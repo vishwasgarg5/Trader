@@ -26,8 +26,11 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Confirm the intended universe with the owner; the configured 49-symbol list is not a verified current or historical Nifty 50 universe.
 - [ ] Obtain official dated constituent additions/removals and archive source circulars, including delisted constituents.
 - [ ] Populate `data/reference/universe_membership.csv` only from those official records.
-- [x] Establish the official NSE symbol mapping: `TATAMOTORS` became `TMPV` (Tata Motors Passenger Vehicles Ltd.) effective 2025-10-24; the demerged CV entity listed separately as `TMCV` on 2025-11-12 and was excluded from Nifty indices effective 2025-11-17.\n- [ ] Reconcile the missing `TATAMOTORS.NS` history to `TMPV.NS` across the rename and independently verify adjusted-price continuity; do not substitute `TMCV` for the passenger-vehicle history.
-- [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.\n- [x] Correct NSE calendar parsing so naive timestamps remain India-local while timezone-aware timestamps are converted to Asia/Kolkata; add regression tests for both membership and corporate-action audits.\n- [x] Make missing OHLCV columns explicit integrity failures rather than silently leaving invalid-row counts as null.
+- [x] Establish the official NSE symbol mapping: `TATAMOTORS` became `TMPV` (Tata Motors Passenger Vehicles Ltd.) effective 2025-10-24; the demerged CV entity listed separately as `TMCV` on 2025-11-12 and was excluded from Nifty indices effective 2025-11-17.
+- [ ] Reconcile the missing `TATAMOTORS.NS` history to `TMPV.NS` across the rename and independently verify adjusted-price continuity; do not substitute `TMCV` for the passenger-vehicle history.
+- [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
+- [x] Correct NSE calendar parsing so naive timestamps remain India-local while timezone-aware timestamps are converted to Asia/Kolkata; add regression tests for both membership and corporate-action audits.
+- [x] Make missing OHLCV columns explicit integrity failures rather than silently leaving invalid-row counts as null.
 - [ ] Supply and validate the corporate-action ledger; latest experiment reports it was not provided.
 - [ ] Freeze verified price, delivery, membership and corporate-action inputs with the manifest after these checks.
 
