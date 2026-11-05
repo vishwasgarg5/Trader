@@ -1,14 +1,14 @@
 import numpy as np
 import pandas as pd
 
-from trader.pipeline import _rsi, load_universe
+from trader.pipeline import rsi, load_universe
 
 
 def test_rsi_is_bounded():
     close = pd.Series(np.linspace(100, 150, 40))
-    rsi = _rsi(close).dropna()
-    assert not rsi.empty
-    assert ((rsi >= 0) & (rsi <= 100)).all()
+    values = rsi(close).dropna()
+    assert not values.empty
+    assert ((values >= 0) & (values <= 100)).all()
 
 
 def test_universe_contains_nse_symbols():
