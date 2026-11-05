@@ -127,12 +127,20 @@ def simulate_mark_to_market_portfolio(
             if target <= 0:
                 rejected["cash"] += 1
                 continue
-            cash -= target
+            # NSE cash equities trade in whole shares. Round down the order
+            # quantity and use the resulting executed notional for cash,
+            # exposure and per-order charges.
+            shares = float(np.floor(target / float(row.entry_price)))
+            executed_notional = shares * float(row.entry_price)
+            if shares < 1 or executed_notional <= 0:
+                rejected["cash"] += 1
+                continue
+            cash -= executed_notional
             positions[symbol] = {
                 "signal_date": row.signal_date, "entry_date": day,
                 "exit_date": row.exit_date, "entry_price": float(row.entry_price),
-                "exit_price": float(row.exit_price), "notional": float(target),
-                "shares": float(target) / float(row.entry_price),
+                "exit_price": float(row.exit_price), "notional": float(executed_notional),
+                "shares": shares,
                 "last_price": float(row.entry_price), "score": float(row.score),
                 "fallback_net_return": float(row.net_return),
                 "sector": getattr(row, "sector", None),
