@@ -3,12 +3,12 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-# NSE cash-market exchange transaction charge (0.00297%) plus IPFT (0.0001%),
-# combined at 0.00307% per side. Groww's published equity-delivery tariff
+# NSE cash-market exchange transaction charge (0.00297%) and IPFT (0.0001%)
+# are modelled separately. Groww's published equity-delivery tariff
 # checked 2026-11-05: brokerage min(₹20, 0.1% of order value), minimum
 # lower of ₹5 or 2.5% of order value; delivery sell DP ₹20 (₹16.50 Groww
 # + ₹3.50 depository) unless sell value is below ₹100. GST applies to
-# brokerage, exchange/SEBI and DP charges. Slippage remains a scenario input.
+# brokerage, exchange/IPFT/SEBI and DP charges. Slippage remains a scenario input.
 DEFAULT_DELIVERY_COSTS = {
     "stt_rate_each_side": 0.001,
     "stamp_duty_buy_rate": 0.00015,
