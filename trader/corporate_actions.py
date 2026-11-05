@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 from urllib.parse import urlparse
 
+import numpy as np
 import pandas as pd
 
 
@@ -47,8 +48,12 @@ def audit_corporate_action_ledger(path: Path) -> dict:
         result["errors"].append("blank symbols or invalid ex_date")
     if frame["action_type"].astype(str).str.strip().eq("").any():
         result["errors"].append("blank action_type")
-    if frame["adjustment_factor"].isna().any() or (frame["adjustment_factor"] <= 0).any():
+    if (frame["adjustment_factor"].isna().any()
+            or not np.isfinite(frame["adjustment_factor"]).all()
+            or (frame["adjustment_factor"] <= 0).any()):
         result["errors"].append("adjustment_factor must be finite and positive")
+    if (frame["source_published_at"].dt.normalize() > frame["ex_date"].dt.normalize()).any():
+        result["errors"].append("source publication occurs after the corporate action ex_date")
     if frame["source"].astype(str).str.strip().eq("").any():
         result["errors"].append("blank source provenance")
     if frame["source_published_at"].isna().any():
