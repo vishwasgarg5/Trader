@@ -126,6 +126,7 @@ def run_experiment() -> dict:
         cross_frame, cross_features, make_regularized_boost_model,
         horizon=5, train_years=3, test_months=3,
         baseline_factory=make_logistic_model, shuffle_repeats=99,
+        shuffle_within_date=True,
     )
     predictive_edge = summarize_predictive_edge(cross_metrics)
     factor_baselines = evaluate_simple_factor_baselines(
