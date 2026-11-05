@@ -73,3 +73,48 @@ def test_outcome_summary_separates_barriers_and_timeouts_with_net_returns():
     assert result["timeout"]["gross_positive_fraction"] == 0.5
     assert result["timeout"]["net_positive_fraction"] == 0.0
     assert result["timeout"]["mean_net_return"] == pytest.approx(-0.0025)
+
+
+def test_cross_sectional_frame_ranks_features_and_labels_against_daily_median():
+    from trader.research import make_cross_sectional_frame
+
+    dates = pd.to_datetime(["2026-01-01"] * 3 + ["2026-01-02"] * 3)
+    frame = pd.DataFrame({
+        "symbol": ["A", "B", "C", "A", "B", "C"],
+        "ret_5": [0.03, 0.01, 0.02, 0.01, 0.03, 0.02],
+        "nifty_ret_5": [0.01] * 6,
+        "net_return": [0.04, -0.01, 0.01, -0.02, 0.03, 0.01],
+    }, index=dates)
+    ranked, features = make_cross_sectional_frame(frame, ["ret_5", "nifty_ret_5"])
+    assert features == ["ret_5"]
+    assert ranked.iloc[0]["ret_5"] == pytest.approx(1.0)
+    assert ranked.iloc[1]["ret_5"] == pytest.approx(1 / 3)
+    assert list(ranked["target"].astype(int)) == [1, 0, 0, 0, 1, 1]
+
+
+def test_block_bootstrap_is_reproducible_and_returns_interval():
+    from trader.research import block_bootstrap_mean_ci
+
+    values = np.linspace(-0.002, 0.003, 40)
+    first = block_bootstrap_mean_ci(values, repeats=300)
+    second = block_bootstrap_mean_ci(values, repeats=300)
+    assert first == second
+    assert first["method"] == "circular_moving_block_bootstrap"
+    assert first["lower"] <= float(values.mean()) <= first["upper"]
+
+
+def test_regime_summary_compares_top_five_with_universe_by_predeclared_bins():
+    from trader.research import summarize_regime_performance
+
+    dates = pd.to_datetime(["2026-01-01"] * 6 + ["2026-01-02"] * 6)
+    test = pd.DataFrame({
+        "symbol": list("ABCDEF") * 2,
+        "net_return": [0.01, 0.02, -0.01, 0.0, 0.01, 0.0] * 2,
+        "nifty_above_200dma": [True] * 6 + [False] * 6,
+        "india_vix_low_20": [True] * 12,
+    }, index=dates)
+    daily_top = test.groupby(level=0).head(2)
+    result = summarize_regime_performance(test, daily_top)
+    assert result["nifty_above_200dma_vix_below_20"]["days"] == 1
+    assert result["nifty_at_or_below_200dma_vix_below_20"]["days"] == 1
+    assert result["nifty_above_200dma_vix_below_20"]["top5_mean_net_return"] == pytest.approx(0.015)
