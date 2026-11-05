@@ -59,15 +59,33 @@ def download_prices(tickers: list[str], period: str = "3y") -> dict[str, pd.Data
             if not set(required).issubset(frame.columns):
                 continue
             frame = frame[required].apply(pd.to_numeric, errors="coerce")
-            frame = frame.dropna(subset=["close"]).sort_index()
+            frame = frame.dropna(subset=required).sort_index()
+            frame = frame.loc[np.isfinite(frame[required]).all(axis=1)]
+            frame = frame.loc[
+                (frame[["open", "high", "low", "close"]] > 0).all(axis=1)
+                & (frame["volume"] >= 0)
+                & (frame["high"] >= frame[["open", "low", "close"]].max(axis=1))
+                & (frame["low"] <= frame[["open", "high", "close"]].min(axis=1))
+            ]
             idx = pd.to_datetime(frame.index)
             if idx.tz is not None:
                 idx = idx.tz_localize(None)
             frame.index = idx
+            if frame.index.has_duplicates:
+                raise ValueError("duplicate trading dates")
             result[symbol] = frame
         except (KeyError, TypeError, ValueError):
             LOG.warning("No usable data for %s", symbol)
     return result
+
+
+def validate_universe_prices(tickers: list[str], prices: dict[str, pd.DataFrame]) -> None:
+    """Fail closed rather than silently training on a smaller universe."""
+    missing = sorted(set(tickers).difference(prices))
+    if missing:
+        raise RuntimeError(
+            "Missing price history for configured universe symbols: " + ", ".join(missing)
+        )
 
 
 def rsi(close: pd.Series, period: int = 14) -> pd.Series:
@@ -216,7 +234,9 @@ def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     DATA.mkdir(exist_ok=True)
     MODELS.mkdir(exist_ok=True)
-    prices = download_prices(load_universe())
+    universe = load_universe()
+    prices = download_prices(universe)
+    validate_universe_prices(universe, prices)
     frame = build_features(prices)
     model, metrics = train_and_evaluate(frame)
     signals = make_signals(frame, model)
