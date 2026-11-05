@@ -59,7 +59,7 @@ def merge_delivery_percentages(
         raise ValueError("Delivery CSV contains duplicate date/symbol rows")
     delivery.loc[~delivery["delivery_pct"].between(0, 100), "delivery_pct"] = np.nan
 
-    left = result.reset_index(names="date")
+    left = result.drop(columns=["delivery_pct"], errors="ignore").reset_index(names="date")
     left["date"] = pd.to_datetime(left["date"]).dt.tz_localize(None)
     left["symbol"] = left["symbol"].astype(str).str.strip().str.upper()
     merged = left.merge(
