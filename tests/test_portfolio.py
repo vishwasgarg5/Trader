@@ -46,3 +46,16 @@ def test_invalid_or_unresolved_rows_are_not_silently_traded():
     result = simulate_overlapping_portfolio(data)
     assert result["rejected"]["invalid"] == 1
     assert result["trades"] == 3
+
+
+
+def test_turnover_participation_caps_position_notional():
+    data = _candidates().iloc[[0]].copy()
+    data["avg_daily_turnover"] = 10_000
+    result = simulate_overlapping_portfolio(
+        data, initial_capital=100_000, max_participation_rate=0.01,
+    )
+    assert result["trades"] == 1
+    assert result["trade_log"][0]["notional"] == pytest.approx(100)
+    assert result["liquidity_constraint_applied"] is False
+    assert result["liquidity_data_available"] is True
