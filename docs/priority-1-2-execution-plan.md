@@ -46,3 +46,6 @@ This plan is for research-only work on `feature/p1-p2-data-portfolio-validation`
 - The mark-to-market simulator fails closed when a requested liquidity cap lacks turnover history and reports daily sector exposure and peak sector concentration.
 - The experiment includes 2, 5, 10 and 20 bps-per-side slippage scenarios.
 - Sector labels are sourced to the NSE Indices Nifty 50 classification as of 27 February 2026; labels for configured legacy/non-constituent symbols are mapped to the same broad industry taxonomy and are not represented as historical PIT classifications.
+
+
+- [x] Apply dated membership intervals to research rows when the membership file passes structural, timestamp, evidence-path and SHA-256 audits; if absent, preserve static-universe exploratory research with an explicit unverified status; if present but invalid, fail closed.

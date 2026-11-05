@@ -20,7 +20,7 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.predictive_edge import summarize_predictive_edge
-from trader.universe_audit import audit_universe
+from trader.universe_audit import apply_point_in_time_membership, audit_universe
 from trader.research import (
     add_relative_strength_features, evaluate_simple_factor_baselines,
     make_cross_sectional_frame, merge_delivery_percentages,
@@ -99,9 +99,11 @@ def run_experiment() -> dict:
     sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
     prices = download_prices(load_universe(), period="7y")
     delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
+    membership_path = DATA / "reference" / "universe_membership.csv"
+    universe_audit = audit_universe(prices, load_universe(), membership_path)
     frame = build_experiment_frame(prices)
-    universe_audit = audit_universe(
-        prices, load_universe(), DATA / "reference" / "universe_membership.csv",
+    frame, membership_application = apply_point_in_time_membership(
+        frame, membership_path, universe_audit,
     )
     corporate_action_audit = audit_corporate_action_ledger(
         DATA / "reference" / "corporate_actions.csv",
@@ -284,6 +286,7 @@ def run_experiment() -> dict:
         },
     }
     metrics["universe_integrity_audit"] = universe_audit
+    metrics["membership_application"] = membership_application
     metrics["corporate_action_audit"] = corporate_action_audit
     metrics["final_holdout_protocol"] = {
         "path": "config/final_holdout_protocol.json",

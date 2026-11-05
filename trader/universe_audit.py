@@ -158,3 +158,56 @@ def audit_universe(
             "Membership file provenance is not independently authenticated by this audit.",
         ],
     }
+
+
+
+def apply_point_in_time_membership(
+    frame: pd.DataFrame, membership_path: Path, universe_audit: dict
+) -> tuple[pd.DataFrame, dict]:
+    """Apply only evidence-audited membership intervals; otherwise keep static research explicit."""
+    if not membership_path.exists():
+        return frame.copy(), {
+            "applied": False,
+            "mode": "static_configured_unverified",
+            "rows_before": int(len(frame)),
+            "rows_after": int(len(frame)),
+            "rows_removed": 0,
+            "reason": "No official dated membership history file is present.",
+            "point_in_time_verified": False,
+        }
+    membership_status = universe_audit.get("membership_history", {})
+    if not membership_status.get("valid"):
+        raise ValueError(
+            "Refusing to apply an invalid membership history: "
+            + "; ".join(membership_status.get("errors", []))
+        )
+
+    history = pd.read_csv(membership_path)
+    history["symbol"] = history["symbol"].astype(str).str.strip().str.upper()
+    history["valid_from"] = _india_calendar_dates(history["valid_from"])
+    history["valid_to"] = _india_calendar_dates(history["valid_to"])
+    left = frame.reset_index(names="date").copy()
+    left["date"] = _india_calendar_dates(left["date"])
+    left["symbol"] = left["symbol"].astype(str).str.strip().str.upper()
+    merged = left.merge(
+        history[["symbol", "valid_from", "valid_to"]],
+        on="symbol", how="left", validate="many_to_many",
+    )
+    active = (
+        merged["valid_from"].notna()
+        & (merged["date"] >= merged["valid_from"])
+        & (merged["valid_to"].isna() | (merged["date"] <= merged["valid_to"]))
+    )
+    filtered = merged.loc[active].drop(columns=["valid_from", "valid_to"])
+    if filtered.empty:
+        raise ValueError("Membership history excludes every experiment row; refusing empty research run.")
+    filtered = filtered.set_index("date").sort_index()
+    return filtered, {
+        "applied": True,
+        "mode": "evidence_audited_membership_intervals",
+        "rows_before": int(len(frame)),
+        "rows_after": int(len(filtered)),
+        "rows_removed": int(len(frame) - len(filtered)),
+        "point_in_time_verified": False,
+        "reason": "Evidence files and metadata passed structural checks, but source authenticity still requires independent review.",
+    }
