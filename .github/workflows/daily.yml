@@ -23,6 +23,8 @@ jobs:
   build-signals:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +40,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run tests
-        run: pytest -q
+        run: python -m pytest -q
       - name: Generate signals and evaluate model
         run: python -m trader.pipeline
       - name: Commit model and reports
