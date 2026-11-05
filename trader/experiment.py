@@ -174,7 +174,8 @@ def run_experiment() -> dict:
     portfolio_diagnostics = {"status": "unavailable", "reason": "No out-of-sample candidate predictions were collected."}
     if cross_oos_predictions:
         from trader.portfolio_diagnostics import (
-            random_pick_monte_carlo, simulate_mark_to_market_portfolio,
+            index_benchmarks, random_pick_monte_carlo,
+            simulate_mark_to_market_portfolio,
         )
         oos_frame = pd.DataFrame(cross_oos_predictions)
         model_picks = (
@@ -184,7 +185,8 @@ def run_experiment() -> dict:
         )
         daily_price_parts = [
             pd.DataFrame({"date": stock.index, "symbol": symbol, "close": stock["close"].to_numpy()})
-            for symbol, stock in prices.items() if not symbol.startswith("^") and "close" in stock
+            for symbol, stock in prices.items()
+            if (not symbol.startswith("^") or symbol == "^NSEI") and "close" in stock
         ]
         daily_price_panel = pd.concat(daily_price_parts, ignore_index=True)
         model_portfolio = simulate_mark_to_market_portfolio(
@@ -194,9 +196,13 @@ def run_experiment() -> dict:
             oos_frame, daily_price_panel, simulations=300, seed=42052,
             cost_parameters=DEFAULT_DELIVERY_COSTS,
         )
+        index_comparisons = index_benchmarks(
+            model_portfolio["daily_equity"], daily_price_panel, index_symbol="^NSEI",
+        )
         portfolio_diagnostics = {
             "daily_mark_to_market_model": model_portfolio,
             "random_pick_monte_carlo": random_benchmark,
+            "nifty_benchmarks": index_comparisons,
             "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
         }
     metrics["portfolio_diagnostics"] = portfolio_diagnostics
