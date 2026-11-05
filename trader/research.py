@@ -131,6 +131,7 @@ def walk_forward_evaluate(
     last_date = dates.max()
     fold_rows = []
     daily_return_spreads = []
+    portfolio_candidates = []
     cursor = first_test
     fold_number = 0
     while cursor <= last_date:
@@ -151,6 +152,11 @@ def walk_forward_evaluate(
                 scored.sort_values("probability", ascending=False)
                 .groupby(level=0, sort=True).head(5)
             )
+            required_portfolio_columns = {"symbol", "entry_date", "exit_date", "entry_price", "exit_price", "net_return"}
+            if required_portfolio_columns.issubset(daily_top.columns):
+                selected_candidates = daily_top.copy()
+                selected_candidates["score"] = selected_candidates["probability"]
+                portfolio_candidates.append(selected_candidates)
             daily_precision = daily_top.groupby(level=0)["target"].mean()
             daily_base = test.groupby(level=0)["target"].mean()
             daily_universe_gross = test.groupby(level=0)["outcome_return"].mean()
@@ -234,6 +240,11 @@ def walk_forward_evaluate(
         return float(np.mean(values)) if values else None
 
     feature_names = sorted({name for row in fold_rows for name in row["single_feature_auc"]})
+    portfolio_backtest = None
+    if portfolio_candidates:
+        from trader.portfolio import simulate_overlapping_portfolio
+        portfolio_frame = pd.concat(portfolio_candidates).sort_index()
+        portfolio_backtest = simulate_overlapping_portfolio(portfolio_frame)
     return {
         "folds": fold_rows,
         "fold_count": len(fold_rows),
@@ -265,6 +276,7 @@ def walk_forward_evaluate(
             ]))
             for feature in feature_names
         },
+        "portfolio_backtest": portfolio_backtest,
         "status": "evaluated",
     }
 
