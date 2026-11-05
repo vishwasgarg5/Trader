@@ -30,7 +30,7 @@ def test_membership_file_requires_provenance_and_valid_dates(tmp_path):
     pd.DataFrame([{
         "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
         "source": "NSE circular", "source_url": "https://www.nseindia.com/",
-        "source_published_at": "2019-12-20", "evidence_path": evidence.name,
+        "source_published_at": "2019-12-20T09:00:00+05:30", "evidence_path": evidence.name,
         "evidence_sha256": digest,
     }]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
@@ -47,7 +47,7 @@ def test_invalid_membership_dates_are_rejected(tmp_path):
     pd.DataFrame([{
         "symbol": "AAA.NS", "valid_from": "2021-01-01", "valid_to": "2020-01-01",
         "source": "NSE circular", "source_url": "https://www.nseindia.com/",
-        "source_published_at": "2020-12-20", "evidence_path": evidence.name,
+        "source_published_at": "2020-12-20T09:00:00+05:30", "evidence_path": evidence.name,
         "evidence_sha256": digest,
     }]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
@@ -72,7 +72,7 @@ def test_membership_evidence_checksum_mismatch_is_rejected(tmp_path):
     pd.DataFrame([{
         "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
         "source": "NSE circular", "source_url": "https://www.nseindia.com/",
-        "source_published_at": "2019-12-20", "evidence_path": evidence.name,
+        "source_published_at": "2019-12-20T09:00:00+05:30", "evidence_path": evidence.name,
         "evidence_sha256": "0" * 64,
     }]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
