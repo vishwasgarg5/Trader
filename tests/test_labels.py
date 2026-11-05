@@ -12,27 +12,28 @@ def _bars(rows):
     return frame
 
 
-def test_target_barrier_is_labelled_positive():
+def test_target_barrier_is_labelled_positive_after_next_open_entry():
     prices = _bars([
         (100, 101, 99, 100),
         (100, 105, 99, 104),
         (104, 105, 103, 104),
     ])
     result = triple_barrier_labels(prices, horizon=2)
+    assert result.iloc[0]["entry_price"] == 100
     assert result.iloc[0]["target"] == 1
     assert result.iloc[0]["exit_reason"] == "target"
 
 
-def test_stop_gap_uses_open_execution_price():
+def test_stop_gap_uses_open_execution_price_after_entry_session():
     prices = _bars([
         (100, 101, 99, 100),
-        (96, 98, 95, 97),
-        (97, 99, 96, 98),
+        (100, 102, 99, 101),
+        (90, 95, 88, 92),
     ])
     result = triple_barrier_labels(prices, horizon=2)
     assert result.iloc[0]["target"] == 0
     assert result.iloc[0]["exit_reason"] == "stop_gap"
-    assert result.iloc[0]["exit_price"] == 96
+    assert result.iloc[0]["exit_price"] == 90
 
 
 def test_same_day_double_touch_is_ambiguous():
@@ -46,7 +47,7 @@ def test_same_day_double_touch_is_ambiguous():
     assert result.iloc[0]["exit_reason"] == "ambiguous"
 
 
-def test_timeout_uses_horizon_close_and_return_sign():
+def test_timeout_uses_horizon_close_and_return_sign_from_next_open():
     prices = _bars([
         (100, 101, 99, 100),
         (100, 101, 99, 100),
@@ -55,6 +56,7 @@ def test_timeout_uses_horizon_close_and_return_sign():
     result = triple_barrier_labels(prices, horizon=2)
     assert result.iloc[0]["target"] == 1
     assert result.iloc[0]["exit_reason"] == "timeout"
+    assert result.iloc[0]["entry_price"] == 100
     assert result.iloc[0]["exit_price"] == 101
 
 
