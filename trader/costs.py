@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
@@ -9,22 +12,46 @@ import pandas as pd
 # lower of ₹5 or 2.5% of order value; delivery sell DP ₹20 (₹16.50 Groww
 # + ₹3.50 depository) unless sell value is below ₹100. GST applies to
 # brokerage, exchange/IPFT/SEBI and DP charges. Slippage remains a scenario input.
-DEFAULT_DELIVERY_COSTS = {
-    "stt_rate_each_side": 0.001,
-    "stamp_duty_buy_rate": 0.00015,
-    "exchange_rate_each_side": 0.0000297,
-    "ipft_rate_each_side": 0.000001,
-    "sebi_rate_each_side": 0.000001,
-    "gst_rate": 0.18,
-    "brokerage_rate_each_side": 0.001,
-    "brokerage_cap_per_order": 20.0,
-    "brokerage_min_per_order": 5.0,
-    "brokerage_min_rate": 0.025,
-    "dp_charge_per_sell": 20.0,
-    "dp_free_below_sell_value": 100.0,
-    "slippage_bps_per_side": 2.0,
-    "notional_rupees": 100000.0,
-}
+def load_groww_delivery_costs(config_path: str | Path | None = None) -> dict:
+    """Load the single source of truth for Groww NSE equity-delivery costs."""
+    path = (
+        Path(config_path) if config_path is not None
+        else Path(__file__).resolve().parent.parent / "config" / "broker_costs_groww.json"
+    )
+    try:
+        profile = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"Unable to load Groww cost profile: {path}") from exc
+    if profile.get("broker") != "Groww" or profile.get("segment") != "NSE equity delivery":
+        raise ValueError("Cost profile must describe Groww NSE equity delivery")
+    brokerage = profile["brokerage"]
+    statutory = profile["statutory_and_exchange"]
+    dp = profile["dp"]
+    dp_total = float(dp["groww_component"]) + float(dp["depository_component_standard"])
+    if not np.isclose(dp_total, float(dp["standard_pre_gst_total"]), atol=0.005):
+        raise ValueError("Groww DP components do not match standard_pre_gst_total")
+    costs = {
+        "stt_rate_each_side": float(statutory["stt_each_side"]),
+        "stamp_duty_buy_rate": float(statutory["stamp_duty_buy_side"]),
+        "exchange_rate_each_side": float(statutory["nse_transaction_charge"]),
+        "ipft_rate_each_side": float(statutory["nse_ipft_charge"]),
+        "sebi_rate_each_side": float(statutory["sebi_turnover_charge_each_side"]),
+        "gst_rate": float(statutory["gst"]),
+        "brokerage_rate_each_side": float(brokerage["rate_per_executed_order"]),
+        "brokerage_cap_per_order": float(brokerage["cap_per_executed_order"]),
+        "brokerage_min_per_order": float(brokerage["minimum_per_executed_order"]),
+        "brokerage_min_rate": float(brokerage["minimum_rate_cap"]),
+        "dp_charge_per_sell": dp_total,
+        "dp_free_below_sell_value": float(dp["free_below_sell_value"]),
+        "slippage_bps_per_side": float(profile["slippage_bps_per_side"]),
+        "notional_rupees": 100000.0,
+    }
+    if any(not np.isfinite(value) or value < 0 for value in costs.values()):
+        raise ValueError("Groww cost profile contains non-finite or negative values")
+    return costs
+
+
+DEFAULT_DELIVERY_COSTS = load_groww_delivery_costs()
 
 
 def _groww_brokerage(turnover: float, rate: float, cap: float,

@@ -1,6 +1,9 @@
 import pandas as pd
 import pytest
 
+import json
+
+from trader.costs import DEFAULT_DELIVERY_COSTS, load_groww_delivery_costs
 from trader.delivery import parse_full_bhavcopy
 from trader.portfolio_diagnostics import simulate_mark_to_market_portfolio
 from trader.research import merge_delivery_percentages
@@ -63,3 +66,33 @@ def test_mark_to_market_liquidity_fails_closed_without_turnover():
         simulate_mark_to_market_portfolio(
             candidate, _daily_prices(), max_participation_rate=0.01,
         )
+
+
+
+def test_groww_cost_defaults_are_loaded_from_the_profile():
+    profile_path = __import__("pathlib").Path(__file__).resolve().parents[1] / "config" / "broker_costs_groww.json"
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    expected_dp = profile["dp"]["groww_component"] + profile["dp"]["depository_component_standard"]
+    assert DEFAULT_DELIVERY_COSTS["dp_charge_per_sell"] == pytest.approx(expected_dp)
+    assert DEFAULT_DELIVERY_COSTS["brokerage_cap_per_order"] == profile["brokerage"]["cap_per_executed_order"]
+    assert DEFAULT_DELIVERY_COSTS["stt_rate_each_side"] == profile["statutory_and_exchange"]["stt_each_side"]
+
+
+def test_groww_cost_loader_rejects_inconsistent_dp_components(tmp_path):
+    profile_path = __import__("pathlib").Path(__file__).resolve().parents[1] / "config" / "broker_costs_groww.json"
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    profile["dp"]["standard_pre_gst_total"] += 1
+    invalid_path = tmp_path / "invalid-costs.json"
+    invalid_path.write_text(json.dumps(profile), encoding="utf-8")
+    with pytest.raises(ValueError, match="DP components"):
+        load_groww_delivery_costs(invalid_path)
+
+
+def test_groww_cost_loader_supports_account_specific_dp_component(tmp_path):
+    profile_path = __import__("pathlib").Path(__file__).resolve().parents[1] / "config" / "broker_costs_groww.json"
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    profile["dp"]["depository_component_standard"] = 3.25
+    profile["dp"]["standard_pre_gst_total"] = 19.75
+    custom_path = tmp_path / "custom-costs.json"
+    custom_path.write_text(json.dumps(profile), encoding="utf-8")
+    assert load_groww_delivery_costs(custom_path)["dp_charge_per_sell"] == pytest.approx(19.75)

@@ -49,3 +49,6 @@ This plan is for research-only work on `feature/p1-p2-data-portfolio-validation`
 
 
 - [x] Apply dated membership intervals to research rows when the membership file passes structural, timestamp, evidence-path and SHA-256 audits; if absent, preserve static-universe exploratory research with an explicit unverified status; if present but invalid, fail closed.
+
+
+- [x] Make `config/broker_costs_groww.json` the executable source of truth for brokerage, statutory rates, DP charges and slippage; validate DP component totals and support account-specific DP configuration rather than maintaining duplicated constants.
