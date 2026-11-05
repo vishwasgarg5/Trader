@@ -48,7 +48,7 @@ def audit_universe(
     """
     benchmark = prices.get("^NSEI")
     benchmark_dates = (
-        pd.DatetimeIndex(pd.to_datetime(benchmark.index)).tz_localize(None).normalize()
+        pd.DatetimeIndex(_india_calendar_dates(pd.Series(benchmark.index)).dropna())
         if benchmark is not None else pd.DatetimeIndex([])
     )
     symbols = sorted({str(s).strip().upper() for s in configured_symbols})
@@ -61,7 +61,7 @@ def audit_universe(
                                   "missing_ohlcv_columns": ["open", "high", "low", "close", "volume"],
                                   "missing_benchmark_sessions": None, "stale_benchmark_sessions": None, "last_date": None}
             continue
-        dates = pd.DatetimeIndex(pd.to_datetime(frame.index)).tz_localize(None).normalize()
+        dates = pd.DatetimeIndex(_india_calendar_dates(pd.Series(frame.index)).dropna())
         duplicate_count = int(dates.duplicated().sum())
         required = {"open", "high", "low", "close", "volume"}
         missing_columns = sorted(required.difference(frame.columns))
