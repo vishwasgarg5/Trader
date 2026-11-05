@@ -116,6 +116,15 @@ def walk_forward_evaluate(
                 lambda group: group.nlargest(min(5, len(group)), "probability")
             )
             daily_precision = daily_top.groupby(level=0)["target"].mean()
+            base_rate = float(test["target"].mean())
+            top5_return = (
+                float(daily_top.groupby(level=0)["outcome_return"].mean().mean())
+                if "outcome_return" in daily_top else None
+            )
+            universe_return = (
+                float(test["outcome_return"].mean())
+                if "outcome_return" in test else None
+            )
             fold = {
                 "train_start": str(train.index.min().date()),
                 "train_end": str(train.index.max().date()),
@@ -124,6 +133,12 @@ def walk_forward_evaluate(
                 "train_rows": int(len(train)),
                 "test_rows": int(len(test)),
                 "top5_precision": float(daily_precision.mean()),
+                "base_rate": base_rate,
+                "top5_precision_lift": (
+                    float(daily_precision.mean() / base_rate) if base_rate > 0 else None
+                ),
+                "top5_mean_gross_return": top5_return,
+                "universe_mean_gross_return": universe_return,
                 "brier_score": float(brier_score_loss(test["target"], probabilities)),
                 "roc_auc": (
                     float(roc_auc_score(test["target"], probabilities))
@@ -141,6 +156,19 @@ def walk_forward_evaluate(
         "folds": fold_rows,
         "fold_count": len(fold_rows),
         "mean_top5_precision": float(np.mean([r["top5_precision"] for r in fold_rows])),
+        "mean_base_rate": float(np.mean([r["base_rate"] for r in fold_rows])),
+        "mean_top5_precision_lift": float(np.mean([
+            r["top5_precision_lift"] for r in fold_rows
+            if r["top5_precision_lift"] is not None
+        ])),
+        "mean_top5_gross_return": float(np.mean([
+            r["top5_mean_gross_return"] for r in fold_rows
+            if r["top5_mean_gross_return"] is not None
+        ])),
+        "mean_universe_gross_return": float(np.mean([
+            r["universe_mean_gross_return"] for r in fold_rows
+            if r["universe_mean_gross_return"] is not None
+        ])),
         "mean_brier_score": float(np.mean([r["brier_score"] for r in fold_rows])),
         "mean_roc_auc": float(np.mean(valid_auc)) if valid_auc else None,
         "status": "evaluated",
