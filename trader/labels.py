@@ -10,16 +10,13 @@ def triple_barrier_labels(
     up_multiple: float = 2.0,
     down_multiple: float = 1.5,
 ) -> pd.DataFrame:
-    """Label close-to-close entries by the first ATR barrier reached.
+    """Label signal-day features using next-session-open entries.
 
-    Entries are assumed at the signal day's close. Subsequent daily OHLC bars
-    are inspected in chronological order. A gap through a barrier is exited
-    at the next session's open. If both barriers are touched intraday and the
-    open did not already resolve the exit, the observation is marked
-    ambiguous (NaN) rather than assigning a favourable ordering.
-
-    If neither barrier is touched, the position exits at the horizon close and
-    is labelled by the sign of its realised return (zero is negative).
+    Features are known after the signal day's close, so execution is assumed
+    at the following session's open. ATR is frozen at the signal-day close.
+    The entry session counts as the first of the horizon sessions. Subsequent
+    opening gaps exit at the open; same-day double barrier touches are
+    ambiguous and excluded.
     """
     required = {"open", "high", "low", "close", "atr"}
     missing = required.difference(prices.columns)
@@ -32,36 +29,49 @@ def triple_barrier_labels(
     rows: list[dict] = []
     n = len(data)
     for i in range(n):
-        entry = float(data["close"].iloc[i])
         atr = float(data["atr"].iloc[i]) if pd.notna(data["atr"].iloc[i]) else np.nan
         result = {
             "target": np.nan,
+            "entry_date": data.index[i + 1] if i + 1 < n else pd.NaT,
+            "entry_price": np.nan,
             "exit_reason": "unresolved",
             "exit_date": pd.NaT,
             "exit_price": np.nan,
             "outcome_return": np.nan,
         }
-        if not np.isfinite(entry) or entry <= 0 or not np.isfinite(atr) or atr <= 0:
-            rows.append(result)
-            continue
-        if i + horizon >= n:
+        if i + 1 >= n or i + horizon >= n or not np.isfinite(atr) or atr <= 0:
             rows.append(result)
             continue
 
+        entry = float(data["open"].iloc[i + 1])
+        if not np.isfinite(entry) or entry <= 0:
+            result["exit_reason"] = "invalid_entry"
+            rows.append(result)
+            continue
+        result["entry_price"] = entry
         take_profit = entry + up_multiple * atr
         stop_loss = entry - down_multiple * atr
         resolved = False
+
         for j in range(i + 1, i + horizon + 1):
             bar = data.iloc[j]
             opn, high, low = (float(bar[k]) for k in ("open", "high", "low"))
-            # Opening gaps are executable before the intraday range.
-            if opn >= take_profit:
+            if not np.isfinite([opn, high, low]).all() or opn <= 0:
+                result["exit_reason"] = "invalid_bar"
+                resolved = True
+                break
+
+            # The first open is the entry price, not a post-entry gap exit.
+            if j > i + 1 and opn >= take_profit:
                 exit_price, reason = opn, "target_gap"
-            elif opn <= stop_loss:
+            elif j > i + 1 and opn <= stop_loss:
                 exit_price, reason = opn, "stop_gap"
             elif low <= stop_loss and high >= take_profit:
-                result.update({"target": np.nan, "exit_reason": "ambiguous",
-                               "exit_date": data.index[j]})
+                result.update({
+                    "target": np.nan,
+                    "exit_reason": "ambiguous",
+                    "exit_date": data.index[j],
+                })
                 resolved = True
                 break
             elif high >= take_profit:
@@ -84,14 +94,17 @@ def triple_barrier_labels(
 
         if not resolved:
             exit_price = float(data["close"].iloc[i + horizon])
-            outcome_return = exit_price / entry - 1.0
-            result.update({
-                "target": int(outcome_return > 0),
-                "exit_reason": "timeout",
-                "exit_date": data.index[i + horizon],
-                "exit_price": exit_price,
-                "outcome_return": outcome_return,
-            })
+            if not np.isfinite(exit_price) or exit_price <= 0:
+                result["exit_reason"] = "invalid_timeout_close"
+            else:
+                outcome_return = exit_price / entry - 1.0
+                result.update({
+                    "target": int(outcome_return > 0),
+                    "exit_reason": "timeout",
+                    "exit_date": data.index[i + horizon],
+                    "exit_price": exit_price,
+                    "outcome_return": outcome_return,
+                })
         rows.append(result)
 
     return pd.DataFrame(rows, index=data.index)
