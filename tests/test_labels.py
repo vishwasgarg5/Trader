@@ -65,4 +65,4 @@ def test_last_horizon_rows_remain_unresolved():
         (100, 101, 99, 100),
     ])
     result = triple_barrier_labels(prices, horizon=2)
-    assert result["target"].isna().all()
+    assert result.iloc[0]["exit_reason"] == "timeout"\n    assert result.iloc[0]["target"] == 0\n    assert result.iloc[1:]["target"].isna().all()
