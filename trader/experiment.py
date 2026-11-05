@@ -17,6 +17,7 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.predictive_edge import summarize_predictive_edge
+from trader.universe_audit import audit_universe
 from trader.research import (
     add_relative_strength_features, evaluate_simple_factor_baselines,
     make_cross_sectional_frame, merge_delivery_percentages,
@@ -91,6 +92,9 @@ def run_experiment() -> dict:
     prices = download_prices(load_universe(), period="7y")
     delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
     frame = build_experiment_frame(prices)
+    universe_audit = audit_universe(
+        prices, load_universe(), DATA / "reference" / "universe_membership.csv",
+    )
     labelled = frame.dropna(subset=["target"]).copy()
     if len(labelled.index.unique()) < 900:
         raise RuntimeError("At least 900 trading dates are required for 3-year walk-forward evaluation")
@@ -206,6 +210,12 @@ def run_experiment() -> dict:
             "rows": int(len(net_frame)),
             "fold_metrics": net_metrics,
         },
+    }
+    metrics["universe_integrity_audit"] = universe_audit
+    metrics["final_holdout_protocol"] = {
+        "path": "config/final_holdout_protocol.json",
+        "status": "LOCKED_NOT_EVALUATED",
+        "holdout_metrics_computed": False,
     }
     metrics["experiment"] = "triple_barrier_relative_strength_delivery"
     metrics["target_definition"] = (
