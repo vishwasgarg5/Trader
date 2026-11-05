@@ -74,19 +74,6 @@ def simulate_overlapping_portfolio(
     gross_exposure_peak = 0.0
 
     for day in event_days:
-        # Exit first so capital released at today's open can be reused.
-        closing = [symbol for symbol, pos in positions.items() if pos["exit_date"] <= day]
-        for symbol in closing:
-            pos = positions.pop(symbol)
-            pnl = pos["notional"] * pos["net_return"]
-            cash += pos["notional"] + pnl
-            trades.append({
-                "symbol": symbol, "entry_date": str(pos["entry_date"].date()),
-                "exit_date": str(pos["exit_date"].date()), "score": pos["score"],
-                "notional": pos["notional"], "net_return": pos["net_return"],
-                "net_pnl": pnl, "exit_reason": pos.get("exit_reason"),
-            })
-
         group = entries.get(day)
         if group is not None:
             for row in group.itertuples(index=False):
@@ -122,6 +109,20 @@ def simulate_overlapping_portfolio(
                     "score": float(row.score), "exit_reason": getattr(row, "exit_reason", None),
                 }
                 cash -= target_notional
+
+        # Keep same-day exits reserved until after entries: an intraday/close
+        # barrier exit cannot fund a new next-open order on that same date.
+        closing = [symbol for symbol, pos in positions.items() if pos["exit_date"] <= day]
+        for symbol in closing:
+            pos = positions.pop(symbol)
+            pnl = pos["notional"] * pos["net_return"]
+            cash += pos["notional"] + pnl
+            trades.append({
+                "symbol": symbol, "entry_date": str(pos["entry_date"].date()),
+                "exit_date": str(pos["exit_date"].date()), "score": pos["score"],
+                "notional": pos["notional"], "net_return": pos["net_return"],
+                "net_pnl": pnl, "exit_reason": pos.get("exit_reason"),
+            })
 
         invested = sum(pos["notional"] for pos in positions.values())
         equity = cash + invested
