@@ -1,0 +1,54 @@
+name: Triple Barrier Research Experiment
+
+on:
+  push:
+    branches: [feature/triple-barrier-walk-forward]
+    paths:
+      - "trader/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/triple-barrier-experiment.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "trader/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/triple-barrier-experiment.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: triple-barrier-research
+  cancel-in-progress: false
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m pytest -q
+      - name: Run triple-barrier walk-forward experiment
+        run: python -m trader.experiment
+      - name: Upload experiment report
+        uses: actions/upload-artifact@v4
+        with:
+          name: triple-barrier-experiment-report
+          path: data/reports/triple_barrier_experiment.json
+          if-no-files-found: error
