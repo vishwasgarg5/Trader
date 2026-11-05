@@ -46,7 +46,8 @@ def simulate_overlapping_portfolio(
     valid = (
         data["symbol"].ne("") & data["entry_date"].notna() & data["exit_date"].notna()
         & (data["exit_date"] >= data["entry_date"])
-        & data["score"].notna() & (data["entry_price"] > 0)
+        & data["score"].notna() & np.isfinite(data["score"])
+        & (data["entry_price"] > 0)
         & (data["exit_price"] > 0)
         & np.isfinite(data["entry_price"]) & np.isfinite(data["exit_price"])
     )
