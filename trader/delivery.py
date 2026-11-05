@@ -178,6 +178,7 @@ def download_delivery_history(
         "newly_checked_dates": len(pending),
         "downloaded_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "downloaded").sum()),
         "not_found_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "not_found").sum()),
+        "date_mismatch_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "date_mismatch").sum()),
         "delivery_rows_total": int(len(all_rows)),
         "delivery_symbols_total": int(all_rows["symbol"].nunique()) if not all_rows.empty else 0,
         "delivery_file": str(output_path),
