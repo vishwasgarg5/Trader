@@ -181,12 +181,13 @@ def walk_forward_evaluate(
                     shuffled_aucs.append(null_auc)
 
             logistic_auc = None
+            logistic_cross_sectional_auc = None
             if baseline_factory is not None:
                 baseline = baseline_factory()
                 baseline.fit(train[features], train["target"].astype(int))
-                logistic_auc = _safe_auc(
-                    test["target"], baseline.predict_proba(test[features])[:, 1]
-                )
+                logistic_scores = baseline.predict_proba(test[features])[:, 1]
+                logistic_auc = _safe_auc(test["target"], logistic_scores)
+                logistic_cross_sectional_auc = _cross_sectional_auc(test, logistic_scores)
 
             feature_aucs = _single_feature_aucs(train, test, features)
             base_rate = float(daily_base.mean())
@@ -213,6 +214,7 @@ def walk_forward_evaluate(
                 "shuffled_label_auc_mean": float(np.mean(shuffled_aucs)) if shuffled_aucs else None,
                 "shuffled_label_auc_runs": shuffled_aucs,
                 "logistic_regression_auc": logistic_auc,
+                "logistic_regression_cross_sectional_auc": logistic_cross_sectional_auc,
                 "single_feature_auc": feature_aucs,
                 "test_dates": int(daily_precision.size),
                 "regime_performance": summarize_regime_performance(test, daily_top) if {"nifty_above_200dma", "india_vix_low_20"}.issubset(test.columns) and "net_return" in test else None,
@@ -242,9 +244,11 @@ def walk_forward_evaluate(
         "mean_cross_sectional_auc": mean_metric("cross_sectional_auc"),
         "mean_shuffled_label_auc": mean_metric("shuffled_label_auc_mean"),
         "mean_logistic_regression_auc": mean_metric("logistic_regression_auc"),
+        "mean_logistic_regression_cross_sectional_auc": mean_metric("logistic_regression_cross_sectional_auc"),
         "folds_auc_above_0_5": int(sum(row["roc_auc"] is not None and row["roc_auc"] > 0.5 for row in fold_rows)),
         "folds_cross_sectional_auc_above_0_5": int(sum(row["cross_sectional_auc"] is not None and row["cross_sectional_auc"] > 0.5 for row in fold_rows)),
         "folds_logistic_auc_above_0_5": int(sum(row["logistic_regression_auc"] is not None and row["logistic_regression_auc"] > 0.5 for row in fold_rows)),
+        "folds_logistic_cross_sectional_auc_above_0_5": int(sum(row["logistic_regression_cross_sectional_auc"] is not None and row["logistic_regression_cross_sectional_auc"] > 0.5 for row in fold_rows)),
         "folds_with_positive_net_excess": int(sum(row["top5_minus_universe_mean_net_return"] is not None and row["top5_minus_universe_mean_net_return"] > 0 for row in fold_rows)),
         "mean_top5_minus_universe_net_return": float(np.mean(daily_return_spreads)) if daily_return_spreads else None,
         "top5_minus_universe_net_return_block_bootstrap_95pct": block_bootstrap_mean_ci(daily_return_spreads),
