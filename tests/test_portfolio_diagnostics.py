@@ -102,3 +102,16 @@ def test_index_benchmarks_include_buy_hold_and_exposure_matched_results():
     assert benchmark["status"] == "evaluated"
     assert benchmark["buy_and_hold"]["net_return_before_index_costs"] == pytest.approx(-0.02)
     assert benchmark["exposure_matched"]["method"].startswith("daily index return")
+
+
+
+def test_delivery_simulator_rounds_order_quantity_to_whole_shares():
+    candidate = _candidates().iloc[[0]].copy()
+    candidate["entry_price"] = 103.0
+    result = simulate_mark_to_market_portfolio(
+        candidate, _prices(), initial_capital=100_000,
+        max_positions=1, max_position_fraction=0.20,
+    )
+    trade = result["trade_log"][0]
+    assert trade["notional"] == pytest.approx(194 * 103.0)
+    assert trade["notional"] <= 20_000
