@@ -1,0 +1,43 @@
+import pandas as pd
+
+from trader.universe_audit import audit_universe
+
+
+def _prices():
+    idx = pd.bdate_range("2026-01-01", periods=3)
+    bars = pd.DataFrame({
+        "open": [10, 11, 12], "high": [11, 12, 13], "low": [9, 10, 11],
+        "close": [10.5, 11.5, 12.5], "volume": [100, 0, 100],
+    }, index=idx)
+    return {"AAA.NS": bars, "^NSEI": pd.DataFrame({"close": [1, 2, 3]}, index=idx)}
+
+
+def test_static_universe_is_never_claimed_point_in_time_verified(tmp_path):
+    report = audit_universe(_prices(), ["AAA.NS", "MISSING.NS"], tmp_path / "none.csv")
+    assert report["point_in_time_universe_verified"] is False
+    assert report["membership_history"]["provided"] is False
+    assert report["missing_symbols"] == ["MISSING.NS"]
+    assert report["per_symbol"]["AAA.NS"]["zero_volume_rows"] == 1
+
+
+def test_membership_file_requires_provenance_and_valid_dates(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "exchange archive", "source_published_at": "2020-01-01",
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is True
+    # A supplied file is not automatically treated as independently authenticated.
+    assert report["point_in_time_universe_verified"] is False
+
+
+def test_invalid_membership_dates_are_rejected(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2021-01-01", "valid_to": "2020-01-01",
+        "source": "x", "source_published_at": "2021-01-01",
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("precedes" in item for item in report["membership_history"]["errors"])
