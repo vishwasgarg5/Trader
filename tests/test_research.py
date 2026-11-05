@@ -118,3 +118,36 @@ def test_regime_summary_compares_top_five_with_universe_by_predeclared_bins():
     assert result["nifty_above_200dma_vix_below_20"]["days"] == 1
     assert result["nifty_at_or_below_200dma_vix_below_20"]["days"] == 1
     assert result["nifty_above_200dma_vix_below_20"]["top5_mean_net_return"] == pytest.approx(0.015)
+
+
+def test_simple_factor_baselines_use_fixed_rank_rules_and_net_returns():
+    from trader.research import evaluate_simple_factor_baselines
+
+    dates = pd.bdate_range("2020-01-01", periods=520)
+    rows = []
+    for date in dates:
+        for symbol, ret5, atr, rel20, net in [
+            ("A", 0.1, 0.9, 0.1, -0.01),
+            ("B", 0.2, 0.8, 0.2, -0.02),
+            ("C", 0.3, 0.7, 0.3, 0.01),
+            ("D", 0.4, 0.6, 0.4, 0.02),
+            ("E", 0.5, 0.5, 0.5, 0.03),
+            ("F", 0.6, 0.4, 0.6, 0.04),
+        ]:
+            rows.append({
+                "date": date, "symbol": symbol, "ret_5": ret5,
+                "atr_pct": atr, "relative_ret_20": rel20, "net_return": net,
+            })
+    frame = pd.DataFrame(rows).set_index("date")
+    result = evaluate_simple_factor_baselines(
+        frame, train_years=1, test_months=3, picks_per_day=5,
+    )
+    factors = result["factor_results"]
+    assert set(factors) == {
+        "short_term_reversal", "low_volatility", "relative_strength_20d",
+    }
+    assert factors["short_term_reversal"]["fold_count"] > 0
+    assert factors["low_volatility"]["fold_count"] > 0
+    assert factors["relative_strength_20d"]["fold_count"] > 0
+    assert factors["short_term_reversal"]["folds"][0]["test_dates"] > 0
+    assert factors["relative_strength_20d"]["selection_rule"].startswith("highest")
