@@ -112,6 +112,7 @@ def walk_forward_evaluate(
     test_months: int = 3,
     baseline_factory=None,
     shuffle_repeats: int = 3,
+    shuffle_within_date: bool = False,
 ) -> dict:
     """Rolling walk-forward evaluation with outcome-date purge and diagnostics.
 
@@ -172,7 +173,12 @@ def walk_forward_evaluate(
             target_values = train["target"].astype(int).to_numpy()
             for repeat in range(shuffle_repeats):
                 rng = np.random.default_rng(4200 + fold_number * 101 + repeat)
-                shuffled = rng.permutation(target_values)
+                if shuffle_within_date:
+                    shuffled = train["target"].astype(int).groupby(level=0, sort=False).transform(
+                        lambda values: rng.permutation(values.to_numpy())
+                    ).to_numpy()
+                else:
+                    shuffled = rng.permutation(target_values)
                 null_model = model_factory()
                 null_model.fit(train[features], shuffled)
                 null_scores = null_model.predict_proba(test[features])[:, 1]
