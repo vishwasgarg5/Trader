@@ -7,7 +7,8 @@ def test_delivery_costs_include_both_side_stt_and_buy_stamp_duty():
     result = delivery_round_trip_cost(100, 100, slippage_bps_per_side=0)
     assert result["stt_rupees"] == pytest.approx(200.0)
     assert result["stamp_duty_rupees"] == pytest.approx(15.0)
-    assert result["exchange_rupees"] == pytest.approx(6.14)
+    assert result["exchange_rupees"] == pytest.approx(5.94)
+    assert result["ipft_rupees"] == pytest.approx(0.2)
     assert result["sebi_rupees"] == pytest.approx(0.2)
     assert result["net_return"] < 0
     assert result["cost_return"] > 0.002
