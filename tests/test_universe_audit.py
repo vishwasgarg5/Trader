@@ -113,7 +113,7 @@ def test_audit_flags_missing_ohlcv_columns(tmp_path):
 
 
 def test_audit_normalizes_aware_price_and_benchmark_indices_to_nse_date(tmp_path):
-        index = pd.DatetimeIndex([pd.Timestamp("2024-01-10T18:30:00Z")])
+    index = pd.DatetimeIndex([pd.Timestamp("2024-01-10T18:30:00Z")])
     bars = pd.DataFrame(
         {"open": [10.0], "high": [11.0], "low": [9.0], "close": [10.5], "volume": [1000]},
         index=index,
