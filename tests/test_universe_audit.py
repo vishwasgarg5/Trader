@@ -1,3 +1,5 @@
+import hashlib
+
 import pandas as pd
 
 from trader.universe_audit import audit_universe
@@ -22,9 +24,14 @@ def test_static_universe_is_never_claimed_point_in_time_verified(tmp_path):
 
 def test_membership_file_requires_provenance_and_valid_dates(tmp_path):
     path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "nse-circular.pdf"
+    evidence.write_bytes(b"archived official circular fixture")
+    digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
     pd.DataFrame([{
         "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
-        "source": "exchange archive", "source_published_at": "2020-01-01",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2019-12-20", "evidence_path": evidence.name,
+        "evidence_sha256": digest,
     }]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is True
@@ -34,9 +41,14 @@ def test_membership_file_requires_provenance_and_valid_dates(tmp_path):
 
 def test_invalid_membership_dates_are_rejected(tmp_path):
     path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "circular.pdf"
+    evidence.write_bytes(b"evidence")
+    digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
     pd.DataFrame([{
         "symbol": "AAA.NS", "valid_from": "2021-01-01", "valid_to": "2020-01-01",
-        "source": "x", "source_published_at": "2021-01-01",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2020-12-20", "evidence_path": evidence.name,
+        "evidence_sha256": digest,
     }]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is False
@@ -50,3 +62,19 @@ def test_audit_flags_symbols_stale_vs_latest_benchmark_session(tmp_path):
     report = audit_universe(prices, ["AAA.NS"], tmp_path / "none.csv")
     assert report["per_symbol"]["AAA.NS"]["stale_benchmark_sessions"] == 1
     assert "AAA.NS" in report["price_integrity_issues"]
+
+
+
+def test_membership_evidence_checksum_mismatch_is_rejected(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "circular.pdf"
+    evidence.write_bytes(b"original")
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2019-12-20", "evidence_path": evidence.name,
+        "evidence_sha256": "0" * 64,
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("checksum mismatch" in item for item in report["membership_history"]["errors"])
