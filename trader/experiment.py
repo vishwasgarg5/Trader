@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import json
 
-import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs\nfrom trader.delivery import download_delivery_history
+from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
+from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
@@ -36,7 +36,7 @@ def make_logistic_model() -> Pipeline:
 
 
 def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
-    """Build triple-barrier labels and relative-strength features from OHLCV."""
+    """Build next-open triple-barrier labels and relative-strength features."""
     frame = build_features(prices)
     pieces = []
     for symbol, stock in prices.items():
@@ -47,7 +47,10 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
         bars["atr"] = atr.reindex(bars.index)
         labels = triple_barrier_labels(bars, horizon=5)
         part = frame.loc[frame["symbol"] == symbol].copy()
-        for column in ("target", "entry_date", "entry_price", "exit_reason", "exit_date", "exit_price", "outcome_return"):
+        for column in (
+            "target", "entry_date", "entry_price", "exit_reason",
+            "exit_date", "exit_price", "outcome_return",
+        ):
             part[column] = labels[column].reindex(part.index)
         pieces.append(part)
 
@@ -65,6 +68,7 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
 
 def run_experiment() -> dict:
     prices = download_prices(load_universe(), period="7y")
+    delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
     frame = build_experiment_frame(prices)
     labelled = frame.dropna(subset=["target"]).copy()
     if len(labelled.index.unique()) < 900:
@@ -78,13 +82,16 @@ def run_experiment() -> dict:
     )
     metrics["experiment"] = "triple_barrier_relative_strength_delivery"
     metrics["target_definition"] = (
-        "first touch of +2 ATR target or -1.5 ATR stop; timeout uses realised "
-        "return sign; same-day double touches excluded; opening gaps executed at open"
+        "signal-day features; next-session-open entry; first touch of +2 ATR "
+        "target or -1.5 ATR stop; timeout uses realised return sign; "
+        "same-day double touches excluded; opening gaps executed at open"
     )
     metrics["feature_columns"] = EXPERIMENT_FEATURES
     metrics["ambiguous_rows"] = int((frame["exit_reason"] == "ambiguous").sum())
     metrics["target_rows"] = int(frame["target"].notna().sum())
-    metrics["delivery_data_available"] = bool(frame["delivery_pct"].notna().any())\n    metrics["delivery_coverage_fraction"] = float(frame["delivery_pct"].notna().mean())\n    metrics["delivery_download"] = delivery_status
+    metrics["delivery_data_available"] = bool(frame["delivery_pct"].notna().any())
+    metrics["delivery_coverage_fraction"] = float(frame["delivery_pct"].notna().mean())
+    metrics["delivery_download"] = delivery_status
     metrics["cost_assumptions"] = DEFAULT_DELIVERY_COSTS
     metrics["cost_note"] = (
         "Illustrative NSE cash-delivery statutory rates as checked 2026-11-05; "
