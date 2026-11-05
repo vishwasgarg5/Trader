@@ -129,3 +129,11 @@ def test_audit_normalizes_aware_price_and_benchmark_indices_to_nse_date(tmp_path
     row = report["per_symbol"]["AAA.NS"]
     assert row["last_date"] == "2024-01-11"
     assert row["missing_benchmark_sessions"] == 0
+
+
+def test_audit_flags_non_finite_ohlcv_values():
+    prices = _prices()
+    prices["AAA.NS"].loc[prices["AAA.NS"].index[0], "close"] = float("inf")
+    report = audit_universe(prices, ["AAA.NS"], Path("missing-membership.csv"))
+    assert report["per_symbol"]["AAA.NS"]["invalid_ohlc_rows"] == 1
+    assert "AAA.NS" in report["price_integrity_issues"]
