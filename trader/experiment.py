@@ -16,7 +16,8 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.research import (
-    add_relative_strength_features, merge_delivery_percentages, walk_forward_evaluate,
+    add_relative_strength_features, merge_delivery_percentages,
+    summarize_outcome_reasons, walk_forward_evaluate,
 )
 
 EXPERIMENT_FEATURES = BASE_FEATURES + [
@@ -80,6 +81,35 @@ def run_experiment() -> dict:
         horizon=5, train_years=3, test_months=3,
         baseline_factory=make_logistic_model, shuffle_repeats=3,
     )
+    # Diagnose whether timeout sign-labels dilute barrier outcomes, and
+    # whether a cost-aware positive-return target changes out-of-sample results.
+    barrier_rows = labelled["exit_reason"].isin(["target", "target_gap", "stop", "stop_gap"])
+    barrier_frame = labelled.loc[barrier_rows].copy()
+    barrier_metrics = walk_forward_evaluate(
+        barrier_frame, EXPERIMENT_FEATURES, make_model,
+        horizon=5, train_years=3, test_months=3,
+        baseline_factory=make_logistic_model, shuffle_repeats=0,
+    )
+    net_frame = labelled.loc[labelled["net_return"].notna()].copy()
+    net_frame["target"] = (net_frame["net_return"] > 0).astype(int)
+    net_metrics = walk_forward_evaluate(
+        net_frame, EXPERIMENT_FEATURES, make_model,
+        horizon=5, train_years=3, test_months=3,
+        baseline_factory=make_logistic_model, shuffle_repeats=0,
+    )
+    metrics["outcome_reason_summary"] = summarize_outcome_reasons(labelled)
+    metrics["target_definition_comparisons"] = {
+        "barrier_only": {
+            "description": "Exclude timeout outcomes; classify target-barrier exits as 1 and stop-barrier exits as 0.",
+            "rows": int(len(barrier_frame)),
+            "fold_metrics": barrier_metrics,
+        },
+        "net_positive": {
+            "description": "Classify realised trade net_return > 0 as 1, otherwise 0; includes timeouts.",
+            "rows": int(len(net_frame)),
+            "fold_metrics": net_metrics,
+        },
+    }
     metrics["experiment"] = "triple_barrier_relative_strength_delivery"
     metrics["target_definition"] = (
         "signal-day features; next-session-open entry; first touch of +2 ATR "
