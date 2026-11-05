@@ -146,9 +146,9 @@ def simulate_overlapping_portfolio(
         "max_realized_equity_drawdown": float(max_drawdown),
         "peak_gross_exposure": float(gross_exposure_peak),
         "rejected": rejected,
-        "liquidity_constraint_applied": min_avg_daily_turnover is not None,
+        "liquidity_constraint_applied": liquidity_available,
         "liquidity_data_available": liquidity_available,
-        "liquidity_warning": None if min_avg_daily_turnover is not None else
+        "liquidity_warning": None if liquidity_available else
             "No enforceable liquidity cap was applied; turnover data and a threshold are required.",
         "drawdown_warning": "Drawdown uses realised equity at event dates and understates intra-trade mark-to-market drawdown.",
         "trade_log": trades,
