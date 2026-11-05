@@ -169,8 +169,14 @@ def run_experiment() -> dict:
         "cross_sectional_A_pass": bool(cross_pass),
         "regime_gate_B_pass": bool(regime_pass),
         "continue_price_feature_tuning": bool(cross_pass and regime_pass),
-        "decision": "continue" if cross_pass and regime_pass else "stop_price_feature_tuning",
-        "note": "All returns are after the configured transaction-cost model. This is a research stopping rule, not a trading approval.",
+        "decision": "continue_price_feature_research_only" if cross_pass and regime_pass else "stop_price_feature_tuning",
+        "cross_sectional_top5_mean_net_return": cross_metrics.get("mean_top5_net_return"),
+        "cross_sectional_absolute_profitability_pass": bool(
+            cross_metrics.get("mean_top5_net_return") is not None
+            and cross_metrics["mean_top5_net_return"] > 0
+        ),
+        "promotion_eligible": False,
+        "note": "All returns are after the configured transaction-cost model. Positive excess versus the universe is relative edge only; if absolute top-five net return remains negative, no trading approval or deployment is permitted.",
     }
     metrics["reporting_diagnostics"] = {
         "fold_auc_above_0_5": metrics.get("folds_auc_above_0_5"),
