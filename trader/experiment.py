@@ -17,8 +17,9 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.research import (
-    add_relative_strength_features, make_cross_sectional_frame,
-    merge_delivery_percentages, summarize_outcome_reasons, walk_forward_evaluate,
+    add_relative_strength_features, evaluate_simple_factor_baselines,
+    make_cross_sectional_frame, merge_delivery_percentages,
+    summarize_outcome_reasons, walk_forward_evaluate,
 )
 
 EXPERIMENT_FEATURES = BASE_FEATURES + [
@@ -125,6 +126,11 @@ def run_experiment() -> dict:
         horizon=5, train_years=3, test_months=3,
         baseline_factory=make_logistic_model, shuffle_repeats=0,
     )
+    factor_baselines = evaluate_simple_factor_baselines(
+        cross_frame, horizon=5, train_years=3, test_months=3, picks_per_day=5,
+    )
+
+    metrics["simple_factor_baselines"] = factor_baselines
 
     metrics["cross_sectional_experiment"] = {
         "description": "Within-date percentile-ranked stock features; target is net return above that date's universe median.",
