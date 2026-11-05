@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
 
+from trader.costs import delivery_round_trip_cost
 from trader.portfolio import simulate_overlapping_portfolio
 
 
@@ -74,3 +75,23 @@ def test_same_day_intraday_exit_does_not_fund_next_open_entry():
     )
     assert result["trades"] == 1
     assert result["rejected"]["capacity"] == 1
+
+
+
+def test_event_simulator_uses_whole_shares_and_actual_notional_costs():
+    data = _candidates().iloc[[0]].copy()
+    data["entry_price"] = 103.0
+    data["net_return"] = 0.99  # legacy field must not override execution-cost math
+    result = simulate_overlapping_portfolio(
+        data, initial_capital=100_000, max_positions=1,
+        max_position_fraction=0.20,
+    )
+    trade = result["trade_log"][0]
+    expected = delivery_round_trip_cost(
+        103.0, 110.0, notional_rupees=194 * 103.0,
+    )
+    assert trade["shares"] == pytest.approx(194)
+    assert trade["notional"] == pytest.approx(194 * 103.0)
+    assert trade["cost_rupees"] == pytest.approx(expected["total_cost_rupees"])
+    assert trade["net_return"] == pytest.approx(expected["net_return"])
+    assert trade["net_return"] != pytest.approx(0.99)
