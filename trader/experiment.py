@@ -16,6 +16,7 @@ from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
     load_universe, make_model,
 )
+from trader.predictive_edge import summarize_predictive_edge
 from trader.research import (
     add_relative_strength_features, evaluate_simple_factor_baselines,
     make_cross_sectional_frame, merge_delivery_percentages,
@@ -124,13 +125,15 @@ def run_experiment() -> dict:
     cross_metrics = walk_forward_evaluate(
         cross_frame, cross_features, make_regularized_boost_model,
         horizon=5, train_years=3, test_months=3,
-        baseline_factory=make_logistic_model, shuffle_repeats=0,
+        baseline_factory=make_logistic_model, shuffle_repeats=99,
     )
+    predictive_edge = summarize_predictive_edge(cross_metrics)
     factor_baselines = evaluate_simple_factor_baselines(
         cross_frame, horizon=5, train_years=3, test_months=3, picks_per_day=5,
     )
 
     metrics["simple_factor_baselines"] = factor_baselines
+    metrics["stage_2_predictive_edge"] = predictive_edge
 
     metrics["cross_sectional_experiment"] = {
         "description": "Within-date percentile-ranked stock features; target is net return above that date's universe median.",
