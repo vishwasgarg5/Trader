@@ -42,6 +42,8 @@ def load_groww_delivery_costs(config_path: str | Path | None = None) -> dict:
         "brokerage_min_per_order": float(brokerage["minimum_per_executed_order"]),
         "brokerage_min_rate": float(brokerage["minimum_rate_cap"]),
         "dp_charge_per_sell": dp_total,
+        "dp_groww_component_per_sell": float(dp["groww_component"]),
+        "dp_depository_component_per_sell": float(dp["depository_component_standard"]),
         "dp_free_below_sell_value": float(dp["free_below_sell_value"]),
         "slippage_bps_per_side": float(profile["slippage_bps_per_side"]),
         "notional_rupees": 100000.0,
@@ -78,6 +80,8 @@ def delivery_round_trip_cost(
     brokerage_min_rate: float = 0.025,
     dp_charge_per_sell: float = 20.0,
     dp_free_below_sell_value: float = 100.0,
+    dp_groww_component_per_sell: float | None = None,
+    dp_depository_component_per_sell: float | None = None,
     slippage_bps_per_side: float = 2.0,
     notional_rupees: float = 100000.0,
 ) -> dict:
@@ -93,7 +97,9 @@ def delivery_round_trip_cost(
         raise ValueError("Entry and exit prices must be finite and positive")
     if (not np.isfinite(notional_rupees) or notional_rupees <= 0
             or brokerage_cap_per_order < 0 or brokerage_min_per_order < 0
-            or dp_charge_per_sell < 0 or dp_free_below_sell_value < 0):
+            or dp_charge_per_sell < 0 or dp_free_below_sell_value < 0
+            or (dp_groww_component_per_sell is not None and dp_groww_component_per_sell < 0)
+            or (dp_depository_component_per_sell is not None and dp_depository_component_per_sell < 0)):
         raise ValueError("Notional must be positive and fixed charges non-negative")
     if min(stt_rate_each_side, stamp_duty_buy_rate, exchange_rate_each_side,
            ipft_rate_each_side, sebi_rate_each_side, gst_rate, brokerage_rate_each_side,
@@ -115,7 +121,15 @@ def delivery_round_trip_cost(
     exchange = (buy_turnover + sell_turnover) * exchange_rate_each_side
     ipft = (buy_turnover + sell_turnover) * ipft_rate_each_side
     sebi = (buy_turnover + sell_turnover) * sebi_rate_each_side
-    dp = 0.0 if sell_turnover < dp_free_below_sell_value else float(dp_charge_per_sell)
+    if dp_groww_component_per_sell is not None and dp_depository_component_per_sell is not None:
+        # Groww waives its own DP component for sell value below ₹100; the
+        # separate depository fee remains payable on the sell transaction.
+        dp = float(dp_depository_component_per_sell)
+        if sell_turnover >= dp_free_below_sell_value:
+            dp += float(dp_groww_component_per_sell)
+    else:
+        # Backward-compatible aggregate fee behavior for custom legacy callers.
+        dp = 0.0 if sell_turnover < dp_free_below_sell_value else float(dp_charge_per_sell)
     gst = gst_rate * (brokerage + exchange + ipft + sebi + dp)
     slippage = (buy_turnover + sell_turnover) * slippage_bps_per_side / 10000.0
     total = stt + stamp + exchange + ipft + sebi + brokerage + dp + gst + slippage
