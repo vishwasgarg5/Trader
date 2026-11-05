@@ -4,6 +4,7 @@ import json
 
 import pandas as pd
 from sklearn.impute import SimpleImputer
+from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -16,8 +17,8 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.research import (
-    add_relative_strength_features, merge_delivery_percentages,
-    summarize_outcome_reasons, walk_forward_evaluate,
+    add_relative_strength_features, make_cross_sectional_frame,
+    merge_delivery_percentages, summarize_outcome_reasons, walk_forward_evaluate,
 )
 
 EXPERIMENT_FEATURES = BASE_FEATURES + [
@@ -33,6 +34,17 @@ def make_logistic_model() -> Pipeline:
         ("imputer", SimpleImputer(strategy="median", add_indicator=True)),
         ("scale", StandardScaler()),
         ("classifier", LogisticRegression(C=0.1, max_iter=1500, random_state=42)),
+    ])
+
+
+def make_regularized_boost_model() -> Pipeline:
+    """Constrained boosting comparator for the cross-sectional experiment."""
+    return Pipeline([
+        ("imputer", SimpleImputer(strategy="median", add_indicator=True)),
+        ("classifier", HistGradientBoostingClassifier(
+            max_iter=80, learning_rate=0.04, max_leaf_nodes=7,
+            min_samples_leaf=40, l2_regularization=5.0, random_state=42,
+        )),
     ])
 
 
@@ -61,6 +73,12 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
     nifty = prices["^NSEI"]["close"]
     vix = prices.get("^INDIAVIX", pd.DataFrame()).get("close", pd.Series(dtype=float))
     result["nifty_ret_10"] = nifty.pct_change(10).reindex(result.index)
+    nifty_sma_200 = nifty.rolling(200, min_periods=200).mean()
+    result["nifty_close"] = nifty.reindex(result.index)
+    result["nifty_sma_200"] = nifty_sma_200.reindex(result.index)
+    result["nifty_above_200dma"] = (result["nifty_close"] > result["nifty_sma_200"])
+    result["india_vix"] = vix.reindex(result.index)
+    result["india_vix_low_20"] = result["india_vix"] < 20.0
     result["nifty_ret_20"] = nifty.pct_change(20).reindex(result.index)
     result["nifty_vix_change"] = vix.pct_change(1).reindex(result.index)
     result = merge_delivery_percentages(result, DATA / "raw" / "delivery.csv")
@@ -97,6 +115,42 @@ def run_experiment() -> dict:
         horizon=5, train_years=3, test_months=3,
         baseline_factory=make_logistic_model, shuffle_repeats=0,
     )
+    # Experiment A: predict which stocks beat the same-day universe median.
+    # Raw market-wide variables are excluded; every retained feature is ranked
+    # cross-sectionally before fitting to avoid market-timing leakage.
+    cross_frame, cross_features = make_cross_sectional_frame(labelled, EXPERIMENT_FEATURES)
+    cross_frame = cross_frame.dropna(subset=["target"]).copy()
+    cross_metrics = walk_forward_evaluate(
+        cross_frame, cross_features, make_regularized_boost_model,
+        horizon=5, train_years=3, test_months=3,
+        baseline_factory=make_logistic_model, shuffle_repeats=0,
+    )
+
+    metrics["cross_sectional_experiment"] = {
+        "description": "Within-date percentile-ranked stock features; target is net return above that date's universe median.",
+        "rows": int(len(cross_frame)),
+        "features": cross_features,
+        "excluded_market_features": ["nifty_ret_1", "nifty_ret_5", "nifty_ret_10", "nifty_ret_20", "nifty_vix", "nifty_vix_change"],
+        "boosting_model": "HistGradientBoostingClassifier(max_iter=80,max_leaf_nodes=7,min_samples_leaf=40,l2_regularization=5.0)",
+        "logistic_baseline": "LogisticRegression(C=0.1)",
+        "fold_metrics": cross_metrics,
+    }
+    metrics["regime_experiment"] = {
+        "description": "Predeclared four-way regime split of existing baseline top-five and universe returns; no thresholds fitted to test outcomes.",
+        "nifty_regime_rule": "Nifty close above its trailing 200-session moving average (200 observations required).",
+        "vix_regime_rule": "India VIX below 20.0 versus at or above 20.0.",
+        "gated_strategy": "Risk-on / lower-volatility only: Nifty above 200DMA AND India VIX below 20.",
+        "fold_metrics": [
+            {"test_start": row["test_start"], "test_end": row["test_end"], "regime_performance": row.get("regime_performance")}
+            for row in metrics.get("folds", [])
+        ],
+    }
+    metrics["reporting_diagnostics"] = {
+        "fold_auc_above_0_5": metrics.get("folds_auc_above_0_5"),
+        "fold_auc_count": metrics.get("fold_count"),
+        "top5_minus_universe_net_return_block_bootstrap_95pct": metrics.get("top5_minus_universe_net_return_block_bootstrap_95pct"),
+        "bootstrap_note": "Circular 5-trading-day moving-block bootstrap of daily top-five minus universe net-return spread; preserves short-horizon dependence from overlapping labels.",
+    }
     metrics["outcome_reason_summary"] = summarize_outcome_reasons(labelled)
     metrics["target_definition_comparisons"] = {
         "barrier_only": {
