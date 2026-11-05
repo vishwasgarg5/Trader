@@ -26,8 +26,8 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Confirm the intended universe with the owner; the configured 49-symbol list is not a verified current or historical Nifty 50 universe.
 - [ ] Obtain official dated constituent additions/removals and archive source circulars, including delisted constituents.
 - [ ] Populate `data/reference/universe_membership.csv` only from those official records.
-- [ ] Resolve the missing `TATAMOTORS.NS` price series and TATAMOTORS/TMPV symbol transition/demerger adjustment with source-backed evidence.
-- [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
+- [x] Establish the official NSE symbol mapping: `TATAMOTORS` became `TMPV` (Tata Motors Passenger Vehicles Ltd.) effective 2025-10-24; the demerged CV entity listed separately as `TMCV` on 2025-11-12 and was excluded from Nifty indices effective 2025-11-17.\n- [ ] Reconcile the missing `TATAMOTORS.NS` history to `TMPV.NS` across the rename and independently verify adjusted-price continuity; do not substitute `TMCV` for the passenger-vehicle history.
+- [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.\n- [x] Correct NSE calendar parsing so naive timestamps remain India-local while timezone-aware timestamps are converted to Asia/Kolkata; add regression tests for both membership and corporate-action audits.\n- [x] Make missing OHLCV columns explicit integrity failures rather than silently leaving invalid-row counts as null.
 - [ ] Supply and validate the corporate-action ledger; latest experiment reports it was not provided.
 - [ ] Freeze verified price, delivery, membership and corporate-action inputs with the manifest after these checks.
 
@@ -80,6 +80,16 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Add fail-closed release gates, artifact provenance, monitoring and rollback.
 - [ ] Require independent approval before any deployment decision.
 - [ ] Keep live execution disabled unless all research, paper and operational gates pass and explicit authorization is given.
+
+## Source-backed corporate-action and symbol findings
+
+The following primary-source records were located and establish the symbol timeline, but do not by themselves validate the historical Yahoo Finance price series:
+
+- NSE circular [NSE/CML/70875 (2025-10-16)](https://nsearchives.nseindia.com/content/circulars/CML70875.pdf): `TATAMOTORS` → `TMPV`, effective 2025-10-24, with the company renamed Tata Motors Passenger Vehicles Limited.
+- NSE Indices press release [2025-10-07](https://www.niftyindices.com/Press_Release/ind_prs07102025.pdf): the demerged CV entity was temporarily represented by `DUMMYTATAM` in affected indices from 2025-10-14 (close 2025-10-13).
+- NSE Indices press release [2025-11-13](https://www.niftyindices.com/Press_Release/ind_prs13112025.pdf): the CV entity, listed as `TMCV` on 2025-11-12, was excluded from Nifty indices effective 2025-11-17 (close 2025-11-14).
+
+The research panel must therefore not treat `TATAMOTORS.NS` as an unchanged ticker across this event. Use the passenger-vehicle symbol only after reconciling source-vendor price history and the demerger adjustment; the new CV ticker is not a substitute for the historical passenger-vehicle constituent.
 
 ## External inputs still required
 
