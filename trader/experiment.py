@@ -12,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 
 from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
 from trader.data_snapshot import write_data_snapshot_manifest
+from trader.corporate_actions import audit_corporate_action_ledger
 from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
@@ -96,6 +97,9 @@ def run_experiment() -> dict:
     frame = build_experiment_frame(prices)
     universe_audit = audit_universe(
         prices, load_universe(), DATA / "reference" / "universe_membership.csv",
+    )
+    corporate_action_audit = audit_corporate_action_ledger(
+        DATA / "reference" / "corporate_actions.csv",
     )
     labelled = frame.dropna(subset=["target"]).copy()
     if len(labelled.index.unique()) < 900:
@@ -252,6 +256,7 @@ def run_experiment() -> dict:
         },
     }
     metrics["universe_integrity_audit"] = universe_audit
+    metrics["corporate_action_audit"] = corporate_action_audit
     metrics["final_holdout_protocol"] = {
         "path": "config/final_holdout_protocol.json",
         "status": "LOCKED_NOT_EVALUATED",
