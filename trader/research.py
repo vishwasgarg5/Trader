@@ -242,3 +242,28 @@ def walk_forward_evaluate(
         },
         "status": "evaluated",
     }
+
+
+def summarize_outcome_reasons(frame: pd.DataFrame) -> dict:
+    """Summarize barrier and timeout outcomes separately, including costs."""
+    required = {"exit_reason", "outcome_return"}
+    missing = required.difference(frame.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {sorted(missing)}")
+    result = {}
+    for reason, group in frame.groupby("exit_reason", dropna=False, sort=True):
+        gross = pd.to_numeric(group["outcome_return"], errors="coerce").dropna()
+        item = {
+            "rows": int(len(group)),
+            "mean_gross_return": float(gross.mean()) if not gross.empty else None,
+            "median_gross_return": float(gross.median()) if not gross.empty else None,
+            "gross_positive_fraction": float((gross > 0).mean()) if not gross.empty else None,
+        }
+        if "net_return" in group:
+            net = pd.to_numeric(group["net_return"], errors="coerce").dropna()
+            item.update({
+                "mean_net_return": float(net.mean()) if not net.empty else None,
+                "net_positive_fraction": float((net > 0).mean()) if not net.empty else None,
+            })
+        result[str(reason)] = item
+    return result
