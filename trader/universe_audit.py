@@ -86,6 +86,9 @@ def audit_universe(
                     membership["errors"].append("blank source provenance")
                 if history["source_published_at"].isna().any():
                     membership["errors"].append("missing source_published_at timestamps")
+                elif (history["source_published_at"].dt.normalize()
+                      > history["valid_from"].dt.normalize()).any():
+                    membership["errors"].append("membership source was published after valid_from")
                 urls = history["source_url"].astype(str).str.strip()
                 if any(urlparse(url).scheme != "https" or not urlparse(url).netloc for url in urls):
                     membership["errors"].append("source_url must be an HTTPS URL")
