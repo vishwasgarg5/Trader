@@ -267,3 +267,82 @@ def summarize_outcome_reasons(frame: pd.DataFrame) -> dict:
             })
         result[str(reason)] = item
     return result
+
+
+CROSS_SECTIONAL_EXCLUDED_FEATURES = {
+    "nifty_ret_1", "nifty_ret_5", "nifty_ret_10", "nifty_ret_20",
+    "nifty_vix", "nifty_vix_change", "nifty_close", "nifty_sma_200",
+    "nifty_above_200dma", "india_vix", "india_vix_low_20",
+}
+
+
+def make_cross_sectional_frame(frame: pd.DataFrame, features: list[str]) -> tuple[pd.DataFrame, list[str]]:
+    """Rank stock features within each date and label outperformance vs daily median."""
+    if "net_return" not in frame:
+        raise ValueError("Missing required columns: ['net_return']")
+    result = frame.copy()
+    eligible = [name for name in features if name in result.columns and name not in CROSS_SECTIONAL_EXCLUDED_FEATURES]
+    if not eligible:
+        raise ValueError("No stock-level features available for cross-sectional model")
+    for name in eligible:
+        values = pd.to_numeric(result[name], errors="coerce")
+        result[name] = values.groupby(level=0).rank(pct=True, method="average")
+    net = pd.to_numeric(result["net_return"], errors="coerce")
+    daily_median = net.groupby(level=0).transform("median")
+    result["target"] = np.where(net.notna() & daily_median.notna(), (net > daily_median).astype(float), np.nan)
+    return result, eligible
+
+
+def block_bootstrap_mean_ci(values, block_length: int = 5, repeats: int = 2000, seed: int = 42052) -> dict | None:
+    """Circular moving-block bootstrap CI for daily portfolio spreads."""
+    data = np.asarray(values, dtype=float)
+    data = data[np.isfinite(data)]
+    if len(data) < max(10, block_length * 2):
+        return None
+    rng = np.random.default_rng(seed)
+    n_blocks = int(np.ceil(len(data) / block_length))
+    estimates = np.empty(repeats, dtype=float)
+    offsets = np.arange(block_length)
+    for i in range(repeats):
+        starts = rng.integers(0, len(data), size=n_blocks)
+        sample = np.concatenate([data[(start + offsets) % len(data)] for start in starts])[:len(data)]
+        estimates[i] = sample.mean()
+    return {
+        "method": "circular_moving_block_bootstrap",
+        "block_length_trading_days": int(block_length),
+        "repeats": int(repeats),
+        "confidence_level": 0.95,
+        "lower": float(np.quantile(estimates, 0.025)),
+        "upper": float(np.quantile(estimates, 0.975)),
+    }
+
+
+def summarize_regime_performance(test: pd.DataFrame, daily_top: pd.DataFrame) -> dict:
+    """Compare existing top-five and universe returns across predeclared market regimes."""
+    if not {"net_return", "nifty_above_200dma", "india_vix_low_20"}.issubset(test.columns):
+        return {}
+    rows = test[["net_return", "nifty_above_200dma", "india_vix_low_20"]].copy()
+    if "symbol" in test.columns and "symbol" in daily_top.columns:
+        selected = set(zip(daily_top.index, daily_top["symbol"]))
+        rows["top5_selected"] = [key in selected for key in zip(test.index, test["symbol"])]
+    else:
+        rows["top5_selected"] = False
+    above = rows["nifty_above_200dma"].fillna(False).astype(bool)
+    low_vix = rows["india_vix_low_20"].fillna(False).astype(bool)
+    rows["regime"] = np.select(
+        [above & low_vix, above & ~low_vix, ~above & low_vix],
+        ["nifty_above_200dma_vix_below_20", "nifty_above_200dma_vix_at_or_above_20", "nifty_at_or_below_200dma_vix_below_20"],
+        default="nifty_at_or_below_200dma_vix_at_or_above_20",
+    )
+    output = {}
+    for regime, group in rows.groupby("regime", sort=True):
+        daily_universe = group.groupby(level=0)["net_return"].mean()
+        daily_top = group.loc[group["top5_selected"]].groupby(level=0)["net_return"].mean()
+        paired = pd.concat([daily_top.rename("top5"), daily_universe.rename("universe")], axis=1).dropna()
+        output[regime] = {
+            "days": int(len(paired)),
+            "top5_mean_net_return": float(paired["top5"].mean()) if not paired.empty else None,
+            "universe_mean_net_return": float(paired["universe"].mean()) if not paired.empty else None,
+            "top5_minus_universe": float((paired["top5"] - paired["universe"]).mean()) if not paired.empty else None,
+        }
+    return output
