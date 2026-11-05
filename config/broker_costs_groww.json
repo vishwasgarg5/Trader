@@ -1,0 +1,41 @@
+{
+  "broker": "Groww",
+  "segment": "NSE equity delivery",
+  "checked_on": "2026-11-05",
+  "currency": "INR",
+  "brokerage": {
+    "rate_per_executed_order": 0.001,
+    "cap_per_executed_order": 20.0,
+    "minimum_per_executed_order": 5.0,
+    "minimum_rate_cap": 0.025
+  },
+  "statutory_and_exchange": {
+    "stt_each_side": 0.001,
+    "stamp_duty_buy_side": 0.00015,
+    "nse_transaction_charge": 0.0000297,
+    "nse_ipft_charge": 0.000001,
+    "sebi_turnover_charge_each_side": 0.000001,
+    "gst": 0.18
+  },
+  "dp": {
+    "groww_component": 16.5,
+    "depository_component_standard": 3.5,
+    "depository_component_women": 3.25,
+    "standard_pre_gst_total": 20.0,
+    "free_below_sell_value": 100.0
+  },
+  "slippage_bps_per_side": 2.0,
+  "assumptions": [
+    "The standard ₹20 DP charge is used as a conservative default; account-specific depository component can be configured.",
+    "GST is applied to brokerage, exchange transaction/IPFT, SEBI and DP charges; STT and stamp duty are excluded from GST.",
+    "Two basis points per side is a scenario assumption, not an observed execution cost.",
+    "Tax and exchange rates must be rechecked against official schedules before live use.",
+    "This file models delivery only, not intraday, F&O, MTF, pledge, call-and-trade or penalties."
+  ],
+  "sources": [
+    "https://groww.in/help/stocks/sx-reports/what-are-the-different-charges-mentioned-in-the-report",
+    "https://groww.in/help/stocks/searchable/when-are-dp-charges-levied",
+    "https://groww.in/help/payments-%26-withdrawals/payments-charges/what-fees-does-groww-charge--58",
+    "https://groww.in/help/stocks%2C-f%26o%2C-ipo-%26-mtf/sx-pricing/what-is-stamp-duty"
+  ]
+}
