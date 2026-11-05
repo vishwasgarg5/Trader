@@ -113,9 +113,7 @@ def test_audit_flags_missing_ohlcv_columns(tmp_path):
 
 
 def test_audit_normalizes_aware_price_and_benchmark_indices_to_nse_date(tmp_path):
-    from datetime import timezone
-
-    index = pd.DatetimeIndex([pd.Timestamp("2024-01-10T18:30:00Z")])
+        index = pd.DatetimeIndex([pd.Timestamp("2024-01-10T18:30:00Z")])
     bars = pd.DataFrame(
         {"open": [10.0], "high": [11.0], "low": [9.0], "close": [10.5], "volume": [1000]},
         index=index,
@@ -131,9 +129,9 @@ def test_audit_normalizes_aware_price_and_benchmark_indices_to_nse_date(tmp_path
     assert row["missing_benchmark_sessions"] == 0
 
 
-def test_audit_flags_non_finite_ohlcv_values():
+def test_audit_flags_non_finite_ohlcv_values(tmp_path):
     prices = _prices()
     prices["AAA.NS"].loc[prices["AAA.NS"].index[0], "close"] = float("inf")
-    report = audit_universe(prices, ["AAA.NS"], Path("missing-membership.csv"))
+    report = audit_universe(prices, ["AAA.NS"], tmp_path / "missing-membership.csv")
     assert report["per_symbol"]["AAA.NS"]["invalid_ohlc_rows"] == 1
     assert "AAA.NS" in report["price_integrity_issues"]
