@@ -9,7 +9,7 @@ on:
       - "requirements.txt"
       - ".github/workflows/triple-barrier-experiment.yml"
   pull_request:
-    branches: [main]
+    branches: [main, feature/p1-p2-data-portfolio-validation]
     paths:
       - "trader/**"
       - "tests/**"
