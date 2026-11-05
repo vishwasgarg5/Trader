@@ -23,9 +23,9 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [x] Deterministic SHA-256 manifest builder for frozen inputs.
 - [x] Membership schema requires HTTPS sources, archived evidence paths and matching SHA-256 checksums.
 - [x] Reject overlapping membership intervals; missing history is explicitly unverified and invalid supplied history fails closed.
-- [ ] Confirm the intended universe with the owner; the configured 49-symbol list is not a verified current or historical Nifty 50 universe.
-- [ ] Obtain official dated constituent additions/removals and archive source circulars, including delisted constituents.
-- [ ] Populate `data/reference/universe_membership.csv` only from those official records.
+- [x] Owner confirmed the intended universe is exactly the configured 49-symbol custom universe; do not expand it or relabel it as Nifty 50.
+- [ ] If historical universe membership is used in backtests, obtain dated membership evidence for these exact 49 symbols and archive source records. Do not substitute Nifty 50 constituents or silently add symbols.
+- [ ] Populate `data/reference/universe_membership.csv` only from source-backed membership evidence; until then, explicitly mark point-in-time membership unverified.
 - [x] Establish the official NSE symbol mapping: `TATAMOTORS` became `TMPV` (Tata Motors Passenger Vehicles Ltd.) effective 2025-10-24; the demerged CV entity listed separately as `TMCV` on 2025-11-12 and was excluded from Nifty indices effective 2025-11-17.
 - [ ] Reconcile the missing `TATAMOTORS.NS` history to `TMPV.NS` across the rename and independently verify adjusted-price continuity; do not substitute `TMCV` for the passenger-vehicle history.
 - [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
@@ -84,6 +84,12 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Require independent approval before any deployment decision.
 - [ ] Keep live execution disabled unless all research, paper and operational gates pass and explicit authorization is given.
 
+## Universe scope confirmed
+
+The owner confirmed that the research universe is exactly the 49 symbols in `config/universe.txt`. This is a custom fixed universe, not a claim that the list equals the current or historical Nifty 50. Do not add or substitute symbols to force index membership. Historical inclusion/exclusion dates for these exact 49 symbols remain unverified until source-backed records are archived.
+
+The 49 configured entries include the legacy `TATAMOTORS.NS` identifier. It must be reconciled to the passenger-vehicle successor `TMPV.NS` and the 2025 demerger before using its series; keep the universe at 49 names and do not include the separate CV ticker as an additional name.
+
 ## Source-backed corporate-action and symbol findings
 
 The following primary-source records were located and establish the symbol timeline, but do not by themselves validate the historical Yahoo Finance price series:
@@ -96,8 +102,7 @@ The research panel must therefore not treat `TATAMOTORS.NS` as an unchanged tick
 
 ## External inputs still required
 
-1. Intended universe confirmation.
-2. Official historical constituent circulars and archived evidence.
+1. Historical membership evidence for the exact owner-defined 49-symbol universe, if point-in-time membership is needed.
 3. Source-backed TATAMOTORS/TMPV transition and corporate-action adjustment.
 4. Corporate-action ledger and independent adjusted-price verification.
 5. Anonymised Groww contract notes or equivalent actual fee evidence.
