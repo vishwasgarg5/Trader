@@ -44,7 +44,23 @@ def test_groww_minimum_brokerage_and_small_sell_dp_exemption():
     )
     assert result["brokerage_rupees"] == pytest.approx(10.0)
     small = delivery_round_trip_cost(
-        100, 100, notional_rupees=50, slippage_bps_per_side=0,
+        100, 100, **{**DEFAULT_DELIVERY_COSTS, "notional_rupees": 50,
+                    "slippage_bps_per_side": 0},
     )
-    assert small["dp_rupees"] == 0
+    # Groww's ₹16.50 component is waived below ₹100; the ₹3.50
+    # depository component remains payable (before GST).
+    assert small["dp_rupees"] == pytest.approx(3.5)
     assert small["brokerage_rupees"] == pytest.approx(2.5)
+
+
+def test_groww_dp_threshold_waives_only_groww_component():
+    small = delivery_round_trip_cost(
+        100, 100, **{**DEFAULT_DELIVERY_COSTS, "notional_rupees": 99.99,
+                    "slippage_bps_per_side": 0},
+    )
+    regular = delivery_round_trip_cost(
+        100, 100, **{**DEFAULT_DELIVERY_COSTS, "notional_rupees": 100.0,
+                    "slippage_bps_per_side": 0},
+    )
+    assert small["dp_rupees"] == pytest.approx(3.5)
+    assert regular["dp_rupees"] == pytest.approx(20.0)
