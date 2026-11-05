@@ -75,7 +75,10 @@ def rsi(close: pd.Series, period: int = 14) -> pd.Series:
     gain = delta.clip(lower=0).ewm(alpha=1 / period, adjust=False).mean()
     loss = (-delta.clip(upper=0)).ewm(alpha=1 / period, adjust=False).mean()
     rs = gain / loss.replace(0, np.nan)
-    return 100 - 100 / (1 + rs)
+    values = 100 - 100 / (1 + rs)
+    values = values.mask((loss == 0) & (gain > 0), 100)
+    values = values.mask((gain == 0) & (loss > 0), 0)
+    return values
 
 
 def build_features(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
@@ -143,8 +146,9 @@ def train_and_evaluate(frame: pd.DataFrame) -> tuple[Pipeline, dict]:
     test_dates = dates[split:]
     train = labelled.loc[labelled.index.isin(train_dates)]
     test = labelled.loc[labelled.index.isin(test_dates)]
-    if train.empty or test.empty or test["target"].nunique() < 2:
-        raise RuntimeError("Chronological holdout is too small or contains one target class")
+    if (train.empty or test.empty or train["target"].nunique() < 2
+            or test["target"].nunique() < 2):
+        raise RuntimeError("Chronological train/holdout split is too small or contains one target class")
     model = make_model()
     model.fit(train[FEATURES], train["target"].astype(int))
     probabilities = model.predict_proba(test[FEATURES])[:, 1]
