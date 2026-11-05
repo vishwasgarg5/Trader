@@ -12,7 +12,8 @@ import pandas as pd
 DEFAULT_DELIVERY_COSTS = {
     "stt_rate_each_side": 0.001,
     "stamp_duty_buy_rate": 0.00015,
-    "exchange_rate_each_side": 0.0000307,
+    "exchange_rate_each_side": 0.0000297,
+    "ipft_rate_each_side": 0.000001,
     "sebi_rate_each_side": 0.000001,
     "gst_rate": 0.18,
     "brokerage_rate_each_side": 0.001,
@@ -40,7 +41,8 @@ def delivery_round_trip_cost(
     *,
     stt_rate_each_side: float = 0.001,
     stamp_duty_buy_rate: float = 0.00015,
-    exchange_rate_each_side: float = 0.0000307,
+    exchange_rate_each_side: float = 0.0000297,
+    ipft_rate_each_side: float = 0.000001,
     sebi_rate_each_side: float = 0.000001,
     gst_rate: float = 0.18,
     brokerage_rate_each_side: float = 0.001,
@@ -67,7 +69,7 @@ def delivery_round_trip_cost(
             or dp_charge_per_sell < 0 or dp_free_below_sell_value < 0):
         raise ValueError("Notional must be positive and fixed charges non-negative")
     if min(stt_rate_each_side, stamp_duty_buy_rate, exchange_rate_each_side,
-           sebi_rate_each_side, gst_rate, brokerage_rate_each_side,
+           ipft_rate_each_side, sebi_rate_each_side, gst_rate, brokerage_rate_each_side,
            brokerage_min_rate, slippage_bps_per_side) < 0:
         raise ValueError("Cost rates cannot be negative")
 
@@ -84,11 +86,12 @@ def delivery_round_trip_cost(
     stt = (buy_turnover + sell_turnover) * stt_rate_each_side
     stamp = buy_turnover * stamp_duty_buy_rate
     exchange = (buy_turnover + sell_turnover) * exchange_rate_each_side
+    ipft = (buy_turnover + sell_turnover) * ipft_rate_each_side
     sebi = (buy_turnover + sell_turnover) * sebi_rate_each_side
     dp = 0.0 if sell_turnover < dp_free_below_sell_value else float(dp_charge_per_sell)
-    gst = gst_rate * (brokerage + exchange + sebi + dp)
+    gst = gst_rate * (brokerage + exchange + ipft + sebi + dp)
     slippage = (buy_turnover + sell_turnover) * slippage_bps_per_side / 10000.0
-    total = stt + stamp + exchange + sebi + brokerage + dp + gst + slippage
+    total = stt + stamp + exchange + ipft + sebi + brokerage + dp + gst + slippage
     gross_return = float(exit_price) / float(entry_price) - 1.0
     gross_pnl = buy_turnover * gross_return
     return {
@@ -97,6 +100,7 @@ def delivery_round_trip_cost(
         "stt_rupees": stt,
         "stamp_duty_rupees": stamp,
         "exchange_rupees": exchange,
+        "ipft_rupees": ipft,
         "sebi_rupees": sebi,
         "brokerage_rupees": brokerage,
         "dp_rupees": dp,
