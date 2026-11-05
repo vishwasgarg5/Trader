@@ -7,15 +7,6 @@ from urllib.parse import urlparse
 import pandas as pd
 
 
-from __future__ import annotations
-
-from pathlib import Path
-import hashlib
-from urllib.parse import urlparse
-
-import pandas as pd
-
-
 def _india_calendar_dates(values: pd.Series) -> pd.Series:
     """Parse timestamps as NSE calendar dates without shifting naive local values."""
     def to_india_date(value):
@@ -36,6 +27,7 @@ def _india_calendar_dates(values: pd.Series) -> pd.Series:
         index=values.index,
         dtype="datetime64[ns]",
     )
+
 
 MEMBERSHIP_COLUMNS = {
     "symbol", "valid_from", "valid_to", "source", "source_url",
