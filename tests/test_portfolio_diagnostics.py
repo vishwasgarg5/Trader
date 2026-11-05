@@ -116,3 +116,18 @@ def test_delivery_simulator_rounds_order_quantity_to_whole_shares():
     assert trade["shares"] == pytest.approx(194)
     assert trade["notional"] == pytest.approx(194 * 103.0)
     assert trade["notional"] <= 20_000
+
+
+def test_mark_to_market_rejects_non_finite_candidate_values():
+    candidate = _candidates().iloc[[0]].copy()
+    candidate.loc[candidate.index[0], "score"] = np.inf
+    result = simulate_mark_to_market_portfolio(candidate, _prices())
+    assert result["status"] == "no_valid_candidates"
+    assert result["invalid_candidates"] == 1
+
+
+def test_daily_price_normalizer_drops_non_finite_closes():
+    prices = _prices().copy()
+    prices.loc[0, "close"] = np.inf
+    normalised = _normalise_daily_prices(prices)
+    assert "AAA" not in normalised.columns or pd.isna(normalised.loc[pd.Timestamp("2026-01-02"), "AAA"])
