@@ -113,5 +113,6 @@ def test_delivery_simulator_rounds_order_quantity_to_whole_shares():
         max_positions=1, max_position_fraction=0.20,
     )
     trade = result["trade_log"][0]
+    assert trade["shares"] == pytest.approx(194)
     assert trade["notional"] == pytest.approx(194 * 103.0)
     assert trade["notional"] <= 20_000
