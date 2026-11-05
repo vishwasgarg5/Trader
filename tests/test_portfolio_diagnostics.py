@@ -3,7 +3,7 @@ import pytest
 
 from trader.costs import delivery_round_trip_cost
 from trader.portfolio_diagnostics import (
-    random_pick_monte_carlo, simulate_mark_to_market_portfolio,
+    index_benchmarks, random_pick_monte_carlo, simulate_mark_to_market_portfolio,
 )
 
 
@@ -84,3 +84,21 @@ def test_missing_daily_price_symbol_fails_closed():
         simulate_mark_to_market_portfolio(
             _candidates(), _prices().query("symbol == 'AAA'"),
         )
+
+
+
+def test_index_benchmarks_include_buy_hold_and_exposure_matched_results():
+    prices = _prices()
+    prices = pd.concat([prices, pd.DataFrame([
+        {"date": "2026-01-02", "symbol": "^NSEI", "close": 100},
+        {"date": "2026-01-05", "symbol": "^NSEI", "close": 95},
+        {"date": "2026-01-06", "symbol": "^NSEI", "close": 98},
+        {"date": "2026-01-07", "symbol": "^NSEI", "close": 101},
+    ])], ignore_index=True)
+    result = simulate_mark_to_market_portfolio(
+        _candidates().iloc[[0]], prices, initial_capital=100_000, max_positions=1,
+    )
+    benchmark = index_benchmarks(result["daily_equity"], prices)
+    assert benchmark["status"] == "evaluated"
+    assert benchmark["buy_and_hold"]["net_return_before_index_costs"] > 0
+    assert benchmark["exposure_matched"]["method"].startswith("daily index return")
