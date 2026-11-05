@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 from pathlib import Path
+import hashlib
+from urllib.parse import urlparse
 
 import pandas as pd
 
 
-MEMBERSHIP_COLUMNS = {"symbol", "valid_from", "valid_to", "source", "source_published_at"}
+MEMBERSHIP_COLUMNS = {
+    "symbol", "valid_from", "valid_to", "source", "source_url",
+    "source_published_at", "evidence_path", "evidence_sha256",
+}
 
 
 def audit_universe(
@@ -81,8 +86,34 @@ def audit_universe(
                     membership["errors"].append("blank source provenance")
                 if history["source_published_at"].isna().any():
                     membership["errors"].append("missing source_published_at timestamps")
+                urls = history["source_url"].astype(str).str.strip()
+                if any(urlparse(url).scheme != "https" or not urlparse(url).netloc for url in urls):
+                    membership["errors"].append("source_url must be an HTTPS URL")
+                if history["evidence_path"].astype(str).str.strip().eq("").any():
+                    membership["errors"].append("missing evidence_path")
+                if history["evidence_sha256"].astype(str).str.fullmatch(r"[0-9a-fA-F]{64}").eq(False).any():
+                    membership["errors"].append("evidence_sha256 must be a 64-character SHA-256 digest")
                 if history.duplicated(["symbol", "valid_from"]).any():
                     membership["errors"].append("duplicate symbol/valid_from records")
+                for symbol, group in history.sort_values(["symbol", "valid_from"]).groupby("symbol"):
+                    previous_end = None
+                    for row in group.itertuples(index=False):
+                        start = row.valid_from
+                        end = row.valid_to
+                        if previous_end is not None and (pd.isna(previous_end) or start <= previous_end):
+                            membership["errors"].append(f"overlapping membership intervals for {symbol}")
+                            break
+                        previous_end = end
+                for row in history.itertuples(index=False):
+                    evidence = Path(str(row.evidence_path))
+                    if not evidence.is_absolute():
+                        evidence = membership_path.parent / evidence
+                    if not evidence.is_file():
+                        membership["errors"].append(f"missing evidence file for {row.symbol}: {row.evidence_path}")
+                        continue
+                    digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
+                    if digest.lower() != str(row.evidence_sha256).lower():
+                        membership["errors"].append(f"evidence checksum mismatch for {row.symbol}: {row.evidence_path}")
                 membership["rows"] = int(len(history))
                 membership["valid"] = not membership["errors"] and not history.empty
                 # Even schema-valid user-supplied data is not independently
