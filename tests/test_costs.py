@@ -24,3 +24,26 @@ def test_brokerage_cap_is_applied_per_side():
 def test_default_cost_assumptions_are_explicit_and_parameterized():
     assert DEFAULT_DELIVERY_COSTS["stt_rate_each_side"] == pytest.approx(0.001)
     assert DEFAULT_DELIVERY_COSTS["slippage_bps_per_side"] == 2.0
+
+
+
+def test_groww_delivery_defaults_include_brokerage_and_dp_charges():
+    result = delivery_round_trip_cost(
+        100, 100, notional_rupees=10000, slippage_bps_per_side=0,
+    )
+    # ₹10 brokerage per side (0.1% of ₹10,000), plus ₹20 DP on sell.
+    assert result["brokerage_rupees"] == pytest.approx(20.0)
+    assert result["dp_rupees"] == pytest.approx(20.0)
+    assert result["gst_rupees"] > 0
+
+
+def test_groww_minimum_brokerage_and_small_sell_dp_exemption():
+    result = delivery_round_trip_cost(
+        100, 100, notional_rupees=1000, slippage_bps_per_side=0,
+    )
+    assert result["brokerage_rupees"] == pytest.approx(10.0)
+    small = delivery_round_trip_cost(
+        100, 100, notional_rupees=50, slippage_bps_per_side=0,
+    )
+    assert small["dp_rupees"] == 0
+    assert small["brokerage_rupees"] == pytest.approx(2.5)
