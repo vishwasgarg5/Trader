@@ -47,7 +47,7 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
         bars["atr"] = atr.reindex(bars.index)
         labels = triple_barrier_labels(bars, horizon=5)
         part = frame.loc[frame["symbol"] == symbol].copy()
-        for column in ("target", "exit_reason", "exit_date", "exit_price", "outcome_return"):
+        for column in ("target", "entry_date", "entry_price", "exit_reason", "exit_date", "exit_price", "outcome_return"):
             part[column] = labels[column].reindex(part.index)
         pieces.append(part)
 
