@@ -1,6 +1,13 @@
 name: Daily Trader Signals
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "trader/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/daily.yml"
   schedule:
     - cron: "20 10 * * 1-5" # 15:50 IST, after NSE cash-market close
   workflow_dispatch:
