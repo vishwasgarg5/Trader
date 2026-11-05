@@ -1,23 +1,38 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
+from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
     load_universe, make_model,
 )
-from trader.research import add_relative_strength_features, merge_delivery_percentages, walk_forward_evaluate
+from trader.research import (
+    add_relative_strength_features, merge_delivery_percentages, walk_forward_evaluate,
+)
 
 EXPERIMENT_FEATURES = BASE_FEATURES + [
     "nifty_ret_10", "nifty_ret_20", "nifty_vix_change",
     "relative_ret_5", "relative_ret_10", "relative_ret_20",
     "relative_strength_rank_5", "delivery_pct",
 ]
+
+
+def make_logistic_model() -> Pipeline:
+    """Regularized linear baseline with train-only median imputation."""
+    return Pipeline([
+        ("imputer", SimpleImputer(strategy="median", add_indicator=True)),
+        ("scale", StandardScaler()),
+        ("classifier", LogisticRegression(C=0.1, max_iter=1500, random_state=42)),
+    ])
 
 
 def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
@@ -32,9 +47,8 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
         bars["atr"] = atr.reindex(bars.index)
         labels = triple_barrier_labels(bars, horizon=5)
         part = frame.loc[frame["symbol"] == symbol].copy()
-        part["target"] = labels["target"].reindex(part.index)
-        part["exit_reason"] = labels["exit_reason"].reindex(part.index)
-        part["outcome_return"] = labels["outcome_return"].reindex(part.index)
+        for column in ("target", "exit_reason", "exit_date", "exit_price", "outcome_return"):
+            part[column] = labels[column].reindex(part.index)
         pieces.append(part)
 
     if not pieces:
@@ -56,10 +70,11 @@ def run_experiment() -> dict:
     if len(labelled.index.unique()) < 900:
         raise RuntimeError("At least 900 trading dates are required for 3-year walk-forward evaluation")
 
-    # Rolling three-year training windows; each test fold is the next quarter.
+    labelled = add_delivery_costs(labelled, **DEFAULT_DELIVERY_COSTS)
     metrics = walk_forward_evaluate(
         labelled, EXPERIMENT_FEATURES, make_model,
         horizon=5, train_years=3, test_months=3,
+        baseline_factory=make_logistic_model, shuffle_repeats=3,
     )
     metrics["experiment"] = "triple_barrier_relative_strength_delivery"
     metrics["target_definition"] = (
@@ -69,8 +84,12 @@ def run_experiment() -> dict:
     metrics["feature_columns"] = EXPERIMENT_FEATURES
     metrics["ambiguous_rows"] = int((frame["exit_reason"] == "ambiguous").sum())
     metrics["target_rows"] = int(frame["target"].notna().sum())
-    metrics["delivery_data_available"] = bool(
-        (DATA / "raw" / "delivery.csv").exists()
+    metrics["delivery_data_available"] = bool((DATA / "raw" / "delivery.csv").exists())
+    metrics["cost_assumptions"] = DEFAULT_DELIVERY_COSTS
+    metrics["cost_note"] = (
+        "Illustrative NSE cash-delivery statutory rates as checked 2026-11-05; "
+        "2 bps slippage per side is a configurable scenario assumption, not an observed fill. "
+        "Brokerage and DP charges default to zero and must be set for the user's broker."
     )
 
     report_dir = DATA / "reports"
