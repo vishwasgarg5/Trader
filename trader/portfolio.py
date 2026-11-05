@@ -3,6 +3,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from trader.costs import DEFAULT_DELIVERY_COSTS, delivery_round_trip_cost
+
 
 def simulate_overlapping_portfolio(
     candidates: pd.DataFrame,
@@ -13,16 +15,17 @@ def simulate_overlapping_portfolio(
     max_gross_exposure: float = 1.0,
     min_avg_daily_turnover: float | None = None,
     max_participation_rate: float = 0.01,
+    cost_parameters: dict | None = None,
 ) -> dict:
-    """Event-driven long-only portfolio simulation using OOS-ranked trade candidates.
+    """Event-driven cash-funded delivery simulation with actual-notional costs.
 
     Required columns: symbol, score, entry_date, exit_date, entry_price,
-    exit_price, net_return. net_return must already include the configured
-    per-trade costs. Positions are cash-funded, equal-weight target sized,
-    cannot overlap in the same symbol, and are closed on the label exit date.
-    Liquidity is enforced only when a turnover field and threshold are supplied.
+    exit_price. The legacy net_return column is accepted but ignored: brokerage,
+    statutory charges, DP and slippage are recomputed from each executed order's
+    actual whole-share notional. Drawdown remains realised/event-date only; use
+    portfolio_diagnostics for daily mark-to-market drawdown.
     """
-    required = {"symbol", "score", "entry_date", "exit_date", "entry_price", "exit_price", "net_return"}
+    required = {"symbol", "score", "entry_date", "exit_date", "entry_price", "exit_price"}
     missing = required.difference(candidates.columns)
     if missing:
         raise ValueError(f"Missing required columns: {sorted(missing)}")
@@ -32,19 +35,20 @@ def simulate_overlapping_portfolio(
         raise ValueError("position and gross exposure fractions must be in (0, 1]")
     if not 0 < max_participation_rate <= 1:
         raise ValueError("max_participation_rate must be in (0, 1]")
+    costs = dict(DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters)
 
     data = candidates.copy()
     for col in ("entry_date", "exit_date"):
         data[col] = pd.to_datetime(data[col], errors="coerce")
-    for col in ("score", "entry_price", "exit_price", "net_return"):
+    for col in ("score", "entry_price", "exit_price"):
         data[col] = pd.to_numeric(data[col], errors="coerce")
     data["symbol"] = data["symbol"].astype(str).str.strip().str.upper()
     valid = (
         data["symbol"].ne("") & data["entry_date"].notna() & data["exit_date"].notna()
         & (data["exit_date"] >= data["entry_date"])
         & data["score"].notna() & (data["entry_price"] > 0)
-        & (data["exit_price"] > 0) & data["net_return"].notna()
-        & np.isfinite(data["net_return"])
+        & (data["exit_price"] > 0)
+        & np.isfinite(data["entry_price"]) & np.isfinite(data["exit_price"])
     )
     invalid_rows = int((~valid).sum())
     data = data.loc[valid].copy()
@@ -103,25 +107,38 @@ def simulate_overlapping_portfolio(
                 if target_notional <= 0:
                     rejected["cash"] += 1
                     continue
+                shares = float(np.floor(target_notional / float(row.entry_price)))
+                executed_notional = shares * float(row.entry_price)
+                if shares < 1 or executed_notional <= 0:
+                    rejected["cash"] += 1
+                    continue
                 positions[symbol] = {
                     "entry_date": day, "exit_date": row.exit_date,
-                    "notional": float(target_notional), "net_return": float(row.net_return),
+                    "entry_price": float(row.entry_price), "exit_price": float(row.exit_price),
+                    "notional": float(executed_notional), "shares": shares,
                     "score": float(row.score), "exit_reason": getattr(row, "exit_reason", None),
                 }
-                cash -= target_notional
+                cash -= executed_notional
 
-        # Keep same-day exits reserved until after entries: an intraday/close
-        # barrier exit cannot fund a new next-open order on that same date.
+        # Same-day exits remain reserved until after entries; a barrier exit
+        # cannot fund a new next-open order on that same date.
         closing = [symbol for symbol, pos in positions.items() if pos["exit_date"] <= day]
         for symbol in closing:
             pos = positions.pop(symbol)
-            pnl = pos["notional"] * pos["net_return"]
+            estimate = delivery_round_trip_cost(
+                pos["entry_price"], pos["exit_price"],
+                **{**costs, "notional_rupees": pos["notional"]},
+            )
+            pnl = estimate["net_pnl_rupees"]
             cash += pos["notional"] + pnl
             trades.append({
                 "symbol": symbol, "entry_date": str(pos["entry_date"].date()),
                 "exit_date": str(pos["exit_date"].date()), "score": pos["score"],
-                "notional": pos["notional"], "net_return": pos["net_return"],
-                "net_pnl": pnl, "exit_reason": pos.get("exit_reason"),
+                "notional": pos["notional"], "shares": pos["shares"],
+                "gross_return": estimate["gross_return"],
+                "net_return": estimate["net_return"], "net_pnl": pnl,
+                "cost_rupees": estimate["total_cost_rupees"],
+                "exit_reason": pos.get("exit_reason"),
             })
 
         invested = sum(pos["notional"] for pos in positions.values())
@@ -130,8 +147,6 @@ def simulate_overlapping_portfolio(
         equity_peak = max(equity_peak, equity)
         max_drawdown = max(max_drawdown, (equity_peak - equity) / equity_peak if equity_peak else 0.0)
 
-    # All valid trades should have an exit event. This guard prevents silent
-    # treatment of unresolved open positions as realised results.
     if positions:
         raise ValueError("Portfolio contains positions without a processed exit event")
     ending_equity = cash
@@ -152,5 +167,6 @@ def simulate_overlapping_portfolio(
         "liquidity_warning": None if liquidity_available else
             "No enforceable liquidity cap was applied; turnover data and a threshold are required.",
         "drawdown_warning": "Drawdown uses realised equity at event dates and understates intra-trade mark-to-market drawdown.",
+        "cost_accounting": "Groww charges recomputed from each actual whole-share order notional",
         "trade_log": trades,
     }
