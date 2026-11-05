@@ -16,7 +16,8 @@ def _normalise_daily_prices(daily_prices: pd.DataFrame) -> pd.DataFrame:
     prices["symbol"] = prices["symbol"].astype(str).str.strip().str.upper()
     prices["close"] = pd.to_numeric(prices["close"], errors="coerce")
     prices = prices.dropna(subset=["date", "symbol", "close"])
-    prices = prices.loc[(prices["symbol"] != "") & (prices["close"] > 0)]
+    prices = prices.loc[(prices["symbol"] != "") & (prices["close"] > 0)
+                        & np.isfinite(prices["close"])]
     if prices.duplicated(["date", "symbol"]).any():
         raise ValueError("daily_prices contains duplicate date/symbol rows")
     return prices.pivot(index="date", columns="symbol", values="close").sort_index()
@@ -70,7 +71,10 @@ def simulate_mark_to_market_portfolio(
              & data["entry_date"].notna() & data["exit_date"].notna()
              & (data["exit_date"] >= data["entry_date"])
              & (data["entry_price"] > 0) & (data["exit_price"] > 0)
-             & data["score"].notna() & data["net_return"].notna())
+             & data["score"].notna() & np.isfinite(data["score"])
+             & data["entry_price"].map(np.isfinite)
+             & data["exit_price"].map(np.isfinite)
+             & data["net_return"].map(np.isfinite))
     invalid = int((~valid).sum())
     data = data.loc[valid].copy()
     if data.empty:
