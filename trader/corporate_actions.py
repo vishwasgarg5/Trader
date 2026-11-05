@@ -8,15 +8,36 @@ import numpy as np
 import pandas as pd
 
 
-def _india_calendar_dates(values: pd.Series) -> pd.Series:
-    """Parse mixed naive/aware timestamps onto comparable NSE calendar dates."""
-    return (
-        pd.to_datetime(values, errors="coerce", utc=True)
-        .dt.tz_convert("Asia/Kolkata")
-        .dt.tz_localize(None)
-        .dt.normalize()
-    )
+from __future__ import annotations
 
+import hashlib
+from pathlib import Path
+from urllib.parse import urlparse
+
+import numpy as np
+import pandas as pd
+
+
+def _india_calendar_dates(values: pd.Series) -> pd.Series:
+    """Parse timestamps as NSE calendar dates without shifting naive local values."""
+    def to_india_date(value):
+        try:
+            stamp = pd.Timestamp(value)
+        except (TypeError, ValueError, OverflowError):
+            return pd.NaT
+        if pd.isna(stamp):
+            return pd.NaT
+        if stamp.tzinfo is None:
+            stamp = stamp.tz_localize("Asia/Kolkata")
+        else:
+            stamp = stamp.tz_convert("Asia/Kolkata")
+        return stamp.tz_localize(None).normalize()
+
+    return pd.Series(
+        values.map(to_india_date),
+        index=values.index,
+        dtype="datetime64[ns]",
+    )
 
 REQUIRED_COLUMNS = {
     "symbol", "ex_date", "action_type", "adjustment_factor", "source",
