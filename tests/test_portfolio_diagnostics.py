@@ -3,7 +3,7 @@ import pytest
 
 from trader.costs import delivery_round_trip_cost
 from trader.portfolio_diagnostics import (
-    index_benchmarks, random_pick_monte_carlo, simulate_mark_to_market_portfolio,
+    _normalise_daily_prices, index_benchmarks, random_pick_monte_carlo, simulate_mark_to_market_portfolio,
 )
 
 
@@ -120,7 +120,7 @@ def test_delivery_simulator_rounds_order_quantity_to_whole_shares():
 
 def test_mark_to_market_rejects_non_finite_candidate_values():
     candidate = _candidates().iloc[[0]].copy()
-    candidate.loc[candidate.index[0], "score"] = np.inf
+    candidate.loc[candidate.index[0], "score"] = float("inf")
     result = simulate_mark_to_market_portfolio(candidate, _prices())
     assert result["status"] == "no_valid_candidates"
     assert result["invalid_candidates"] == 1
@@ -130,4 +130,4 @@ def test_daily_price_normalizer_drops_non_finite_closes():
     prices = _prices().copy()
     prices.loc[0, "close"] = np.inf
     normalised = _normalise_daily_prices(prices)
-    assert "AAA" not in normalised.columns or pd.isna(normalised.loc[pd.Timestamp("2026-01-02"), "AAA"])
+    assert pd.Timestamp("2026-01-02") not in normalised.index
