@@ -159,7 +159,7 @@ def simulate_mark_to_market_portfolio(
                     "symbol": symbol, "signal_date": str(position["signal_date"].date()),
                     "entry_date": str(position["entry_date"].date()),
                     "exit_date": str(position["exit_date"].date()),
-                    "notional": position["notional"], "score": position["score"],
+                    "notional": position["notional"], "shares": position["shares"], "score": position["score"],
                     "gross_return": estimate["gross_return"],
                     "net_return": estimate["net_return"], "net_pnl": net_pnl,
                     "cost_rupees": estimate["total_cost_rupees"],
