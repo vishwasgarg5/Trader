@@ -5,8 +5,8 @@
   "currency": "INR",
   "brokerage": {
     "rate_per_executed_order": 0.001,
-    "cap_per_executed_order": 20.0,
-    "minimum_per_executed_order": 5.0,
+    "cap_per_executed_order": 20,
+    "minimum_per_executed_order": 5,
     "minimum_rate_cap": 0.025
   },
   "statutory_and_exchange": {
@@ -21,10 +21,10 @@
     "groww_component": 16.5,
     "depository_component_standard": 3.5,
     "depository_component_women": 3.25,
-    "standard_pre_gst_total": 20.0,
-    "free_below_sell_value": 100.0
+    "standard_pre_gst_total": 20,
+    "free_below_sell_value": 100
   },
-  "slippage_bps_per_side": 2.0,
+  "slippage_bps_per_side": 2,
   "assumptions": [
     "The standard ₹20 DP charge is used as a conservative default; account-specific depository component can be configured.",
     "GST is applied to brokerage, exchange transaction/IPFT, SEBI and DP charges; STT and stamp duty are excluded from GST.",
