@@ -7,6 +7,16 @@ from urllib.parse import urlparse
 import pandas as pd
 
 
+def _india_calendar_dates(values: pd.Series) -> pd.Series:
+    """Parse mixed naive/aware timestamps onto comparable NSE calendar dates."""
+    return (
+        pd.to_datetime(values, errors="coerce", utc=True)
+        .dt.tz_convert("Asia/Kolkata")
+        .dt.tz_localize(None)
+        .dt.normalize()
+    )
+
+
 MEMBERSHIP_COLUMNS = {
     "symbol", "valid_from", "valid_to", "source", "source_url",
     "source_published_at", "evidence_path", "evidence_sha256",
@@ -75,9 +85,9 @@ def audit_universe(
                 membership["errors"].append(f"missing columns: {sorted(missing)}")
             else:
                 history["symbol"] = history["symbol"].astype(str).str.strip().str.upper()
-                history["valid_from"] = pd.to_datetime(history["valid_from"], errors="coerce")
-                history["valid_to"] = pd.to_datetime(history["valid_to"], errors="coerce")
-                history["source_published_at"] = pd.to_datetime(history["source_published_at"], errors="coerce")
+                history["valid_from"] = _india_calendar_dates(history["valid_from"])
+                history["valid_to"] = _india_calendar_dates(history["valid_to"])
+                history["source_published_at"] = _india_calendar_dates(history["source_published_at"])
                 if history["symbol"].eq("").any() or history["valid_from"].isna().any():
                     membership["errors"].append("blank symbols or invalid valid_from dates")
                 if (history["valid_to"].notna() & (history["valid_to"] < history["valid_from"])).any():
