@@ -18,7 +18,7 @@ def _candidates():
 
 
 def test_portfolio_respects_cash_capacity_and_overlapping_symbol():
-    result = simulate_overlapping_portfolio(_candidates(), initial_capital=100_000, max_positions=2)
+    result = simulate_overlapping_portfolio(_candidates(), initial_capital=100_000, max_positions=3)
     assert result["trades"] == 3
     assert result["rejected"]["already_held"] == 1
     assert result["ending_equity"] > 100_000
@@ -59,3 +59,18 @@ def test_turnover_participation_caps_position_notional():
     assert result["trade_log"][0]["notional"] == pytest.approx(100)
     assert result["liquidity_constraint_applied"] is True
     assert result["liquidity_data_available"] is True
+
+
+
+def test_same_day_intraday_exit_does_not_fund_next_open_entry():
+    data = pd.DataFrame([
+        {"symbol": "AAA", "score": .9, "entry_date": "2026-01-02", "exit_date": "2026-01-05",
+         "entry_price": 100, "exit_price": 110, "net_return": .10},
+        {"symbol": "BBB", "score": .8, "entry_date": "2026-01-05", "exit_date": "2026-01-08",
+         "entry_price": 100, "exit_price": 105, "net_return": .05},
+    ])
+    result = simulate_overlapping_portfolio(
+        data, initial_capital=100_000, max_positions=1,
+    )
+    assert result["trades"] == 1
+    assert result["rejected"]["capacity"] == 1
