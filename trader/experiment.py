@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -10,6 +11,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
+from trader.data_snapshot import write_data_snapshot_manifest
 from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
@@ -268,11 +270,51 @@ def run_experiment() -> dict:
     metrics["delivery_coverage_fraction"] = float(frame["delivery_pct"].notna().mean())
     metrics["delivery_download"] = delivery_status
     metrics["cost_assumptions"] = DEFAULT_DELIVERY_COSTS
+    metrics["broker_cost_profile"] = "Groww NSE equity delivery (config/broker_costs_groww.json)"
     metrics["cost_note"] = (
-        "Illustrative NSE cash-delivery statutory rates as checked 2026-11-05; "
-        "2 bps slippage per side is a configurable scenario assumption, not an observed fill. "
-        "Brokerage and DP charges default to zero and must be set for the user's broker."
+        "Groww published NSE equity-delivery brokerage and DP schedule checked 2026-11-05; "
+        "2 bps slippage per side remains a configurable scenario assumption, not an observed fill. "
+        "The standard ₹20 pre-GST DP charge is used by default; account-specific DP concessions "
+        "can be configured. Reconcile against contract notes before live use."
     )
+
+    # Freeze the exact OHLCV and delivery inputs used by this experiment.
+    raw_dir = DATA / "raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    price_parts = []
+    for symbol, stock in prices.items():
+        available = [column for column in ("open", "high", "low", "close", "volume")
+                     if column in stock.columns]
+        if available:
+            part = stock[available].copy()
+            part["date"] = part.index
+            part["symbol"] = symbol
+            price_parts.append(part.reset_index(drop=True))
+    price_panel_path = raw_dir / "price_panel.csv"
+    pd.concat(price_parts, ignore_index=True).sort_values(["date", "symbol"]).to_csv(
+        price_panel_path, index=False
+    )
+    snapshot_inputs = [price_panel_path]
+    for candidate in (
+        raw_dir / "delivery.csv",
+        raw_dir / "delivery_download_log.csv",
+        DATA / "reference" / "universe_membership.csv",
+        DATA / "reference" / "corporate_actions.csv",
+    ):
+        if candidate.is_file():
+            snapshot_inputs.append(candidate)
+    snapshot_manifest = write_data_snapshot_manifest(
+        snapshot_inputs,
+        DATA / "snapshots" / "input_manifest.json",
+        root=DATA.parent,
+        metadata={
+            "git_commit": os.environ.get("GITHUB_SHA", "local-unpinned"),
+            "experiment": "triple_barrier_relative_strength_delivery",
+            "price_source": "Yahoo Finance via yfinance; independently verify adjusted-price lineage",
+            "delivery_source": "NSE full bhavcopy sec_bhavdata_full",
+        },
+    )
+    metrics["data_snapshot_manifest"] = snapshot_manifest
 
     report_dir = DATA / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
