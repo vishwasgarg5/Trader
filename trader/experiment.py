@@ -135,15 +135,42 @@ def run_experiment() -> dict:
         "logistic_baseline": "LogisticRegression(C=0.1)",
         "fold_metrics": cross_metrics,
     }
+    regime_fold_metrics = [
+        {"test_start": row["test_start"], "test_end": row["test_end"], "regime_performance": row.get("regime_performance")}
+        for row in metrics.get("folds", [])
+    ]
+    gate_key = "nifty_above_200dma_vix_below_20"
+    gate_excess = [
+        item["regime_performance"][gate_key]["top5_minus_universe"]
+        for item in regime_fold_metrics
+        if item.get("regime_performance") and item["regime_performance"].get(gate_key)
+        and item["regime_performance"][gate_key].get("top5_minus_universe") is not None
+    ]
+    regime_positive_folds = sum(value > 0 for value in gate_excess)
+    majority_folds = (metrics.get("fold_count", 0) // 2) + 1
+    cross_ci = cross_metrics.get("top5_minus_universe_net_return_block_bootstrap_95pct")
+    cross_pass = (
+        cross_metrics.get("folds_with_positive_net_excess", 0) >= majority_folds
+        and cross_ci is not None and cross_ci["lower"] > 0
+    )
+    regime_pass = regime_positive_folds >= majority_folds
     metrics["regime_experiment"] = {
         "description": "Predeclared four-way regime split of existing baseline top-five and universe returns; no thresholds fitted to test outcomes.",
         "nifty_regime_rule": "Nifty close above its trailing 200-session moving average (200 observations required).",
         "vix_regime_rule": "India VIX below 20.0 versus at or above 20.0.",
         "gated_strategy": "Risk-on / lower-volatility only: Nifty above 200DMA AND India VIX below 20.",
-        "fold_metrics": [
-            {"test_start": row["test_start"], "test_end": row["test_end"], "regime_performance": row.get("regime_performance")}
-            for row in metrics.get("folds", [])
-        ],
+        "risk_on_low_vol_positive_excess_folds": int(regime_positive_folds),
+        "risk_on_low_vol_evaluable_folds": int(len(gate_excess)),
+        "fold_metrics": regime_fold_metrics,
+    }
+    metrics["stopping_rule"] = {
+        "criterion": "A and B must each show positive net top-five minus universe return in a strict majority of folds; A must also have a positive lower 95% five-day block-bootstrap bound.",
+        "majority_folds_required": int(majority_folds),
+        "cross_sectional_A_pass": bool(cross_pass),
+        "regime_gate_B_pass": bool(regime_pass),
+        "continue_price_feature_tuning": bool(cross_pass and regime_pass),
+        "decision": "continue" if cross_pass and regime_pass else "stop_price_feature_tuning",
+        "note": "All returns are after the configured transaction-cost model. This is a research stopping rule, not a trading approval.",
     }
     metrics["reporting_diagnostics"] = {
         "fold_auc_above_0_5": metrics.get("folds_auc_above_0_5"),
