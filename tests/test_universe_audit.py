@@ -110,3 +110,22 @@ def test_audit_flags_missing_ohlcv_columns(tmp_path):
     report = audit_universe(prices, ["AAA.NS"], tmp_path / "none.csv")
     assert report["per_symbol"]["AAA.NS"]["missing_ohlcv_columns"] == ["volume"]
     assert "AAA.NS" in report["price_integrity_issues"]
+
+
+def test_audit_normalizes_aware_price_and_benchmark_indices_to_nse_date(tmp_path):
+    from datetime import timezone
+
+    index = pd.DatetimeIndex([pd.Timestamp("2024-01-10T18:30:00Z")])
+    bars = pd.DataFrame(
+        {"open": [10.0], "high": [11.0], "low": [9.0], "close": [10.5], "volume": [1000]},
+        index=index,
+    )
+    benchmark = pd.DataFrame({"close": [21000.0]}, index=index)
+    report = audit_universe(
+        {"AAA.NS": bars, "^NSEI": benchmark},
+        ["AAA.NS"],
+        tmp_path / "no-membership.csv",
+    )
+    row = report["per_symbol"]["AAA.NS"]
+    assert row["last_date"] == "2024-01-11"
+    assert row["missing_benchmark_sessions"] == 0
