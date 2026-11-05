@@ -365,3 +365,100 @@ def summarize_regime_performance(test: pd.DataFrame, daily_top: pd.DataFrame) ->
             "top5_minus_universe": float((paired["top5"] - paired["universe"]).mean()) if not paired.empty else None,
         }
     return output
+
+
+def evaluate_simple_factor_baselines(
+    frame: pd.DataFrame,
+    *,
+    horizon: int = 5,
+    train_years: int = 3,
+    test_months: int = 3,
+    picks_per_day: int = 5,
+) -> dict:
+    """Evaluate fixed, untrained cross-sectional factors on the model's OOS dates.
+
+    Input factor columns must already be ranked within each date using only
+    signal-day information. The three predeclared rules are: short-term
+    reversal (lowest 5-session return), low volatility (lowest ATR%), and
+    relative strength (highest 20-session market-relative return).
+    """
+    from pandas.tseries.offsets import DateOffset
+
+    required = {"net_return", "ret_5", "atr_pct", "relative_ret_20"}
+    missing = required.difference(frame.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {sorted(missing)}")
+    labelled = frame.dropna(subset=["net_return"]).copy()
+    dates = pd.DatetimeIndex(sorted(pd.to_datetime(labelled.index.unique())))
+    if len(dates) == 0:
+        raise ValueError("No dated observations for factor baseline evaluation")
+
+    # These are fixed before inspecting outcomes; all inputs are same-day
+    # cross-sectional percentiles produced by make_cross_sectional_frame.
+    factor_scores = {
+        "short_term_reversal": lambda x: -pd.to_numeric(x["ret_5"], errors="coerce"),
+        "low_volatility": lambda x: -pd.to_numeric(x["atr_pct"], errors="coerce"),
+        "relative_strength_20d": lambda x: pd.to_numeric(x["relative_ret_20"], errors="coerce"),
+    }
+    cursor = dates.min() + DateOffset(years=train_years)
+    last_date = dates.max()
+    output = {}
+    while cursor <= last_date:
+        test_end = cursor + DateOffset(months=test_months)
+        test = labelled.loc[(labelled.index >= cursor) & (labelled.index < test_end)]
+        if not test.empty:
+            for name, score_fn in factor_scores.items():
+                scored = test.copy()
+                scored["_factor_score"] = score_fn(scored)
+                scored = scored.dropna(subset=["_factor_score", "net_return"])
+                daily_top = (
+                    scored.sort_values("_factor_score", ascending=False, kind="mergesort")
+                    .groupby(level=0, sort=True).head(picks_per_day)
+                )
+                top_daily = daily_top.groupby(level=0)["net_return"].mean()
+                universe_daily = scored.groupby(level=0)["net_return"].mean()
+                paired = pd.concat(
+                    [top_daily.rename("top"), universe_daily.rename("universe")],
+                    axis=1,
+                ).dropna()
+                fold = {
+                    "test_start": str(test.index.min().date()),
+                    "test_end": str(test.index.max().date()),
+                    "test_dates": int(len(paired)),
+                    "top5_mean_net_return": float(paired["top"].mean()) if not paired.empty else None,
+                    "universe_mean_net_return": float(paired["universe"].mean()) if not paired.empty else None,
+                    "top5_minus_universe_mean_net_return": float((paired["top"] - paired["universe"]).mean()) if not paired.empty else None,
+                }
+                output.setdefault(name, {"folds": [], "daily_spreads": []})
+                output[name]["folds"].append(fold)
+                output[name]["daily_spreads"].extend(
+                    (paired["top"] - paired["universe"]).to_numpy(dtype=float).tolist()
+                )
+
+        cursor = test_end
+
+    results = {}
+    for name, item in output.items():
+        folds = item["folds"]
+        spreads = [row["top5_minus_universe_mean_net_return"] for row in folds
+                   if row["top5_minus_universe_mean_net_return"] is not None]
+        top_returns = [row["top5_mean_net_return"] for row in folds
+                       if row["top5_mean_net_return"] is not None]
+        results[name] = {
+            "folds": folds,
+            "fold_count": len(folds),
+            "folds_with_positive_net_excess": int(sum(value > 0 for value in spreads)),
+            "mean_top5_net_return": float(np.mean(top_returns)) if top_returns else None,
+            "mean_top5_minus_universe_net_return": float(np.mean(item["daily_spreads"])) if item["daily_spreads"] else None,
+            "net_excess_block_bootstrap_95pct": block_bootstrap_mean_ci(item["daily_spreads"]),
+            "selection_rule": {
+                "short_term_reversal": "lowest same-day cross-sectional percentile of ret_5",
+                "low_volatility": "lowest same-day cross-sectional percentile of atr_pct",
+                "relative_strength_20d": "highest same-day cross-sectional percentile of relative_ret_20",
+            }[name],
+        }
+    return {
+        "description": "Fixed, non-trained top-five factor portfolios evaluated on the same chronological test windows as the ML model; returns are net of the supplied cost model.",
+        "factor_results": results,
+        "selection_note": "Factor columns must be same-day cross-sectional ranks; ties use stable input order. These are diagnostics, not optimized or promoted strategies.",
+    }
