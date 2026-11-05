@@ -15,9 +15,19 @@ def _normalise_daily_prices(daily_prices: pd.DataFrame) -> pd.DataFrame:
     prices["date"] = pd.to_datetime(prices["date"], errors="coerce")
     prices["symbol"] = prices["symbol"].astype(str).str.strip().str.upper()
     prices["close"] = pd.to_numeric(prices["close"], errors="coerce")
+    # A malformed close invalidates the whole session for this price panel.
+    # Keeping the other symbols on that date would create an inconsistent
+    # cross-sectional calendar and can distort portfolio marks/benchmarks.
+    invalid_close = (
+        prices["close"].isna()
+        | ~np.isfinite(prices["close"])
+        | (prices["close"] <= 0)
+    )
+    invalid_dates = prices.loc[prices["date"].notna() & invalid_close, "date"].unique()
+    if len(invalid_dates):
+        prices = prices.loc[~prices["date"].isin(invalid_dates)]
     prices = prices.dropna(subset=["date", "symbol", "close"])
-    prices = prices.loc[(prices["symbol"] != "") & (prices["close"] > 0)
-                        & np.isfinite(prices["close"])]
+    prices = prices.loc[prices["symbol"] != ""]
     if prices.duplicated(["date", "symbol"]).any():
         raise ValueError("daily_prices contains duplicate date/symbol rows")
     return prices.pivot(index="date", columns="symbol", values="close").sort_index()
