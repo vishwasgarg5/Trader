@@ -102,3 +102,11 @@ def test_naive_late_evening_membership_timestamp_keeps_nse_calendar_date():
     values = pd.Series(["2024-01-10 23:45:00", "2024-01-10T18:30:00Z"])
     dates = _india_calendar_dates(values)
     assert dates.dt.strftime("%Y-%m-%d").tolist() == ["2024-01-10", "2024-01-11"]
+
+
+def test_audit_flags_missing_ohlcv_columns(tmp_path):
+    prices = _prices()
+    prices["AAA.NS"] = prices["AAA.NS"].drop(columns=["volume"])
+    report = audit_universe(prices, ["AAA.NS"], tmp_path / "none.csv")
+    assert report["per_symbol"]["AAA.NS"]["missing_ohlcv_columns"] == ["volume"]
+    assert "AAA.NS" in report["price_integrity_issues"]
