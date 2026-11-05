@@ -78,3 +78,19 @@ def test_membership_evidence_checksum_mismatch_is_rejected(tmp_path):
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is False
     assert any("checksum mismatch" in item for item in report["membership_history"]["errors"])
+
+
+def test_membership_source_published_after_effective_date_is_rejected(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "circular.pdf"
+    evidence.write_bytes(b"late published evidence")
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2020-01-02T09:00:00+05:30",
+        "evidence_path": evidence.name,
+        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("published after valid_from" in item for item in report["membership_history"]["errors"])
