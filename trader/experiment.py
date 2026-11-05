@@ -130,8 +130,9 @@ def run_experiment() -> dict:
         cross_frame, cross_features, make_regularized_boost_model,
         horizon=5, train_years=3, test_months=3,
         baseline_factory=make_logistic_model, shuffle_repeats=99,
-        shuffle_within_date=True,
+        shuffle_within_date=True, collect_oos_predictions=True,
     )
+    cross_oos_predictions = cross_metrics.pop("oos_predictions", [])
     predictive_edge = summarize_predictive_edge(cross_metrics)
     factor_baselines = evaluate_simple_factor_baselines(
         cross_frame, horizon=5, train_years=3, test_months=3, picks_per_day=5,
@@ -149,9 +150,11 @@ def run_experiment() -> dict:
         "logistic_baseline": "LogisticRegression(C=0.1)",
         "fold_metrics": cross_metrics,
     }
+    # The regime gate must evaluate the same cross-sectional model picks as A.
+    # Using metrics["folds"] here would silently substitute the pooled model.
     regime_fold_metrics = [
         {"test_start": row["test_start"], "test_end": row["test_end"], "regime_performance": row.get("regime_performance")}
-        for row in metrics.get("folds", [])
+        for row in cross_metrics.get("folds", [])
     ]
     gate_key = "nifty_above_200dma_vix_below_20"
     gate_excess = [
@@ -161,15 +164,44 @@ def run_experiment() -> dict:
         and item["regime_performance"][gate_key].get("top5_minus_universe") is not None
     ]
     regime_positive_folds = sum(value > 0 for value in gate_excess)
-    majority_folds = (metrics.get("fold_count", 0) // 2) + 1
+    majority_folds = (cross_metrics.get("fold_count", 0) // 2) + 1
     cross_ci = cross_metrics.get("top5_minus_universe_net_return_block_bootstrap_95pct")
     cross_pass = (
         cross_metrics.get("folds_with_positive_net_excess", 0) >= majority_folds
         and cross_ci is not None and cross_ci["lower"] > 0
     )
     regime_pass = regime_positive_folds >= majority_folds
+    portfolio_diagnostics = {"status": "unavailable", "reason": "No out-of-sample candidate predictions were collected."}
+    if cross_oos_predictions:
+        from trader.portfolio_diagnostics import (
+            random_pick_monte_carlo, simulate_mark_to_market_portfolio,
+        )
+        oos_frame = pd.DataFrame(cross_oos_predictions)
+        model_picks = (
+            oos_frame.sort_values(["signal_date", "score", "symbol"],
+                                  ascending=[True, False, True], kind="mergesort")
+            .groupby("signal_date", sort=True).head(5).copy()
+        )
+        daily_price_parts = [
+            pd.DataFrame({"date": stock.index, "symbol": symbol, "close": stock["close"].to_numpy()})
+            for symbol, stock in prices.items() if not symbol.startswith("^") and "close" in stock
+        ]
+        daily_price_panel = pd.concat(daily_price_parts, ignore_index=True)
+        model_portfolio = simulate_mark_to_market_portfolio(
+            model_picks, daily_price_panel, cost_parameters=DEFAULT_DELIVERY_COSTS,
+        )
+        random_benchmark = random_pick_monte_carlo(
+            oos_frame, daily_price_panel, simulations=300, seed=42052,
+            cost_parameters=DEFAULT_DELIVERY_COSTS,
+        )
+        portfolio_diagnostics = {
+            "daily_mark_to_market_model": model_portfolio,
+            "random_pick_monte_carlo": random_benchmark,
+            "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
+        }
+    metrics["portfolio_diagnostics"] = portfolio_diagnostics
     metrics["regime_experiment"] = {
-        "description": "Predeclared four-way regime split of existing baseline top-five and universe returns; no thresholds fitted to test outcomes.",
+        "description": "Predeclared four-way regime split of the cross-sectional model top-five picks versus the same-day universe; no thresholds fitted to test outcomes.",
         "nifty_regime_rule": "Nifty close above its trailing 200-session moving average (200 observations required).",
         "vix_regime_rule": "India VIX below 20.0 versus at or above 20.0.",
         "gated_strategy": "Risk-on / lower-volatility only: Nifty above 200DMA AND India VIX below 20.",
