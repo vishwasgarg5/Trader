@@ -94,3 +94,11 @@ def test_membership_source_published_after_effective_date_is_rejected(tmp_path):
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is False
     assert any("published after valid_from" in item for item in report["membership_history"]["errors"])
+
+
+def test_naive_late_evening_membership_timestamp_keeps_nse_calendar_date():
+    from trader.universe_audit import _india_calendar_dates
+
+    values = pd.Series(["2024-01-10 23:45:00", "2024-01-10T18:30:00Z"])
+    dates = _india_calendar_dates(values)
+    assert dates.dt.strftime("%Y-%m-%d").tolist() == ["2024-01-10", "2024-01-11"]
