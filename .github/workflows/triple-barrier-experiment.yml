@@ -22,7 +22,7 @@ permissions:
 
 concurrency:
   group: triple-barrier-research-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   test-and-evaluate:
