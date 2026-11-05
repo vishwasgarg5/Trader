@@ -113,6 +113,7 @@ def walk_forward_evaluate(
     baseline_factory=None,
     shuffle_repeats: int = 3,
     shuffle_within_date: bool = False,
+    collect_oos_predictions: bool = False,
 ) -> dict:
     """Rolling walk-forward evaluation with outcome-date purge and diagnostics.
 
@@ -132,6 +133,7 @@ def walk_forward_evaluate(
     fold_rows = []
     daily_return_spreads = []
     portfolio_candidates = []
+    oos_prediction_rows = []
     cursor = first_test
     fold_number = 0
     while cursor <= last_date:
@@ -148,6 +150,11 @@ def walk_forward_evaluate(
 
             scored = test.copy()
             scored["probability"] = probabilities
+            if collect_oos_predictions:
+                oos = scored.copy()
+                oos["signal_date"] = oos.index
+                oos["score"] = oos["probability"]
+                oos_prediction_rows.extend(oos.to_dict("records"))
             daily_top = (
                 scored.sort_values("probability", ascending=False)
                 .groupby(level=0, sort=True).head(5)
@@ -278,6 +285,7 @@ def walk_forward_evaluate(
         },
         "portfolio_backtest": portfolio_backtest,
         "status": "evaluated",
+        **({"oos_predictions": oos_prediction_rows} if collect_oos_predictions else {}),
     }
 
 
