@@ -4,6 +4,7 @@ import pytest
 
 from trader.research import (
     add_relative_strength_features, merge_delivery_percentages, purge_training_rows,
+    summarize_outcome_reasons,
 )
 
 
@@ -57,3 +58,18 @@ def test_purge_uses_actual_label_exit_date_not_weekday_offset():
     )
     assert method == "actual_exit_date"
     assert list(train.index) == [pd.Timestamp("2026-01-06"), pd.Timestamp("2026-01-07")]
+
+
+def test_outcome_summary_separates_barriers_and_timeouts_with_net_returns():
+    frame = pd.DataFrame({
+        "exit_reason": ["target", "stop", "timeout", "timeout"],
+        "outcome_return": [0.04, -0.03, 0.002, -0.001],
+        "net_return": [0.037, -0.033, -0.001, -0.004],
+    })
+    result = summarize_outcome_reasons(frame)
+    assert result["target"]["rows"] == 1
+    assert result["stop"]["gross_positive_fraction"] == 0.0
+    assert result["timeout"]["rows"] == 2
+    assert result["timeout"]["gross_positive_fraction"] == 0.5
+    assert result["timeout"]["net_positive_fraction"] == 0.0
+    assert result["timeout"]["mean_net_return"] == pytest.approx(-0.0025)
