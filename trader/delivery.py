@@ -93,15 +93,17 @@ def _fetch_one(day: pd.Timestamp, symbols: set[str]) -> tuple[str, pd.DataFrame]
         response.raise_for_status()
         try:
             rows = parse_full_bhavcopy(response.content, day, symbols)
-        except pd.errors.ParserError:
-            # Some archived dates contain malformed/non-CSV payloads. Keep the
-            # date explicitly unavailable; never interpret it as zero delivery.
+        except (pd.errors.ParserError, pd.errors.EmptyDataError):
+            # Some archived dates contain malformed/non-CSV payloads.
             return "invalid_file", pd.DataFrame(columns=COLUMNS)
         except ValueError as exc:
-            # The archive can occasionally return an adjacent session's file
-            # for a requested date. Record it as a gap, not as valid data.
-            if "date mismatch" in str(exc):
+            message = str(exc)
+            if "date mismatch" in message:
                 return "date_mismatch", pd.DataFrame(columns=COLUMNS)
+            if "missing columns" in message:
+                # HTML/error payloads and truncated archives can parse as a
+                # one-column CSV; reject them as unavailable, never as data.
+                return "invalid_file", pd.DataFrame(columns=COLUMNS)
             raise
         return "downloaded", rows
     raise RuntimeError(f"Unable to download NSE bhavcopy for {day.date()}")
