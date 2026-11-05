@@ -37,7 +37,17 @@ def parse_full_bhavcopy(
     payload: bytes, expected_date: pd.Timestamp, symbols: set[str]
 ) -> pd.DataFrame:
     """Parse NSE's full bhavcopy and return delivery percentages for EQ stocks."""
-    raw = pd.read_csv(BytesIO(payload))
+    # NSE occasionally serves legacy-encoded CSVs; try UTF-8 (with BOM), then
+    # Windows-1252 and Latin-1. Never decode with replacement characters.
+    last_decode_error = None
+    for encoding in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            raw = pd.read_csv(BytesIO(payload), encoding=encoding)
+            break
+        except UnicodeDecodeError as exc:
+            last_decode_error = exc
+    else:
+        raise ValueError(f"Unable to decode NSE bhavcopy: {last_decode_error}")
     raw.columns = [str(column).strip().upper() for column in raw.columns]
     required = {"SYMBOL", "SERIES", "DATE1", "DELIV_PER"}
     missing = required.difference(raw.columns)
@@ -81,7 +91,16 @@ def _fetch_one(day: pd.Timestamp, symbols: set[str]) -> tuple[str, pd.DataFrame]
             time.sleep(2 ** attempt)
             continue
         response.raise_for_status()
-        return "downloaded", parse_full_bhavcopy(response.content, day, symbols)
+        try:
+            rows = parse_full_bhavcopy(response.content, day, symbols)
+        except ValueError as exc:
+            # The archive can occasionally return an adjacent session's file
+            # for a requested date. Record it as a gap, not as valid data and
+            # not as an infrastructure failure that aborts the whole study.
+            if "date mismatch" in str(exc):
+                return "date_mismatch", pd.DataFrame(columns=COLUMNS)
+            raise
+        return "downloaded", rows
     raise RuntimeError(f"Unable to download NSE bhavcopy for {day.date()}")
 
 
