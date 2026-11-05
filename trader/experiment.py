@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
+from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs\nfrom trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
@@ -84,7 +84,7 @@ def run_experiment() -> dict:
     metrics["feature_columns"] = EXPERIMENT_FEATURES
     metrics["ambiguous_rows"] = int((frame["exit_reason"] == "ambiguous").sum())
     metrics["target_rows"] = int(frame["target"].notna().sum())
-    metrics["delivery_data_available"] = bool((DATA / "raw" / "delivery.csv").exists())
+    metrics["delivery_data_available"] = bool(frame["delivery_pct"].notna().any())\n    metrics["delivery_coverage_fraction"] = float(frame["delivery_pct"].notna().mean())\n    metrics["delivery_download"] = delivery_status
     metrics["cost_assumptions"] = DEFAULT_DELIVERY_COSTS
     metrics["cost_note"] = (
         "Illustrative NSE cash-delivery statutory rates as checked 2026-11-05; "
