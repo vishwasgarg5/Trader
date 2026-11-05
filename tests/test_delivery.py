@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
 
+from trader import delivery
 from trader.delivery import parse_full_bhavcopy
 
 
@@ -38,3 +39,24 @@ def test_parse_full_bhavcopy_accepts_legacy_windows_encoding():
         csv, pd.Timestamp("2026-11-05"), {"RELIANCE"}
     )
     assert result.loc[0, "delivery_pct"] == 42.5
+
+
+
+def test_fetch_one_marks_malformed_archive_as_unavailable(monkeypatch):
+    class Response:
+        status_code = 200
+        content = b"single_column\nvalue,unexpected\n"
+
+        def raise_for_status(self):
+            return None
+
+    class Session:
+        def get(self, *args, **kwargs):
+            return Response()
+
+    monkeypatch.setattr(delivery, "_session", lambda: Session())
+    status, rows = delivery._fetch_one(
+        pd.Timestamp("2022-08-08"), {"RELIANCE"}
+    )
+    assert status == "invalid_file"
+    assert rows.empty
