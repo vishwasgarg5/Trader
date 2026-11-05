@@ -48,14 +48,30 @@ def merge_delivery_percentages(frame: pd.DataFrame, path: Path) -> pd.DataFrame:
     if delivery.duplicated(["date", "symbol"]).any():
         raise ValueError("Delivery CSV contains duplicate date/symbol rows")
     delivery.loc[~delivery["delivery_pct"].between(0, 100), "delivery_pct"] = np.nan
+    merge_columns = ["date", "symbol", "delivery_pct"]
+    if "turnover_rupees" in delivery.columns:
+        delivery["turnover_rupees"] = pd.to_numeric(delivery["turnover_rupees"], errors="coerce")
+        delivery.loc[~np.isfinite(delivery["turnover_rupees"]) | (delivery["turnover_rupees"] <= 0),
+                     "turnover_rupees"] = np.nan
+        merge_columns.append("turnover_rupees")
 
-    left = result.drop(columns=["delivery_pct"], errors="ignore").reset_index(names="date")
+    left = result.drop(columns=["delivery_pct", "turnover_rupees", "avg_daily_turnover"],
+                       errors="ignore").reset_index(names="date")
     left["date"] = pd.to_datetime(left["date"]).dt.tz_localize(None)
     left["symbol"] = left["symbol"].astype(str).str.strip().str.upper()
     merged = left.merge(
-        delivery[["date", "symbol", "delivery_pct"]],
+        delivery[merge_columns],
         on=["date", "symbol"], how="left", validate="many_to_one",
     )
+    if "turnover_rupees" in merged.columns:
+        ordered = merged.sort_values(["symbol", "date"], kind="mergesort")
+        ordered["avg_daily_turnover"] = ordered.groupby("symbol", sort=False)["turnover_rupees"].transform(
+            lambda values: values.rolling(20, min_periods=20).mean()
+        )
+        merged = ordered.sort_values(["date", "symbol"], kind="mergesort")
+    else:
+        merged["turnover_rupees"] = np.nan
+        merged["avg_daily_turnover"] = np.nan
     return merged.set_index("date")
 
 

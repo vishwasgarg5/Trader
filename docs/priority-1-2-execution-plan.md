@@ -21,11 +21,11 @@ This plan is for research-only work on `feature/p1-p2-data-portfolio-validation`
 - [x] Round cash-equity order quantities down to whole shares and use executed notional for cash and costs.
 - [ ] Validate tariff arithmetic against one or more anonymised Groww contract notes; account-specific DP component remains configurable.
 - [ ] Model entry/exit execution using next-session open and barrier/gap rules with explicit price-impact and liquidity constraints.
-- [ ] Enforce integer quantities, available cash, maximum positions, gross exposure and per-stock turnover participation in every portfolio run.
-- [ ] Add sector classifications and report sector concentration; no sector concentration conclusion is valid while sector labels are absent.
+- [x] Enforce integer quantities, available cash, maximum positions, gross exposure and a 1% per-stock participation cap using trailing 20-session NSE rupee turnover in the mark-to-market experiment; fail closed when turnover history is unavailable.
+- [x] Add dated sector classification metadata for the configured universe and report daily sector exposure / peak sector concentration; classifications are descriptive, not point-in-time membership evidence.
 - [ ] Re-run the complete walk-forward and mark-to-market portfolio diagnostics with Groww costs and the frozen P1 dataset.
 - [ ] Compare model returns with buy-and-hold Nifty, exposure-matched Nifty, fixed-factor portfolios and random picks on identical dates.
-- [ ] Run robustness checks by symbol, sector, regime, time period and slippage/cost stress.
+- [x] Add 2/5/10/20 bps-per-side slippage stress to the Groww-cost mark-to-market report; symbol, sector and regime diagnostics remain descriptive and need interpretation.
 - [ ] Require positive absolute net portfolio returns and statistically supported excess returns before any promotion; otherwise retain HOLD.
 
 ## Current evidence and blockers
@@ -37,3 +37,12 @@ This plan is for research-only work on `feature/p1-p2-data-portfolio-validation`
 - Delivery data coverage was 99.73% across the experiment rows, but the historical universe and adjusted-price lineage remain unverified.
 - The final holdout remains locked and unevaluated. Do not unlock it until P1 inputs and P2 execution assumptions are reviewed and frozen.
 - The current model remains research-only and is not approved for real-money trading.
+
+
+## Additional execution controls added on 2026-11-05
+
+- NSE full-bhavcopy parsing now captures `TURNOVER_LACS` as rupee turnover and migrates older delivery-only caches by re-fetching affected dates.
+- The research merge derives a trailing 20-session average of official NSE turnover; the model and random comparator both enforce a 1% participation cap.
+- The mark-to-market simulator fails closed when a requested liquidity cap lacks turnover history and reports daily sector exposure and peak sector concentration.
+- The experiment includes 2, 5, 10 and 20 bps-per-side slippage scenarios.
+- Sector labels are sourced to the NSE Indices Nifty 50 classification as of 27 February 2026; labels for configured legacy/non-constituent symbols are mapped to the same broad industry taxonomy and are not represented as historical PIT classifications.

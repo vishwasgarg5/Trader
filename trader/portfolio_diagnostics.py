@@ -53,7 +53,11 @@ def simulate_mark_to_market_portfolio(
     if max_participation_rate is not None and not 0 < max_participation_rate <= 1:
         raise ValueError("max_participation_rate must be in (0, 1]")
     if max_participation_rate is not None and "avg_daily_turnover" not in candidates.columns:
-        raise ValueError("max_participation_rate requires avg_daily_turnover")
+        raise ValueError("max_participation_rate requires avg_daily_turnover from NSE turnover history")
+    if max_participation_rate is not None and not np.isfinite(
+        pd.to_numeric(candidates["avg_daily_turnover"], errors="coerce")
+    ).any():
+        raise ValueError("No valid trailing NSE turnover history is available for liquidity constraints")
 
     prices = _normalise_daily_prices(daily_prices)
     data = candidates.copy()
@@ -96,11 +100,12 @@ def simulate_mark_to_market_portfolio(
     positions: dict[str, dict] = {}
     trade_log = []
     daily_rows = []
-    rejected = {"capacity": 0, "already_held": 0, "cash": 0}
+    rejected = {"capacity": 0, "already_held": 0, "cash": 0, "liquidity": 0}
     stale_marks = 0
     peak_equity = float(initial_capital)
     max_drawdown = 0.0
     peak_exposure = average_exposure_sum = 0.0
+    peak_sector_exposure = 0.0
     exposure_days = 0
     costs = dict(DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters)
 
@@ -118,10 +123,11 @@ def simulate_mark_to_market_portfolio(
             target = min(equity_before * max_position_fraction,
                          equity_before * max_gross_exposure / max_positions,
                          cash, max(0.0, equity_before * max_gross_exposure - invested))
-            if max_participation_rate is not None and "avg_daily_turnover" in data.columns:
+            if max_participation_rate is not None:
                 turnover = pd.to_numeric(pd.Series([getattr(row, "avg_daily_turnover", np.nan)]),
                                          errors="coerce").iloc[0]
                 if not np.isfinite(turnover) or turnover <= 0:
+                    rejected["liquidity"] += 1
                     continue
                 target = min(target, turnover * max_participation_rate)
             if target <= 0:
@@ -177,6 +183,18 @@ def simulate_mark_to_market_portfolio(
         market_value = sum(p["shares"] * p["last_price"] for p in positions.values())
         equity = cash + market_value
         exposure = market_value / equity if equity > 0 else 0.0
+        sector_values = {}
+        for position in positions.values():
+            sector = position.get("sector")
+            if sector:
+                sector_values[sector] = sector_values.get(sector, 0.0) + (
+                    position["shares"] * position["last_price"]
+                )
+        sector_exposures = {
+            sector: value / equity for sector, value in sorted(sector_values.items())
+        } if equity > 0 else {}
+        if sector_exposures:
+            peak_sector_exposure = max(peak_sector_exposure, max(sector_exposures.values()))
         peak_exposure = max(peak_exposure, exposure)
         average_exposure_sum += exposure
         exposure_days += 1
@@ -185,7 +203,9 @@ def simulate_mark_to_market_portfolio(
         max_drawdown = max(max_drawdown, drawdown)
         daily_rows.append({"date": str(day.date()), "cash": cash,
                            "market_value": market_value, "equity": equity,
-                           "gross_exposure": exposure, "drawdown": drawdown})
+                           "gross_exposure": exposure, "sector_exposure": sector_exposures,
+                           "max_sector_exposure": max(sector_exposures.values()) if sector_exposures else 0.0,
+                           "drawdown": drawdown})
 
     if positions:
         raise ValueError("Daily price calendar ended with open positions; extend the price panel")
@@ -206,6 +226,7 @@ def simulate_mark_to_market_portfolio(
         "average_trade_net_return": float(np.mean(returns)) if returns else None,
         "max_daily_drawdown": float(max_drawdown),
         "peak_gross_exposure": float(peak_exposure),
+        "peak_sector_exposure": float(peak_sector_exposure),
         "average_gross_exposure": float(average_exposure_sum / exposure_days) if exposure_days else 0.0,
         "exposure_days": exposure_days, "stale_daily_marks": stale_marks,
         "invalid_candidates": invalid, "rejected": rejected,

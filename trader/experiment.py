@@ -88,10 +88,15 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
     result["nifty_ret_20"] = nifty.pct_change(20).reindex(result.index)
     result["nifty_vix_change"] = vix.pct_change(1).reindex(result.index)
     result = merge_delivery_percentages(result, DATA / "raw" / "delivery.csv")
+    sector_path = DATA.parent / "config" / "sector_classifications.json"
+    sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
+    result["sector"] = result["symbol"].map(sector_config["symbols"])
     return add_relative_strength_features(result)
 
 
 def run_experiment() -> dict:
+    sector_path = DATA.parent / "config" / "sector_classifications.json"
+    sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
     prices = download_prices(load_universe(), period="7y")
     delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
     frame = build_experiment_frame(prices)
@@ -196,12 +201,26 @@ def run_experiment() -> dict:
         ]
         daily_price_panel = pd.concat(daily_price_parts, ignore_index=True)
         model_portfolio = simulate_mark_to_market_portfolio(
-            model_picks, daily_price_panel, cost_parameters=DEFAULT_DELIVERY_COSTS,
+            model_picks, daily_price_panel, max_participation_rate=0.01,
+            cost_parameters=DEFAULT_DELIVERY_COSTS,
         )
         random_benchmark = random_pick_monte_carlo(
             oos_frame, daily_price_panel, simulations=300, seed=42052,
-            cost_parameters=DEFAULT_DELIVERY_COSTS,
+            max_participation_rate=0.01, cost_parameters=DEFAULT_DELIVERY_COSTS,
         )
+        cost_stress = {}
+        for slippage_bps in (2.0, 5.0, 10.0, 20.0):
+            stress_costs = {**DEFAULT_DELIVERY_COSTS, "slippage_bps_per_side": slippage_bps}
+            stress_result = simulate_mark_to_market_portfolio(
+                model_picks, daily_price_panel, max_participation_rate=0.01,
+                cost_parameters=stress_costs,
+            )
+            cost_stress[str(int(slippage_bps)) + "_bps_per_side"] = {
+                "net_return": stress_result["net_return"],
+                "max_daily_drawdown": stress_result["max_daily_drawdown"],
+                "trades": stress_result["trades"],
+                "liquidity_rejections": stress_result["rejected"]["liquidity"],
+            }
         index_comparisons = index_benchmarks(
             model_portfolio["daily_equity"], daily_price_panel, index_symbol="^NSEI",
         )
@@ -209,7 +228,16 @@ def run_experiment() -> dict:
             "daily_mark_to_market_model": model_portfolio,
             "random_pick_monte_carlo": random_benchmark,
             "nifty_benchmarks": index_comparisons,
-            "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
+            "cost_stress_by_slippage_bps_per_side": cost_stress,
+            "liquidity_participation_cap": 0.01,
+            "liquidity_source": "NSE sec_bhavdata_full TURNOVER_LACS, trailing 20-session average",
+            "sector_classification": {
+                "path": "config/sector_classifications.json",
+                "classification_as_of": sector_config["classification_as_of"],
+                "source_url": sector_config["source_url"],
+                "note": sector_config["note"],
+            },
+            "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, 1% of trailing 20-session NSE rupee turnover cap, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
         }
     metrics["portfolio_diagnostics"] = portfolio_diagnostics
     metrics["regime_experiment"] = {

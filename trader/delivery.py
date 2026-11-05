@@ -15,7 +15,7 @@ HEADERS = {
     "Accept": "text/csv,application/octet-stream,*/*",
     "Referer": "https://www.nseindia.com/all-reports",
 }
-COLUMNS = ["date", "symbol", "delivery_pct"]
+COLUMNS = ["date", "symbol", "delivery_pct", "turnover_rupees"]
 _thread_local = threading.local()
 
 
@@ -65,15 +65,24 @@ def parse_full_bhavcopy(
     raw["SYMBOL"] = raw["SYMBOL"].astype(str).str.strip().str.upper()
     raw["SERIES"] = raw["SERIES"].astype(str).str.strip().str.upper()
     raw["DELIV_PER"] = pd.to_numeric(raw["DELIV_PER"], errors="coerce")
+    if "TURNOVER_LACS" in raw.columns:
+        raw["TURNOVER_LACS"] = pd.to_numeric(raw["TURNOVER_LACS"], errors="coerce")
+    else:
+        raw["TURNOVER_LACS"] = float("nan")
     selected = raw.loc[
         raw["SERIES"].eq("EQ") & raw["SYMBOL"].isin(symbols),
-        ["DATE1", "SYMBOL", "DELIV_PER"],
+        ["DATE1", "SYMBOL", "DELIV_PER", "TURNOVER_LACS"],
     ].copy()
-    selected = selected.rename(columns={"DATE1": "date", "SYMBOL": "nse_symbol", "DELIV_PER": "delivery_pct"})
+    selected = selected.rename(columns={
+        "DATE1": "date", "SYMBOL": "nse_symbol",
+        "DELIV_PER": "delivery_pct", "TURNOVER_LACS": "turnover_lacs",
+    })
     selected["date"] = pd.to_datetime(selected["date"]).dt.normalize()
     selected["symbol"] = selected.pop("nse_symbol") + ".NS"
     selected.loc[~selected["delivery_pct"].between(0, 100), "delivery_pct"] = float("nan")
-    selected = selected.dropna(subset=["delivery_pct"])
+    selected["turnover_rupees"] = selected.pop("turnover_lacs") * 100_000.0
+    selected.loc[~selected["turnover_rupees"].gt(0), "turnover_rupees"] = float("nan")
+    selected = selected.dropna(subset=["delivery_pct", "turnover_rupees"], how="all")
     if selected["symbol"].duplicated().any():
         raise ValueError("NSE full bhavcopy contains duplicate EQ symbol rows")
     return selected[COLUMNS].reset_index(drop=True)
@@ -139,7 +148,15 @@ def download_delivery_history(
     if output_path.exists():
         existing = pd.read_csv(output_path, parse_dates=["date"])
         if not existing.empty:
-            checked.update(pd.to_datetime(existing["date"]).dt.normalize())
+            existing_dates = set(pd.to_datetime(existing["date"]).dt.normalize())
+            if "turnover_rupees" not in existing.columns:
+                checked.difference_update(existing_dates)
+            else:
+                missing_turnover_dates = set(pd.to_datetime(
+                    existing.loc[pd.to_numeric(existing["turnover_rupees"], errors="coerce").isna(), "date"]
+                ).dt.normalize())
+                checked.difference_update(missing_turnover_dates)
+                checked.update(existing_dates.difference(missing_turnover_dates))
     pending = [day for day in dates if day not in checked]
 
     new_rows = []
@@ -166,6 +183,9 @@ def download_delivery_history(
         combined_rows = pd.concat(new_rows, ignore_index=True)
         if output_path.exists():
             old_rows = pd.read_csv(output_path, parse_dates=["date"])
+            refreshed_dates = {pd.Timestamp(item["date"]).normalize() for item in new_log}
+            old_rows["date"] = pd.to_datetime(old_rows["date"]).dt.normalize()
+            old_rows = old_rows.loc[~old_rows["date"].isin(refreshed_dates)]
             combined_rows = pd.concat([old_rows, combined_rows], ignore_index=True)
         combined_rows["date"] = pd.to_datetime(combined_rows["date"]).dt.normalize()
         combined_rows = combined_rows.drop_duplicates(["date", "symbol"], keep="last")
@@ -177,6 +197,11 @@ def download_delivery_history(
         log = log.drop_duplicates(["date"], keep="last").sort_values("date")
         log.to_csv(log_path, index=False)
 
+    if output_path.exists():
+        migrated = pd.read_csv(output_path)
+        if "turnover_rupees" not in migrated.columns:
+            migrated["turnover_rupees"] = float("nan")
+            migrated.to_csv(output_path, index=False)
     all_rows = pd.read_csv(output_path) if output_path.exists() else pd.DataFrame(columns=COLUMNS)
     return {
         "requested_trading_dates": len(dates),
