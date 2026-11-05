@@ -1,54 +1,92 @@
-# Priority 1 and Priority 2 execution plan
+# Trader research execution status
 
-This plan is for research-only work on `feature/p1-p2-data-portfolio-validation`, stacked on the current triple-barrier research revision. No changes are made directly to `main`.
+Last reviewed: 2026-11-06. This plan tracks research-only work on `feature/p2-liquidity-sector-validation`, stacked on the P1/P2 branch. Production `main` is intentionally unchanged.
 
-## Priority 1 — prediction and input-data verification
+## Current decision
 
-- [x] Add a deterministic SHA-256 manifest builder for frozen input files.
-- [x] Require dated membership records to carry HTTPS source URLs, archived evidence paths and matching SHA-256 checksums.
-- [x] Reject overlapping membership intervals and keep the strong point-in-time verification flag false until independent evidence review.
-- [ ] Obtain official dated Nifty constituent additions/removals and archive the source circulars.
-- [ ] Populate `data/reference/universe_membership.csv` from official evidence; do not infer past constituents from today's list.
-- [ ] Reconcile all configured symbols with the price panel, including the missing `TATAMOTORS.NS` series in the current experiment.
-- [ ] Verify OHLCV source coverage, stale/missing sessions, adjusted-vs-unadjusted semantics and corporate-action factors against official evidence.
-- [ ] Freeze and commit or artifact the exact price, delivery, membership and corporate-action inputs with the snapshot manifest.
-- [ ] Reconcile NSE delivery history by date and symbol against source download logs; retain coverage gaps explicitly.
+**RESEARCH HOLD — no price-feature tuning, model promotion, final-holdout evaluation, merge to production, or live orders.**
+
+The completed P2 experiment fails the pre-registered profitability and statistical-edge gates. Passing CI confirms code execution and reproducibility, not a tradable edge.
+
+Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg5/Trader/actions/runs/42080829525), successful on `ac820b586a2ac1fa02b504d691808801d31af1a8`. Unit tests, walk-forward experiment and report upload all passed.
+
+## Priority 0 — leakage-aware research baseline
+
+- [x] Triple-barrier labels with next-session-open entry, gap-aware exits and same-day ambiguous double-touch exclusions.
+- [x] Purge training labels using actual label exit dates.
+- [x] Walk-forward folds, logistic baseline, shuffled-label controls and fixed-factor comparators.
+- [x] Keep the final holdout locked and unevaluated.
+- [x] CI validation passed on the research branch.
+
+## Priority 1 — point-in-time data integrity
+
+- [x] Deterministic SHA-256 manifest builder for frozen inputs.
+- [x] Membership schema requires HTTPS sources, archived evidence paths and matching SHA-256 checksums.
+- [x] Reject overlapping membership intervals; missing history is explicitly unverified and invalid supplied history fails closed.
+- [ ] Confirm the intended universe with the owner; the configured 49-symbol list is not a verified current or historical Nifty 50 universe.
+- [ ] Obtain official dated constituent additions/removals and archive source circulars, including delisted constituents.
+- [ ] Populate `data/reference/universe_membership.csv` only from those official records.
+- [ ] Resolve the missing `TATAMOTORS.NS` price series and TATAMOTORS/TMPV symbol transition/demerger adjustment with source-backed evidence.
+- [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
+- [ ] Supply and validate the corporate-action ledger; latest experiment reports it was not provided.
+- [ ] Freeze verified price, delivery, membership and corporate-action inputs with the manifest after these checks.
 
 ## Priority 2 — realistic execution and portfolio validation
 
-- [x] Add a sourced Groww NSE equity-delivery tariff configuration.
-- [x] Include per-order brokerage minimum/cap, DP sell fee and low-value DP exemption in the cost function.
-- [x] Round cash-equity order quantities down to whole shares and use executed notional for cash and costs.
-- [ ] Validate tariff arithmetic against one or more anonymised Groww contract notes; account-specific DP component remains configurable.
-- [ ] Model entry/exit execution using next-session open and barrier/gap rules with explicit price-impact and liquidity constraints.
-- [x] Enforce integer quantities, available cash, maximum positions, gross exposure and a 1% per-stock participation cap using trailing 20-session NSE rupee turnover in the mark-to-market experiment; fail closed when turnover history is unavailable.
-- [x] Add dated sector classification metadata for the configured universe and report daily sector exposure / peak sector concentration; classifications are descriptive, not point-in-time membership evidence.
-- [ ] Re-run the complete walk-forward and mark-to-market portfolio diagnostics with Groww costs and the frozen P1 dataset.
-- [ ] Compare model returns with buy-and-hold Nifty, exposure-matched Nifty, fixed-factor portfolios and random picks on identical dates.
-- [x] Add 2/5/10/20 bps-per-side slippage stress to the Groww-cost mark-to-market report; symbol, sector and regime diagnostics remain descriptive and need interpretation.
-- [ ] Require positive absolute net portfolio returns and statistically supported excess returns before any promotion; otherwise retain HOLD.
+- [x] Source-configured Groww NSE equity-delivery brokerage, statutory charges, DP components and low-value exemption.
+- [x] Correct DP exemption to waive only Groww's ₹16.50 component below ₹100 while retaining the separate depository component.
+- [x] Whole-share sizing, available-cash enforcement, max positions and exposure constraints.
+- [x] NSE full-bhavcopy rupee turnover parsing and trailing 20-session average turnover without look-ahead.
+- [x] 1% per-stock participation cap for model and random portfolios; fail closed when turnover history is missing.
+- [x] Dated sector taxonomy and daily/peak sector exposure diagnostics.
+- [x] 2/5/10/20 bps-per-side slippage stress.
+- [x] Compare with Nifty buy-and-hold, exposure-matched Nifty, fixed-factor portfolios and random picks on the research windows.
+- [x] Re-run walk-forward and mark-to-market diagnostics with the Groww cost profile.
+- [ ] Reconcile tariff arithmetic against anonymised actual Groww contract notes; account-specific DP concessions remain unverified.
+- [ ] Reconcile source delivery history gaps and independently validate price/turnover provenance.
+- [x] Evaluate the pre-registered profitability and statistical gates; result is FAIL / HOLD, so do not promote.
 
-## Current evidence and blockers
+### Latest experiment evidence (run #151)
 
-- The prior experiment workflow passed on commit `54a3b92cab361d82af9cfbe0d4056a296b754b5f`, but it used zero brokerage and zero DP defaults. Its results are not the final Groww-cost evaluation.
-- Prior mark-to-market diagnostic: net return -9.85%, max daily drawdown 31.78%, 1,204 trades, and no stale daily marks. Over the same dates Nifty buy-and-hold returned +32.18% before index costs; exposure-matched Nifty returned +24.50%.
-- Prior random-pick mean net return was -28.65% over 300 simulations. This is a useful comparator, not proof of model profitability.
-- The prior data audit found 49 configured symbols but only 48 price series (`TATAMOTORS.NS` absent); point-in-time membership and corporate-action adjustment are not verified.
-- Delivery data coverage was 99.73% across the experiment rows, but the historical universe and adjusted-price lineage remain unverified.
-- The final holdout remains locked and unevaluated. Do not unlock it until P1 inputs and P2 execution assumptions are reviewed and frozen.
-- The current model remains research-only and is not approved for real-money trading.
+- 16 walk-forward folds; 82,373 labels; 43 ambiguous rows excluded.
+- Delivery coverage 99.73%; 1% turnover participation cap applied.
+- Cross-sectional AUC 0.5101; logistic baseline 0.5079.
+- Model-minus-logistic AUC +0.00384; 95% block-bootstrap interval [-0.00187, +0.00932], includes zero.
+- Mean top-five net return across folds -0.1875%; mean net excess over universe +0.0734%; 95% five-day block-bootstrap interval [-0.0252%, +0.1785%], includes zero.
+- Predeclared cross-sectional and regime gates both failed; `continue_price_feature_tuning=false`.
+- Cash-funded portfolio: 1,148 trades, -17.24% net return, 26.25% realised-equity drawdown.
+- Daily mark-to-market portfolio: 1,163 trades, -23.26% net return, 29.23% max daily drawdown and 80.10% peak sector exposure.
+- Nifty buy-and-hold comparator: +32.18% before index costs, 15.77% max drawdown over the reported window.
+- Daily MTM slippage stress: -23.26% at 2 bps/side; -33.63% at 5 bps; -47.94% at 10 bps; -68.38% at 20 bps.
+- Final holdout status: `LOCKED_NOT_EVALUATED`.
 
+## Priority 3 — freeze and independent review
 
-## Additional execution controls added on 2026-11-05
+- [ ] Close P1 evidence gaps and reconcile Groww contract notes.
+- [ ] Freeze code SHA, raw-data manifest, universe, cost configuration, execution assumptions and exact evaluation dates.
+- [ ] Independent review of labels, purge logic, execution accounting, portfolio MTM and benchmark construction.
+- [ ] Confirm pre-registered acceptance criteria remain unchanged.
+- [ ] Only if all gates are met, evaluate the untouched final holdout once.
 
-- NSE full-bhavcopy parsing now captures `TURNOVER_LACS` as rupee turnover and migrates older delivery-only caches by re-fetching affected dates.
-- The research merge derives a trailing 20-session average of official NSE turnover; the model and random comparator both enforce a 1% participation cap.
-- The mark-to-market simulator fails closed when a requested liquidity cap lacks turnover history and reports daily sector exposure and peak sector concentration.
-- The experiment includes 2, 5, 10 and 20 bps-per-side slippage scenarios.
-- Sector labels are sourced to the NSE Indices Nifty 50 classification as of 27 February 2026; labels for configured legacy/non-constituent symbols are mapped to the same broad industry taxonomy and are not represented as historical PIT classifications.
+## Priority 4 — forward paper trading
 
+- [ ] Start only after the frozen research process passes its gates.
+- [ ] Run a prospective paper ledger with timestamped signals, intended orders, fills/rejections, costs, slippage and daily MTM.
+- [ ] Accumulate 60–90 sessions as an operational check; this alone cannot prove a small statistical edge.
+- [ ] Review drift, missing data, concentration, drawdown and execution reconciliation.
 
-- [x] Apply dated membership intervals to research rows when the membership file passes structural, timestamp, evidence-path and SHA-256 audits; if absent, preserve static-universe exploratory research with an explicit unverified status; if present but invalid, fail closed.
+## Priority 5 — production safeguards
 
+- [ ] Add fail-closed release gates, artifact provenance, monitoring and rollback.
+- [ ] Require independent approval before any deployment decision.
+- [ ] Keep live execution disabled unless all research, paper and operational gates pass and explicit authorization is given.
 
-- [x] Make `config/broker_costs_groww.json` the executable source of truth for brokerage, statutory rates, DP charges and slippage; validate DP component totals and support account-specific DP configuration rather than maintaining duplicated constants.
+## External inputs still required
+
+1. Intended universe confirmation.
+2. Official historical constituent circulars and archived evidence.
+3. Source-backed TATAMOTORS/TMPV transition and corporate-action adjustment.
+4. Corporate-action ledger and independent adjusted-price verification.
+5. Anonymised Groww contract notes or equivalent actual fee evidence.
+
+Do not fabricate or infer these records. Until supplied and independently validated, Priority 1 is incomplete, the final holdout stays locked, and the strategy remains research-only.
