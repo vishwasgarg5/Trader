@@ -4,6 +4,7 @@ from pathlib import Path
 import hashlib
 from urllib.parse import urlparse
 
+import numpy as np
 import pandas as pd
 
 
@@ -71,6 +72,7 @@ def audit_universe(
             bars = frame[list(required)].apply(pd.to_numeric, errors="coerce")
             invalid_mask = (
                 bars[["open", "high", "low", "close"]].isna().any(axis=1)
+                | ~np.isfinite(bars).all(axis=1)
                 | (bars[["open", "high", "low", "close"]] <= 0).any(axis=1)
                 | (bars["high"] < bars[["open", "low", "close"]].max(axis=1))
                 | (bars["low"] > bars[["open", "high", "close"]].min(axis=1))
