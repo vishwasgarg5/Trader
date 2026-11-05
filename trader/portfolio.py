@@ -107,6 +107,12 @@ def simulate_overlapping_portfolio(
                 equity = cash + invested
                 target_notional = min(equity * target_fraction, cash,
                                       max(0.0, equity * max_gross_exposure - invested))
+                if liquidity_available:
+                    turnover = getattr(row, "avg_daily_turnover", np.nan)
+                    if not np.isfinite(turnover) or turnover <= 0:
+                        rejected["liquidity"] += 1
+                        continue
+                    target_notional = min(target_notional, float(turnover) * max_participation_rate)
                 if target_notional <= 0:
                     rejected["cash"] += 1
                     continue
