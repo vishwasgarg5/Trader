@@ -31,8 +31,8 @@ def test_parse_full_bhavcopy_rejects_stale_or_wrong_date():
 def test_parse_full_bhavcopy_accepts_legacy_windows_encoding():
     # NSE archive responses have occasionally contained Windows-1252 bytes.
     csv = (
-        "SYMBOL,SERIES,DATE1,DELIV_PER,NOTES\\n"
-        "RELIANCE,EQ,05-Nov-2026,42.5,legacy–encoding\\n"
+        "SYMBOL,SERIES,DATE1,DELIV_PER,NOTES\n"
+        "RELIANCE,EQ,05-Nov-2026,42.5,legacy–encoding\n"
     ).encode("cp1252")
     result = parse_full_bhavcopy(
         csv, pd.Timestamp("2026-11-05"), {"RELIANCE"}
