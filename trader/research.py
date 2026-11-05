@@ -129,6 +129,7 @@ def walk_forward_evaluate(
     first_test = dates.min() + DateOffset(years=train_years)
     last_date = dates.max()
     fold_rows = []
+    daily_return_spreads = []
     cursor = first_test
     fold_number = 0
     while cursor <= last_date:
@@ -160,6 +161,9 @@ def walk_forward_evaluate(
                 daily_top.groupby(level=0)["net_return"].mean()
                 if "net_return" in daily_top else None
             )
+            if daily_top_net is not None and daily_universe_net is not None:
+                daily_spread = (daily_top_net - daily_universe_net).dropna()
+                daily_return_spreads.extend(daily_spread.to_numpy(dtype=float).tolist())
 
             shuffled_aucs = []
             target_values = train["target"].astype(int).to_numpy()
@@ -207,6 +211,7 @@ def walk_forward_evaluate(
                 "logistic_regression_auc": logistic_auc,
                 "single_feature_auc": feature_aucs,
                 "test_dates": int(daily_precision.size),
+                "regime_performance": summarize_regime_performance(test, daily_top) if {"nifty_above_200dma", "india_vix_low_20"}.issubset(test.columns) and "net_return" in test else None,
             })
         cursor = test_end
 
@@ -233,6 +238,9 @@ def walk_forward_evaluate(
         "mean_cross_sectional_auc": mean_metric("cross_sectional_auc"),
         "mean_shuffled_label_auc": mean_metric("shuffled_label_auc_mean"),
         "mean_logistic_regression_auc": mean_metric("logistic_regression_auc"),
+        "folds_auc_above_0_5": int(sum(row["roc_auc"] is not None and row["roc_auc"] > 0.5 for row in fold_rows)),
+        "mean_top5_minus_universe_net_return": float(np.mean(daily_return_spreads)) if daily_return_spreads else None,
+        "top5_minus_universe_net_return_block_bootstrap_95pct": block_bootstrap_mean_ci(daily_return_spreads),
         "mean_single_feature_auc": {
             feature: float(np.mean([
                 row["single_feature_auc"][feature]
