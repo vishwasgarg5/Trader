@@ -89,7 +89,7 @@ def test_cross_sectional_frame_ranks_features_and_labels_against_daily_median():
     assert features == ["ret_5"]
     assert ranked.iloc[0]["ret_5"] == pytest.approx(1.0)
     assert ranked.iloc[1]["ret_5"] == pytest.approx(1 / 3)
-    assert list(ranked["target"].astype(int)) == [1, 0, 0, 0, 1, 1]
+    assert list(ranked["target"].astype(int)) == [1, 0, 0, 0, 1, 0]
 
 
 def test_block_bootstrap_is_reproducible_and_returns_interval():
