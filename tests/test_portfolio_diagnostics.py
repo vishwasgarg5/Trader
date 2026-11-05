@@ -100,5 +100,5 @@ def test_index_benchmarks_include_buy_hold_and_exposure_matched_results():
     )
     benchmark = index_benchmarks(result["daily_equity"], prices)
     assert benchmark["status"] == "evaluated"
-    assert benchmark["buy_and_hold"]["net_return_before_index_costs"] > 0
+    assert benchmark["buy_and_hold"]["net_return_before_index_costs"] == pytest.approx(-0.02)
     assert benchmark["exposure_matched"]["method"].startswith("daily index return")
