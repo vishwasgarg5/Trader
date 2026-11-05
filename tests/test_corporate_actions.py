@@ -56,3 +56,11 @@ def test_corporate_action_ledger_rejects_nonfinite_factors_and_lookahead(tmp_pat
     assert result["valid"] is False
     assert any("finite and positive" in error for error in result["errors"])
     assert any("after the corporate action ex_date" in error for error in result["errors"])
+
+
+def test_naive_late_evening_ex_date_keeps_nse_calendar_date():
+    from trader.corporate_actions import _india_calendar_dates
+
+    values = pd.Series(["2024-01-10 23:45:00", "2024-01-10T18:30:00Z"])
+    dates = _india_calendar_dates(values)
+    assert dates.dt.strftime("%Y-%m-%d").tolist() == ["2024-01-10", "2024-01-11"]
