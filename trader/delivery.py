@@ -93,10 +93,13 @@ def _fetch_one(day: pd.Timestamp, symbols: set[str]) -> tuple[str, pd.DataFrame]
         response.raise_for_status()
         try:
             rows = parse_full_bhavcopy(response.content, day, symbols)
+        except pd.errors.ParserError:
+            # Some archived dates contain malformed/non-CSV payloads. Keep the
+            # date explicitly unavailable; never interpret it as zero delivery.
+            return "invalid_file", pd.DataFrame(columns=COLUMNS)
         except ValueError as exc:
             # The archive can occasionally return an adjacent session's file
-            # for a requested date. Record it as a gap, not as valid data and
-            # not as an infrastructure failure that aborts the whole study.
+            # for a requested date. Record it as a gap, not as valid data.
             if "date mismatch" in str(exc):
                 return "date_mismatch", pd.DataFrame(columns=COLUMNS)
             raise
@@ -179,6 +182,7 @@ def download_delivery_history(
         "downloaded_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "downloaded").sum()),
         "not_found_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "not_found").sum()),
         "date_mismatch_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "date_mismatch").sum()),
+        "invalid_file_dates": int((pd.DataFrame(new_log).get("status", pd.Series(dtype=str)) == "invalid_file").sum()),
         "delivery_rows_total": int(len(all_rows)),
         "delivery_symbols_total": int(all_rows["symbol"].nunique()) if not all_rows.empty else 0,
         "delivery_file": str(output_path),
