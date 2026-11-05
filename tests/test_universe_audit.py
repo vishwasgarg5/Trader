@@ -41,3 +41,12 @@ def test_invalid_membership_dates_are_rejected(tmp_path):
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is False
     assert any("precedes" in item for item in report["membership_history"]["errors"])
+
+
+
+def test_audit_flags_symbols_stale_vs_latest_benchmark_session(tmp_path):
+    prices = _prices()
+    prices["AAA.NS"] = prices["AAA.NS"].iloc[:-1]
+    report = audit_universe(prices, ["AAA.NS"], tmp_path / "none.csv")
+    assert report["per_symbol"]["AAA.NS"]["stale_benchmark_sessions"] == 1
+    assert "AAA.NS" in report["price_integrity_issues"]
