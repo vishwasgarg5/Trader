@@ -8,6 +8,16 @@ import numpy as np
 import pandas as pd
 
 
+def _india_calendar_dates(values: pd.Series) -> pd.Series:
+    """Parse mixed naive/aware timestamps onto comparable NSE calendar dates."""
+    return (
+        pd.to_datetime(values, errors="coerce", utc=True)
+        .dt.tz_convert("Asia/Kolkata")
+        .dt.tz_localize(None)
+        .dt.normalize()
+    )
+
+
 REQUIRED_COLUMNS = {
     "symbol", "ex_date", "action_type", "adjustment_factor", "source",
     "source_url", "source_published_at", "evidence_path", "evidence_sha256",
@@ -41,8 +51,8 @@ def audit_corporate_action_ledger(path: Path) -> dict:
         return result
 
     frame["symbol"] = frame["symbol"].astype(str).str.strip().str.upper()
-    frame["ex_date"] = pd.to_datetime(frame["ex_date"], errors="coerce")
-    frame["source_published_at"] = pd.to_datetime(frame["source_published_at"], errors="coerce")
+    frame["ex_date"] = _india_calendar_dates(frame["ex_date"])
+    frame["source_published_at"] = _india_calendar_dates(frame["source_published_at"])
     frame["adjustment_factor"] = pd.to_numeric(frame["adjustment_factor"], errors="coerce")
     if frame["symbol"].eq("").any() or frame["ex_date"].isna().any():
         result["errors"].append("blank symbols or invalid ex_date")
