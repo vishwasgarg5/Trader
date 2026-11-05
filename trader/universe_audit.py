@@ -58,11 +58,13 @@ def audit_universe(
         if frame is None or frame.empty:
             per_symbol[symbol] = {"present": False, "rows": 0, "duplicate_dates": 0,
                                   "invalid_ohlc_rows": None, "zero_volume_rows": None,
+                                  "missing_ohlcv_columns": ["open", "high", "low", "close", "volume"],
                                   "missing_benchmark_sessions": None, "stale_benchmark_sessions": None, "last_date": None}
             continue
         dates = pd.DatetimeIndex(pd.to_datetime(frame.index)).tz_localize(None).normalize()
         duplicate_count = int(dates.duplicated().sum())
         required = {"open", "high", "low", "close", "volume"}
+        missing_columns = sorted(required.difference(frame.columns))
         invalid = None
         zero_volume = None
         if required.issubset(frame.columns):
@@ -82,6 +84,7 @@ def audit_universe(
         per_symbol[symbol] = {
             "present": True, "rows": int(len(frame)), "duplicate_dates": duplicate_count,
             "invalid_ohlc_rows": invalid, "zero_volume_rows": zero_volume,
+            "missing_ohlcv_columns": missing_columns,
             "missing_benchmark_sessions": missing_sessions,
             "stale_benchmark_sessions": stale_sessions,
             "last_date": str(dates.max().date()),
@@ -150,7 +153,7 @@ def audit_universe(
     integrity_issues = {
         s: row for s, row in per_symbol.items()
         if row["present"] and (
-            row["duplicate_dates"] or row["invalid_ohlc_rows"] or row["missing_benchmark_sessions"] or row["stale_benchmark_sessions"]
+            row["duplicate_dates"] or row["invalid_ohlc_rows"] or row["missing_ohlcv_columns"] or row["missing_benchmark_sessions"] or row["stale_benchmark_sessions"]
         )
     }
     return {
