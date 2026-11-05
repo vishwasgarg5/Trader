@@ -87,10 +87,11 @@ def add_delivery_costs(frame: pd.DataFrame, **costs) -> pd.DataFrame:
     if not {"close", "exit_price"}.issubset(frame.columns):
         raise ValueError("Frame must include close and exit_price")
     result = frame.copy()
+    entries = result["entry_price"] if "entry_price" in result else result["close"]
     estimates = [
         delivery_round_trip_cost(entry, exit_price, **costs)
         if pd.notna(exit_price) and pd.notna(entry) else None
-        for entry, exit_price in zip(result["close"], result["exit_price"])
+        for entry, exit_price in zip(entries, result["exit_price"])
     ]
     result["net_return"] = [
         estimate["net_return"] if estimate is not None else np.nan for estimate in estimates
