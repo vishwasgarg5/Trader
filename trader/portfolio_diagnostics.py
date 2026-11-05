@@ -52,6 +52,8 @@ def simulate_mark_to_market_portfolio(
         raise ValueError("position and gross exposure fractions must be in (0, 1]")
     if max_participation_rate is not None and not 0 < max_participation_rate <= 1:
         raise ValueError("max_participation_rate must be in (0, 1]")
+    if max_participation_rate is not None and "avg_daily_turnover" not in candidates.columns:
+        raise ValueError("max_participation_rate requires avg_daily_turnover")
 
     prices = _normalise_daily_prices(daily_prices)
     data = candidates.copy()
@@ -82,6 +84,10 @@ def simulate_mark_to_market_portfolio(
     calendar = calendar[(calendar >= first_day) & (calendar <= last_day)]
     if calendar.empty:
         raise ValueError("daily_prices does not cover candidate holding dates")
+    if not set(data["entry_date"]).issubset(set(calendar)):
+        raise ValueError("daily_prices is missing one or more candidate entry dates")
+    if not set(data["exit_date"]).issubset(set(calendar)):
+        raise ValueError("daily_prices is missing one or more candidate exit dates")
     data_by_entry = {
         day: group.sort_values(["score", "symbol"], ascending=[False, True], kind="mergesort")
         for day, group in data.groupby("entry_date", sort=True)
@@ -129,6 +135,7 @@ def simulate_mark_to_market_portfolio(
                 "shares": float(target) / float(row.entry_price),
                 "last_price": float(row.entry_price), "score": float(row.score),
                 "fallback_net_return": float(row.net_return),
+                "sector": getattr(row, "sector", None),
             }
 
         for symbol, position in list(positions.items()):
@@ -148,6 +155,7 @@ def simulate_mark_to_market_portfolio(
                     "gross_return": estimate["gross_return"],
                     "net_return": estimate["net_return"], "net_pnl": net_pnl,
                     "cost_rupees": estimate["total_cost_rupees"],
+                    "sector": position.get("sector"),
                 })
                 del positions[symbol]
                 continue
@@ -175,6 +183,13 @@ def simulate_mark_to_market_portfolio(
         raise ValueError("Daily price calendar ended with open positions; extend the price panel")
     ending = cash
     returns = [trade["net_return"] for trade in trade_log]
+    symbol_allocations = {}
+    sector_allocations = {}
+    total_traded_notional = sum(trade["notional"] for trade in trade_log)
+    for trade in trade_log:
+        symbol_allocations[trade["symbol"]] = symbol_allocations.get(trade["symbol"], 0.0) + trade["notional"]
+        if trade.get("sector"):
+            sector_allocations[trade["sector"]] = sector_allocations.get(trade["sector"], 0.0) + trade["notional"]
     return {
         "status": "evaluated", "initial_capital": float(initial_capital),
         "ending_equity": float(ending), "net_return": float(ending / initial_capital - 1),
@@ -187,7 +202,57 @@ def simulate_mark_to_market_portfolio(
         "exposure_days": exposure_days, "stale_daily_marks": stale_marks,
         "invalid_candidates": invalid, "rejected": rejected,
         "cost_accounting": "recomputed from actual position notional",
+        "traded_notional_share_by_symbol": {
+            key: value / total_traded_notional for key, value in sorted(symbol_allocations.items())
+        } if total_traded_notional else {},
+        "traded_notional_share_by_sector": {
+            key: value / total_traded_notional for key, value in sorted(sector_allocations.items())
+        } if total_traded_notional and sector_allocations else None,
+        "sector_concentration_note": "Sector concentration is reported only when a sector column is supplied." if not sector_allocations else None,
         "daily_equity": daily_rows, "trade_log": trade_log,
+    }
+
+
+def index_benchmarks(
+    daily_equity: list[dict],
+    daily_prices: pd.DataFrame,
+    *,
+    index_symbol: str = "^NSEI",
+) -> dict:
+    """Calculate buy-and-hold and daily exposure-matched index comparators."""
+    prices = _normalise_daily_prices(daily_prices)
+    if index_symbol not in prices.columns:
+        return {"status": "unavailable", "reason": f"{index_symbol} is absent from daily_prices"}
+    equity = pd.DataFrame(daily_equity)
+    if equity.empty:
+        return {"status": "unavailable", "reason": "No daily portfolio equity observations"}
+    equity["date"] = pd.to_datetime(equity["date"])
+    series = prices[index_symbol].dropna()
+    aligned = pd.DataFrame({"index_close": series}).join(
+        equity.set_index("date")[["gross_exposure"]], how="inner"
+    ).dropna()
+    if len(aligned) < 2:
+        return {"status": "unavailable", "reason": "Fewer than two common index/portfolio dates"}
+    index_returns = aligned["index_close"].pct_change().fillna(0.0)
+    buy_hold_curve = (1.0 + index_returns).cumprod()
+    buy_hold_dd = buy_hold_curve / buy_hold_curve.cummax() - 1.0
+    # Use prior close exposure for the next close-to-close index return.
+    matched_returns = aligned["gross_exposure"].shift(1).fillna(0.0) * index_returns
+    matched_curve = (1.0 + matched_returns).cumprod()
+    matched_dd = matched_curve / matched_curve.cummax() - 1.0
+    return {
+        "status": "evaluated", "index_symbol": index_symbol,
+        "start_date": str(aligned.index.min().date()),
+        "end_date": str(aligned.index.max().date()),
+        "buy_and_hold": {
+            "net_return_before_index_costs": float(buy_hold_curve.iloc[-1] - 1.0),
+            "max_drawdown": float(-buy_hold_dd.min()),
+        },
+        "exposure_matched": {
+            "net_return_before_index_costs": float(matched_curve.iloc[-1] - 1.0),
+            "max_drawdown": float(-matched_dd.min()),
+            "method": "daily index return multiplied by prior-day strategy gross exposure",
+        },
     }
 
 
