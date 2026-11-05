@@ -95,3 +95,11 @@ def test_event_simulator_uses_whole_shares_and_actual_notional_costs():
     assert trade["cost_rupees"] == pytest.approx(expected["total_cost_rupees"])
     assert trade["net_return"] == pytest.approx(expected["net_return"])
     assert trade["net_return"] != pytest.approx(0.99)
+
+
+def test_non_finite_scores_and_prices_are_rejected():
+    data = _candidates().iloc[[0]].copy()
+    data.loc[data.index[0], "score"] = np.inf
+    result = simulate_overlapping_portfolio(data)
+    assert result["rejected"]["invalid"] == 1
+    assert result["trades"] == 0
