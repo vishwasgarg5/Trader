@@ -134,6 +134,15 @@ def run_experiment() -> dict:
             + detail
         )
 
+    corporate_action_audit = audit_corporate_action_ledger(
+        reference_root / "corporate_actions.csv",
+    )
+    if not corporate_action_audit.get("corporate_action_adjustment_verified", False):
+        raise RuntimeError(
+            "T-0003 corporate-action gate is BLOCKED; archived metadata alone does not "
+            "verify adjusted prices, demerger price discovery, or total-return continuity."
+        )
+
     membership_path = reference_root / "universe_membership.csv"
     if not membership_path.is_file():
         raise RuntimeError(
@@ -154,9 +163,6 @@ def run_experiment() -> dict:
     frame = build_experiment_frame(prices)
     frame, membership_application = apply_point_in_time_membership(
         frame, membership_path, universe_audit,
-    )
-    corporate_action_audit = audit_corporate_action_ledger(
-        DATA / "reference" / "corporate_actions.csv",
     )
     labelled = frame.dropna(subset=["target"]).copy()
     if len(labelled.index.unique()) < 900:
