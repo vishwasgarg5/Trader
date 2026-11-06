@@ -388,11 +388,14 @@ def run_experiment() -> dict:
         price_panel_path, index=False
     )
     snapshot_inputs = [price_panel_path]
+    reference_ledgers = (
+        DATA / "reference" / "universe_membership.csv",
+        DATA / "reference" / "corporate_actions.csv",
+    )
     for candidate in (
         raw_dir / "delivery.csv",
         raw_dir / "delivery_download_log.csv",
-        DATA / "reference" / "universe_membership.csv",
-        DATA / "reference" / "corporate_actions.csv",
+        *reference_ledgers,
         DATA.parent / "config" / "universe.txt",
         DATA.parent / "config" / "broker_costs_groww.json",
         DATA.parent / "config" / "sector_classifications.json",
@@ -400,6 +403,22 @@ def run_experiment() -> dict:
     ):
         if candidate.is_file():
             snapshot_inputs.append(candidate)
+
+    # Freeze every evidence file referenced by a membership or corporate-action
+    # ledger, not just the ledger row containing its checksum.
+    for ledger_path in reference_ledgers:
+        if not ledger_path.is_file():
+            continue
+        ledger = pd.read_csv(ledger_path)
+        if "evidence_path" not in ledger.columns:
+            continue
+        for evidence_value in ledger["evidence_path"].dropna().astype(str):
+            evidence_path = Path(evidence_value)
+            if not evidence_path.is_absolute():
+                evidence_path = ledger_path.parent / evidence_path
+            if evidence_path.is_file():
+                snapshot_inputs.append(evidence_path)
+
     snapshot_manifest = write_data_snapshot_manifest(
         snapshot_inputs,
         DATA / "snapshots" / "input_manifest.json",
