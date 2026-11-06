@@ -151,3 +151,21 @@ def test_simple_factor_baselines_use_fixed_rank_rules_and_net_returns():
     assert factors["relative_strength_20d"]["fold_count"] > 0
     assert factors["short_term_reversal"]["folds"][0]["test_dates"] > 0
     assert factors["relative_strength_20d"]["selection_rule"].startswith("highest")
+
+
+
+def test_rank_evaluation_reports_spearman_ic_and_decile_spread():
+    from trader.research import _cross_sectional_rank_metrics
+
+    dates = pd.to_datetime([date for date in pd.bdate_range("2026-01-01", periods=12) for _ in range(10)])
+    rows = []
+    for day in pd.bdate_range("2026-01-01", periods=12):
+        for rank in range(10):
+            rows.append({"score": float(rank), "net_return": float(rank) / 1000.0})
+    result = _cross_sectional_rank_metrics(pd.DataFrame(rows, index=dates))
+    assert result["status"] == "evaluated"
+    assert result["dates"] == 12
+    assert result["mean_rank_ic"] == pytest.approx(1.0)
+    assert result["rank_ic_hac_t_statistic"] is None or result["rank_ic_hac_t_statistic"] > 0
+    assert result["mean_long_short_decile_net_return"] > 0
+    assert result["daily"][0]["top_decile_net_return"] > result["daily"][0]["bottom_decile_net_return"]
