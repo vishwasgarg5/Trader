@@ -1,0 +1,8 @@
+year,scope_start,scope_end,official_notice_search_complete,expected_transition_count,verified_transition_count,supersession_review_complete,snapshot_reconciliation_complete,independent_reviewer,reviewed_at,coverage_status,notes
+2018,2018-04-01,2018-12-31,false,,,,,,,NOT_STARTED,
+2019,2019-01-01,2019-12-31,false,,,,,,,NOT_STARTED,
+2020,2020-01-01,2020-12-31,false,,,,,,,NOT_STARTED,
+2021,2021-01-01,2021-12-31,false,,,,,,,NOT_STARTED,
+2022,2022-01-01,2022-12-31,false,,,,,,,NOT_STARTED,
+2023,2023-01-01,2023-12-31,false,,,,,,,NOT_STARTED,
+2024,2024-01-01,2024-12-31,false,,,,,,,NOT_STARTED,
