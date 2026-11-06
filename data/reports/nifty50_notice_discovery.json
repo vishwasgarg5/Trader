@@ -1,0 +1,24 @@
+{
+  "archive_entries_discovered": 697,
+  "archive_failures": [],
+  "archive_url": "https://www.niftyindices.com/press-release",
+  "candidate_pdfs_archived_this_run": 272,
+  "classification_policy": "No Nifty 50 effect is inferred automatically; all new rows remain UNCLASSIFIED_REVIEW_REQUIRED.",
+  "coverage_complete": false,
+  "new_inventory_rows": 272,
+  "review_keyword_candidates": 289,
+  "scope": {
+    "end_year": 2024,
+    "start_year": 2018
+  },
+  "unparsed_pdf_links": [
+    {
+      "title": "Benchmark Codes",
+      "url": "https://www.niftyindices.com/BenchmarkCodes/nifty_indices_benchmark_codes.pdf"
+    },
+    {
+      "title": "Tracking Error",
+      "url": "https://www.niftyindices.com/docs/default-source/tracking-error/trackingerror.pdf?sfvrsn=7e449b34_2"
+    }
+  ]
+}
