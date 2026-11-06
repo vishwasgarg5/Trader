@@ -126,11 +126,11 @@ jobs:
 
           if changed:
               with transition_ledger.open("w", newline="", encoding="utf-8") as handle:
-                  writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator="\\n")
+                  writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator="\n")
                   writer.writeheader()
                   writer.writerows(transition_rows)
               with ledger.open("w", newline="", encoding="utf-8") as handle:
-                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\\n")
+                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
                   writer.writeheader()
                   writer.writerows(rows)
           PY
