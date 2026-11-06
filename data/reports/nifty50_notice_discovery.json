@@ -11,30 +11,14 @@
     "2024": 140
   },
   "archive_entries_discovered": 697,
-  "archive_failures": [
-    {
-      "error": "Downloaded source does not have a PDF signature",
-      "notice_id": "NSE-ARCHIVE-2018-06-05-209df26d1951",
-      "url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf"
-    },
-    {
-      "error": "Downloaded source does not have a PDF signature",
-      "notice_id": "NSE-ARCHIVE-2019-07-16-3a8719394912",
-      "url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
-    },
-    {
-      "error": "Downloaded source does not have a PDF signature",
-      "notice_id": "NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
-      "url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf"
-    }
-  ],
+  "archive_failures": [],
   "archive_url": "https://www.niftyindices.com/press-release",
   "candidate_pdfs_archived_this_run": 0,
   "classification_policy": "No Nifty 50 effect is inferred automatically; all new rows remain UNCLASSIFIED_REVIEW_REQUIRED.",
   "coverage_complete": false,
   "new_inventory_rows": 0,
-  "non_candidate_entries_catalogued": 15,
-  "review_keyword_candidates": 682,
+  "non_candidate_entries_catalogued": 139,
+  "review_keyword_candidates": 558,
   "scope": {
     "end_year": 2024,
     "start_year": 2018
