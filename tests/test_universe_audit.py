@@ -168,3 +168,19 @@ def test_membership_history_rejects_symbols_outside_configured_universe(tmp_path
     report = audit_universe(_prices(), ["AAA.NS"], path)
     assert report["membership_history"]["valid"] is False
     assert any("BBB.NS" in error for error in report["membership_history"]["errors"])
+
+
+def test_membership_evidence_path_cannot_escape_membership_directory(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    outside = tmp_path.parent / "outside-evidence.bin"
+    outside.write_bytes(b"outside evidence must not be accepted")
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2019-12-20T09:00:00+05:30",
+        "evidence_path": "../outside-evidence.bin",
+        "evidence_sha256": hashlib.sha256(outside.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("escapes membership directory" in item for item in report["membership_history"]["errors"])
