@@ -204,17 +204,25 @@ def run_experiment() -> dict:
         daily_price_panel = pd.concat(daily_price_parts, ignore_index=True)
         model_portfolio = simulate_mark_to_market_portfolio(
             model_picks, daily_price_panel, max_participation_rate=0.01,
+            max_sector_exposure_fraction=0.30,
+            drawdown_size_reduction_threshold=0.10,
+            drawdown_size_multiplier=0.50,
             cost_parameters=DEFAULT_DELIVERY_COSTS,
         )
         random_benchmark = random_pick_monte_carlo(
             oos_frame, daily_price_panel, simulations=300, seed=42052,
-            max_participation_rate=0.01, cost_parameters=DEFAULT_DELIVERY_COSTS,
+            max_participation_rate=0.01, max_sector_exposure_fraction=0.30,
+            drawdown_size_reduction_threshold=0.10, drawdown_size_multiplier=0.50,
+            cost_parameters=DEFAULT_DELIVERY_COSTS,
         )
         cost_stress = {}
         for slippage_bps in (2.0, 5.0, 10.0, 20.0):
             stress_costs = {**DEFAULT_DELIVERY_COSTS, "slippage_bps_per_side": slippage_bps}
             stress_result = simulate_mark_to_market_portfolio(
                 model_picks, daily_price_panel, max_participation_rate=0.01,
+                max_sector_exposure_fraction=0.30,
+                drawdown_size_reduction_threshold=0.10,
+                drawdown_size_multiplier=0.50,
                 cost_parameters=stress_costs,
             )
             cost_stress[str(int(slippage_bps)) + "_bps_per_side"] = {
@@ -232,6 +240,9 @@ def run_experiment() -> dict:
             "nifty_benchmarks": index_comparisons,
             "cost_stress_by_slippage_bps_per_side": cost_stress,
             "liquidity_participation_cap": 0.01,
+            "max_sector_exposure_fraction": 0.30,
+            "drawdown_size_reduction_threshold": 0.10,
+            "drawdown_size_multiplier_after_threshold": 0.50,
             "liquidity_source": "NSE sec_bhavdata_full TURNOVER_LACS, trailing 20-session average",
             "sector_classification": {
                 "path": "config/sector_classifications.json",
@@ -239,7 +250,7 @@ def run_experiment() -> dict:
                 "source_url": sector_config["source_url"],
                 "note": sector_config["note"],
             },
-            "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, 1% of trailing 20-session NSE rupee turnover cap, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
+            "comparison_note": "Model and random portfolios use the same out-of-sample signal dates, eligible candidate pool, five-pick daily limit, cash sizing, 30% sector exposure cap, 50% sizing after a 10% drawdown, 1% of trailing 20-session NSE rupee turnover cap, price panel, and actual-notional cost calculation. Random picks are uniform without replacement per signal date.",
         }
     metrics["portfolio_diagnostics"] = portfolio_diagnostics
     metrics["regime_experiment"] = {
