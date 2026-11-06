@@ -6,6 +6,8 @@ on:
     paths:
       - "trader/**"
       - "tests/**"
+      - "config/**"
+      - "data/reference/**"
       - "requirements.txt"
       - ".github/workflows/daily.yml"
   schedule:
