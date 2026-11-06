@@ -102,6 +102,23 @@ def summarize_predictive_edge(fold_metrics: dict, *, repeats: int = 5000, seed: 
 
 
 
+def is_positive_95pct_block_bootstrap_ci(ci: dict | None, *, expected_method: str) -> bool:
+    """Return True only for a valid 95% CI wholly above zero from the expected bootstrap."""
+    if not isinstance(ci, dict):
+        return False
+    if ci.get("method") != expected_method or ci.get("confidence_level") != 0.95:
+        return False
+    try:
+        lower = float(ci["lower"])
+        upper = float(ci["upper"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    return bool(
+        np.isfinite(lower) and np.isfinite(upper)
+        and lower <= upper and lower > 0.0 and upper > 0.0
+    )
+
+
 def evaluate_research_continuation_gate(
     cross_metrics: dict,
     regime_positive_folds: int,
@@ -126,18 +143,17 @@ def evaluate_research_continuation_gate(
         "relative_excess_majority_of_folds": int(
             cross_metrics.get("folds_with_positive_net_excess") or 0
         ) >= majority,
-        "relative_excess_95pct_lower_bound_positive": bool(
-            excess_ci is not None and excess_ci.get("lower") is not None
-            and excess_ci["lower"] > 0
+        "relative_excess_95pct_interval_valid_and_above_zero": is_positive_95pct_block_bootstrap_ci(
+            excess_ci, expected_method="circular_moving_block_bootstrap"
         ),
         "absolute_net_profitability_positive": bool(
             absolute_return is not None and np.isfinite(absolute_return)
             and absolute_return > 0
         ),
         "regime_gate_majority_of_folds": int(regime_positive_folds) >= majority,
-        "incremental_auc_vs_logistic_statistically_positive": bool(
-            model_ci is not None and model_ci.get("lower") is not None
-            and model_ci["lower"] > 0
+        "incremental_auc_vs_logistic_statistically_positive": is_positive_95pct_block_bootstrap_ci(
+            model_ci,
+            expected_method="circular_moving_block_bootstrap_over_walk_forward_folds",
         ),
         "point_in_time_universe_verified": bool(point_in_time_universe_verified),
         "corporate_action_adjustments_verified": bool(corporate_action_adjustments_verified),
