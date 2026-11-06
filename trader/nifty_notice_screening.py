@@ -15,6 +15,7 @@ from pypdf import PdfReader
 
 INVENTORY = Path("data/reference/nifty50_annual_notice_inventory.csv")
 REPORT = Path("data/reports/nifty50_notice_text_screening.json")
+TEXT_OUTPUT_DIR = Path("data/reference/extracted_notice_text")
 NIFTY50_RE = re.compile(r"nifty\s*[- ]?\s*50|nifty50", re.IGNORECASE)
 CONTEXT_CHARS = 220
 
@@ -32,7 +33,7 @@ def _snippets(text: str, limit: int = 12) -> list[str]:
     return snippets
 
 
-def screen_pdf(path: Path, expected_sha256: str = "") -> dict:
+def screen_pdf(path: Path, expected_sha256: str = "", text_output_path: Path | None = None) -> dict:
     if not path.is_file():
         return {"text_status": "MISSING_SOURCE_DOCUMENT", "error": "source PDF is missing"}
     data = path.read_bytes()
@@ -47,6 +48,15 @@ def screen_pdf(path: Path, expected_sha256: str = "") -> dict:
     except Exception as exc:
         return {"text_status": "PDF_TEXT_EXTRACTION_FAILED", "source_sha256": digest, "error": str(exc)}
     compact = re.sub(r"\s+", " ", text).strip()
+    extracted_metadata = {}
+    if text_output_path is not None:
+        text_output_path.parent.mkdir(parents=True, exist_ok=True)
+        normalized_text = compact + "\n"
+        text_output_path.write_text(normalized_text, encoding="utf-8")
+        extracted_metadata = {
+            "extracted_text_path": text_output_path.as_posix(),
+            "extracted_text_sha256": hashlib.sha256(normalized_text.encode("utf-8")).hexdigest(),
+        }
     if not compact:
         return {
             "text_status": "EMPTY_OR_SCANNED_PDF",
@@ -55,6 +65,7 @@ def screen_pdf(path: Path, expected_sha256: str = "") -> dict:
             "text_characters": 0,
             "nifty50_mention_count": 0,
             "snippets": [],
+            **extracted_metadata,
         }
     snippets = _snippets(compact)
     return {
@@ -64,10 +75,11 @@ def screen_pdf(path: Path, expected_sha256: str = "") -> dict:
         "text_characters": len(compact),
         "nifty50_mention_count": len(list(NIFTY50_RE.finditer(compact))),
         "snippets": snippets,
+        **extracted_metadata,
     }
 
 
-def run_screening(inventory_path: Path = INVENTORY, report_path: Path = REPORT) -> dict:
+def run_screening(inventory_path: Path = INVENTORY, report_path: Path = REPORT, text_output_dir: Path = TEXT_OUTPUT_DIR) -> dict:
     with inventory_path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         rows = list(reader)
@@ -75,7 +87,9 @@ def run_screening(inventory_path: Path = INVENTORY, report_path: Path = REPORT) 
     counts = {}
     for row in rows:
         source_path = Path(row.get("source_document_path", "")) if row.get("source_document_path") else Path("")
-        result = screen_pdf(source_path, row.get("source_sha256", ""))
+        safe_notice_id = re.sub(r"[^A-Za-z0-9._-]", "_", row.get("notice_id", "unknown"))
+        text_output_path = text_output_dir / f"{safe_notice_id}.txt"
+        result = screen_pdf(source_path, row.get("source_sha256", ""), text_output_path)
         status = result["text_status"]
         counts[status] = counts.get(status, 0) + 1
         results.append({
@@ -90,6 +104,7 @@ def run_screening(inventory_path: Path = INVENTORY, report_path: Path = REPORT) 
     report = {
         "inventory_rows_screened": len(rows),
         "screening_method": "pypdf text extraction plus exact Nifty 50/Nifty50 string matching",
+        "extracted_text_directory": text_output_dir.as_posix(),
         "status_counts": counts,
         "results": results,
         "classification_policy": (
