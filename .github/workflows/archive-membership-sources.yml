@@ -83,7 +83,51 @@ jobs:
                   changed = True
               print(f"{event_id}: archived {len(data)} bytes sha256={digest}")
 
+          # Archive the transition-register source PDFs too. Multiple rows can
+          # reference one official notice, so content is stored once per URL.
+          transition_ledger = pathlib.Path("data/reference/nifty50_transition_register.csv")
+          with transition_ledger.open(newline="", encoding="utf-8") as handle:
+              transition_reader = csv.DictReader(handle)
+              transition_fields = transition_reader.fieldnames
+              transition_rows = list(transition_reader)
+
+          for row in transition_rows:
+              for url_field, path_field, digest_field in (
+                  ("source_url", "source_document_path", "source_sha256"),
+                  ("superseding_notice_url", "superseding_document_path", "superseding_sha256"),
+              ):
+                  url = (row.get(url_field) or "").strip()
+                  if not url:
+                      continue
+                  parsed = urllib.parse.urlparse(url)
+                  if parsed.scheme != "https" or parsed.hostname not in allowed_hosts:
+                      raise SystemExit(f"Refusing non-approved transition source URL: {url}")
+                  request = urllib.request.Request(url, headers={"User-Agent": "TraderResearchEvidenceArchiver/1.0"})
+                  with urllib.request.urlopen(request, timeout=30) as response:
+                      final = urllib.parse.urlparse(response.geturl())
+                      if final.scheme != "https" or final.hostname not in allowed_hosts:
+                          raise SystemExit(f"Unexpected redirect host: {response.geturl()}")
+                      data = response.read(25 * 1024 * 1024 + 1)
+                  if len(data) > 25 * 1024 * 1024 or not data.startswith(b"%PDF-"):
+                      raise SystemExit(f"Invalid or oversized PDF for {row['transition_id']}: {url}")
+                  digest = hashlib.sha256(data).hexdigest()
+                  relative = f"data/reference/source_documents/NSE-{hashlib.sha256(url.encode()).hexdigest()[:16]}.pdf"
+                  target = pathlib.Path(relative)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  if not target.exists() or target.read_bytes() != data:
+                      target.write_bytes(data)
+                      changed = True
+                  if row.get(path_field, "") != relative or row.get(digest_field, "") != digest:
+                      row[path_field] = relative
+                      row[digest_field] = digest
+                      changed = True
+                  print(f"{row['transition_id']} {url_field}: archived {len(data)} bytes sha256={digest}")
+
           if changed:
+              with transition_ledger.open("w", newline="", encoding="utf-8") as handle:
+                  writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator="\n")
+                  writer.writeheader()
+                  writer.writerows(transition_rows)
               with ledger.open("w", newline="", encoding="utf-8") as handle:
                   writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
                   writer.writeheader()
@@ -97,7 +141,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/reference/nifty50_special_membership_events.csv data/reference/source_documents/
+          git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/source_documents/
           git commit -m "Archive primary Nifty 50 special-membership PDFs"
           git fetch origin main
           git rebase origin/main
