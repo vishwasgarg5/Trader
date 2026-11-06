@@ -13,6 +13,7 @@ def simulate_overlapping_portfolio(
     max_positions: int = 5,
     max_position_fraction: float = 0.20,
     max_gross_exposure: float = 1.0,
+    max_sector_exposure_fraction: float | None = None,
     min_avg_daily_turnover: float | None = None,
     max_participation_rate: float = 0.01,
     cost_parameters: dict | None = None,
@@ -33,6 +34,8 @@ def simulate_overlapping_portfolio(
         raise ValueError("initial_capital and max_positions must be positive")
     if not 0 < max_position_fraction <= 1 or not 0 < max_gross_exposure <= 1:
         raise ValueError("position and gross exposure fractions must be in (0, 1]")
+    if max_sector_exposure_fraction is not None and not 0 < max_sector_exposure_fraction <= 1:
+        raise ValueError("max_sector_exposure_fraction must be in (0, 1]")
     if not 0 < max_participation_rate <= 1:
         raise ValueError("max_participation_rate must be in (0, 1]")
     costs = dict(DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters)
@@ -43,6 +46,10 @@ def simulate_overlapping_portfolio(
     for col in ("score", "entry_price", "exit_price"):
         data[col] = pd.to_numeric(data[col], errors="coerce")
     data["symbol"] = data["symbol"].astype(str).str.strip().str.upper()
+    if "sector" not in data.columns:
+        data["sector"] = "UNKNOWN"
+    data["sector"] = data["sector"].fillna("UNKNOWN").astype(str).str.strip()
+    data.loc[data["sector"].eq(""), "sector"] = "UNKNOWN"
     valid = (
         data["symbol"].ne("") & data["entry_date"].notna() & data["exit_date"].notna()
         & (data["exit_date"] >= data["entry_date"])
@@ -73,7 +80,7 @@ def simulate_overlapping_portfolio(
     cash = float(initial_capital)
     positions: dict[str, dict] = {}
     trades = []
-    rejected = {"capacity": 0, "already_held": 0, "cash": 0, "liquidity": 0, "invalid": invalid_rows}
+    rejected = {"capacity": 0, "already_held": 0, "cash": 0, "liquidity": 0, "sector_cap": 0, "invalid": invalid_rows}
     equity_peak = float(initial_capital)
     max_drawdown = 0.0
     gross_exposure_peak = 0.0
@@ -99,6 +106,19 @@ def simulate_overlapping_portfolio(
                 equity = cash + invested
                 target_notional = min(equity * target_fraction, cash,
                                       max(0.0, equity * max_gross_exposure - invested))
+                sector = str(getattr(row, "sector", "UNKNOWN") or "UNKNOWN")
+                if max_sector_exposure_fraction is not None:
+                    sector_invested = sum(
+                        pos["notional"] for pos in positions.values()
+                        if pos.get("sector") == sector
+                    )
+                    sector_capacity = max(
+                        0.0, equity * max_sector_exposure_fraction - sector_invested
+                    )
+                    if sector_capacity <= 0:
+                        rejected["sector_cap"] += 1
+                        continue
+                    target_notional = min(target_notional, sector_capacity)
                 if liquidity_available:
                     turnover = getattr(row, "avg_daily_turnover", np.nan)
                     if not np.isfinite(turnover) or turnover <= 0:
@@ -118,6 +138,7 @@ def simulate_overlapping_portfolio(
                     "entry_price": float(row.entry_price), "exit_price": float(row.exit_price),
                     "notional": float(executed_notional), "shares": shares,
                     "score": float(row.score), "exit_reason": getattr(row, "exit_reason", None),
+                    "sector": sector,
                 }
                 cash -= executed_notional
 
@@ -139,7 +160,7 @@ def simulate_overlapping_portfolio(
                 "gross_return": estimate["gross_return"],
                 "net_return": estimate["net_return"], "net_pnl": pnl,
                 "cost_rupees": estimate["total_cost_rupees"],
-                "exit_reason": pos.get("exit_reason"),
+                "exit_reason": pos.get("exit_reason"), "sector": pos.get("sector"),
             })
 
         invested = sum(pos["notional"] for pos in positions.values())
@@ -162,6 +183,7 @@ def simulate_overlapping_portfolio(
         "average_trade_net_return": float(np.mean([t["net_return"] for t in trades])) if trades else None,
         "max_realized_equity_drawdown": float(max_drawdown),
         "peak_gross_exposure": float(gross_exposure_peak),
+        "max_sector_exposure_fraction": max_sector_exposure_fraction,
         "rejected": rejected,
         "liquidity_constraint_applied": liquidity_available,
         "liquidity_data_available": liquidity_available,
