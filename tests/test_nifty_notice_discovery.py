@@ -81,3 +81,14 @@ def test_run_discovery_catalogues_all_archive_entries(monkeypatch, tmp_path):
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["archive_catalog_rows_total"] == 2
     assert report["non_candidate_entries_catalogued"] == 1
+
+
+
+def test_flags_generic_change_in_indices_as_review_candidate():
+    html = """
+    <div>Feb 21, 2018</div>
+    <a href="/Press_Release/ind_prs21022018.pdf">Change in Indices w.e.f. April 02, 2018</a>
+    """
+    entries, _ = discover_entries(html, 2018, 2018)
+    assert len(entries) == 1
+    assert entries[0]["review_candidate"] is True
