@@ -2,7 +2,7 @@ name: Trader Pull Request CI
 
 on:
   push:
-    branches: [feature/p3-main-research-only-signals]
+    branches: [main]
     paths:
       - "trader/**"
       - "tests/**"
