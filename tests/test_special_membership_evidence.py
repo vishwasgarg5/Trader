@@ -17,7 +17,7 @@ EVENTS = [
      "ADD_DUMMY", "2023-07-17", "2023-07-20", "51",
      "SPOS_DERIVED_CONSTANT_PRICE", "https://nse.example/demerger.pdf"],
     ["N50-2023-JIOFIN-LIST", "NIFTY50", "JIOFIN",
-     "REPLACE_DUMMY_WITH_LISTED", "2023-07-17", "2023-08-21", "51",
+     "REPLACE_DUMMY_WITH_LISTED", "2023-08-18", "2023-08-21", "51",
      "LISTED_MARKET_PRICE", "https://nse.example/listing.pdf"],
     ["N50-2023-JIOFIN-REMOVE", "NIFTY50", "JIOFIN",
      "REMOVE_LISTED", "2023-09-05", "2023-09-07", "50",
