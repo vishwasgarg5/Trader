@@ -2,7 +2,7 @@ name: Triple Barrier Research Experiment
 
 on:
   push:
-    branches: [feature/triple-barrier-walk-forward]
+    branches: [feature/triple-barrier-walk-forward, feature/p3-rankic-sector-risk-controls]
     paths:
       - "trader/**"
       - "tests/**"
