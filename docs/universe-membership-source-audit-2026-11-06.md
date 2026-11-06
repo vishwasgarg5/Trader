@@ -194,3 +194,13 @@ Primary discovery and scope references:
 - 2021-09-15 release: https://www.niftyindices.com/Press_Release/ind_prs15092021.pdf
 - 2021-12-08 strategy-index release: https://www.niftyindices.com/Press_Release/ind_prs08122021.pdf
 - 2024-09-25 superseding/revocation release: https://www.niftyindices.com/Press_Release/ind_prs25092024.pdf
+
+
+## COVID-period supersession chain — 2020-11-06 audit continuation
+
+The annual notice inventory has been extended with three primary-source candidates for the March–May 2020 rebalancing chain:
+- 2020-03-23 deferment: https://www.niftyindices.com/Press_Release/ind_prs23032020.pdf. It defers the March 27 index rebalancing until further notice.
+- 2020-03-25 further deferment: https://www.niftyindices.com/Press_Release/ind_prs25032020.pdf. It defers the ETF/index-fund concentration-norm related changes previously announced for March 27.
+- 2020-05-13 nullification/reinitiation: https://www.niftyindices.com/Press_Release/ind_prs13052020.pdf. It explicitly says March 27 replacements are null and void **except NIFTY 50 and NIFTY Bank**, because those indices had already rebalanced effective March 19. It restarts the review for the other indices.
+
+This establishes the important distinction: the March 23 and May 13 actions did not reverse the Nifty 50's already-effective March 19 YESBANK/SHREECEM replacement. The March 25 notice concerns the subsequent concentration-norm implementation delay. All three are retained as CANDIDATE notice records pending archival hashes and line-by-line independent review; none is promoted to VERIFIED. The 2021-09-20 broad-market review release is still an unresolved discovery item: the official archive lists the release, but a verified direct PDF source URL has not yet been established, so no guessed URL was added.
