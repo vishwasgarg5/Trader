@@ -221,6 +221,7 @@ def simulate_mark_to_market_portfolio(
                     "net_return": estimate["net_return"], "net_pnl": net_pnl,
                     "cost_rupees": estimate["total_cost_rupees"],
                     "sector": position.get("sector"),
+                    "drawdown_size_multiplier": position.get("drawdown_size_multiplier", 1.0),
                 })
                 del positions[symbol]
                 continue
