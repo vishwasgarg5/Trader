@@ -7,8 +7,8 @@ def test_delivery_costs_include_both_side_stt_and_buy_stamp_duty():
     result = delivery_round_trip_cost(100, 100, slippage_bps_per_side=0)
     assert result["stt_rupees"] == pytest.approx(200.0)
     assert result["stamp_duty_rupees"] == pytest.approx(15.0)
-    assert result["exchange_rupees"] == pytest.approx(5.94)
-    assert result["ipft_rupees"] == pytest.approx(0.2)
+    assert result["exchange_rupees"] == pytest.approx(6.1398)
+    assert result["ipft_rupees"] == pytest.approx(0.0002)
     assert result["sebi_rupees"] == pytest.approx(0.2)
     assert result["net_return"] < 0
     assert result["cost_return"] > 0.002
@@ -81,3 +81,61 @@ def test_groww_dp_threshold_waives_only_groww_component():
 def test_cost_api_rejects_non_finite_parameters(parameter, invalid):
     with pytest.raises(ValueError, match="must be finite"):
         delivery_round_trip_cost(100, 100, **{parameter: invalid})
+
+
+def test_contract_note_reconciliation_matches_modeled_charge_components():
+    import pandas as pd
+    from trader.costs import reconcile_groww_contract_notes
+
+    estimate = delivery_round_trip_cost(
+        100, 105, notional_rupees=10000, slippage_bps_per_side=0,
+    )
+    observation = {
+        "entry_price": 100,
+        "exit_price": 105,
+        "notional_rupees": 10000,
+        "actual_brokerage_rupees": estimate["brokerage_rupees"],
+        "actual_stt_rupees": estimate["stt_rupees"],
+        "actual_stamp_duty_rupees": estimate["stamp_duty_rupees"],
+        "actual_exchange_rupees": estimate["exchange_rupees"],
+        "actual_ipft_rupees": estimate["ipft_rupees"],
+        "actual_sebi_rupees": estimate["sebi_rupees"],
+        "actual_dp_rupees": estimate["dp_rupees"],
+        "actual_gst_rupees": estimate["gst_rupees"],
+    }
+    result = reconcile_groww_contract_notes(pd.DataFrame([observation]))
+    assert bool(result.iloc[0]["within_tolerance"]) is True
+    assert result.iloc[0]["total_delta_rupees"] == pytest.approx(0.0)
+
+
+def test_contract_note_reconciliation_flags_component_mismatch():
+    import pandas as pd
+    from trader.costs import reconcile_groww_contract_notes
+
+    estimate = delivery_round_trip_cost(
+        100, 100, notional_rupees=10000, slippage_bps_per_side=0,
+    )
+    observation = {
+        "entry_price": 100,
+        "exit_price": 100,
+        "notional_rupees": 10000,
+        "actual_brokerage_rupees": estimate["brokerage_rupees"],
+        "actual_stt_rupees": estimate["stt_rupees"],
+        "actual_stamp_duty_rupees": estimate["stamp_duty_rupees"],
+        "actual_exchange_rupees": estimate["exchange_rupees"],
+        "actual_ipft_rupees": estimate["ipft_rupees"],
+        "actual_sebi_rupees": estimate["sebi_rupees"],
+        "actual_dp_rupees": estimate["dp_rupees"] + 1,
+        "actual_gst_rupees": estimate["gst_rupees"],
+    }
+    result = reconcile_groww_contract_notes(pd.DataFrame([observation]))
+    assert bool(result.iloc[0]["within_tolerance"]) is False
+    assert result.iloc[0]["delta_dp_rupees"] == pytest.approx(1.0)
+
+
+def test_contract_note_reconciliation_requires_all_fee_components():
+    import pandas as pd
+    from trader.costs import reconcile_groww_contract_notes
+
+    with pytest.raises(ValueError, match="missing columns"):
+        reconcile_groww_contract_notes(pd.DataFrame([{"entry_price": 100}]))
