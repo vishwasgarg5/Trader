@@ -152,8 +152,11 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
     triage, events, counts = [], [], {}
     ocr_artifacts = []
     for row in rows:
-        title = row.get("notes", "")
-        title = re.sub(r"^Archive title:\s*", "", title)
+        source_url = (row.get("source_url") or "").strip()
+        # Prefer the canonical publisher archive title. Inventory notes may
+        # contain a human summary of the event and are not a document title.
+        title = catalog_titles.get(source_url) or row.get("notes", "")
+        title = re.sub(r"^Archive title:\\s*", "", title)
         priority = classify_title(title)
         counts[priority] = counts.get(priority, 0) + 1
         source_path = Path(row.get("source_document_path") or "")
