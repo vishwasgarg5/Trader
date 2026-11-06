@@ -92,3 +92,15 @@ def test_flags_generic_change_in_indices_as_review_candidate():
     entries, _ = discover_entries(html, 2018, 2018)
     assert len(entries) == 1
     assert entries[0]["review_candidate"] is True
+
+
+def test_broadly_archives_fixed_income_and_specialized_index_titles_for_screening():
+    html = """
+    <div>Jan 24, 2018</div>
+    <a href="/Press_Release/fixed_income.pdf">Change in the Fixed Income Indices w.e.f. February 01, 2018</a>
+    <div>Mar 15, 2018</div>
+    <a href="/Press_Release/hybrid_launch.pdf">IISL launches 3 hybrid indices</a>
+    """
+    entries, _ = discover_entries(html, 2018, 2018)
+    assert len(entries) == 2
+    assert all(entry["review_candidate"] is True for entry in entries)
