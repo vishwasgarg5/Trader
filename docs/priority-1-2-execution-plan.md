@@ -161,3 +161,18 @@ These changes improve observability and reconciliation tooling; they do not reso
 - [ ] Do not start new price-feature or portfolio-threshold searches until Phase 1 data lineage and membership evidence are verified.
 - [ ] If data gates are later cleared, pre-register one falsifiable alternative hypothesis on walk-forward data; do not select the one-pick sensitivity as a strategy.
 - [ ] Require positive absolute net returns and statistically reliable incremental edge before advancing to the locked holdout protocol.
+
+
+## Evidence reconciliation update — 2026-11-06
+
+- The configured research universe is the owner's fixed 49-symbol custom universe, not the Nifty 50. The membership JSON schema title and description now say this explicitly to prevent accidental use of index constituent history as a substitute.
+- The corporate-action ledger's two source URLs now point to the NSE corporate-filings page for TMPV and the verified NSE archive path for Circular NSE/CML/70875. The local evidence notes remain explicitly labelled summaries; the original source PDFs have not yet been archived in this repository.
+- The NSE circular confirms the TATAMOTORS → TMPV symbol/name change effective 2025-10-24. It does not establish a price adjustment factor.
+- The shareholder entitlement was one TML Commercial Vehicles share per eligible Tata Motors share. This is an entitlement ratio, not an adjustment factor for the TMPV OHLCV series. Both ledger factor cells therefore remain null and unresolved; no factor of 1.0 or inferred demerger price split is permitted.
+- The NSE corporate-filings page also exposes the 2025-10-09 shareholder communication, 2025-10-01 scheme-effectiveness filing and 2025-10-01 record-date filing. These are the primary records to archive next. Until the original attachments and an independently reproducible price-discovery calculation are archived, adjusted-price continuity remains unverified.
+- No historical membership rows were fabricated. The 49-symbol universe remains fixed and unchanged; a historical membership claim requires dated source evidence for each inclusion/exclusion interval, including delisted or renamed instruments where applicable.
+- Gate outcome is unchanged: Priority 1 remains incomplete, final holdout remains locked, promotion/live execution remain disabled.
+
+Primary-source references checked during this reconciliation:
+- NSE Listing Circular NSE/CML/70875, 2025-10-16: https://nsearchives.nseindia.com/content/circulars/CML70875.pdf
+- NSE TMPV corporate filings (includes the 2025-10-09 shareholder communication and 2025-10-01 scheme/record-date announcements): https://www.nseindia.com/companies-listing/corporate-filings-announcements?symbol=TMPV&tabIndex=equity
