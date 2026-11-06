@@ -79,13 +79,44 @@ def download_prices(tickers: list[str], period: str = "3y") -> dict[str, pd.Data
     return result
 
 
-def validate_universe_prices(tickers: list[str], prices: dict[str, pd.DataFrame]) -> None:
-    """Fail closed rather than silently training on a smaller universe."""
+def validate_universe_prices(
+    tickers: list[str], prices: dict[str, pd.DataFrame], *, minimum_rows: int = 100,
+) -> None:
+    """Require usable history for every configured symbol before feature generation."""
+    if len(tickers) != len(set(tickers)):
+        raise RuntimeError("Configured universe contains duplicate symbols")
     missing = sorted(set(tickers).difference(prices))
     if missing:
         raise RuntimeError(
             "Missing price history for configured universe symbols: " + ", ".join(missing)
         )
+
+    required = ["open", "high", "low", "close", "volume"]
+    invalid: list[str] = []
+    for symbol in tickers:
+        frame = prices[symbol]
+        if not isinstance(frame, pd.DataFrame) or frame.empty:
+            invalid.append(f"{symbol} (empty price history)")
+            continue
+        if not set(required).issubset(frame.columns):
+            invalid.append(f"{symbol} (missing OHLCV columns)")
+            continue
+        values = frame[required].apply(pd.to_numeric, errors="coerce")
+        valid = (
+            np.isfinite(values).all(axis=1)
+            & (values[["open", "high", "low", "close"]] > 0).all(axis=1)
+            & (values["volume"] >= 0)
+            & (values["high"] >= values[["open", "low", "close"]].max(axis=1))
+            & (values["low"] <= values[["open", "high", "close"]].min(axis=1))
+        )
+        if frame.index.has_duplicates:
+            invalid.append(f"{symbol} (duplicate dates)")
+        elif int(valid.sum()) < minimum_rows:
+            invalid.append(
+                f"{symbol} (only {int(valid.sum())} valid OHLCV rows; need {minimum_rows})"
+            )
+    if invalid:
+        raise RuntimeError("Unusable configured price history: " + "; ".join(invalid))
 
 
 def rsi(close: pd.Series, period: int = 14) -> pd.Series:
