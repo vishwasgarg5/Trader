@@ -1,4 +1,8 @@
 from pathlib import Path
+import hashlib
+
+from pypdf import PdfWriter
+import trader.nifty_notice_triage as triage
 
 from trader.nifty_notice_triage import classify_title, run
 
@@ -22,3 +26,29 @@ def test_triage_never_marks_review_complete_or_membership(tmp_path):
     assert report["membership_written"] is False
     assert report["triage"][0]["review_status_unchanged"] == "DISCOVERED_UNREVIEWED"
     assert report["triage"][0]["text_extraction_status"] == "MISSING_SOURCE_DOCUMENT"
+
+
+
+def test_scanned_notice_uses_ocr_and_records_source_and_text_hashes(tmp_path, monkeypatch):
+    source = tmp_path / "scan.pdf"
+    writer = PdfWriter()
+    writer.add_blank_page(width=300, height=300)
+    with source.open("wb") as handle:
+        writer.write(handle)
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    monkeypatch.setattr(
+        triage, "_ocr_page_text",
+        lambda path, page: ("NIFTY 50 constituents removed ABC and added XYZ w.e.f. 01 April 2021", "5.3.0"),
+    )
+    monkeypatch.setattr(triage, "OCR_TEXT_DIR", tmp_path / "ocr")
+    events, status, metadata = triage._candidate_events(source, source_hash, "scan-1")
+    assert status == "OCR_EXTRACTED"
+    assert metadata["source_pdf_sha256"] == source_hash
+    assert metadata["engine"] == "Tesseract"
+    assert metadata["pages"] == [1]
+    assert metadata["sha256"] == hashlib.sha256(
+        (tmp_path / "ocr" / "scan-1.txt").read_bytes()
+    ).hexdigest()
+    assert events and events[0]["human_review_required"] is True
+    assert events[0]["candidate_out_symbols"] == ""
+    assert events[0]["candidate_in_symbols"] == ""
