@@ -45,14 +45,19 @@ jobs:
         run: python -m pytest -q
       - name: Generate signals and evaluate model
         run: python -m trader.pipeline
-      - name: Upload data integrity diagnostics
+      - name: Run fail-closed operational and drift monitoring
+        if: always()
+        run: python -m trader.monitoring
+      - name: Upload data integrity and monitoring diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: data-integrity-report-${{ github.run_id }}
-          path: data/reports/data_integrity.json
+          name: trader-monitoring-reports-${{ github.run_id }}
+          path: |
+            data/reports/data_integrity.json
+            data/reports/monitoring.json
           if-no-files-found: ignore
-          retention-days: 30
+          retention-days: 90
       - name: Commit model and reports
         shell: bash
         run: |
