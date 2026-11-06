@@ -8,6 +8,9 @@ import joblib
 import numpy as np
 import pandas as pd
 import yfinance as yf
+
+from trader.corporate_actions import audit_corporate_action_ledger
+from trader.universe_audit import audit_universe
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, brier_score_loss, precision_score, roc_auc_score
@@ -109,14 +112,78 @@ def validate_universe_prices(
             & (values["high"] >= values[["open", "low", "close"]].max(axis=1))
             & (values["low"] <= values[["open", "high", "close"]].min(axis=1))
         )
-        if frame.index.has_duplicates:
-            invalid.append(f"{symbol} (duplicate dates)")
+        dates = pd.to_datetime(frame.index, errors="coerce")
+        if dates.isna().any():
+            invalid.append(f"{symbol} (invalid trading dates)")
+        elif getattr(dates, "tz", None) is not None:
+            dates = dates.tz_convert("Asia/Kolkata").tz_localize(None).normalize()
+            if dates.has_duplicates:
+                invalid.append(f"{symbol} (duplicate NSE trading dates)")
+            elif not dates.is_monotonic_increasing:
+                invalid.append(f"{symbol} (trading dates are not increasing)")
+            elif int(valid.sum()) < minimum_rows:
+                invalid.append(
+                    f"{symbol} (only {int(valid.sum())} valid OHLCV rows; need {minimum_rows})"
+                )
+        elif dates.normalize().has_duplicates:
+            invalid.append(f"{symbol} (duplicate NSE trading dates)")
+        elif not dates.is_monotonic_increasing:
+            invalid.append(f"{symbol} (trading dates are not increasing)")
         elif int(valid.sum()) < minimum_rows:
             invalid.append(
                 f"{symbol} (only {int(valid.sum())} valid OHLCV rows; need {minimum_rows})"
             )
     if invalid:
         raise RuntimeError("Unusable configured price history: " + "; ".join(invalid))
+
+
+def write_data_integrity_report(
+    tickers: list[str],
+    prices: dict[str, pd.DataFrame],
+    output_path: Path | None = None,
+) -> dict:
+    """Persist a preflight audit before the daily pipeline can fail closed."""
+    output_path = output_path or DATA / "reports" / "data_integrity.json"
+    membership_path = DATA / "reference" / "universe_membership.csv"
+    corporate_action_path = DATA / "reference" / "corporate_actions.csv"
+    universe_report = audit_universe(prices, tickers, membership_path)
+    corporate_action_report = audit_corporate_action_ledger(corporate_action_path)
+    validation_error = None
+    try:
+        validate_universe_prices(tickers, prices)
+    except RuntimeError as exc:
+        validation_error = str(exc)
+
+    evidence_gaps = []
+    if not universe_report.get("membership_history", {}).get("valid"):
+        evidence_gaps.append("Historical membership evidence is absent or invalid.")
+    if not corporate_action_report.get("corporate_action_adjustment_verified", False):
+        evidence_gaps.append("Corporate-action adjusted-price lineage is not independently verified.")
+    report = {
+        "schema_version": 1,
+        "generated_at_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+        "configured_symbols": list(tickers),
+        "configured_symbol_count": len(tickers),
+        "price_validation": {
+            "passed": validation_error is None,
+            "minimum_valid_rows_per_symbol": 100,
+            "error": validation_error,
+        },
+        "universe_audit": universe_report,
+        "corporate_action_audit": corporate_action_report,
+        "research_evidence_gaps": evidence_gaps,
+        "status": (
+            "BLOCKED_PRICE_DATA" if validation_error
+            else "RESEARCH_ONLY_EVIDENCE_GAPS" if evidence_gaps
+            else "PRICE_DATA_VALID_REQUIRES_INDEPENDENT_REVIEW"
+        ),
+        "promotion_eligible": False,
+        "live_execution_enabled": False,
+    }
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return report
 
 
 def rsi(close: pd.Series, period: int = 14) -> pd.Series:
@@ -292,7 +359,9 @@ def main() -> None:
     MODELS.mkdir(exist_ok=True)
     universe = load_universe()
     prices = download_prices(universe)
-    validate_universe_prices(universe, prices)
+    integrity_report = write_data_integrity_report(universe, prices)
+    if not integrity_report["price_validation"]["passed"]:
+        raise RuntimeError(integrity_report["price_validation"]["error"])
     frame = build_features(prices)
     model, metrics = train_and_evaluate(frame)
     signals = make_signals(frame, model)
