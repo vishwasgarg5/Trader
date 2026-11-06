@@ -108,3 +108,34 @@ def test_signal_generation_requires_both_approval_and_execution_enablement():
         "live_execution_enabled": False,
     })
     assert signals.iloc[0]["signal"] == "RESEARCH_ONLY_BUY"
+
+
+def test_data_integrity_preflight_persists_missing_symbol_and_evidence_gaps(tmp_path):
+    from trader.pipeline import write_data_integrity_report
+
+    report_path = tmp_path / "reports" / "data_integrity.json"
+    report = write_data_integrity_report(
+        ["AAA.NS", "TATAMOTORS.NS"],
+        {"AAA.NS": pd.DataFrame()},
+        report_path,
+    )
+    persisted = __import__("json").loads(report_path.read_text(encoding="utf-8"))
+    assert report["status"] == "BLOCKED_PRICE_DATA"
+    assert report["price_validation"]["passed"] is False
+    assert "TATAMOTORS.NS" in report["price_validation"]["error"]
+    assert persisted["promotion_eligible"] is False
+    assert persisted["live_execution_enabled"] is False
+
+
+def test_configured_price_validation_rejects_duplicate_nse_calendar_dates():
+    idx = pd.DatetimeIndex([
+        pd.Timestamp("2025-01-01T18:30:00Z"),
+        pd.Timestamp("2025-01-02T04:00:00+05:30"),
+    ])
+    frame = pd.DataFrame({
+        "open": [100.0, 100.0], "high": [102.0, 102.0],
+        "low": [99.0, 99.0], "close": [101.0, 101.0],
+        "volume": [1000.0, 1000.0],
+    }, index=idx)
+    with pytest.raises(RuntimeError, match="duplicate NSE trading dates"):
+        validate_universe_prices(["AAA.NS"], {"AAA.NS": frame})
