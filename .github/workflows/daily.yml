@@ -54,15 +54,38 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
       - name: Commit model and reports
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data models
-          if ! git diff --cached --quiet; then
+
+          # Generated model binaries and JSON reports cannot be meaningfully
+          # line-merged. If main moved during this run, regenerate from the
+          # latest main instead of rebasing stale artifacts onto it.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+              echo "main advanced; rebuilding generated outputs on latest main (attempt ${attempt})"
+              git reset --hard origin/main
+              python -m trader.pipeline
+            fi
+
+            git add data models
+            if git diff --cached --quiet; then
+              echo "No generated changes to commit"
+              exit 0
+            fi
+
             git commit -m "chore: refresh daily swing signals and model"
-            # Rebase generated outputs onto the latest main; never force-push.
-            git pull --rebase origin main
-            git push
-          else
-            echo "No generated changes to commit"
-          fi
+            if git push origin HEAD:main; then
+              echo "Generated outputs pushed successfully"
+              exit 0
+            fi
+
+            echo "Push raced with another main update; retrying from latest main"
+            git reset --hard origin/main
+          done
+
+          echo "Unable to publish generated outputs after 3 attempts"
+          exit 1
