@@ -111,3 +111,16 @@ The research panel must therefore not treat `TATAMOTORS.NS` as an unchanged tick
 4. Anonymised Groww contract notes or equivalent actual fee evidence.
 
 Do not fabricate or infer these records. Until supplied and independently validated, Priority 1 is incomplete, the final holdout stays locked, and the strategy remains research-only.
+
+
+## Priority 3 implementation update — rank and concentration controls
+
+The follow-on branch `feature/p3-rankic-sector-risk-controls` adds:
+- Daily Spearman rank IC between model scores and realised net returns, with a Newey-West/HAC t-statistic (up to four lags).
+- Daily long-short decile net-return spreads with five-session moving-block-bootstrap confidence intervals.
+- A 30% hard sector allocation cap in the mark-to-market portfolio simulator; missing sector labels are grouped as `UNKNOWN` rather than bypassing the cap.
+- A 50% new-position sizing multiplier after portfolio drawdown reaches 10%.
+- Explicit risk-limit metadata in the experiment report and inclusion of universe, broker-cost, sector-taxonomy and holdout-protocol configuration files in the SHA-256 input manifest.
+- Regression tests for rank metrics, sector-cap rejection and drawdown-triggered sizing.
+
+These are research-simulator controls, not a live execution authorization. The owner-confirmed 49-name universe remains unchanged; expansion requires a separate explicit decision and point-in-time evidence. The 49/49 price-history, corporate-action and historical-membership evidence gates remain open.
