@@ -158,3 +158,22 @@ def test_every_universe_symbol_has_a_sector_classification():
     assert set(symbols).issubset(sectors)
     assert sectors["TMPV.NS"] == "Automobile and Auto Components"
     assert "TATAMOTORS.NS" not in sectors
+
+
+def test_download_prices_disables_parallel_yfinance_cache_writes(monkeypatch):
+    import trader.pipeline as pipeline
+
+    calls = {}
+
+    def fake_download(symbols, **kwargs):
+        calls["symbols"] = symbols
+        calls.update(kwargs)
+        return pd.DataFrame()
+
+    monkeypatch.setattr(pipeline.yf, "download", fake_download)
+    with pytest.raises(RuntimeError, match="returned no price data"):
+        pipeline.download_prices(["AAA.NS"])
+
+    assert calls["threads"] is False
+    assert calls["auto_adjust"] is True
+    assert calls["interval"] == "1d"
