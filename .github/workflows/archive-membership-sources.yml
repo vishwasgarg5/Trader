@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "data/reference/nifty50_special_membership_events.csv"
-      - ".github/workflows/archive-membership-sources.yml"
+      - ".github/workflows/archive-membership-sources.yml"\n      - "tests/test_experiment.py"
   workflow_dispatch:
 
 permissions:
