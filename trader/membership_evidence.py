@@ -215,6 +215,10 @@ def audit_special_membership_events(path: Path) -> dict:
         by_id[event_id] = row
         if row.get("phase", "").strip() not in SPECIAL_PHASES:
             errors.append(f"{event_id}: unsupported special membership phase")
+        if row.get("index_name", "").strip().upper().replace(" ", "") != "NIFTY50":
+            errors.append(f"{event_id}: index_name must be NIFTY 50")
+        if not row.get("price_treatment", "").strip():
+            errors.append(f"{event_id}: price_treatment is missing")
         try:
             announced = date.fromisoformat(row.get("announcement_date", ""))
             effective = date.fromisoformat(row.get("effective_date", ""))
@@ -255,11 +259,11 @@ def audit_special_membership_events(path: Path) -> dict:
             errors.append(f"{event_id}: effective_date does not match the official event chronology")
         if row.get("constituent_count", "").strip() != str(count):
             errors.append(f"{event_id}: constituent_count does not match the demerger phase")
-    if len(rows) != len(required):
-        errors.append("special membership ledger must contain exactly the three required JIOFIN episode rows")
+    if not set(required).issubset(by_id):
+        errors.append("special membership ledger is missing one or more required JIOFIN episode rows")
 
     return {
-        "ready": not errors and len(rows) == len(required),
+        "ready": not errors and set(required).issubset(by_id),
         "rows": len(rows),
         "verified_rows": sum(row.get("verification_status", "").strip() == "VERIFIED" for row in rows),
         "errors": errors,
