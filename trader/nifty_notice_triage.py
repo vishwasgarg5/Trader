@@ -160,9 +160,16 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
         priority = classify_title(title)
         counts[priority] = counts.get(priority, 0) + 1
         source_path = Path(row.get("source_document_path") or "")
-        page_events, extraction_status, ocr_metadata = _candidate_events(
-            source_path, row.get("source_sha256", ""), row.get("notice_id", "")
-        )
+        if priority == "LOW_PRIORITY_LIKELY_OTHER_INDEX":
+            # Keep non-Nifty notices in the archive catalogue, but do not
+            # require a local PDF for Nifty 50 membership reconstruction.
+            page_events, extraction_status, ocr_metadata = (
+                [], "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED", None
+            )
+        else:
+            page_events, extraction_status, ocr_metadata = _candidate_events(
+                source_path, row.get("source_sha256", ""), row.get("notice_id", "")
+            )
         events.extend(page_events)
         if ocr_metadata:
             ocr_artifacts.append({"notice_id": row.get("notice_id", ""), **ocr_metadata})
@@ -186,6 +193,7 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
         "ocr_artifacts": ocr_artifacts,
         "ocr_required_notice_ids": [r["notice_id"] for r in triage if r["text_extraction_status"] == "OCR_REQUIRED"],
         "source_integrity_failures": [r["notice_id"] for r in triage if r["text_extraction_status"] in {"INVALID_PDF_SIGNATURE", "SOURCE_HASH_MISMATCH", "MISSING_SOURCE_DOCUMENT", "PDF_READ_FAILED"}],
+        "out_of_scope_source_not_required": [r["notice_id"] for r in triage if r["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"],
         "triage": triage,
         "coverage_complete": False,
         "membership_written": False,
