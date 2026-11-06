@@ -48,3 +48,36 @@ def test_extracts_relative_pdf_url_from_onclick_handler():
     entries, _ = discover_entries(html)
     assert len(entries) == 1
     assert entries[0]["url"].endswith("/Press_Release/multi_asset_review.pdf")
+
+
+def test_run_discovery_catalogues_all_archive_entries(monkeypatch, tmp_path):
+    from trader import nifty_notice_discovery as discovery
+    import csv
+    import json
+
+    html = """
+    <div>Feb 15, 2023</div>
+    <a href="/Press_Release/new_index_launch.pdf">NSE Indices launches a new index</a>
+    <div>Aug 23, 2023</div>
+    <a href="/Press_Release/replacements.pdf">Replacements in Nifty indices</a>
+    """
+    monkeypatch.setattr(discovery, "_request", lambda url, max_bytes=30_000_000: html.encode())
+    inventory = tmp_path / "nifty50_annual_notice_inventory.csv"
+    report_path = tmp_path / "report.json"
+    discovery.run_discovery(
+        inventory_path=inventory,
+        source_dir=tmp_path / "sources",
+        report_path=report_path,
+        start_year=2023,
+        end_year=2023,
+        archive_candidates=False,
+    )
+    catalog_path = tmp_path / "nifty50_archive_discovery_catalog.csv"
+    with catalog_path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    assert len(rows) == 2
+    assert {row["review_candidate"] for row in rows} == {"true", "false"}
+    assert all(row["scope_status"] == "UNREVIEWED" for row in rows)
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["archive_catalog_rows_total"] == 2
+    assert report["non_candidate_entries_catalogued"] == 1
