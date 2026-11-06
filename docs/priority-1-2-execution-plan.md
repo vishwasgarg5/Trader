@@ -176,3 +176,14 @@ These changes improve observability and reconciliation tooling; they do not reso
 Primary-source references checked during this reconciliation:
 - NSE Listing Circular NSE/CML/70875, 2025-10-16: https://nsearchives.nseindia.com/content/circulars/CML70875.pdf
 - NSE TMPV corporate filings (includes the 2025-10-09 shareholder communication and 2025-10-01 scheme/record-date announcements): https://www.nseindia.com/companies-listing/corporate-filings-announcements?symbol=TMPV&tabIndex=equity
+
+## Execution update — 2026-11-06 (concurrency and universe evidence)
+
+- Daily Signals run #36 failed after all 118 tests and signal generation passed. The only failing step was publication: a stale generated commit conflicted with newer main versions of data/reports/data_integrity.json and binary models/current_model.joblib. This is an artifact-publication race, not a model/test failure.
+- Replaced the unsafe rebase of generated artifacts in .github/workflows/daily.yml with a bounded three-attempt publish loop. When main has advanced, the job resets to the latest origin/main and regenerates outputs before committing; it never force-pushes or attempts to line-merge model binaries. If a push races again, it fetches and rebuilds before retrying.
+- Tightened audit_universe: a membership file can no longer pass structural validation when it omits any configured symbol or includes symbols outside the exact configured universe. Added regression tests for both cases.
+- Added data/reference/universe_membership_evidence_matrix.csv as a 49-symbol acquisition tracker. All entries remain NOT_VERIFIED; it is deliberately separate from the machine-consumed universe_membership.csv so the tracker cannot be mistaken for verified intervals.
+- Corrected the corporate-action ledger to use the exact primary-source document URLs recorded in the evidence notes: the 2025-10-09 shareholder communication and NSE/CML/70875 circular. The source-note files are still summaries, not archived original PDFs.
+- The NSE circular confirms TATAMOTORS → TMPV effective 2025-10-24. The shareholder communication's 1:1 figure is an entitlement ratio only. Both price adjustment factors remain null pending an archived exchange price-discovery record and independently reproducible adjustment calculation.
+- Validation triggered by these changes: Daily Signals #37 onward, Pull Request CI #29 onward, and Triple Barrier #226 onward. Treat them as pending until their completed conclusions and job logs are inspected.
+- Keep final holdout locked and promotion/live execution disabled. The 49-symbol universe is unchanged.
