@@ -135,3 +135,36 @@ def test_audit_flags_non_finite_ohlcv_values(tmp_path):
     report = audit_universe(prices, ["AAA.NS"], tmp_path / "missing-membership.csv")
     assert report["per_symbol"]["AAA.NS"]["invalid_ohlc_rows"] == 1
     assert "AAA.NS" in report["price_integrity_issues"]
+
+
+
+def test_membership_history_must_cover_every_configured_symbol(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "circular.pdf"
+    evidence.write_bytes(b"official evidence fixture")
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2019-12-20T09:00:00+05:30",
+        "evidence_path": evidence.name,
+        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS", "BBB.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("BBB.NS" in error for error in report["membership_history"]["errors"])
+
+
+def test_membership_history_rejects_symbols_outside_configured_universe(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    evidence = tmp_path / "circular.pdf"
+    evidence.write_bytes(b"official evidence fixture")
+    pd.DataFrame([{
+        "symbol": "BBB.NS", "valid_from": "2020-01-01", "valid_to": "",
+        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2019-12-20T09:00:00+05:30",
+        "evidence_path": evidence.name,
+        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+    report = audit_universe(_prices(), ["AAA.NS"], path)
+    assert report["membership_history"]["valid"] is False
+    assert any("BBB.NS" in error for error in report["membership_history"]["errors"])
