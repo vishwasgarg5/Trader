@@ -8,7 +8,10 @@ on:
     branches: [main]
     paths:
       - "trader/nifty_notice_discovery.py"
+      - "trader/nifty_notice_screening.py"
+      - "requirements.txt"
       - "tests/test_nifty_notice_discovery.py"
+      - "tests/test_nifty_notice_screening.py"
       - ".github/workflows/discover-nifty50-notices.yml"
 
 permissions:
@@ -32,7 +35,7 @@ jobs:
       - name: Run deterministic discovery tests
         run: |
           python -m pip install --upgrade pip pytest pypdf
-          PYTHONPATH=. pytest -q tests/test_nifty_notice_discovery.py
+          PYTHONPATH=. pytest -q tests/test_nifty_notice_discovery.py tests/test_nifty_notice_screening.py
       - name: Discover archive entries and archive review candidates
         run: python -m trader.nifty_notice_discovery --start-year 2018 --end-year 2024
       - name: Extract text and flag Nifty 50 references for model review
