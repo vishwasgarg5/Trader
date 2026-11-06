@@ -23,7 +23,7 @@ def _write_inputs(tmp_path: Path, *, verified: bool = False):
             "independent_reviewer,reviewed_at,coverage_status,notes"]
     for year in range(2018, 2025):
         rows.append(
-            f"{year},{year}-01-01,{year}-12-31,false,,,,,,,NOT_STARTED,"
+            f"{year},{'2018-04-01' if year == 2018 else f'{year}-01-01'},{year}-12-31,false,,,,,,,NOT_STARTED,"
         )
     coverage.write_text("\n".join(rows) + "\n", encoding="utf-8")
     return transition, coverage, evidence_root
@@ -83,7 +83,7 @@ def test_complete_year_requires_verified_events_and_hashed_primary_source(tmp_pa
         for year in range(2018, 2025):
             count = 1 if year == 2018 else 0
             writer.writerow([
-                year, f"{year}-01-01", f"{year}-12-31", "true",
+                year, "2018-04-01" if year == 2018 else f"{year}-01-01", f"{year}-12-31", "true",
                 count, count, "true", "true", "independent-reviewer",
                 "2026-11-06", "COMPLETE", "annual search and snapshot reconciliation signed",
             ])
@@ -91,3 +91,26 @@ def test_complete_year_requires_verified_events_and_hashed_primary_source(tmp_pa
     assert report["ready"] is True
     assert report["verified_transition_rows"] == 1
     assert report["annual_years_complete"] == 7
+
+
+
+def test_transition_outside_research_scope_is_rejected(tmp_path):
+    transition, coverage, evidence = _write_inputs(tmp_path)
+    text = transition.read_text(encoding="utf-8").replace(
+        "2018-06-01", "2017-12-31"
+    )
+    transition.write_text(text, encoding="utf-8")
+    report = audit_membership_evidence(transition, coverage, evidence)
+    assert report["ready"] is False
+    assert any("outside the 2018-04-01 to 2024-12-31 scope" in error for error in report["errors"])
+
+
+def test_annual_coverage_scope_must_match_the_defined_calendar_window(tmp_path):
+    transition, coverage, evidence = _write_inputs(tmp_path)
+    text = coverage.read_text(encoding="utf-8").replace(
+        "2018,2018-04-01,2018-12-31", "2018,2018-01-01,2018-12-31"
+    )
+    coverage.write_text(text, encoding="utf-8")
+    report = audit_membership_evidence(transition, coverage, evidence)
+    assert report["ready"] is False
+    assert any("scope must be 2018-04-01 through 2018-12-31" in error for error in report["errors"])
