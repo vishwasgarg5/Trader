@@ -2,1002 +2,880 @@
   "catalog_rows_audited": 697,
   "coverage_complete": false,
   "existing_review_candidates": 558,
-  "method": "Broad title-term scan over every catalog row not already marked review_candidate.",
-  "non_candidate_rows": 139,
-  "potential_false_negatives": [
+  "explicit_sdl_title_rows": [
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-01-02",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02012018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 03, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 03, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-01-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09012018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 10, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 10, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-01-16",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16012018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 17, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 17, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-01-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23012018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 24, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 24, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-01-30",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30012018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 31, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 31, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-02-06",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06022018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 07, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 07, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-02-12",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12022018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 14, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 14, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-02-20",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20022018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 21, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 21, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-02-27",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27022018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 28, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 28, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-03-06",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06032018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 07, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 07, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-03-13",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13032018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 14, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 14, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-03-20",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20032018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 21, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 21, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-03-26",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26032018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 27, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 27, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-04-10",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10042018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 11, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 11, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-04-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17042018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 18, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 18, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-04-24",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24042018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 25, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 25, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-05-08",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08052018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 09, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 09, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-05-15",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15052018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 16, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 16, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-05-22",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22052018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 23, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 23, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-05-29",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29052018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 30, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 30, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-06-05",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-06-12",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12062018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 13, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 13, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-06-19",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19062018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 20, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 20, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-06-26",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26062018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 27, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 27, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-07-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03072018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 04, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 04, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-07-10",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10072018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 11, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 11, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-07-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17072018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 18, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 18, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-07-24",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24072018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 25, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 25, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-07-31",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs31072018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 01, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 01, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-08-07",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07082018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 08, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 08, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-08-20",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20082018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 21, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 21, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-08-28",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28082018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 29, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 29, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-09-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03092018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 04, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 04, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-09-18",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18092018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 19, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 19, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-09-25",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25092018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 26, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 26, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-10-01",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01102018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 03, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 03, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-10-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09102018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 10, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 10, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-10-16",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16102018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 17, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 17, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-10-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23102018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 24, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 24, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-10-30",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30102018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 31, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 31, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-11-05",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05112018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 06, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 06, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-11-13",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13112018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 14, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 14, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-11-19",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19112018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 20, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 20, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-11-27",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27112018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 28, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 28, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-12-04",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04122018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 05, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 05, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-12-11",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11122018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 12, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 12, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-12-18",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18122018.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 19, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 19, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2018-12-24",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24122018_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 26, 2018",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 26, 2018"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-01-01",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01012019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 02, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 02, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-01-08",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08012019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 09, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 09, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-01-15",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15012019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 16, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 16, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-01-22",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22012019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 23, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 23, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-01-29",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29012019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 30, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 30, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-02-05",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05022019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 06, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 06, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-02-12",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12022019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 13, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 13, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-02-18",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18022019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 20, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 20, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-02-26",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26022019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 27, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 27, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-03-05",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05032019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 06, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 06, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-03-12",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12032019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 13, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 13, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-03-19",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19032019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 20, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. March 20, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-04-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09042019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 10, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 10, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-04-15",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15042019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 16, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 16, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-04-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23042019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 24, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. April 24, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-05-02",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02052019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 03, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 03, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-05-07",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07052019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 08, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 08, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-05-14",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 15, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 15, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-05-21",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21052019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 22, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 22, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-05-28",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28052019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 29, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. May 29, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-06-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03062019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 04, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 04, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-06-11",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11062019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 12, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 12, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-06-18",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18062019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 19, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 19, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-06-25",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25062019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 26, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. June 26, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-07-02",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02072019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 03, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 03, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-07-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09072019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 10, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 10, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-07-16",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-07-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23072019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 24, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 24, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-07-30",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30072019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 31, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. July 31, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-08-06",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06082019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 07, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 07, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-08-13",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13082019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 14, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 14, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-08-20",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20082019_2.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 21, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 21, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-08-27",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27082019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 28, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. August 28, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-09-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03092019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 04, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 04, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-09-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09092019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 11, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 11, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-09-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17092019_2.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 18, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 18, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-09-24",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 25, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. September 25, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-10-07",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07102019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 09, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 09, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-10-15",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15102019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 16, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 16, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-10-22",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22102019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 23, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 23, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-10-29",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29102019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 30, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. October 30, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-11-05",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05112019_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 06, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 06, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-11-11",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11112019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 13, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 13, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-11-19",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19112019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 20, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 20, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-11-26",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26112019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 27, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. November 27, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-12-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03122019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 4, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 4, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-12-10",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10122019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 11, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 11, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-12-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17122019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 18, 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. December 18, 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-12-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23122019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f December 24 2019",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f December 24 2019"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2019-12-31",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs31122019.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f January 01 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f January 01 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-01-07",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07012020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 08 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 08 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-01-14",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14012020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 15 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. January 15 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-01-21",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21012020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f January 22, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f January 22, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-01-28",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28012020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f January 29, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f January 29, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-02-04",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04022020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f February 05, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f February 05, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-02-11",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11022020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 12, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f. February 12, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-02-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17022020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f February 18, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f February 18, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-02-25",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25022020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f February 26, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f February 26, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-03-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03032020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w e f March 04, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w e f March 04, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-03-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 11, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 11, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-03-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17032020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 18, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 18, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-03-23",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23032020_1.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 24, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 24, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-03-30",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30032020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 31, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f March 31, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2020-04-08",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08042020.pdf",
-      "title": "Change in NIFTY 10 Year SDL Index w.e.f April 08, 2020",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "Change in NIFTY 10 Year SDL Index w.e.f April 08, 2020"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2021-09-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03092021.pdf",
-      "title": "NSE Indices launches Nifty SDL Plus PSU Bond Sep 2026 60:40 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Plus PSU Bond Sep 2026 60:40 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2022-03-03",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03032022.pdf",
-      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2028 30:70 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2028 30:70 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2022-03-09",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032022.pdf",
-      "title": "NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2022-09-20",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20092022.pdf",
-      "title": "NSE Indices launches Nifty SDL Sep 2025 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Sep 2025 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2022-12-08",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08122022.pdf",
-      "title": "NSE Indices launches Nifty SDL Sep 2026 V1 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Sep 2026 V1 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2022-12-12",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12122022.pdf",
-      "title": "NSE Indices launches Nifty SDL Jul 2026 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Jul 2026 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-02-01",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01022023.pdf",
-      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2029 70:30 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2029 70:30 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-02-02",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02022023.pdf",
-      "title": "NSE Indices launches Nifty SDL Jul 2033 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Jul 2033 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-02-15",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15022023.pdf",
-      "title": "NSE Indices launches Nifty SDL Oct 2026 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Oct 2026 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-03-10",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032023.pdf",
-      "title": "NSE Indices launches Nifty SDL Plus G-Sec June 2027 40:60 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec June 2027 40:60 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-03-14",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
-      "title": "NSE Indices launches Nifty SDL Jul 2028 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL Jul 2028 Index"
     },
     {
-      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
       "publication_date": "2023-03-17",
       "scope_status_unchanged": "UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17032023.pdf",
-      "title": "NSE Indices launches Nifty SDL June 2028 Index",
-      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+      "title": "NSE Indices launches Nifty SDL June 2028 Index"
     }
   ],
-  "potential_false_negatives_for_source_review": 124,
+  "explicit_sdl_title_rows_separated": 124,
+  "method": "Broad title-term scan over every non-candidate catalog row, with explicit NIFTY SDL index titles separately tracked as non-equity title hints.",
+  "non_candidate_rows": 139,
+  "potential_false_negatives": [],
+  "potential_false_negatives_for_source_review": 0,
   "safety_policy": "Title hints are not scope decisions. No notice is classified as Nifty 50 change/no-change, no review status is changed, no effective date is inferred, and no membership interval or annual coverage flag is created."
 }
