@@ -1,6 +1,6 @@
 # Trader research execution status
 
-Last reviewed: 2026-11-06. This plan tracks research-only work on `feature/p2-liquidity-sector-validation`, stacked on the P1/P2 branch. Production `main` is intentionally unchanged.
+Last reviewed: 2026-11-06. This plan tracks the live `main` branch. P1/P2 engineering fixes are being committed directly to `main`; data provenance, tariff reconciliation and research promotion remain separate evidence gates.
 
 ## Current decision
 
@@ -31,7 +31,8 @@ Latest full validation: [GitHub Actions run #171](https://github.com/vishwasgarg
 - [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
 - [x] Correct NSE calendar parsing so naive timestamps remain India-local while timezone-aware timestamps are converted to Asia/Kolkata; add regression tests for both membership and corporate-action audits.
 - [x] Make missing OHLCV columns explicit integrity failures rather than silently leaving invalid-row counts as null.
-- [x] Make the standard pipeline reject any configured symbol with empty history, fewer than 100 valid OHLCV rows, duplicate dates, missing OHLCV columns or invalid/non-finite OHLCV values.
+- [x] Make the standard pipeline reject any configured symbol with empty history, fewer than 100 valid OHLCV rows, duplicate NSE calendar dates, invalid date order, missing OHLCV columns or invalid/non-finite OHLCV values.
+- [x] Persist a structured `data/reports/data_integrity.json` preflight report before the daily pipeline fails closed; upload it as a GitHub Actions artifact even when signal generation fails.
 - [ ] Supply and validate the corporate-action ledger; latest experiment reports it was not provided.
 - [ ] Freeze verified price, delivery, membership and corporate-action inputs with the manifest after these checks.
 
@@ -46,6 +47,8 @@ Latest full validation: [GitHub Actions run #171](https://github.com/vishwasgarg
 - [x] 2/5/10/20 bps-per-side slippage stress.
 - [x] Compare with Nifty buy-and-hold, exposure-matched Nifty, fixed-factor portfolios and random picks on the research windows.
 - [x] Re-run walk-forward and mark-to-market diagnostics with the Groww cost profile.
+- [x] Add a component-level contract-note reconciliation helper that excludes slippage and reports per-fee deltas; no actual contract notes have yet been supplied for reconciliation.
+- [x] Update NSE cash-market transaction/IPFT component attribution from the 2026-03-01 circular (₹306.99 + ₹0.01 per crore per side); combined exchange/IPFT outflow remains ₹307 per crore per side.
 - [ ] Reconcile tariff arithmetic against anonymised actual Groww contract notes; account-specific DP concessions remain unverified.
 - [ ] Reconcile source delivery history gaps and independently validate price/turnover provenance.
 - [x] Evaluate the pre-registered profitability and statistical gates; result is FAIL / HOLD, so do not promote.
@@ -124,3 +127,17 @@ The follow-on branch `feature/p3-rankic-sector-risk-controls` adds:
 - Regression tests for rank metrics, sector-cap rejection and drawdown-triggered sizing.
 
 These are research-simulator controls, not a live execution authorization. The owner-confirmed 49-name universe remains unchanged; expansion requires a separate explicit decision and point-in-time evidence. The 49/49 price-history, corporate-action and historical-membership evidence gates remain open.
+
+
+## Direct-main implementation update — 2026-11-06
+
+The following engineering changes are now on `main`:
+
+- Daily pipeline writes a structured preflight report before raising the configured-symbol data-integrity error. The report records missing symbols, price validation, membership evidence and corporate-action evidence gaps, and explicitly keeps promotion/live execution disabled.
+- Price validation now checks invalid and duplicate NSE calendar dates and non-increasing date order.
+- Universe audit handles empty/invalid date indexes without crashing before the diagnostic can be written.
+- Daily workflow uploads the preflight report with `if: always()`; the fast CI workflow now runs on pushes to `main`.
+- Groww charge code has a reusable contract-note reconciliation helper. It compares brokerage, STT, stamp duty, exchange, IPFT, SEBI, DP and GST line items, excludes slippage, and does not claim that notes are authenticated.
+- NSE circular NSE/FA/73061 (effective 2026-03-01) is recorded in the cost profile. The updated exchange/IPFT split is ₹306.99/₹0.01 per crore per side; combined outflow remains ₹307 per crore per side, so the overall modeled combined rate is unchanged.
+
+These changes improve observability and reconciliation tooling; they do not resolve the external evidence blockers. In particular, the missing TATAMOTORS/TMPV/TMCV total-value price lineage, original source-document archiving, 49-symbol historical membership evidence and actual Groww contract-note reconciliation remain open. Do not bypass the configured-symbol guard or claim Phase 1/2 evidence complete.
