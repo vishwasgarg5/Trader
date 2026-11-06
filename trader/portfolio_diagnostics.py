@@ -41,6 +41,9 @@ def simulate_mark_to_market_portfolio(
     max_positions: int = 5,
     max_position_fraction: float = 0.20,
     max_gross_exposure: float = 1.0,
+    max_sector_exposure_fraction: float | None = 0.30,
+    drawdown_size_reduction_threshold: float | None = 0.10,
+    drawdown_size_multiplier: float = 0.50,
     max_participation_rate: float | None = None,
     cost_parameters: dict | None = None,
 ) -> dict:
@@ -61,6 +64,12 @@ def simulate_mark_to_market_portfolio(
         raise ValueError("initial_capital and max_positions must be positive")
     if not 0 < max_position_fraction <= 1 or not 0 < max_gross_exposure <= 1:
         raise ValueError("position and gross exposure fractions must be in (0, 1]")
+    if max_sector_exposure_fraction is not None and not 0 < max_sector_exposure_fraction <= 1:
+        raise ValueError("max_sector_exposure_fraction must be in (0, 1]")
+    if drawdown_size_reduction_threshold is not None and not 0 < drawdown_size_reduction_threshold < 1:
+        raise ValueError("drawdown_size_reduction_threshold must be in (0, 1)")
+    if not 0 < drawdown_size_multiplier <= 1:
+        raise ValueError("drawdown_size_multiplier must be in (0, 1]")
     if max_participation_rate is not None and not 0 < max_participation_rate <= 1:
         raise ValueError("max_participation_rate must be in (0, 1]")
     if max_participation_rate is not None and "avg_daily_turnover" not in candidates.columns:
@@ -77,6 +86,10 @@ def simulate_mark_to_market_portfolio(
     for col in ("score", "entry_price", "exit_price", "net_return"):
         data[col] = pd.to_numeric(data[col], errors="coerce")
     data["symbol"] = data["symbol"].astype(str).str.strip().str.upper()
+    if "sector" not in data.columns:
+        data["sector"] = "UNKNOWN"
+    data["sector"] = data["sector"].fillna("UNKNOWN").astype(str).str.strip()
+    data.loc[data["sector"].eq(""), "sector"] = "UNKNOWN"
     valid = (data["symbol"].ne("") & data["signal_date"].notna()
              & data["entry_date"].notna() & data["exit_date"].notna()
              & (data["exit_date"] >= data["entry_date"])
@@ -114,7 +127,8 @@ def simulate_mark_to_market_portfolio(
     positions: dict[str, dict] = {}
     trade_log = []
     daily_rows = []
-    rejected = {"capacity": 0, "already_held": 0, "cash": 0, "liquidity": 0}
+    rejected = {"capacity": 0, "already_held": 0, "cash": 0, "liquidity": 0, "sector_cap": 0}
+    drawdown_scaled_entries = 0
     stale_marks = 0
     peak_equity = float(initial_capital)
     max_drawdown = 0.0
@@ -134,9 +148,31 @@ def simulate_mark_to_market_portfolio(
                 continue
             invested = sum(p["notional"] for p in positions.values())
             equity_before = cash + sum(p["shares"] * p["last_price"] for p in positions.values())
+            current_drawdown = (
+                (peak_equity - equity_before) / peak_equity if peak_equity > 0 else 0.0
+            )
+            size_multiplier = 1.0
+            if (drawdown_size_reduction_threshold is not None
+                    and current_drawdown >= drawdown_size_reduction_threshold):
+                size_multiplier = drawdown_size_multiplier
+                drawdown_scaled_entries += 1
             target = min(equity_before * max_position_fraction,
                          equity_before * max_gross_exposure / max_positions,
                          cash, max(0.0, equity_before * max_gross_exposure - invested))
+            target *= size_multiplier
+            sector = str(getattr(row, "sector", "UNKNOWN") or "UNKNOWN")
+            if max_sector_exposure_fraction is not None:
+                sector_market_value = sum(
+                    p["shares"] * p["last_price"]
+                    for p in positions.values() if p.get("sector") == sector
+                )
+                sector_capacity = max(
+                    0.0, equity_before * max_sector_exposure_fraction - sector_market_value
+                )
+                if sector_capacity <= 0:
+                    rejected["sector_cap"] += 1
+                    continue
+                target = min(target, sector_capacity)
             if max_participation_rate is not None:
                 turnover = pd.to_numeric(pd.Series([getattr(row, "avg_daily_turnover", np.nan)]),
                                          errors="coerce").iloc[0]
@@ -163,7 +199,8 @@ def simulate_mark_to_market_portfolio(
                 "shares": shares,
                 "last_price": float(row.entry_price), "score": float(row.score),
                 "fallback_net_return": float(row.net_return),
-                "sector": getattr(row, "sector", None),
+                "sector": sector,
+                "drawdown_size_multiplier": size_multiplier,
             }
 
         for symbol, position in list(positions.items()):
@@ -241,6 +278,10 @@ def simulate_mark_to_market_portfolio(
         "max_daily_drawdown": float(max_drawdown),
         "peak_gross_exposure": float(peak_exposure),
         "peak_sector_exposure": float(peak_sector_exposure),
+        "max_sector_exposure_fraction": max_sector_exposure_fraction,
+        "drawdown_size_reduction_threshold": drawdown_size_reduction_threshold,
+        "drawdown_size_multiplier": drawdown_size_multiplier,
+        "drawdown_scaled_entries": int(drawdown_scaled_entries),
         "average_gross_exposure": float(average_exposure_sum / exposure_days) if exposure_days else 0.0,
         "exposure_days": exposure_days, "stale_daily_marks": stale_marks,
         "invalid_candidates": invalid, "rejected": rejected,
