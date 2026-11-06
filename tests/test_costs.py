@@ -71,3 +71,13 @@ def test_groww_dp_threshold_waives_only_groww_component():
     )
     assert small["dp_rupees"] == pytest.approx(3.5)
     assert regular["dp_rupees"] == pytest.approx(20.0)
+
+
+@pytest.mark.parametrize("parameter", [
+    "stt_rate_each_side", "gst_rate", "brokerage_cap_per_order",
+    "dp_charge_per_sell", "slippage_bps_per_side",
+])
+@pytest.mark.parametrize("invalid", [float("nan"), float("inf")])
+def test_cost_api_rejects_non_finite_parameters(parameter, invalid):
+    with pytest.raises(ValueError, match="must be finite"):
+        delivery_round_trip_cost(100, 100, **{parameter: invalid})
