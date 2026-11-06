@@ -2,7 +2,7 @@
 
 An open-source GitHub Actions-powered research and paper-signal system for Indian equities. It collects daily prices, builds technical features, trains a five-session upside classifier, ranks candidates, and publishes risk-aware paper signals.
 
-  > **RESEARCH HOLD.** The daily model is not promotion-approved. Its probability-ranked outputs are labelled `RESEARCH_ONLY_BUY/HOLD/AVOID`; they are not trade instructions. Live execution remains disabled. The fixed research-universe decision is the full point-in-time Nifty 50 from 2018-04-01, but the historical membership evidence and full-universe price panel are not yet verified. The existing 49-symbol daily configuration is a legacy signal input and is not T-0003 evidence. This is research software, not investment advice.
+> **RESEARCH HOLD.** The daily model is not promotion-approved. Its probability-ranked outputs are labelled `RESEARCH_ONLY_BUY/HOLD/AVOID`; they are not trade instructions. Live execution remains disabled. The fixed research-universe decision is the full point-in-time Nifty 50 from 2018-04-01, but the historical membership evidence and full-universe price panel are not yet verified. The existing 49-symbol daily configuration is a legacy signal input and is not T-0003 evidence. This is research software, not investment advice.
 
 ## Initial release
 - Daily OHLCV collection from Yahoo Finance via yfinance (NSE tickers use `.NS`).
