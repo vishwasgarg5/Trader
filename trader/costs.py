@@ -170,6 +170,68 @@ def delivery_round_trip_cost(
     }
 
 
+def reconcile_groww_contract_notes(
+    observations: pd.DataFrame,
+    *,
+    tolerance_rupees: float = 0.05,
+    cost_parameters: dict | None = None,
+) -> pd.DataFrame:
+    """Compare anonymised round-trip contract-note charges with the tariff model.
+
+    Required input columns are entry_price, exit_price, notional_rupees and
+    actual_* charge columns for brokerage, STT, stamp duty, exchange, IPFT,
+    SEBI, DP and GST. Slippage is deliberately excluded because it is not a
+    contract-note fee. This validates arithmetic only; it does not authenticate
+    the uploaded contract notes or establish account-specific tariff terms.
+    """
+    actual_columns = {
+        "actual_brokerage_rupees": "brokerage_rupees",
+        "actual_stt_rupees": "stt_rupees",
+        "actual_stamp_duty_rupees": "stamp_duty_rupees",
+        "actual_exchange_rupees": "exchange_rupees",
+        "actual_ipft_rupees": "ipft_rupees",
+        "actual_sebi_rupees": "sebi_rupees",
+        "actual_dp_rupees": "dp_rupees",
+        "actual_gst_rupees": "gst_rupees",
+    }
+    required = {"entry_price", "exit_price", "notional_rupees", *actual_columns}
+    missing = required.difference(observations.columns)
+    if missing:
+        raise ValueError(f"Contract-note observations missing columns: {sorted(missing)}")
+    if not np.isfinite(tolerance_rupees) or tolerance_rupees < 0:
+        raise ValueError("tolerance_rupees must be finite and non-negative")
+
+    costs = dict(DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters)
+    costs["slippage_bps_per_side"] = 0.0
+    rows = []
+    for index, row in observations.iterrows():
+        numeric = [row[column] for column in required]
+        if any(pd.isna(value) or not np.isfinite(float(value)) for value in numeric):
+            raise ValueError(f"Contract-note row {index} contains missing or non-finite values")
+        if float(row["notional_rupees"]) <= 0:
+            raise ValueError(f"Contract-note row {index} has non-positive notional")
+        estimate = delivery_round_trip_cost(
+            float(row["entry_price"]), float(row["exit_price"]),
+            notional_rupees=float(row["notional_rupees"]), **costs,
+        )
+        result = row.to_dict()
+        deltas = []
+        for actual_column, estimated_key in actual_columns.items():
+            expected = float(estimate[estimated_key])
+            actual = float(row[actual_column])
+            result[f"estimated_{estimated_key}"] = expected
+            result[f"delta_{estimated_key}"] = actual - expected
+            deltas.append(actual - expected)
+        actual_total = sum(float(row[column]) for column in actual_columns)
+        expected_total = sum(float(estimate[key]) for key in actual_columns.values())
+        result["actual_total_charges_rupees"] = actual_total
+        result["estimated_total_charges_rupees"] = expected_total
+        result["total_delta_rupees"] = actual_total - expected_total
+        result["within_tolerance"] = all(abs(delta) <= tolerance_rupees for delta in deltas)
+        rows.append(result)
+    return pd.DataFrame(rows, index=observations.index)
+
+
 def add_delivery_costs(frame: pd.DataFrame, **costs) -> pd.DataFrame:
     """Attach gross/net per-trade returns and a rupee cost estimate."""
     if not {"close", "exit_price"}.issubset(frame.columns):
