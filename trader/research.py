@@ -328,7 +328,9 @@ def walk_forward_evaluate(
     if portfolio_candidates:
         from trader.portfolio import simulate_overlapping_portfolio
         portfolio_frame = pd.concat(portfolio_candidates).sort_index()
-        portfolio_backtest = simulate_overlapping_portfolio(portfolio_frame)
+        portfolio_backtest = simulate_overlapping_portfolio(
+            portfolio_frame, max_sector_exposure_fraction=0.30,
+        )
     return {
         "folds": fold_rows,
         "fold_count": len(fold_rows),
