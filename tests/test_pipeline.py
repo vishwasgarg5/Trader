@@ -128,10 +128,10 @@ def test_data_integrity_preflight_persists_missing_symbol_and_evidence_gaps(tmp_
 
 
 def test_configured_price_validation_rejects_duplicate_nse_calendar_dates():
-    idx = pd.DatetimeIndex([
-        pd.Timestamp("2025-01-01T18:30:00Z"),
-        pd.Timestamp("2025-01-02T04:00:00+05:30"),
-    ])
+    idx = pd.to_datetime([
+        "2025-01-01T18:30:00Z",
+        "2025-01-02T04:00:00+05:30",
+    ], utc=True)
     frame = pd.DataFrame({
         "open": [100.0, 100.0], "high": [102.0, 102.0],
         "low": [99.0, 99.0], "close": [101.0, 101.0],
