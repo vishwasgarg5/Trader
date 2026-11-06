@@ -68,24 +68,34 @@ def audit_membership_evidence(
     errors.extend(coverage_errors)
 
     seen_ids: set[str] = set()
+    seen_events: set[tuple[str, str, str]] = set()
     verified_by_year = {year: 0 for year in YEARS}
-    event_errors = 0
     for row in events:
         event_id = row.get("transition_id", "").strip()
         label = event_id or "<blank transition_id>"
         if not event_id or event_id in seen_ids:
             errors.append(f"{label}: blank or duplicate transition_id")
         seen_ids.add(event_id)
-        if row.get("action", "").strip() not in {"ADD", "REMOVE"}:
+        symbol = row.get("symbol", "").strip().upper()
+        action = row.get("action", "").strip()
+        if not symbol:
+            errors.append(f"{label}: symbol is blank")
+        if action not in {"ADD", "REMOVE"}:
             errors.append(f"{label}: action must be ADD or REMOVE")
         try:
             announcement = date.fromisoformat(row["announcement_date"])
             effective = date.fromisoformat(row["effective_date"])
             if announcement > effective:
                 errors.append(f"{label}: announcement date is after effective date")
+            if effective < date(2018, 4, 1) or effective > date(2024, 12, 31):
+                errors.append(f"{label}: effective date is outside the 2018-04-01 to 2024-12-31 scope")
+            event_key = (symbol, action, effective.isoformat())
+            if event_key in seen_events:
+                errors.append(f"{label}: duplicate symbol/action/effective-date event")
+            seen_events.add(event_key)
         except (KeyError, TypeError, ValueError):
             errors.append(f"{label}: invalid announcement_date/effective_date")
-            announcement = effective = None
+            effective = None
 
         if row.get("verification_status", "").strip() != "VERIFIED":
             errors.append(f"{label}: transition is not VERIFIED")
@@ -127,6 +137,17 @@ def audit_membership_evidence(
         if row is None:
             errors.append(f"{year}: annual coverage row is missing")
             continue
+        expected_start = date(2018, 4, 1) if year == 2018 else date(year, 1, 1)
+        expected_end = date(year, 12, 31)
+        try:
+            actual_start = date.fromisoformat(row.get("scope_start", ""))
+            actual_end = date.fromisoformat(row.get("scope_end", ""))
+            if actual_start != expected_start or actual_end != expected_end:
+                errors.append(
+                    f"{year}: scope must be {expected_start.isoformat()} through {expected_end.isoformat()}"
+                )
+        except ValueError:
+            errors.append(f"{year}: invalid annual scope_start/scope_end")
         for field in (
             "official_notice_search_complete", "supersession_review_complete",
             "snapshot_reconciliation_complete",
