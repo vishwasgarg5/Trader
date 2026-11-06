@@ -45,10 +45,20 @@ def test_research_continuation_gate_requires_absolute_profitability_and_verified
     cross = {
         "fold_count": 8,
         "folds_with_positive_net_excess": 7,
-        "top5_minus_universe_net_return_block_bootstrap_95pct": {"lower": 0.001},
+        "top5_minus_universe_net_return_block_bootstrap_95pct": {
+            "method": "circular_moving_block_bootstrap",
+            "confidence_level": 0.95,
+            "lower": 0.001,
+            "upper": 0.004,
+        },
         "mean_top5_net_return": 0.002,
     }
-    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {"lower": 0.001}}
+    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {
+        "method": "circular_moving_block_bootstrap_over_walk_forward_folds",
+        "confidence_level": 0.95,
+        "lower": 0.001,
+        "upper": 0.03,
+    }}
     passed = evaluate_research_continuation_gate(
         cross, 7, edge, point_in_time_universe_verified=True,
         corporate_action_adjustments_verified=True,
@@ -74,14 +84,76 @@ def test_research_continuation_gate_rejects_confidence_interval_touching_zero():
     cross = {
         "fold_count": 6,
         "folds_with_positive_net_excess": 5,
-        "top5_minus_universe_net_return_block_bootstrap_95pct": {"lower": 0.0},
+        "top5_minus_universe_net_return_block_bootstrap_95pct": {
+            "method": "circular_moving_block_bootstrap",
+            "confidence_level": 0.95,
+            "lower": 0.0,
+            "upper": 0.02,
+        },
         "mean_top5_net_return": 0.01,
     }
-    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {"lower": -0.001}}
+    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {
+        "method": "circular_moving_block_bootstrap_over_walk_forward_folds",
+        "confidence_level": 0.95,
+        "lower": -0.001,
+        "upper": 0.01,
+    }}
     result = evaluate_research_continuation_gate(
         cross, 5, edge, point_in_time_universe_verified=True,
         corporate_action_adjustments_verified=True,
     )
     assert result["status"] == "STOP"
-    assert "relative_excess_95pct_lower_bound_positive" in result["failed_checks"]
+    assert "relative_excess_95pct_interval_valid_and_above_zero" in result["failed_checks"]
     assert "incremental_auc_vs_logistic_statistically_positive" in result["failed_checks"]
+
+
+
+def test_research_gate_rejects_relative_excess_interval_crossing_zero():
+    from trader.predictive_edge import evaluate_research_continuation_gate
+
+    cross = {
+        "fold_count": 8,
+        "folds_with_positive_net_excess": 8,
+        "top5_minus_universe_net_return_block_bootstrap_95pct": {
+            "method": "circular_moving_block_bootstrap",
+            "confidence_level": 0.95,
+            "lower": -0.09,
+            "upper": 0.12,
+        },
+        "mean_top5_net_return": 0.02,
+    }
+    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {
+        "method": "circular_moving_block_bootstrap_over_walk_forward_folds",
+        "confidence_level": 0.95,
+        "lower": 0.001,
+        "upper": 0.02,
+    }}
+    result = evaluate_research_continuation_gate(
+        cross, 8, edge, point_in_time_universe_verified=True,
+        corporate_action_adjustments_verified=True,
+    )
+    assert result["status"] == "STOP"
+    assert result["checks"]["relative_excess_95pct_interval_valid_and_above_zero"] is False
+    assert "relative_excess_95pct_interval_valid_and_above_zero" in result["failed_checks"]
+    assert result["promotion_eligible"] is False
+    assert result["live_execution_enabled"] is False
+
+
+def test_research_gate_rejects_malformed_or_wrong_bootstrap_interval():
+    from trader.predictive_edge import is_positive_95pct_block_bootstrap_ci
+
+    assert not is_positive_95pct_block_bootstrap_ci(
+        {"method": "circular_moving_block_bootstrap", "confidence_level": 0.95,
+         "lower": 0.01, "upper": -0.01},
+        expected_method="circular_moving_block_bootstrap",
+    )
+    assert not is_positive_95pct_block_bootstrap_ci(
+        {"method": "ordinary_iid_bootstrap", "confidence_level": 0.95,
+         "lower": 0.01, "upper": 0.02},
+        expected_method="circular_moving_block_bootstrap",
+    )
+    assert not is_positive_95pct_block_bootstrap_ci(
+        {"method": "circular_moving_block_bootstrap", "confidence_level": 0.95,
+         "lower": 0.01},
+        expected_method="circular_moving_block_bootstrap",
+    )
