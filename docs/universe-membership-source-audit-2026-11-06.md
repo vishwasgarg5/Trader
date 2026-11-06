@@ -204,3 +204,12 @@ The annual notice inventory has been extended with three primary-source candidat
 - 2020-05-13 nullification/reinitiation: https://www.niftyindices.com/Press_Release/ind_prs13052020.pdf. It explicitly says March 27 replacements are null and void **except NIFTY 50 and NIFTY Bank**, because those indices had already rebalanced effective March 19. It restarts the review for the other indices.
 
 This establishes the important distinction: the March 23 and May 13 actions did not reverse the Nifty 50's already-effective March 19 YESBANK/SHREECEM replacement. The March 25 notice concerns the subsequent concentration-norm implementation delay. All three are retained as CANDIDATE notice records with archived PDFs and SHA-256 hashes; line-by-line independent review remains open and none is promoted to VERIFIED. The 2021-09-20 broad-market review release is still an unresolved discovery item: the official archive lists the release, but a verified direct PDF source URL has not yet been established, so no guessed URL was added.
+
+
+## 2021 methodology and notice discovery — 2026-11-06 continuation
+
+- The official archive lists a September 20, 2021 release titled “Replacements in indices w.e.f. September 30, 2021”. The archive listing confirms the release exists, but its direct official PDF URL and Nifty 50 scope have not yet been verified. No URL or membership transition has been inferred from the title alone.
+- The September 15, 2021 PDF is verified and archived; its semi-annual replacement section covers Nifty India Manufacturing and does not establish a Nifty 50 constituent change. This is a scope screen only, not annual completeness.
+- The February 23, 2021 methodology-change PDF is a separate control document from the same-day replacement notice. It changes the periodic reconstitution effective-date convention and other index methodology rules. It has been added as a distinct candidate inventory row so the effective-date policy can be audited independently of the GAIL/TATACONSUM transition.
+- The official archive also lists April 22, June 15, August 23 and October 22, 2021 replacement/methodology notices. Their direct PDFs and parent-index scope remain to be retrieved and screened. The archive page is the primary discovery index: https://www.niftyindices.com/press-release.
+- 2021 annual coverage remains NOT_STARTED; no transition is promoted to VERIFIED and no PIT ledger is authorized.
