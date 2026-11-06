@@ -193,7 +193,8 @@ def audit_membership_evidence(
 SPECIAL_EVENT_COLUMNS = {
     "event_id", "index_name", "member_key", "phase", "announcement_date",
     "effective_date", "constituent_count", "price_treatment", "source_url",
-    "verification_status", "notes",
+    "source_document_path", "source_sha256", "verification_status",
+    "reviewer", "reviewed_at", "notes",
 }
 SPECIAL_PHASES = {"ADD_DUMMY", "REPLACE_DUMMY_WITH_LISTED", "REMOVE_LISTED"}
 
@@ -231,6 +232,13 @@ def audit_special_membership_events(path: Path) -> dict:
             errors.append(f"{event_id}: HTTPS primary source URL is missing")
         if row.get("verification_status", "").strip() != "VERIFIED":
             errors.append(f"{event_id}: special membership event is not VERIFIED")
+        else:
+            if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
+                errors.append(f"{event_id}: VERIFIED special event lacks reviewer sign-off")
+            errors.extend(_valid_digest_file(
+                path.parent, row.get("source_document_path", ""),
+                row.get("source_sha256", ""), event_id,
+            ))
         if not row.get("notes", "").strip():
             errors.append(f"{event_id}: event treatment notes are missing")
 
