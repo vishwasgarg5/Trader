@@ -157,7 +157,8 @@ jobs:
                   )
               # The archiver computes the digest from downloaded PDF bytes.
               # A pre-populated hash would defeat discovery of newly added notices.
-              if not (row.get("source_document_path") or "").startswith("data/reference/source_documents/"):
+              existing_path = (row.get("source_document_path") or "").strip()
+              if existing_path and not existing_path.startswith("data/reference/source_documents/"):
                   raise SystemExit(
                       f"Annual notice inventory has invalid source_document_path: {row['notice_id']}"
                   )
