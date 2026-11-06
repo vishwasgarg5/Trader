@@ -32,13 +32,11 @@ jobs:
           python - <<'PY'
           import csv
           import hashlib
-          import os
           import pathlib
           import urllib.parse
           import urllib.request
 
           ledger = pathlib.Path("data/reference/nifty50_special_membership_events.csv")
-          archive = pathlib.Path("data/reference/source_documents")
           allowed_hosts = {
               "nsearchives.nseindia.com",
               "www.niftyindices.com",
@@ -87,8 +85,7 @@ jobs:
 
           if changed:
               with ledger.open("w", newline="", encoding="utf-8") as handle:
-                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\
-")
+                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
                   writer.writeheader()
                   writer.writerows(rows)
           PY
@@ -102,4 +99,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/reference/nifty50_special_membership_events.csv data/reference/source_documents/
           git commit -m "Archive primary Nifty 50 special-membership PDFs"
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
