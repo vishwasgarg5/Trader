@@ -28,7 +28,7 @@ CHANGE_TITLE = re.compile(
 )
 NIFTY_TITLE = re.compile(r"\bnifty\s*[- ]?\s*50\b|\bnifty50\b", re.I)
 EXCLUDE_TITLE = re.compile(
-    r"fixed.?income|\\bsdl\\b|strategy indices|midcap|smallcap|"
+    r"fixed.?income|\bsdl\b|strategy indices|midcap|smallcap|"
     r"hybrid indices|launch(es|ed)? .*indices|cessation of indices",
     re.I,
 )
