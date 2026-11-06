@@ -287,7 +287,7 @@ def main():
     )
     print(json.dumps(report, indent=2))
     if report["archive_failures"]:
-        raise SystemExit(1)
+        print("WARNING: some source PDFs could not be archived; see archive_failures. Coverage remains incomplete.")
 
 
 if __name__ == "__main__":
