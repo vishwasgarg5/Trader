@@ -31,7 +31,7 @@ NON_EQUITY_HINTS = re.compile(
 # Explicit SDL index titles are catalogued for auditability but cannot change
 # Nifty 50 equity membership. Keep them separate from potential missed equity
 # review candidates; this is a title-only scope hint, not a source-content verdict.
-EXPLICIT_SDL_TITLE = re.compile(r"\\bNIFTY\\b.*\\bSDL\\b.*\\bINDEX\\b", re.IGNORECASE)
+EXPLICIT_SDL_TITLE = re.compile(r"\bNIFTY\b.*\bSDL\b.*\bINDEX\b", re.IGNORECASE)
 
 
 def audit_catalog(catalog_path: Path = CATALOG, report_path: Path = REPORT) -> dict:
