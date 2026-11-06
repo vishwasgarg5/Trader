@@ -135,3 +135,21 @@ Primary source URLs:
 The ledger uses a synthetic key `JIOFIN_SPINOFF_DUMMY`; it does not assert that this was the vendor's tradable ticker. It deliberately does not infer the SPOS-derived price or use the 1:1 shareholder entitlement as a price-adjustment factor. The event auditor requires all three phases, the 51-to-50 constituent-count transitions, primary HTTPS URLs, original source files and SHA-256 hashes, and reviewer sign-off before it can pass.
 
 **Current status:** three event rows are present, all remain `SAMPLE_ONLY`, and no original PDF bytes have been archived or hashed. The experiment runner now calls this special-event audit before data download and fails closed while it is unresolved. The JIOFIN episode is therefore represented in the research evidence plan but is not yet approved for operational interval or price-panel construction.
+
+
+## 2020 supersession chronology correction — 2026-11-06
+
+The 2020 YESBANK/SHREECEM NIFTY 50 transition has been reconciled against the original and superseding NSE Indices releases:
+
+- **2020-02-18 original periodic-review release** (ind_prs18022020.pdf) announced YESBANK exclusion and SHREECEM inclusion effective 2020-03-27 (close 2020-03-26).
+- **2020-03-16 superseding release** (ind_prs16032020.pdf) explicitly references the February 18 and March 12 notices and accelerates the NIFTY 50 replacement to 2020-03-19 (close 2020-03-18), due to the Yes Bank reconstruction scheme.
+- The transition register now records the original announcement date as 2020-02-18, the effective date as 2020-03-19, and the March 16 notice in the superseding-notice fields for both YESBANK and SHREECEM.
+- The 2020-03-23 deferment and 2020-05-13 nullification/reinitiation releases apply to changes that were still scheduled for 2020-03-27; the May 13 release explicitly excludes NIFTY 50 and NIFTY Bank because those indices had already been rebalanced effective 2020-03-19. These documents must remain in the annual supersession audit trail, but they do not reverse the March 19 NIFTY 50 replacement.
+
+Primary sources:
+- https://www.niftyindices.com/Press_Release/ind_prs18022020.pdf
+- https://www.niftyindices.com/Press_Release/ind_prs16032020.pdf
+- https://www.niftyindices.com/Press_Release/ind_prs23032020.pdf
+- https://www.niftyindices.com/Press_Release/ind_prs13052020.pdf
+
+All affected transition rows remain SAMPLE_ONLY until independent document review and annual inventory reconciliation are complete.
