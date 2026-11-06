@@ -24,6 +24,8 @@ YEARS = range(2018, 2025)
 INVENTORY = Path("data/reference/nifty50_annual_notice_inventory.csv")
 SOURCE_DIR = Path("data/reference/source_documents")
 REPORT = Path("data/reports/nifty50_notice_discovery.json")
+CATALOG = Path("data/reference/nifty50_archive_discovery_catalog.csv")
+CATALOG_FIELDS = ["publication_date", "title", "source_url", "review_candidate", "scope_status", "first_discovered_at_utc"]
 FIELDS = [
     "notice_id", "year", "announcement_date", "effective_date", "source_role",
     "source_url", "observed_nifty50_effect", "source_document_path",
@@ -169,6 +171,31 @@ def run_discovery(
     html = _request(ARCHIVE_URL, max_bytes=20_000_000).decode("utf-8", errors="replace")
     discovered, unparsed = discover_entries(html, start_year, end_year)
     existing = _load_inventory(inventory_path)
+    catalog = {}
+    if CATALOG.exists():
+        with CATALOG.open(newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            if reader.fieldnames != CATALOG_FIELDS:
+                raise ValueError(f"Unexpected archive catalog schema in {CATALOG}")
+            catalog = {row["source_url"]: row for row in reader if row.get("source_url")}
+    now = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    for item in discovered:
+        url = item["url"]
+        prior = catalog.get(url, {})
+        catalog[url] = {
+            "publication_date": item["date"].isoformat(),
+            "title": item["title"],
+            "source_url": url,
+            "review_candidate": str(item["review_candidate"]).lower(),
+            "scope_status": prior.get("scope_status") or "UNREVIEWED",
+            "first_discovered_at_utc": prior.get("first_discovered_at_utc") or now,
+        }
+    catalog_path = inventory_path.parent / "nifty50_archive_discovery_catalog.csv"
+    catalog_path.parent.mkdir(parents=True, exist_ok=True)
+    with catalog_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=CATALOG_FIELDS, lineterminator="\\n")
+        writer.writeheader()
+        writer.writerows(sorted(catalog.values(), key=lambda r: (r["publication_date"], r["source_url"])))
     new_count = 0
     candidate_count = 0
     archived_count = 0
@@ -230,7 +257,11 @@ def run_discovery(
         "archive_url": ARCHIVE_URL,
         "scope": {"start_year": start_year, "end_year": end_year},
         "archive_entries_discovered": len(discovered),
+        "archive_catalog_rows_total": len(catalog),
+        "archive_catalog_path": catalog_path.as_posix(),
+        "archive_entries_by_year": {str(year): sum(1 for item in discovered if item["date"].year == year) for year in range(start_year, end_year + 1)},
         "review_keyword_candidates": candidate_count,
+        "non_candidate_entries_catalogued": sum(1 for item in discovered if not item["review_candidate"]),
         "new_inventory_rows": new_count,
         "candidate_pdfs_archived_this_run": archived_count,
         "unparsed_pdf_links": unparsed,
