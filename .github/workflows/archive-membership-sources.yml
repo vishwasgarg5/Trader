@@ -183,6 +183,17 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/nifty50_annual_notice_inventory.csv data/reference/source_documents/
           git commit -m "Archive primary Nifty 50 special-membership PDFs"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          # Other scheduled workflows may also commit to main. Retry a
+          # fetch/rebase/push cycle instead of failing on a non-fast-forward race.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push raced with another main commit (attempt ${attempt}/5); retrying."
+            git rebase --abort || true
+            sleep $((attempt * 3))
+          done
+          echo "Unable to push archived evidence after 5 retries."
+          exit 1
