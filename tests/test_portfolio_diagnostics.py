@@ -180,3 +180,24 @@ def test_drawdown_rule_halves_new_position_size_after_ten_percent_loss():
     by_symbol = {trade["symbol"]: trade for trade in result["trade_log"]}
     assert by_symbol["BBB"]["drawdown_size_multiplier"] == pytest.approx(0.50)
     assert result["drawdown_scaled_entries"] >= 1
+
+
+
+def test_sector_cap_mark_to_market_drift_is_reported_not_misrepresented_as_hard_cap():
+    candidate = _candidates().iloc[[0]].copy()
+    candidate["sector"] = "Financials"
+    prices = _prices().copy()
+    prices.loc[
+        (prices["symbol"] == "AAA") & (prices["date"] == "2026-01-05"), "close"
+    ] = 300.0
+    result = simulate_mark_to_market_portfolio(
+        candidate, prices, initial_capital=100_000, max_positions=1,
+        max_position_fraction=0.20, max_sector_exposure_fraction=0.30,
+        max_participation_rate=None,
+    )
+    assert result["sector_cap_breach_days"] > 0
+    assert result["max_sector_cap_breach_fraction"] > 0
+    assert result["peak_sector_exposure"] > 0.30
+    assert result["sector_cap_enforcement"] == (
+        "entry_only_mark_to_market_drift_is_reported_no_forced_rebalance"
+    )
