@@ -63,6 +63,9 @@ jobs:
           name: triple-barrier-experiment-report
           path: |
             data/reports/triple_barrier_experiment.json
+            data/raw/price_panel.csv
             data/raw/delivery.csv
             data/raw/delivery_download_log.csv
+            data/reference/**
+            data/snapshots/input_manifest.json
           if-no-files-found: error
