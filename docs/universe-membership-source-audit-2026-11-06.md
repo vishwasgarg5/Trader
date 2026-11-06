@@ -121,7 +121,7 @@ The transition CSV had notes containing commas without CSV quoting. That caused 
 The ordinary ADD/REMOVE transition ledger cannot represent the 2023 demerger episode safely. A separate `data/reference/nifty50_special_membership_events.csv` now records the three required phases:
 
 1. `JIOFIN_SPINOFF_DUMMY` added effective 2023-07-20 (close 2023-07-19), with 51 securities represented and SPOS-derived constant-price treatment.
-2. Dummy member replaced by listed `JIOFIN` on 2023-08-21, retaining 51 securities.
+2. Dummy member replaced by listed `JIOFIN` on 2023-08-21, retaining 51 securities; the NSE listing notice was published 2023-08-18.
 3. Listed `JIOFIN` removed effective 2023-09-07 (close 2023-09-06), returning the index to 50 securities.
 
 The July 17 NSE Indices announcement describes temporary spun-off entity inclusion and the demerger price treatment. The September 5 NSE Indices release states JIOFIN was listed on August 21 and confirms the September 7 removal; NSE circular FAOP58243 independently confirms the NIFTY 50 exclusion.
