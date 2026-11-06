@@ -49,8 +49,8 @@ REVIEW_TERMS = re.compile(
 # Keep them in the complete archive catalog, but do not download them as
 # Nifty 50 membership-review candidates. This is a narrow, explicit scope rule.
 OUT_OF_NIFTY50_SCOPE_TITLE = re.compile(
-    r"\\bNIFTY\\s+10\\s+Year\\s+SDL\\s+Index\\b|"
-    r"\\bNifty\\s+SDL\\s+(?:Jul|Plus|June|Oct|Sep)\\b",
+    r"\bNIFTY\s+10\s+Year\s+SDL\s+Index\b|"
+    r"\bNifty\s+SDL\s+(?:Jul|Plus|June|Oct|Sep)\b",
     re.I,
 )
 
