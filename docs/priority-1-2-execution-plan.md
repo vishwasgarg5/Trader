@@ -141,3 +141,23 @@ The following engineering changes are now on `main`:
 - NSE circular NSE/FA/73061 (effective 2026-03-01) is recorded in the cost profile. The updated exchange/IPFT split is ₹306.99/₹0.01 per crore per side; combined outflow remains ₹307 per crore per side, so the overall modeled combined rate is unchanged.
 
 These changes improve observability and reconciliation tooling; they do not resolve the external evidence blockers. In particular, the missing TATAMOTORS/TMPV/TMCV total-value price lineage, original source-document archiving, 49-symbol historical membership evidence and actual Groww contract-note reconciliation remain open. Do not bypass the configured-symbol guard or claim Phase 1/2 evidence complete.
+
+
+## Phase 3 — Research validation (2026-11-06)
+
+- [x] Download and inspect the complete run #182 artifact, not only its green workflow status.
+- [x] Reconcile T-0001 results and report SHA-256 in the append-only trial register.
+- [x] Record cross-sectional AUC, logistic comparator, block-bootstrap intervals, rank IC, decile spread, fixed 1/2/5-pick sensitivity, regime diagnostics and portfolio net results.
+- [x] Add a fail-closed research continuation gate requiring absolute net profitability, a statistically positive model-vs-logistic AUC interval, the predeclared regime check, point-in-time universe evidence and corporate-action adjustment verification.
+- [ ] Inspect the next main-branch CI and full experiment artifact after T-0002 code changes.
+- [ ] Reconcile historical trial IDs and artifacts (#171, #172, #175, #177 and later runs) before any multiple-testing-adjusted performance claim.
+
+## Phase 4 — Predictive-edge investigation (2026-11-06)
+
+- [x] Compare the current model with logistic regression, shuffled-label nulls and fixed reversal, low-volatility and relative-strength baselines.
+- [x] Apply a stopping rule that prevents further price-feature tuning when absolute profitability, incremental predictive significance, regime consistency or data provenance fails.
+- [x] Keep the final 12-month holdout locked and unevaluated.
+- [x] Add explicit reporting of sector exposure drift after mark-to-market; the 30% control is an entry cap, not a continuously enforced hard cap without rebalancing.
+- [ ] Do not start new price-feature or portfolio-threshold searches until Phase 1 data lineage and membership evidence are verified.
+- [ ] If data gates are later cleared, pre-register one falsifiable alternative hypothesis on walk-forward data; do not select the one-pick sensitivity as a strategy.
+- [ ] Require positive absolute net returns and statistically reliable incremental edge before advancing to the locked holdout protocol.
