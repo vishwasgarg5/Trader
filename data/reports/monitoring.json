@@ -1,7 +1,7 @@
 {
   "checks": {
     "accuracy_vs_majority_baseline": {
-      "accuracy": 0.6223110865968009,
+      "accuracy": 0.6216216216216216,
       "baseline": 0.6337562051847766,
       "passed": false
     },
@@ -45,15 +45,15 @@
       "signal_date": "2026-11-05"
     }
   },
-  "code_revision": "312311fe587230185ec7e4107c2551189c702686",
+  "code_revision": "7c0df34d08604e7b82f43ad8d19acef2068ef7bd",
   "errors": [],
-  "generated_at_utc": "2026-11-06T18:54:23.198543+00:00",
+  "generated_at_utc": "2026-11-06T19:00:00.180495+00:00",
   "input_sha256": {
     "config/promotion_gate.json": "ed8d4cfd32fb0092de221e8eb78845dfb5d2f24d25d4d788dcce94c0c175c2f3",
-    "data/logs/predictions.csv": "296157b638615835d7bc12578498f6827522736602ca61984c3d2b9d80af43f1",
-    "data/reports/data_integrity.json": "f4e8a757589373dd1047902365630646d1f04ccaa6dd71ead79d2ff4dfac50cc",
-    "data/reports/metrics.json": "f0aa677c2f0b34b586595693aff875caf3d9f0b390c86faa6688df9286ae29bb",
-    "data/signals/latest_signals.csv": "f9f37e29f8f8014620afd7e74e585c36df4252f53656ebc1880844fb1e2ff8c4"
+    "data/logs/predictions.csv": "d737de7ab25fab2b1dd9ee895fd3d26213cfc65acf68f8a4906f0da4aef8c57b",
+    "data/reports/data_integrity.json": "ac66ace3f910595332a9dd80d3ca0f07b0d9e7a00f92aadfff1ccd019b0e7491",
+    "data/reports/metrics.json": "e3a414451686bf75f14ae2f3bcb298212ed21182660b5cd3c23e00f31037b6f8",
+    "data/signals/latest_signals.csv": "a669f7b8292ae11e043061df7c8eb1dd404e99e1123b8c2f5bfa3a2cd3b821bc"
   },
   "live_execution_enabled": false,
   "policy": "Monitoring is diagnostic only; it never authorizes promotion, holdout access, or live execution.",
