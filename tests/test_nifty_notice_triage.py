@@ -11,6 +11,7 @@ def test_title_triage_separates_constituent_changes_from_other_indices():
     assert classify_title("Changes in Indices w.e.f. April 02, 2018") == "PRIORITY_CONSTITUENT_CHANGE_REVIEW"
     assert classify_title("Replacements in Fixed income Indices") == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     assert classify_title("Change in NIFTY 10 Year SDL Index") == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
+    assert classify_title("NSE Indices launches Nifty SDL Jul 2028 Index") == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     assert classify_title("Nifty 50 constituent replacement") == "PRIORITY_CONSTITUENT_CHANGE_REVIEW"
 
 
@@ -97,4 +98,21 @@ def test_missing_pdf_for_explicitly_other_index_is_not_nifty50_integrity_failure
     assert row["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"
     assert report["source_integrity_failures"] == []
     assert report["out_of_scope_source_not_required"] == ["sdl-1"]
+    assert report["membership_written"] is False
+
+
+def test_missing_pdf_for_nifty_sdl_launch_is_out_of_scope(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\n"
+        "sdl-launch,2023-03-14,Archive title: NSE Indices launches Nifty SDL Jul 2028 Index,"
+        "https://example.test/sdl-launch.pdf,,,DISCOVERED_UNREVIEWED\n",
+        encoding="utf-8",
+    )
+    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv")
+    row = report["triage"][0]
+    assert row["title_triage"] == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
+    assert row["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"
+    assert report["source_integrity_failures"] == []
+    assert report["out_of_scope_source_not_required"] == ["sdl-launch"]
     assert report["membership_written"] is False
