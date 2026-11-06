@@ -6,9 +6,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-# NSE cash-market exchange transaction charge (0.00297%) and IPFT (0.0001%)
-# are modelled separately. Groww's published equity-delivery tariff
-# checked 2026-11-05: brokerage min(₹20, 0.1% of order value), minimum
+# Since 2026-03-01, NSE cash-market charges are ₹306.99/crore/side
+# transaction charge plus ₹0.01/crore/side IPFT (NSE/FA/73061). Their
+# combined rate is unchanged at ₹307/crore/side. Groww's published
+# equity-delivery tariff checked 2026-11-06: brokerage min(₹20, 0.1% of
+# order value), minimum
 # lower of ₹5 or 2.5% of order value; delivery sell DP ₹20 (₹16.50 Groww
 # + ₹3.50 depository) unless sell value is below ₹100. GST applies to
 # brokerage, exchange/IPFT/SEBI and DP charges. Slippage remains a scenario input.
