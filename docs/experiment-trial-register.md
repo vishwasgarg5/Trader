@@ -95,3 +95,15 @@ The separate daily mark-to-market portfolio diagnostic is less severe than the e
 | Execution status | NOT RUN. Do not start walk-forward or promotion workflows until primary-source sample checks, interval-boundary/look-ahead tests, full constituent data coverage, and corporate-action blockers are resolved. |
 
 This registration is intentionally made before implementation and before any performance result from the full point-in-time universe is observed. The candidate source hash is frozen for reproducibility but is not a claim of source authentication.
+
+
+### T-0003 implementation status (2026-11-06; no research run)
+
+- Full point-in-time Nifty 50 is frozen as the intended universe; the custom 49-name list is not the T-0003 universe.
+- The candidate CSV remains pinned to blob SHA `4b762a75376b14b9db6304ef70237270bc8da397`, but is **rejected for direct import pending correction**.
+- Preliminary comparison covered 17 constituent transition records across 2018–2024 using official NSE Indices press releases. It found the YESBANK/SHREECEM transition should be effective 2020-03-19, while the candidate CSV uses 2020-03-27 for both interval boundaries; it also uses `LTM` where official circulars use `LTIM`. Details and source links are in `docs/universe-membership-source-audit-2026-11-06.md`.
+- The source PDFs are not yet archived and hashed in this repository. The sample is not labelled `SAMPLE_VERIFIED` in the evidence matrix. No candidate rows have been imported.
+- Half-open interval semantics are now enforced in the audit/application code. Boundary and future-effective-date regression tests pass in CI run [#42226533050](https://github.com/vishwasgarg5/Trader/actions/runs/42226533050).
+- The automatic Triple Barrier run triggered by the earlier code/test commit [#42226373556](https://github.com/vishwasgarg5/Trader/actions/runs/42226373556) failed during test collection on the then-present syntax error; the walk-forward step did not execute. The syntax was corrected and CI subsequently passed.
+- The expensive Triple Barrier workflow is now manual-dispatch only. No new T-0003 walk-forward result exists. The separate daily signals workflow [#42226532906](https://github.com/vishwasgarg5/Trader/actions/runs/42226532906) completed successfully on the existing configured 49-symbol daily pipeline; it is not a T-0003 result and must not be interpreted as full-universe evidence.
+- **Gate: BLOCKED / NOT RUN** until the official circular PDFs are archived and hashed, the candidate history is corrected for superseding notices and ticker aliases, the full Nifty 50 security universe is enumerated, every required constituent has complete usable price data (including delisted/merged names), and TATAMOTORS/TMPV/TMCV corporate-action lineage is reconciled.
