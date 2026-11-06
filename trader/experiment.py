@@ -15,6 +15,7 @@ from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
 from trader.data_snapshot import write_data_snapshot_manifest
 from trader.corporate_actions import audit_corporate_action_ledger
 from trader.membership_evidence import audit_membership_evidence
+from trader.security_aliases import audit_security_aliases
 from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
@@ -117,6 +118,20 @@ def run_experiment() -> dict:
         raise RuntimeError(
             "T-0003 full point-in-time Nifty 50 evidence gate is BLOCKED; "
             "refusing to run on the legacy static universe. " + detail
+        )
+
+    alias_gate = audit_security_aliases(
+        reference_root / "security_symbol_aliases.csv", reference_root,
+    )
+    if not alias_gate.get("ready", False):
+        errors = alias_gate.get("errors", [])
+        detail = "; ".join(errors[:8])
+        if len(errors) > 8:
+            detail += f"; and {len(errors) - 8} additional alias errors"
+        raise RuntimeError(
+            "T-0003 security identity gate is BLOCKED; "
+            "refusing to treat unresolved vendor aliases or separate securities as continuous. "
+            + detail
         )
 
     membership_path = reference_root / "universe_membership.csv"
