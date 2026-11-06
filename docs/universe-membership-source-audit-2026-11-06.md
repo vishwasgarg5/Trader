@@ -66,3 +66,23 @@ Implementation guardrails now fixed:
 The existing interval audit/application now uses the half-open convention, with tests for inclusion on `valid_from`, exclusion on `valid_to`, future-effective membership not making earlier rows eligible, and rejection of zero-length intervals. This is a semantics correction only: the unauthenticated candidate data has not been imported, the static 49-symbol configuration has not been represented as the full universe, and no model/backtest has been run.
 
 **Current status: universe decision registered; interval semantics corrected and regression-tested; full-universe data integration remains BLOCKED pending primary-source checks and complete price coverage.**
+
+
+## Preliminary official-circular spot-check (candidate data is not accepted)
+
+The pinned candidate CSV was compared against official NSE Indices press releases for selected Nifty 50 additions/removals spanning 2018–2024. These are useful independent primary-source checks, but the PDF files have **not yet been archived into this repository and hashed locally**. Accordingly, no evidence-matrix row is promoted to `SAMPLE_VERIFIED` and no candidate interval is approved for pipeline use.
+
+| Published circular | Effective date | Nifty 50 transition stated by NSE Indices | Candidate CSV comparison |
+|---|---|---|---|
+| [2018-08-28](https://niftyindices.com/Press_Release/ind_prs28082018.pdf) | 2018-09-28 | LUPIN out; JSWSTEEL in | Candidate dates match |
+| [2019-02-25](https://niftyindices.com/Press_Release/ind_prs25022019.pdf) | 2019-03-29 | HINDPETRO out; BRITANNIA in | Candidate dates match |
+| [2020-03-16](https://www.niftyindices.com/Press_Release/ind_prs16032020.pdf) | **2020-03-19** | YESBANK out; SHREECEM in; NSE explicitly accelerated the originally announced March 27 change | **MISMATCH:** candidate CSV retains YESBANK through 2020-03-27 and starts SHREECEM on 2020-03-27. Both boundaries are eight calendar days late. The February 18 announcement alone is insufficient; the March 16 superseding circular controls. |
+| [2021-02-23](https://www.niftyindices.com/Press_Release/ind_prs23022021.pdf) | 2021-03-31 | GAIL out; TATACONSUM in | Candidate dates match |
+| [2022-09-01](https://www.niftyindices.com/Press_Release/ind_prs01092022.pdf) | 2022-09-30 | SHREECEM out; ADANIENT in | Candidate dates match |
+| [2023-07-04](https://www.niftyindices.com/Press_Release/ind_prs04072023.pdf) | 2023-07-13 | HDFC out; LTIMindtree in | Candidate date matches, but candidate symbol is `LTM` while the circular says `LTIM`; alias is unresolved |
+| [2024-02-28](https://www.niftyindices.com/Press_Release/ind_prs28022024.pdf) | 2024-03-28 | UPL out; SHRIRAMFIN in | Candidate dates match |
+| [2024-08-23](https://www.niftyindices.com/Press_Release/ind_prs23082024.pdf) | 2024-09-30 | DIVISLAB and LTIM out; BEL and TRENT in | Candidate dates match, but the candidate uses `LTM` rather than circular symbol `LTIM` for the outgoing constituent |
+
+This spot-check includes more than 10 constituent transition records across seven calendar years. It already identifies a substantive effective-date error (the 2020 Yes Bank/Shree Cement transition) and an unresolved symbol alias (LTIMindtree). Therefore, the third-party CSV cannot be imported as-is, even for the stronger-coverage period. Every event must be reconciled against the controlling, latest official circular, including accelerated, deferred, superseded, merger and delisting changes—not merely the first announcement.
+
+The 2020 finding also illustrates the look-ahead/data-lineage hazard: the candidate interval was apparently closed against the original February schedule, despite a later March 16 official decision changing the effective date. The implementation must resolve superseding notices chronologically and retain both announcement timestamp and final effective date. No performance run is authorized on the candidate CSV.
