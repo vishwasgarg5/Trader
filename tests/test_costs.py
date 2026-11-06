@@ -139,3 +139,12 @@ def test_contract_note_reconciliation_requires_all_fee_components():
 
     with pytest.raises(ValueError, match="missing columns"):
         reconcile_groww_contract_notes(pd.DataFrame([{"entry_price": 100}]))
+
+
+def test_default_nse_exchange_and_ipft_components_match_march_2026_circular():
+    result = delivery_round_trip_cost(
+        100, 100, notional_rupees=100000, slippage_bps_per_side=0,
+    )
+    assert result["exchange_rupees"] == pytest.approx(6.1398)
+    assert result["ipft_rupees"] == pytest.approx(0.0002)
+    assert result["exchange_rupees"] + result["ipft_rupees"] == pytest.approx(6.14)
