@@ -19,7 +19,9 @@ from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
     load_universe, make_model,
 )
-from trader.predictive_edge import summarize_predictive_edge
+from trader.predictive_edge import (
+    evaluate_research_continuation_gate, summarize_predictive_edge,
+)
 from trader.universe_audit import apply_point_in_time_membership, audit_universe
 from trader.research import (
     add_relative_strength_features, evaluate_simple_factor_baselines,
@@ -289,20 +291,34 @@ def run_experiment() -> dict:
         "risk_on_low_vol_evaluable_folds": int(len(gate_excess)),
         "fold_metrics": regime_fold_metrics,
     }
+    research_gate = evaluate_research_continuation_gate(
+        cross_metrics,
+        regime_positive_folds,
+        predictive_edge,
+        point_in_time_universe_verified=bool(
+            membership_application.get("point_in_time_verified", False)
+        ),
+        corporate_action_adjustments_verified=bool(
+            corporate_action_audit.get("corporate_action_adjustment_verified", False)
+        ),
+    )
+    metrics["research_continuation_gate"] = research_gate
     metrics["stopping_rule"] = {
-        "criterion": "A and B must each show positive net top-five minus universe return in a strict majority of folds; A must also have a positive lower 95% five-day block-bootstrap bound.",
+        "criterion": "Require positive relative excess in a strict majority of folds, a positive lower 95% block-bootstrap bound, positive absolute top-five net return, a passing predeclared regime check, a statistically positive AUC advantage over logistic, and verified point-in-time universe and corporate-action data.",
         "majority_folds_required": int(majority_folds),
         "cross_sectional_A_pass": bool(cross_pass),
         "regime_gate_B_pass": bool(regime_pass),
-        "continue_price_feature_tuning": bool(cross_pass and regime_pass),
-        "decision": "continue_price_feature_research_only" if cross_pass and regime_pass else "stop_price_feature_tuning",
+        "continue_price_feature_tuning": bool(
+            research_gate["continue_price_feature_research_only"]
+        ),
+        "decision": research_gate["decision"],
         "cross_sectional_top5_mean_net_return": cross_metrics.get("mean_top5_net_return"),
         "cross_sectional_absolute_profitability_pass": bool(
             cross_metrics.get("mean_top5_net_return") is not None
             and cross_metrics["mean_top5_net_return"] > 0
         ),
         "promotion_eligible": False,
-        "note": "All returns are after the configured transaction-cost model. Positive excess versus the universe is relative edge only; if absolute top-five net return remains negative, no trading approval or deployment is permitted.",
+        "note": "All returns are after the configured transaction-cost model. Relative ranking alone is insufficient. No final-holdout access, promotion or live execution is authorised by this exploratory gate.",
     }
     metrics["reporting_diagnostics"] = {
         "fold_auc_above_0_5": metrics.get("folds_auc_above_0_5"),
