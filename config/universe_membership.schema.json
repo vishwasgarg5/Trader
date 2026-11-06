@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Point-in-time membership evidence for the configured research universe",
-  "description": "Membership intervals for the owner-defined custom research universe; this is not a Nifty 50 constituent schema.",
+  "title": "Point-in-time Nifty 50 membership interval evidence",
+  "description": "One official Nifty 50 constituent membership interval per security, using half-open [valid_from, valid_to) dates. This schema does not assert completeness; completeness is checked against the annual transition and snapshot evidence registers.",
   "type": "object",
   "required": ["symbol", "valid_from", "valid_to", "source", "source_url", "source_published_at", "evidence_path", "evidence_sha256"],
   "properties": {
