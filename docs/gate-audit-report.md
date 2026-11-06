@@ -18,9 +18,7 @@ This is the correct dependence-aware distribution for the pre-registered daily r
 
 ## Finding
 
-Before this audit, the research gate checked only that the relative-excess interval's lower endpoint was present and greater than zero. That correctly rejected a valid interval crossing zero, including **-0.09 to +0.12**, but it did not validate the upper endpoint, endpoint ordering, finiteness, 95% confidence level, or expected bootstrap method. The experiment's separate `cross_pass` summary duplicated the lower-endpoint-only check.
-
-Therefore, the current implementation did not demonstrate that the quoted crossing-zero interval could pass this specific lower-bound check. The defect was incomplete interval validation and duplicated gate logic—not evidence that the interval was intentionally treated as statistically positive. The report artifact containing the quoted interval must still be checked against the exact field above before claiming a byte-for-byte reconciliation.
+Before this audit, the research gate checked only that the lower endpoint of the **cross-sectional experiment's** relative-excess interval was present and greater than zero. It did not validate the upper endpoint, endpoint ordering, finiteness, 95% confidence level, or expected bootstrap method. The experiment's separate `cross_pass` summary duplicated the lower-endpoint-only check. Importantly, the gate receives `cross_sectional_experiment.fold_metrics`; it does not consume the top-level pooled-model interval, even though both objects use the same CI field name.
 
 ## Correction on main
 
@@ -32,7 +30,7 @@ Therefore, the current implementation did not demonstrate that the quoted crossi
 
 ## Interpretation of the reported interval
 
-If **-0.09 to +0.12** is the 95% interval in `top5_minus_universe_net_return_block_bootstrap_95pct`, it crosses zero and cannot satisfy the corrected gate. A positive point estimate, a majority of positive folds, or a positive upper endpoint cannot override that result.
+The quoted **-0.09% to +0.12%** interval is the top-level pooled-model interval, not the cross-sectional interval consumed by the research gate. The gate's input is `cross_sectional_experiment.fold_metrics.top5_minus_universe_net_return_block_bootstrap_95pct`. A positive result on that cross-sectional estimand does not imply that the pooled-model interval is positive; these are distinct estimands and must be labelled by full JSON path.
 
 ## Validation still required
 
@@ -53,8 +51,23 @@ The uploaded artifact `triple-barrier-experiment-report` was inspected. Its prim
 
 The interval crosses zero. The generated `research_continuation_gate` reports `STOP`; the interval check is false; promotion eligibility and live execution are both false. The 95% AUC-difference interval also crosses zero (`-0.0024317086322898475` to `0.006798290330470413`) using its separate two-fold bootstrap. The final holdout remains `LOCKED_NOT_EVALUATED`, with no holdout metrics computed.
 
-**Reconciliation caveat:** this generated artifact does not contain the previously quoted exact interval `-0.09 to +0.12` in the primary relative-excess field. Its primary interval is approximately `-0.000968 to +0.000929` in decimal-return units. Both intervals cross zero, but the exact discrepancy in magnitude/source cannot be reconciled from this artifact alone; the earlier report/source field must be identified before claiming an exact match.
+**Reconciliation caveat:** the top-level pooled-model interval in run #208 is approximately `-0.000968 to +0.000929` in decimal-return units (about `-0.0968% to +0.0929%`). Its cross-sectional gate-input interval is approximately `-0.0000757 to +0.0017711` (about `-0.0076% to +0.1771%`). Both cross zero, and the corrected gate rejects the cross-sectional interval.
 
 ## Final audit disposition
 
 The code correction and regression tests are validated by successful CI, and the generated experiment independently confirms a STOP decision. The gate inconsistency is resolved for the current main-branch artifact. The historical interval-source reconciliation remains open. Research remains **HOLD** because the gate fails on profitability, regime, incremental AUC, point-in-time universe, and corporate-action evidence as well as relative excess.
+
+
+## Historical interval reconciliation — run #204
+
+The historical quote is now traceable to workflow run #204 (run ID `42177465040`), commit `6efa0028e33181347a33f43d6e04a9d25c1a666e`, artifact `triple-barrier-experiment-report` (artifact ID `13484643171`). Its top-level pooled-model field `top5_minus_universe_net_return_block_bootstrap_95pct` is:
+
+- Decimal lower: `-0.0008981007876277349`
+- Decimal upper: `0.0012205701220321479`
+- Percentage lower/upper: approximately `-0.08981% / +0.12206%`, which rounds to the quoted `-0.09% to +0.12%`.
+
+The **same artifact's cross-sectional gate-input field** is different: `cross_sectional_experiment.fold_metrics.top5_minus_universe_net_return_block_bootstrap_95pct` has lower `+0.000023856960883227305` and upper `+0.0018135542468718992`. The old gate's lower-bound check therefore returned true for its actual cross-sectional input. This explains why the gate showed a relative-excess pass while the top-level pooled-model interval crossed zero: the report compared two different estimands without making the JSON paths sufficiently prominent. This is not evidence that the gate accepted the quoted top-level crossing-zero interval.
+
+Run #208 confirms the fail-closed behavior on the cross-sectional gate input: its cross-sectional interval lower endpoint is `-0.00007571577683105549`, upper `0.0017711065784943101`, so it crosses zero and the corrected interval check is false. Its top-level pooled-model interval also crosses zero. The code hardening remains valuable because it validates the complete CI object and expected bootstrap method, but the historical root cause is **ambiguous reporting / estimand-path confusion**, not a proven false positive by the old lower-bound comparison.
+
+The two intervals use the same five-day circular moving-block bootstrap mechanics but different daily spread series: pooled-model versus cross-sectional top-five selection. They must never be substituted for one another. No turnover analysis or model promotion follows from this reconciliation; the remaining gate and data-provenance failures continue to require RESEARCH HOLD.
