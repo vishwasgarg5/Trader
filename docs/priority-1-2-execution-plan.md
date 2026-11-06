@@ -187,3 +187,13 @@ Primary-source references checked during this reconciliation:
 - The NSE circular confirms TATAMOTORS → TMPV effective 2025-10-24. The shareholder communication's 1:1 figure is an entitlement ratio only. Both price adjustment factors remain null pending an archived exchange price-discovery record and independently reproducible adjustment calculation.
 - Validation triggered by these changes: Daily Signals #37 onward, Pull Request CI #29 onward, and Triple Barrier #226 onward. Treat them as pending until their completed conclusions and job logs are inspected.
 - Keep final holdout locked and promotion/live execution disabled. The 49-symbol universe is unchanged.
+
+
+## Execution update — 2026-11-06 (Yahoo Finance cache contention)
+
+- Daily Trader Signals #43 passed all 121 unit tests but failed during price download: yfinance reported SQLite `OperationalError('database is locked')` for BAJAJFINSV.NS, after which the fail-closed preflight correctly stopped on empty history.
+- The run log points to threaded yfinance download/cache contention, not proof of a missing listing or valid zero-price history.
+- Changed the downloader to `threads=False` so yfinance cache/database writes are serialized, and added a regression test asserting the non-threaded call.
+- Commits: `e43c1cf` (serialize downloads), `381ef0d` (test).
+- CI #32 passed with 121 tests before this downloader change. CI #33/#34, Daily Signals #44/#45 and Triple Barrier #231/#232 were triggered by the new commits and must be inspected before considering the fix validated.
+- Keep the pipeline fail-closed if any symbol still has insufficient or unusable data. Do not silently drop BAJAJFINSV.NS or substitute another ticker.
