@@ -199,7 +199,11 @@ def run_discovery(
             # Never overwrite a human classification or a previously assigned notice ID.
             if not row.get("notes", "").strip():
                 row["notes"] = f"Archive title: {item['title']}."
-        if archive_candidates and (not row.get("source_document_path") or not row.get("source_sha256")):
+        existing_path = Path(row.get("source_document_path", "")) if row.get("source_document_path") else None
+        existing_hash_ok = False
+        if existing_path and existing_path.is_file() and row.get("source_sha256"):
+            existing_hash_ok = hashlib.sha256(existing_path.read_bytes()).hexdigest() == row["source_sha256"]
+        if archive_candidates and not existing_hash_ok:
             try:
                 data = _request(url)
                 if not data.startswith(b"%PDF-"):
