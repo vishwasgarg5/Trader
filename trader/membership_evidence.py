@@ -188,3 +188,72 @@ def audit_membership_evidence(
         "errors": errors,
         "source_authenticity_independently_established": False,
     }
+
+
+SPECIAL_EVENT_COLUMNS = {
+    "event_id", "index_name", "member_key", "phase", "announcement_date",
+    "effective_date", "constituent_count", "price_treatment", "source_url",
+    "verification_status", "notes",
+}
+SPECIAL_PHASES = {"ADD_DUMMY", "REPLACE_DUMMY_WITH_LISTED", "REMOVE_LISTED"}
+
+
+def audit_special_membership_events(path: Path) -> dict:
+    """Fail closed unless temporary/dummy constituent episodes are represented and evidenced."""
+    rows, errors = _read_csv(path, SPECIAL_EVENT_COLUMNS)
+    required = {
+        "N50-2023-JIOFIN-DUMMY-ADD": ("JIOFIN_SPINOFF_DUMMY", "ADD_DUMMY", "2023-07-20", 51),
+        "N50-2023-JIOFIN-LIST": ("JIOFIN", "REPLACE_DUMMY_WITH_LISTED", "2023-08-21", 51),
+        "N50-2023-JIOFIN-REMOVE": ("JIOFIN", "REMOVE_LISTED", "2023-09-07", 50),
+    }
+    by_id = {}
+    for row in rows:
+        event_id = row.get("event_id", "").strip()
+        if not event_id or event_id in by_id:
+            errors.append(f"{event_id or '<blank>'}: blank or duplicate special event_id")
+        by_id[event_id] = row
+        if row.get("phase", "").strip() not in SPECIAL_PHASES:
+            errors.append(f"{event_id}: unsupported special membership phase")
+        try:
+            announced = date.fromisoformat(row.get("announcement_date", ""))
+            effective = date.fromisoformat(row.get("effective_date", ""))
+            if announced > effective:
+                errors.append(f"{event_id}: announcement_date is after effective_date")
+        except ValueError:
+            errors.append(f"{event_id}: invalid announcement/effective date")
+        try:
+            count = int(row.get("constituent_count", ""))
+            if count not in {50, 51}:
+                errors.append(f"{event_id}: constituent_count must be 50 or 51")
+        except ValueError:
+            errors.append(f"{event_id}: invalid constituent_count")
+        if not row.get("source_url", "").startswith("https://"):
+            errors.append(f"{event_id}: HTTPS primary source URL is missing")
+        if row.get("verification_status", "").strip() != "VERIFIED":
+            errors.append(f"{event_id}: special membership event is not VERIFIED")
+        if not row.get("notes", "").strip():
+            errors.append(f"{event_id}: event treatment notes are missing")
+
+    for event_id, (member, phase, effective, count) in required.items():
+        row = by_id.get(event_id)
+        if row is None:
+            errors.append(f"{event_id}: required JIOFIN temporary-membership event is missing")
+            continue
+        if row.get("member_key", "").strip() != member:
+            errors.append(f"{event_id}: member_key does not match the required demerger phase")
+        if row.get("phase", "").strip() != phase:
+            errors.append(f"{event_id}: phase does not match the required demerger phase")
+        if row.get("effective_date", "").strip() != effective:
+            errors.append(f"{event_id}: effective_date does not match the official event chronology")
+        if row.get("constituent_count", "").strip() != str(count):
+            errors.append(f"{event_id}: constituent_count does not match the demerger phase")
+    if len(rows) != len(required):
+        errors.append("special membership ledger must contain exactly the three required JIOFIN episode rows")
+
+    return {
+        "ready": not errors and len(rows) == len(required),
+        "rows": len(rows),
+        "verified_rows": sum(row.get("verification_status", "").strip() == "VERIFIED" for row in rows),
+        "errors": errors,
+        "source_authenticity_independently_established": False,
+    }
