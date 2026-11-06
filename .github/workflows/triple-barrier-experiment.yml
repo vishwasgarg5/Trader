@@ -8,7 +8,6 @@ on:
       - "tests/**"
       - "config/**"
       - "requirements.txt"
-      - ".github/workflows/triple-barrier-experiment.yml"
   pull_request:
     branches: [main, feature/p1-p2-data-portfolio-validation]
     paths:
