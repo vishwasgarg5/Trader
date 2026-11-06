@@ -69,9 +69,11 @@ class PressReleaseParser(HTMLParser):
         for value in values:
             if not value:
                 continue
-            candidates.extend(PDF_RE.findall(value.replace("&amp;", "&")))
-            if value.lower().endswith(".pdf"):
-                candidates.append(value)
+            cleaned = value.replace("&amp;", "&")
+            candidates.extend(PDF_RE.findall(cleaned))
+            candidates.extend(re.findall(r"""['"]([^'"]+\.pdf(?:\?[^'"]*)?)['"]""", cleaned, re.I))
+            if ".pdf" in cleaned.lower() and cleaned.lower().endswith(".pdf"):
+                candidates.append(cleaned)
         if tag.lower() == "a":
             self.anchor = {"title": [], "urls": list(dict.fromkeys(candidates)), "date": self.current_date}
         elif candidates:
