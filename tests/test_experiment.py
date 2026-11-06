@@ -36,9 +36,33 @@ def test_run_experiment_requires_interval_panel_even_if_event_gate_passes(monkey
     monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
         "ready": True, "errors": [],
     })
+    monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
+        "ready": True, "errors": [],
+    })
     monkeypatch.setattr(experiment, "download_prices", lambda *args, **kwargs: pytest.fail(
         "market data download must not run without verified membership intervals"
     ))
 
     with pytest.raises(RuntimeError, match="universe_membership.csv"):
+        experiment.run_experiment()
+
+
+
+def test_run_experiment_requires_verified_security_identity_before_download(monkeypatch, tmp_path):
+    monkeypatch.setattr(experiment, "DATA", tmp_path)
+    reference = tmp_path / "reference"
+    reference.mkdir()
+    (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
+    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+        "ready": True, "errors": [],
+    })
+    monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
+        "ready": False, "errors": ["LTM: identity mapping is not VERIFIED"],
+    })
+    monkeypatch.setattr(experiment, "download_prices", lambda *args, **kwargs: pytest.fail(
+        "market data download must not run while security identity is unresolved"
+    ))
+
+    with pytest.raises(RuntimeError, match="security identity gate is BLOCKED"):
         experiment.run_experiment()
