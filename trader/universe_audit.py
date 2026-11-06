@@ -123,7 +123,7 @@ def audit_universe(
                     )
                 if history["symbol"].eq("").any() or history["valid_from"].isna().any():
                     membership["errors"].append("blank symbols or invalid valid_from dates")
-                if (history["valid_to"].notna() & (history["valid_to"] < history["valid_from"])).any():
+                if (history["valid_to"].notna() & (history["valid_to"] <= history["valid_from"])).any():
                     membership["errors"].append("valid_to precedes valid_from")
                 if history["source"].astype(str).str.strip().eq("").any():
                     membership["errors"].append("blank source provenance")
@@ -146,7 +146,7 @@ def audit_universe(
                     for row in group.itertuples(index=False):
                         start = row.valid_from
                         end = row.valid_to
-                        if previous_end is not None and (pd.isna(previous_end) or start <= previous_end):
+                        if previous_end is not None and (pd.isna(previous_end) or start < previous_end):
                             membership["errors"].append(f"overlapping membership intervals for {symbol}")
                             break
                         previous_end = end
@@ -200,7 +200,7 @@ def audit_universe(
             "Yahoo Finance adjusted-price semantics and corporate-action completeness are not independently verified.",
             "Missing benchmark sessions are a diagnostic; holidays, suspensions and source gaps require manual adjudication.",
             "Delisted securities and historical constituents absent from the configured list cannot be recovered from this panel.",
-            "Membership file provenance is not independently authenticated by this audit.",
+            "Membership file provenance is not independently authenticated by this audit.",\n            "Membership intervals use half-open [valid_from, valid_to) semantics.",
         ],
     }
 
@@ -241,7 +241,7 @@ def apply_point_in_time_membership(
     active = (
         merged["valid_from"].notna()
         & (merged["date"] >= merged["valid_from"])
-        & (merged["valid_to"].isna() | (merged["date"] <= merged["valid_to"]))
+        & (merged["valid_to"].isna() | (merged["date"] < merged["valid_to"]))
     )
     filtered = merged.loc[active].drop(columns=["valid_from", "valid_to"])
     if filtered.empty:
