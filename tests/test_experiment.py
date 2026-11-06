@@ -94,3 +94,63 @@ def test_run_experiment_requires_verified_corporate_action_treatment(monkeypatch
 
     with pytest.raises(RuntimeError, match="corporate-action gate is BLOCKED"):
         experiment.run_experiment()
+
+
+
+def test_point_in_time_universe_loader_includes_historical_constituents(tmp_path):
+    path = tmp_path / "universe_membership.csv"
+    pd.DataFrame([
+        {"symbol": "CURRENT.NS", "valid_from": "2024-01-01", "valid_to": ""},
+        {"symbol": "FORMER.NS", "valid_from": "2018-04-01", "valid_to": "2020-01-01"},
+        {"symbol": "CURRENT.NS", "valid_from": "2020-01-01", "valid_to": ""},
+    ]).to_csv(path, index=False)
+
+    assert experiment.load_point_in_time_universe(path) == ["CURRENT.NS", "FORMER.NS"]
+
+
+def test_experiment_downloads_all_symbols_from_pit_ledger_not_static_config(monkeypatch, tmp_path):
+    data_root = tmp_path / "data"
+    reference = data_root / "reference"
+    reference.mkdir(parents=True)
+    membership = pd.DataFrame([
+        {"symbol": "CURRENT.NS", "valid_from": "2024-01-01", "valid_to": ""},
+        {"symbol": "FORMER.NS", "valid_from": "2018-04-01", "valid_to": "2020-01-01"},
+    ])
+    membership.to_csv(reference / "universe_membership.csv", index=False)
+    (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "corporate_actions.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "security_symbol_aliases.csv").write_text("placeholder", encoding="utf-8")
+    config = tmp_path / "config"
+    config.mkdir()
+    (config / "sector_classifications.json").write_text(
+        '{"classification_as_of":"2026-01-01","source_url":"https://example.com",'
+        '"note":"test fixture","symbols":{"CURRENT.NS":"A","FORMER.NS":"B"}}',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(experiment, "DATA", data_root)
+    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+        "ready": True, "errors": [],
+    })
+    monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
+        "ready": True, "errors": [],
+    })
+    monkeypatch.setattr(experiment, "audit_corporate_action_ledger", lambda *args: {
+        "corporate_action_adjustment_verified": True,
+    })
+    monkeypatch.setattr(experiment, "load_universe", lambda: pytest.fail(
+        "research experiment must not load the legacy static ticker file"
+    ))
+    seen = {}
+
+    def stop_after_download(tickers, period):
+        seen["tickers"] = tickers
+        seen["period"] = period
+        raise RuntimeError("stop after asserting PIT universe")
+
+    monkeypatch.setattr(experiment, "download_prices", stop_after_download)
+    with pytest.raises(RuntimeError, match="stop after asserting PIT universe"):
+        experiment.run_experiment()
+
+    assert seen["tickers"] == ["CURRENT.NS", "FORMER.NS"]
+    assert seen["period"] == "7y"
