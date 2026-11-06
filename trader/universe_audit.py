@@ -151,9 +151,21 @@ def audit_universe(
                             break
                         previous_end = end
                 for row in history.itertuples(index=False):
-                    evidence = Path(str(row.evidence_path))
-                    if not evidence.is_absolute():
-                        evidence = membership_path.parent / evidence
+                    relative_evidence = Path(str(row.evidence_path))
+                    if relative_evidence.is_absolute() or ".." in relative_evidence.parts:
+                        membership["errors"].append(
+                            f"evidence_path escapes membership directory for {row.symbol}: {row.evidence_path}"
+                        )
+                        continue
+                    evidence_root = membership_path.parent.resolve()
+                    evidence = (evidence_root / relative_evidence).resolve()
+                    try:
+                        evidence.relative_to(evidence_root)
+                    except ValueError:
+                        membership["errors"].append(
+                            f"evidence_path escapes membership directory for {row.symbol}: {row.evidence_path}"
+                        )
+                        continue
                     if not evidence.is_file():
                         membership["errors"].append(f"missing evidence file for {row.symbol}: {row.evidence_path}")
                         continue
