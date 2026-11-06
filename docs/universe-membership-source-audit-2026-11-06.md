@@ -86,3 +86,31 @@ The pinned candidate CSV was compared against official NSE Indices press release
 This spot-check includes more than 10 constituent transition records across seven calendar years. It already identifies a substantive effective-date error (the 2020 Yes Bank/Shree Cement transition) and an unresolved symbol alias (LTIMindtree). Therefore, the third-party CSV cannot be imported as-is, even for the stronger-coverage period. Every event must be reconciled against the controlling, latest official circular, including accelerated, deferred, superseded, merger and delisting changes—not merely the first announcement.
 
 The 2020 finding also illustrates the look-ahead/data-lineage hazard: the candidate interval was apparently closed against the original February schedule, despite a later March 16 official decision changing the effective date. The implementation must resolve superseding notices chronologically and retain both announcement timestamp and final effective date. No performance run is authorized on the candidate CSV.
+
+
+## Additional primary-source checks added on 2026-11-06
+
+The following official NSE Indices press releases were opened and checked directly during the continuation audit. Their constituent events are recorded in the transition register as `SAMPLE_ONLY`; none is treated as complete annual coverage until the original PDF bytes are committed, SHA-256 is computed from those bytes, all superseding notices are checked, and a reviewer signs off.
+
+| Published circular | Effective date | Nifty 50 transition stated by NSE Indices |
+|---|---|---|
+| [2018-02-21](https://www.niftyindices.com/Press_Release/ind_prs21022018.pdf) | 2018-04-02 | AMBUJACEM, AUROPHARMA and BOSCHLTD out; BAJAJFINSV, GRASIM and TITAN in |
+| [2019-08-28](https://www.niftyindices.com/Press_Release/ind_prs28082019.pdf) | 2019-09-27 | IBULHSGFIN out; NESTLEIND in |
+| [2020-07-02](https://www.niftyindices.com/Press_Release/ind_prs02072020_1.pdf) | 2020-07-31 | VEDL out; HDFCLIFE in |
+| [2020-08-20](https://www.niftyindices.com/Press_Release/ind_prs20082020.pdf) | 2020-09-25 | INFRATEL and ZEEL out; DIVISLAB and SBILIFE in |
+| [2022-02-24](https://www.niftyindices.com/Press_Release/ind_prs24022022_1.pdf) | 2022-03-31 | IOC out; APOLLOHOSP in |
+
+The 2021-02-23, 2022-09-01, 2023-07-04, 2024-02-28 and 2024-08-23 events remain documented in the preceding spot-check table. These checks are not an exhaustive inventory: the official archive contains other releases and special corporate-action updates that still require event-by-event screening.
+
+## Register integrity correction
+
+The transition CSV had notes containing commas without CSV quoting. That caused affected records to parse as more than the required 16 columns. The register was normalized by quoting the notes field and rechecked with a quote-aware parser: all 34 current records now have exactly 16 columns. This repairs file structure only; it does not authenticate any row or change the `SAMPLE_ONLY` status.
+
+## Current gate
+
+- Transition register: 34 candidate records; all remain `SAMPLE_ONLY`.
+- Annual coverage: 0/7 years marked complete.
+- Original official PDF archive and hashes: not yet complete.
+- Full interval ledger: absent; `data/reference/universe_membership.csv` is still missing.
+- Alias and corporate-action evidence: still unverified.
+- Full-universe price panel and experiment: not authorized.
