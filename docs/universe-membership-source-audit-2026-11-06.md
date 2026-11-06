@@ -196,7 +196,7 @@ Primary discovery and scope references:
 - 2024-09-25 superseding/revocation release: https://www.niftyindices.com/Press_Release/ind_prs25092024.pdf
 
 
-## COVID-period supersession chain — 2020-11-06 audit continuation
+## COVID-period supersession chain — 2026-11-06 audit continuation
 
 The annual notice inventory has been extended with three primary-source candidates for the March–May 2020 rebalancing chain:
 - 2020-03-23 deferment: https://www.niftyindices.com/Press_Release/ind_prs23032020.pdf. It defers the March 27 index rebalancing until further notice.
