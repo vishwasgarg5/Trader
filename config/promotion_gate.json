@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "RESEARCH_HOLD",
+  "promotion_eligible": false,
+  "live_execution_enabled": false,
+  "reason": "Research evidence has not established positive net profitability or statistically reliable incremental edge; data provenance and forward paper-trading gates remain open.",
+  "required_before_approval": [
+    "Complete and independently verify all configured symbol histories and corporate-action adjustments.",
+    "Resolve point-in-time universe membership and survivorship-bias evidence.",
+    "Pass pre-registered profitability and dependence-aware incremental-edge criteria on the locked confirmatory holdout.",
+    "Reconcile transaction costs and slippage against actual broker contract notes.",
+    "Complete prospective paper trading and operational review.",
+    "Obtain explicit independent approval for promotion and a separate authorization for any live execution."
+  ]
+}

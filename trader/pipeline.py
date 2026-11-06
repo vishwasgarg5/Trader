@@ -174,7 +174,25 @@ def train_and_evaluate(frame: pd.DataFrame) -> tuple[Pipeline, dict]:
     return final_model, metrics
 
 
-def make_signals(frame: pd.DataFrame, model: Pipeline) -> pd.DataFrame:
+def make_signals(
+    frame: pd.DataFrame,
+    model: Pipeline,
+    promotion_gate: dict | None = None,
+) -> pd.DataFrame:
+    """Create explicitly research-labelled signals unless promotion is approved."""
+    if promotion_gate is None:
+        gate_path = ROOT / "config" / "promotion_gate.json"
+        try:
+            promotion_gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            promotion_gate = {}
+    if not isinstance(promotion_gate, dict):
+        promotion_gate = {}
+    promotion_eligible = (
+        promotion_gate.get("status") == "APPROVED"
+        and promotion_gate.get("promotion_eligible") is True
+        and promotion_gate.get("live_execution_enabled") is True
+    )
     latest_date = frame.index.max()
     latest = frame.loc[frame.index == latest_date].dropna(subset=FEATURES).copy()
     if latest.empty:
@@ -185,18 +203,25 @@ def make_signals(frame: pd.DataFrame, model: Pipeline) -> pd.DataFrame:
     latest["stop_loss"] = latest["entry"] - 1.5 * latest["atr"]
     latest["target_price"] = latest["entry"] + 2.0 * latest["atr"]
     latest["risk_per_share"] = latest["entry"] - latest["stop_loss"]
-    latest["signal"] = np.where(
+    latest["model_signal"] = np.where(
         latest["prob_up_5d"] >= 0.60, "BUY",
         np.where(latest["prob_up_5d"] <= 0.40, "AVOID", "HOLD"),
     )
+    latest["signal"] = (
+        latest["model_signal"] if promotion_eligible
+        else "RESEARCH_ONLY_" + latest["model_signal"]
+    )
+    latest["promotion_status"] = "APPROVED" if promotion_eligible else "RESEARCH_HOLD"
+    latest["promotion_eligible"] = bool(promotion_eligible)
     latest["position_fraction"] = np.minimum(
         RISK_FRACTION * latest["entry"] / latest["risk_per_share"].replace(0, np.nan),
         MAX_POSITION_FRACTION,
     ).fillna(0)
     latest["as_of"] = latest.index.strftime("%Y-%m-%d")
     return latest.reset_index(drop=True)[[
-        "as_of", "symbol", "signal", "prob_up_5d", "entry",
-        "stop_loss", "target_price", "atr", "position_fraction",
+        "as_of", "symbol", "signal", "model_signal", "promotion_status",
+        "promotion_eligible", "prob_up_5d", "entry", "stop_loss",
+        "target_price", "atr", "position_fraction",
     ]]
 
 
