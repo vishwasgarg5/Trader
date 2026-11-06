@@ -134,6 +134,8 @@ def simulate_mark_to_market_portfolio(
     max_drawdown = 0.0
     peak_exposure = average_exposure_sum = 0.0
     peak_sector_exposure = 0.0
+    sector_cap_breach_days = 0
+    max_sector_cap_breach_fraction = 0.0
     exposure_days = 0
     costs = dict(DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters)
 
@@ -246,7 +248,13 @@ def simulate_mark_to_market_portfolio(
             sector: value / equity for sector, value in sorted(sector_values.items())
         } if equity > 0 else {}
         if sector_exposures:
-            peak_sector_exposure = max(peak_sector_exposure, max(sector_exposures.values()))
+            daily_peak_sector = max(sector_exposures.values())
+            peak_sector_exposure = max(peak_sector_exposure, daily_peak_sector)
+            if max_sector_exposure_fraction is not None:
+                breach = max(0.0, daily_peak_sector - max_sector_exposure_fraction)
+                if breach > 1e-9:
+                    sector_cap_breach_days += 1
+                    max_sector_cap_breach_fraction = max(max_sector_cap_breach_fraction, breach)
         peak_exposure = max(peak_exposure, exposure)
         average_exposure_sum += exposure
         exposure_days += 1
@@ -280,6 +288,12 @@ def simulate_mark_to_market_portfolio(
         "peak_gross_exposure": float(peak_exposure),
         "peak_sector_exposure": float(peak_sector_exposure),
         "max_sector_exposure_fraction": max_sector_exposure_fraction,
+        "sector_cap_breach_days": int(sector_cap_breach_days),
+        "max_sector_cap_breach_fraction": float(max_sector_cap_breach_fraction),
+        "sector_cap_enforcement": (
+            "entry_only_mark_to_market_drift_is_reported_no_forced_rebalance"
+            if max_sector_exposure_fraction is not None else "disabled"
+        ),
         "drawdown_size_reduction_threshold": drawdown_size_reduction_threshold,
         "drawdown_size_multiplier": drawdown_size_multiplier,
         "drawdown_scaled_entries": int(drawdown_scaled_entries),
