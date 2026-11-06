@@ -32,7 +32,7 @@ def test_screen_pdf_persists_hash_checked_extracted_text(monkeypatch, tmp_path):
     output_path = tmp_path / "extracted" / "notice.txt"
     result = screening.screen_pdf(pdf_path, expected_pdf_hash, output_path)
 
-    expected_text = "NIFTY 50 constituent review\\n"
+    expected_text = "NIFTY 50 constituent review\n"
     assert output_path.read_text(encoding="utf-8") == expected_text
     assert result["extracted_text_path"] == output_path.as_posix()
     assert result["extracted_text_sha256"] == hashlib.sha256(expected_text.encode("utf-8")).hexdigest()
