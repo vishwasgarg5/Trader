@@ -4,7 +4,7 @@ This note records the two official NSE Indices announcements relevant to the tem
 
 ## 17 July 2023: temporary inclusion
 
-- Official source: https://www.niftyindices.com/Press_Release/ind_prs17072023.pdf
+- Official source: https://nsearchives.nseindia.com/web/sites/default/files/2023-07/ind_prs17072023.pdf
 - Announcement date: 2023-07-17
 - Effective point: 2023-07-20 (close of 2023-07-19)
 - NSE Indices describes inclusion of the spun-off entity from Reliance Industries in Nifty 50 and other indices on account of the demerger.
