@@ -20,7 +20,8 @@ from trader.pipeline import (
     load_universe, make_model,
 )
 from trader.predictive_edge import (
-    evaluate_research_continuation_gate, summarize_predictive_edge,
+    evaluate_research_continuation_gate, is_positive_95pct_block_bootstrap_ci,
+    summarize_predictive_edge,
 )
 from trader.universe_audit import apply_point_in_time_membership, audit_universe
 from trader.research import (
@@ -183,7 +184,9 @@ def run_experiment() -> dict:
     cross_ci = cross_metrics.get("top5_minus_universe_net_return_block_bootstrap_95pct")
     cross_pass = (
         cross_metrics.get("folds_with_positive_net_excess", 0) >= majority_folds
-        and cross_ci is not None and cross_ci["lower"] > 0
+        and is_positive_95pct_block_bootstrap_ci(
+            cross_ci, expected_method="circular_moving_block_bootstrap"
+        )
     )
     regime_pass = regime_positive_folds >= majority_folds
     portfolio_diagnostics = {"status": "unavailable", "reason": "No out-of-sample candidate predictions were collected."}
