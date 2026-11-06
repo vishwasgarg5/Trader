@@ -22,10 +22,27 @@ def triple_barrier_labels(
     missing = required.difference(prices.columns)
     if missing:
         raise ValueError(f"Missing required columns: {sorted(missing)}")
-    if horizon < 1 or up_multiple <= 0 or down_multiple <= 0:
-        raise ValueError("horizon and barrier multiples must be positive")
+    if isinstance(horizon, bool) or not isinstance(horizon, (int, np.integer)) or horizon < 1:
+        raise ValueError("horizon must be a positive integer")
+    if (not np.isfinite(up_multiple) or not np.isfinite(down_multiple)
+            or up_multiple <= 0 or down_multiple <= 0):
+        raise ValueError("barrier multiples must be finite and positive")
 
     data = prices.sort_index()
+    if data.index.has_duplicates:
+        raise ValueError("Price index must contain unique trading dates")
+    ohlc = data[["open", "high", "low", "close"]].apply(pd.to_numeric, errors="coerce")
+    values = ohlc.to_numpy(dtype=float)
+    if not np.isfinite(values).all() or (values <= 0).any():
+        raise ValueError("OHLC prices must be finite and positive")
+    invalid_ranges = (
+        (ohlc["high"] < ohlc[["open", "close", "low"]].max(axis=1))
+        | (ohlc["low"] > ohlc[["open", "close", "high"]].min(axis=1))
+    )
+    if invalid_ranges.any():
+        raise ValueError("OHLC bars contain inconsistent high/low ranges")
+    data = data.copy()
+    data[["open", "high", "low", "close"]] = ohlc
     rows: list[dict] = []
     n = len(data)
     for i in range(n):
