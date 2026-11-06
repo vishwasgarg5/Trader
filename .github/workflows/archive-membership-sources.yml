@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "data/reference/nifty50_special_membership_events.csv"
+      - "data/reference/nifty50_transition_register.csv"
       - ".github/workflows/archive-membership-sources.yml"
       - "tests/test_experiment.py"
   workflow_dispatch:
@@ -125,11 +126,13 @@ jobs:
 
           if changed:
               with transition_ledger.open("w", newline="", encoding="utf-8") as handle:
-                  writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator="\n")
+                  writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator="
+")
                   writer.writeheader()
                   writer.writerows(transition_rows)
               with ledger.open("w", newline="", encoding="utf-8") as handle:
-                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+                  writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="
+")
                   writer.writeheader()
                   writer.writerows(rows)
           PY
