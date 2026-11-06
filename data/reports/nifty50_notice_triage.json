@@ -1,5 +1,5 @@
 {
-  "candidate_event_rows": 1330,
+  "candidate_event_rows": 1297,
   "coverage_complete": false,
   "inventory_rows": 684,
   "membership_written": false,
@@ -58,20 +58,6 @@
       "path": "data/reference/ocr_notice_text/NSE-ARCHIVE-2021-08-23-693f636899bd.txt",
       "sha256": "0a5b0b99d31fd2d4006056bba0cba66438cf7b74024c566409696ec5fd3d2997",
       "source_pdf_sha256": "c9b9feef248ca89f7d8c8f12009e3d5c409eb4d6c793eee061fb93bf0af1231e"
-    },
-    {
-      "engine": "Tesseract",
-      "engine_versions": [
-        "5.3.4"
-      ],
-      "notice_id": "NSE-ARCHIVE-2022-03-09-85475e6c8965",
-      "pages": [
-        1,
-        2
-      ],
-      "path": "data/reference/ocr_notice_text/NSE-ARCHIVE-2022-03-09-85475e6c8965.txt",
-      "sha256": "333d4a9e337b4f1bfddb3f6c7ecfe9e3339fa4b6fc207b0ed722bcb8f4a6f249",
-      "source_pdf_sha256": "ba63ea3e57550b7cd21ab327263a2be74c8427371cbb5cbd9134254f24c58ff0"
     },
     {
       "engine": "Tesseract",
@@ -291,28 +277,45 @@
     "NSE-ARCHIVE-2020-08-25-eefa63ce0dd3",
     "NSE-ARCHIVE-2020-09-24-01ed685743d4",
     "NSE-ARCHIVE-2020-10-23-36ac8543b767",
+    "NSE-ARCHIVE-2020-10-28-78db936463b0",
     "NSE-ARCHIVE-2020-11-23-74a580ccccfc",
     "NSE-ARCHIVE-2020-12-14-730c1748c63c",
     "NSE-ARCHIVE-2020-12-24-c0c56b989c62",
     "NSE-ARCHIVE-2021-01-22-e8c16fe62877",
     "NSE-ARCHIVE-2021-02-22-6cefb0173228",
+    "NSE-ARCHIVE-2021-03-02-2cec5fed683a",
+    "NSE-ARCHIVE-2021-03-09-b27ad24f7b76",
     "NSE-ARCHIVE-2021-03-22-b970708dac1a",
     "NSE-ARCHIVE-2021-03-24-f26045f0d53e",
+    "NSE-ARCHIVE-2021-03-25-f2a2b3931780",
+    "NSE-ARCHIVE-2021-04-09-7336304f23a4",
     "NSE-ARCHIVE-2021-04-26-4b819dafb07f",
     "NSE-ARCHIVE-2021-05-24-e29029ff7d02",
     "NSE-ARCHIVE-2021-06-24-44e7117a1b61",
+    "NSE-ARCHIVE-2021-06-25-71566bb89184",
     "NSE-ARCHIVE-2021-07-14-c7f92d68e38f",
     "NSE-ARCHIVE-2021-07-26-ad405b1bbb7d",
+    "NSE-ARCHIVE-2021-09-03-e9aefee28203",
+    "NSE-ARCHIVE-2021-09-09-6924bdafe0c6",
     "NSE-ARCHIVE-2021-09-14-8a547ccf2361",
+    "NSE-ARCHIVE-2021-09-22-2af85699da8e",
     "NSE-ARCHIVE-2021-09-24-8457b7e3e73f",
+    "NSE-ARCHIVE-2021-09-27-cae519dfee0e",
     "NSE-ARCHIVE-2021-10-07-c8e45791210a",
     "NSE-ARCHIVE-2021-10-25-ded7ae889ba4",
     "NSE-ARCHIVE-2021-11-24-f9aabe880b47",
     "NSE-ARCHIVE-2021-12-27-247ab2297dae",
+    "NSE-ARCHIVE-2021-12-28-600d24302630",
+    "NSE-ARCHIVE-2021-12-29-6c09c5948616",
+    "NSE-ARCHIVE-2022-01-13-b082ab152c6d",
     "NSE-ARCHIVE-2022-01-24-0e625153af78",
+    "NSE-ARCHIVE-2022-01-28-5a1f278fa535",
     "NSE-ARCHIVE-2022-01-31-4dfe99df5834",
     "NSE-ARCHIVE-2022-02-07-dea9f04579c7",
     "NSE-ARCHIVE-2022-02-22-c656aebb82fa",
+    "NSE-ARCHIVE-2022-03-03-0c86c193868e",
+    "NSE-ARCHIVE-2022-03-09-85475e6c8965",
+    "NSE-ARCHIVE-2022-03-10-98f747996dc6",
     "NSE-ARCHIVE-2022-03-17-acfc46eee09c",
     "NSE-ARCHIVE-2022-03-25-63e92170ee95",
     "NSE-ARCHIVE-2022-03-25-f5653bd1113a",
@@ -332,22 +335,30 @@
     "NSE-ARCHIVE-2022-08-19-889586e917dc",
     "NSE-ARCHIVE-2022-08-29-f356663b8df8",
     "NSE-ARCHIVE-2022-09-02-47dc351bd0e4",
+    "NSE-ARCHIVE-2022-09-20-44d3563baefb",
     "NSE-ARCHIVE-2022-09-26-e4ed28920afd",
     "NSE-ARCHIVE-2022-09-27-08345159ee27",
     "NSE-ARCHIVE-2022-09-28-05124070cc45",
     "NSE-ARCHIVE-2022-09-28-b3c41ed4df42",
+    "NSE-ARCHIVE-2022-09-30-da155ff1e689",
     "NSE-ARCHIVE-2022-10-04-abe43a7b459d",
     "NSE-ARCHIVE-2022-10-21-699f5f7b26e1",
     "NSE-ARCHIVE-2022-10-21-77630238df8e",
     "NSE-ARCHIVE-2022-11-01-4fcca632e77b",
     "NSE-ARCHIVE-2022-11-24-973accdfcea0",
+    "NSE-ARCHIVE-2022-12-08-7e853d8e50c6",
+    "NSE-ARCHIVE-2022-12-12-ee33f6b7ecb8",
     "NSE-ARCHIVE-2022-12-15-99633db4f0f3",
     "NSE-ARCHIVE-2022-12-26-57ab31d8fa4d",
     "NSE-ARCHIVE-2022-12-27-d3e982a84536",
     "NSE-ARCHIVE-2022-12-30-b9123951f34e",
+    "NSE-ARCHIVE-2023-01-13-354e317f7604",
     "NSE-ARCHIVE-2023-01-20-dadcd0d1f3ad",
     "NSE-ARCHIVE-2023-01-24-ca6922cca07e",
     "NSE-ARCHIVE-2023-01-27-707363a248d3",
+    "NSE-ARCHIVE-2023-02-01-0ad22a3ca41d",
+    "NSE-ARCHIVE-2023-02-02-a7edcaadee87",
+    "NSE-ARCHIVE-2023-02-15-6cb9d4fd5d41",
     "NSE-ARCHIVE-2023-02-17-cbc17721875b",
     "NSE-ARCHIVE-2023-02-22-4c5356ceae37",
     "NSE-ARCHIVE-2023-02-24-14569b24e77e",
@@ -355,8 +366,11 @@
     "NSE-ARCHIVE-2023-02-24-77bfea3291a0",
     "NSE-ARCHIVE-2023-02-27-52974ecb626d",
     "NSE-ARCHIVE-2023-03-01-e949d6dc047f",
+    "NSE-ARCHIVE-2023-03-10-45fdb1f71d95",
     "NSE-ARCHIVE-2023-03-10-7183ac64d608",
+    "NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
     "NSE-ARCHIVE-2023-03-15-7e379d0cfab0",
+    "NSE-ARCHIVE-2023-03-17-fed30cbc117b",
     "NSE-ARCHIVE-2023-03-20-e80ec9500ff4",
     "NSE-ARCHIVE-2023-03-24-d121351d90b8",
     "NSE-ARCHIVE-2023-03-31-fa44a986985b",
@@ -432,12 +446,10 @@
     "NSE-ARCHIVE-2024-12-26-4c741119e80e"
   ],
   "policy": "Title classes and page-level fields are candidate-generation only. Symbol lists are deliberately unassigned to in/out roles; dates are unnormalized text. Human verification against the source PDF is mandatory. No membership interval or review status is changed.",
-  "source_integrity_failures": [
-    "NSE-ARCHIVE-2023-03-14-5b13b76a2af9"
-  ],
+  "source_integrity_failures": [],
   "title_triage_counts": {
-    "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW": 289,
-    "LOW_PRIORITY_LIKELY_OTHER_INDEX": 300,
+    "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW": 261,
+    "LOW_PRIORITY_LIKELY_OTHER_INDEX": 328,
     "PRIORITY_CONSTITUENT_CHANGE_REVIEW": 95
   },
   "triage": [
@@ -3770,16 +3782,16 @@
     },
     {
       "announcement_date": "2020-10-28",
-      "candidate_page_count": 2,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2020-10-28-78db936463b0",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2020-10-28-78db936463b0.pdf",
       "source_sha256_expected": "413e133eaadd57ab554c8bebef46eee57b98ff7d827e50d0718476052f469c47",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28102020.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty CPSE Bond Plus SDL Sep 2024 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2020-10-29",
@@ -4043,29 +4055,29 @@
     },
     {
       "announcement_date": "2021-03-02",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-03-02-2cec5fed683a",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-03-02-2cec5fed683a.pdf",
       "source_sha256_expected": "70297f9f41bc938c6ece877045a3a2ed36526423c29e1e949ea3ae88c3ccc5d8",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02032021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty PSU Bond Plus SDL Apr 2026 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-03-09",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-03-09-b27ad24f7b76",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-03-09-b27ad24f7b76.pdf",
       "source_sha256_expected": "e3d3ea7df896cd9fbcf4be943858545d7abac136c11df4d9e09484d68395368a",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Apr 2026 Top 20 Equal Weight Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-03-10",
@@ -4147,29 +4159,29 @@
     },
     {
       "announcement_date": "2021-03-25",
-      "candidate_page_count": 2,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-03-25-f2a2b3931780",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-03-25-f2a2b3931780.pdf",
       "source_sha256_expected": "8487ef49f722b58e95ec9b5754bc2ee1f8e53153e13fe421eaa54b3d046cb96c",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25032021_1.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 31 March 2021",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-04-09",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-04-09-7336304f23a4",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-04-09-7336304f23a4.pdf",
       "source_sha256_expected": "acd2f560a8915029787c6f65c41b77c86cf40dd4d5cb5c481e447157f93c9f16",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09042021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty AAA Bond Plus SDL Apr 2026 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-04-13",
@@ -4329,16 +4341,16 @@
     },
     {
       "announcement_date": "2021-06-25",
-      "candidate_page_count": 2,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-06-25-71566bb89184",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-06-25-71566bb89184.pdf",
       "source_sha256_expected": "3125027cded311983eb7ec351f589a0215455bec59d543c498b2b7b75e0237c3",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25062021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 30 June 2021",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-06-25",
@@ -4498,16 +4510,16 @@
     },
     {
       "announcement_date": "2021-09-03",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-09-03-e9aefee28203",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-09-03-e9aefee28203.pdf",
       "source_sha256_expected": "4dc137ad2322584c1669b31e473ab0b168494dd31287726098db2d1d266b7e72",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03092021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Plus PSU Bond Sep 2026 60:40 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-09-07",
@@ -4524,16 +4536,16 @@
     },
     {
       "announcement_date": "2021-09-09",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-09-09-6924bdafe0c6",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-09-09-6924bdafe0c6.pdf",
       "source_sha256_expected": "fa78f989b626172b4c333f3e05225dcf2b724d88122374e7a073b697e133b318",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09092021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty PSU Bond Plus SDL Sep 2027 40:60 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-09-14",
@@ -4576,16 +4588,16 @@
     },
     {
       "announcement_date": "2021-09-22",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-09-22-2af85699da8e",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-09-22-2af85699da8e.pdf",
       "source_sha256_expected": "fb9bb6c2361f742a957c6b942e512d83b46ac4ede4e776a7feaccd2d0dec4f3d",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22092021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty PSU Bond Plus SDL Apr 2027 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-09-24",
@@ -4641,16 +4653,16 @@
     },
     {
       "announcement_date": "2021-09-27",
-      "candidate_page_count": 2,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-09-27-cae519dfee0e",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-09-27-cae519dfee0e.pdf",
       "source_sha256_expected": "95e40021358415e2cbe5b1bbbf1140515c72ca8db3bbbcb89834cecc8c7a6c6a",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27092021_1.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 30 September 2021",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-09-28",
@@ -5005,16 +5017,16 @@
     },
     {
       "announcement_date": "2021-12-28",
-      "candidate_page_count": 3,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-12-28-600d24302630",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-12-28-600d24302630.pdf",
       "source_sha256_expected": "2ab3dd497e6b2ee4c3217fa2c472d41c400ed6c98123e85c7c8352c3ef9ceaef",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28122021_1.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index & Nifty PSU Bond plus SDL Apr 2027 50:50 Index w.e.f. 31 December 2021",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-12-28",
@@ -5031,16 +5043,16 @@
     },
     {
       "announcement_date": "2021-12-29",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-12-29-6c09c5948616",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2021-12-29-6c09c5948616.pdf",
       "source_sha256_expected": "f45a1a5225ce31d39520458300bed066e0ef2c99217226fb487f21ec5b840944",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29122021.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty CPSE Bond Plus SDL Sep 2026 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2021-12-29",
@@ -5070,16 +5082,16 @@
     },
     {
       "announcement_date": "2022-01-13",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-01-13-b082ab152c6d",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-01-13-b082ab152c6d.pdf",
       "source_sha256_expected": "17434e2e9daa4b9a2fd525546bf1f0357e6b0139616ee59734ac69e08d373886",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13012022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Apr 2027 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-01-19",
@@ -5122,16 +5134,16 @@
     },
     {
       "announcement_date": "2022-01-28",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-01-28-5a1f278fa535",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-01-28-5a1f278fa535.pdf",
       "source_sha256_expected": "3dac78ca86888762d7f1872f63e26c5c72bed698ca65a364a8cf1216c9bc0412",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28012022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Apr 2027 Top 12 Equal Weight Index and Nifty SDL Apr 2032 Top 12 Equal Weight Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-01-31",
@@ -5291,16 +5303,16 @@
     },
     {
       "announcement_date": "2022-03-03",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-03-03-0c86c193868e",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-03-03-0c86c193868e.pdf",
       "source_sha256_expected": "bef9c4b0e142d0ff19718bf0ce8d482afb116c801c5e871e683041e07cdcd1bc",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03032022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2028 30:70 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-03-08",
@@ -5330,28 +5342,16 @@
     },
     {
       "announcement_date": "2022-03-09",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-03-09-85475e6c8965",
-      "ocr_metadata": {
-        "engine": "Tesseract",
-        "engine_versions": [
-          "5.3.4"
-        ],
-        "pages": [
-          1,
-          2
-        ],
-        "path": "data/reference/ocr_notice_text/NSE-ARCHIVE-2022-03-09-85475e6c8965.txt",
-        "sha256": "333d4a9e337b4f1bfddb3f6c7ecfe9e3339fa4b6fc207b0ed722bcb8f4a6f249",
-        "source_pdf_sha256": "ba63ea3e57550b7cd21ab327263a2be74c8427371cbb5cbd9134254f24c58ff0"
-      },
+      "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-03-09-85475e6c8965.pdf",
       "source_sha256_expected": "ba63ea3e57550b7cd21ab327263a2be74c8427371cbb5cbd9134254f24c58ff0",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032022.pdf",
-      "text_extraction_status": "OCR_EXTRACTED",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-03-10",
@@ -5368,16 +5368,16 @@
     },
     {
       "announcement_date": "2022-03-10",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-03-10-98f747996dc6",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-03-10-98f747996dc6.pdf",
       "source_sha256_expected": "d6ad9b01fc5baa19c9912a0486a3c7a68582956b3dae65dbf50c0edd46635f23",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032022_1.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Jun 2027 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-03-14",
@@ -5979,16 +5979,16 @@
     },
     {
       "announcement_date": "2022-09-20",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-09-20-44d3563baefb",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-09-20-44d3563baefb.pdf",
       "source_sha256_expected": "f5d47257105c69a24d249d14fca94eca979057b64c6dfc3858f1238180520e56",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20092022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Sep 2025 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-09-23",
@@ -6057,16 +6057,16 @@
     },
     {
       "announcement_date": "2022-09-30",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-09-30-da155ff1e689",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-09-30-da155ff1e689.pdf",
       "source_sha256_expected": "1c3e0f38ce7916c83f311b53a1dd9d98cadc3e6333732194b8b0b6462eeac747",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30092022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty AAA PSU Bond Plus SDL Apr 2026 50:50 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-10-04",
@@ -6278,29 +6278,29 @@
     },
     {
       "announcement_date": "2022-12-08",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-12-08-7e853d8e50c6",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-12-08-7e853d8e50c6.pdf",
       "source_sha256_expected": "ee0cf95742f8bb24b3f3d3877f5e7deb2caf3c215d0890319bd507c48c6b3ca3",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08122022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Sep 2026 V1 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-12-12",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2022-12-12-ee33f6b7ecb8",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2022-12-12-ee33f6b7ecb8.pdf",
       "source_sha256_expected": "a1956bac034826fa0991fe3a45a8d8d82664fd7be7d6f2cd5ec8da234a719936",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12122022.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Jul 2026 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2022-12-15",
@@ -6395,16 +6395,16 @@
     },
     {
       "announcement_date": "2023-01-13",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-01-13-354e317f7604",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-01-13-354e317f7604.pdf",
       "source_sha256_expected": "97888dfaf57b5d988e0f682dd532eccf93d741fb7d09695e4cc32d620b03a793",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13012023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Dec 2026 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-01-18",
@@ -6473,29 +6473,29 @@
     },
     {
       "announcement_date": "2023-02-01",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-02-01-0ad22a3ca41d",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-02-01-0ad22a3ca41d.pdf",
       "source_sha256_expected": "1f81234d36633c8c1fddaa40f5494dca882645a2817faba420a9f52235b70e8f",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01022023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2029 70:30 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-02-02",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-02-02-a7edcaadee87",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-02-02-a7edcaadee87.pdf",
       "source_sha256_expected": "16114d19b9de8fb43e52ac68ecb21986cfed518f7c789f45768869a35ff7ee20",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02022023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Jul 2033 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-02-09",
@@ -6538,16 +6538,16 @@
     },
     {
       "announcement_date": "2023-02-15",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-02-15-6cb9d4fd5d41",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-02-15-6cb9d4fd5d41.pdf",
       "source_sha256_expected": "acf5c42b907954ab0f672f636a5ca57c5bcc217bfe9f51433d27ca4f9d0fdc4a",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15022023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Oct 2026 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-02-17",
@@ -6707,16 +6707,16 @@
     },
     {
       "announcement_date": "2023-03-10",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-03-10-45fdb1f71d95",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-03-10-45fdb1f71d95.pdf",
       "source_sha256_expected": "155296dd25af27cc1063926775541280d0a599b00ff85deeb9e6ef4c842b43dc",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Plus G-Sec June 2027 40:60 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-03-10",
@@ -6740,9 +6740,9 @@
       "source_document_path": "",
       "source_sha256_expected": "",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
-      "text_extraction_status": "MISSING_SOURCE_DOCUMENT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL Jul 2028 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-03-15",
@@ -6772,16 +6772,16 @@
     },
     {
       "announcement_date": "2023-03-17",
-      "candidate_page_count": 1,
+      "candidate_page_count": 0,
       "notice_id": "NSE-ARCHIVE-2023-03-17-fed30cbc117b",
       "ocr_metadata": null,
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_document_path": "data/reference/source_documents/NSE-ARCHIVE-2023-03-17-fed30cbc117b.pdf",
       "source_sha256_expected": "d442e81308bf517e7d128db8b49c1c0e662f215f5ec720b5041bcd826de86fe7",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17032023.pdf",
-      "text_extraction_status": "EXTRACTED_TEXT",
+      "text_extraction_status": "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED",
       "title": "NSE Indices launches Nifty SDL June 2028 Index",
-      "title_triage": "LOW_PRIORITY_GENERAL_ARCHIVE_REVIEW"
+      "title_triage": "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     },
     {
       "announcement_date": "2023-03-20",
