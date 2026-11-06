@@ -33,7 +33,7 @@ def test_run_experiment_requires_interval_panel_even_if_event_gate_passes(monkey
     reference.mkdir()
     (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
     (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
-    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+    monkeypatch.setattr(experiment, "audit_special_membership_events", lambda *args: {\n        "ready": True, "errors": [],\n    })\n    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
         "ready": True, "errors": [],
     })
     monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
@@ -57,7 +57,7 @@ def test_run_experiment_requires_verified_security_identity_before_download(monk
     reference.mkdir()
     (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
     (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
-    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+    monkeypatch.setattr(experiment, "audit_special_membership_events", lambda *args: {\n        "ready": True, "errors": [],\n    })\n    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
         "ready": True, "errors": [],
     })
     monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
@@ -79,7 +79,7 @@ def test_run_experiment_requires_verified_corporate_action_treatment(monkeypatch
     (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
     (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
     (reference / "corporate_actions.csv").write_text("placeholder", encoding="utf-8")
-    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+    monkeypatch.setattr(experiment, "audit_special_membership_events", lambda *args: {\n        "ready": True, "errors": [],\n    })\n    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
         "ready": True, "errors": [],
     })
     monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
@@ -129,7 +129,7 @@ def test_experiment_downloads_all_symbols_from_pit_ledger_not_static_config(monk
         encoding="utf-8",
     )
     monkeypatch.setattr(experiment, "DATA", data_root)
-    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+    monkeypatch.setattr(experiment, "audit_special_membership_events", lambda *args: {\n        "ready": True, "errors": [],\n    })\n    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
         "ready": True, "errors": [],
     })
     monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
