@@ -100,6 +100,30 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
     return add_relative_strength_features(result)
 
 
+def load_point_in_time_universe(membership_path: Path) -> list[str]:
+    """Return every security appearing in the verified PIT membership interval ledger."""
+    if not membership_path.is_file():
+        raise RuntimeError(f"Point-in-time membership interval file is missing: {membership_path}")
+    try:
+        history = pd.read_csv(membership_path)
+    except (OSError, pd.errors.ParserError, UnicodeError) as exc:
+        raise RuntimeError(
+            f"Unable to read point-in-time membership intervals ({type(exc).__name__})"
+        ) from exc
+    if "symbol" not in history.columns:
+        raise RuntimeError("Point-in-time membership interval file lacks a symbol column")
+    symbols = sorted({
+        str(value).strip().upper()
+        for value in history["symbol"].dropna()
+        if str(value).strip()
+    })
+    if not symbols:
+        raise RuntimeError("Point-in-time membership interval file contains no security symbols")
+    if history["symbol"].isna().any() or history["symbol"].astype(str).str.strip().eq("").any():
+        raise RuntimeError("Point-in-time membership interval file contains blank symbols")
+    return symbols
+
+
 def run_experiment() -> dict:
     # T-0003 must never fall back to the legacy static 49-symbol universe.
     # Validate the official event ledger before any market-data download or
@@ -150,9 +174,9 @@ def run_experiment() -> dict:
             "(data/reference/universe_membership.csv); refusing to use config/universe.txt."
         )
 
+    universe = load_point_in_time_universe(membership_path)
     sector_path = DATA.parent / "config" / "sector_classifications.json"
     sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
-    universe = load_universe()
     prices = download_prices(universe, period="7y")
     # Never run a cross-sectional experiment on a silently reduced universe.
     # Missing/delisted constituents must be resolved with an explicit,
