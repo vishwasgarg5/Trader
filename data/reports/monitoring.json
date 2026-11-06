@@ -45,13 +45,13 @@
       "signal_date": "2026-11-06"
     }
   },
-  "code_revision": "a6957b24a65b8cadf5d79686aabc595b1805cd9b",
+  "code_revision": "6751ce3e2782c7c5ce3f16c9cb87f7fbdbf97e9b",
   "errors": [],
-  "generated_at_utc": "2026-11-06T17:38:08.174393+00:00",
+  "generated_at_utc": "2026-11-06T18:17:38.152676+00:00",
   "input_sha256": {
     "config/promotion_gate.json": "ed8d4cfd32fb0092de221e8eb78845dfb5d2f24d25d4d788dcce94c0c175c2f3",
     "data/logs/predictions.csv": "e834351076d1bfcbdafa5d789a25e5520137e7e88c345271dc7079b74dd31c4e",
-    "data/reports/data_integrity.json": "63cceb28c9781c88a33fe50106228961fde9493793c9b94f3ee874d980a3ab31",
+    "data/reports/data_integrity.json": "c6d359be995c5213024c09dd63396c056b3e238ff5b9c971edcc5095a6834c71",
     "data/reports/metrics.json": "4446ded53da4bf7ffa16672bc1cb0e75dcccee268c8a6ea5e565e34dcc40e09d",
     "data/signals/latest_signals.csv": "873f6eb7a2251784a594bae95d5c307be49468ee8d3d5edb1a2e66ea3ee135f2"
   },
