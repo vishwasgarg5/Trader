@@ -74,3 +74,24 @@ TMPV appears in the frozen seven-year price panel from 2019-11-06, including the
 The #234 report reports 84,090 labelled rows and 43 ambiguous rows. Delivery coverage is 97.64%. The 30% sector cap is recorded in the portfolio simulation, but its reported peak sector exposure should be checked against daily marked exposures before treating the cap as a proven hard limit.
 
 The separate daily mark-to-market portfolio diagnostic is less severe than the event-date realised-equity trade ledger but still materially negative: ₹1,000,000 to ₹794,701.66 (net -20.53%), maximum daily drawdown 22.81%, 1,180 trades, and 0.45 win rate. The 30% sector limit is an entry-time cap, not a continuously maintained cap: mark-to-market drift exceeded 30% on 100 exposure days, with a maximum observed sector weight of 30.578%. The report explicitly records `entry_only_mark_to_market_drift_is_reported_no_forced_rebalance`; do not describe this as a hard daily exposure ceiling.
+
+
+## T-0003 — full point-in-time Nifty 50 universe (pre-registered; not yet run)
+
+| Field | Frozen specification |
+|---|---|
+| Registration baseline | `0d42e76061de6c44efb3f74d8780d15d5752da9e` (registration commit precedes implementation and all experiment execution) |
+| Universe decision | Full Nifty 50 constituents on each effective date; reject the custom 49-symbol universe. |
+| Candidate source | `aditya-jha/nse-historical-membership`, upstream commit `0786cd9159742f4f2012dcd5f01c1f224b0b019b`; candidate CSV blob SHA `4b762a75376b14b9db6304ef70237270bc8da397`. This is a candidate reconstruction only, not authenticated input. |
+| Interval semantics | Half-open `[valid_from, valid_to)`; include on `valid_from`, exclude on `valid_to`; blank `valid_to` is open-ended. No inclusive-end conversion or date shifting. |
+| Research window | 2018-04-01 onward only, and only after point-in-time data coverage is validated. No pre-2018 candidate intervals enter the experiment. |
+| Announcement / look-ahead | Membership is applied from the published effective date, not announcement date. Each membership fact must have `source_published_at <= valid_from`; a row at decision date t may use only facts effective by t and published by t. Future membership rows must not contribute labels or universe eligibility. |
+| Missing / delisted securities | Fail closed for any required constituent/session with missing or unusable price data. No silent constituent skipping, forward fill, or survivorship-based exclusion. If complete coverage cannot be achieved, the affected date/fold is blocked and reported; no model run until a separately pre-registered, externally defensible exclusion policy is approved. |
+| Authentication | Independently spot-check 10–15 additions/removals across 2018 onward against official NSE Indices circulars/press releases. Mark only sampled events `SAMPLE_VERIFIED`; this does not certify unsampled rows or the full series. Archive primary documents and SHA-256 hashes before use. |
+| Corporate actions | TATAMOTORS/TMPV/TMCV lineage remains quarantined. No synthetic continuity, inferred adjustment factor, or merging of security returns. Any affected constituent/date blocks the relevant data until primary price-series reconciliation is complete. |
+| Single changed dimension | Universe definition / membership history only. No feature, target, threshold, cost, model, or portfolio tuning. |
+| Pre-registered metrics | Compare walk-forward top-five absolute net return, same-day full-universe baseline, relative excess with circular moving-block 95% CI, fold/regime breakdown, cross-sectional AUC vs logistic paired CI, missing-data coverage, and universe cardinality. Report all failures and null results. |
+| Decision rule | Research-only diagnostic. No promotion from relative excess alone. Existing continuation gate remains unchanged; absolute net profitability, regime, AUC, data-integrity, corporate-action and PIT evidence gates remain mandatory. Final holdout stays locked; live execution stays disabled. |
+| Execution status | NOT RUN. Do not start walk-forward or promotion workflows until primary-source sample checks, interval-boundary/look-ahead tests, full constituent data coverage, and corporate-action blockers are resolved. |
+
+This registration is intentionally made before implementation and before any performance result from the full point-in-time universe is observed. The candidate source hash is frozen for reproducibility but is not a claim of source authentication.
