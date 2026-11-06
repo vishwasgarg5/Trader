@@ -193,7 +193,7 @@ def run_discovery(
     catalog_path = inventory_path.parent / "nifty50_archive_discovery_catalog.csv"
     catalog_path.parent.mkdir(parents=True, exist_ok=True)
     with catalog_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=CATALOG_FIELDS, lineterminator="\\n")
+        writer = csv.DictWriter(handle, fieldnames=CATALOG_FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(sorted(catalog.values(), key=lambda r: (r["publication_date"], r["source_url"])))
     new_count = 0
