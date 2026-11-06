@@ -48,3 +48,21 @@ The upstream coverage report states that index-membership data runs through 2026
 ## Current outcome
 
 No membership intervals were imported into the production research inputs, no ticker was added or removed, and no model/backtest was rerun. This avoids turning a third-party candidate reconstruction into falsely authenticated point-in-time evidence.
+
+
+## Decision update — full point-in-time Nifty 50 selected
+
+The research-universe ambiguity is resolved: use the **complete Nifty 50 constituent set effective on each date**, not the configured 49-name snapshot. This decision is frozen in pre-registration T-0003 in `docs/experiment-trial-register.md`.
+
+Implementation guardrails now fixed:
+- Research starts no earlier than 2018-04-01.
+- Membership intervals are half-open `[valid_from, valid_to)`; `valid_from` is included and `valid_to` excluded.
+- Membership is effective from the official effective date. Publication/announcement time is retained separately and must not be later than the effective date for the membership fact to be usable at that effective date.
+- Missing/delisted constituent price history is a fail-closed data-coverage blocker. No silent omission, imputation, or survivor-only fallback.
+- Official NSE circular spot checks will be labelled `SAMPLE_VERIFIED`, never full-series verified.
+- TATAMOTORS/TMPV/TMCV remains quarantined until the full security and adjusted-price lineage is reconciled.
+- The final holdout remains locked; no performance experiment is authorized until source authentication, full-universe coverage, and the corporate-action blockers are resolved.
+
+The existing interval audit/application now uses the half-open convention, with tests for inclusion on `valid_from`, exclusion on `valid_to`, future-effective membership not making earlier rows eligible, and rejection of zero-length intervals. This is a semantics correction only: the unauthenticated candidate data has not been imported, the static 49-symbol configuration has not been represented as the full universe, and no model/backtest has been run.
+
+**Current status: universe decision registered; interval semantics corrected and regression-tested; full-universe data integration remains BLOCKED pending primary-source checks and complete price coverage.**
