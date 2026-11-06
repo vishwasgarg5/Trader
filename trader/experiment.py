@@ -347,6 +347,10 @@ def run_experiment() -> dict:
         raw_dir / "delivery_download_log.csv",
         DATA / "reference" / "universe_membership.csv",
         DATA / "reference" / "corporate_actions.csv",
+        DATA.parent / "config" / "universe.txt",
+        DATA.parent / "config" / "broker_costs_groww.json",
+        DATA.parent / "config" / "sector_classifications.json",
+        DATA.parent / "config" / "final_holdout_protocol.json",
     ):
         if candidate.is_file():
             snapshot_inputs.append(candidate)
@@ -356,6 +360,15 @@ def run_experiment() -> dict:
         root=DATA.parent,
         metadata={
             "git_commit": os.environ.get("GITHUB_SHA", "local-unpinned"),
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+            "universe_policy": "owner-confirmed fixed 49-symbol custom universe; no silent additions or substitutions",
+            "portfolio_risk_limits": {
+                "max_sector_exposure_fraction": 0.30,
+                "drawdown_size_reduction_threshold": 0.10,
+                "drawdown_size_multiplier": 0.50,
+                "max_participation_rate": 0.01,
+            },
             "experiment": "triple_barrier_relative_strength_delivery",
             "price_source": "Yahoo Finance via yfinance; independently verify adjusted-price lineage",
             "delivery_source": "NSE full bhavcopy sec_bhavdata_full",
