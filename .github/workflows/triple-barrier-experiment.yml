@@ -1,20 +1,8 @@
 name: Triple Barrier Research Experiment
 
 on:
-  push:
-    branches: [main, feature/triple-barrier-walk-forward, feature/p1-p2-data-portfolio-validation, feature/p2-liquidity-sector-validation, feature/p3-rankic-sector-risk-controls]
-    paths:
-      - "trader/**"
-      - "tests/**"
-      - "config/**"
-      - "requirements.txt"
-  pull_request:
-    branches: [main, feature/p1-p2-data-portfolio-validation]
-    paths:
-      - "trader/**"
-      - "tests/**"
-      - "requirements.txt"
-      - ".github/workflows/triple-barrier-experiment.yml"
+  # Expensive walk-forward runs are opt-in only. Unit tests run in CI; do not
+  # launch research automatically on implementation, test, or docs commits.
   workflow_dispatch:
 
 permissions:
