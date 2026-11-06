@@ -44,7 +44,7 @@ def download_prices(tickers: list[str], period: str = "3y") -> dict[str, pd.Data
     symbols = list(dict.fromkeys([*tickers, "^NSEI", "^INDIAVIX"]))
     raw = yf.download(
         symbols, period=period, interval="1d", auto_adjust=True,
-        group_by="ticker", progress=False, threads=True,
+        group_by="ticker", progress=False, threads=False,
     )
     if raw.empty:
         raise RuntimeError("Yahoo Finance returned no price data")
