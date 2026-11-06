@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pytest
 
 from trader.labels import triple_barrier_labels
 
@@ -70,3 +71,45 @@ def test_last_horizon_rows_remain_unresolved():
     assert result.iloc[0]["exit_reason"] == "timeout"
     assert result.iloc[0]["target"] == 0
     assert result.iloc[1:]["target"].isna().all()
+
+
+def test_rejects_duplicate_trading_dates():
+    prices = _bars([
+        (100, 101, 99, 100),
+        (100, 105, 99, 104),
+        (104, 105, 103, 104),
+    ])
+    prices.index = pd.to_datetime(["2026-01-01", "2026-01-01", "2026-01-03"])
+    with pytest.raises(ValueError, match="unique trading dates"):
+        triple_barrier_labels(prices, horizon=2)
+
+
+@pytest.mark.parametrize("multiple", [float("nan"), float("inf"), 0.0, -1.0])
+def test_rejects_non_finite_or_non_positive_barrier_multiples(multiple):
+    prices = _bars([
+        (100, 101, 99, 100),
+        (100, 105, 99, 104),
+        (104, 105, 103, 104),
+    ])
+    with pytest.raises(ValueError, match="finite and positive"):
+        triple_barrier_labels(prices, horizon=2, up_multiple=multiple)
+
+
+def test_rejects_inconsistent_ohlc_range():
+    prices = _bars([
+        (100, 101, 99, 100),
+        (100, 99, 98, 100),
+        (104, 105, 103, 104),
+    ])
+    with pytest.raises(ValueError, match="inconsistent high/low"):
+        triple_barrier_labels(prices, horizon=2)
+
+
+def test_rejects_non_finite_ohlc_values():
+    prices = _bars([
+        (100, 101, 99, 100),
+        (100, np.inf, 99, 100),
+        (104, 105, 103, 104),
+    ])
+    with pytest.raises(ValueError, match="finite and positive"):
+        triple_barrier_labels(prices, horizon=2)
