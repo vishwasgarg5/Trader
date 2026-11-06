@@ -80,3 +80,21 @@ def test_triage_uses_canonical_archive_title_not_human_inventory_notes(tmp_path)
     assert row["title_triage"] == "PRIORITY_CONSTITUENT_CHANGE_REVIEW"
     assert row["review_status_unchanged"] == "CANDIDATE"
     assert report["membership_written"] is False
+
+
+
+def test_missing_pdf_for_explicitly_other_index_is_not_nifty50_integrity_failure(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\n"
+        "sdl-1,2018-06-05,Archive title: Change in NIFTY 10 Year SDL Index w.e.f. June 06 2018,"
+        "https://example.test/sdl.pdf,,,DISCOVERED_UNREVIEWED\n",
+        encoding="utf-8",
+    )
+    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv")
+    row = report["triage"][0]
+    assert row["title_triage"] == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
+    assert row["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"
+    assert report["source_integrity_failures"] == []
+    assert report["out_of_scope_source_not_required"] == ["sdl-1"]
+    assert report["membership_written"] is False
