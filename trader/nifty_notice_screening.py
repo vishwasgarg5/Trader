@@ -15,7 +15,7 @@ from pypdf import PdfReader
 
 INVENTORY = Path("data/reference/nifty50_annual_notice_inventory.csv")
 REPORT = Path("data/reports/nifty50_notice_text_screening.json")
-NIFTY50_RE = re.compile(r"nifty\\s*[- ]?\\s*50|nifty50", re.IGNORECASE)
+NIFTY50_RE = re.compile(r"nifty\s*[- ]?\s*50|nifty50", re.IGNORECASE)
 CONTEXT_CHARS = 220
 
 
@@ -24,7 +24,7 @@ def _snippets(text: str, limit: int = 12) -> list[str]:
     for match in NIFTY50_RE.finditer(text):
         start = max(0, match.start() - CONTEXT_CHARS)
         end = min(len(text), match.end() + CONTEXT_CHARS)
-        snippet = re.sub(r"\\s+", " ", text[start:end]).strip()
+        snippet = re.sub(r"\s+", " ", text[start:end]).strip()
         if snippet and (not snippets or snippet != snippets[-1]):
             snippets.append(snippet)
         if len(snippets) >= limit:
@@ -43,10 +43,10 @@ def screen_pdf(path: Path, expected_sha256: str = "") -> dict:
         return {"text_status": "SOURCE_HASH_MISMATCH", "source_sha256": digest}
     try:
         reader = PdfReader(str(path), strict=False)
-        text = "\\n".join(page.extract_text() or "" for page in reader.pages)
+        text = "\n".join(page.extract_text() or "" for page in reader.pages)
     except Exception as exc:
         return {"text_status": "PDF_TEXT_EXTRACTION_FAILED", "source_sha256": digest, "error": str(exc)}
-    compact = re.sub(r"\\s+", " ", text).strip()
+    compact = re.sub(r"\s+", " ", text).strip()
     if not compact:
         return {
             "text_status": "EMPTY_OR_SCANNED_PDF",
@@ -99,7 +99,7 @@ def run_screening(inventory_path: Path = INVENTORY, report_path: Path = REPORT) 
         "coverage_complete": False,
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 
