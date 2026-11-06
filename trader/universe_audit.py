@@ -200,7 +200,8 @@ def audit_universe(
             "Yahoo Finance adjusted-price semantics and corporate-action completeness are not independently verified.",
             "Missing benchmark sessions are a diagnostic; holidays, suspensions and source gaps require manual adjudication.",
             "Delisted securities and historical constituents absent from the configured list cannot be recovered from this panel.",
-            "Membership file provenance is not independently authenticated by this audit.",\n            "Membership intervals use half-open [valid_from, valid_to) semantics.",
+            "Membership file provenance is not independently authenticated by this audit.",
+            "Membership intervals use half-open [valid_from, valid_to) semantics.",
         ],
     }
 
