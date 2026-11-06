@@ -32,3 +32,28 @@ The historical experiment count is not yet complete: earlier parameter changes a
 ## T-0001 interpretation
 
 The model's relative top-five advantage was positive in 11/16 folds and its cross-sectional excess-return bootstrap interval was positive. However, absolute top-five net return was -0.1371%, the model-vs-logistic AUC difference interval included zero, the predeclared risk-on/low-volatility regime check passed only 7/14 evaluable folds, and the data manifest reported no verified point-in-time membership or corporate-action adjustment ledger. The experiment therefore does not establish a deployable edge. The one-pick sensitivity result must not be promoted or tuned against the same walk-forward sample.
+
+## Universe-change record (not a model trial)
+
+| Change ID | Date (UTC) | Commit | Change | Evidence and disposition |
+|---|---|---|---|---|
+| U-0001 | 2026-11-06 | `48bdea3a0637cabadff86f97669c11414a4a04f9` | Replaced `TATAMOTORS.NS` with `TMPV.NS` in the fixed 49-symbol universe after the NSE symbol/name transition; sector classification and corporate-action ledger were also renamed to TMPV. | **Unverified lineage; quarantine from inferential use pending reconciliation.** The NSE circular establishes the passenger-vehicle symbol change effective 2025-10-24, but the demerger also created a separately listed commercial-vehicle security (TMCV) on 2025-11-12. The 1:1 entitlement is not a price factor. Yahoo's pre-demerger TMPV history, adjusted OHLCV, and the official special-pre-open price discovery have not been reconciled. Do not treat TMPV as a proven continuous single-security series or infer a factor. |
+
+The change above is a universe/data-lineage change, not an independent model trial. Until verified, any experiment containing TMPV history across the 2025-10-14 demerger is not eligible to support performance or promotion claims. A safe keep/drop decision requires checking the exact downloaded TMPV bars and their source lineage; the current evidence is insufficient to keep it as a validated continuous series. Do not silently replace it with TMCV or combine both securities into one series.
+
+## Data-window reconciliation
+
+The daily pipeline calls `download_prices(universe)`, whose default is `period="3y"`; the current integrity report therefore describes roughly 742 rows per symbol. The walk-forward experiment explicitly calls `download_prices(universe, period="7y")`. These are different input windows and must not be described as one shared frozen dataset. The experiment creates its own `data/snapshots/input_manifest.json` after downloading and writing `data/raw/price_panel.csv`; the daily integrity report does not consume that experiment manifest. The #233 artifact is not available while its experiment step is still running. Compare the eventual #233 manifest's price-panel hash, symbol/date coverage, and manifest hash against its report before accepting the gate result. Do not compare daily-model metrics directly with walk-forward metrics.
+
+## Run-to-trial reconciliation queue
+
+Workflow runs are executions, not automatically independent statistical trials. A single pre-registered configuration can produce multiple reruns; conversely, code/configuration changes may create a new trial even when the workflow run is not the only distinguishing feature. The register must map each run to the commit, universe, target, features, costs, evaluation window and manifest before counting independent trials.
+
+| Run | Commit SHA | Current evidence | Reconciliation status |
+|---|---|---|---|
+| #204 | `6efa0028e33181347a33f43d6e04a9d25c1a666e` | Report artifact inspected in the gate audit; historical pooled and cross-sectional intervals were different estimands. | Reconcile configuration and manifest against T-0001/T-0002; do not count as independent without comparison. |
+| #223 | `efcb72dfcc7d7aa9f51bcb551b3ee0a9158ac61f` | Completed successfully; prior report showed negative absolute portfolio return and intervals crossing zero. | Map to registered configuration and compare manifest/return series; no independent-trial claim yet. |
+| #233 | `b72c22fd21a2f2049b02c6b24407ca199cdb3625` | In progress at register update; unit tests passed, walk-forward step running, artifact not yet uploaded. | Pending report, manifest and gate verification. |
+
+Runs #171, #172, #175, #177 and #182 remain listed above or under T-0001. The current two trial IDs are not a complete historical trial census. No multiple-testing-adjusted significance claim is permitted until the full configuration/run map is reconstructed.
+
