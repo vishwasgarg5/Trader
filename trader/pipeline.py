@@ -186,6 +186,8 @@ def make_signals(
             promotion_gate = json.loads(gate_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             promotion_gate = {}
+    if not isinstance(promotion_gate, dict):
+        promotion_gate = {}
     promotion_eligible = (
         promotion_gate.get("status") == "APPROVED"
         and promotion_gate.get("promotion_eligible") is True
