@@ -131,3 +131,51 @@ def test_daily_price_normalizer_drops_non_finite_closes():
     prices.loc[0, "close"] = float("inf")
     normalised = _normalise_daily_prices(prices)
     assert pd.Timestamp("2026-01-02") not in normalised.index
+
+
+
+def test_sector_exposure_cap_rejects_entries_above_configured_limit():
+    candidates = _candidates().iloc[[0]].copy()
+    second = candidates.iloc[[0]].copy()
+    second["symbol"] = "BBB"
+    second["score"] = 0.8
+    third = candidates.iloc[[0]].copy()
+    third["symbol"] = "CCC"
+    third["score"] = 0.7
+    for item in (candidates, second, third):
+        item["sector"] = "Financials"
+    panel = _prices()
+    extra = panel.loc[panel["symbol"] == "AAA"].copy()
+    extra["symbol"] = "CCC"
+    panel = pd.concat([panel, extra], ignore_index=True)
+    result = simulate_mark_to_market_portfolio(
+        pd.concat([candidates, second, third], ignore_index=True),
+        panel, initial_capital=100_000, max_positions=5,
+        max_position_fraction=0.20, max_sector_exposure_fraction=0.30,
+        max_participation_rate=None,
+    )
+    assert result["trades"] == 2
+    assert result["rejected"]["sector_cap"] == 1
+    assert result["peak_sector_exposure"] <= 0.30
+
+
+def test_drawdown_rule_halves_new_position_size_after_ten_percent_loss():
+    first = _candidates().iloc[[0]].copy()
+    first["exit_date"] = "2026-01-07"
+    first["exit_price"] = 70.0
+    first["score"] = 0.9
+    second = _candidates().iloc[[1]].copy()
+    second["entry_date"] = "2026-01-06"
+    second["exit_date"] = "2026-01-07"
+    second["score"] = 0.8
+    second["sector"] = "Technology"
+    first["sector"] = "Financials"
+    result = simulate_mark_to_market_portfolio(
+        pd.concat([first, second], ignore_index=True),
+        _prices(), initial_capital=100_000, max_positions=2,
+        max_position_fraction=1.0, max_gross_exposure=1.0,
+        max_sector_exposure_fraction=None, max_participation_rate=None,
+    )
+    by_symbol = {trade["symbol"]: trade for trade in result["trade_log"]}
+    assert by_symbol["BBB"]["drawdown_size_multiplier"] == pytest.approx(0.50)
+    assert result["drawdown_scaled_entries"] >= 1
