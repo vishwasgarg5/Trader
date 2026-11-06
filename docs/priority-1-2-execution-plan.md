@@ -8,7 +8,7 @@ Last reviewed: 2026-11-06. This plan tracks research-only work on `feature/p2-li
 
 The completed P2 experiment fails the pre-registered profitability and statistical-edge gates. Passing CI confirms code execution and reproducibility, not a tradable edge.
 
-Latest full validation: [GitHub Actions run #170](https://github.com/vishwasgarg5/Trader/actions/runs/42153473314), successful on `67148cb7bd13a61340ae1b4e4b76379f62b291c9`. Unit tests, walk-forward experiment and report upload all passed. The latest report artifact was uploaded as `triple-barrier-experiment-report` (artifact ID `13473134181`, SHA-256 `25653dcefe6185e01306c4c1beee476388ac18ebaa2b28a4af6280968735dff4`).
+Latest full validation: [GitHub Actions run #171](https://github.com/vishwasgarg5/Trader/actions/runs/42155416537), successful on `06bf56e3cbe826f1194c0b2b893730ea8b7f5bbd`. Unit tests, walk-forward experiment and report upload all passed. The report artifact `triple-barrier-experiment-report` (artifact ID `13475379095`) was downloaded and independently inspected; SHA-256: `e6721cc80b0ae96a1f7d121a4c40a7a2220b3af0c98dcacb0afb4c412f8cb4b6`.
 
 ## Priority 0 — leakage-aware research baseline
 
@@ -50,19 +50,21 @@ Latest full validation: [GitHub Actions run #170](https://github.com/vishwasgarg
 - [ ] Reconcile source delivery history gaps and independently validate price/turnover provenance.
 - [x] Evaluate the pre-registered profitability and statistical gates; result is FAIL / HOLD, so do not promote.
 
-### Previously reviewed experiment evidence (run #151; run #170 artifact not yet independently reviewed)
+### Latest inspected experiment evidence (run #171; artifact SHA-256 `e6721cc80b0ae96a1f7d121a4c40a7a2220b3af0c98dcacb0afb4c412f8cb4b6`)
 
-- 16 walk-forward folds; 82,373 labels; 43 ambiguous rows excluded.
-- Delivery coverage 99.73%; 1% turnover participation cap applied.
-- Cross-sectional AUC 0.5101; logistic baseline 0.5079.
-- Model-minus-logistic AUC +0.00384; 95% block-bootstrap interval [-0.00187, +0.00932], includes zero.
-- Mean top-five net return across folds -0.1875%; mean net excess over universe +0.0734%; 95% five-day block-bootstrap interval [-0.0252%, +0.1785%], includes zero.
-- Predeclared cross-sectional and regime gates both failed; `continue_price_feature_tuning=false`.
-- Cash-funded portfolio: 1,148 trades, -17.24% net return, 26.25% realised-equity drawdown.
-- Daily mark-to-market portfolio: 1,163 trades, -23.26% net return, 29.23% max daily drawdown and 80.10% peak sector exposure.
-- Nifty buy-and-hold comparator: +32.18% before index costs, 15.77% max drawdown over the reported window.
-- Daily MTM slippage stress: -23.26% at 2 bps/side; -33.63% at 5 bps; -47.94% at 10 bps; -68.38% at 20 bps.
-- Final holdout status: `LOCKED_NOT_EVALUATED`.
+- 16 walk-forward folds; 82,366 labelled rows; 43 ambiguous same-day double-touch rows excluded.
+- Delivery coverage: 99.732%; 1% turnover participation cap applied.
+- Mean cross-sectional AUC: 0.50520; logistic cross-sectional baseline: 0.50790.
+- Mean model-minus-logistic cross-sectional AUC: +0.00414; 95% two-fold block-bootstrap interval [-0.00207, +0.00988], includes zero.
+- Top-five mean net return across folds: -0.2564%; universe mean net return: -0.2622%; mean net excess: +0.00364%; 95% five-day block-bootstrap interval [-0.1035%, +0.1076%], includes zero.
+- Pre-registered cross-sectional and regime gates both failed; `continue_price_feature_tuning=false`, decision `stop_price_feature_tuning`, and `promotion_eligible=false`.
+- Cash-funded portfolio: 1,158 trades, -44.47% net return and 45.68% realised-equity drawdown. This realised-equity drawdown understates intra-trade mark-to-market drawdown.
+- Daily mark-to-market portfolio: 1,169 trades, -24.39% net return, 29.77% maximum daily drawdown and 80.15% peak sector exposure.
+- Nifty buy-and-hold comparator: +32.18% before index costs, 15.77% maximum drawdown; exposure-matched Nifty: +14.18% before index costs.
+- Data audit still found only 48 of the configured 49 price histories; `TATAMOTORS.NS` is missing. No official dated membership history or corporate-action ledger was supplied, and adjusted-price lineage remains independently unverified.
+- Final holdout status: `LOCKED_NOT_EVALUATED`; no holdout metrics were computed.
+
+Passing CI validates implementation and reproducibility, not data completeness, profitability or trading readiness. The successful run must not be interpreted as passing any promotion gate.
 
 ## Priority 3 — freeze and independent review
 
