@@ -119,6 +119,62 @@ def _single_feature_aucs(train: pd.DataFrame, test: pd.DataFrame, features: list
     return results
 
 
+def _cross_sectional_rank_metrics(scored: pd.DataFrame) -> dict:
+    """Evaluate within-date ranking using continuous realised net returns."""
+    required = {"score", "net_return"}
+    missing = required.difference(scored.columns)
+    if missing:
+        raise ValueError(f"Rank evaluation missing columns: {sorted(missing)}")
+    rows = []
+    for day, group in scored.groupby(level=0, sort=True):
+        values = group[["score", "net_return"]].apply(pd.to_numeric, errors="coerce").dropna()
+        if len(values) < 3 or values["score"].nunique() < 2 or values["net_return"].nunique() < 2:
+            continue
+        rank_ic = values["score"].corr(values["net_return"], method="spearman")
+        if not np.isfinite(rank_ic):
+            continue
+        count = max(1, int(np.ceil(len(values) * 0.10)))
+        ordered = values.sort_values("score", ascending=False, kind="mergesort")
+        top = float(ordered.head(count)["net_return"].mean())
+        bottom = float(ordered.tail(count)["net_return"].mean())
+        rows.append({
+            "date": str(pd.Timestamp(day).date()),
+            "rank_ic": float(rank_ic),
+            "top_decile_net_return": top,
+            "bottom_decile_net_return": bottom,
+            "long_short_decile_net_return": top - bottom,
+            "cross_section_size": int(len(values)),
+        })
+    if not rows:
+        return {"status": "insufficient_cross_sections", "dates": 0, "daily": []}
+    ic = np.asarray([row["rank_ic"] for row in rows], dtype=float)
+    spreads = np.asarray([row["long_short_decile_net_return"] for row in rows], dtype=float)
+    centered = ic - ic.mean()
+    n = len(centered)
+    gamma0 = float(np.dot(centered, centered) / n)
+    long_run_variance = gamma0
+    max_lag = min(4, n - 1)
+    for lag in range(1, max_lag + 1):
+        covariance = float(np.dot(centered[lag:], centered[:-lag]) / n)
+        weight = 1.0 - lag / (max_lag + 1)
+        long_run_variance += 2.0 * weight * covariance
+    standard_error = float(np.sqrt(max(long_run_variance, 0.0) / n))
+    return {
+        "status": "evaluated",
+        "dates": int(n),
+        "mean_rank_ic": float(ic.mean()),
+        "rank_ic_hac_lag": int(max_lag),
+        "rank_ic_hac_standard_error": standard_error,
+        "rank_ic_hac_t_statistic": float(ic.mean() / standard_error) if standard_error > 0 else None,
+        "mean_long_short_decile_net_return": float(spreads.mean()),
+        "long_short_decile_net_return_block_bootstrap_95pct": block_bootstrap_mean_ci(
+            spreads, block_length=5, seed=42053
+        ),
+        "daily": rows,
+        "note": "Spearman rank IC uses realised net returns; HAC t-statistic uses up to four Newey-West lags; decile spread is computed per signal date and block-bootstrapped across dates.",
+    }
+
+
 def walk_forward_evaluate(
     frame: pd.DataFrame,
     features: list[str],
@@ -166,6 +222,10 @@ def walk_forward_evaluate(
 
             scored = test.copy()
             scored["probability"] = probabilities
+            scored["score"] = probabilities
+            rank_metrics = _cross_sectional_rank_metrics(scored) if "net_return" in scored else {
+                "status": "unavailable", "reason": "net_return is absent"
+            }
             if collect_oos_predictions:
                 oos = scored.copy()
                 oos["signal_date"] = oos.index
@@ -246,6 +306,7 @@ def walk_forward_evaluate(
                 "roc_auc": auc,
                 "flipped_roc_auc": (1.0 - auc) if auc is not None else None,
                 "cross_sectional_auc": _cross_sectional_auc(test, probabilities),
+                "rank_evaluation": rank_metrics,
                 "shuffled_label_auc_mean": float(np.mean(shuffled_aucs)) if shuffled_aucs else None,
                 "shuffled_label_auc_runs": shuffled_aucs,
                 "logistic_regression_auc": logistic_auc,
@@ -282,6 +343,14 @@ def walk_forward_evaluate(
         "mean_roc_auc": mean_metric("roc_auc"),
         "mean_flipped_roc_auc": mean_metric("flipped_roc_auc"),
         "mean_cross_sectional_auc": mean_metric("cross_sectional_auc"),
+        "mean_rank_ic": float(np.mean([
+            row["rank_evaluation"]["mean_rank_ic"] for row in fold_rows
+            if row.get("rank_evaluation", {}).get("status") == "evaluated"
+        ])) if any(row.get("rank_evaluation", {}).get("status") == "evaluated" for row in fold_rows) else None,
+        "mean_long_short_decile_net_return": float(np.mean([
+            row["rank_evaluation"]["mean_long_short_decile_net_return"] for row in fold_rows
+            if row.get("rank_evaluation", {}).get("status") == "evaluated"
+        ])) if any(row.get("rank_evaluation", {}).get("status") == "evaluated" for row in fold_rows) else None,
         "mean_shuffled_label_auc": mean_metric("shuffled_label_auc_mean"),
         "mean_logistic_regression_auc": mean_metric("logistic_regression_auc"),
         "mean_logistic_regression_cross_sectional_auc": mean_metric("logistic_regression_cross_sectional_auc"),
