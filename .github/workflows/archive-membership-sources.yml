@@ -132,6 +132,39 @@ jobs:
               notice_fields = notice_reader.fieldnames
               notice_rows = list(notice_reader)
 
+          required_notice_fields = {
+              "notice_id", "year", "announcement_date", "effective_date",
+              "source_role", "source_url", "observed_nifty50_effect",
+              "source_document_path", "source_sha256", "review_status", "notes",
+          }
+          if not required_notice_fields.issubset(notice_fields or []):
+              raise SystemExit(
+                  f"Annual notice inventory missing columns: "
+                  f"{sorted(required_notice_fields - set(notice_fields or []))}"
+              )
+          with notice_inventory.open(newline="", encoding="utf-8") as handle:
+              for line_number, raw_row in enumerate(csv.reader(handle), start=1):
+                  if len(raw_row) != len(notice_fields or []):
+                      raise SystemExit(
+                          f"Annual notice inventory CSV width error on line {line_number}: "
+                          f"expected {len(notice_fields or [])}, got {len(raw_row)}"
+                      )
+          for row in notice_rows:
+              effect = (row.get("observed_nifty50_effect") or "").strip()
+              digest = (row.get("source_sha256") or "").strip()
+              if not effect or effect.startswith("data/"):
+                  raise SystemExit(
+                      f"Annual notice inventory has invalid observed_nifty50_effect: {row['notice_id']}"
+                  )
+              if len(digest) != 64 or any(ch not in "0123456789abcdef" for ch in digest.lower()):
+                  raise SystemExit(
+                      f"Annual notice inventory has invalid SHA-256: {row['notice_id']}"
+                  )
+              if not (row.get("source_document_path") or "").startswith("data/reference/source_documents/"):
+                  raise SystemExit(
+                      f"Annual notice inventory has invalid source_document_path: {row['notice_id']}"
+                  )
+
           for row in notice_rows:
               notice_id = row["notice_id"].strip()
               url = row["source_url"].strip()
