@@ -42,7 +42,7 @@ jobs:
         run: python -m trader.nifty_notice_screening
       - name: Commit discovered inventory, source PDFs and screening report
         run: |
-          if git diff --quiet; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No new archive candidates or source changes."
             exit 0
           fi
