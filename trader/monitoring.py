@@ -100,7 +100,8 @@ def build_monitoring_report(root: Path = ROOT, generated_at: datetime | None = N
     if gate:
         gate_safe = (
             gate.get("status") != "APPROVED"
-            or (gate.get("promotion_eligible") is False and gate.get("live_execution_enabled") is False)
+            and gate.get("promotion_eligible") is False
+            and gate.get("live_execution_enabled") is False
         )
         checks["promotion_gate_fail_closed"] = {"passed": gate_safe, "status": gate.get("status")}
         if not gate_safe:
