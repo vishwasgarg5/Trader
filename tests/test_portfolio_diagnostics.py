@@ -128,6 +128,7 @@ def test_mark_to_market_rejects_non_finite_candidate_values():
 
 def test_daily_price_normalizer_drops_non_finite_closes():
     prices = _prices().copy()
+    prices["close"] = prices["close"].astype(float)
     prices.loc[0, "close"] = float("inf")
     normalised = _normalise_daily_prices(prices)
     assert pd.Timestamp("2026-01-02") not in normalised.index
