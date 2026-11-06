@@ -1,8 +1,8 @@
 {
   "checks": {
     "accuracy_vs_majority_baseline": {
-      "accuracy": 0.6214837286265857,
-      "baseline": 0.6293436293436294,
+      "accuracy": 0.621207942636514,
+      "baseline": 0.6337562051847766,
       "passed": false
     },
     "configured_price_validation": {
@@ -16,7 +16,7 @@
       "passed": true
     },
     "latest_signals_valid": {
-      "as_of": "2026-11-06",
+      "as_of": "2026-11-05",
       "passed": true,
       "rows": 5
     },
@@ -40,20 +40,20 @@
       "passed": true
     },
     "signal_price_date_alignment": {
-      "latest_price_date": "2026-11-06",
+      "latest_price_date": "2026-11-05",
       "passed": true,
-      "signal_date": "2026-11-06"
+      "signal_date": "2026-11-05"
     }
   },
-  "code_revision": "aae5fce1b5469d96544770439a9246fb17990761",
+  "code_revision": "b5719a5474a191bfd21cfbbfe70560952e4f4d48",
   "errors": [],
-  "generated_at_utc": "2026-11-06T18:27:53.491324+00:00",
+  "generated_at_utc": "2026-11-06T18:44:34.215552+00:00",
   "input_sha256": {
     "config/promotion_gate.json": "ed8d4cfd32fb0092de221e8eb78845dfb5d2f24d25d4d788dcce94c0c175c2f3",
-    "data/logs/predictions.csv": "e834351076d1bfcbdafa5d789a25e5520137e7e88c345271dc7079b74dd31c4e",
-    "data/reports/data_integrity.json": "20076e058927e6cb21ed2980cd8be46447f5dcd2b4cce68f629c0e6e93b64f9c",
-    "data/reports/metrics.json": "4446ded53da4bf7ffa16672bc1cb0e75dcccee268c8a6ea5e565e34dcc40e09d",
-    "data/signals/latest_signals.csv": "873f6eb7a2251784a594bae95d5c307be49468ee8d3d5edb1a2e66ea3ee135f2"
+    "data/logs/predictions.csv": "84fd601f89f6e6030bf32e1906d83ff30bd3637e0abb64a06f897367acc0a100",
+    "data/reports/data_integrity.json": "947bf6a63ab5080fd4be5e07e603c3253bedd06e4d38bcb6ee2c015f018136a5",
+    "data/reports/metrics.json": "6224da6f26e584ed9e7560794eecdb0078e210afba112259f86a25cdfd6fc440",
+    "data/signals/latest_signals.csv": "54ff1a6704b4e479f3f5a24490ae6d83ce9707f82a3cf7c3b2d6746c2740030a"
   },
   "live_execution_enabled": false,
   "policy": "Monitoring is diagnostic only; it never authorizes promotion, holdout access, or live execution.",
