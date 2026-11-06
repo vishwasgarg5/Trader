@@ -153,3 +153,25 @@ Primary sources:
 - https://www.niftyindices.com/Press_Release/ind_prs13052020.pdf
 
 All affected transition rows remain SAMPLE_ONLY until independent document review and annual inventory reconciliation are complete.
+
+
+## Transition-source archival and content spot-check — 2026-11-06
+
+The transition-register archive workflow now downloads the primary source PDF for every candidate transition row, validates the PDF signature and approved NSE/Nifty Indices host, stores the source once per URL, and writes the local path plus SHA-256 back to the ledger. The successful archival run covered all 34 candidate rows, 13 unique original-notice PDFs, and the separate 2020-03-16 superseding notice (14 distinct PDFs total). The 2020-02-18 original notice and 2020-03-16 superseding notice are both attached to the YESBANK and SHREECEM rows.
+
+Content spot-checks of the official documents confirmed the candidate transition details for:
+- 2018-04-02: AMBUJACEM, AUROPHARMA and BOSCHLTD out; BAJAJFINSV, GRASIM and TITAN in.
+- 2018-09-28: LUPIN out; JSWSTEEL in.
+- 2019-03-29: HINDPETRO out; BRITANNIA in.
+- 2019-09-27: IBULHSGFIN out; NESTLEIND in.
+- 2020-03-19: YESBANK out; SHREECEM in, accelerated from the original March 27 schedule.
+- 2020-07-31: VEDL out; HDFCLIFE in.
+- 2020-09-25: INFRATEL and ZEEL out; DIVISLAB and SBILIFE in.
+- 2021-03-31: GAIL out; TATACONSUM in.
+- 2022-03-31: IOC out; APOLLOHOSP in.
+- 2022-09-30: SHREECEM out; ADANIENT in.
+- 2023-07-13: HDFC out; LTIM in (official symbol LTIM).
+- 2024-03-28: UPL out; SHRIRAMFIN in.
+- 2024-09-30: DIVISLAB and LTIM out; BEL and TRENT in.
+
+This is a document-content spot-check of the currently registered candidate transitions, not proof that the annual notice inventory is exhaustive. All 34 transition rows remain SAMPLE_ONLY, and all seven annual coverage rows remain NOT_STARTED until independent review, supersession inventory completion, and snapshot reconciliation are complete.
