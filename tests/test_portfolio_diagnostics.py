@@ -144,10 +144,11 @@ def test_sector_exposure_cap_rejects_entries_above_configured_limit():
     third["score"] = 0.7
     for item in (candidates, second, third):
         item["sector"] = "Financials"
-    panel = _prices()
+    panel = _prices().copy()
     extra = panel.loc[panel["symbol"] == "AAA"].copy()
     extra["symbol"] = "CCC"
     panel = pd.concat([panel, extra], ignore_index=True)
+    panel["close"] = 100.0
     result = simulate_mark_to_market_portfolio(
         pd.concat([candidates, second, third], ignore_index=True),
         panel, initial_capital=100_000, max_positions=5,
