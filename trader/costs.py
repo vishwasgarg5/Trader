@@ -210,9 +210,9 @@ def reconcile_groww_contract_notes(
             raise ValueError(f"Contract-note row {index} contains missing or non-finite values")
         if float(row["notional_rupees"]) <= 0:
             raise ValueError(f"Contract-note row {index} has non-positive notional")
+        costs["notional_rupees"] = float(row["notional_rupees"])
         estimate = delivery_round_trip_cost(
-            float(row["entry_price"]), float(row["exit_price"]),
-            notional_rupees=float(row["notional_rupees"]), **costs,
+            float(row["entry_price"]), float(row["exit_price"]), **costs,
         )
         result = row.to_dict()
         deltas = []
