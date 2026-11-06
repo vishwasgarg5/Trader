@@ -151,15 +151,12 @@ jobs:
                       )
           for row in notice_rows:
               effect = (row.get("observed_nifty50_effect") or "").strip()
-              digest = (row.get("source_sha256") or "").strip()
               if not effect or effect.startswith("data/"):
                   raise SystemExit(
                       f"Annual notice inventory has invalid observed_nifty50_effect: {row['notice_id']}"
                   )
-              if len(digest) != 64 or any(ch not in "0123456789abcdef" for ch in digest.lower()):
-                  raise SystemExit(
-                      f"Annual notice inventory has invalid SHA-256: {row['notice_id']}"
-                  )
+              # The archiver computes the digest from downloaded PDF bytes.
+              # A pre-populated hash would defeat discovery of newly added notices.
               if not (row.get("source_document_path") or "").startswith("data/reference/source_documents/"):
                   raise SystemExit(
                       f"Annual notice inventory has invalid source_document_path: {row['notice_id']}"
@@ -208,7 +205,7 @@ jobs:
           PY
       - name: Commit archived evidence
         run: |
-          if git diff --quiet; then
+          if [[ -z "$(git status --porcelain)" ]]; then
             echo "All source PDFs and ledger hashes are already current."
             exit 0
           fi
