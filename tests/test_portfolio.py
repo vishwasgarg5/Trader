@@ -103,3 +103,16 @@ def test_non_finite_scores_and_prices_are_rejected():
     result = simulate_overlapping_portfolio(data)
     assert result["rejected"]["invalid"] == 1
     assert result["trades"] == 0
+
+
+
+def test_event_simulator_enforces_sector_cap_when_enabled():
+    data = _candidates().iloc[:3].copy()
+    data["sector"] = "Financials"
+    result = simulate_overlapping_portfolio(
+        data, initial_capital=100_000, max_positions=5,
+        max_position_fraction=0.20, max_sector_exposure_fraction=0.30,
+    )
+    assert result["rejected"]["sector_cap"] >= 1
+    assert result["trades"] <= 2
+    assert result["max_sector_exposure_fraction"] == pytest.approx(0.30)
