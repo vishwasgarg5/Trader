@@ -99,3 +99,65 @@ def summarize_predictive_edge(fold_metrics: dict, *, repeats: int = 5000, seed: 
         "folds": rows,
         "interpretation_guardrail": "A positive AUC difference or low shuffle p-value is predictive evidence only; it does not establish positive net returns or justify deployment.",
     }
+
+
+
+def evaluate_research_continuation_gate(
+    cross_metrics: dict,
+    regime_positive_folds: int,
+    predictive_edge: dict,
+    *,
+    point_in_time_universe_verified: bool,
+    corporate_action_adjustments_verified: bool,
+) -> dict:
+    """Fail closed before allowing another round of price-feature research.
+
+    This gate is deliberately stricter than a relative-ranking pass: it also
+    requires positive absolute net returns, a statistically positive advantage
+    over the logistic comparator, a passing predeclared regime check, and
+    independently verified historical data lineage.
+    """
+    fold_count = int(cross_metrics.get("fold_count") or 0)
+    majority = (fold_count // 2) + 1 if fold_count else 1
+    excess_ci = cross_metrics.get("top5_minus_universe_net_return_block_bootstrap_95pct")
+    model_ci = predictive_edge.get("model_minus_logistic_auc_block_bootstrap_95pct")
+    absolute_return = cross_metrics.get("mean_top5_net_return")
+    checks = {
+        "relative_excess_majority_of_folds": int(
+            cross_metrics.get("folds_with_positive_net_excess") or 0
+        ) >= majority,
+        "relative_excess_95pct_lower_bound_positive": bool(
+            excess_ci is not None and excess_ci.get("lower") is not None
+            and excess_ci["lower"] > 0
+        ),
+        "absolute_net_profitability_positive": bool(
+            absolute_return is not None and np.isfinite(absolute_return)
+            and absolute_return > 0
+        ),
+        "regime_gate_majority_of_folds": int(regime_positive_folds) >= majority,
+        "incremental_auc_vs_logistic_statistically_positive": bool(
+            model_ci is not None and model_ci.get("lower") is not None
+            and model_ci["lower"] > 0
+        ),
+        "point_in_time_universe_verified": bool(point_in_time_universe_verified),
+        "corporate_action_adjustments_verified": bool(corporate_action_adjustments_verified),
+    }
+    failed = [name for name, passed in checks.items() if not passed]
+    return {
+        "status": "PASS" if not failed else "STOP",
+        "continue_price_feature_research_only": not failed,
+        "fold_count": fold_count,
+        "majority_folds_required": majority,
+        "checks": checks,
+        "failed_checks": failed,
+        "decision": (
+            "continue_only_with_a_new_preregistered_trial"
+            if not failed else "stop_price_feature_tuning_and_repair_evidence"
+        ),
+        "promotion_eligible": False,
+        "live_execution_enabled": False,
+        "note": (
+            "Passing this exploratory gate would only permit a separately registered research trial; "
+            "it would not authorize deployment or final-holdout access."
+        ),
+    }
