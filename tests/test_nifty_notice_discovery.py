@@ -104,3 +104,17 @@ def test_broadly_archives_fixed_income_and_specialized_index_titles_for_screenin
     entries, _ = discover_entries(html, 2018, 2018)
     assert len(entries) == 2
     assert all(entry["review_candidate"] is True for entry in entries)
+
+
+def test_fixed_income_sdl_notices_remain_catalogue_only_not_membership_candidates():
+    html = """
+    <div>Jun 05, 2018</div>
+    <a href="/Press_Release/ind_prs05062018.pdf">Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018</a>
+    <div>Jul 16, 2019</div>
+    <a href="/Press_Release/ind_prs16072019_1.pdf">Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019</a>
+    <div>Mar 14, 2023</div>
+    <a href="/Press_Release/ind_prs14032023.pdf">NSE Indices launches Nifty SDL Jul 2028 Index</a>
+    """
+    entries, _ = discover_entries(html, 2018, 2024)
+    assert len(entries) == 3
+    assert all(entry["review_candidate"] is False for entry in entries)
