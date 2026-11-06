@@ -95,16 +95,32 @@ def delivery_round_trip_cost(
     if (not np.isfinite(entry_price) or not np.isfinite(exit_price)
             or entry_price <= 0 or exit_price <= 0):
         raise ValueError("Entry and exit prices must be finite and positive")
-    if (not np.isfinite(notional_rupees) or notional_rupees <= 0
-            or brokerage_cap_per_order < 0 or brokerage_min_per_order < 0
-            or dp_charge_per_sell < 0 or dp_free_below_sell_value < 0
-            or (dp_groww_component_per_sell is not None and dp_groww_component_per_sell < 0)
-            or (dp_depository_component_per_sell is not None and dp_depository_component_per_sell < 0)):
-        raise ValueError("Notional must be positive and fixed charges non-negative")
-    if min(stt_rate_each_side, stamp_duty_buy_rate, exchange_rate_each_side,
-           ipft_rate_each_side, sebi_rate_each_side, gst_rate, brokerage_rate_each_side,
-           brokerage_min_rate, slippage_bps_per_side) < 0:
-        raise ValueError("Cost rates cannot be negative")
+    numeric_parameters = {
+        "notional_rupees": notional_rupees,
+        "stt_rate_each_side": stt_rate_each_side,
+        "stamp_duty_buy_rate": stamp_duty_buy_rate,
+        "exchange_rate_each_side": exchange_rate_each_side,
+        "ipft_rate_each_side": ipft_rate_each_side,
+        "sebi_rate_each_side": sebi_rate_each_side,
+        "gst_rate": gst_rate,
+        "brokerage_rate_each_side": brokerage_rate_each_side,
+        "brokerage_cap_per_order": brokerage_cap_per_order,
+        "brokerage_min_per_order": brokerage_min_per_order,
+        "brokerage_min_rate": brokerage_min_rate,
+        "dp_charge_per_sell": dp_charge_per_sell,
+        "dp_free_below_sell_value": dp_free_below_sell_value,
+        "slippage_bps_per_side": slippage_bps_per_side,
+    }
+    if dp_groww_component_per_sell is not None:
+        numeric_parameters["dp_groww_component_per_sell"] = dp_groww_component_per_sell
+    if dp_depository_component_per_sell is not None:
+        numeric_parameters["dp_depository_component_per_sell"] = dp_depository_component_per_sell
+    if any(not np.isfinite(value) for value in numeric_parameters.values()):
+        raise ValueError("Cost parameters must be finite")
+    if notional_rupees <= 0:
+        raise ValueError("Notional must be positive")
+    if any(value < 0 for key, value in numeric_parameters.items() if key != "notional_rupees"):
+        raise ValueError("Cost rates and fixed charges cannot be negative")
 
     buy_turnover = float(notional_rupees)
     sell_turnover = buy_turnover * float(exit_price) / float(entry_price)
