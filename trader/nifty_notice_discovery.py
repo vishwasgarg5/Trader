@@ -39,7 +39,7 @@ PDF_RE = re.compile(r"""(?:https?://)?[^\s"'<> ()]*?\.pdf(?:\?[^\s"'<> ()]*)?"""
 REVIEW_TERMS = re.compile(
     r"replacement|replacements|inclusion|inclusions|exclusion|exclusions|"
     r"corporate action|demerger|merger|reconstitution|rebalanc|"
-    r"methodolog|criteria|index change|changes in indices|changes in nifty",
+    r"methodolog|criteria|index change|changes? in indices|changes? in nifty",
     re.I,
 )
 
