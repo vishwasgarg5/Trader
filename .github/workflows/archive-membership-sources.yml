@@ -6,6 +6,7 @@ on:
     paths:
       - "data/reference/nifty50_special_membership_events.csv"
       - "data/reference/nifty50_transition_register.csv"
+      - "data/reference/nifty50_annual_notice_inventory.csv"
       - ".github/workflows/archive-membership-sources.yml"
       - "tests/test_experiment.py"
   workflow_dispatch:
@@ -124,7 +125,45 @@ jobs:
                       changed = True
                   print(f"{row['transition_id']} {url_field}: archived {len(data)} bytes sha256={digest}")
 
+          # Archive the annual notice inventory as a separate source register.
+          notice_inventory = pathlib.Path("data/reference/nifty50_annual_notice_inventory.csv")
+          with notice_inventory.open(newline="", encoding="utf-8") as handle:
+              notice_reader = csv.DictReader(handle)
+              notice_fields = notice_reader.fieldnames
+              notice_rows = list(notice_reader)
+
+          for row in notice_rows:
+              notice_id = row["notice_id"].strip()
+              url = row["source_url"].strip()
+              parsed = urllib.parse.urlparse(url)
+              if parsed.scheme != "https" or parsed.hostname not in allowed_hosts:
+                  raise SystemExit(f"Refusing non-approved annual notice URL for {notice_id}: {url}")
+              request = urllib.request.Request(url, headers={"User-Agent": "TraderResearchEvidenceArchiver/1.0"})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  final = urllib.parse.urlparse(response.geturl())
+                  if final.scheme != "https" or final.hostname not in allowed_hosts:
+                      raise SystemExit(f"Unexpected redirect host for {notice_id}: {response.geturl()}")
+                  data = response.read(25 * 1024 * 1024 + 1)
+              if len(data) > 25 * 1024 * 1024 or not data.startswith(b"%PDF-"):
+                  raise SystemExit(f"Invalid or oversized annual notice PDF: {notice_id}")
+              digest = hashlib.sha256(data).hexdigest()
+              relative = f"data/reference/source_documents/NOTICE-{notice_id}.pdf"
+              target = pathlib.Path(relative)
+              target.parent.mkdir(parents=True, exist_ok=True)
+              if not target.exists() or target.read_bytes() != data:
+                  target.write_bytes(data)
+                  changed = True
+              if row.get("source_document_path", "") != relative or row.get("source_sha256", "") != digest:
+                  row["source_document_path"] = relative
+                  row["source_sha256"] = digest
+                  changed = True
+              print(f"{notice_id}: archived {len(data)} bytes sha256={digest}")
+
           if changed:
+              with notice_inventory.open("w", newline="", encoding="utf-8") as handle:
+                  writer = csv.DictWriter(handle, fieldnames=notice_fields, lineterminator=chr(10))
+                  writer.writeheader()
+                  writer.writerows(notice_rows)
               with transition_ledger.open("w", newline="", encoding="utf-8") as handle:
                   writer = csv.DictWriter(handle, fieldnames=transition_fields, lineterminator=chr(10))
                   writer.writeheader()
@@ -142,7 +181,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/source_documents/
+          git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/nifty50_annual_notice_inventory.csv data/reference/source_documents/
           git commit -m "Archive primary Nifty 50 special-membership PDFs"
           git fetch origin main
           git rebase origin/main
