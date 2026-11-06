@@ -107,3 +107,15 @@ This registration is intentionally made before implementation and before any per
 - The automatic Triple Barrier run triggered by the earlier code/test commit [#42226373556](https://github.com/vishwasgarg5/Trader/actions/runs/42226373556) failed during test collection on the then-present syntax error; the walk-forward step did not execute. The syntax was corrected and CI subsequently passed.
 - The expensive Triple Barrier workflow is now manual-dispatch only. No new T-0003 walk-forward result exists. The separate daily signals workflow [#42226532906](https://github.com/vishwasgarg5/Trader/actions/runs/42226532906) completed successfully on the existing configured 49-symbol daily pipeline; it is not a T-0003 result and must not be interpreted as full-universe evidence.
 - **Gate: BLOCKED / NOT RUN** until the official circular PDFs are archived and hashed, the candidate history is corrected for superseding notices and ticker aliases, the full Nifty 50 security universe is enumerated, every required constituent has complete usable price data (including delisted/merged names), and TATAMOTORS/TMPV/TMCV corporate-action lineage is reconciled.
+
+
+## T-0003 implementation controls — 2026-11-06
+
+The full point-in-time Nifty 50 evidence work is now tracked separately from model trials. Added:
+- `docs/nifty50-membership-verification-checklist.md`: event-by-event primary-source and annual completeness protocol;
+- `data/reference/nifty50_transition_register.csv`: initial known transition rows, explicitly `SAMPLE_ONLY` and not accepted as evidence;
+- `data/reference/nifty50_annual_coverage.csv`: seven required annual coverage rows, all `NOT_STARTED`;
+- `data/reference/security_symbol_aliases.csv` and `config/security_symbol_alias.schema.json`: effective-dated identity ledger distinguishing ticker rename, vendor alias and separate security;
+- `trader/membership_evidence.py`: fail-closed completeness and local SHA-256 validator, with positive and negative tests.
+
+These controls do not authenticate the historical membership facts and do not make the T-0003 input eligible. Original NSE documents have not yet been archived; annual notice searches and independent snapshot reconciliation remain incomplete. The legacy `config/universe.txt` remains the daily signal input only and is not the T-0003 full-universe source. No model run was started.
