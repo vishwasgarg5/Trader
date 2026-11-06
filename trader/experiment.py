@@ -202,13 +202,39 @@ def run_experiment() -> dict:
             if (not symbol.startswith("^") or symbol == "^NSEI") and "close" in stock
         ]
         daily_price_panel = pd.concat(daily_price_parts, ignore_index=True)
+        portfolio_risk_kwargs = {
+            "max_participation_rate": 0.01,
+            "max_sector_exposure_fraction": 0.30,
+            "drawdown_size_reduction_threshold": 0.10,
+            "drawdown_size_multiplier": 0.50,
+            "cost_parameters": DEFAULT_DELIVERY_COSTS,
+        }
         model_portfolio = simulate_mark_to_market_portfolio(
-            model_picks, daily_price_panel, max_participation_rate=0.01,
-            max_sector_exposure_fraction=0.30,
-            drawdown_size_reduction_threshold=0.10,
-            drawdown_size_multiplier=0.50,
-            cost_parameters=DEFAULT_DELIVERY_COSTS,
+            model_picks, daily_price_panel, **portfolio_risk_kwargs,
         )
+        # Predeclared turnover sensitivity: compare one, two and five picks
+        # without selecting the best result or changing the locked holdout.
+        top_pick_sensitivity = {}
+        for pick_count in (1, 2, 5):
+            selected = (
+                oos_frame.sort_values(
+                    ["signal_date", "score", "symbol"],
+                    ascending=[True, False, True], kind="mergesort",
+                ).groupby("signal_date", sort=True).head(pick_count).copy()
+            )
+            result = simulate_mark_to_market_portfolio(
+                selected, daily_price_panel, **portfolio_risk_kwargs,
+            )
+            top_pick_sensitivity[str(pick_count)] = {
+                "picks_per_signal_date": pick_count,
+                "trades": result["trades"],
+                "net_return": result["net_return"],
+                "max_daily_drawdown": result["max_daily_drawdown"],
+                "peak_sector_exposure": result["peak_sector_exposure"],
+                "average_gross_exposure": result["average_gross_exposure"],
+                "rejected": result["rejected"],
+                "interpretation": "predeclared turnover sensitivity; not a parameter-selection gate",
+            }
         random_benchmark = random_pick_monte_carlo(
             oos_frame, daily_price_panel, simulations=300, seed=42052,
             max_participation_rate=0.01, max_sector_exposure_fraction=0.30,
@@ -236,6 +262,7 @@ def run_experiment() -> dict:
         )
         portfolio_diagnostics = {
             "daily_mark_to_market_model": model_portfolio,
+            "top_pick_turnover_sensitivity": top_pick_sensitivity,
             "random_pick_monte_carlo": random_benchmark,
             "nifty_benchmarks": index_comparisons,
             "cost_stress_by_slippage_bps_per_side": cost_stress,
