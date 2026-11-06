@@ -47,3 +47,47 @@ def test_missing_annual_coverage_rows_fail_closed(tmp_path):
     report = audit_membership_evidence(transition, coverage, evidence)
     assert report["ready"] is False
     assert any("annual coverage row is missing" in error for error in report["errors"])
+
+
+def test_complete_year_requires_verified_events_and_hashed_primary_source(tmp_path):
+    import csv
+    import hashlib
+
+    transition, coverage, evidence = _write_inputs(tmp_path)
+    source = evidence / "nse.pdf"
+    source.write_bytes(b"official circular fixture")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    with transition.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle)
+        writer.writerow([
+            "transition_id", "symbol", "action", "announcement_date", "effective_date",
+            "source_url", "source_document_path", "source_sha256",
+            "has_superseding_notice", "superseding_notice_url",
+            "superseding_document_path", "superseding_sha256",
+            "verification_status", "reviewer", "reviewed_at", "notes",
+        ])
+        writer.writerow([
+            "E1", "AAA", "ADD", "2018-05-01", "2018-06-01",
+            "https://example.com/nse.pdf", "nse.pdf", digest,
+            "false", "", "", "", "VERIFIED", "independent-reviewer",
+            "2026-11-06", "reviewed against archived source",
+        ])
+    with coverage.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle)
+        writer.writerow([
+            "year", "scope_start", "scope_end", "official_notice_search_complete",
+            "expected_transition_count", "verified_transition_count",
+            "supersession_review_complete", "snapshot_reconciliation_complete",
+            "independent_reviewer", "reviewed_at", "coverage_status", "notes",
+        ])
+        for year in range(2018, 2025):
+            count = 1 if year == 2018 else 0
+            writer.writerow([
+                year, f"{year}-01-01", f"{year}-12-31", "true",
+                count, count, "true", "true", "independent-reviewer",
+                "2026-11-06", "COMPLETE", "annual search and snapshot reconciliation signed",
+            ])
+    report = audit_membership_evidence(transition, coverage, evidence)
+    assert report["ready"] is True
+    assert report["verified_transition_rows"] == 1
+    assert report["annual_years_complete"] == 7
