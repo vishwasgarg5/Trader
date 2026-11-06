@@ -114,3 +114,24 @@ The transition CSV had notes containing commas without CSV quoting. That caused 
 - Full interval ledger: absent; `data/reference/universe_membership.csv` is still missing.
 - Alias and corporate-action evidence: still unverified.
 - Full-universe price panel and experiment: not authorized.
+
+
+## JIOFIN temporary Nifty 50 membership — special-event ledger
+
+The ordinary ADD/REMOVE transition ledger cannot represent the 2023 demerger episode safely. A separate `data/reference/nifty50_special_membership_events.csv` now records the three required phases:
+
+1. `JIOFIN_SPINOFF_DUMMY` added effective 2023-07-20 (close 2023-07-19), with 51 securities represented and SPOS-derived constant-price treatment.
+2. Dummy member replaced by listed `JIOFIN` on 2023-08-21, retaining 51 securities.
+3. Listed `JIOFIN` removed effective 2023-09-07 (close 2023-09-06), returning the index to 50 securities.
+
+The July 17 NSE Indices announcement describes temporary spun-off entity inclusion and the demerger price treatment. The September 5 NSE Indices release states JIOFIN was listed on August 21 and confirms the September 7 removal; NSE circular FAOP58243 independently confirms the NIFTY 50 exclusion.
+
+Primary source URLs:
+- https://nsearchives.nseindia.com/web/sites/default/files/2023-08/PR_cc_17072023.pdf
+- https://www.niftyindices.com/Press_Release/ind_prs05092023.pdf
+- https://archives.nseindia.com/content/circulars/FAOP58243.pdf
+- https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf
+
+The ledger uses a synthetic key `JIOFIN_SPINOFF_DUMMY`; it does not assert that this was the vendor's tradable ticker. It deliberately does not infer the SPOS-derived price or use the 1:1 shareholder entitlement as a price-adjustment factor. The event auditor requires all three phases, the 51-to-50 constituent-count transitions, primary HTTPS URLs, original source files and SHA-256 hashes, and reviewer sign-off before it can pass.
+
+**Current status:** three event rows are present, all remain `SAMPLE_ONLY`, and no original PDF bytes have been archived or hashed. The experiment runner now calls this special-event audit before data download and fails closed while it is unresolved. The JIOFIN episode is therefore represented in the research evidence plan but is not yet approved for operational interval or price-panel construction.
