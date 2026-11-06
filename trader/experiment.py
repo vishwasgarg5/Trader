@@ -14,6 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
 from trader.data_snapshot import write_data_snapshot_manifest
 from trader.corporate_actions import audit_corporate_action_ledger
+from trader.membership_evidence import audit_membership_evidence
 from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
@@ -99,6 +100,32 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
 
 
 def run_experiment() -> dict:
+    # T-0003 must never fall back to the legacy static 49-symbol universe.
+    # Validate the official event ledger before any market-data download or
+    # model computation; a missing interval panel is also a hard blocker.
+    reference_root = DATA / "reference"
+    evidence_gate = audit_membership_evidence(
+        reference_root / "nifty50_transition_register.csv",
+        reference_root / "nifty50_annual_coverage.csv",
+        reference_root,
+    )
+    if not evidence_gate.get("ready", False):
+        errors = evidence_gate.get("errors", [])
+        detail = "; ".join(errors[:8])
+        if len(errors) > 8:
+            detail += f"; and {len(errors) - 8} additional evidence errors"
+        raise RuntimeError(
+            "T-0003 full point-in-time Nifty 50 evidence gate is BLOCKED; "
+            "refusing to run on the legacy static universe. " + detail
+        )
+
+    membership_path = reference_root / "universe_membership.csv"
+    if not membership_path.is_file():
+        raise RuntimeError(
+            "T-0003 full point-in-time membership intervals are missing "
+            "(data/reference/universe_membership.csv); refusing to use config/universe.txt."
+        )
+
     sector_path = DATA.parent / "config" / "sector_classifications.json"
     sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
     universe = load_universe()
@@ -108,8 +135,7 @@ def run_experiment() -> dict:
     # documented corporate-action/history treatment before research proceeds.
     validate_universe_prices(universe, prices)
     delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
-    membership_path = DATA / "reference" / "universe_membership.csv"
-    universe_audit = audit_universe(prices, load_universe(), membership_path)
+    universe_audit = audit_universe(prices, universe, membership_path)
     frame = build_experiment_frame(prices)
     frame, membership_application = apply_point_in_time_membership(
         frame, membership_path, universe_audit,
