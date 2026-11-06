@@ -171,12 +171,13 @@ def run_discovery(
     html = _request(ARCHIVE_URL, max_bytes=20_000_000).decode("utf-8", errors="replace")
     discovered, unparsed = discover_entries(html, start_year, end_year)
     existing = _load_inventory(inventory_path)
+    catalog_path = inventory_path.parent / "nifty50_archive_discovery_catalog.csv"
     catalog = {}
-    if CATALOG.exists():
-        with CATALOG.open(newline="", encoding="utf-8") as handle:
+    if catalog_path.exists():
+        with catalog_path.open(newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             if reader.fieldnames != CATALOG_FIELDS:
-                raise ValueError(f"Unexpected archive catalog schema in {CATALOG}")
+                raise ValueError(f"Unexpected archive catalog schema in {catalog_path}")
             catalog = {row["source_url"]: row for row in reader if row.get("source_url")}
     now = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     for item in discovered:
@@ -190,7 +191,6 @@ def run_discovery(
             "scope_status": prior.get("scope_status") or "UNREVIEWED",
             "first_discovered_at_utc": prior.get("first_discovered_at_utc") or now,
         }
-    catalog_path = inventory_path.parent / "nifty50_archive_discovery_catalog.csv"
     catalog_path.parent.mkdir(parents=True, exist_ok=True)
     with catalog_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=CATALOG_FIELDS, lineterminator="\n")
