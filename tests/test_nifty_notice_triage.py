@@ -52,3 +52,31 @@ def test_scanned_notice_uses_ocr_and_records_source_and_text_hashes(tmp_path, mo
     assert events and events[0]["human_review_required"] is True
     assert events[0]["candidate_out_symbols"] == ""
     assert events[0]["candidate_in_symbols"] == ""
+
+
+
+def test_triage_uses_canonical_archive_title_not_human_inventory_notes(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\\n"
+        "nifty50-2018,2018-02-21,Official release lists three removals and additions,"
+        "https://www.niftyindices.com/Press_Release/ind_prs21022018.pdf,,,"
+        "CANDIDATE\\n",
+        encoding="utf-8",
+    )
+    catalog = tmp_path / "catalog.csv"
+    catalog.write_text(
+        "publication_date,title,source_url,review_candidate,scope_status,first_discovered_at_utc\\n"
+        "2018-02-21,Change in Indices w.e.f. April 02 2018,"
+        "https://www.niftyindices.com/Press_Release/ind_prs21022018.pdf,true,UNREVIEWED,now\\n",
+        encoding="utf-8",
+    )
+    report = run(
+        inventory, tmp_path / "report.json", tmp_path / "events.csv",
+        catalog_path=catalog,
+    )
+    row = report["triage"][0]
+    assert row["title"] == "Change in Indices w.e.f. April 02 2018"
+    assert row["title_triage"] == "PRIORITY_CONSTITUENT_CHANGE_REVIEW"
+    assert row["review_status_unchanged"] == "CANDIDATE"
+    assert report["membership_written"] is False
