@@ -39,6 +39,7 @@ jobs:
           python -m pip install --upgrade pip pytest pypdf
           PYTHONPATH=. pytest -q tests/test_nifty_notice_discovery.py tests/test_nifty_notice_screening.py tests/test_nifty_archive_catalog_audit.py
       - name: Discover archive entries and archive review candidates
+        id: discover
         run: python -m trader.nifty_notice_discovery --start-year 2018 --end-year 2024
       - name: Audit every archive catalog row for missed review candidates
         run: python -m trader.nifty_archive_catalog_audit
