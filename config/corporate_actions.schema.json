@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Corporate action evidence ledger",
+  "type": "object",
+  "required": ["symbol", "ex_date", "action_type", "adjustment_factor", "source", "source_url", "source_published_at", "evidence_path", "evidence_sha256"],
+  "properties": {
+    "symbol": {"type": "string", "minLength": 1},
+    "ex_date": {"type": "string", "format": "date"},
+    "action_type": {"type": "string", "minLength": 1},
+    "adjustment_factor": {"type": "number", "exclusiveMinimum": 0},
+    "source": {"type": "string", "minLength": 1},
+    "source_url": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "source_published_at": {"type": "string", "format": "date-time"},
+    "evidence_path": {"type": "string", "minLength": 1},
+    "evidence_sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"}
+  },
+  "additionalProperties": false
+}

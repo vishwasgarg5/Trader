@@ -1,0 +1,24 @@
+{
+  "protocol_version": 1,
+  "status": "LOCKED_NOT_EVALUATED",
+  "purpose": "Reserve a final chronological holdout for one confirmatory evaluation after research code, features, costs, and acceptance criteria are frozen.",
+  "holdout_definition": {
+    "rule": "Last 12 complete calendar months of the available price history, ending at the last complete common trading date.",
+    "selection_time": "Resolve exact dates once the data snapshot is frozen; record them in the experiment artifact before any holdout metrics are computed.",
+    "access": "Do not use holdout labels, returns, metrics, or plots for feature selection, hyperparameter tuning, model selection, or debugging."
+  },
+  "pre_registered_acceptance_criteria": {
+    "point_in_time_universe": "Independently sourced, timestamped constituent membership including delisted constituents and effective dates.",
+    "portfolio_net_profitability": "Positive absolute portfolio net return after actual broker charges, taxes, slippage, and liquidity constraints.",
+    "incremental_edge": "Positive lower bound of a pre-specified 95% dependence-aware confidence interval versus the frozen benchmark.",
+    "robustness": "No single fold, symbol, sector, or market regime is responsible for the entire result.",
+    "execution": "Next-session executable prices, gap handling, cash/position constraints, turnover, liquidity and failed/missing fills are modelled.",
+    "reproducibility": "Frozen data snapshot, code SHA, configuration, broker tariff and random seeds are stored with the result."
+  },
+  "safeguards": [
+    "This protocol does not assert that a valid holdout currently exists or has been evaluated.",
+    "Do not derive exact holdout dates from a moving Yahoo Finance download without first freezing the data snapshot.",
+    "Do not change criteria after viewing holdout outcomes.",
+    "Passing research criteria does not authorize live orders; forward paper trading and operational review remain separate gates."
+  ]
+}
