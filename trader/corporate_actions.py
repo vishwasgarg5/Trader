@@ -70,10 +70,13 @@ def audit_corporate_action_ledger(path: Path) -> dict:
         result["errors"].append("blank symbols or invalid ex_date")
     if frame["action_type"].astype(str).str.strip().eq("").any():
         result["errors"].append("blank action_type")
-    if (frame["adjustment_factor"].isna().any()
-            or not np.isfinite(frame["adjustment_factor"]).all()
-            or (frame["adjustment_factor"] <= 0).any()):
-        result["errors"].append("adjustment_factor must be finite and positive")
+    supplied_factors = frame["adjustment_factor"].notna()
+    invalid_factors = supplied_factors & (
+        ~np.isfinite(frame["adjustment_factor"])
+        | (frame["adjustment_factor"] <= 0)
+    )
+    if invalid_factors.any():
+        result["errors"].append("provided adjustment_factor values must be finite and positive")
     if (frame["source_published_at"].dt.normalize() > frame["ex_date"].dt.normalize()).any():
         result["errors"].append("source publication occurs after the corporate action ex_date")
     if frame["source"].astype(str).str.strip().eq("").any():
@@ -102,6 +105,7 @@ def audit_corporate_action_ledger(path: Path) -> dict:
             result["errors"].append(f"evidence checksum mismatch for {row.symbol}: {row.evidence_path}")
 
     result["rows"] = int(len(frame))
+    result["unresolved_adjustment_factor_rows"] = int(frame["adjustment_factor"].isna().sum())
     result["valid"] = not result["errors"] and not frame.empty
     result["status"] = "evidence_valid_unverified_adjustment" if result["valid"] else "invalid"
     result["limitations"] = [
