@@ -36,3 +36,52 @@ def test_predictive_edge_handles_missing_comparator_and_shuffle_runs():
     assert result["mean_model_minus_logistic_cross_sectional_auc"] is None
     assert result["model_minus_logistic_auc_block_bootstrap_95pct"] is None
     assert result["folds_shuffled_label_p_below_0_05"] == 0
+
+
+
+def test_research_continuation_gate_requires_absolute_profitability_and_verified_data():
+    from trader.predictive_edge import evaluate_research_continuation_gate
+
+    cross = {
+        "fold_count": 8,
+        "folds_with_positive_net_excess": 7,
+        "top5_minus_universe_net_return_block_bootstrap_95pct": {"lower": 0.001},
+        "mean_top5_net_return": 0.002,
+    }
+    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {"lower": 0.001}}
+    passed = evaluate_research_continuation_gate(
+        cross, 7, edge, point_in_time_universe_verified=True,
+        corporate_action_adjustments_verified=True,
+    )
+    assert passed["status"] == "PASS"
+    assert passed["continue_price_feature_research_only"] is True
+
+    blocked = evaluate_research_continuation_gate(
+        {**cross, "mean_top5_net_return": -0.001}, 7, edge,
+        point_in_time_universe_verified=False,
+        corporate_action_adjustments_verified=False,
+    )
+    assert blocked["status"] == "STOP"
+    assert "absolute_net_profitability_positive" in blocked["failed_checks"]
+    assert "point_in_time_universe_verified" in blocked["failed_checks"]
+    assert blocked["promotion_eligible"] is False
+    assert blocked["live_execution_enabled"] is False
+
+
+def test_research_continuation_gate_rejects_confidence_interval_touching_zero():
+    from trader.predictive_edge import evaluate_research_continuation_gate
+
+    cross = {
+        "fold_count": 6,
+        "folds_with_positive_net_excess": 5,
+        "top5_minus_universe_net_return_block_bootstrap_95pct": {"lower": 0.0},
+        "mean_top5_net_return": 0.01,
+    }
+    edge = {"model_minus_logistic_auc_block_bootstrap_95pct": {"lower": -0.001}}
+    result = evaluate_research_continuation_gate(
+        cross, 5, edge, point_in_time_universe_verified=True,
+        corporate_action_adjustments_verified=True,
+    )
+    assert result["status"] == "STOP"
+    assert "relative_excess_95pct_lower_bound_positive" in result["failed_checks"]
+    assert "incremental_auc_vs_logistic_statistically_positive" in result["failed_checks"]
