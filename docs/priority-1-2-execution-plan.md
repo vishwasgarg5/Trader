@@ -8,7 +8,7 @@ Last reviewed: 2026-11-06. This plan tracks research-only work on `feature/p2-li
 
 The completed P2 experiment fails the pre-registered profitability and statistical-edge gates. Passing CI confirms code execution and reproducibility, not a tradable edge.
 
-Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg5/Trader/actions/runs/42080829525), successful on `ac820b586a2ac1fa02b504d691808801d31af1a8`. Unit tests, walk-forward experiment and report upload all passed.
+Latest full validation: [GitHub Actions run #170](https://github.com/vishwasgarg5/Trader/actions/runs/42153473314), successful on `67148cb7bd13a61340ae1b4e4b76379f62b291c9`. Unit tests, walk-forward experiment and report upload all passed. The latest report artifact was uploaded as `triple-barrier-experiment-report` (artifact ID `13473134181`, SHA-256 `25653dcefe6185e01306c4c1beee476388ac18ebaa2b28a4af6280968735dff4`).
 
 ## Priority 0 — leakage-aware research baseline
 
@@ -31,6 +31,7 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
 - [x] Correct NSE calendar parsing so naive timestamps remain India-local while timezone-aware timestamps are converted to Asia/Kolkata; add regression tests for both membership and corporate-action audits.
 - [x] Make missing OHLCV columns explicit integrity failures rather than silently leaving invalid-row counts as null.
+- [x] Make the standard pipeline reject any configured symbol with empty history, fewer than 100 valid OHLCV rows, duplicate dates, missing OHLCV columns or invalid/non-finite OHLCV values.
 - [ ] Supply and validate the corporate-action ledger; latest experiment reports it was not provided.
 - [ ] Freeze verified price, delivery, membership and corporate-action inputs with the manifest after these checks.
 
@@ -49,7 +50,7 @@ Latest full validation: [GitHub Actions run #151](https://github.com/vishwasgarg
 - [ ] Reconcile source delivery history gaps and independently validate price/turnover provenance.
 - [x] Evaluate the pre-registered profitability and statistical gates; result is FAIL / HOLD, so do not promote.
 
-### Latest experiment evidence (run #151)
+### Previously reviewed experiment evidence (run #151; run #170 artifact not yet independently reviewed)
 
 - 16 walk-forward folds; 82,373 labels; 43 ambiguous rows excluded.
 - Delivery coverage 99.73%; 1% turnover participation cap applied.
@@ -103,8 +104,8 @@ The research panel must therefore not treat `TATAMOTORS.NS` as an unchanged tick
 ## External inputs still required
 
 1. Historical membership evidence for the exact owner-defined 49-symbol universe, if point-in-time membership is needed.
-3. Source-backed TATAMOTORS/TMPV transition and corporate-action adjustment.
-4. Corporate-action ledger and independent adjusted-price verification.
-5. Anonymised Groww contract notes or equivalent actual fee evidence.
+2. Source-backed TATAMOTORS/TMPV transition and corporate-action adjustment.
+3. Corporate-action ledger and independent adjusted-price verification.
+4. Anonymised Groww contract notes or equivalent actual fee evidence.
 
 Do not fabricate or infer these records. Until supplied and independently validated, Priority 1 is incomplete, the final holdout stays locked, and the strategy remains research-only.
