@@ -80,8 +80,9 @@ def _candidate_events(pdf_path: Path, source_sha256: str, notice_id: str) -> tup
             "source_sha256": digest,
             "page_number": page_no,
             "candidate_effective_date_text": "; ".join(dates),
-            "candidate_out_symbols": "; ".join(symbols) if OUT_CUE.search(page_text) else "",
-            "candidate_in_symbols": "; ".join(symbols) if IN_CUE.search(page_text) else "",
+            "candidate_symbols_unassigned": "; ".join(symbols),
+            "candidate_out_symbols": "",
+            "candidate_in_symbols": "",
             "supersession_cue": bool(SUPERSEDE.search(page_text)),
             "human_review_required": True,
             "page_text_excerpt": page_text[:1200],
@@ -125,13 +126,13 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
         "triage": triage,
         "coverage_complete": False,
         "membership_written": False,
-        "policy": "Title classes and page-level fields are candidate-generation only. Symbol lists are not assigned to in/out roles; dates are unnormalized text. Human verification against the source PDF is mandatory. No membership interval or review status is changed.",
+        "policy": "Title classes and page-level fields are candidate-generation only. Symbol lists are deliberately unassigned to in/out roles; dates are unnormalized text. Human verification against the source PDF is mandatory. No membership interval or review status is changed.",
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     events_path.parent.mkdir(parents=True, exist_ok=True)
     columns = ["notice_id", "source_sha256", "page_number", "candidate_effective_date_text",
-               "candidate_out_symbols", "candidate_in_symbols", "supersession_cue",
+               "candidate_symbols_unassigned", "candidate_out_symbols", "candidate_in_symbols", "supersession_cue",
                "human_review_required", "page_text_excerpt"]
     with events_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=columns)
