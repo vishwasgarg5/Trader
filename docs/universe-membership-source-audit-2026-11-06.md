@@ -175,3 +175,22 @@ Content spot-checks of the official documents confirmed the candidate transition
 - 2024-09-30: DIVISLAB and LTIM out; BEL and TRENT in.
 
 This is a document-content spot-check of the currently registered candidate transitions, not proof that the annual notice inventory is exhaustive. All 34 transition rows remain SAMPLE_ONLY, and all seven annual coverage rows remain NOT_STARTED until independent review, supersession inventory completion, and snapshot reconciliation are complete.
+
+
+## Preliminary annual notice inventory — 2026-11-06
+
+A separate `data/reference/nifty50_annual_notice_inventory.csv` has been added so notice discovery is not conflated with actual constituent-transition rows. It currently contains 20 candidate/negative-screen records across 2018–2024. The archive workflow now downloads each inventory PDF from approved NSE/Nifty Indices hosts, validates the PDF signature, stores it locally, and records SHA-256.
+
+The initial inventory captures the currently registered Nifty 50 transition releases, the 2020-03-16 superseding notice, and the JIOFIN temporary-member/listing/removal documents. It also screens three documents that are not Nifty 50 constituent changes: the 2021-09-15 review release (Nifty India Manufacturing and strategy indices only), the 2021-12-08 Nifty50 Value 20 annual review, and the 2024-09-25 IDEA revocation release (its table does not list Nifty 50). These negative screens are deliberately retained so they cannot later be mistaken for omitted constituent transitions.
+
+The official methodology states that Nifty 50 is reviewed semi-annually using six-month data ending January and July, with any replacements implemented on the last trading day of March and September; it also permits additional reconstitution for mergers, demergers, delistings and other specified events. Consequently, the annual audit must cover both scheduled review windows and ad-hoc corporate-action/exception notices. A list of known additions/removals is not enough to establish completeness.
+
+**Current gap:** the 20-row inventory is a discovery baseline, not an exhaustive annual notice inventory. In particular, 2021's September broad-market review search remains unresolved; the screened September 15 and December 8 notices are not evidence that no other Nifty 50 review notice existed. All seven rows in `nifty50_annual_coverage.csv` therefore remain `NOT_STARTED`, all transitions remain `SAMPLE_ONLY`, and no PIT membership ledger is authorized.
+
+Primary discovery and scope references:
+- NSE Indices methodology: https://archives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf
+- Official review tutorial: https://niftyindices.com/resources/tutorial/review-of-indices
+- Official annual press-release archive: https://www.niftyindices.com/press-release
+- 2021-09-15 release: https://www.niftyindices.com/Press_Release/ind_prs15092021.pdf
+- 2021-12-08 strategy-index release: https://www.niftyindices.com/Press_Release/ind_prs08122021.pdf
+- 2024-09-25 superseding/revocation release: https://www.niftyindices.com/Press_Release/ind_prs25092024.pdf
