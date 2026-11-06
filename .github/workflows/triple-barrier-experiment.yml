@@ -7,7 +7,6 @@ on:
       - "trader/**"
       - "tests/**"
       - "config/**"
-      - "docs/**"
       - "requirements.txt"
       - ".github/workflows/triple-barrier-experiment.yml"
   pull_request:
