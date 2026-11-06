@@ -80,8 +80,8 @@ def delivery_round_trip_cost(
     brokerage_min_rate: float = 0.025,
     dp_charge_per_sell: float = 20.0,
     dp_free_below_sell_value: float = 100.0,
-    dp_groww_component_per_sell: float | None = None,
-    dp_depository_component_per_sell: float | None = None,
+    dp_groww_component_per_sell: float | None = 16.5,
+    dp_depository_component_per_sell: float | None = 3.5,
     slippage_bps_per_side: float = 2.0,
     notional_rupees: float = 100000.0,
 ) -> dict:
