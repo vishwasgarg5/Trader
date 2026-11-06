@@ -139,3 +139,10 @@ def test_configured_price_validation_rejects_duplicate_nse_calendar_dates():
     }, index=idx)
     with pytest.raises(RuntimeError, match="duplicate NSE trading dates"):
         validate_universe_prices(["AAA.NS"], {"AAA.NS": frame})
+
+
+def test_tata_motors_legacy_symbol_is_replaced_by_official_tmpv_symbol():
+    symbols = load_universe()
+    assert "TMPV.NS" in symbols
+    assert "TATAMOTORS.NS" not in symbols
+
