@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -17,7 +18,7 @@ from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
 from trader.pipeline import (
     DATA, FEATURES as BASE_FEATURES, build_features, download_prices,
-    load_universe, make_model,
+    load_universe, make_model, validate_universe_prices,
 )
 from trader.predictive_edge import (
     evaluate_research_continuation_gate, is_positive_95pct_block_bootstrap_ci,
@@ -100,7 +101,12 @@ def build_experiment_frame(prices: dict[str, pd.DataFrame]) -> pd.DataFrame:
 def run_experiment() -> dict:
     sector_path = DATA.parent / "config" / "sector_classifications.json"
     sector_config = json.loads(sector_path.read_text(encoding="utf-8"))
-    prices = download_prices(load_universe(), period="7y")
+    universe = load_universe()
+    prices = download_prices(universe, period="7y")
+    # Never run a cross-sectional experiment on a silently reduced universe.
+    # Missing/delisted constituents must be resolved with an explicit,
+    # documented corporate-action/history treatment before research proceeds.
+    validate_universe_prices(universe, prices)
     delivery_status = download_delivery_history(prices, DATA / "raw" / "delivery.csv")
     membership_path = DATA / "reference" / "universe_membership.csv"
     universe_audit = audit_universe(prices, load_universe(), membership_path)
