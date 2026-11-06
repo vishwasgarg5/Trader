@@ -39,6 +39,9 @@ def test_run_experiment_requires_interval_panel_even_if_event_gate_passes(monkey
     monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
         "ready": True, "errors": [],
     })
+    monkeypatch.setattr(experiment, "audit_corporate_action_ledger", lambda *args: {
+        "corporate_action_adjustment_verified": True,
+    })
     monkeypatch.setattr(experiment, "download_prices", lambda *args, **kwargs: pytest.fail(
         "market data download must not run without verified membership intervals"
     ))
@@ -65,4 +68,29 @@ def test_run_experiment_requires_verified_security_identity_before_download(monk
     ))
 
     with pytest.raises(RuntimeError, match="security identity gate is BLOCKED"):
+        experiment.run_experiment()
+
+
+
+def test_run_experiment_requires_verified_corporate_action_treatment(monkeypatch, tmp_path):
+    monkeypatch.setattr(experiment, "DATA", tmp_path)
+    reference = tmp_path / "reference"
+    reference.mkdir()
+    (reference / "nifty50_transition_register.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "nifty50_annual_coverage.csv").write_text("placeholder", encoding="utf-8")
+    (reference / "corporate_actions.csv").write_text("placeholder", encoding="utf-8")
+    monkeypatch.setattr(experiment, "audit_membership_evidence", lambda *args: {
+        "ready": True, "errors": [],
+    })
+    monkeypatch.setattr(experiment, "audit_security_aliases", lambda *args: {
+        "ready": True, "errors": [],
+    })
+    monkeypatch.setattr(experiment, "audit_corporate_action_ledger", lambda *args: {
+        "corporate_action_adjustment_verified": False,
+    })
+    monkeypatch.setattr(experiment, "download_prices", lambda *args, **kwargs: pytest.fail(
+        "market data download must not run while corporate-action treatment is unresolved"
+    ))
+
+    with pytest.raises(RuntimeError, match="corporate-action gate is BLOCKED"):
         experiment.run_experiment()
