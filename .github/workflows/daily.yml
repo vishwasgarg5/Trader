@@ -43,6 +43,14 @@ jobs:
         run: python -m pytest -q
       - name: Generate signals and evaluate model
         run: python -m trader.pipeline
+      - name: Upload data integrity diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-integrity-report-${{ github.run_id }}
+          path: data/reports/data_integrity.json
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Commit model and reports
         run: |
           git config user.name "github-actions[bot]"
