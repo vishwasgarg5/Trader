@@ -53,6 +53,13 @@ def test_groww_minimum_brokerage_and_small_sell_dp_exemption():
     assert small["brokerage_rupees"] == pytest.approx(2.5)
 
 
+def test_default_cost_api_retains_depository_fee_below_100_rupees():
+    small = delivery_round_trip_cost(
+        100, 100, notional_rupees=50, slippage_bps_per_side=0,
+    )
+    assert small["dp_rupees"] == pytest.approx(3.5)
+
+
 def test_groww_dp_threshold_waives_only_groww_component():
     small = delivery_round_trip_cost(
         100, 100, **{**DEFAULT_DELIVERY_COSTS, "notional_rupees": 99.99,
