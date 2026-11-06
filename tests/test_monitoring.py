@@ -72,3 +72,14 @@ def test_monitor_detects_signal_that_is_not_research_only(tmp_path):
     assert report["status"] == "ALERT"
     assert any("lacks RESEARCH_ONLY_" in error or "not explicitly research-only" in error
                for error in report["errors"])
+
+
+def test_monitor_rejects_approved_or_enabled_promotion_gate(tmp_path):
+    _monitor_root(tmp_path)
+    _write_json(tmp_path / "config/promotion_gate.json", {
+        "status": "APPROVED", "promotion_eligible": True,
+        "live_execution_enabled": False,
+    })
+    report = build_monitoring_report(tmp_path)
+    assert report["status"] == "ALERT"
+    assert report["checks"]["promotion_gate_fail_closed"]["passed"] is False
