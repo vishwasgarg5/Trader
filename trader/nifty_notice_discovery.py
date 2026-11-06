@@ -36,10 +36,13 @@ DATE_PATTERNS = (
 )
 DATE_RE = re.compile(r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2},\s+\d{4}\b|\b\d{1,2}-[A-Za-z]{3}-\d{4}\b", re.I)
 PDF_RE = re.compile(r"""(?:https?://)?[^\s"'<> ()]*?\.pdf(?:\?[^\s"'<> ()]*)?""", re.I)
+# Broad recall is intentional: archive titles are only triage. This deliberately
+# includes fixed-income, strategy, specialized-index and launch notices so their
+# source contents can be screened before any Nifty 50 scope decision.
 REVIEW_TERMS = re.compile(
-    r"replacement|replacements|inclusion|inclusions|exclusion|exclusions|"
-    r"corporate action|demerger|merger|reconstitution|rebalanc|"
-    r"methodolog|criteria|index change|changes? in indices|changes? in nifty",
+    r"change|replacement|inclusion|exclusion|review|rebalanc|"
+    r"reconstitution|constituent|demerger|merger|methodolog|criteria|"
+    r"defer|revok|addition|removal|indices",
     re.I,
 )
 
