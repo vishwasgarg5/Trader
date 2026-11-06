@@ -170,14 +170,32 @@ jobs:
               if parsed.scheme != "https" or parsed.hostname not in allowed_hosts:
                   raise SystemExit(f"Refusing non-approved annual notice URL for {notice_id}: {url}")
               request = urllib.request.Request(url, headers={"User-Agent": "TraderResearchEvidenceArchiver/1.0"})
-              with urllib.request.urlopen(request, timeout=30) as response:
-                  final = urllib.parse.urlparse(response.geturl())
-                  if final.scheme != "https" or final.hostname not in allowed_hosts:
-                      raise SystemExit(f"Unexpected redirect host for {notice_id}: {response.geturl()}")
-                  data = response.read(25 * 1024 * 1024 + 1)
-              if len(data) > 25 * 1024 * 1024 or not data.startswith(b"%PDF-"):
-                  raise SystemExit(f"Invalid or oversized annual notice PDF: {notice_id}")
+              try:
+                  with urllib.request.urlopen(request, timeout=30) as response:
+                      final = urllib.parse.urlparse(response.geturl())
+                      if final.scheme != "https" or final.hostname not in allowed_hosts:
+                          raise ValueError(f"unexpected redirect host: {response.geturl()}")
+                      data = response.read(25 * 1024 * 1024 + 1)
+                  if len(data) > 25 * 1024 * 1024:
+                      raise ValueError("response exceeds 25 MiB limit")
+                  if not data.startswith(b"%PDF-"):
+                      raise ValueError("response is not a PDF")
+              except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
+                  failure = f"ARCHIVE_RETRIEVAL_FAILED: {type(exc).__name__}: {exc}"
+                  old_notes = (row.get("notes") or "").strip()
+                  if failure not in old_notes:
+                      row["notes"] = (old_notes + " | " + failure).strip(" |")
+                      changed = True
+                  print(f"WARNING {notice_id}: {failure}; will retry on next scheduled run")
+                  continue
               digest = hashlib.sha256(data).hexdigest()
+              old_notes = (row.get("notes") or "").strip()
+              if "ARCHIVE_RETRIEVAL_FAILED:" in old_notes:
+                  row["notes"] = " | ".join(
+                      part for part in old_notes.split(" | ")
+                      if not part.startswith("ARCHIVE_RETRIEVAL_FAILED:")
+                  )
+                  changed = True
               relative = f"data/reference/source_documents/NOTICE-{notice_id}.pdf"
               target = pathlib.Path(relative)
               target.parent.mkdir(parents=True, exist_ok=True)
