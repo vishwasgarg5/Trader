@@ -65,3 +65,18 @@ jobs:
           done
           echo "Unable to push discovered evidence after 5 retries."
           exit 1
+      - name: Fail run when any candidate source could not be archived
+        if: always() && steps.discover.outcome == 'success'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("data/reports/nifty50_notice_discovery.json").read_text(encoding="utf-8"))
+          failures = report.get("archive_failures", [])
+          if failures:
+              print(f"BLOCKED: {len(failures)} candidate source document(s) failed retrieval.")
+              for item in failures:
+                  print(f"- {item.get('notice_id')}: {item.get('error')} ({item.get('url')})")
+              raise SystemExit(1)
+          print("All discovered candidate source PDFs were retrieved successfully.")
+          PY
