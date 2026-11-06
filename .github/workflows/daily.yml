@@ -60,6 +60,8 @@ jobs:
           git add data models
           if ! git diff --cached --quiet; then
             git commit -m "chore: refresh daily swing signals and model"
+            # Rebase generated outputs onto the latest main; never force-push.
+            git pull --rebase origin main
             git push
           else
             echo "No generated changes to commit"
