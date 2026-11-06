@@ -74,3 +74,22 @@ def test_committed_tata_motors_source_notes_are_integrity_valid_but_not_price_ve
     assert result["valid"] is True
     assert result["status"] == "evidence_valid_unverified_adjustment"
     assert result["corporate_action_adjustment_verified"] is False
+
+
+def test_missing_adjustment_factor_is_explicitly_unresolved_not_assumed_neutral(tmp_path):
+    evidence = tmp_path / "demerger-note.txt"
+    evidence.write_text("official filing summary; not a price adjustment factor", encoding="utf-8")
+    path = tmp_path / "corporate_actions.csv"
+    pd.DataFrame([{
+        "symbol": "AAA.NS", "ex_date": "2024-01-10",
+        "action_type": "demerger_price_discovery",
+        "adjustment_factor": None, "source": "Company filing summary",
+        "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2024-01-02T10:00:00+05:30",
+        "evidence_path": evidence.name,
+        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+    result = audit_corporate_action_ledger(path)
+    assert result["valid"] is True
+    assert result["unresolved_adjustment_factor_rows"] == 1
+    assert result["corporate_action_adjustment_verified"] is False
