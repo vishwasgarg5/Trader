@@ -1,0 +1,1771 @@
+{
+  "catalog_rows_audited": 697,
+  "coverage_complete": false,
+  "existing_review_candidates": 462,
+  "method": "Broad title-term scan over every catalog row not already marked review_candidate.",
+  "non_candidate_rows": 235,
+  "potential_false_negatives": [
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-01-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24012018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 01, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-02-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09022018.pdf",
+      "title": "IISL launches a record 72 fixed income and 3 hybrid indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-02-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22022018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. March 01, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-03-08",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08032018.pdf",
+      "title": "Change in Strategy Indices w.e.f. April 02, 2018",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-03-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15032018.pdf",
+      "title": "IISL launches 3 hybrid indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-03-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22032018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. April 02, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-03-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27032018.pdf",
+      "title": "IISL Launches NIFTY100 ESG Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-04-23",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23042018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 02, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-05-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25052018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. June 01, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-06-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25062018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. July 02, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-08-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27082018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. September 03, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-09-10",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10092018.pdf",
+      "title": "Change in Strategy Indices and NIFTY Tata Group Index w.e.f. September 28, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092018_1.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. October 01, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-10-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01102018.pdf",
+      "title": "NSE Indices launches NIFTY Dynamic Asset Allocation Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-10-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24102018.pdf",
+      "title": "NSE Indices launches NIFTY500 Value 50 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-10-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25102018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. November 01, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-11-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02112018.pdf",
+      "title": "Change in the reference rate for computation of NIFTY 1D Rate, NIFTY50 Inverse and NIFTY50 Leverage indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-11-26",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26112018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. December 03, 2018",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-12-05",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05122018.pdf",
+      "title": "NSE Indices launches 4 new indices tracking money market",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2018-12-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24122018.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. January 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-01-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14012019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. January 21, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-01-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25012019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-02-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22022019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. March 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-03-19",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19032019.pdf",
+      "title": "Annual Review of NIFTY Fixed Income Indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-03-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25032019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. April 02, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-04-23",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23042019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 02, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. July 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-06-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28062019.pdf",
+      "title": "NSE Indices launches NIFTY100 Alpha 30 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-07-08",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08072019.pdf",
+      "title": "Revision in NIFTY CPSE and NIFTY SME EMERGE Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-07-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25072019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. August 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. October 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-10-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24102019.pdf",
+      "title": "NSE Indices launches Nifty Midcap150 Quality 50 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-10-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24102019_1.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. November 01, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-11-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25112019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. December 02, 2019",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-11-29",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29112019.pdf",
+      "title": "NSE Indices launches Nifty 5 yr Benchmark G-Sec Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-12-05",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05122019.pdf",
+      "title": "NSE Indices launches Nifty BHARAT Bond Index Series",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2019-12-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24122019.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. January 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-01-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15012020.pdf",
+      "title": "NSE Indices launches two new sector indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-01-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27012020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 03, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-02-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24022020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. March 02, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-03-18",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18032020.pdf",
+      "title": "Annual Review of NIFTY Fixed Income Indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-03-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24032020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f.April 03, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-03-26",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26032020.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Indices w.e.f. 31 March 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-04-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24042020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 04, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-05-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20052020.pdf",
+      "title": "NSE Indices launches Nifty Financial Services 25/50 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-05-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22052020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. June 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-06-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15062020.pdf",
+      "title": "NSE Indices launches Nifty100 ESG Sector Leaders Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. July 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062020_1.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Indices w.e.f. 30 June 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-07-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02072020.pdf",
+      "title": "NSE Indices launches Nifty BHARAT Bond Indices - April 2025 and April 2031 series",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-08-03",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03082020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. August 10, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-08-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25082020.pdf",
+      "title": "NSE Indices launches Nifty200 Momentum 30 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-08-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25082020_1.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. September 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. October 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-09-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25092020.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 30 September 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-10-23",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23102020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. November 02, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-10-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28102020.pdf",
+      "title": "NSE Indices launches Nifty CPSE Bond Plus SDL Sep 2024 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-11-18",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18112020_1.pdf",
+      "title": "NSE Indices launches Nifty Healthcare Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-11-23",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23112020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. December 01, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-12-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02122020.pdf",
+      "title": "NSE Indices launches Nifty500 Multicap 50:25:25 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-12-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14122020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. December 21, 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-12-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24122020.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. January 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2020-12-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28122020.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 31 December 2020",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-01-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22012021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-02-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22022021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. March 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02032021.pdf",
+      "title": "NSE Indices launches Nifty PSU Bond Plus SDL Apr 2026 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032021.pdf",
+      "title": "NSE Indices launches Nifty SDL Apr 2026 Top 20 Equal Weight Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22032021.pdf",
+      "title": "Annual Review of NIFTY Fixed Income Indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24032021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. April 05, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24032021_1.pdf",
+      "title": "Quarterly Review of Nifty Corporate Bond Indices w.e.f. April 05, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24032021_2.pdf",
+      "title": "Quarterly Review of Nifty Banking and PSU Bond indices w.e.f. April 05, 2021",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25032021.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 31 March 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-03-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25032021_1.pdf",
+      "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 31 March 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-04-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09042021.pdf",
+      "title": "NSE Indices launches Nifty AAA Bond Plus SDL Apr 2026 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-04-26",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26042021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 03, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-05-10",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10052021.pdf",
+      "title": "NSE Indices launches Nifty Microcap 250 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-05-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24052021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. June 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062021_1.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. July 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062021_2.pdf",
+      "title": "Quarterly Review of Nifty Corporate Bond Indices w.e.f. July 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062021_3.pdf",
+      "title": "Quarterly Review of Nifty Banking and PSU Bond indices w.e.f. July 01, 2021",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-06-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25062021.pdf",
+      "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 30 June 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-06-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25062021_1.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 30 June 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-07-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14072021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. July 22, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-07-26",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26072021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. August 02, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-08-16",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16082021.pdf",
+      "title": "NSE Indices launches Nifty India Manufacturing Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-08-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20082021.pdf",
+      "title": "NSE Indices launches Nifty India Select 7 Government Bond Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-03",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03092021.pdf",
+      "title": "NSE Indices launches Nifty SDL Plus PSU Bond Sep 2026 60:40 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09092021.pdf",
+      "title": "NSE Indices launches Nifty PSU Bond Plus SDL Sep 2027 40:60 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14092021.pdf",
+      "title": "NSE Indices launches Nifty Midcap Select Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22092021.pdf",
+      "title": "NSE Indices launches Nifty PSU Bond Plus SDL Apr 2027 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. October 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092021_1.pdf",
+      "title": "Quarterly Review of Nifty Banking and PSU Bond indices w.e.f. October 01, 2021",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24092021_2.pdf",
+      "title": "Quarterly Review of Nifty Corporate Bond Indices w.e.f. October 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27092021.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 30 September 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27092021_1.pdf",
+      "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index w.e.f. 30 September 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28092021.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) w.e.f. October 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-09-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30092021.pdf",
+      "title": "Quarterly Review of Nifty Corporate Bond Indices w.e.f. October 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-10-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07102021.pdf",
+      "title": "NSE Indices launches two new Target Maturity Debt Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-10-13",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13102021.pdf",
+      "title": "NSE Indices launches Nifty Total Market Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-10-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25102021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. November 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-10-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27102021.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) w.e.f. November 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-11-17",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17112021.pdf",
+      "title": "NSE Indices launches Nifty Non-Cyclical Consumer Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-11-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24112021.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. December 01, 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01122021.pdf",
+      "title": "NSE Indices launches new Nifty BHARAT Bond Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07122021.pdf",
+      "title": "NSE Indices launches Nifty Mobility Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14122021.pdf",
+      "title": "NSE Indices launches Nifty India Digital Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27122021.pdf",
+      "title": "Quarterly Review of Nifty Corporate Bond Indices w.e.f. January 03, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27122021_1.pdf",
+      "title": "Quarterly Review of Nifty Banking and PSU Bond indices w.e.f. January 03, 2022",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27122021_2.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. January 03, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28122021.pdf",
+      "title": "Quarterly Review of Nifty BHARAT Bond Index Series w.e.f. 31 December 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28122021_1.pdf",
+      "title": "Quarterly Review of Nifty PSU Bond Plus SDL Apr 2026 50:50 Index & Nifty PSU Bond plus SDL Apr 2027 50:50 Index w.e.f. 31 December 2021",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-29",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29122021.pdf",
+      "title": "NSE Indices launches Nifty CPSE Bond Plus SDL Sep 2026 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2021-12-29",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29122021_1.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) w.e.f. January 03, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-01-13",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13012022.pdf",
+      "title": "NSE Indices launches Nifty SDL Apr 2027 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-01-19",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19012022.pdf",
+      "title": "NSE Indices launches Nifty India Defence Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-01-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24012022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 01, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-01-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28012022.pdf",
+      "title": "NSE Indices launches Nifty SDL Apr 2027 Top 12 Equal Weight Index and Nifty SDL Apr 2032 Top 12 Equal Weight Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-01-31",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs31012022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 07, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02022022.pdf",
+      "title": "NSE Indices launches Nifty Financial Services Ex-Bank Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07022022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. February 08, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15022022.pdf",
+      "title": "NSE Indices launches Nifty Housing Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22022022.pdf",
+      "title": "NSE Indices launches Nifty Transportation & Logistics Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22022022_1.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. March 02, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-02-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24022022.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) w.e.f. March 02, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-03",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03032022.pdf",
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2028 30:70 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032022.pdf",
+      "title": "NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-10",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032022_1.pdf",
+      "title": "NSE Indices launches Nifty SDL Jun 2027 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032022.pdf",
+      "title": "NSE Indices publishes Nifty AIF Benchmark Report",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-17",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17032022.pdf",
+      "title": "NSE Indices launches three new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-21",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21032022.pdf",
+      "title": "NSE Indices launches Nifty AQLV 30 Plus 5yr G-Sec 70:30 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25032022.pdf",
+      "title": "Annual Review of NIFTY Fixed Income Indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28032023.pdf",
+      "title": "Quarterly review of Nifty Target Maturity Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-03-29",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29032023.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (USD and INR)",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-04-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01042022.pdf",
+      "title": "NSE Indices launches 57 new fixed income indices for Money Market and Banking & PSU Segments",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-04-04",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04042022.pdf",
+      "title": "NSE Indices launches 66 new Fixed Income Indices in line with SEBI's Potential Risk Class (PRC) Matrix for Debt MF",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-04-11",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11042022.pdf",
+      "title": "Review of Nifty 5 yr Benchmark G-Sec Index w.e.f. 18 April 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-04-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25042022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 02, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-04-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27042022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. May 02, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-05-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25052022.pdf",
+      "title": "Change in the Fixed Income Indices w.e.f. June 01, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-05-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27052022.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) w.e.f. June 01, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-06-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28062022.pdf",
+      "title": "Review of NIFTY India Select 7 Government Bond Index (INR and USD) wef 01 July 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-06-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30062022.pdf",
+      "title": "Revision in Nifty Target Maturity Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-07-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14072022.pdf",
+      "title": "Revision in Nifty Fixed Income Indices w.e.f. July 14, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-07-21",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21072022.pdf",
+      "title": "NSE Indices launches Nifty200 Alpha 30 index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-07-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22072022.pdf",
+      "title": "Revision in Nifty Fixed Income Indices w.e.f. July 29 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-08-03",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs03082022.pdf",
+      "title": "NSE Indices launches three new sector indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-08-16",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16082022.pdf",
+      "title": "NSE Indices launches Nifty Midcap150 Momentum 50 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-08-19",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19082022.pdf",
+      "title": "Revision in Nifty Fixed Income Indices w.e.f. August 30, 2022",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-09-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20092022.pdf",
+      "title": "NSE Indices launches Nifty SDL Sep 2025 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-09-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28092022_1.pdf",
+      "title": "NSE Indices launches three new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-09-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30092022.pdf",
+      "title": "NSE Indices launches Nifty AAA PSU Bond Plus SDL Apr 2026 50:50 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-10-04",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04102022.pdf",
+      "title": "NSE Indices launches two new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-10-11",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11102022.pdf",
+      "title": "NSE Indices launches Nifty MidSmall India Consumption index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-10-21",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21102022_1.pdf",
+      "title": "NSE Indices launches two new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-11-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01112022.pdf",
+      "title": "NSE Indices launches two new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-11-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15112022.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Sep 2027 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-11-23",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23112022_1.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Jun 2036 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-11-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30112022.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Sep 2032 V1 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-12-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01122022.pdf",
+      "title": "NSE Indices launches new Nifty BHARAT Bond Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-12-08",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08122022.pdf",
+      "title": "NSE Indices launches Nifty SDL Sep 2026 V1 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-12-12",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12122022.pdf",
+      "title": "NSE Indices launches Nifty SDL Jul 2026 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2022-12-29",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs29122022.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Dec 2029 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-01-13",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13012023.pdf",
+      "title": "NSE Indices launches Nifty SDL Dec 2026 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-01-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20012023.pdf",
+      "title": "NSE Indices launches two new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-01-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24012023_1.pdf",
+      "title": "Revision in Nifty Corporate Bond and Money Market Indices w.e.f. February 01, 2023",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-01",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01022023.pdf",
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec Jun 2029 70:30 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-02",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02022023.pdf",
+      "title": "NSE Indices launches Nifty SDL Jul 2033 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09022023.pdf",
+      "title": "NSE Indices launches Sub-Category level Nifty AIF Benchmarks",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14022023.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Oct 2028 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15022023.pdf",
+      "title": "NSE Indices launches Nifty SDL Oct 2026 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24022023.pdf",
+      "title": "NSE Indices launches India's first Municipal Bond Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24022023_1.pdf",
+      "title": "NSE Indices launches two new target maturity indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27022023.pdf",
+      "title": "NSE Indices launches Nifty G-Sec May 2029 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-02-27",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27022023_1.pdf",
+      "title": "NSE Indices launches India's first Sovereign Green Bond Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-03-10",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032023.pdf",
+      "title": "NSE Indices launches Nifty SDL Plus G-Sec June 2027 40:60 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-03-14",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
+      "title": "NSE Indices launches Nifty SDL Jul 2028 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-03-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15032023.pdf",
+      "title": "NSE Indices launches Nifty G-Sec July 2027 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-03-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15032023_1.pdf",
+      "title": "NSE Indices launches Nifty Smallcap250 Quality 50 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-03-17",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17032023.pdf",
+      "title": "NSE Indices launches Nifty SDL June 2028 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-04-11",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11042023.pdf",
+      "title": "NSE Indices launches India's first ever REITs & InvITs Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-04-19",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19042023.pdf",
+      "title": "NSE Indices launches two new multi asset indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-05-16",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16052023.pdf",
+      "title": "NSE Indices launches Nifty Core Housing Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-05-18",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18052023.pdf",
+      "title": "Revision in Nifty Multi Asset Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-06-26",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26062023.pdf",
+      "title": "AUM of Passive Funds in India Tracking Nifty Indices Crosses Rs. 5 Trillion",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-07-12",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12072023.pdf",
+      "title": "NSE Indices launches two new fixed income indices",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-07-17",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17072023.pdf",
+      "title": "Corporate Adjustment for Reliance Industries Ltd. in Nifty indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-08-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07082023.pdf",
+      "title": "Revision in Nifty Fixed Income Indices w.e.f. August 31, 2023",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-09-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22092023.pdf",
+      "title": "NSE Indices launches Nifty G-Sec Jul 2033 Index",
+      "title_scope_hint": "NON_EQUITY_OR_SPECIALIZED_INDEX_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-10-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25102023.pdf",
+      "title": "NSE Indices launches new Sub-Category level Nifty AIF Benchmarks",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-12-05",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05122023.pdf",
+      "title": "NSE Indices launches new variant of the Nifty 50 index - the Nifty 50 Net Total Return (NTR) index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-12-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20122023.pdf",
+      "title": "New Passive Funds tracking Nifty Indices launched in Japan and Korea",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-12-21",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21122023.pdf",
+      "title": "NSE Indices launches Nifty Smallcap250 Momentum Quality 100 index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2023-12-21",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21122023_2.pdf",
+      "title": "Revision in Nifty100 ESG indices w.e.f. December 29, 2023",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-02-08",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08022024.pdf",
+      "title": "NSE Indices launches Nifty MidSmallcap400 Momentum Quality 100 index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-03-06",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06032024.pdf",
+      "title": "NSE Indices launches two new thematic indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-03-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07032024.pdf",
+      "title": "NSE Indices launches new Sub-Category level Nifty AIF Benchmark and Fund of Funds Benchmark",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-03-13",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs13032024.pdf",
+      "title": "NSE Indices launches Nifty AAA Bond Jun 2025 HTM Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-03-28",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs28032024.pdf",
+      "title": "NSE Indices wins '2024 Best of the Best Awards' by Asia Asset Management for Index Provider of the Year in India & Best ESG Index Provider in India",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-04-18",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18042024.pdf",
+      "title": "Revision in names of Nifty Corporate Group Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-05-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30052024.pdf",
+      "title": "NSE Indices launches India's first Electric Vehicle Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-05-31",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs31052024.pdf",
+      "title": "NSE Indices launches Nifty500 Equal Weight Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-04",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04062024.pdf",
+      "title": "NSE Indices launches Nifty500 Momentum 50 index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07062024_1.pdf",
+      "title": "NSE Indices launches Nifty500 LargeMidSmall Equal-Cap Weighted index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-07",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07062024_2.pdf",
+      "title": "Corporate Adjustment for Sanofi India Ltd. in Nifty indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-12",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12062024.pdf",
+      "title": "NSE Indices launches Nifty200 Value 30 Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-18",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18062024.pdf",
+      "title": "NSE Indices launches Nifty India Tourism Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-06-24",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24062024.pdf",
+      "title": "NSE Indices launches Nifty Top 10 Equal Weight Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-07-05",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05072024.pdf",
+      "title": "Corporate Adjustment for Raymond Ltd. in Nifty indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-07-19",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19072024.pdf",
+      "title": "NSE Indices launches Nifty IPO Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-07-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25072024.pdf",
+      "title": "NSE Indices launches Nifty Rural Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-09-04",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04092024.pdf",
+      "title": "NSE Indices launches Nifty500 Multicap Momentum Quality 50 index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-09-06",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06092024.pdf",
+      "title": "Corporate Adjustment for Infibeam Avenues Ltd. in Nifty indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-09-09",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09092024.pdf",
+      "title": "NSE Indices launches Nifty Capital Markets Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-10-15",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15102024.pdf",
+      "title": "NSE Indices launches Nifty Top 15 Equal Weight Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-10-22",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22102024.pdf",
+      "title": "NSE Indices launches Nifty Top 20 Equal Weight Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-10-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25102024.pdf",
+      "title": "NSE Indices launches Nifty India New Age Consumption Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-11-12",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12112024.pdf",
+      "title": "NSE Indices launches Nifty India Select 5 Corporate Groups (MAATR)",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-11-25",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs25112024.pdf",
+      "title": "NSE Indices launches Nifty India Railways PSU Index",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-12-20",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20122024.pdf",
+      "title": "NSE Indices launches two new strategy indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    },
+    {
+      "decision": "SOURCE_CONTENT_REVIEW_REQUIRED",
+      "publication_date": "2024-12-30",
+      "scope_status_unchanged": "UNREVIEWED",
+      "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30122024.pdf",
+      "title": "Corporate Adjustment for ITC Ltd. in Nifty Indices",
+      "title_scope_hint": "GENERAL_INDEX_REVIEW_HINT"
+    }
+  ],
+  "potential_false_negatives_for_source_review": 220,
+  "safety_policy": "Title hints are not scope decisions. No notice is classified as Nifty 50 change/no-change, no review status is changed, no effective date is inferred, and no membership interval or annual coverage flag is created."
+}

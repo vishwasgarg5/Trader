@@ -549,7 +549,7 @@
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
       "text_status": "MISSING_SOURCE_DOCUMENT",
-      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018. Automated title-keyword candidate only; inspect PDF and classify index scope. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
       "year": "2018"
     },
     {
@@ -2054,7 +2054,7 @@
       "review_status_unchanged": "DISCOVERED_UNREVIEWED",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
       "text_status": "MISSING_SOURCE_DOCUMENT",
-      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
       "year": "2019"
     },
     {
