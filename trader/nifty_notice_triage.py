@@ -16,6 +16,7 @@ INVENTORY = Path("data/reference/nifty50_annual_notice_inventory.csv")
 REPORT = Path("data/reports/nifty50_notice_triage.json")
 EVENTS = Path("data/reference/nifty50_candidate_events.csv")
 OCR_TEXT_DIR = Path("data/reference/ocr_notice_text")
+CATALOG = Path("data/reference/nifty50_archive_discovery_catalog.csv")
 
 # High-recall title cues for index constituent changes. Broad terms such as
 # "change" alone are deliberately insufficient.
@@ -137,9 +138,17 @@ def _candidate_events(pdf_path: Path, source_sha256: str, notice_id: str) -> tup
 
 
 def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
-        events_path: Path = EVENTS) -> dict:
+        events_path: Path = EVENTS, catalog_path: Path = CATALOG) -> dict:
     with inventory_path.open(newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+    catalog_titles = {}
+    if catalog_path.is_file():
+        with catalog_path.open(newline="", encoding="utf-8") as f:
+            for catalog_row in csv.DictReader(f):
+                source_url = catalog_row.get("source_url", "").strip()
+                title = catalog_row.get("title", "").strip()
+                if source_url and title:
+                    catalog_titles[source_url] = title
     triage, events, counts = [], [], {}
     ocr_artifacts = []
     for row in rows:
