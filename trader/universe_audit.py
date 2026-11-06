@@ -110,6 +110,17 @@ def audit_universe(
                 history["valid_from"] = _india_calendar_dates(history["valid_from"])
                 history["valid_to"] = _india_calendar_dates(history["valid_to"])
                 history["source_published_at"] = _india_calendar_dates(history["source_published_at"])
+                membership_symbols = set(history["symbol"].dropna())
+                missing_membership = sorted(set(symbols) - membership_symbols)
+                unexpected_membership = sorted(membership_symbols - set(symbols))
+                if missing_membership:
+                    membership["errors"].append(
+                        f"configured symbols missing from membership evidence: {missing_membership}"
+                    )
+                if unexpected_membership:
+                    membership["errors"].append(
+                        f"membership evidence contains symbols outside configured universe: {unexpected_membership}"
+                    )
                 if history["symbol"].eq("").any() or history["valid_from"].isna().any():
                     membership["errors"].append("blank symbols or invalid valid_from dates")
                 if (history["valid_to"].notna() & (history["valid_to"] < history["valid_from"])).any():
