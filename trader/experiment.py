@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from trader.costs import DEFAULT_DELIVERY_COSTS, add_delivery_costs
 from trader.data_snapshot import write_data_snapshot_manifest
 from trader.corporate_actions import audit_corporate_action_ledger
-from trader.membership_evidence import audit_membership_evidence
+from trader.membership_evidence import audit_membership_evidence, audit_special_membership_events
 from trader.security_aliases import audit_security_aliases
 from trader.delivery import download_delivery_history
 from trader.labels import triple_barrier_labels
@@ -142,6 +142,20 @@ def run_experiment() -> dict:
         raise RuntimeError(
             "T-0003 full point-in-time Nifty 50 evidence gate is BLOCKED; "
             "refusing to run on the legacy static universe. " + detail
+        )
+
+    special_membership_gate = audit_special_membership_events(
+        reference_root / "nifty50_special_membership_events.csv",
+    )
+    if not special_membership_gate.get("ready", False):
+        errors = special_membership_gate.get("errors", [])
+        detail = "; ".join(errors[:8])
+        if len(errors) > 8:
+            detail += f"; and {len(errors) - 8} additional special-event errors"
+        raise RuntimeError(
+            "T-0003 temporary/dummy constituent evidence gate is BLOCKED; "
+            "refusing to omit demerger membership episodes or synthesize a price series. "
+            + detail
         )
 
     alias_gate = audit_security_aliases(
