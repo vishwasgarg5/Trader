@@ -28,7 +28,7 @@ CHANGE_TITLE = re.compile(
 )
 NIFTY_TITLE = re.compile(r"\bnifty\s*[- ]?\s*50\b|\bnifty50\b", re.I)
 EXCLUDE_TITLE = re.compile(
-    r"fixed.?income|10 year sdl|strategy indices|midcap|smallcap|"
+    r"fixed.?income|\\bsdl\\b|strategy indices|midcap|smallcap|"
     r"hybrid indices|launch(es|ed)? .*indices|cessation of indices",
     re.I,
 )
@@ -44,7 +44,7 @@ SUPERSEDE = re.compile(r"\b(supersed(?:e|es|ed|ing)|in place of|withdrawn|revok(
 
 def classify_title(title: str) -> str:
     title = title or ""
-    if EXCLUDE_TITLE.search(title) and not NIFTY_TITLE.search(title):
+    if EXCLUDE_TITLE.search(title):
         return "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     if NIFTY_TITLE.search(title) or CHANGE_TITLE.search(title):
         return "PRIORITY_CONSTITUENT_CHANGE_REVIEW"
