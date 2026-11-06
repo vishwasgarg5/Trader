@@ -39,3 +39,12 @@ def test_ignores_unrelated_press_release_titles():
     entries, _ = discover_entries(html)
     assert len(entries) == 1
     assert entries[0]["review_candidate"] is False
+
+def test_extracts_relative_pdf_url_from_onclick_handler():
+    html = """
+    <div>May 18, 2023</div>
+    <a onclick="window.open('/Press_Release/multi_asset_review.pdf')">Revision in Nifty Multi Asset Indices</a>
+    """
+    entries, _ = discover_entries(html)
+    assert len(entries) == 1
+    assert entries[0]["url"].endswith("/Press_Release/multi_asset_review.pdf")
