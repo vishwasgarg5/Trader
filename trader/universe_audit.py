@@ -64,6 +64,7 @@ def audit_universe(
             continue
         dates = pd.DatetimeIndex(_india_calendar_dates(pd.Series(frame.index)).dropna())
         duplicate_count = int(dates.duplicated().sum())
+        invalid_date_rows = int(len(frame) - len(dates))
         required = {"open", "high", "low", "close", "volume"}
         missing_columns = sorted(required.difference(frame.columns))
         invalid = None
@@ -80,11 +81,15 @@ def audit_universe(
             )
             invalid = int(invalid_mask.sum())
             zero_volume = int((bars["volume"] == 0).sum())
-        expected = benchmark_dates[(benchmark_dates >= dates.min()) & (benchmark_dates <= dates.max())] if len(benchmark_dates) else pd.DatetimeIndex([])
+        expected = (
+            benchmark_dates[(benchmark_dates >= dates.min()) & (benchmark_dates <= dates.max())]
+            if len(benchmark_dates) and len(dates) else pd.DatetimeIndex([])
+        )
         missing_sessions = int(len(expected.difference(dates)))
-        stale_sessions = int((benchmark_dates > dates.max()).sum()) if len(benchmark_dates) else 0
+        stale_sessions = int((benchmark_dates > dates.max()).sum()) if len(benchmark_dates) and len(dates) else 0
         per_symbol[symbol] = {
             "present": True, "rows": int(len(frame)), "duplicate_dates": duplicate_count,
+            "invalid_date_rows": invalid_date_rows,
             "invalid_ohlc_rows": invalid, "zero_volume_rows": zero_volume,
             "missing_ohlcv_columns": missing_columns,
             "missing_benchmark_sessions": missing_sessions,
@@ -155,7 +160,7 @@ def audit_universe(
     integrity_issues = {
         s: row for s, row in per_symbol.items()
         if row["present"] and (
-            row["duplicate_dates"] or row["invalid_ohlc_rows"] or row["missing_ohlcv_columns"] or row["missing_benchmark_sessions"] or row["stale_benchmark_sessions"]
+            row["duplicate_dates"] or row.get("invalid_date_rows", 0) or row["invalid_ohlc_rows"] or row["missing_ohlcv_columns"] or row["missing_benchmark_sessions"] or row["stale_benchmark_sessions"]
         )
     }
     return {
