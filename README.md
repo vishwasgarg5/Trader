@@ -2,7 +2,7 @@
 
 An open-source GitHub Actions-powered research and paper-signal system for Indian equities. It collects daily prices, builds technical features, trains a five-session upside classifier, ranks candidates, and publishes risk-aware paper signals.
 
-> Research software, not investment advice. Signals are unvalidated until sustained out-of-sample and paper-trading evidence exists. No real-money execution is performed.
+> **RESEARCH HOLD.** The daily model is not promotion-approved. Its probability-ranked outputs are labelled `RESEARCH_ONLY_BUY/HOLD/AVOID`; they are not trade instructions. Live execution remains disabled. This is research software, not investment advice.
 
 ## Initial release
 - Daily OHLCV collection from Yahoo Finance via yfinance (NSE tickers use `.NS`).
@@ -22,6 +22,10 @@ python -m trader.pipeline
 ```
 
 Edit `config/universe.txt` to change the Yahoo Finance tickers. The starter list is a configurable Nifty 50-style universe, not a live constituent feed; verify constituents before relying on it.
+
+## Promotion gate
+
+Daily signals are fail-closed by `config/promotion_gate.json`. A raw classifier label is retained in `model_signal`, while the public `signal` field is prefixed with `RESEARCH_ONLY_` unless the gate is explicitly approved, promotion eligibility is true, and live execution is separately enabled. The committed gate is `RESEARCH_HOLD`; CI success alone cannot change it. Do not enable promotion or live execution based on the current research metrics.
 
 ## Outputs
 - `data/signals/latest_signals.csv`
