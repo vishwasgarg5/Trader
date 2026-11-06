@@ -31,14 +31,14 @@ def test_deduplicates_same_pdf_url():
     assert len(entries) == 1
 
 
-def test_ignores_unrelated_press_release_titles():
+def test_broad_recall_includes_index_provider_launch_titles_for_source_screening():
     html = """
     <div>Feb 15, 2023</div>
     <a href="/Press_Release/new_index_launch.pdf">NSE Indices launches a new index</a>
     """
     entries, _ = discover_entries(html)
     assert len(entries) == 1
-    assert entries[0]["review_candidate"] is False
+    assert entries[0]["review_candidate"] is True
 
 def test_extracts_relative_pdf_url_from_onclick_handler():
     html = """
@@ -76,11 +76,11 @@ def test_run_discovery_catalogues_all_archive_entries(monkeypatch, tmp_path):
     with catalog_path.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
     assert len(rows) == 2
-    assert {row["review_candidate"] for row in rows} == {"true", "false"}
+    assert {row["review_candidate"] for row in rows} == {"true"}
     assert all(row["scope_status"] == "UNREVIEWED" for row in rows)
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["archive_catalog_rows_total"] == 2
-    assert report["non_candidate_entries_catalogued"] == 1
+    assert report["non_candidate_entries_catalogued"] == 0
 
 
 
