@@ -1,0 +1,58 @@
+name: Discover and archive Nifty 50 coverage candidates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 1 * *"
+  push:
+    branches: [main]
+    paths:
+      - "trader/nifty_notice_discovery.py"
+      - "tests/test_nifty_notice_discovery.py"
+      - ".github/workflows/discover-nifty50-notices.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nifty50-notice-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run deterministic discovery tests
+        run: |
+          python -m pip install --upgrade pip pytest
+          pytest -q tests/test_nifty_notice_discovery.py
+      - name: Discover archive entries and archive review candidates
+        run: python -m trader.nifty_notice_discovery --start-year 2018 --end-year 2024
+      - name: Commit discovered inventory and source PDFs
+        run: |
+          if git diff --quiet; then
+            echo "No new archive candidates or source changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reference/nifty50_annual_notice_inventory.csv data/reference/source_documents/ data/reports/nifty50_notice_discovery.json
+          git commit -m "Discover and archive Nifty Indices press-release candidates"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 3))
+          done
+          echo "Unable to push discovered evidence after 5 retries."
+          exit 1
