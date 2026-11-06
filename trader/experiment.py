@@ -482,6 +482,7 @@ def run_experiment() -> dict:
     reference_ledgers = (
         DATA / "reference" / "universe_membership.csv",
         DATA / "reference" / "corporate_actions.csv",
+        DATA / "reference" / "nifty50_special_membership_events.csv",
     )
     for candidate in (
         raw_dir / "delivery.csv",
@@ -501,9 +502,13 @@ def run_experiment() -> dict:
         if not ledger_path.is_file():
             continue
         ledger = pd.read_csv(ledger_path)
-        if "evidence_path" not in ledger.columns:
+        evidence_column = next(
+            (column for column in ("evidence_path", "source_document_path") if column in ledger.columns),
+            None,
+        )
+        if evidence_column is None:
             continue
-        for evidence_value in ledger["evidence_path"].dropna().astype(str):
+        for evidence_value in ledger[evidence_column].dropna().astype(str):
             evidence_path = Path(evidence_value)
             if not evidence_path.is_absolute():
                 evidence_path = ledger_path.parent / evidence_path
@@ -518,7 +523,7 @@ def run_experiment() -> dict:
             "git_commit": os.environ.get("GITHUB_SHA", "local-unpinned"),
             "github_run_id": os.environ.get("GITHUB_RUN_ID"),
             "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
-            "universe_policy": "owner-confirmed fixed 49-symbol custom universe; no silent additions or substitutions",
+            "universe_policy": "full Nifty 50 point-in-time membership from verified half-open intervals, including special temporary/dummy demerger members; no legacy static-universe fallback",
             "portfolio_risk_limits": {
                 "max_sector_exposure_fraction": 0.30,
                 "drawdown_size_reduction_threshold": 0.10,
