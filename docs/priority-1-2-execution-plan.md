@@ -23,9 +23,9 @@ Latest full validation: [GitHub Actions run #171](https://github.com/vishwasgarg
 - [x] Deterministic SHA-256 manifest builder for frozen inputs.
 - [x] Membership schema requires HTTPS sources, archived evidence paths and matching SHA-256 checksums.
 - [x] Reject overlapping membership intervals; missing history is explicitly unverified and invalid supplied history fails closed.
-- [x] Owner confirmed the intended universe is exactly the configured 49-symbol custom universe; do not expand it or relabel it as Nifty 50.
-- [ ] If historical universe membership is used in backtests, obtain dated membership evidence for these exact 49 symbols and archive source records. Do not substitute Nifty 50 constituents or silently add symbols.
-- [ ] Populate `data/reference/universe_membership.csv` only from source-backed membership evidence; until then, explicitly mark point-in-time membership unverified.
+- [x] Research scope is the complete historical Nifty 50 constituent set on each date, not the current configured 49-symbol subset.
+- [ ] Complete the 2018–2024 official Nifty 50 notice inventory, supersession chain and independent source review before creating the PIT ledger.
+- [ ] Populate the PIT membership ledger only from primary-source-backed additions/removals using half-open `[valid_from, valid_to)` intervals; keep it blocked until annual completeness and independent review pass.
 - [x] Establish the official NSE symbol mapping: `TATAMOTORS` became `TMPV` (Tata Motors Passenger Vehicles Ltd.) effective 2025-10-24; the demerged CV entity listed separately as `TMCV` on 2025-11-12 and was excluded from Nifty indices effective 2025-11-17.
 - [ ] Reconcile the missing `TATAMOTORS.NS` history to `TMPV.NS` across the rename and independently verify adjusted-price continuity; do not substitute `TMCV` for the passenger-vehicle history.
 - [ ] Independently verify OHLCV adjusted-price lineage, stale/missing sessions and corporate-action factors.
@@ -92,7 +92,7 @@ Passing CI validates implementation and reproducibility, not data completeness, 
 
 ## Universe scope confirmed
 
-The owner confirmed that the research universe is exactly the 49 symbols in `config/universe.txt`. This is a custom fixed universe, not a claim that the list equals the current or historical Nifty 50. Do not add or substitute symbols to force index membership. Historical inclusion/exclusion dates for these exact 49 symbols remain unverified until source-backed records are archived.
+The research universe is the complete point-in-time Nifty 50 constituent set effective on each date, as frozen in pre-registration T-0003. The configured 49-symbol list is not the research universe and must not be used as a substitute, expanded ad hoc, or described as the historical Nifty 50. The PIT ledger remains blocked until all annual notice, supersession, snapshot and reviewer gates pass.
 
 The 49 configured entries include the legacy `TATAMOTORS.NS` identifier. It must be reconciled to the passenger-vehicle successor `TMPV.NS` and the 2025 demerger before using its series; keep the universe at 49 names and do not include the separate CV ticker as an additional name.
 
@@ -108,7 +108,7 @@ The research panel must therefore not treat `TATAMOTORS.NS` as an unchanged tick
 
 ## External inputs still required
 
-1. Historical membership evidence for the exact owner-defined 49-symbol universe, if point-in-time membership is needed.
+1. Complete official point-in-time Nifty 50 membership evidence for every effective date in the 2018-04-01 through 2024-12-31 research window.
 2. Source-backed TATAMOTORS/TMPV transition and corporate-action adjustment.
 3. Corporate-action ledger and independent adjusted-price verification.
 4. Anonymised Groww contract notes or equivalent actual fee evidence.
@@ -126,7 +126,7 @@ The follow-on branch `feature/p3-rankic-sector-risk-controls` adds:
 - Explicit risk-limit metadata in the experiment report and inclusion of universe, broker-cost, sector-taxonomy and holdout-protocol configuration files in the SHA-256 input manifest.
 - Regression tests for rank metrics, sector-cap rejection and drawdown-triggered sizing.
 
-These are research-simulator controls, not a live execution authorization. The owner-confirmed 49-name universe remains unchanged; expansion requires a separate explicit decision and point-in-time evidence. The 49/49 price-history, corporate-action and historical-membership evidence gates remain open.
+These are research-simulator controls, not a live execution authorization. The complete point-in-time Nifty 50 universe is required; current configured symbols are not a substitute. Historical membership, full constituent price coverage and corporate-action evidence gates remain open.
 
 
 ## Direct-main implementation update — 2026-11-06
@@ -165,12 +165,12 @@ These changes improve observability and reconciliation tooling; they do not reso
 
 ## Evidence reconciliation update — 2026-11-06
 
-- The configured research universe is the owner's fixed 49-symbol custom universe, not the Nifty 50. The membership JSON schema title and description now say this explicitly to prevent accidental use of index constituent history as a substitute.
+- The selected research universe is the full point-in-time Nifty 50. The membership JSON schema and data gates must preserve dated official index membership and must not fall back to a static 49-symbol subset.nt history as a substitute.
 - The corporate-action ledger's two source URLs now point to the NSE corporate-filings page for TMPV and the verified NSE archive path for Circular NSE/CML/70875. The local evidence notes remain explicitly labelled summaries; the original source PDFs have not yet been archived in this repository.
 - The NSE circular confirms the TATAMOTORS → TMPV symbol/name change effective 2025-10-24. It does not establish a price adjustment factor.
 - The shareholder entitlement was one TML Commercial Vehicles share per eligible Tata Motors share. This is an entitlement ratio, not an adjustment factor for the TMPV OHLCV series. Both ledger factor cells therefore remain null and unresolved; no factor of 1.0 or inferred demerger price split is permitted.
 - The NSE corporate-filings page also exposes the 2025-10-09 shareholder communication, 2025-10-01 scheme-effectiveness filing and 2025-10-01 record-date filing. These are the primary records to archive next. Until the original attachments and an independently reproducible price-discovery calculation are archived, adjusted-price continuity remains unverified.
-- No historical membership rows were fabricated. The 49-symbol universe remains fixed and unchanged; a historical membership claim requires dated source evidence for each inclusion/exclusion interval, including delisted or renamed instruments where applicable.
+- No historical membership rows were fabricated. The PIT Nifty 50 ledger remains unpopulated until every inclusion/exclusion interval has dated primary-source evidence, including delisted and merged securities.sted or renamed instruments where applicable.
 - Gate outcome is unchanged: Priority 1 remains incomplete, final holdout remains locked, promotion/live execution remain disabled.
 
 Primary-source references checked during this reconciliation:
@@ -186,7 +186,7 @@ Primary-source references checked during this reconciliation:
 - Corrected the corporate-action ledger to use the exact primary-source document URLs recorded in the evidence notes: the 2025-10-09 shareholder communication and NSE/CML/70875 circular. The source-note files are still summaries, not archived original PDFs.
 - The NSE circular confirms TATAMOTORS → TMPV effective 2025-10-24. The shareholder communication's 1:1 figure is an entitlement ratio only. Both price adjustment factors remain null pending an archived exchange price-discovery record and independently reproducible adjustment calculation.
 - Validation triggered by these changes: Daily Signals #37 onward, Pull Request CI #29 onward, and Triple Barrier #226 onward. Treat them as pending until their completed conclusions and job logs are inspected.
-- Keep final holdout locked and promotion/live execution disabled. The 49-symbol universe is unchanged.
+- Keep final holdout locked and promotion/live execution disabled. Use the frozen full point-in-time Nifty 50 universe only after its evidence and price-coverage gates pass.
 
 
 ## Execution update — 2026-11-06 (Yahoo Finance cache contention)
@@ -197,3 +197,8 @@ Primary-source references checked during this reconciliation:
 - Commits: `e43c1cf` (serialize downloads), `381ef0d` (test).
 - CI #32 passed with 121 tests before this downloader change. CI #33/#34, Daily Signals #44/#45 and Triple Barrier #231/#232 were triggered by the new commits and must be inspected before considering the fix validated.
 - Keep the pipeline fail-closed if any symbol still has insufficient or unusable data. Do not silently drop BAJAJFINSV.NS or substitute another ticker.
+
+
+## Scope correction — full point-in-time Nifty 50 supersedes legacy 49-name notes
+
+The current approved research universe is the **complete point-in-time Nifty 50**, with dated membership effective on each session and half-open intervals `[valid_from, valid_to)`. This decision supersedes older passages in this execution plan that describe the configured 49 symbols as the intended universe. The configured 49-name list is not a valid substitute for the historical Nifty 50 and must not be used to omit historical constituents. Research window: 2018-04-01 through 2024-12-31. No PIT ledger, full-universe price panel, model experiment, or holdout evaluation is authorized until the annual source inventory, supersession review, constituent snapshots, complete price coverage, symbol/corporate-action lineage, and independent review gates pass.
