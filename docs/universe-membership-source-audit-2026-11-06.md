@@ -213,3 +213,16 @@ This establishes the important distinction: the March 23 and May 13 actions did 
 - The February 23, 2021 methodology-change PDF is a separate control document from the same-day replacement notice. Its official URL has been located: https://www.niftyindices.com/Press_Release/ind_prs23022021_1.pdf. It states that periodic reconstitutions take effect from the last working day (beginning of day) of March, June, September and December, replacing the prior first-working-day-after-F&O-expiry convention. This matters directly to effective-date and half-open interval construction. The PDF is documented here but is not yet in the hash-validated inventory: the current archive workflow requires a pre-existing 64-character digest before it will download and calculate the actual digest. No placeholder hash was inserted.
 - The official archive also lists April 22, June 15, August 23 and October 22, 2021 replacement/methodology notices. Their direct PDFs and parent-index scope remain to be retrieved and screened. The archive page is the primary discovery index: https://www.niftyindices.com/press-release.
 - 2021 annual coverage remains NOT_STARTED; no transition is promoted to VERIFIED and no PIT ledger is authorized.
+
+
+## 2021-10-22 scope screen — 2026-11-06 continuation
+
+The official October 22, 2021 NSE Indices press release has now been retrieved and inspected:
+
+- Official PDF: https://www.niftyindices.com/Press_Release/ind_prs22102021.pdf
+- It revises index-maintenance guidelines and lists replacements effective October 29, 2021.
+- The replacement section covers NIFTY 500, NIFTY500 Multicap 50:25:25, NIFTY Midcap 150, NIFTY Midcap 50, NIFTY Midcap 100, NIFTY 200, NIFTY LargeMidcap 250, NIFTY MidSmallcap 400, NIFTY Microcap 250 and NIFTY Total Market. It does not list NIFTY 50.
+- This is a verified negative scope screen for the parent NIFTY 50 constituent set, not proof of annual completeness.
+- The PDF has not yet been archived and hashed in this repository. It is therefore documented as an audit finding only and has not been inserted into the hash-validated annual inventory.
+
+The September 20, April 22, June 15 and August 23, 2021 archive entries still require direct-PDF retrieval and scope review. Do not infer a direct URL from the archive title. The 2021 annual gate remains NOT_STARTED.
