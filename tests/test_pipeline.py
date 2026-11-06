@@ -146,3 +146,15 @@ def test_tata_motors_legacy_symbol_is_replaced_by_official_tmpv_symbol():
     assert "TMPV.NS" in symbols
     assert "TATAMOTORS.NS" not in symbols
 
+
+
+def test_every_universe_symbol_has_a_sector_classification():
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    sectors = json.loads((root / "config" / "sector_classifications.json").read_text(encoding="utf-8"))["symbols"]
+    symbols = load_universe()
+    assert set(symbols).issubset(sectors)
+    assert sectors["TMPV.NS"] == "Automobile and Auto Components"
+    assert "TATAMOTORS.NS" not in sectors
