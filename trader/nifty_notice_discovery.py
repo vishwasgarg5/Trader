@@ -33,7 +33,7 @@ DATE_PATTERNS = (
     "%b %d, %Y", "%B %d, %Y", "%d-%b-%Y", "%d %B %Y",
 )
 DATE_RE = re.compile(r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2},\s+\d{4}\b|\b\d{1,2}-[A-Za-z]{3}-\d{4}\b", re.I)
-PDF_RE = re.compile(r"https?://[^\s\"'<>]+?\.pdf(?:\?[^\s\"'<>]*)?", re.I)
+PDF_RE = re.compile(r"""(?:https?://)?[^\\s"'<>()]*?\\.pdf(?:\\?[^\\s"'<>()]*)?""", re.I)
 REVIEW_TERMS = re.compile(
     r"replacement|replacements|inclusion|inclusions|exclusion|exclusions|"
     r"corporate action|demerger|merger|reconstitution|rebalanc|"
