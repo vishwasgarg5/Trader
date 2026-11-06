@@ -64,3 +64,13 @@ def test_naive_late_evening_ex_date_keeps_nse_calendar_date():
     values = pd.Series(["2024-01-10 23:45:00", "2024-01-10T18:30:00Z"])
     dates = _india_calendar_dates(values)
     assert dates.dt.strftime("%Y-%m-%d").tolist() == ["2024-01-10", "2024-01-11"]
+
+
+def test_committed_tata_motors_source_notes_are_integrity_valid_but_not_price_verified():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    result = audit_corporate_action_ledger(root / "data" / "reference" / "corporate_actions.csv")
+    assert result["valid"] is True
+    assert result["status"] == "evidence_valid_unverified_adjustment"
+    assert result["corporate_action_adjustment_verified"] is False

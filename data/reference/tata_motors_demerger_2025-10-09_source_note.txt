@@ -1,0 +1,14 @@
+Source note — not the original shareholder communication PDF
+Source: Tata Motors Limited shareholder communication dated 2025-10-09, filed with BSE and NSE.
+Official filing URL: https://links.sgx.com/FileOpen/NSEBSESHAREHOLDERINTIMATION.ashx?App=Announcement&FileID=863553
+Retrieved: 2026-11-06.
+
+Verified facts from the company communication:
+- The composite scheme became effective on 2025-10-01; the appointed date was 2025-07-01.
+- The record date for the commercial-vehicle share entitlement was 2025-10-14.
+- Eligible holders were entitled to one TML Commercial Vehicles Limited share for each one Tata Motors share held on the record date.
+- The existing Tata Motors share price was to be adjusted through an exchange price-discovery mechanism.
+- The commercial-vehicle shares were not available for exchange trading until listing permission was obtained.
+
+Interpretation and limitation:
+The 1:1 figure is a share-entitlement ratio, not an OHLCV price-adjustment factor. A continuous historical shareholder-value series must account for both resulting securities and the interval before the commercial-vehicle shares became tradable. This file is a locally recorded source summary, not an archived copy of the official PDF.

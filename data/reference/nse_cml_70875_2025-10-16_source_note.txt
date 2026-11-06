@@ -1,0 +1,14 @@
+Source note — not the original circular PDF
+Source: National Stock Exchange of India Limited, Listing Circular 2041/2025, Download Reference NSE/CML/70875, dated 2025-10-16.
+Official source URL: https://nsearchives.nseindia.com/corporate/vinodn_16102025185058_CML70875.pdf
+Retrieved: 2026-11-06.
+
+Verified facts from the circular:
+- Existing trading symbol: TATAMOTORS.
+- New trading symbol: TMPV.
+- Existing company name: Tata Motors Limited.
+- New company name: Tata Motors Passenger Vehicles Limited.
+- The symbol/name change is effective 2025-10-24.
+
+Interpretation and limitation:
+This establishes the passenger-vehicle entity's exchange symbol transition. It does not establish a price-adjustment factor, prove Yahoo Finance adjusted OHLCV semantics, or account for the separately demerged commercial-vehicle share. This file is a locally recorded source summary, not an archived copy of the official PDF.
