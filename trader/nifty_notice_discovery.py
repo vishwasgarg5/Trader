@@ -45,6 +45,14 @@ REVIEW_TERMS = re.compile(
     r"defer|revok|addition|removal|indices",
     re.I,
 )
+# These titles identify fixed-income SDL indices, not the Nifty 50 equity index.
+# Keep them in the complete archive catalog, but do not download them as
+# Nifty 50 membership-review candidates. This is a narrow, explicit scope rule.
+OUT_OF_NIFTY50_SCOPE_TITLE = re.compile(
+    r"\\bNIFTY\\s+10\\s+Year\\s+SDL\\s+Index\\b|"
+    r"\\bNifty\\s+SDL\\s+(?:Jul|Plus|June|Oct|Sep)\\b",
+    re.I,
+)
 
 
 def parse_date(value: str):
@@ -148,7 +156,10 @@ def discover_entries(html: str, start_year: int = 2018, end_year: int = 2024):
             "date": date,
             "title": item["title"],
             "url": url,
-            "review_candidate": bool(REVIEW_TERMS.search(item["title"])),
+            "review_candidate": bool(
+                REVIEW_TERMS.search(item["title"])
+                and not OUT_OF_NIFTY50_SCOPE_TITLE.search(item["title"])
+            ),
         }
     return sorted(unique.values(), key=lambda x: (x["date"], x["url"])), unparsed
 
