@@ -31,6 +31,6 @@ The workflow runs monthly and can also be started manually. It parses **all** ar
 
 ## Acceptance
 
-A successful workflow run means the archive was reachable and candidate entries were processed. It does **not** mean the Nifty 50 coverage gate passed. Coverage remains blocked until every candidate is screened, the ad-hoc exchange circular inventory is reconciled, transition events are independently verified, historical constituent snapshots agree, and the full interval ledger passes the fail-closed audit.
+A successful workflow run means the archive was reachable, candidate entries were attempted, and every retrieval failure was retained in the discovery report for retry. A run with source retrieval failures can still complete its screening and commit successful evidence; the report remains `coverage_complete: false` and the failures remain explicit. It does **not** mean the Nifty 50 coverage gate passed. Coverage remains blocked until every candidate is screened, the ad-hoc exchange circular inventory is reconciled, transition events are independently verified, historical constituent snapshots agree, and the full interval ledger passes the fail-closed audit.
 
 The workflow must never promote the model or unlock the confirmatory holdout.
