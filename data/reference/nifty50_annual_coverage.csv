@@ -1,8 +1,8 @@
 year,scope_start,scope_end,official_notice_search_complete,expected_transition_count,verified_transition_count,supersession_review_complete,snapshot_reconciliation_complete,independent_reviewer,reviewed_at,coverage_status,notes
-2018,2018-04-01,2018-12-31,false,,,,,,,NOT_STARTED,
-2019,2019-01-01,2019-12-31,false,,,,,,,NOT_STARTED,
-2020,2020-01-01,2020-12-31,false,,,,,,,NOT_STARTED,
-2021,2021-01-01,2021-12-31,false,,,,,,,NOT_STARTED,
-2022,2022-01-01,2022-12-31,false,,,,,,,NOT_STARTED,
-2023,2023-01-01,2023-12-31,false,,,,,,,NOT_STARTED,
-2024,2024-01-01,2024-12-31,false,,,,,,,NOT_STARTED,
+2018,2018-04-01,2018-12-31,false,,,,,,,NOT_STARTED,"Preliminary source screen has two Nifty 50 transition notices (Feb 21 and Aug 28); full notice-page and ad-hoc-event reconciliation remains open."
+2019,2019-01-01,2019-12-31,false,,,,,,,NOT_STARTED,"Preliminary source screen has two Nifty 50 transition notices (Feb 25 and Aug 28); full notice-page and ad-hoc-event reconciliation remains open."
+2020,2020-01-01,2020-12-31,false,,,,,,,NOT_STARTED,"Preliminary source screen has four transition notices including the Mar 16 YESBANK supersession; audit the Mar 23/May 13 deferment and nullification notices and all ad-hoc changes."
+2021,2021-01-01,2021-12-31,false,,,,,,,NOT_STARTED,"Only the Feb 23 Nifty 50 replacement is currently registered. Sep review notice discovery is incomplete; do not infer no change from screened strategy/manufacturing notices."
+2022,2022-01-01,2022-12-31,false,,,,,,,NOT_STARTED,"Two Nifty 50 transition notices currently registered (Feb 24 and Sep 1); screen all other semi-annual and ad-hoc releases before declaring complete."
+2023,2023-01-01,2023-12-31,false,,,,,,,NOT_STARTED,"Register includes HDFC/LTIM and the JIOFIN temporary-member episode; review all additional review, corporate-action, and replacement releases in the annual archive."
+2024,2024-01-01,2024-12-31,false,,,,,,,NOT_STARTED,"Register includes March and September changes; Sep 25 revocation notice screened and found not to list Nifty 50, but full annual notice and ad-hoc review remains open."
