@@ -34,14 +34,14 @@ Daily signals are fail-closed by `config/promotion_gate.json`. A raw classifier 
 - `models/current_model.joblib`
 
 ## Limitations and safeguards
-Yahoo Finance is unofficial and may have coverage, corporate-action or timestamp issues. Verify prices against NSE. Holdout metrics are research diagnostics, not evidence of profitability. The initial release does not include options flow, FII/DII, news sentiment, live constituent refresh, transaction-cost-aware paper trading, drift monitoring or guarded challenger promotion. Costs, taxes, slippage, liquidity and survivorship bias must be modelled before evaluating profitability.
+Yahoo Finance is unofficial and may have coverage, corporate-action or timestamp issues. Verify prices against NSE. The research code now includes transaction-cost-aware walk-forward and portfolio diagnostics, but Groww tariff arithmetic still needs actual contract-note reconciliation, price history and corporate-action lineage need independent verification, and point-in-time membership remains unverified. Holdout metrics are research diagnostics, not evidence of profitability. Live execution is disabled.
 
 ## Roadmap
-1. Validate data integrity and baseline out-of-sample performance.
-2. Add a verified dynamic Nifty 50/200 universe.
-3. Add paper trading with costs, portfolio constraints, drawdown and Sharpe metrics.
-4. Add regime detection, PSI drift monitoring and evidence-based challenger promotion.
-5. Add ensembles, meta-labeling, multiple horizons, Optuna and SHAP.
+1. Complete 49-symbol historical data, corporate-action and point-in-time membership evidence.
+2. Reconcile Groww delivery charges against anonymised contract notes and validate execution assumptions.
+3. Complete independent walk-forward review and evaluate the locked final holdout only after all preconditions pass.
+4. Run prospective paper trading with costs, portfolio constraints, drawdown and drift monitoring.
+5. Consider challenger models only after the existing research stopping rules justify further model work.
 6. Add dashboard and optional Telegram alerts.
 
 The workflow runs weekdays at 10:20 UTC (15:50 IST), with manual dispatch. GitHub Actions has repository Contents write permission to commit generated files.
