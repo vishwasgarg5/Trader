@@ -147,8 +147,8 @@ def main() -> None:
         "inventory_rows", "title_triage_counts", "candidate_event_rows",
         "ocr_required_notice_ids", "source_integrity_failures", "coverage_complete"
     )}, indent=2))
-    if report["source_integrity_failures"]:
-        raise SystemExit(1)
+    # Source-integrity failures are reported in the artifact. The workflow's
+    # separate final gate fails the run after committing all diagnostic outputs.
 
 
 if __name__ == "__main__":
