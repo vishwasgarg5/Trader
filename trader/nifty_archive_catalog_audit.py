@@ -28,6 +28,10 @@ NON_EQUITY_HINTS = re.compile(
     r"SDL|G-?Sec|money market|strategy index|shariah|tata group",
     re.IGNORECASE,
 )
+# Explicit SDL index titles are catalogued for auditability but cannot change
+# Nifty 50 equity membership. Keep them separate from potential missed equity
+# review candidates; this is a title-only scope hint, not a source-content verdict.
+EXPLICIT_SDL_TITLE = re.compile(r"\\bNIFTY\\b.*\\bSDL\\b.*\\bINDEX\\b", re.IGNORECASE)
 
 
 def audit_catalog(catalog_path: Path = CATALOG, report_path: Path = REPORT) -> dict:
@@ -38,10 +42,20 @@ def audit_catalog(catalog_path: Path = CATALOG, report_path: Path = REPORT) -> d
         rows = list(reader)
 
     missed = []
+    specialized = []
     for row in rows:
         if row.get("review_candidate", "").strip().lower() == "true":
             continue
         title = row.get("title", "").strip()
+        if EXPLICIT_SDL_TITLE.search(title):
+            specialized.append({
+                "publication_date": row.get("publication_date", ""),
+                "title": title,
+                "source_url": row.get("source_url", ""),
+                "decision": "TITLE_IDENTIFIES_SDL_INDEX_NOT_NIFTY50_EQUITY_CANDIDATE",
+                "scope_status_unchanged": row.get("scope_status", ""),
+            })
+            continue
         if not BROAD_REVIEW_TERMS.search(title):
             continue
         missed.append({
@@ -69,7 +83,9 @@ def audit_catalog(catalog_path: Path = CATALOG, report_path: Path = REPORT) -> d
         ),
         "potential_false_negatives_for_source_review": len(missed),
         "potential_false_negatives": missed,
-        "method": "Broad title-term scan over every catalog row not already marked review_candidate.",
+        "explicit_sdl_title_rows_separated": len(specialized),
+        "explicit_sdl_title_rows": specialized,
+        "method": "Broad title-term scan over every non-candidate catalog row, with explicit NIFTY SDL index titles separately tracked as non-equity title hints.",
         "safety_policy": (
             "Title hints are not scope decisions. No notice is classified as Nifty 50 "
             "change/no-change, no review status is changed, no effective date is inferred, "
@@ -91,6 +107,7 @@ def main() -> None:
     print(json.dumps({
         "catalog_rows_audited": report["catalog_rows_audited"],
         "potential_false_negatives_for_source_review": report["potential_false_negatives_for_source_review"],
+        "explicit_sdl_title_rows_separated": report["explicit_sdl_title_rows_separated"],
         "coverage_complete": report["coverage_complete"],
     }, indent=2))
 
