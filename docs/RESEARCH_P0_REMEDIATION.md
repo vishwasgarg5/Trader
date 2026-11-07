@@ -200,3 +200,11 @@ Acceptance criteria:
 - Follow-up CI run `42352645468` still failed because the 2019-05-02 archived SDL notice retained the legacy value `EXPLICIT_FIXED_INCOME_SDL_NOT_NIFTY50_EQUITY`, while the regression test's canonical inventory contract requires `NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE` for all notices screened as not changing the flagship NIFTY 50.
 - Normalized the 2019-05-02 inventory value to the canonical classification. The source interpretation, PDF hash, extracted text, and pending-human-review status are unchanged. This corrects the schema inconsistency; it does not constitute human approval.
 - Official archive index lists the 2019-05-02, 2019-05-07 and 2019-05-08 press releases in its May 2019 archive. The 10 Year SDL index is a fixed-income portfolio of State Development Loans, not the flagship equity constituent list. Source: https://www.nseindia.com/static/nse-indices/press-releases
+
+
+### Additional notice screen — 2019-05-14 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official two-page NSE Indices release dated 2019-05-14. It announces seven exclusions and two inclusions (Kerala and Rajasthan State Development Loan securities) in the NIFTY 10 Year SDL fixed-income index, effective 2019-05-15. The extracted notice contains no flagship NIFTY 50 equity constituent section or membership event.
+- Archived PDF SHA-256: `a9bcace20ecf5038aa5101a32bfef7dae803f9fb9be2836da4a45a207eb45c1d`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-14-cde78c64905a.txt`.
+- Updated the annual notice inventory, unregistered-candidate scope-review table, human review queue and regression test. AI scope classification remains pending independent human sign-off; manual review remains `PENDING_HUMAN_REVIEW` and no verified symbol or reviewer fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf
