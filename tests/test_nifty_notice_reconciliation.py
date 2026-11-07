@@ -113,3 +113,50 @@ def test_ragged_csv_rows_are_reported_instead_of_crashing(tmp_path):
         for issue in report["issues"]
     )
     assert report["coverage_complete"] is False
+
+def test_2020_nifty50_acceleration_survives_later_rebalancing_deferment_chain():
+    """Regression: later general deferments must not undo the Nifty 50's March 19 event."""
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    with (root / "data/reference/nifty50_transition_register.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        transitions = list(csv.DictReader(handle))
+    march_events = {
+        row["transition_id"]: row
+        for row in transitions
+        if row["transition_id"] in {
+            "N50-2020-YESBANK-OUT",
+            "N50-2020-SHREECEM-IN",
+        }
+    }
+    assert set(march_events) == {
+        "N50-2020-YESBANK-OUT",
+        "N50-2020-SHREECEM-IN",
+    }
+    assert {row["effective_date"] for row in march_events.values()} == {"2020-03-19"}
+    assert all(row["verification_status"] == "SAMPLE_ONLY" for row in march_events.values())
+    assert all(row["has_superseding_notice"] == "true" for row in march_events.values())
+
+    with (root / "data/reference/nifty50_notice_register.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        notices = {row["publication_date"]: row for row in csv.DictReader(handle)
+                   if row["publication_date"] in {"2020-03-23", "2020-03-25", "2020-05-13"}}
+    assert set(notices) == {"2020-03-23", "2020-03-25", "2020-05-13"}
+    assert notices["2020-03-23"]["supersession_status"] == "DEFERRED_UNTIL_FURTHER_NOTICE"
+    assert notices["2020-03-25"]["supersedes_notice_id"] == "NSE_INDICES_PR_2020-03-23"
+    assert notices["2020-05-13"]["supersession_status"] == (
+        "EXCEPT_NIFTY50_AND_NIFTY_BANK_ALREADY_REBALANCED_2020-03-19"
+    )
+    assert notices["2020-05-13"]["observed_nifty50_effect"] == "NIFTY50_CONFIRMATION"
+
+    notice_texts = {
+        "2020-03-23": (root / "data/reference/extracted_notice_text/N50-NOTICE-2020-03-23.txt").read_text(encoding="utf-8"),
+        "2020-03-25": (root / "data/reference/extracted_notice_text/N50-NOTICE-2020-03-25.txt").read_text(encoding="utf-8"),
+        "2020-05-13": (root / "data/reference/extracted_notice_text/N50-NOTICE-2020-05-13.txt").read_text(encoding="utf-8"),
+    }
+    assert "defer the upcoming index rebalancing" in notice_texts["2020-03-23"]
+    assert "defer the above changes" in notice_texts["2020-03-25"]
+    assert "except replacements in NIFTY 50 and NIFTY Bank index" in notice_texts["2020-05-13"]
