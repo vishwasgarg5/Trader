@@ -5,6 +5,8 @@ import math
 import numpy as np
 import pandas as pd
 
+from trader.costs import DEFAULT_DELIVERY_COSTS, delivery_round_trip_cost
+
 
 PILOT_MAX_PARTICIPATION = 0.02
 PILOT_REFERENCE_PARTICIPATION = 0.01
@@ -44,6 +46,41 @@ def pilot_slippage_bps(participation_fraction: float, *, stress_multiplier: floa
     if not np.isfinite(stress_multiplier) or stress_multiplier <= 0:
         raise ValueError("stress_multiplier must be finite and positive")
     return float((15.0 + 25.0 * math.sqrt(participation_fraction / 0.01)) * stress_multiplier)
+
+
+def pilot_delivery_round_trip_cost(
+    entry_price: float,
+    exit_price: float,
+    *,
+    notional_rupees: float,
+    participation_fraction: float,
+    stress_multiplier: float = 1.0,
+    cost_parameters: dict | None = None,
+) -> dict:
+    """Combine the registered pilot slippage scenario with the delivery fee engine.
+
+    The participation fraction is an explicit input for the modeled order; it
+    is not inferred from a price series. The result remains a scenario estimate,
+    not an observed fill or empirical slippage calibration.
+    """
+    if not np.isfinite(notional_rupees) or notional_rupees <= 0:
+        raise ValueError("notional_rupees must be finite and positive")
+    slippage = pilot_slippage_bps(
+        participation_fraction, stress_multiplier=stress_multiplier
+    )
+    parameters = dict(
+        DEFAULT_DELIVERY_COSTS if cost_parameters is None else cost_parameters
+    )
+    parameters["notional_rupees"] = float(notional_rupees)
+    parameters["slippage_bps_per_side"] = slippage
+    estimate = delivery_round_trip_cost(entry_price, exit_price, **parameters)
+    return {
+        **estimate,
+        "participation_fraction": float(participation_fraction),
+        "stress_multiplier": float(stress_multiplier),
+        "slippage_bps_per_side": slippage,
+        "slippage_basis": "registered_pilot_scenario_not_observed_execution",
+    }
 
 
 def assess_pilot_liquidity(
