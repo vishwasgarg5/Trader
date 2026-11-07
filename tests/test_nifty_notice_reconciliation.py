@@ -150,7 +150,7 @@ def test_2020_nifty50_acceleration_survives_later_rebalancing_deferment_chain():
     assert notices["2020-05-13"]["cancellation_or_deferral_status"] == (
         "EXCEPT_NIFTY50_AND_NIFTY_BANK_ALREADY_REBALANCED_2020-03-19"
     )
-    assert notices["2020-05-13"]["observed_nifty50_effect"] == "NIFTY50_CONFIRMATION"
+    assert notices["2020-05-13"]["nifty50_scope_result"] == "NIFTY50_CONFIRMATION"
 
     notice_texts = {
         "2020-03-23": (root / "data/reference/extracted_notice_text/N50-NOTICE-2020-03-23.txt").read_text(encoding="utf-8"),
