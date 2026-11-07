@@ -1,6 +1,14 @@
 name: Nifty 50 pilot protocol checks
 
 on:
+  push:
+    branches: [pilot/nifty50-registration]
+    paths:
+      - "config/nifty50_pilot_protocol.json"
+      - "config/schemas/nifty50_pilot_protocol.schema.json"
+      - "trader/pilot_protocol.py"
+      - "tests/test_nifty50_pilot_protocol.py"
+      - ".github/workflows/nifty50-pilot-protocol.yml"
   pull_request:
     branches: [main]
     paths:
