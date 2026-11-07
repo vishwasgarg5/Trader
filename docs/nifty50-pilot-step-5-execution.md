@@ -11,12 +11,15 @@ The registered NIFTY50_PILOT_001 execution section remains authoritative:
 - Stress scenario multiplier: 1.5.
 - Unfilled quantity must be recorded, never silently assumed filled.
 
-trader/pilot_execution.py implements these fixed constraints. Liquidity assessment uses the latest 20 unique observations on or before the supplied signal date; fewer than 20 valid sessions are unresolved and fail closed. The fill cap returns requested, filled and unfilled quantities and cannot exceed the participation ceiling.
+`trader/pilot_execution.py` implements these fixed constraints. Liquidity assessment uses the latest 20 unique observations on or before the supplied signal date; fewer than 20 valid sessions are unresolved and fail closed. The fill cap returns requested, filled and unfilled quantities and cannot exceed the participation ceiling.
+
+The new `pilot_delivery_round_trip_cost` helper connects the registered participation-dependent slippage curve to the Groww delivery fee engine. It requires explicit actual-notional and participation inputs, applies the 1.5x stress multiplier when requested, and labels slippage as a scenario rather than an observed execution result. It does not infer participation or claim that a modeled fill occurred.
 
 ## Important limits
 
 - The fill cap is a deterministic participation guard, not an intraday execution simulator. It does not establish queue position, spread, auction behavior, market impact calibration or fill probability.
 - The slippage curve is a registered scenario assumption, not observed slippage or a guarantee. No historical calibration is claimed.
+- The new cost helper makes the registered scenario reproducible, but is not yet a substitute for wiring a verified per-order participation estimate into a fully sourced historical portfolio replay.
 - The existing Groww charge engine models published delivery tariffs, but tariff arithmetic is not independently reconciled to authenticated anonymised contract notes in this repository. Account-specific DP concessions and contract-note reconciliation remain outstanding.
 - NSE turnover inputs must be sourced, timestamped and security-identity reconciled before they can support an empirical pilot run.
 - No pilot labels, portfolio simulation, walk-forward evaluation or holdout access is enabled by this change.
@@ -28,6 +31,7 @@ trader/pilot_execution.py implements these fixed constraints. Liquidity assessme
 3. Liquidity uses exactly 20 prior-or-current sessions and ignores future observations.
 4. Missing/incomplete or duplicate session history cannot pass.
 5. Requested/filled/unfilled quantities are explicit and the filled notional respects the cap.
+6. The delivery cost helper uses actual notional, applies 40 bps at 1% participation and scales only slippage under the registered 1.5x stress case.
 
 ## Remaining evidence gates
 
