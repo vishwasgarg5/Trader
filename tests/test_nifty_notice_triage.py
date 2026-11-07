@@ -22,7 +22,7 @@ def test_triage_never_marks_review_complete_or_membership(tmp_path):
         "n1,2018-01-01,Archive title: Changes in Indices,https://example.test/a,, ,DISCOVERED_UNREVIEWED\n",
         encoding="utf-8",
     )
-    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv")
+    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv", review_queue_path=tmp_path / "queue.csv")
     assert report["coverage_complete"] is False
     assert report["membership_written"] is False
     assert report["triage"][0]["review_status_unchanged"] == "DISCOVERED_UNREVIEWED"
@@ -75,6 +75,7 @@ def test_triage_uses_canonical_archive_title_not_human_inventory_notes(tmp_path)
     report = run(
         inventory, tmp_path / "report.json", tmp_path / "events.csv",
         catalog_path=catalog,
+        review_queue_path=tmp_path / "queue.csv",
     )
     row = report["triage"][0]
     assert row["title"] == "Change in Indices w.e.f. April 02 2018"
@@ -116,3 +117,45 @@ def test_missing_pdf_for_nifty_sdl_launch_is_out_of_scope(tmp_path):
     assert report["source_integrity_failures"] == []
     assert report["out_of_scope_source_not_required"] == ["sdl-launch"]
     assert report["membership_written"] is False
+
+
+def test_review_queue_preserves_human_annotations_across_regeneration(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\\n"
+        "nifty50-2024,2024-02-20,Archive title: Changes in Indices,https://example.test/nifty50.pdf,,,DISCOVERED_UNREVIEWED\\n",
+        encoding="utf-8",
+    )
+    queue = tmp_path / "review_queue.csv"
+    report = run(
+        inventory, tmp_path / "report.json", tmp_path / "events.csv",
+        review_queue_path=queue,
+    )
+    assert report["human_review_queue_rows"] == 1
+
+    import csv
+    with queue.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    rows[0]["review_status"] = "VERIFIED_PRIMARY_SOURCE"
+    rows[0]["reviewer"] = "human-reviewer"
+    rows[0]["verified_effective_date"] = "2024-03-28"
+    rows[0]["verified_out_symbols"] = "OLDCO"
+    rows[0]["verified_in_symbols"] = "NEWCO"
+    rows[0]["notes"] = "Checked against official notice"
+    with queue.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(rows)
+
+    run(
+        inventory, tmp_path / "report.json", tmp_path / "events.csv",
+        review_queue_path=queue,
+    )
+    with queue.open(newline="", encoding="utf-8") as handle:
+        regenerated = next(csv.DictReader(handle))
+    assert regenerated["review_status"] == "VERIFIED_PRIMARY_SOURCE"
+    assert regenerated["reviewer"] == "human-reviewer"
+    assert regenerated["verified_effective_date"] == "2024-03-28"
+    assert regenerated["verified_out_symbols"] == "OLDCO"
+    assert regenerated["verified_in_symbols"] == "NEWCO"
+    assert regenerated["notes"] == "Checked against official notice"
