@@ -262,3 +262,11 @@ The official NSE Indices release dated 2019-06-03 was opened and its complete tw
 - The release contains no flagship NIFTY 50 constituent-change section. This is a negative scope screen, not a Nifty 50 transition.
 - The annual inventory row is now classified `SCREENED_NO_NIFTY50_CHANGE`; its existing archive path and recorded SHA-256 are retained unchanged. The PDF bytes were inspected from the official URL in this screening step; the recorded local digest was not independently recomputed here.
 - Independent human sign-off remains required. This does not complete 2019 annual archive reconciliation or authorize the PIT membership ledger.
+
+
+## 2019-05-21 notice — title-level verification only — 2026-11-07
+
+- NSE Indices' official press-release archive lists the 2019-05-21 item as “Change in NIFTY 10 Year SDL Index w.e.f. May 22, 2019” (archive page: https://niftyindices.com/press-release).
+- The archived inventory row points to https://www.niftyindices.com/Press_Release/ind_prs21052019.pdf and records the local archive SHA-256, but this screening attempt could not retrieve/render the full PDF body from the official URL or independently recompute the archived file digest.
+- Therefore this is only a title-level scope indication, not a complete-document screen. The row remains `DISCOVERED_UNREVIEWED`; no NIFTY 50 negative classification, transition, or PIT membership update is authorized.
+- Next action: restore a readable copy of the archived PDF, verify its SHA-256 against the inventory, inspect every page, then classify the scope.
