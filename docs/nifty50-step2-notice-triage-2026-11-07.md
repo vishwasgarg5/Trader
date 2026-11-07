@@ -41,3 +41,16 @@ The 100 screened rows are AI scope dispositions, not independent human approvals
 ## Safety
 
 No membership interval was created or promoted. The transition register remains sample-only; the membership ledger remains empty. Annual coverage remains `NOT_STARTED`. Protocol remains `DRAFT_NOT_FROZEN`; holdout remains locked; evaluation, promotion, paper trading and live execution remain unauthorized.
+
+
+## Post-merge main-branch verification (2026-11-07)
+
+The archive-title parsing fix and Python test workflow were merged in PR #27 (merge commit `0a3d163086cd3c01cf90cf0d19f2e38c35f5ded3`). The source-corroboration documentation was merged in PR #28 (merge commit `16fc20163b4d5b7079b740816907f77f40d7d2d1`).
+
+The Nifty 50 protocol workflow completed successfully on the PR #27 merge commit (run [#42395432776](https://github.com/vishwasgarg5/Trader/actions/runs/42395432776)). Its live triage diagnostic classified all 687 inventory rows into 34 `MEMBERSHIP_OR_EFFECTIVE_DATE_REVIEW`, 86 `OUT_OF_SCOPE_CANDIDATE_HUMAN_SIGNOFF`, and 567 `UNRESOLVED_REVIEW_REQUIRED`. It explicitly reported `human_signoff_required_for_every_row=true`, `membership_written=false`, and `source_rows_modified=false`. These are work-queue categories, not verified scope decisions.
+
+The same workflow's source reconciliation reported 687 inventory rows, 117 register rows and 697 catalog rows; 112 register rows matched inventory, five did not; 15 unique catalog URLs were absent from inventory, and two inventory URLs were absent from the catalog. It found 798 source files present with matching recorded hashes and six rows with no source path/hash recorded; no field mismatches were reported. This reconciliation is diagnostic and does not close completeness or human-review gates.
+
+Post-merge CI verification: protocol workflow PASS; Python test workflow PASS (277 tests); Model Status workflow PASS (277 tests). The readiness audit continued to fail closed as designed: no membership intervals, zero verified OHLCV/TRI observations, and unresolved Step 2/Step 3/corporate-action prerequisites. See [protocol run](https://github.com/vishwasgarg5/Trader/actions/runs/42395432776), [Python tests](https://github.com/vishwasgarg5/Trader/actions/runs/42395432872), and [Model Status](https://github.com/vishwasgarg5/Trader/actions/runs/42395432788).
+
+**Disposition unchanged: Step 2 remains OPEN / NOT COMPLETE.** No human review, annual coverage, transition verification, dated snapshot reconciliation, or point-in-time membership intervals were fabricated or promoted by these merges or CI runs. The triage workflow's generated diagnostic files are runner outputs; this documentation does not claim that stale tracked report artifacts were regenerated and committed.
