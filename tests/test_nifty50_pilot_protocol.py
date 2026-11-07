@@ -87,3 +87,36 @@ def test_loader_rejects_invalid_protocol(tmp_path):
     path.write_text(json.dumps(invalid), encoding="utf-8")
     with pytest.raises(PilotProtocolError):
         load_pilot_protocol(path)
+
+
+def test_json_schema_declares_core_contract_and_safety_fields():
+    schema_path = ROOT / "config" / "schemas" / "nifty50_pilot_protocol.schema.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    assert schema["$schema"].endswith("2020-12/schema")
+    assert {
+        "schema_version", "experiment_id", "universe", "target",
+        "statistical_power", "evaluation_gates", "outcomes", "safety",
+    }.issubset(set(schema["required"]))
+    assert schema["properties"]["universe"]["properties"]["index"]["const"] == "NIFTY_50"
+    assert schema["properties"]["statistical_power"]["properties"]["maximum_permitted_mde_absolute"]["const"] == 0.06
+
+
+def test_shared_promotion_gate_remains_research_hold_and_non_trading():
+    gate_path = ROOT / "config" / "promotion_gate.json"
+    gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    assert gate["status"] == "RESEARCH_HOLD"
+    assert gate["promotion_eligible"] is False
+    assert gate["live_execution_enabled"] is False
+    restrictions = gate["pilot_outcome_restrictions"]
+    assert restrictions["pilot_go_authorizes_promotion"] is False
+    assert restrictions["pilot_go_authorizes_paper_trading"] is False
+    assert restrictions["pilot_go_authorizes_live_trading"] is False
+
+
+def test_prior_trial_register_entries_are_preserved():
+    register_path = ROOT / "docs" / "experiment-trial-register.md"
+    register = register_path.read_text(encoding="utf-8")
+    assert "T-0001" in register
+    assert "T-0002" in register
+    assert "T-0003" in register
+    assert "NIFTY50_PILOT_001 protocol registration (not a model trial)" in register
