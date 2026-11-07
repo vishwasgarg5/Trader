@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "experiment_id": "NIFTY50_PILOT_001",
+  "protocol_name": "Nifty 50 event-aware equity research pilot",
+  "status": "DRAFT_NOT_FROZEN",
+  "registration": {
+    "baseline_branch": "main",
+    "baseline_commit": "47892799d54093c0abc08a99c18bc14d206f45b1",
+    "implementation_branch": "main",
+    "registered_at": "2026-11-07",
+    "evaluation_authorized": false,
+    "holdout_access_authorized": false,
+    "reason": "Pilot scope and outcome restrictions are registered; data feasibility, cost validation, power simulation, factor formula freeze and independent review remain outstanding."
+  },
+  "objective": "Test whether an event-aware, point-in-time Indian equity research pipeline can rank five Nifty 50 constituents with benchmark-relative predictive value and simulate a realistic cash-funded long-only portfolio. This is a research feasibility experiment, not a deployment test.",
+  "universe": {
+    "index": "NIFTY_50",
+    "membership": "point_in_time_constituents",
+    "membership_source_requirement": "independently_verified_official_nse_indices_evidence",
+    "eligible_security_count_min": 30,
+    "expected_full_universe_count": 50,
+    "selection_count": 5,
+    "selection_fraction_at_full_universe": 0.1,
+    "selection_rule": "rank_all_eligible_constituents_and_select_exactly_top_five",
+    "dynamic_selection_count": false,
+    "missing_or_ambiguous_membership": "FAIL_CLOSED_OR_QUARANTINE",
+    "expansion_allowed": false,
+    "excluded_expansions": [
+      "NIFTY_200",
+      "NIFTY_500",
+      "ALL_NSE_EQUITIES"
+    ],
+    "expansion_requires": "separately_approved_experiment_with_verified_point_in_time_membership",
+    "benchmark": "NIFTY_50_TRI",
+    "alternative_benchmark": {
+      "name": "equal_weight_same_eligible_stock_basket",
+      "enabled": false,
+      "requirement": "separately_specified_and_frozen_before_any_evaluation"
+    }
+  },
+  "target": {
+    "signal_time": "after_close_of_trading_session_T",
+    "entry": "next_eligible_trading_session_at_modeled_executable_price",
+    "holding_period_trading_sessions": 5,
+    "exit": "modeled_executable_price_after_five_trading_sessions",
+    "stock_return": "total_return_including_dividends_and_verified_corporate_action_adjustments",
+    "benchmark_return": "NIFTY_50_TRI_over_identical_entry_exit_interval",
+    "reference_cost_profile_id": "NIFTY50_PILOT_LABEL_COST_V1",
+    "formula": "net_stock_total_return_after_fixed_reference_costs_minus_matched_NIFTY_50_TRI_return",
+    "positive_class_rule": "net_relative_excess_return_strictly_greater_than_0.01",
+    "equality_at_threshold_label": 0,
+    "invalid_or_unavailable_outcome": "UNRESOLVED_EXCLUDED_NOT_NEGATIVE",
+    "reference_costs_independent_of_portfolio_capital": true,
+    "legacy_label_compatibility": "retain_triple_barrier_labels_for_legacy_experiments; pilot must explicitly select fixed_horizon_target"
+  },
+  "execution": {
+    "status": "PROPOSED_PENDING_BROKER_TARIFF_VALIDATION",
+    "reference_capital_inr": 10000000,
+    "capital_sensitivity_inr": [
+      2500000,
+      50000000
+    ],
+    "liquidity_filter": {
+      "metric": "20_session_median_traded_value",
+      "minimum_inr": 50000000,
+      "status": "PROPOSED_SAFETY_CHECK_NOT_BROAD_MARKET_ROBUSTNESS_EVIDENCE"
+    },
+    "max_order_participation_adv": 0.02,
+    "reference_label_participation_adv": 0.01,
+    "slippage_bps_per_side": "15 + 25 * sqrt(participation_fraction / 0.01)",
+    "slippage_at_reference_participation_bps_per_side": 40,
+    "charges": [
+      "brokerage",
+      "STT",
+      "stamp_duty",
+      "exchange_transaction_fees",
+      "SEBI_fees",
+      "GST",
+      "applicable_depository_charges",
+      "slippage"
+    ],
+    "unfilled_orders": "never_assume_filled; record_requested_filled_and_unfilled_quantity",
+    "over_limit_orders": "split_or_truncate_at_participation_limit",
+    "stress_multiplier": 1.5,
+    "income_tax": "reported_separately_not_in_trading_cost_model",
+    "tariff_validation_required_before_freeze": true
+  },
+  "portfolio": {
+    "mode": "long_only_cash_funded",
+    "positions": 5,
+    "sleeves": 5,
+    "daily_replacement_fraction": 0.2,
+    "holding_period_trading_sessions": 5,
+    "reference_capital_inr": 10000000,
+    "capital_sensitivity_inr": [
+      2500000,
+      50000000
+    ],
+    "daily_returns": "combine_all_five_sleeves_into_one_actual_weighted_portfolio_series",
+    "cash_and_partial_fill_accounting_required": true
+  },
+  "validation": {
+    "method": "chronological_walk_forward",
+    "train_only_fitting": [
+      "imputation",
+      "normalization",
+      "feature_selection",
+      "thresholds",
+      "calibration",
+      "model_parameters"
+    ],
+    "purge_trading_sessions": 6,
+    "test_period": "next_chronological_test_window",
+    "aggregate_only_permitted_oos_predictions": true,
+    "holdout_isolated_from_development": true,
+    "minimum_clean_development_years": 5,
+    "minimum_qualifying_cross_sectional_dates": 1000,
+    "minimum_eligible_securities_per_date": 30
+  },
+  "statistical_power": {
+    "status": "NOT_RUN",
+    "mde_metric": "top_five_precision_lift",
+    "maximum_permitted_mde_absolute": 0.06,
+    "automatic_decision_if_mde_exceeds_ceiling": "INCONCLUSIVE",
+    "simulation_must_use": [
+      "actual_qualifying_daily_selection_count",
+      "estimated_eligible_data_base_rate",
+      "overlapping_five_session_label_dependence",
+      "cross_sectional_dependence",
+      "registered_time_block_bootstrap",
+      "registered_sensitivity_analysis"
+    ],
+    "no_post_result_threshold_changes": true,
+    "power_target_and_alpha": "MUST_BE_PRE_REGISTERED_BEFORE_SIMULATION; NOT YET FROZEN",
+    "random_seed": "MUST_BE_RECORDED_IN_POWER_REPORT",
+    "feasibility_not_performance_evidence": true
+  },
+  "inference": {
+    "primary_hac": "Newey-West",
+    "newey_west_daily_lags": 10,
+    "primary_bootstrap": "moving_time_block_bootstrap",
+    "bootstrap_block_sessions": 20,
+    "sensitivity_analysis": "MUST_BE_SPECIFIED_AND_FROZEN_BEFORE_EVALUATION",
+    "resampling_unit": "time_blocks_preserving_cross_sectional_and_overlapping_label_dependence",
+    "stock_date_independence_assumption": false,
+    "dsr_daily_series": "single_combined_weighted_five_sleeve_portfolio",
+    "dsr_independent_trial_count": "INCOMPLETE_UNTIL_HISTORICAL_TRIAL_RECONSTRUCTION"
+  },
+  "factors": {
+    "required": [
+      "market_excess",
+      "size",
+      "momentum",
+      "volatility",
+      "reversal"
+    ],
+    "proposed_construction": "cross_sectional_tercile_portfolios; top_third_minus_bottom_third_where_definition_supports_it",
+    "status": "PROPOSED_FORMULAS_REQUIRE_EXPLICIT_FREEZE_BEFORE_EVALUATION",
+    "freeze_must_define": [
+      "exact_formula",
+      "ranking_direction",
+      "rebalance_frequency",
+      "missing_value_handling",
+      "ties",
+      "portfolio_weights",
+      "market_excess_cash_proxy"
+    ],
+    "limitations": [
+      "Nifty 50 size dispersion is restricted",
+      "cross-sectional factor portfolios are noisy",
+      "weak factor results are not proof of robustness"
+    ],
+    "factor_adjusted_alpha_gate": "positive_with_dependence_aware_95_percent_CI_lower_bound_above_zero"
+  },
+  "features": {
+    "families": [
+      "technical_trend_momentum_reversal_volatility",
+      "fundamentals_growth_financial_strength_valuation",
+      "corporate_actions",
+      "dividends",
+      "buybacks",
+      "official_news_classification_sentiment",
+      "sector_attribution"
+    ],
+    "point_in_time_required": true,
+    "fold_specific_preprocessing": true,
+    "module_admission": "each_module_must_show_incremental_out_of_sample_value_before_fusion",
+    "low_sample_buybacks": "event_studies_initially_not_standalone_classifier",
+    "ipo_gmp": "separate_module_until_listing_eligibility_is_met"
+  },
+  "evaluation_gates": [
+    {
+      "id": 1,
+      "name": "top_five_precision_lift",
+      "threshold": "at_least_0.03",
+      "confidence": "95_percent_lower_bound_above_zero"
+    },
+    {
+      "id": 2,
+      "name": "mean_daily_rank_ic",
+      "threshold": "at_least_0.02",
+      "confidence": "95_percent_lower_bound_above_zero"
+    },
+    {
+      "id": 3,
+      "name": "mean_daily_cross_sectional_auc",
+      "threshold": "95_percent_lower_bound_above_0.50"
+    },
+    {
+      "id": 4,
+      "name": "annualized_net_excess_return",
+      "threshold": "at_least_0.02",
+      "confidence": "95_percent_lower_bound_above_zero"
+    },
+    {
+      "id": 5,
+      "name": "factor_adjusted_alpha",
+      "threshold": "positive",
+      "confidence": "95_percent_lower_bound_above_zero"
+    },
+    {
+      "id": 6,
+      "name": "deflated_sharpe_ratio",
+      "threshold": "at_least_0.95"
+    },
+    {
+      "id": 7,
+      "name": "cost_drag_as_fraction_of_gross_alpha",
+      "threshold": "at_most_0.50"
+    },
+    {
+      "id": 8,
+      "name": "stress_costs",
+      "threshold": "gates_4_5_7_still_pass_at_1.5x_costs"
+    },
+    {
+      "id": 9,
+      "name": "relative_maximum_drawdown_ratio",
+      "threshold": "at_most_1.20_when_benchmark_drawdown_at_least_0.10",
+      "otherwise": "report_ratio_without_applying_threshold",
+      "also_report": [
+        "absolute_drawdown",
+        "drawdown_duration"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "brier_improvement",
+      "threshold": "improvement_vs_base_rate_forecast_with_bootstrap_evidence"
+    },
+    {
+      "id": 11,
+      "name": "calibration_slope",
+      "threshold": "0.80_to_1.20",
+      "confidence": "95_percent_lower_bound_above_0.50"
+    },
+    {
+      "id": 12,
+      "name": "positive_ic_calendar_years",
+      "threshold": "at_least_0.80_of_eligible_years"
+    },
+    {
+      "id": 13,
+      "name": "positive_ic_market_regimes",
+      "threshold": "both_registered_regimes"
+    },
+    {
+      "id": 14,
+      "name": "sector_alpha_concentration",
+      "threshold": "no_sector_above_0.50_of_positive_strategy_alpha"
+    },
+    {
+      "id": 15,
+      "name": "point_in_time_universe_and_identity",
+      "threshold": "independently_verified"
+    },
+    {
+      "id": 16,
+      "name": "material_execution_or_leakage_errors",
+      "threshold": "none_unresolved"
+    }
+  ],
+  "power_and_sample_gates": {
+    "precision_lift_mde_ceiling": 0.06,
+    "min_clean_development_years": 5,
+    "min_qualifying_dates": 1000,
+    "min_eligible_securities_per_date": 30,
+    "under_30_date_treatment": "not_a_qualifying_selection_date"
+  },
+  "special_universe_limitations": {
+    "liquidity": "IN_NIFTY_50_THE_5_CRORE_THRESHOLD_RARELY_BINDS; SAFETY_CHECK_ONLY",
+    "sector": "50_PERCENT_SECTOR_ALPHA_RULE_IS_SENSITIVE_TO_BANKING_AND_IT_CONCENTRATION",
+    "factors": "SMALL_CROSS_SECTION_REDUCES_FACTOR_STABILITY_AND_DISCRIMINATORY_POWER"
+  },
+  "data_feasibility": {
+    "status": "NOT_VERIFIED",
+    "required": [
+      "complete_point_in_time_nifty50_membership",
+      "effective_dated_security_identity_history",
+      "executable_ohlcv",
+      "stock_total_returns",
+      "NIFTY_50_TRI",
+      "corporate_action_source_evidence_and_lineage",
+      "official_news_publication_timestamps",
+      "fundamental_publication_dates_and_restatement_vintages",
+      "point_in_time_sector_history_or_explicitly_limited_attribution"
+    ],
+    "known_blockers": [
+      "annual_membership_coverage_incomplete",
+      "transition_records_not_independently_verified",
+      "original_NSE_circular_archives_and_hashes_incomplete",
+      "TATAMOTORS_TMPV_TMCV_lineage_unresolved",
+      "stock_total_return_and_TRI_coverage_not_verified",
+      "sector_configuration_anchored_to_2026-02-27_not_historical_PIT"
+    ]
+  },
+  "holdout": {
+    "current_repository_config": "config/final_holdout_protocol.json currently specifies 12 months; reconcile against the approved pilot 18/24-month rule before freeze",
+    "registered_pilot_rule": "if_verified_clean_data_span_at_least_7_years_then_24_months_else_if_5_to_under_7_years_then_18_months",
+    "exact_dates": "select_from_verified_data_availability_before_examining_holdout_returns",
+    "access": "physically_or_logically_isolated; evaluate once after freeze and independent approval",
+    "conflict_status": "UNRESOLVED_RECONCILIATION_REQUIRED"
+  },
+  "outcomes": {
+    "GO": "eligible_for_a_separately_approved_broader_experiment_only",
+    "NO_GO": "data_and_power_sufficient_but_one_or_more_mandatory_performance_gates_fail",
+    "INCONCLUSIVE": "data_power_trial_reconstruction_or_other_eligibility_is_insufficient",
+    "pilot_go_authorizes_promotion": false,
+    "pilot_go_authorizes_paper_trading": false,
+    "pilot_go_authorizes_live_trading": false
+  },
+  "safety": {
+    "research_status": "RESEARCH_HOLD",
+    "promotion_eligible": false,
+    "paper_trading_eligible": false,
+    "live_execution_enabled": false,
+    "full_universe_experiment_authorized": false,
+    "final_holdout_status": "LOCKED_NOT_EVALUATED",
+    "model_evaluation_authorized": false,
+    "no_automatic_expansion": true
+  },
+  "unresolved_freeze_items": [
+    "verify historical membership and identity evidence",
+    "verify Nifty 50 TRI and stock total-return data",
+    "validate broker tariffs and slippage assumptions",
+    "complete power simulation design inputs and run simulation",
+    "freeze exact factor formulas and inference sensitivity analysis",
+    "reconstruct historical trial census for DSR",
+    "reconcile the 12-month repository holdout config with the registered 18/24-month pilot rule; no holdout access",
+    "independent protocol review and SHA-256 registration"
+  ]
+}
