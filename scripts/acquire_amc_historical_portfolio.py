@@ -85,11 +85,11 @@ with sync_playwright() as p:
             page.goto(url, wait_until="domcontentloaded", timeout=60000)
             page.wait_for_timeout(5000)
             events.append({"page": url, "title": page.title(), "url_after_redirect": page.url,
-                           "body_excerpt": re.sub(r"\\s+", " ", page.locator("body").inner_text())[:5000],
+                           "body_excerpt": re.sub(r"\s+", " ", page.locator("body").inner_text())[:5000],
                            "selects": options_snapshot(page)})
             choose_matching_selects(page)
             events.append({"after_interaction": page.url, "selects": options_snapshot(page),
-                           "body_excerpt": re.sub(r"\\s+", " ", page.locator("body").inner_text())[:5000]})
+                           "body_excerpt": re.sub(r"\s+", " ", page.locator("body").inner_text())[:5000]})
             for a in page.locator("a").all():
                 try:
                     href = a.get_attribute("href") or ""
