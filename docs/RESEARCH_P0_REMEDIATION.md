@@ -2,8 +2,47 @@
 
 **Status:** RESEARCH HOLD  
 **Baseline branch:** `main`  
-**Last evidence review:** 2026-11-06  
+**Last evidence review:** 2026-11-07  
 **Policy:** This register is a work tracker, not evidence that any gate has passed. Do not change `config/promotion_gate.json` to approved, do not unlock the confirmatory holdout, and do not enable live execution until the evidence and independent-review requirements below are satisfied.
+
+## Latest verified checkpoint — 2026-11-07
+
+**Current main head:** `057010e5223dca69215bbb8d53d4e3acae1d1c53` (daily model/report refresh).  
+**Research-data change:** `13a0dac571ab5c75fd91622fb0536999d56f7a65` — full-text scope screening of two archived official notices.
+
+### Completed this run
+
+- Full-text screened the archived 2018-01-08 NSE Indices notice. Its 13 numbered sections cover other indices; no flagship NIFTY 50 constituent section is present. Its 2018-02-05 effective date precedes this research window's 2018-04-01 start. Source SHA-256: `364784c98963a7bc2d28fa19d7b0c5377063178e9215669b1c7b1dfcdc8981f2`.
+- Full-text screened the archived 2019-12-18 NSE Indices notice. Its constituent sections cover NIFTY 500, NIFTY Smallcap 250 and NIFTY MidSmallcap 400 only; no flagship NIFTY 50 section is present. It is distinct from the 2019-12-19 impact-cost notice. Source SHA-256: `1a82bef95e25f8b6760dc06b4d6d443416193aaa22322627edb7f33784a0fc0e`.
+- Updated the annual inventory, discovery catalog, scope-review table, human review queue notes and 2018/2019 coverage notes. Both decisions are explicitly AI-only: `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; the 95-row human queue remains `PENDING_HUMAN_REVIEW`, with no reviewer or verified event fields filled.
+- Added `tests/test_nifty_unregistered_scope_review.py`. It checks the archived PDF bytes against the recorded SHA-256, the extracted-text scope evidence, and the continued human-review hold.
+
+### Verified evidence state
+
+- Annual notice inventory: 684 rows — 592 `DISCOVERED_UNREVIEWED`, 20 `CANDIDATE`, 72 `SCREENED_NO_NIFTY50_CHANGE`. 681 rows have archived PDF paths and hashes; three source URLs still return non-PDF responses: 2018-06-05, 2019-07-16 and 2023-03-14. Their contents remain unresolved; retain the retrieval failures and do not infer PDF contents.
+- Archive discovery catalog: 697 rows (558 title candidates, 139 non-candidates). Fifteen catalog-only records remain outside the annual inventory after URL-level reconciliation; they are not silently counted as reviewed. Next full-text dispositions should prioritize the 2024-02-27 and 2024-08-16 Index Maintenance Sub-Committee meeting notices and the 2024-12-02 Strides Pharma corporate-adjustment notice.
+- Curated notice register: 104 rows — 16 `NIFTY50_CHANGE`, 2 `NIFTY50_CONFIRMATION`, 82 `NO_CHANGE`, 1 `METHODOLOGY_CONTROL`, 2 `CORPORATE_ACTION_CONTROL`, and 1 `NO_MEMBERSHIP_CHANGE`. Review states: 24 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW` and 80 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`.
+- Transition register: 34 rows, all `SAMPLE_ONLY`. Special-membership ledger: 3 JIOFIN dummy/listed/removal events, all `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. The membership-interval file has zero data rows.
+- Annual coverage: all seven years (2018–2024) remain `NOT_STARTED`; every `official_notice_search_complete` flag remains false. Supersession review, authoritative snapshot reconciliation and independent sign-off are not complete.
+- Security identity: three alias/lineage rows exist, but none is verified (one explicitly `UNVERIFIED`, two lack a verification status). The two TMPV-related corporate-action rows still have blank adjustment factors and no archived original source documents.
+
+### Model and monitoring — diagnostic only
+
+The latest daily run generated successfully, but its reported metrics did not improve: 7,252 chronological test rows (2026-03-24 to 2026-10-29), five-session horizon and purge, before costs; accuracy 0.6208 versus majority-class accuracy 0.6338, ROC AUC 0.574, Brier score 0.2333. This is not a previous-close or buy-and-hold comparison and does not establish incremental edge. The monitoring report still fails the point-in-time-membership check (zero rows), corporate-action lineage check (two unresolved rows), and accuracy-versus-majority check; prediction-drift history is only 2 of the 40 required sessions.
+
+**Promotion remains `RESEARCH_HOLD`; `promotion_eligible=false`; `live_execution_enabled=false`; the confirmatory holdout remains locked and unevaluated.**
+
+### Workflow evidence
+
+- [CI run 42340279629](https://github.com/vishwasgarg5/Trader/actions/runs/42340279629) — success; unit tests (including the new scope-review test) and source reconciliation passed.
+- [Source archive run 42340279660](https://github.com/vishwasgarg5/Trader/actions/runs/42340279660) — success; archive/hash checks passed, with the three explicit non-PDF retrieval warnings above; no further archive commit was needed.
+- [Daily model run 42340279658](https://github.com/vishwasgarg5/Trader/actions/runs/42340279658) — success; model/report generation and fail-closed monitoring completed. This workflow success does not pass a research gate.
+
+### Next action
+
+Reconcile the 15 catalog-only records, starting with the two 2024 review-meeting controls and the Strides Pharma corporate-action control; archive/hash any in-scope source PDFs and link them to the subsequent review notices. Then continue full-text screening of the 592 unreviewed annual-inventory rows, retry the three non-PDF source URLs with diagnostics, and preserve all human-review and snapshot-reconciliation gates. Do not start full-universe performance experiments until point-in-time membership and security/price lineage are independently established.
+
+Draft PR #9 remains unmerged; AI scope screening is not human approval.
 
 ## Gate 0 — Historical point-in-time Nifty 50 universe
 
