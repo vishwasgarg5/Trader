@@ -13,8 +13,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
-from playwright.sync_api import sync_playwright
-
 SOURCES = {
     "navi": {
         "url": "https://navi.com/mutual-fund/downloads/portfolio/",
@@ -26,9 +24,42 @@ SOURCES = {
     },
 }
 
+
+def validate_discovery_record(record: dict) -> None:
+    """Validate the offline JSON contract without importing or running Playwright."""
+    required = {
+        "record_type", "counts_as_acquisition_attempt", "acquisition_attempts_consumed",
+        "downloads_permitted", "amc", "official_archive_url", "retrieved_at",
+        "final_url", "controls", "requests", "responses", "download_events_cancelled",
+        "errors", "limitations",
+    }
+    missing = required.difference(record)
+    if missing:
+        raise ValueError(f"Missing discovery fields: {sorted(missing)}")
+    if record["record_type"] != "AMC_ARCHIVE_DISCOVERY_ONLY":
+        raise ValueError("Unexpected discovery record type")
+    if record["counts_as_acquisition_attempt"] is not False:
+        raise ValueError("Discovery must not count as an acquisition attempt")
+    if record["acquisition_attempts_consumed"] != 0:
+        raise ValueError("Discovery must consume zero acquisition attempts")
+    if record["downloads_permitted"] is not False:
+        raise ValueError("Downloads must remain disabled")
+    if record["amc"] not in SOURCES:
+        raise ValueError("Unknown AMC source")
+    if not isinstance(record["controls"], list) or not isinstance(record["requests"], list):
+        raise ValueError("Controls and requests must be lists")
+    if not isinstance(record["responses"], list) or not isinstance(record["download_events_cancelled"], list):
+        raise ValueError("Responses and download events must be lists")
+    if any("body" in response or "response_body" in response for response in record["responses"]):
+        raise ValueError("Response bodies must not be captured")
+
+
 def main() -> int:
     if len(sys.argv) != 2 or sys.argv[1] not in SOURCES:
         raise SystemExit("Usage: discover_amc_archive_only.py navi|aditya-birla-sun-life")
+    # Import only for the live discovery command; offline tests use the validator above.
+    from playwright.sync_api import sync_playwright
+
     key = sys.argv[1]
     source = SOURCES[key]
     out = Path("discovery-output")
@@ -123,10 +154,12 @@ def main() -> int:
             "Network calls are metadata only; file/API payload completeness is not established.",
         ],
     }
+    validate_discovery_record(record)
     (out / f"{key}-discovery.json").write_text(json.dumps(record, indent=2), encoding="utf-8")
     print(json.dumps({k: record[k] for k in ("record_type", "counts_as_acquisition_attempt",
           "amc", "official_archive_url", "retrieved_at", "final_url")}, indent=2))
     return 0 if not downloads else 2
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
