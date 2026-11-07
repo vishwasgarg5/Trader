@@ -7,6 +7,9 @@ on:
       - "data/reference/nifty50_special_membership_events.csv"
       - "data/reference/nifty50_transition_register.csv"
       - "data/reference/nifty50_annual_notice_inventory.csv"
+      - "data/reference/nifty50_notice_register.csv"
+      - "trader/nifty_notice_register_archive.py"
+      - "tests/test_nifty_notice_register_archive.py"
       - ".github/workflows/archive-membership-sources.yml"
       - "tests/test_experiment.py"
   workflow_dispatch:
@@ -223,6 +226,8 @@ jobs:
                   writer.writeheader()
                   writer.writerows(rows)
           PY
+      - name: Archive located-but-unarchived curated notice PDFs
+        run: python -m trader.nifty_notice_register_archive
       - name: Commit archived evidence
         run: |
           if [[ -z "$(git status --porcelain)" ]]; then
@@ -231,7 +236,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/nifty50_annual_notice_inventory.csv data/reference/source_documents/
+          git add data/reference/nifty50_special_membership_events.csv data/reference/nifty50_transition_register.csv data/reference/nifty50_annual_notice_inventory.csv data/reference/nifty50_notice_register.csv data/reference/source_documents/
           git commit -m "Archive primary Nifty 50 special-membership PDFs"
           # Other scheduled workflows may also commit to main. Retry a
           # fetch/rebase/push cycle instead of failing on a non-fast-forward race.
