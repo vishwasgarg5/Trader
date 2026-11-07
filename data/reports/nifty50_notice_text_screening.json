@@ -327,7 +327,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2018-03-06-06fa372e63dc",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "3, 2018. In view of above, the Index Maintenance Sub -Committee (IMSC) has decided to replace Videocon Industries Ltd. from various indices as listed hereunder effective from March 13, 2018 (close of March 12, 2018). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Videocon Industries Ltd. VIDEOIND The following company is being included: Sr. No. Company Name Symbol 1 Eris Lifesciences Ltd. ERIS 2) NIFTY Small",
         "ty of indices and index related services for the capital markets. IISL focuses on the index as a core product. IISL owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. IISL equity Indices comprises broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. IISL also maintains fixed income indices based on Government of India securities",
@@ -337,7 +337,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06032018.pdf",
       "text_characters": 5816,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official IISL release reviewed: early replacement of Videocon affects Nifty 500, Nifty Smallcap 250 and Nifty MidSmallcap 400 only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2018"
     },
     {
@@ -730,10 +730,10 @@
       "announcement_date": "2018-06-05",
       "error": "source PDF is missing",
       "notice_id": "NSE-ARCHIVE-2018-06-05-209df26d1951",
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
       "text_status": "MISSING_SOURCE_DOCUMENT",
-      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. June 06, 2018. Automated title-keyword candidate only; inspect PDF and classify index scope. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
+      "title": "Official NSE Indices press-release archive lists this item as \u201cChange in NIFTY 10 Year SDL Index w.e.f. June 06, 2018\u201d. This is a sovereign-state-development-loan fixed-income index, not the flagship Nifty 50 equity index. Classified out of Nifty 50 membership scope from the official archive title; original PDF retrieval remains unresolved. Independent human sign-off pending; archive hash/path still missing. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
       "year": "2018"
     },
     {
@@ -762,7 +762,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2018-06-15-44536bdf09ec",
       "page_count": 8,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ty of indices and index related services for the capital markets. IISL focuses on the index as a core product. IISL owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. IISL equity Indices comprises broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. IISL also maintains fixed income indices based on Government of India securitie",
         "ves traded on NSE, Singapore Exchange Ltd. (SGX), Chicago Mercantile Exchange Inc. (CME), Osaka Exchange Inc. (OSE), Taiwan Futures Exchange (TAIFEX) and a number of index funds and exchange traded funds. The flagship ' NIFTY 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Disclaimer: National Stock Exchange of India Limited is proposing, subject to rec"
@@ -771,7 +771,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15062018.pdf",
       "text_characters": 13273,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Revision in criteria of multi-factor indices and replacements in Indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official IISL release reviewed: revisions concern Nifty multi-factor indices and replacements across factor, SME and group indices. The similarly named Nifty High Beta 50 and Low Volatility 50 are not the flagship Nifty 50; no flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2018"
     },
     {
@@ -991,7 +991,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2018-08-01-6951c55fba6e",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "& Engineering Company Ltd. from various indices on account of scheme of arrangement for amalgamation and revise the methodology for treatment of special d ividend in the price return index. A. Replacement in Indices 1) NIFTY 500 Index The following company is being excluded: Sr. No. Company Name Symbol 1 Techno Electric & Engineering Company Ltd. TECHNO The following company is being included: Sr. No. Company Name Symbol 1 Bharat Dynamics Ltd.",
         "ty of indices and index related services for the capital markets. IISL focuses on the index as a core product. IISL owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. IISL equity Indices comprises broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. IISL also maintains fixed income indices based on Government of India secu riti",
@@ -1001,7 +1001,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs01082018.pdf",
       "text_characters": 6325,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in Indices and revision in treatment of Special Dividend. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official IISL release reviewed: Techno Electric to Bharat Dynamics replacement affects Nifty 500, Smallcap 250 and MidSmallcap 400; special-dividend price-return methodology revised. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2018"
     },
     {
@@ -1109,7 +1109,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2018-08-31-4eacf18b2249",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "has decided to replace KPIT Technologies Ltd. (KPIT) from various indices on account of scheme of arrangement for demerger. These changes shall become effective from September 28, 2018 (close of September 27, 2018). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 KPIT Technologies Ltd. KPIT The following company is being included: Sr. No. Company Name Symbol 1 Shilpa Medicare Ltd. SHILPAMED 2) NIFTY Smallcap",
         "nd index related services for the c apital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. IISL equity Indices comprises broad -based benchmark indices, s ectoral indices, strategy indices, thematic indices and customised indices. The company also maintains fixed income indices based on Government of India s",
@@ -1119,7 +1119,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs31082018.pdf",
       "text_characters": 6181,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in Indices w.e.f. September 28, 2018. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official IISL release reviewed: KPIT demerger replacement affects Nifty 500, Smallcap 250, MidSmallcap 400, Nifty IT and Smallcap 50/100. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2018"
     },
     {
@@ -2632,10 +2632,10 @@
       "announcement_date": "2019-07-16",
       "error": "source PDF is missing",
       "notice_id": "NSE-ARCHIVE-2019-07-16-3a8719394912",
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
       "text_status": "MISSING_SOURCE_DOCUMENT",
-      "title": "Archive title: Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
+      "title": "Official NSE Indices press-release archive lists this item as \u201cChange in NIFTY 10 Year SDL Index w.e.f. July 17, 2019\u201d. This is a sovereign-state-development-loan fixed-income index, not the flagship Nifty 50 equity index. Classified out of Nifty 50 membership scope from the official archive title; original PDF retrieval remains unresolved. Independent human sign-off pending; archive hash/path still missing. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
       "year": "2019"
     },
     {
@@ -2952,7 +2952,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2019-09-17-0155f1634a44",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ular no. NSE/CML/42146 dated September 16, 2019 has announced shifting of 15 securities to Z category w.e.f. September 24, 2019. One of these securities, Jet Airways (India) Ltd. (Symbol: JETAIRWAYS) is a constituent of NIFTY 500, NIFTY Smallcap 250, NIFTY Smallcap 100 and NIFTY MidSmallcap 400 index. Securities traded under Z category at NSE are considered ineligible for inclusion in NIFTY indices. In view of the above, IMSC has decided to mak",
         "0 and NIFTY MidSmallcap 400 index. Securities traded under Z category at NSE are considered ineligible for inclusion in NIFTY indices. In view of the above, IMSC has decided to make following replacements in indices. 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Jet Airways (India) Ltd. JETAIRWAYS The following company is being included: Sr. No. Company Name Symbol 1 Vaibhav Global Ltd. VAIBHAVGBL 2) NIFTY",
@@ -2963,7 +2963,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17092019_1.pdf",
       "text_characters": 5479,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. September 24, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Jet Airways Z-category changes affect Nifty 500, Smallcap 250, Smallcap 100, MidSmallcap 400 and SME Emerge. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2019"
     },
     {
@@ -2992,7 +2992,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2019-09-17-c9afb3317e76",
       "page_count": 8,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "arrangement: On account of scheme of arrangement for demerger of Human Resource Business Undertaking of Thomas Cook (India) Ltd. into Quess Corp Ltd., replacement shall be made in various indices as given hereunder: 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Thomas Cook (India) Ltd. THOMASCOOK The following company is being included: Sr. No. Company Name Symbol 1 IIFL Finance Ltd. IIFL 2) NIFTY Midcap 1",
         "MidSmallcap 400 The following company is being excluded: Sr. No. Company Name Symbol 1 Thomas Cook (India) Ltd. THOMASCOOK The following company is being included: Sr. No. Company Name Symbol 1 IIFL Finance Ltd. IIFL 6) NIFTY500 Value 50 The following company is being excluded: Sr. No. Company Name Symbol 1 Thomas Cook (India) Ltd. THOMASCOOK The following company is being included: Sr. No. Company Name Symbol 1 H.E.G. Ltd. HEG B. Revision in",
@@ -3003,7 +3003,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17092019.pdf",
       "text_characters": 11114,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Revision in criteria of NIFTY Infrastructure Index and replacements in indices w.e.f. September 27, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: scheme-of-arrangement, Nifty Infrastructure criteria and quarterly strategy changes concern other indices, not flagship Nifty 50. No flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2019"
     },
     {
@@ -3494,7 +3494,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2019-12-19-a331964b2a9e",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         ") and Index Funds (SEBI circular reference: SEBI/HO/IMD/DF3/CIR/P/2019/011 dated January 10, 2019) related to the impact cost. These changes shall become effective from December 27, 2019 (close of December 26, 2019). 1) NIFTY 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 Den Networks Ltd. DEN 2 Hathway Cable & Datacom Ltd. HATHWAY The following companies are being included: Sr. No. Company Name Symbol 1 Kennameta",
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strateg y indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Governmen",
@@ -3504,7 +3504,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19122019.pdf",
       "text_characters": 4425,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. December 27, 2019. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: ETF/index-fund impact-cost replacements affect Nifty 500, Smallcap 250, MidSmallcap 400 and Nifty Media only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2019"
     },
     {
@@ -3665,7 +3665,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2020-01-09-83da66c7a9e0",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "from NIFTY SME EMERGE index on account of proposed shifting to the Capital market segment (Main Board) from NSE EMERGE platform. These changes shall become effective from January 16, 2020 (close of January 15, 2020). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Suven Life Sciences Ltd. SUVEN The following company is being included: Sr. No. Company Name Symbol 1 Tata Steel BSL Ltd. TATASTLBSL 2) NIFTY Small",
         "nd index related services for the capital markets. The company focuses on the index as a co re product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
@@ -3675,7 +3675,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09012020.pdf",
       "text_characters": 4110,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. January 16, 2020. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Suven/Tata Steel BSL and Total Transport changes concern Nifty 500, Smallcap 250, MidSmallcap 400 and SME Emerge only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -3995,7 +3995,7 @@
       "nifty50_mention_count": 6,
       "notice_id": "NSE-ARCHIVE-2020-03-12-e5cd219ef72b",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "FTY Bank The following company is being excluded: Sr. No. Company Name Symbol 1 Yes Bank Ltd. YESBANK The following company is being included: Sr. No. Company Name Symbol 1 Bandhan Bank Ltd. BANDHANBNK B. Replacement in NIFTY50 Value 20 index The following company is being excluded on account of exclusion from NIFTY 50: Sr. No. Company Name Symbol 1 Yes Bank Ltd. YESBANK The following company is being included: Sr. No. Company Name Symbol 1 IT",
         ". YESBANK The following company is being included: Sr. No. Company Name Symbol 1 Bandhan Bank Ltd. BANDHANBNK B. Replacement in NIFTY50 Value 20 index The following company is being excluded on account of exclusion from NIFTY 50: Sr. No. Company Name Symbol 1 Yes Bank Ltd. YESBANK The following company is being included: Sr. No. Company Name Symbol 1 ITC Ltd. ITC C. Quarterly Review of indices: 1) NIFTY Alpha 50 The following companies are bein",
@@ -4008,7 +4008,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs12032020.pdf",
       "text_characters": 7684,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. March 27, 2020. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: YESBANK exclusion and Bandhan Bank inclusion are for Nifty Bank; the Nifty50 Value 20 replacement is a separate strategy index. No flagship Nifty 50 constituent change in this release; the separate flagship YESBANK/SHREECEM replacement is governed by Feb 18 and Mar 16 notices. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -4701,7 +4701,7 @@
       "nifty50_mention_count": 6,
       "notice_id": "NSE-ARCHIVE-2020-09-07-a06e2618456d",
       "page_count": 7,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "securities to Z category effective from September 14, 2020. In view of the above, the Index Maintenance Sub-Committee (IMSC) of NSE Indices Limited has decided to make replacements in various indices as given below. 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Asahi India Glass Ltd. ASAHIINDIA The following company is being included: Sr. No. Company Name Symbol 1 JTEKT India Ltd. JTEKTINDIA 2) NIFTY Small",
         "he Index Maintenance Sub -Committee (IMSC) has decided to revoke its earlier decision of inclusion of Fourth Dimension Solutions Ltd. (FOURTHDIM) in NIFTY SME EMERGE index effective September 25, 2020. B. Replacement in NIFTY50 Value 20 index The following company is being excluded on account of exclusion from NIFTY 50: Sr. No. Company Name Symbol 1 Zee Entertainment Enterprises Ltd. ZEEL The following company is being included: Sr. No. Compan",
@@ -4714,7 +4714,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07092020.pdf",
       "text_characters": 9929,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Z-category and SME Emerge changes concern other indices; ZEEL-to-LT change is for Nifty50 Value 20, a separate strategy index following the flagship Nifty 50 removal. No new flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -4838,7 +4838,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2020-09-30-5825bcc52b40",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "nd index related services for the capital markets. The company focuses on the index as a co re product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "indices have been developed withi n India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange traded funds. The flagship 'NIFTY 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com For any clarifications please contact: Arijit Sengupta Kumar Kartikey Chief Marke"
@@ -4847,7 +4847,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30092020.pdf",
       "text_characters": 4150,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. October 08, 2020. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Hexaware delisting replacements affect Nifty Dividend Opportunities 50 and Nifty Midcap150 Quality 50; SME Emerge exclusion is separate. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -4933,7 +4933,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2020-10-26-24c33269ecf6",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "lcargo Logistics Ltd. from various indices upon equity shareholders\u2019 approval to the proposed voluntary delisting of the company. The changes shall become effective from November 02, 2020 (close of October 30, 2020). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Allcargo Logistics Ltd. ALLCARGO The following company is being included: Sr. No. Company Name Symbol 1 Network18 Media & Investments Ltd. NETWORK1",
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
@@ -4943,7 +4943,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26102020.pdf",
       "text_characters": 3981,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. November 02, 2020. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Allcargo voluntary-delisting replacement affects Nifty 500, Smallcap 250 and MidSmallcap 400 only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -4991,7 +4991,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2020-11-18-2ee25f7c77e7",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "has decided to replace Infibeam Avenues Ltd. from various indices on account of the proposed scheme of arrangement for demerger. The change shall become effective from November 25, 2020 (close of November 24, 2020). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Infibeam Avenues Ltd. INFIBEAM The following company is being included: Sr. No. Company Name Symbol 1 Mahindra CIE Automotive Ltd. MAHINDCIE 2) NIF",
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
@@ -5001,7 +5001,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs18112020.pdf",
       "text_characters": 4158,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. November 25, 2020. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Infibeam demerger replacements affect Nifty 500, Smallcap 250, Smallcap 100 and MidSmallcap 400 only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -5135,7 +5135,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2020-12-11-4893a36bfb4a",
       "page_count": 8,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "wing replacement of stocks in various indices as part of its periodic review. The change shall become effective from January 1, 2021 (close of December 31, 2020). A. Replacements on account of annual review of index: 1) NIFTY50 Value 20 The following companies are being excluded: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL 2 Indian Oil Corporation Ltd. IOC 3 Tata Steel Ltd. TATASTEEL The following companies are being i",
         "odworks Ltd. JUBLFOOD 2 National Aluminium Co. Ltd. NATIONALUM The following companies are being included: Sr. No. Company Name Symbol 1 Bayer Cropscience Ltd. BAYERCROP 2 Navin Fluorine International Ltd. NAVINFLUOR 9) NIFTY500 Value 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 Ashok Leyland Ltd. ASHOKLEY 2 CARE Ratings Ltd. CARERATING 3 DCM Shriram Ltd. DCMSHRIRAM 4 Edelweiss Financial Services Ltd. EDELWEISS",
@@ -5146,7 +5146,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11122020.pdf",
       "text_characters": 10245,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: annual replacements concern Nifty50 Value 20 and strategy indices; Nifty50 Value 20 is distinct from the flagship Nifty 50. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2020"
     },
     {
@@ -5352,7 +5352,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2021-02-23-31f77b3f5614",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "lated based on ex - dividend date) basis. B. Revision in criteria for Nifty 100 index: Parameter Existing Revised Eligible Universe The eligible universe for NIFTY 100 includes: 1. The company should be a constituent of NIFTY 500 AND Investible weight factor (IWF) of stock should be at least 0.10 (10% free float) OR 6 month average free float market capitalization of the stock should be at least 25% of the 6 month average full market capitaliza",
         "f the existing smalles t index constituent (prior to index review) by full market capitalization in NIFTY 100 as of the cut-off date The eligible universe for NIFTY 100 includes: \uf0b7 The company should be a constituent of NIFTY 500: AND - Investible weight factor (IWF) of stock should be at least 0.10 (10% free float) OR - 6 month average free float market capitalization of the stock should be at least 25% of the 6 month average full market capit",
@@ -5363,7 +5363,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23022021_1.pdf",
       "text_characters": 10839,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Changes in index maintenance guidelines, criteria and methodology. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices methodology-control PDF reviewed; index maintenance/reconstitution, capping, Nifty 100 eligibility and Nifty Next 50 methodology changes only. No Nifty 50 constituent event. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -5411,7 +5411,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2021-03-10-5550b23ff44c",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "Y indices have been developed within India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange traded funds. The flagship 'NIFTY 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com For any clarifications please contact: Arijit Sengupta Kumar Kartikey Chief Marke"
@@ -5420,7 +5420,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10032021.pdf",
       "text_characters": 6090,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices w.e.f. March 31, 2021. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed; replacements concern Nifty Alpha 50, High Beta 50, Low Volatility 50 and other strategy indices, not flagship Nifty 50. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -5582,7 +5582,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2021-04-22-7f0a66a72b28",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "sed scheme of amalgamation as approved by equity share holders of the respective companies from various indices as listed hereunder. These changes shall become effective from April 29, 2021 (close of April 28, 2021). 1) NIFTY 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 GHCL Ltd. GHCL 2 Tata Steel BSL Ltd. TATASTLBSL The following companies are being included: Sr. No. Company Name Symbol 1 Burger King India Ltd.",
         "ta Steel BSL Ltd. TATASTLBSL The following companies are being included: Sr. No. Company Name Symbol 1 Burger King India Ltd. BURGERKING 2 Infibeam Avenues Ltd. INFIBEAM The above replacements will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY Smallcap 250 The following companies are being excluded: Sr. No. Company Name Symbol 1 GHCL Ltd. GHCL 2 Tata Steel BSL Ltd. TATASTLBSL The following companies are being included: Sr. N",
@@ -5593,7 +5593,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22042021.pdf",
       "text_characters": 4149,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices w.e.f. April 29, 2021. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed; replacements concern Nifty 500, Smallcap 250, MidSmallcap 400 and Tata Group indices, not flagship Nifty 50. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -5700,7 +5700,7 @@
       "nifty50_mention_count": 5,
       "notice_id": "NSE-ARCHIVE-2021-06-15-21d246eddc3c",
       "page_count": 11,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "heme of arrangement Replacement of Motherson Sumi Systems Ltd. on account of proposed scheme of arrangement of demerger of domestic wiring harness undertaking as approved by equity shareholders \u2019 as listed hereunder: 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Motherson Sumi Systems Ltd. MOTHERSUMI The following company is being included: Sr. No. Company Name Symbol 1 Gland Pharma Ltd. GLAND The above rep",
         "uded: Sr. No. Company Name Symbol 1 Motherson Sumi Systems Ltd. MOTHERSUMI The following company is being included: Sr. No. Company Name Symbol 1 Gland Pharma Ltd. GLAND The above replacements will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY 100 The following company is being excluded: Sr. No. Company Name Symbol 1 Motherson Sumi Systems Ltd. MOTHERSUMI The following company is being included: Sr. No. Company Name Symbol 1",
@@ -5712,7 +5712,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15062021.pdf",
       "text_characters": 13416,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Indices w.e.f. June 30, 2021. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed; replacements concern Nifty 500/100/Next 50/200/LargeMidcap and strategy indices, not flagship Nifty 50. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -5912,13 +5912,13 @@
       "nifty50_mention_count": 0,
       "notice_id": "NSE-ARCHIVE-2021-08-23-693f636899bd",
       "page_count": 29,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [],
       "source_sha256": "c9b9feef248ca89f7d8c8f12009e3d5c409eb4d6c793eee061fb93bf0af1231e",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23082021.pdf",
       "text_characters": 0,
       "text_status": "EMPTY_OR_SCANNED_PDF",
-      "title": "Archive title: Revision in criteria and replacements in indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed via retained 29-page Tesseract OCR; final statement explicitly says no changes to NIFTY 50 and NIFTY50 Equal Weight. Original PDF and OCR artifact are archived and hashed. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -6077,7 +6077,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15092021.pdf",
       "text_characters": 24081,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Inspected release covers Nifty India Manufacturing and strategy indices; this is not proof that the full September 2021 broad-market review inventory is complete.",
+      "title": "Official NSE Indices PDF reviewed; semi-annual changes concern Nifty India Manufacturing and strategy indices; REIT/InvIT revocations affect other indices, not flagship Nifty 50. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -6087,7 +6087,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2021-09-20-c47411597d33",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "indices have been developed within India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange tra ded funds. The flagship 'NIFTY 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com For any clarifications please contact: Arijit Sengupta Chief Marketing & Communic"
@@ -6096,7 +6096,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20092021.pdf",
       "text_characters": 3766,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. September 30, 2021. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF text reviewed; semi-annual changes concern Nifty Midcap Select and Nifty SME Emerge only, not flagship Nifty 50. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -6392,7 +6392,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2021-10-22-4df03b3a24e8",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "scheme of amalgamation as approved by equity shareholders of the respective companies from various indices as listed hereunder. These changes shall become effective from October 29, 2021 (close of October 28, 2021). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 GMR Infrastructure Ltd. GMRINFRA The following company is being included: Sr. No. Company Name Symbol 1 Sona BLW Precision Forgings Ltd. SONACOMS T",
         "o. Company Name Symbol 1 GMR Infrastructure Ltd. GMRINFRA The following company is being included: Sr. No. Company Name Symbol 1 Sona BLW Precision Forgings Ltd. SONACOMS The above replacement will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY Midcap 150 The following company is being excluded: Sr. No. Company Name Symbol 1 GMR Infrastructure Ltd. GMRINFRA The following company is being included: Sr. No. Company Name Symbol",
@@ -6403,7 +6403,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22102021.pdf",
       "text_characters": 7487,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Revision in index maintenance guidelines and replacements in indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed; maintenance guidelines and replacement lists concern Nifty 500, Midcap, LargeMidcap, MidSmallcap, Microcap and Total Market indices; no flagship Nifty 50 constituent event. Source reviewed for AI triage; independent human sign-off remains pending.",
       "year": "2021"
     },
     {
@@ -7199,7 +7199,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2022-03-08-898130c89b5f",
       "page_count": 10,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "nd index related services for the capital markets. The company focuses on the index as a core product. The company owns and man ages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad - based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Governmen",
         "Y indices have been developed within India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange traded funds. The flagship 'NIFTY 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com For any clarifications please contact: Arijit Sengupta Chief Marketing & Communic"
@@ -7208,7 +7208,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs08032022.pdf",
       "text_characters": 11085,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. March 31, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed from extracted text: semi-annual thematic and other index replacements; no flagship Nifty 50 constituent event identified. Distinguish any similarly named Nifty 50 factor indices from the flagship. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7224,7 +7224,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09032022.pdf",
       "text_characters": 0,
       "text_status": "EMPTY_OR_SCANNED_PDF",
-      "title": "Archive title: NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: NSE Indices launches Nifty SDL Plus AAA PSU Bond Dec 2027 60:40 Index. Automated title-keyword candidate only; inspect PDF and classify index scope. | ARCHIVE_RETRIEVAL_FAILED: TimeoutError: The read operation timed out",
       "year": "2022"
     },
     {
@@ -7464,7 +7464,7 @@
       "nifty50_mention_count": 5,
       "notice_id": "NSE-ARCHIVE-2022-04-05-0c5d390c69b2",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "hereunder on account of proposed scheme of arrangement for demerger as approved by equity shareholders of the respective companies. These changes shall become effective from April 12, 2022 (close of April 11, 2022). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 BEML Ltd. BEML The following company is being included: Sr. No. Company Name Symbol 1 Capri Global Capital Ltd. CGCL The above replacement will als",
         "pany is being excluded: Sr. No. Company Name Symbol 1 BEML Ltd. BEML The following company is being included: Sr. No. Company Name Symbol 1 Capri Global Capital Ltd. CGCL The above replacement will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 BEML Ltd. BEML The following company is being included: Sr. No. Company Name Symbol 1 Capri Global C",
@@ -7476,7 +7476,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05042022_1.pdf",
       "text_characters": 5104,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. April 12, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: BEML/Genus demerger replacements affect Nifty 500, Smallcap 250/100, MidSmallcap 400, Microcap 250, Total Market, India Defence and SME Emerge. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7486,7 +7486,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2022-04-05-24a46df82dda",
       "page_count": 5,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "indices as listed hereunder on account of proposed scheme of arrangement for demerger as approved by equity shareholders of the company. These changes shall become effective from May 04, 2022 (close of May 02, 2022). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Aarti Industries Ltd. AARTIIND The following company is being included: Sr. No. Company Name Symbol 1 GMR Infrastructure Ltd. GMRINFRA The above re",
         "uded: Sr. No. Company Name Symbol 1 Aarti Industries Ltd. AARTIIND The following company is being included: Sr. No. Company Name Symbol 1 GMR Infrastructure Ltd. GMRINFRA The above replacement will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY Midcap 150 The following company is being excluded: Sr. No. Company Name Symbol 1 Aarti Industries Ltd. AARTIIND The following company is being included: Sr. No. Company Name Symbol 1",
@@ -7497,7 +7497,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs05042022.pdf",
       "text_characters": 5450,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. May 04, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed from extracted text: Aarti Industries demerger replacement affects Nifty 500, Midcap, Midcap Select/50/100, LargeMidcap, Nifty 200 and related indices only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7507,7 +7507,7 @@
       "nifty50_mention_count": 5,
       "notice_id": "NSE-ARCHIVE-2022-04-06-1ad37f493f49",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ittee - Equity (IMSC) of NSE Indices Limited has decided to replace Supreme Petrochem Ltd. from various indices as listed hereunder. These changes shall become effective from April 07, 2022 (close of April 06, 2022). 1) NIFTY 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Supreme Petrochem Ltd. SUPPETRO The following company is being included: Sr. No. Company Name Symbol 1 MTAR Technologies Ltd. MTARTECH The above re",
         "uded: Sr. No. Company Name Symbol 1 Supreme Petrochem Ltd. SUPPETRO The following company is being included: Sr. No. Company Name Symbol 1 MTAR Technologies Ltd. MTARTECH The above replacement will also be applicable to NIFTY500 Multicap 50:25:25 Index. 2) NIFTY Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 Supreme Petrochem Ltd. SUPPETRO The following company is being included: Sr. No. Company Name Symbol",
@@ -7519,7 +7519,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06042022.pdf",
       "text_characters": 4289,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. April 07, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed from extracted text: Supreme Petrochem capital-reduction replacement affects Nifty 500, Smallcap 250, MidSmallcap 400, Microcap 250 and Total Market only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7623,7 +7623,7 @@
       "nifty50_mention_count": 5,
       "notice_id": "NSE-ARCHIVE-2022-05-24-1909255820e4",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "osed scheme of arrangement for amalgamation of the company with Jindal Stainless Ltd. as approved by equity shareholders of the company. These changes shall become effective from May 31, 2022 (close of May 30, 2022). 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Jindal Stainless (Hisar) Ltd. JSLHISAR The following company is being included: Sr. No. Company Name Symbol 1 Triveni Engineering & Industries Ltd.",
         "Name Symbol 1 Jindal Stainless (Hisar) Ltd. JSLHISAR The following company is being included: Sr. No. Company Name Symbol 1 Triveni Engineering & Industries Ltd. TRIVENI The above replacement will also be applicable to Nifty500 Multicap 50:25:25 Index. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 Jindal Stainless (Hisar) Ltd. JSLHISAR The following company is being included: Sr. No. Company Name",
@@ -7635,7 +7635,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24052022.pdf",
       "text_characters": 4532,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. May 31, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Jindal Stainless (Hisar) amalgamation replacements affect Nifty 500, Smallcap 250, MidSmallcap 400, Microcap 250, Total Market and Nifty Metal only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7683,7 +7683,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2022-06-15-2427c9a1d2d4",
       "page_count": 12,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ONGC 15 Page Industries Ltd. PAGEIND 16 Power Grid Corporation of India Ltd. POWERGRID 17 Reliance Industries Ltd. RELIANCE 18 Siemens Ltd. SIEMENS 19 Sun Pharmaceutical Industries Ltd. SUNPHARMA 20 Trent Ltd. TRENT 9) Nifty500 Value 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 Equitas Holdings Ltd. EQUITAS 2 Great Eastern Shipping Co. Ltd. GESHIP 3 Gujarat Narmada Valley Fertilizers and Chem. Ltd. GNFC 4 IRB I",
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the NIFTY brand of NSE, including the flagship index, the NIFTY 50. NIFTY equity indices comprises of broad - based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Governmen",
@@ -7693,7 +7693,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15062022.pdf",
       "text_characters": 12975,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. June 30, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: semi-annual strategy, thematic and quarterly factor-index replacements; includes Nifty High Beta 50 (a factor index), not the flagship Nifty 50. No flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7815,7 +7815,7 @@
       "nifty50_mention_count": 5,
       "notice_id": "NSE-ARCHIVE-2022-07-11-44d0bc9292d4",
       "page_count": 10,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "inance Ltd.: Scheme of arrangement for amalgamation of Shriram City Union Finance Ltd. with Shriram Transport Finance Company Ltd. These changes shall become effective from August 08, 2022 (close of August 05, 2022). 1) Nifty 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 NMDC Ltd. NMDC 2 Piramal Enterprises Ltd. PEL 3 Shriram City Union Finance Ltd. SHRIRAMCIT The following companies are being included: Sr. No. C",
         "following companies are being included: Sr. No. Company Name Symbol 1 Campus Activewear Ltd. CAMPUS 2 Delhivery Ltd. DELHIVERY 3 Life Insurance Corporation of India LICI The above replacements will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty 100 The following companies are being excluded: Sr. No. Company Name Symbol 1 NMDC Ltd. NMDC 2 Piramal Enterprises Ltd. PEL The following companies are being included: Sr. No. Company",
@@ -7827,7 +7827,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11072022.pdf",
       "text_characters": 9841,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. August 08, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: demerger replacements across Nifty 500, 100, Next 50, 200, midcap, financial services, dividend opportunities and high-beta indices; no flagship Nifty 50 replacement. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -7911,7 +7911,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2022-07-26-2527594c0de3",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "t from August 08, 2022 (close of August 05, 2022). B. Replacements in Nifty Shariah indices: On account of monthly review of Shariah compliance, replacements in Nifty Shariah indices shall be made as given hereunder: 1) Nifty50 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 Britannia Industries Ltd. BRITANNIA The following companies are being included: Sr. No. Company Name Symbol 1 Tata Steel Ltd. TATASTEEL 2 Wi",
         "wing company is being excluded: Sr. No. Company Name Symbol 1 Britannia Industries Ltd. BRITANNIA The following companies are being included: Sr. No. Company Name Symbol 1 Tata Steel Ltd. TATASTEEL 2 Wipro Ltd. WIPRO 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Britannia Industries Ltd. BRITANNIA 2 NMDC Ltd. NMDC 3 Tata Steel Long Products Ltd. TATASTLLP The following companies are being include",
@@ -7922,7 +7922,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs26072022.pdf",
       "text_characters": 4440,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Revision in Nifty Transportation & Logistics index methodology and replacements in indices w.e.f. August 08, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: transportation/logistics methodology revision and Nifty50 Shariah, Nifty500 Shariah and Nifty Shariah 25 changes. Nifty50 Shariah is not the flagship Nifty 50; no flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8027,7 +8027,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2022-08-23-d21a0f903628",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ommittee (Equity) of NSE Indices Limited, as part of its monthly review, announces the following changes in Nifty Shariah indices. These changes shall become effective from August 30, 2022 (close of August 29, 2022). 1) Nifty50 Shariah The following company is being included: Sr. No. Company Name Symbol 1 Shree Cement Ltd. SHREECEM No exclusion is being made in the index. 2) Nifty500 Shariah The following companies are being excluded: Sr. No.",
         "effective from August 30, 2022 (close of August 29, 2022). 1) Nifty50 Shariah The following company is being included: Sr. No. Company Name Symbol 1 Shree Cement Ltd. SHREECEM No exclusion is being made in the index. 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Aarti Drugs Ltd. AARTIDRUGS 2 Crompton Greaves Consumer Electricals Ltd. CROMPTON 3 Godrej Agrovet Ltd. GODREJAGRO 4 Route Mobile Ltd. R",
@@ -8038,7 +8038,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23082022.pdf",
       "text_characters": 3804,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. August 30, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance review adds SHREECEM to Nifty50 Shariah and changes Nifty500 Shariah. Nifty50 Shariah is not the flagship Nifty 50; no flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8147,7 +8147,7 @@
       "nifty50_mention_count": 7,
       "notice_id": "NSE-ARCHIVE-2022-09-16-37cd01a463dd",
       "page_count": 10,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "Ltd. as approved by equity shareholders of the company. ii) Mindtree Ltd.: Scheme of arrangement for amalgamation of Mindtree Ltd. with Larsen & Toubro Infotech Ltd. as approved by equity shareholders of the company. 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Equitas Holdings Ltd. EQUITAS The following company is being included: Sr. No. Company Name Symbol 1 Shoppers Stop Ltd. SHOPERSTOP The above replac",
         "excluded: Sr. No. Company Name Symbol 1 Equitas Holdings Ltd. EQUITAS The following company is being included: Sr. No. Company Name Symbol 1 Shoppers Stop Ltd. SHOPERSTOP The above replacement will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 Equitas Holdings Ltd. EQUITAS The following company is being included: Sr. No. Company Name Symbol 1",
@@ -8161,7 +8161,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs16092022.pdf",
       "text_characters": 11512,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. September 30, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Equitas/Mindtree amalgamation replacements affect Nifty 500, Smallcap and strategy indices; Shree Cement removal from Nifty50 Shariah is a Shariah-index event, not a flagship Nifty 50 event. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8342,7 +8342,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2022-10-20-177833c465e6",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "y indices have been developed within India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.Niftyindices.com Press contact: Kumar Kartikey - Associate Vice President, Corporate Communication"
@@ -8351,7 +8351,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20102022.pdf",
       "text_characters": 3545,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. October 25, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices PDF reviewed from extracted text: Z-category replacements for Future Retail and PTC India affect Nifty Microcap 250 and Nifty Total Market only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8361,7 +8361,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2022-10-20-cc027c2f1477",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "from October 31, 2022 (close of October 28, 2022). A. Replacements in Nifty Shariah indices: On account of monthly review of Shariah compliance, replacements in Nifty Shariah indices shall be made as given hereunder: 1) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Affle (India) Ltd. AFFLE 2 Caplin Point Laboratories Ltd. CAPLIPOINT 3 Varroc Engineering Ltd. VARROC The following companies are being",
         ". No. Company Name Symbol 13 Rajesh Exports Ltd. RAJESHEXPO 14 Shipping Corporation of India Ltd. SCI 15 Steel Authority of India Ltd. SAIL 16 Sterling and Wilson Renewable Energy Ltd. SWSOLAR No change is being made in Nifty50 Shariah and Nifty Shariah 25 indices. B. Replacements in Nifty SME Emerge index: The Index Maintenance Sub -Committee (Equity) of NSE Indices Limited has decided to make the following exclusion from Nifty SME Emerge ind",
@@ -8372,7 +8372,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs20102022_1.pdf",
       "text_characters": 4363,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. October 31, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance and SME Emerge changes; explicitly states no change to Nifty50 Shariah and Nifty Shariah 25. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8590,7 +8590,7 @@
       "nifty50_mention_count": 7,
       "notice_id": "NSE-ARCHIVE-2022-12-06-3f99a1e0c1d8",
       "page_count": 17,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "e company. iii) Shipping Corporation of India Ltd.: Scheme of arrangement for demerger of non-core assets into Shipping Corporation of India Land and Assets Ltd. as approved by the equity shareholders of the company. 1) Nifty 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 Allcargo Logistics Ltd. ALLCARGO 2 NIIT Ltd. NIITLTD 3 Shipping Corporation of India Ltd. SCI The following companies are being included: Sr. No",
         "he following companies are being included: Sr. No. Company Name Symbol 1 BEML Ltd. BEML 2 Lemon Tree Hotels Ltd. LEMONTREE Sr. No. Company Name Symbol 3 UCO Bank UCOBANK The above replacements will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty Smallcap 250 The following companies are being excluded: Sr. No. Company Name Symbol 1 Allcargo Logistics Ltd. ALLCARGO 2 NIIT Ltd. NIITLTD 3 Shipping Corporation of India Ltd. SCI The",
@@ -8604,7 +8604,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06122022.pdf",
       "text_characters": 18318,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. December 30, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: demerger and annual Nifty50 Value 20/strategy-index changes. Nifty50 Value 20 is a separate strategy index, not the flagship Nifty 50. No flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8671,7 +8671,7 @@
       "nifty50_mention_count": 7,
       "notice_id": "NSE-ARCHIVE-2022-12-22-44b414278015",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "Ltd.: Scheme of arrangement for demerger of entire business of manufacturing of non-ferrous gravity and pressure die castings into Sundaram-Clayton DCD Pvt. Ltd. as approved by the equity shareholders of the company. 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Saregama India Ltd. SAREGAMA The following company is being included: Sr. No. Company Name Symbol 1 Rainbow Childrens Medicare Ltd. RAINBOW The abo",
         "Sr. No. Company Name Symbol 1 Saregama India Ltd. SAREGAMA The following company is being included: Sr. No. Company Name Symbol 1 Rainbow Childrens Medicare Ltd. RAINBOW The above replacement will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 Saregama India Ltd. SAREGAMA The following company is being included: Sr. No. Company Name Symbol 1",
@@ -8685,7 +8685,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22122022.pdf",
       "text_characters": 5472,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f December 30, 2022. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Saregama/Sundaram-Clayton demerger replacements concern broad-market indices and Shariah indices; explicitly no changes to Nifty50 Shariah and Nifty Shariah 25. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2022"
     },
     {
@@ -8771,7 +8771,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2023-01-02-df8a9fa70261",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises of broad -based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "y indices have been developed within India and abroad. These include index based derivatives traded on NSE, NSE IFSC and Singapore Exchange Ltd. (SGX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.Niftyindices.com Press contact: Kumar Kartikey - Associate Vice President, Corporate Communication"
@@ -8780,7 +8780,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs02012023.pdf",
       "text_characters": 3076,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in Nifty SME Emerge index w.e.f. January 09, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in Nifty SME Emerge index w.e.f. January 09, 2023. Official NSE Indices PDF reviewed: NRL exclusion is from Nifty SME Emerge only; no flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -9061,7 +9061,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2023-02-21-da065dcac791",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "Ltd. SIGMA No inclusion is being made in the index. B. Replacement in Nifty Shariah indices: On account of monthly review of Shariah compliance, replacement in Nifty Shariah indices shall be made as given hereunder: 1) Nifty500 Shariah The following company is being included: Sr. No. Company Name Symbol 1 Piramal Pharma Ltd. PPLPHARMA No exclusion is being made in the index. No changes are being made in Nifty50 Shariah and Nifty Shariah 25 in",
         "be made as given hereunder: 1) Nifty500 Shariah The following company is being included: Sr. No. Company Name Symbol 1 Piramal Pharma Ltd. PPLPHARMA No exclusion is being made in the index. No changes are being made in Nifty50 Shariah and Nifty Shariah 25 indices. About National Stock Exchange of India Limited (NSE): National Stock Exchange of India (NSE) is the world\u2019s largest derivatives exchange by trading volume (contracts) as per the sta",
@@ -9072,7 +9072,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21022023.pdf",
       "text_characters": 3649,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. February 28, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. February 28, 2023. Official NSE Indices PDF reviewed: replacements concern Nifty SME Emerge and Nifty500 Shariah; no changes to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -9234,7 +9234,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2023-03-06-e6dc9f6e3b91",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "Ltd. POLYCAB 7 Power Finance Corporation Ltd. PFC B. Replacements in Nifty Shariah indices: On account of monthly review of Shariah compliance, replacements in Nifty Shariah indices shall be made as given hereunder: 1) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 AstraZenca Pharma India Ltd. ASTRAZEN 2 Bharat Rasayan Ltd. BHARATRAS 3 Indoco Remedies Ltd. INDOCO 4 Procter & Gamble Health Ltd. PGHL",
         "ernational Ltd. BIKAJI 3 Global Health Ltd. MEDANTA 4 Ingersoll Rand (India) Ltd. INGERRAND 5 Kennametal India Ltd. KENNAMET 6 Kfin Technologies Ltd. KFINTECH 7 KSB Ltd. KSB 8 NMDC Ltd. NMDC No changes are being made in Nifty50 Shariah and Nifty Shariah 25 indices. About National Stock Exchange of India Limited (NSE): National Stock Exchange of India (NSE) is the world\u2019s largest derivatives exchange by trading volume (contracts) as per the sta",
@@ -9245,7 +9245,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs06032023.pdf",
       "text_characters": 7396,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. March 31, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. March 31, 2023. Official NSE Indices PDF reviewed: replacements concern strategy/other indices; explicitly no changes to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -9290,10 +9290,10 @@
       "announcement_date": "2023-03-14",
       "error": "source PDF is missing",
       "notice_id": "NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
       "text_status": "MISSING_SOURCE_DOCUMENT",
-      "title": "Archive title: NSE Indices launches Nifty SDL Jul 2028 Index. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices press-release archive lists this item as \u201cNSE Indices launches Nifty SDL Jul 2028 Index\u201d. This is a fixed-income SDL index launch, not a flagship Nifty 50 equity membership event. Classified out of Nifty 50 membership scope from the official archive title; original PDF retrieval remains unresolved. Independent human sign-off pending; archive hash/path still missing. | ARCHIVE_RETRIEVAL_FAILED: ValueError: response is not a PDF",
       "year": "2023"
     },
     {
@@ -9537,7 +9537,7 @@
       "nifty50_mention_count": 7,
       "notice_id": "NSE-ARCHIVE-2023-04-19-76827b5cfcbe",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "nder Permitted to Trade category announced by NSE vide its circular NSE/CML/56237 dated March 31, 2023: Sr. No. Company Name Symbol 1 Best Agrolife Ltd. BESTAGRO 2 Hindustan Foods Ltd. HNDFDS 3 Spicejet Ltd. SPICEJET 1) Nifty 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 Bajaj Electricals Ltd. BAJAJELEC 2 Edelweiss Financial Services Ltd. EDELWEISS The following companies are being included: Sr. No. Company Name",
         "elweiss Financial Services Ltd. EDELWEISS The following companies are being included: Sr. No. Company Name Symbol 1 Eris Lifesciences Ltd. ERIS 2 NMDC Steel Ltd. NSLNISP The above replacements will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty Smallcap 250 The following companies are being excluded: Sr. No. Company Name Symbol 1 Bajaj Electricals Ltd. BAJAJELEC 2 Edelweiss Financial Services Ltd. EDELWEISS The following comp",
@@ -9551,7 +9551,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19042023_1.pdf",
       "text_characters": 6874,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. April 28, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. April 28, 2023. Official NSE Indices PDF reviewed: demerger/arrangement and constituent changes concern other indices; no flagship Nifty 50 constituent event identified. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10010,7 +10010,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2023-07-24-ed283bc80b6e",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "decided to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from July 31, 2023 (close of July 28, 2023). 1) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Adani Total Gas Ltd. ATGL 2 Adani Wilmar Ltd. AWL 3 Balkrishna Industries Ltd. BALKRISIND 4 Glaxosmithkline Pharmaceuticals Ltd. GLAXO 5",
         ". GLAXO 5 Sterling and Wilson Renewable Energy Ltd. SWSOLAR The following companies are being included: Sr. No. Company Name Symbol 1 Crompton Greaves Consumer Electricals Ltd. CROMPTON 2 Tata Chemicals Ltd. TATACHEM 2) Nifty50 Shariah The following company is being included: Sr. No. Company Name Symbol 1 LTIMindtree Ltd. LTIM No exclusion is being made from the index. 3) Nifty Shariah 25 The following company is being excluded: Sr. No. Compan",
@@ -10021,7 +10021,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24072023.pdf",
       "text_characters": 2296,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. July 31, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. July 31, 2023. Official NSE Indices PDF reviewed: LTIM inclusion concerns Nifty50 Shariah, not the flagship Nifty 50; other changes concern Nifty500 Shariah and Nifty Shariah 25. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10115,7 +10115,7 @@
       "nifty50_mention_count": 12,
       "notice_id": "NSE-ARCHIVE-2023-08-17-2f4e101e06f2",
       "page_count": 29,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ollowing companies are being included: Sr. No. Company Name Symbol 1 Punjab National Bank PNB 2 Shriram Finance Ltd. SHRIRAMFIN 3 Trent Ltd. TRENT 4 TVS Motor Company Ltd. TVSMOTOR 5 Zydus Lifesciences Ltd. ZYDUSLIFE b) Nifty 500 The following companies are being excluded: Sr. No. Company Name Symbol 1 BASF India Ltd. BASF 2 Garware Technical Fibres Ltd. GARFIBRES 3 Godrej Agrovet Ltd. GODREJAGRO 4 Greenpanel Industries Ltd. GREENPANEL 5 Hikal",
         "SAREGAMA 14 Sheela Foam Ltd. SFL 15 Symphony Ltd. SYMPHONY 16 Syrma SGS Technology Ltd. SYRMA 17 Ujjivan Small Finance Bank Ltd. UJJIVANSFB 18 Usha Martin Ltd. USHAMART The above replacements will also be applicable to Nifty500 Multicap 50:25:25 index. c) Nifty 100 The following companies are being excluded: Sr. No. Company Name Symbol 1 ACC Ltd. ACC 2 FSN E-Commerce Ventures Ltd. NYKAA 3 HDFC Asset Management Company Ltd. HDFCAMC 4 Indus Tow",
@@ -10134,7 +10134,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17082023.pdf",
       "text_characters": 33791,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices and revision in criteria. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices and revision in criteria. Official NSE Indices PDF reviewed: semi-annual broad-market review explicitly states no changes to Nifty 50 or Nifty50 Equal Weight; other changes concern Nifty Next 50, Nifty 100, Nifty 500 and other indices. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10160,7 +10160,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2023-08-23-0fd69cb94ab9",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ded to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from August 31, 2023 (close of August 30, 2023). 1) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Gujarat Pipavav Port Ltd. GPPL 2 Mahindra Lifespace Developers Ltd. MAHLIFE 3 Mahindra Logistics Ltd. MAHLOG 4 Pfizer Ltd. PFIZER 5 Zens",
         "luded: Sr. No. Company Name Symbol 1 Aegis Logistics Ltd. AEGISCHEM 2 Archean Chemical Industries Ltd. ACI 3 Biocon Ltd. BIOCON 4 Metropolis Healthcare Ltd. METROPOLIS 5 Thermax Ltd. THERMAX No changes are being made to Nifty50 Shariah and Nifty Shariah 25 indices About NSE Indices Limited: NSE Indices Limited (formerly known as India Index Services & Products Ltd. - IISL), a subsidiary of NSE, provides a variety of indices and index related s",
@@ -10171,7 +10171,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23082023.pdf",
       "text_characters": 2101,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. August 31, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. August 31, 2023. Official NSE Indices PDF reviewed: changes concern Nifty Shariah indices only; no changes to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10261,7 +10261,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2023-09-15-f7febcf66478",
       "page_count": 6,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "the index. C. Replacements on account of monthly review of Nifty Shariah indices: On account of monthly review of Shariah compliance, replacement of stocks in Nifty Shariah indices shall be made as listed hereunder: 1) Nifty50 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL No inclusion is being made in the index. 2) Nifty500 Shariah The following companies are being exclud",
         "iah indices shall be made as listed hereunder: 1) Nifty50 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL No inclusion is being made in the index. 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 BASF India Ltd. BASF 2 Bharat Petroleum Corporation Ltd. BPCL 3 Borosil Renewables Ltd. BORORENEW 4 Finolex Industries Ltd. FINPIPE 5 Gr",
@@ -10272,7 +10272,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs15092023.pdf",
       "text_characters": 6169,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. September 29, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. September 29, 2023. Official NSE Indices PDF reviewed: changes concern strategy/thematic indices and Nifty50 Shariah (BPCL exclusion); not the flagship Nifty 50. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10377,7 +10377,7 @@
       "nifty50_mention_count": 6,
       "notice_id": "NSE-ARCHIVE-2023-10-17-b012588593d2",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "of dealings in securities under Permitted to Trade category w.e.f. October 26, 2023 (i.e. w.e.f. closing hours of trading on October 25, 2023). In view of the above, following replacements from indices shall be made: 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 Kirloskar Ferrous Industries Ltd. KIRLFER The following company is being included: Sr. No. Company Name Symbol 1 Concord Biotech Ltd. CONCORDBIO Th",
         "No. Company Name Symbol 1 Kirloskar Ferrous Industries Ltd. KIRLFER The following company is being included: Sr. No. Company Name Symbol 1 Concord Biotech Ltd. CONCORDBIO The above replacement will also be applicable to Nifty500 Multicap 50:25:25 index. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 Kirloskar Ferrous Industries Ltd. KIRLFER The following company is being included: Sr. No. Company N",
@@ -10390,7 +10390,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs17102023.pdf",
       "text_characters": 4539,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. October 26, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. October 26, 2023. Official NSE Indices PDF reviewed: replacements concern Nifty 500, Nifty Smallcap 250, Nifty MidSmallcap 400, Nifty Microcap 250, Nifty Total Market and Shariah indices; Nifty50 Shariah and Nifty Shariah 25 unchanged. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10438,7 +10438,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2023-11-09-989b74743cb5",
       "page_count": 1,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprise of broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government o",
         "have been developed within India and abroad. These include index based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -10447,7 +10447,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs09112023.pdf",
       "text_characters": 1666,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in index w.e.f. November 17, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacement in index w.e.f. November 17, 2023. Official NSE Indices PDF reviewed: TATASTLLP exclusion is from Nifty Tata Group only. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10524,7 +10524,7 @@
       "nifty50_mention_count": 6,
       "notice_id": "NSE-ARCHIVE-2023-12-07-6ba0d0708a55",
       "page_count": 15,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "decided to make the replacement of stocks in various indices as listed hereunder . These changes shall become effective from December 29, 2023 (close of December 28, 2023). A. Replacement on account of annual review of Nifty50 Value 20 index: The following companies are being excluded: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL 2 Hindustan Unilever Ltd. HINDUNILVR 3 JSW Steel Ltd. JSWSTEEL The following companies are",
         "ders Ltd. MAZDOCK 15 NMDC Ltd. NMDC 16 Oberoi Realty Ltd. OBEROIRLTY 17 PB Fintech Ltd. POLICYBZR 18 Prestige Estates Projects Ltd. PRESTIGE 19 Sun TV Network Ltd. SUNTV 20 The New India Assurance Company Ltd. NIACL 11) Nifty500 Value 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 Aurobindo Pharma Ltd. AUROPHARMA 2 Exide Industries Ltd. EXIDEIND 3 Hindustan Zinc Ltd. HINDZINC 4 JM Financial Ltd. JMFINANCIL 5 Rain",
@@ -10537,7 +10537,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07122023.pdf",
       "text_characters": 16110,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. December 29, 2023. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Archive title: Replacements in indices w.e.f. December 29, 2023. Official NSE Indices PDF reviewed: the Nifty50 Value 20 section concerns a separate strategy index, not the flagship Nifty 50. No flagship Nifty 50 constituent event. Independent human sign-off pending.",
       "year": "2023"
     },
     {
@@ -10708,7 +10708,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2024-01-10-cf735f23d52e",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprise of broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government o",
         "have been developed within India and abroad. These include index based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -10717,7 +10717,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10012024.pdf",
       "text_characters": 2167,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. January 19, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Tinplate/Tata Steel amalgamation replacement affects Nifty Microcap 250, Nifty Total Market and Nifty Tata Group only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -10746,7 +10746,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-01-19-84d3b197db91",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ided to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from January 31, 2024 (close of January 30, 2024). Nifty500 Shariah The following companies are being included: Sr. No. Company Name Symbol 1 Jubilant Pharmova Ltd. JUBLPHARMA 2 Rashtriya Chemicals & Fertilizers Ltd. RCF No exclusion is being made from the index. No changes are",
         "ollowing companies are being included: Sr. No. Company Name Symbol 1 Jubilant Pharmova Ltd. JUBLPHARMA 2 Rashtriya Chemicals & Fertilizers Ltd. RCF No exclusion is being made from the index. No changes are being made to Nifty50 Shariah and Nifty Shariah 25 indices. About NSE Indices Limited: NSE Indices Limited (formerly known as India Index Services & Products Ltd. - IISL), a subsidiary of NSE, provides a variety of indices and index related",
@@ -10757,7 +10757,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19012024.pdf",
       "text_characters": 1792,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. January 31, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance changes concern Nifty500 Shariah and explicitly make no changes to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -10805,7 +10805,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2024-01-30-68c636dcbe7b",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprise of broad-based benchmark indices, secto ral indices, strategy indices, thematic indices and customised indices. NSE Indices Limited also maintains fixed income indices based on Government",
         "have been developed within India and abroad. These include index based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -10814,7 +10814,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs30012024.pdf",
       "text_characters": 2118,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. February 06, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Tata Metaliks/Tata Steel amalgamation replacement affects Nifty Microcap 250, Nifty Total Market and Nifty Tata Group only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -10988,7 +10988,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2024-03-14-184ffabeae69",
       "page_count": 5,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises broad-based benchmark indices, sectoral indices, strategy indices, thematic indices, and customised indices. NSE In dices Limited also maintains fixed income indices based on Government o",
         "ave been developed within India and abroad. These incl ude index -based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -10997,7 +10997,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs14032024.pdf",
       "text_characters": 5514,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. March 28, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices quarterly-review release reviewed: changes concern Nifty Alpha 50, Nifty High Beta 50 and other strategy indices; these are not flagship Nifty 50 membership changes. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11007,7 +11007,7 @@
       "nifty50_mention_count": 12,
       "notice_id": "NSE-ARCHIVE-2024-03-19-07cfa40edb89",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "bruary 28, 2024, as part of periodic review of various indices, the Index Maintenance Sub - Committee (Equity) of NSE Indices Limited had announced inclusion of Indian Renewable Energy Development Agency Ltd. (IREDA) in Nifty 500, Nifty Midcap 150, Nifty Midcap 100, Nifty 200, Nifty LargeMidcap 250, Nifty MidSmallcap 400, Nifty Total Market and Nifty500 Multicap 50:25:25 indices with effect from March 28, 2024. As IREDA breached one of the requ",
         "imited had announced inclusion of Indian Renewable Energy Development Agency Ltd. (IREDA) in Nifty 500, Nifty Midcap 150, Nifty Midcap 100, Nifty 200, Nifty LargeMidcap 250, Nifty MidSmallcap 400, Nifty Total Market and Nifty500 Multicap 50:25:25 indices with effect from March 28, 2024. As IREDA breached one of the requirements of SEBI Portfolio Concentration Norms for Equity Exchange Traded Funds (ETFs) and Index Funds related to impact cost,",
@@ -11026,7 +11026,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs19032024.pdf",
       "text_characters": 6066,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. March 28 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: IREDA inclusion revocation and other replacements affect Nifty 500, Midcap, Smallcap and related indices; UPL exclusion is reflected only in Nifty50 Shariah as a downstream consequence of the Feb 28 flagship Nifty 50 change. No new flagship membership change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11189,7 +11189,7 @@
       "nifty50_mention_count": 3,
       "notice_id": "NSE-ARCHIVE-2024-04-24-b58b657d6085",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ifty Total Market The following company is being excluded: Sr. No. Company Name Symbol 1 Brightcom Group Ltd. BCG The following company is being included: Sr. No. Company Name Symbol 1 Supreme Petrochem Ltd. SPLPETRO 3) Nifty500 Value 50 The following company is being excluded: Sr. No. Company Name Symbol 1 Brightcom Group Ltd. BCG The following company is being included: Sr. No. Company Name Symbol 1 IIFL Finance Ltd. IIFL About NSE Indices L",
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Ind ices Limited also maintains fixed income indices based on Government of",
@@ -11199,7 +11199,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24042024.pdf",
       "text_characters": 2272,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. April 26 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Brightcom Z-category replacement affects Nifty Microcap 250, Total Market and Nifty500 Value 50 only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11209,7 +11209,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2024-04-24-deed66960097",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Ind ices Limited also maintains fixed income indices based on Government of",
         "ave been developed within India and abroad. These inclu de index -based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -11218,7 +11218,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24042024_1.pdf",
       "text_characters": 1993,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. May 03, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Ujjivan Financial Services/Ujjivan Small Finance Bank amalgamation replacement affects Nifty Microcap 250 and Nifty Total Market only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11285,7 +11285,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-05-22-b7bad2ee510a",
       "page_count": 4,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "s decided to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from May 31, 2024 (close of May 30, 2024). 1) Nifty50 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Adani Enterprises Ltd. ADANIENT 2 Divi's Laboratories Ltd. DIVISLAB 3 Grasim Industries Ltd. GRASIM 4 Tata Steel Ltd. TATASTEEL The follo",
         "IENT 2 Divi's Laboratories Ltd. DIVISLAB 3 Grasim Industries Ltd. GRASIM 4 Tata Steel Ltd. TATASTEEL The following company is being included: Sr. No. Company Name Symbol 1 Sun Pharmaceutical Industries Ltd. SUNPHARMA 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Abbott India Ltd. ABBOTINDIA 2 Adani Enterprises Ltd. ADANIENT 3 AIA Engineering Ltd. AIAENG 4 Biocon Ltd. BIOCON 5 Birla Corporation Lt",
@@ -11296,7 +11296,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22052024.pdf",
       "text_characters": 4083,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. May 31, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance changes affect Nifty50 Shariah and Nifty500 Shariah. Nifty50 Shariah is distinct from flagship Nifty 50; no flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11519,7 +11519,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-06-07-b39f3e27b218",
       "page_count": 19,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "ries Ltd. KEI 15 Oil India Ltd. OIL 16 Oracle Financial Services Software Ltd. OFSS 17 Rail Vikas Nigam Ltd. RVNL 18 SJVN Ltd. SJVN 19 Steel Authority of India Ltd. SAIL 20 Thermax Ltd. THERMAX 21 Voltas Ltd. VOLTAS 11) Nifty500 Momentum 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 Angel One Ltd. ANGELONE 2 Aurobindo Pharma Ltd. AUROPHARMA 3 Birlasoft Ltd. BSOFT 4 C.E. Info Systems Ltd. MAPMYINDIA 5 Central Depo",
         "ATCO Pharma Ltd. NATCOPHARM 18 National Aluminium Co. Ltd. NATIONALUM 19 Rail Vikas Nigam Ltd. RVNL 20 Saregama India Ltd SAREGAMA 21 Thermax Ltd. THERMAX 22 Titagarh Rail Systems Ltd. TITAGARH 23 Voltas Ltd. VOLTAS 14) Nifty500 Value 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 Deepak Fertilisers & Petrochemicals Corp. Ltd. DEEPAKFERT 2 Housing & Urban Development Corporation Ltd. HUDCO 3 Indian Railway Finance",
@@ -11530,7 +11530,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs07062024.pdf",
       "text_characters": 21268,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices 19-page release reviewed: semi-annual strategy, thematic and factor-index replacements include Nifty High Beta 50 and Nifty Low Volatility 50, both distinct from flagship Nifty 50. No flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11636,7 +11636,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-06-21-b26bd6ba7f4e",
       "page_count": 1,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "decided to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from June 28, 2024 (close of June 27, 2024). 1) Nifty500 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 ABB India Ltd. ABB No inclusion is being made in the index. No change is being made to Nifty50 Shariah and Nifty Shariah 25 indices. About",
         "m June 28, 2024 (close of June 27, 2024). 1) Nifty500 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 ABB India Ltd. ABB No inclusion is being made in the index. No change is being made to Nifty50 Shariah and Nifty Shariah 25 indices. About NSE Indices Limited: NSE Indices Limited (formerly known as India Index Services & Products Ltd. - IISL), a subsidiary of NSE, provides a variety of indices and index related",
@@ -11647,7 +11647,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs21062024_1.pdf",
       "text_characters": 1719,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. June 28, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance changes affect Nifty500 Shariah only and explicitly state no change to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -11815,7 +11815,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-07-24-f33ead51a05a",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "decided to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from July 31, 2024 (close of July 30, 2024). 1) Nifty50 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Infosys Ltd. INFY 2 Wipro Ltd. WIPRO No inclusion is being made in the index 2) Nifty500 Shariah The following companies are being exclud",
         "e from July 31, 2024 (close of July 30, 2024). 1) Nifty50 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Infosys Ltd. INFY 2 Wipro Ltd. WIPRO No inclusion is being made in the index 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Ambuja Cements Ltd. AMBUJACEM 2 Cera Sanitaryware Ltd CERA 3 Dr. Lal Path Labs Ltd. LALPATHLAB 4 Infosys Ltd. INFY 5 Wipro Ltd. WIPRO Th",
@@ -11826,7 +11826,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs24072024.pdf",
       "text_characters": 2288,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. July 31, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance changes affect Nifty50 Shariah, Nifty500 Shariah and Nifty Shariah 25. Nifty50 Shariah is distinct from flagship Nifty 50; no flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -12018,7 +12018,7 @@
       "nifty50_mention_count": 8,
       "notice_id": "NSE-ARCHIVE-2024-08-23-2a3981c0182b",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "Ordinary Shares as consideration for such reduction of capital, Tata Motors Ltd., \u2018A\u2019 Ordinary Shares - DVR (Symbol: TATAMTRDVR) shall be excluded from the following indices: Sr. No. Index Name 1 Nifty 100 2 Nifty 200 3 Nifty 500 4 Nifty Auto 5 Nifty India Corporate Group Index - Tata Group 6 Nifty India Corporate Group Index - Tata Group 25% Cap 7 Nifty LargeMidcap 250 8 Nifty Mobility 9 Nifty Total Market 10 Nifty Transportation & Logistics 1",
         "a Corporate Group Index - Tata Group 6 Nifty India Corporate Group Index - Tata Group 25% Cap 7 Nifty LargeMidcap 250 8 Nifty Mobility 9 Nifty Total Market 10 Nifty Transportation & Logistics 11 Nifty100 Equal Weight 12 Nifty500 Equal Weight 13 Nifty500 LargeMidSmall Equal-Cap Weighted 14 Nifty500 Multicap 50:25:25 Consequently, t he equity shares and investible weight factor (IWF) of Tata Motors Ltd. (Symbol: TATAMOTORS) shall be revised base",
@@ -12033,7 +12033,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23082024_1.pdf",
       "text_characters": 3701,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. August 30, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: Tata Motors DVR exclusion and IWF adjustment affect Nifty 100/200/500 and other indices; Nifty50 Shariah addition is a separate Shariah index. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -12062,7 +12062,7 @@
       "nifty50_mention_count": 2,
       "notice_id": "NSE-ARCHIVE-2024-08-27-36de81aeb6ff",
       "page_count": 2,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "and index related services for the capital markets. The company focuses on the index as a core product. The company owns and manages a portfolio of indices under the Nifty brand of NSE, including the flagship index, the Nifty 50. Nifty equity indices comprises broad-based benchmark indices, sectoral indices, strategy indices, thematic indices and customised indices. NSE Ind ices Limited also maintains fixed income indices based on Government of",
         "ave been developed within India and abroad. These inclu de index -based derivatives traded on NSE and NSE International Exchange IFSC Limited (NSE IX) and a number of index funds and exchange traded funds. The flagship 'Nifty 50' index is widely tracked and traded as the benchmark for Indian Capital Markets. For more information, please visit: www.niftyindices.com Press contact: Email ID: cc@nse.co.in"
@@ -12071,7 +12071,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs27082024.pdf",
       "text_characters": 1982,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. September 03, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: TCNS Clothing/Aditya Birla Fashion amalgamation replacement affects Nifty Microcap 250 and Nifty Total Market only. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -12459,7 +12459,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-09-23-b081e2fdf37b",
       "page_count": 7,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "t 23, 2024. C. Replacements on account of monthly review of Nifty Shariah indices: On account of monthly review of Shariah compliance, replacement of stocks in Nifty Shariah indices shall be made as listed hereunder: 1) Nifty50 Shariah The following company is being excluded: Sr. No. Company Name Symbol 1 LTIMindtree Ltd. LTIM The following companies are being included: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL 2 Tre",
         "owing company is being excluded: Sr. No. Company Name Symbol 1 LTIMindtree Ltd. LTIM The following companies are being included: Sr. No. Company Name Symbol 1 Bharat Petroleum Corporation Ltd. BPCL 2 Trent Ltd. TRENT 2) Nifty500 Shariah The following companies are being excluded: Sr. No. Company Name Symbol 1 Aether Industries Ltd. AETHER 2 Allcargo Logistics Ltd. ALLCARGO 3 Anupam Rasayan India Ltd. ANURAS 4 Bharat Electronics Ltd. BEL 5 Clea",
@@ -12470,7 +12470,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs23092024.pdf",
       "text_characters": 8952,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices and revision in guideline for calculation of 'Investable Weight Factor' (IWF). Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: quarterly changes affect Nifty Alpha 50, Low Volatility 50, other strategy/thematic indices and Nifty50 Shariah; revised IWF rounding is a methodology control. These are not flagship Nifty 50 membership changes. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -12544,7 +12544,7 @@
       "nifty50_mention_count": 7,
       "notice_id": "NSE-ARCHIVE-2024-10-04-2f707cb607ae",
       "page_count": 5,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "to make the following replacement in various indices on account of scheme of amalgamation of IDFC Ltd. with IDFC First Bank Ltd. These changes shall become effective from October 10, 2024 (close of October 09, 2024). 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 IDFC Ltd. IDFC The following company is being included: Sr. No. Company Name Symbol 1 Emcure Pharmaceuticals Ltd. EMCURE The above replacement will",
         "is being excluded: Sr. No. Company Name Symbol 1 IDFC Ltd. IDFC The following company is being included: Sr. No. Company Name Symbol 1 Emcure Pharmaceuticals Ltd. EMCURE The above replacement will also be applicable to Nifty500 Equal Weight, Nifty500 Multicap 50:25:25 and Nifty500 LargeMidSmall Equal-Cap Weighted indices. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 IDFC Ltd. IDFC The following",
@@ -12558,7 +12558,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs04102024.pdf",
       "text_characters": 4151,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. October 10, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: IDFC amalgamation replacements affect Nifty 500, Smallcap 250/50/100, MidSmallcap 400, Total Market and Financial Services indices. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -12644,7 +12644,7 @@
       "nifty50_mention_count": 6,
       "notice_id": "NSE-ARCHIVE-2024-10-10-583f23bd13a8",
       "page_count": 3,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "placement in various indices on account of scheme of amalgamation of TV18 Broadcast Ltd. with Network18 Media & Investments Ltd. These changes shall become effective from October 16, 2024 (close of October 15, 2024). 1) Nifty 500 The following company is being excluded: Sr. No. Company Name Symbol 1 TV18 Broadcast Ltd. TV18BRDCST The following company is being included: Sr. No. Company Name Symbol 1 Akums Drugs and Pharmaceuticals Ltd. AKUMS Th",
         "No. Company Name Symbol 1 TV18 Broadcast Ltd. TV18BRDCST The following company is being included: Sr. No. Company Name Symbol 1 Akums Drugs and Pharmaceuticals Ltd. AKUMS The above replacement will also be applicable to Nifty500 Equal Weight, Nifty500 Multicap 50:25:25 and Nifty500 LargeMidSmall Equal-Cap Weighted indices. 2) Nifty Smallcap 250 The following company is being excluded: Sr. No. Company Name Symbol 1 TV18 Broadcast Ltd. TV18BRDCS",
@@ -12657,7 +12657,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs10102024.pdf",
       "text_characters": 2839,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacement in indices w.e.f. October 16, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: TV18 Broadcast/Network18 amalgamation replacements affect Nifty 500, Smallcap 250, MidSmallcap 400, Total Market and Nifty Media. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -13015,7 +13015,7 @@
       "nifty50_mention_count": 4,
       "notice_id": "NSE-ARCHIVE-2024-11-22-aded4c3c6551",
       "page_count": 1,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "to make replacement of stocks in Nifty Shariah indices on account of monthly review of Shariah compliance as listed hereunder. These changes shall become effective from November 29, 2024 (close of November 28, 2024). 1) Nifty500 Shariah The following companies are being included: Sr. No. Company Name Symbol 1 NMDC Steel Ltd. NSLNISP 2 Steel Authority of India Ltd. SAIL No exclusion is being made from the index. No change is being made to Nifty",
         "fty500 Shariah The following companies are being included: Sr. No. Company Name Symbol 1 NMDC Steel Ltd. NSLNISP 2 Steel Authority of India Ltd. SAIL No exclusion is being made from the index. No change is being made to Nifty50 Shariah and Nifty Shariah 25 indices. About NSE Indices Limited: NSE Indices Limited (formerly known as India Index Services & Products Ltd. - IISL), a subsidiary of NSE, provides a variety of indices and index related",
@@ -13026,7 +13026,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs22112024.pdf",
       "text_characters": 1779,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices w.e.f. November 29, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices release reviewed: monthly Shariah-compliance changes affect Nifty500 Shariah and explicitly make no changes to Nifty50 Shariah or Nifty Shariah 25. No flagship Nifty 50 constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
@@ -13151,7 +13151,7 @@
       "nifty50_mention_count": 8,
       "notice_id": "NSE-ARCHIVE-2024-12-11-c118ab9b31d4",
       "page_count": 27,
-      "review_status_unchanged": "DISCOVERED_UNREVIEWED",
+      "review_status_unchanged": "SCREENED_NO_NIFTY50_CHANGE",
       "snippets": [
         "s in various Nifty equity indices as listed hereunder. These changes shall become effective from December 31, 2024 (close of December 30, 2024). A. Replacements in indices: 1) Replacements on account of annual review of Nifty50 Value 20 index: The following companies are being excluded: Sr. No. Company Name Symbol 1 Tata Steel Ltd. TATASTEEL 2 Tech Mahindra Ltd. TECHM The following companies are being included: Sr. No. Company Name Symbol 1 Bh",
         "ute Ltd. MAXHEALTH 14 MphasiS Ltd. MPHASIS 15 One 97 Communications Ltd. PAYTM 16 Page Industries Ltd. PAGEIND 17 Persistent Systems Ltd. PERSISTENT 18 Petronet LNG Ltd. PETRONET 19 Syngene International Ltd. SYNGENE k) Nifty500 Momentum 50 The following companies are being excluded: Sr. No. Company Name Symbol 1 ABB India Ltd. ABB 2 Adani Ports and Special Economic Zone Ltd. ADANIPORTS 3 Adani Power Ltd. ADANIPOWER 4 Anand Rathi Wealth Ltd. A",
@@ -13166,7 +13166,7 @@
       "source_url": "https://www.niftyindices.com/Press_Release/ind_prs11122024.pdf",
       "text_characters": 30561,
       "text_status": "EXTRACTED_NIFTY50_REFERENCE",
-      "title": "Archive title: Replacements in indices and Revision in criteria w.e.f. December 31, 2024. Automated title-keyword candidate only; inspect PDF and classify index scope.",
+      "title": "Official NSE Indices 27-page release reviewed: annual replacements concern Nifty50 Value 20 and strategy indices; Nifty50 Value 20 is a separate strategy index, not flagship Nifty 50. No flagship constituent change. Original PDF archived and SHA-256 recorded; independent human sign-off pending.",
       "year": "2024"
     },
     {
