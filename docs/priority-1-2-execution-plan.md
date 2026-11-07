@@ -1,10 +1,44 @@
 # Trader research execution status
 
-Last reviewed: 2026-11-06. This plan tracks the live `main` branch. P1/P2 engineering fixes are being committed directly to `main`; data provenance, tariff reconciliation and research promotion remain separate evidence gates.
+Last reviewed: 2026-11-07. This plan tracks the live `main` branch. P1/P2 engineering fixes are being committed directly to `main`; data provenance, tariff reconciliation and research promotion remain separate evidence gates.
 
 ## Current decision
 
 **RESEARCH HOLD — no price-feature tuning, model promotion, final-holdout evaluation, merge to production, or live orders.**
+
+## Latest verified state — 2026-11-07 (main)
+
+**Decision remains RESEARCH HOLD.** No PIT membership ledger has been produced, no full-universe experiment is authorized, the final holdout remains locked, and live execution remains disabled.
+
+### Source archive and membership evidence
+
+- Main is at `605e0dd0ea6c5bd4a3736104e8aee830f12c1ad2`. The archiver implementation is in `de5bd0214dc53d340a9d0cac7b0c617d2fceb5b2`; the archive workflow subsequently committed the source bytes and register update.
+- The formerly unarchived official NSE F&O circular FAOP58243 is now archived at `data/reference/source_documents/NOTICE-NSE_CIRCULAR_FAOP58243_2023-09-05.pdf`: 69,100 bytes, SHA-256 `a07abf4392d6b69f04b60f6fe42686427d3d8b7fe7d5fd2dcf54aab11bb22cf0`. It confirms the JIOFIN exclusion effective 2023-09-07 (close 2023-09-06); it is corroborating exchange evidence, not a separate transition.
+- The curated notice register has 103/103 rows with archived PDF paths and SHA-256: 23 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW`, 80 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`, and zero `LOCATED_NOT_ARCHIVED`.
+- The broader annual archive inventory has 684 rows; 681 have archived PDF bytes and SHA-256. Three retrieval failures remain as non-PDF responses for official archive entries whose titles identify other fixed-income/SDL products: 2018-06-05 NIFTY 10 Year SDL, 2019-07-16 NIFTY 10 Year SDL, and 2023-03-14 Nifty SDL Jul 2028 launch. Their failures are recorded; do not infer PDF contents.
+- The archive discovery catalog has 697 rows (558 review candidates, 139 non-candidates) and zero heuristic false negatives in the current audit. The 95-row main-branch notice review queue is still entirely `PENDING_HUMAN_REVIEW`. Draft PR #9 contains AI-only 2018–2019 scope triage; it is not merged and does not constitute human approval.
+- The transition register contains 34 rows, all `SAMPLE_ONLY`. No event has been independently human-signed, no effective-dated PIT membership intervals are approved, and all annual coverage rows for 2018–2024 remain `NOT_STARTED` with `official_notice_search_complete=false`.
+
+### Current data and model diagnostics
+
+- The 2026-11-07 preflight reports 49 configured symbols with 741 OHLCV rows per symbol through 2026-11-05; the configured-price validation passes. This is a static configured panel, not the historical Nifty 50 universe.
+- PIT membership evidence is absent (0 rows). The corporate-action audit has two unresolved adjustment-factor rows; adjusted-price lineage remains unverified.
+- Latest daily chronological holdout report: 28,567 train rows, 7,252 test rows (2026-03-24 through 2026-10-29), five-session purge; accuracy 0.6223 versus majority baseline 0.6338, ROC AUC 0.5738, before costs. This diagnostic does not establish a tradable edge and does not replace the pre-registered full experiment.
+- Monitoring remains `RESEARCH_HOLD`: PIT membership false, corporate-action lineage false, probability drift has only 2 of the required 40 sessions, and accuracy remains below the majority baseline. Promotion and live execution are both false.
+
+### Verified workflow results
+
+- [Archive Nifty 50 primary membership sources #42338433332](https://github.com/vishwasgarg5/Trader/actions/runs/42338433332) — success; archived FAOP58243 and hash-verified the other 102 curated notice PDFs.
+- [Trader Pull Request CI #42338433285](https://github.com/vishwasgarg5/Trader/actions/runs/42338433285) — success; full unit suite and source reconciliation passed.
+- [Daily Trader Signals #42338433571](https://github.com/vishwasgarg5/Trader/actions/runs/42338433571) — success; tests, pipeline, notice triage and fail-closed monitoring passed.
+- [Notice discovery #42335224181](https://github.com/vishwasgarg5/Trader/actions/runs/42335224181) — success; discovery, catalog audit, extraction and candidate triage completed.
+
+### Next actions
+
+1. Complete primary-source review and annual notice-page/ad-hoc reconciliation, including superseding, cancelled and deferred notices; keep the three non-PDF archive endpoints documented until a valid official PDF or defensible source disposition is obtained.
+2. Obtain independent human review for the 80 AI-classified rows and 23 archived/hash-verified rows; do not fill reviewer fields automatically.
+3. Reconcile LTIM/LTM vendor identity and the TATAMOTORS/TMPV/TMCV security lineage against archived primary documents, then validate historical price coverage for removed constituents.
+4. Only after source and PIT evidence gates pass, build the full historical universe panel and resume leakage-free walk-forward evaluation, cost/baseline comparison and risk validation.
 
 The completed P2 experiment fails the pre-registered profitability and statistical-edge gates. Passing CI confirms code execution and reproducibility, not a tradable edge.
 
@@ -64,7 +98,7 @@ Latest full validation: [GitHub Actions run #171](https://github.com/vishwasgarg
 - Cash-funded portfolio: 1,158 trades, -44.47% net return and 45.68% realised-equity drawdown. This realised-equity drawdown understates intra-trade mark-to-market drawdown.
 - Daily mark-to-market portfolio: 1,169 trades, -24.39% net return, 29.77% maximum daily drawdown and 80.15% peak sector exposure.
 - Nifty buy-and-hold comparator: +32.18% before index costs, 15.77% maximum drawdown; exposure-matched Nifty: +14.18% before index costs.
-- Data audit still found only 48 of the configured 49 price histories; `TATAMOTORS.NS` is missing. No official dated membership history or corporate-action ledger was supplied, and adjusted-price lineage remains independently unverified.
+- At run #171 (historical snapshot), data audit found 48/49 configured price histories and `TATAMOTORS.NS` missing. The latest 2026-11-07 preflight now reports 49 configured symbols with 741 rows each through 2026-11-05, but this remains a static configured panel; PIT membership is absent (0 rows), TATAMOTORS/TMPV/TMCV lineage remains unverified, and corporate-action factors remain unresolved.
 - Final holdout status: `LOCKED_NOT_EVALUATED`; no holdout metrics were computed.
 
 Passing CI validates implementation and reproducibility, not data completeness, profitability or trading readiness. The successful run must not be interpreted as passing any promotion gate.
