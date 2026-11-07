@@ -164,7 +164,8 @@ def reconstruct_price_index(dates, membership, security_inputs, divisors,
         errors.append("no requested dates supplied")
     status = "INSUFFICIENT_INPUTS" if insufficient else ("MISMATCH" if mismatch else "MATCH")
     return {"status": status, "rows": results, "errors": errors,
-            "tolerance_points": float(tolerance_points), "interpretation": ("CROSS_SOURCE_CONSISTENCY_CHECKED" if status == "MATCH" else "NOT_ESTABLISHED"),\n            "parameter_fitting": False,
+            "tolerance_points": float(tolerance_points), "interpretation": ("CROSS_SOURCE_CONSISTENCY_CHECKED" if status == "MATCH" else "NOT_ESTABLISHED"),
+            "parameter_fitting": False,
             "membership_written": False, "tri_reconstructed": False,
             "limitations": [
                 "A level match is a consistency check, not proof that constituent history is correct; offsetting errors can match.",
