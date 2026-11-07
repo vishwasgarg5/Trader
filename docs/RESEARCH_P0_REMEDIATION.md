@@ -187,3 +187,10 @@ Acceptance criteria:
 - Archived PDF SHA-256: `b820afda2c7659791b566f736a80d9e82c6dab57b90e3f8a2db843a074161697`, matching the annual inventory record.
 - Updated the annual notice inventory, unregistered-candidate scope-review table, notice review queue, and regression test. Classification remains `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; manual queue remains `PENDING_HUMAN_REVIEW`.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs07052019.pdf
+
+### CI correction and additional notice screen — 2019-05-08
+
+- Investigated workflow run `42352509491`: the test suite reported `1 failed, 203 passed`. The failure was a schema-value mismatch in the 2019-05-07 inventory row: the new row used a custom fixed-income classification while the regression test and established inventory convention require `NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE`. Normalized that row to the established value; this is a metadata correction, not a change to the source interpretation.
+- Full-text screened the official NSE Indices release dated 2019-05-08. It excludes One Point One Solutions (`ONEPOINT`) from NIFTY SME EMERGE effective 2019-05-09 (close of 2019-05-08), with no inclusion. This is not a NIFTY 50 membership event.
+- Archived PDF SHA-256: `af50b6eebba05bfe608c1659cd1158e60a5a0b3a399a10a82ccc7d2e6a98e6c3`, matching the annual inventory record. Updated the annual inventory, unregistered-candidate scope review, notice review queue and regression test. AI scope review remains pending human sign-off.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs08052019.pdf
