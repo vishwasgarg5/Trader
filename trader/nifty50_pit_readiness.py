@@ -75,12 +75,24 @@ def audit_pit_readiness(reference_dir: Path = REFERENCE) -> dict:
         row.get("scope_status", "").strip() == "UNREVIEWED"
         for row in catalog_rows
     )
+    # AI dispositions and source-identity blocks are not human review. Only an
+    # explicit human-reviewed terminal state (or VERIFIED) closes a catalog row.
+    unresolved_catalog = sum(
+        not (
+            row.get("scope_status", "").strip() == "VERIFIED"
+            or row.get("scope_status", "").strip().startswith("HUMAN_REVIEWED_")
+        )
+        for row in catalog_rows
+    )
     inventory_rows, inventory_errors = _read_rows(reference_dir / "nifty50_annual_notice_inventory.csv")
     errors.extend(inventory_errors)
+    # SCREENED_NO_NIFTY50_CHANGE is an AI screen, not an independent sign-off.
+    # Likewise, CANDIDATE and DISCOVERED_UNREVIEWED remain open until reviewed.
     unresolved_inventory = sum(
-        row.get("review_status", "").strip() not in {
-            "SCREENED_NO_NIFTY50_CHANGE", "VERIFIED", "ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW"
-        }
+        not (
+            row.get("review_status", "").strip() == "VERIFIED"
+            or row.get("review_status", "").strip().startswith("HUMAN_REVIEWED_")
+        )
         for row in inventory_rows
     )
 
@@ -90,7 +102,7 @@ def audit_pit_readiness(reference_dir: Path = REFERENCE) -> dict:
         and transition["ready"]
         and special["ready"]
         and not annual_incomplete
-        and unreviewed_catalog == 0
+        and unresolved_catalog == 0
         and unresolved_inventory == 0
     )
     return {
@@ -115,6 +127,7 @@ def audit_pit_readiness(reference_dir: Path = REFERENCE) -> dict:
         },
         "annual_coverage_incomplete_years": annual_incomplete,
         "unreviewed_archive_catalog_rows": unreviewed_catalog,
+        "unresolved_archive_catalog_rows": unresolved_catalog,
         "unresolved_annual_notice_rows": unresolved_inventory,
         "errors": errors,
         "limitations": [
