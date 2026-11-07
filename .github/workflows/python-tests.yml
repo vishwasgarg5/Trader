@@ -9,6 +9,7 @@ on:
       - "trader/**"
       - "scripts/**"
       - "tests/**"
+      - "config/nifty50_pilot_protocol.json"
       - "requirements.txt"
       - ".github/workflows/python-tests.yml"
 
