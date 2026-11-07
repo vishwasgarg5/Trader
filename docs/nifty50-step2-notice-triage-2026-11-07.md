@@ -21,9 +21,9 @@ This checkpoint records AI-assisted screening of official NSE Indices archive no
 | Annual notice inventory | 687 |
 | Review queue AI-triaged | 108 / 108 |
 | Remaining AI-triage queue | 0 |
-| Inventory screened no flagship Nifty 50 change | 102 |
+| Inventory screened no flagship Nifty 50 change | 100 |
 | Inventory candidate transition notices | 20 |
-| Inventory still discovered/unreviewed | 565 |
+| Inventory still discovered/unreviewed | 567 |
 | Independently verified transitions | 0 |
 | Complete annual coverage rows | 0 / 7 |
 
