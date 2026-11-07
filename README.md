@@ -45,3 +45,11 @@ Yahoo Finance is unofficial and may have coverage, corporate-action or timestamp
 6. Add dashboard and optional Telegram alerts.
 
 The workflow runs weekdays at 10:20 UTC (15:50 IST), with manual dispatch. GitHub Actions has repository Contents write permission to commit generated files.
+
+## Nifty 50 pilot registration (separate research experiment)
+
+The registered pilot is `NIFTY50_PILOT_001`, defined in `config/nifty50_pilot_protocol.json`. It is an experiment-scoped **Nifty 50-only** research pilot: point-in-time constituents, exactly five selections per qualifying date, and Nifty 50 TRI as the matched benchmark. It does not expand to Nifty 200, Nifty 500 or the broader NSE universe. The shared `config/research_universe.json` retains the broader scope recorded for prior/other research; the pilot-specific override must be explicitly selected by pilot code and does not change those historical experiment definitions.
+
+The protocol is currently `DRAFT_NOT_FROZEN`. Historical membership, identity lineage, stock total returns, Nifty 50 TRI, broker tariff assumptions, statistical power, factor formulas and trial-history reconstruction remain unverified or incomplete. The existing `config/final_holdout_protocol.json` still contains a 12-month rule; the pilot's 18/24-month rule is registered as a conflict to reconcile under GitHub issue #23. Do not evaluate or access the holdout while these items remain open.
+
+A pilot `GO` means **eligible for a separately approved broader experiment only**. It does not authorize promotion, paper trading or live trading. Model evaluation, holdout access, promotion and live execution remain disabled. See [pilot registration](docs/nifty50-pilot-registration.md), [Issue #11](https://github.com/vishwasgarg5/Trader/issues/11), and the [implementation backlog](https://github.com/vishwasgarg5/Trader/issues).
