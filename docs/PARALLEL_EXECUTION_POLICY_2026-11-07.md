@@ -53,6 +53,12 @@ A status may advance only when its own evidence exists. Do not collapse these st
 
 The first Step 3 code change adds ISO 6166 ISIN shape and Luhn check-digit validation to the effective-dated alias ledger audit, with matching schema declaration and regression tests. It is an integrity check only: it does not verify any current alias row, establish a security master, or certify adjusted prices.
 
+Validation:
+- Full Python suite: **279 passed** on commit `49644945b83e103ae938763d5e194bf61543cf8d` ([run](https://github.com/vishwasgarg5/Trader/actions/runs/42396472431)).
+- Nifty 50 protocol checks: **success** on the same code/test commit ([run](https://github.com/vishwasgarg5/Trader/actions/runs/42396472396)).
+- Model Status workflow: **success** on schema commit `a624bea490f40e49ad09b2fb0aa6d843807b94f8` ([run](https://github.com/vishwasgarg5/Trader/actions/runs/42396485626)); automated NSE evidence refresh was skipped.
+- An earlier intermediate run failed because it ran the new validator against the old synthetic test ISIN before the fixture update landed. The subsequent full-suite and protocol runs on the updated test commit passed.
+
 Existing Step 5 cost calculations, Step 6 fixed-horizon label contract, and Step 8 portfolio simulator may be extended and tested independently. The current corporate-action ledger still contains unresolved TMPV terms, the pilot OHLCV/TRI files remain empty/header-only, and the generic event ledger has no historical observations. These limitations must remain visible.
 
 ## Release status
