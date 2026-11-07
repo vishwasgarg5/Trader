@@ -71,12 +71,11 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-08-9b9dab3479fa.txt",
             "required_text": ("NIFTY SME EMERGE", "One Point One Solutions Ltd.", "ONEPOINT", "No inclusion is being made"),
         },
-    }
-
         "NSE-ARCHIVE-2019-06-28-b9d3352bec90": {
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-28-b9d3352bec90.txt",
             "required_text": ("NIFTY100 Alpha 30", "30 companies selected from its parent NIFTY 100 index", "quarterly basis"),
         },
+    }
 
     for notice_id, case in cases.items():
         scope_row = scope[notice_id]
