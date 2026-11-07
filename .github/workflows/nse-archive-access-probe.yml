@@ -1,6 +1,12 @@
 name: NSE archive access probe
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/nse-archive-access-probe.yml"
+      - "trader/nse_archive_access_probe.py"
+      - "tests/test_nse_archive_access_probe.py"
   workflow_dispatch:
 
 permissions:
