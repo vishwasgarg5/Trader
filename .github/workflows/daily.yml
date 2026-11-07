@@ -41,19 +41,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Install OCR engine
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
       - name: Run tests
         run: python -m pytest -q
       - name: Generate signals and evaluate model
         run: python -m trader.pipeline
+      - name: Generate notice triage and candidate events
+        run: python -m trader.nifty_notice_triage
       - name: Run fail-closed operational and drift monitoring
         if: always()
         run: python -m trader.monitoring
-      - name: Upload data integrity and monitoring diagnostics
+      - name: Upload triage, candidate events and monitoring diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: trader-monitoring-reports-${{ github.run_id }}
+          name: trader-diagnostics-${{ github.run_id }}
           path: |
+            data/reports/nifty50_notice_triage.json
+            data/reference/nifty50_candidate_events.csv
             data/reports/data_integrity.json
             data/reports/monitoring.json
           if-no-files-found: ignore
