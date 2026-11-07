@@ -43,6 +43,10 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-07-be5ec74deef5.txt",
             "required_text": ("NIFTY 10 Year SDL Index", "IN2020190046 Kerala", "IN2920190039 Rajasthan"),
         },
+        "NSE-ARCHIVE-2019-05-14-cde78c64905a": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-14-cde78c64905a.txt",
+            "required_text": ("NIFTY 10 Year SDL Index", "IN1320180053 Bihar", "IN2020190053 Kerala", "IN2920190047 Rajasthan"),
+        },
         "NSE-ARCHIVE-2019-05-08-9b9dab3479fa": {
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-08-9b9dab3479fa.txt",
             "required_text": ("NIFTY SME EMERGE", "One Point One Solutions Ltd.", "ONEPOINT", "No inclusion is being made"),
