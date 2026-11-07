@@ -1,7 +1,7 @@
 {
   "checks": {
     "accuracy_vs_majority_baseline": {
-      "accuracy": 0.6223110865968009,
+      "accuracy": 0.6207942636514066,
       "baseline": 0.6337562051847766,
       "passed": false
     },
@@ -45,14 +45,14 @@
       "signal_date": "2026-11-05"
     }
   },
-  "code_revision": "de5bd0214dc53d340a9d0cac7b0c617d2fceb5b2",
+  "code_revision": "f8a7780f4df86cc2fc318dbf363fb5099b24b406",
   "errors": [],
-  "generated_at_utc": "2026-11-07T04:28:02.920286+00:00",
+  "generated_at_utc": "2026-11-07T04:43:48.618744+00:00",
   "input_sha256": {
     "config/promotion_gate.json": "ed8d4cfd32fb0092de221e8eb78845dfb5d2f24d25d4d788dcce94c0c175c2f3",
     "data/logs/predictions.csv": "84fd601f89f6e6030bf32e1906d83ff30bd3637e0abb64a06f897367acc0a100",
-    "data/reports/data_integrity.json": "233c3f1d31f1e1486ad4069d9833512659b2c2056432c2eb2ce02e37f6ba5f1f",
-    "data/reports/metrics.json": "f0aa677c2f0b34b586595693aff875caf3d9f0b390c86faa6688df9286ae29bb",
+    "data/reports/data_integrity.json": "601f734905bc070f29df990730a532eda5a60f82aeb4c37f4792d237c0556cc7",
+    "data/reports/metrics.json": "41052015947f492454d612eb113f338929d76d54b03dc5b7b7c5841402628006",
     "data/signals/latest_signals.csv": "54ff1a6704b4e479f3f5a24490ae6d83ce9707f82a3cf7c3b2d6746c2740030a"
   },
   "live_execution_enabled": false,
