@@ -171,7 +171,8 @@ jobs:
     name: Automated NSE evidence refresh (fail-closed)
     if: >-
       (github.event_name == 'schedule' && github.event.schedule == '15 3 * * 0') ||
-      (github.event_name == 'workflow_dispatch' && inputs.refresh_evidence == true)
+      (github.event_name == 'workflow_dispatch' && inputs.refresh_evidence == true) ||
+      (github.event_name == 'push' && contains(github.event.head_commit.modified, '.github/workflows/model-status.yml'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
     permissions:
