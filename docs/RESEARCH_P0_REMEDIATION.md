@@ -13,6 +13,8 @@
 
 ### Completed this run
 
+- Full-text screened the archived 2019-04-08 NSE Indices replacement notice. Excel Crop Care (EXCELCROP) is replaced by Sundaram Clayton (SUNCLAYLTD) in Nifty 500, Nifty Smallcap 250 and Nifty MidSmallcap 400 only; no flagship Nifty 50 constituent section or change. Effective 2019-04-15. Source SHA-256: `a4ff43189ea06cc6dbf53f3c5ac615b1b0c030fe0678c6fe38e991a5a05716af`. Registered as AI-reviewed pending independent human sign-off, with a regression test.
+
 - Full-text screened the archived 2018-01-08 NSE Indices notice. Its 13 numbered sections cover other indices; no flagship NIFTY 50 constituent section is present. Its 2018-02-05 effective date precedes this research window's 2018-04-01 start. Source SHA-256: `364784c98963a7bc2d28fa19d7b0c5377063178e9215669b1c7b1dfcdc8981f2`.
 - Full-text screened the archived 2019-12-18 NSE Indices notice. Its constituent sections cover NIFTY 500, NIFTY Smallcap 250 and NIFTY MidSmallcap 400 only; no flagship NIFTY 50 section is present. It is distinct from the 2019-12-19 impact-cost notice. Source SHA-256: `1a82bef95e25f8b6760dc06b4d6d443416193aaa22322627edb7f33784a0fc0e`.
 - Full-text screened the archived 2018-05-24 NSE Indices demerger/replacements notice. It lists changes across 14 other indices, with no flagship NIFTY 50 constituent section. Effective 2018-06-29. The original PDF is already archived and SHA-256 verified as `bbc4a4c04cae7a1ff924e8b3ef3f7acc6b3a9da069a1d6a36cfe0ae99189e957`; scope classification remains AI-reviewed pending human sign-off. Added a regression test.
@@ -27,9 +29,9 @@
 
 ### Verified evidence state
 
-- Annual notice inventory: 684 rows — 587 `DISCOVERED_UNREVIEWED`, 20 `CANDIDATE`, 77 `SCREENED_NO_NIFTY50_CHANGE`. 682 rows have archived PDF paths and hashes; three source URLs still return non-PDF responses: 2018-06-05, 2019-07-16 and 2023-03-14. Their contents remain unresolved; retain the retrieval failures and do not infer PDF contents.
+- Annual notice inventory: 684 rows — 586 `DISCOVERED_UNREVIEWED`, 20 `CANDIDATE`, 78 `SCREENED_NO_NIFTY50_CHANGE`. 682 rows have archived PDF paths and hashes; three source URLs still return non-PDF responses: 2018-06-05, 2019-07-16 and 2023-03-14. Their contents remain unresolved; retain the retrieval failures and do not infer PDF contents.
 - Archive discovery catalog: 697 rows (558 title candidates, 139 non-candidates). Fifteen catalog-only records remain outside the annual inventory after URL-level reconciliation; they are not silently counted as reviewed. Official PDF text has been inspected for three priority controls: the 2024-02-27 and 2024-08-16 notices only announce future Index Maintenance Sub-Committee review meetings, while the 2024-12-02 Strides Pharma corporate adjustment applies to Nifty Microcap 250 and Nifty Total Market only. All three controls are now registered in the curated notice register as `LOCATED_NOT_ARCHIVED`; original PDF bytes and hashes remain outstanding.
-- Curated notice register: 112 rows. Review states: 24 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW`, 85 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`, and 3 `LOCATED_NOT_ARCHIVED`. The three unarchived rows are the two 2024 meeting announcements and the 2024 Strides corporate-action control; none is counted as archived evidence.
+- Curated notice register: 113 rows. Review states: 24 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW`, 86 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`, and 3 `LOCATED_NOT_ARCHIVED`. The three unarchived rows are the two 2024 meeting announcements and the 2024 Strides corporate-action control; none is counted as archived evidence.
 - Transition register: 34 rows, all `SAMPLE_ONLY`. Special-membership ledger: 3 JIOFIN dummy/listed/removal events, all `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. The membership-interval file has zero data rows.
 - Annual coverage: all seven years (2018–2024) remain `NOT_STARTED`; every `official_notice_search_complete` flag remains false. Supersession review, authoritative snapshot reconciliation and independent sign-off are not complete.
 - Security identity: three alias/lineage rows exist, but none is verified (one explicitly `UNVERIFIED`, two lack a verification status). The two TMPV-related corporate-action rows still have blank adjustment factors and no archived original source documents.
@@ -51,7 +53,7 @@ The latest daily run generated successfully, but its reported metrics did not im
 
 ### Next action
 
-Continue full-text screening of the remaining archived annual-inventory notices, prioritising the next chronological candidate after 2018-12-14. Preserve AI-only scope decisions as pending independent human sign-off. Retry the three non-PDF source URLs with diagnostics and keep their contents unresolved. Do not start full-universe performance experiments until point-in-time membership and security/price lineage are independently established. The three 2024 catalog-only controls remain `LOCATED_NOT_ARCHIVED`; archive their original PDFs byte-for-byte through the approved source-archiver environment when available.
+Continue full-text screening of the remaining archived annual-inventory notices, prioritising the next chronological candidate after 2019-04-08. Preserve AI-only scope decisions as pending independent human sign-off. Retry the three non-PDF source URLs with diagnostics and keep their contents unresolved. Do not start full-universe performance experiments until point-in-time membership and security/price lineage are independently established. The three 2024 catalog-only controls remain `LOCATED_NOT_ARCHIVED`; archive their original PDFs byte-for-byte through the approved source-archiver environment when available.
 
 ## Gate 0 — Historical point-in-time Nifty 50 universe
 
