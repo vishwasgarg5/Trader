@@ -43,6 +43,18 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-07-be5ec74deef5.txt",
             "required_text": ("NIFTY 10 Year SDL Index", "IN2020190046 Kerala", "IN2920190039 Rajasthan"),
         },
+        "NSE-ARCHIVE-2019-06-24-0977558a6043": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-24-0977558a6043.txt",
+            "required_text": ("NIFTY 11-15 yr G-Sec Index", "NIFTY Composite G-Sec Index", "IN0020160100", "IN0020190065"),
+        },
+        "NSE-ARCHIVE-2019-06-25-3e79e53badb5": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-25-3e79e53badb5.txt",
+            "required_text": ("NIFTY SME EMERGE", "Five Core Electronics Ltd.", "FIVECORE", "No inclusion is being made"),
+        },
+        "NSE-ARCHIVE-2019-06-25-a8c546e97112": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-25-a8c546e97112.txt",
+            "required_text": ("NIFTY 10 Year SDL Index", "IN1020180221 Andhra Pradesh", "IN3420190016 West Bengal", "The following securities are being included"),
+        },
         "NSE-ARCHIVE-2019-06-13-8b59c9ce840e": {
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-13-8b59c9ce840e.txt",
             "required_text": ("NIFTY 500", "NIFTY Midcap 150", "NIFTY Infrastructure", "NIFTY Alpha 50"),

@@ -217,6 +217,13 @@ Acceptance criteria:
 - Updated the annual inventory, AI-only scope register, manual review queue and regression test. Independent human sign-off remains pending; the manual queue remains `PENDING_HUMAN_REVIEW`; no verified symbol or reviewer fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs18062019.pdf
 
+### Additional notice screens — 2019-06-24 and 2019-06-25 (AI-only; human sign-off pending)
+
+- 2019-06-24: the archived official release covers NIFTY 11-15 yr G-Sec and NIFTY Composite G-Sec fixed-income replacements effective 2019-07-01. No flagship NIFTY 50 equity membership section or event appears in the extracted text. SHA-256: `e1e1999a874d53434c5d07a529358cd741eb8c058f8feddca6d3606b15a049a0`.
+- 2019-06-25: the archived official release excludes Five Core Electronics (FIVECORE) from NIFTY SME EMERGE effective 2019-06-25; no flagship NIFTY 50 membership event appears. SHA-256: `3f7e2b373eb5954920eb0a77e5b48668101ea405e73c478d265c125dc02fb7ec`.
+- 2019-06-25: the archived official release excludes four and includes five State Development Loan securities in NIFTY 10 Year SDL effective 2019-06-26; no flagship NIFTY 50 membership event appears. SHA-256: `8352de178607fee89b2999c4873ffeff884469abbf6c57cc8e69cc059c173849`.
+- Updated annual inventory, AI-only scope register, manual queue, regression cases and this remediation log. The hashes are carried forward from the archive inventory and checked by regression tests against the repository PDF bytes. Human sign-off remains pending; queue decisions and verified membership fields remain untouched.
+
 ### Additional notice screen — 2019-06-13 (AI-only; human sign-off pending)
 
 - Full-text screened the archived official 11-page NSE Indices PDF dated 2019-06-13. It announces changes effective 2019-06-28 across NIFTY 500, NIFTY Midcap 150, NIFTY Smallcap 250, NIFTY LargeMidcap 250, NIFTY MidSmallcap 400, NIFTY Midcap 50, NIFTY Infrastructure and strategy indices. The document contains no flagship NIFTY 50 constituent section or membership event.
