@@ -68,7 +68,7 @@ def normalize_nse_actions(source_path: Path, source_url: str) -> pd.DataFrame:
         # dates through dayfirst=True: pandas can silently reinterpret
         # 2025-10-01 as 2025-01-10.
         raw_dates = events[name].astype("string").str.strip()
-        iso_mask = raw_dates.str.match(r"^\\d{4}-\\d{2}-\\d{2}$", na=False)
+        iso_mask = raw_dates.str.match(r"^\d{4}-\d{2}-\d{2}$", na=False)
         parsed_dates = pd.Series(pd.NaT, index=events.index, dtype="datetime64[ns]")
         parsed_dates.loc[iso_mask] = pd.to_datetime(
             raw_dates.loc[iso_mask], format="%Y-%m-%d", errors="coerce"
