@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 REQUIRED_COLUMNS = {
     "alias_id", "alias_symbol", "official_symbol", "security_id",
     "relation_type", "valid_from", "valid_to", "source_url",
-    "source_document_path", "source_sha256", "verification_status",
+    "source_document_path", "source_sha256", "verification_status", "reviewer", "reviewed_at",
 }
 RELATIONS = {
     "TICKER_RENAME_SAME_SECURITY", "VENDOR_ALIAS", "SEPARATE_SECURITY",
@@ -92,6 +92,13 @@ def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dic
         else:
             if not row.get("security_id", "").strip():
                 errors.append(f"{label}: VERIFIED mapping lacks stable security_id")
+            if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
+                errors.append(f"{label}: VERIFIED mapping lacks independent reviewer sign-off")
+            else:
+                try:
+                    date.fromisoformat(row["reviewed_at"].strip())
+                except ValueError:
+                    errors.append(f"{label}: reviewed_at must be an ISO calendar date")
             url = row.get("source_url", "").strip()
             parsed = urlparse(url)
             if parsed.scheme != "https" or not parsed.netloc:
