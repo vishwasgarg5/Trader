@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
@@ -12,14 +13,32 @@ REQUIRED_COLUMNS = {
     "relation_type", "valid_from", "valid_to", "source_url",
     "source_document_path", "source_sha256", "verification_status", "reviewer", "reviewed_at",
 }
-RELATIONS = {
-    "TICKER_RENAME_SAME_SECURITY", "VENDOR_ALIAS", "SEPARATE_SECURITY",
-}
+RELATIONS = {"TICKER_RENAME_SAME_SECURITY", "VENDOR_ALIAS", "SEPARATE_SECURITY"}
 STATUSES = {"UNVERIFIED", "SAMPLE_ONLY", "VERIFIED"}
+ISIN_PATTERN = re.compile(r"^[A-Z]{2}[A-Z0-9]{9}[0-9]$")
+
+
+def is_valid_isin(value: str) -> bool:
+    """Validate ISIN shape and ISO 6166 Luhn check digit."""
+    isin = str(value or "").strip().upper()
+    if not ISIN_PATTERN.fullmatch(isin):
+        return False
+    expanded = "".join(str(ord(char) - 55) if char.isalpha() else char for char in isin)
+    total = 0
+    double = False
+    for char in reversed(expanded):
+        digit = int(char)
+        if double:
+            digit *= 2
+            if digit > 9:
+                digit -= 9
+        total += digit
+        double = not double
+    return total % 10 == 0
 
 
 def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dict:
-    """Validate alias semantics, effective dates, and archived source integrity.
+    """Validate alias semantics, effective dates, ISIN identity and source integrity.
 
     A valid ledger is necessary but not sufficient to prove vendor price-series
     continuity; independent security-master and market-data reconciliation is
@@ -55,6 +74,7 @@ def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dic
         relation = row.get("relation_type", "").strip()
         status = row.get("verification_status", "").strip()
         label = alias_id or "<blank alias_id>"
+        security_id = row.get("security_id", "").strip().upper()
 
         if not alias_id or alias_id in seen_ids:
             errors.append(f"{label}: blank or duplicate alias_id")
@@ -69,6 +89,8 @@ def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dic
             errors.append(f"{label}: alias and official symbols must differ for {relation}")
         if relation == "SEPARATE_SECURITY" and alias != official:
             errors.append(f"{label}: SEPARATE_SECURITY must retain its own symbol, not map to another security")
+        if security_id and not is_valid_isin(security_id):
+            errors.append(f"{label}: security_id must be a valid ISIN (shape and check digit)")
 
         try:
             start = date.fromisoformat(row.get("valid_from", "").strip())
@@ -90,7 +112,7 @@ def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dic
         if status != "VERIFIED":
             errors.append(f"{label}: identity mapping is not VERIFIED")
         else:
-            if not row.get("security_id", "").strip():
+            if not security_id:
                 errors.append(f"{label}: VERIFIED mapping lacks stable security_id")
             if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
                 errors.append(f"{label}: VERIFIED mapping lacks independent reviewer sign-off")
@@ -133,9 +155,7 @@ def audit_security_aliases(path: Path, evidence_root: Path | None = None) -> dic
                 errors.append(f"{label}: overlapping open-ended alias interval for {alias}")
             elif previous_end is not None and start < previous_end:
                 if official != previous_official:
-                    errors.append(
-                        f"{label}: overlapping alias interval maps {alias} to multiple official symbols"
-                    )
+                    errors.append(f"{label}: overlapping alias interval maps {alias} to multiple official symbols")
                 else:
                     errors.append(f"{label}: overlapping duplicate alias interval for {alias}")
             if previous_end is None or end is None or end > previous_end:
