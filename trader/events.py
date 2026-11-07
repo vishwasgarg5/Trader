@@ -74,7 +74,7 @@ def normalize_nse_actions(source_path: Path, source_url: str) -> pd.DataFrame:
             raw_dates.loc[iso_mask], format="%Y-%m-%d", errors="coerce"
         )
         parsed_dates.loc[~iso_mask] = pd.to_datetime(
-            raw_dates.loc[~iso_mask], errors="coerce", dayfirst=True
+            raw_dates.loc[~iso_mask], format="mixed", errors="coerce", dayfirst=True
         )
         events[name] = parsed_dates.dt.normalize()
     events["value"] = pd.to_numeric(
