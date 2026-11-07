@@ -1,0 +1,42 @@
+name: AMC archive discovery only
+
+on:
+  workflow_dispatch:
+    inputs:
+      amc:
+        description: "AMC archive to inspect (no downloads)"
+        required: true
+        type: choice
+        options:
+          - navi
+          - aditya-birla-sun-life
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install browser automation
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Inspect official archive page only (never download)
+        run: python scripts/discover_amc_archive_only.py "${{ inputs.amc }}"
+      - name: Preserve discovery record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amc-discovery-only-${{ inputs.amc }}-${{ github.run_id }}
+          path: discovery-output/
+          if-no-files-found: error
+          retention-days: 90
