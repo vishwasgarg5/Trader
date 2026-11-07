@@ -73,6 +73,11 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
         },
     }
 
+        "NSE-ARCHIVE-2019-06-28-b9d3352bec90": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-28-b9d3352bec90.txt",
+            "required_text": ("NIFTY100 Alpha 30", "30 companies selected from its parent NIFTY 100 index", "quarterly basis"),
+        },
+
     for notice_id, case in cases.items():
         scope_row = scope[notice_id]
         inventory_row = inventory[notice_id]

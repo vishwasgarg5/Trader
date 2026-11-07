@@ -230,3 +230,11 @@ Acceptance criteria:
 - Archived PDF SHA-256: `b05a59c604e1c29cfa00931c71d6ffd9fbe201f0be60b78235eb6f9635447338`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-13-8b59c9ce840e.txt`.
 - Normalized the annual inventory row to `NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE` / `SCREENED_NO_NIFTY50_CHANGE`, updated the manual review queue evidence note, and added a regression case that checks the archived PDF hash and extracted text. The scope register remains AI-reviewed pending human sign-off; manual queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified event fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs13062019.pdf
+
+
+### Additional notice screen — 2019-06-28 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official NSE Indices press release dated 2019-06-28. It announces launch of NIFTY100 Alpha 30, a strategy index comprising 30 companies selected from its NIFTY 100 parent using Jensen's alpha; it is a new index-product announcement, not a flagship NIFTY 50 constituent-change notice.
+- Archived PDF SHA-256: `9e88e10ecd77ccda7422650857f5d9529cc21efa177d37be7781b96828158297`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-28-b9d3352bec90.txt`.
+- Updated the annual notice inventory, AI-only scope register, manual review queue, and regression test. Classification remains AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs28062019.pdf
