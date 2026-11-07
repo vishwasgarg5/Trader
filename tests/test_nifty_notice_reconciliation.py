@@ -90,3 +90,26 @@ def test_reconcile_keeps_inventory_only_as_candidates_not_false_missing_notices(
     assert report["inventory_only_rows"] == 1
     assert report["register_rows_without_inventory_match"] == 0
     assert report["coverage_complete"] is False
+
+
+def test_ragged_csv_rows_are_reported_instead_of_crashing(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    register = tmp_path / "register.csv"
+    report_path = tmp_path / "report.json"
+    details_path = tmp_path / "details.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,source_url,source_document_path,source_sha256,review_status\n"
+        "row-1,2024-01-01,https://example.test/a.pdf,,,DISCOVERED_UNREVIEWED,unexpected-extra\n",
+        encoding="utf-8",
+    )
+    write_csv(register, [
+        "notice_id", "publication_date", "source_url", "source_document_path",
+        "source_sha256", "review_status",
+    ], [])
+    report = reconcile(inventory, register, None, report_path, details_path, tmp_path)
+    assert any(
+        issue["issue_type"] == "CSV_EXTRA_COLUMNS"
+        and issue["notice_id"] == "row-1"
+        for issue in report["issues"]
+    )
+    assert report["coverage_complete"] is False
