@@ -1,0 +1,146 @@
+name: Model Status
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 16:00 IST on NSE trading weekdays (after the cash-market close).
+    - cron: "30 10 * * 1-5"
+  push:
+    branches: [main]
+    paths:
+      - "trader/**"
+      - "tests/**"
+      - "config/**"
+      - "data/reports/**"
+      - "data/signals/**"
+      - "data/logs/**"
+      - "models/**"
+      - "requirements.txt"
+      - ".github/workflows/model-status.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: trader-model-status
+  cancel-in-progress: true
+
+jobs:
+  model-status:
+    name: Test and report model status
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run test suite
+        run: python -m pytest -q
+
+      - name: Validate saved model, metrics and safety gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import joblib
+          import math
+
+          model_path = Path("models/current_model.joblib")
+          metrics_path = Path("data/reports/metrics.json")
+          gate_path = Path("config/promotion_gate.json")
+
+          if not model_path.is_file() or model_path.stat().st_size == 0:
+              raise SystemExit("Saved model is missing or empty")
+          model = joblib.load(model_path)
+          if not callable(getattr(model, "predict", None)):
+              raise SystemExit("Saved model does not expose predict()")
+
+          metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+          for key in ("accuracy", "roc_auc", "brier_score", "baseline_accuracy_majority"):
+              value = metrics.get(key)
+              if not isinstance(value, (int, float)) or not math.isfinite(value):
+                  raise SystemExit(f"Missing or invalid model metric: {key}")
+
+          gate = json.loads(gate_path.read_text(encoding="utf-8"))
+          if gate.get("promotion_eligible") is not False:
+              raise SystemExit("Safety check failed: promotion_eligible must remain false")
+          if gate.get("live_execution_enabled") is not False:
+              raise SystemExit("Safety check failed: live_execution_enabled must remain false")
+
+          print(f"Model artifact: loadable ({model_path.stat().st_size} bytes)")
+          print(f"Accuracy: {metrics['accuracy']:.4f}")
+          print(f"ROC AUC: {metrics['roc_auc']:.4f}")
+          print(f"Brier score: {metrics['brier_score']:.4f}")
+          print(f"Majority baseline accuracy: {metrics['baseline_accuracy_majority']:.4f}")
+          print(f"Promotion gate: {gate.get('status', 'UNKNOWN')}")
+          print("Live execution: disabled")
+          PY
+
+      - name: Generate diagnostic model status
+        run: python -m trader.monitoring --output "${{ runner.temp }}/monitoring.json"
+
+      - name: Add status to workflow summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report_path = Path(os.environ["RUNNER_TEMP"]) / "monitoring.json"
+          summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          if not report_path.is_file():
+              with summary_path.open("a", encoding="utf-8") as out:
+                  out.write("## Model status\\n\\nMonitoring report was not generated. Check earlier failed steps.\\n")
+              raise SystemExit(0)
+
+          report = json.loads(report_path.read_text(encoding="utf-8"))
+          lines = [
+              "## Model status",
+              "",
+              f"**Status: {report.get('status', 'UNKNOWN')}**",
+              "",
+              f"- Generated (UTC): {report.get('generated_at_utc', 'unknown')}",
+              f"- Code revision: {report.get('code_revision', 'unknown')}",
+              f"- Errors: {len(report.get('errors', []))}",
+              f"- Warnings: {len(report.get('warnings', []))}",
+              "- Promotion eligible: false",
+              "- Live execution enabled: false",
+              "",
+              "### Warnings",
+          ]
+          lines.extend([f"- {item}" for item in report.get("warnings", [])] or ["- None"])
+          lines.extend(["", "### Errors"])
+          lines.extend([f"- {item}" for item in report.get("errors", [])] or ["- None"])
+          with summary_path.open("a", encoding="utf-8") as out:
+              out.write("\\n".join(lines) + "\\n")
+          PY
+
+      - name: Upload model status reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trader-model-status-${{ github.run_id }}
+          path: |
+            data/reports/data_integrity.json
+            data/reports/metrics.json
+            data/signals/latest_signals.csv
+            data/logs/predictions.csv
+            ${{ runner.temp }}/monitoring.json
+          if-no-files-found: warn
+          retention-days: 30
