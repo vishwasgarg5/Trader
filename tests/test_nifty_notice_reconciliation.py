@@ -145,9 +145,9 @@ def test_2020_nifty50_acceleration_survives_later_rebalancing_deferment_chain():
         notices = {row["publication_date"]: row for row in csv.DictReader(handle)
                    if row["publication_date"] in {"2020-03-23", "2020-03-25", "2020-05-13"}}
     assert set(notices) == {"2020-03-23", "2020-03-25", "2020-05-13"}
-    assert notices["2020-03-23"]["supersession_status"] == "DEFERRED_UNTIL_FURTHER_NOTICE"
+    assert notices["2020-03-23"]["cancellation_or_deferral_status"] == "DEFERRED_UNTIL_FURTHER_NOTICE"
     assert notices["2020-03-25"]["supersedes_notice_id"] == "NSE_INDICES_PR_2020-03-23"
-    assert notices["2020-05-13"]["supersession_status"] == (
+    assert notices["2020-05-13"]["cancellation_or_deferral_status"] == (
         "EXCEPT_NIFTY50_AND_NIFTY_BANK_ALREADY_REBALANCED_2020-03-19"
     )
     assert notices["2020-05-13"]["observed_nifty50_effect"] == "NIFTY50_CONFIRMATION"
