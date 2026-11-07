@@ -244,3 +244,10 @@ Acceptance criteria:
 - Archived PDF SHA-256: `2e139c45d4e8336e754caeab6b65def574b7d3266b9aa5245bade2719c8c28bf`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-02-3d22aa40d54f.txt`.
 - Updated the annual notice inventory, AI-only scope register, manual review queue, and regression test. Classification remains AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs02072019.pdf
+
+### Additional notice screen — 2019-07-08 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official NSE Indices release dated 2019-07-08. It revises NIFTY CPSE eligibility and excludes REC Limited (RECLTD), with no inclusion; it also excludes InfoBeans Technologies (INFOBEAN) and Sanginita Chemicals (SANGINITA) from NIFTY SME EMERGE, with no inclusions. Changes are effective 2019-07-15 (close of 2019-07-12). Neither index is the flagship NIFTY 50; the notice contains no flagship NIFTY 50 constituent section or membership event.
+- Archived PDF SHA-256 carried from the annual archive inventory: `b7b869c46c3b526f790aa7fcd7147745bbe30740860dc909d3d7d3a2cd0302ec`. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-08-cb472e61d83b.txt`.
+- Updated annual inventory, AI-only scope register, manual review queue and regression test. Scope classification is AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs08072019.pdf
