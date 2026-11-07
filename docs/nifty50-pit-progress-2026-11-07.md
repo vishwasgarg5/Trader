@@ -71,3 +71,10 @@ The pilot workflow was expanded to exercise:
 The index reconstruction diagnostic cannot run on historical data until verified membership, security identity, daily prices, free-float shares/IWF, divisor and official index-level inputs are supplied. Its tolerance also needs explicit protocol registration before real-data comparison.
 
 **Overall roadmap remains 1/13 complete; Steps 2–5 remain IN_PROGRESS, with their safe engineering components implemented and their evidence gates open.** Steps 6–13 remain not started. Protocol remains `DRAFT_NOT_FROZEN`; holdout remains locked and unevaluated; evaluation, promotion, paper trading and live execution remain unauthorized.
+
+
+### Latest engineering verification
+
+- Model Status run #42384466749 on commit `c55d0557c849bf1aef772ec72b47d1dee5fdeee4` completed successfully: **257 tests passed**; saved-model and safety-gate validation also passed.
+- The earlier syntax issue in the reconstruction diagnostic was caught by CI, corrected, and included in the successful 257-test run.
+- The dedicated Nifty 50 pilot workflow last confirmed green is #42383794288 on the notice-triage commit. The expanded workflow definition now includes membership/identity/corporate-action and reconstruction tests; the latest full-suite run is the verification evidence for the newly added reconstruction code.
