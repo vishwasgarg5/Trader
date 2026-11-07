@@ -7,8 +7,9 @@
 
 ## Latest verified checkpoint — 2026-11-07
 
-**Current main head:** `057010e5223dca69215bbb8d53d4e3acae1d1c53` (daily model/report refresh).  
-**Research-data change:** `13a0dac571ab5c75fd91622fb0536999d56f7a65` — full-text scope screening of two archived official notices.
+**Latest model/evidence refresh:** `057010e5223dca69215bbb8d53d4e3acae1d1c53` (daily model/report refresh).  
+**Research-data change:** `13a0dac571ab5c75fd91622fb0536999d56f7a65` — full-text scope screening of two archived official notices.  
+**Progress-register updates:** `d0a17dee8651ded8b6ce6a9e94799e53005cdb08` and `cccf649ce703a43a5584e68d2186f283a300cc88`.
 
 ### Completed this run
 
