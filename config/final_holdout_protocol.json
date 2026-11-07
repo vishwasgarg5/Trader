@@ -4,10 +4,10 @@
   "purpose": "Reserve a final chronological holdout for one confirmatory evaluation after research code, features, costs, and acceptance criteria are frozen.",
   "holdout_definition": {
     "rule": "If the frozen, independently verified clean development data span is at least 7 complete years, reserve the final 24 complete calendar months; if the span is at least 5 but under 7 complete years, reserve the final 18 complete calendar months. If fewer than 5 complete clean years are verified, the pilot is INCONCLUSIVE and no holdout evaluation is authorized.",
-    "period_selection": "Determine the clean span only from verified, common-date OHLCV, stock total-return, Nifty 50 TRI, security-identity, corporate-action, and point-in-time membership coverage. The exact holdout start/end dates must be selected and recorded from the frozen snapshot before any holdout labels, returns, metrics, or plots are accessed.",
-    "selection_time": "Resolve exact dates once the data snapshot is frozen; record them in the experiment artifact before any holdout metrics are computed.",
+    "period_selection": "Determine the clean span exclusively from verified data availability and common-date coverage across OHLCV, stock total-return, Nifty 50 TRI, security identity, corporate actions, and point-in-time membership. Model results, labels, predictions, metrics, profitability, and performance plots must not influence the span or holdout length. Select and record exact holdout dates from the frozen snapshot before accessing any holdout labels, returns, metrics, or plots.",
+    "selection_time": "Resolve exact dates once the qualifying data snapshot is frozen; record the dates and the data-availability calculation in the experiment artifact before any holdout outcomes are accessed.",
     "access": "Do not use holdout labels, returns, metrics, or plots for feature selection, hyperparameter tuning, model selection, debugging, or data repair. One confirmatory evaluation only, after code, features, costs, acceptance criteria, and independent review are frozen.",
-    "current_status": "No verified clean data span or exact holdout dates currently exist; holdout access remains unauthorized."
+    "current_status": "INCONCLUSIVE: 0 of 7 annual anchor years currently have verified coverage and there is no verified common clean development span. No holdout dates exist and holdout access is unauthorized."
   },
   "pre_registered_acceptance_criteria": {
     "point_in_time_universe": "Independently sourced, timestamped NSE listing/delisting/suspension lifecycle and eligible ordinary-equity security identity, including inactive/delisted securities and effective dates.",
