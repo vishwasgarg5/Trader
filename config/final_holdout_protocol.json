@@ -3,9 +3,11 @@
   "status": "LOCKED_NOT_EVALUATED",
   "purpose": "Reserve a final chronological holdout for one confirmatory evaluation after research code, features, costs, and acceptance criteria are frozen.",
   "holdout_definition": {
-    "rule": "Last 12 complete calendar months of the available price history, ending at the last complete common trading date.",
+    "rule": "If the frozen, independently verified clean development data span is at least 7 complete years, reserve the final 24 complete calendar months; if the span is at least 5 but under 7 complete years, reserve the final 18 complete calendar months. If fewer than 5 complete clean years are verified, the pilot is INCONCLUSIVE and no holdout evaluation is authorized.",
+    "period_selection": "Determine the clean span only from verified, common-date OHLCV, stock total-return, Nifty 50 TRI, security-identity, corporate-action, and point-in-time membership coverage. The exact holdout start/end dates must be selected and recorded from the frozen snapshot before any holdout labels, returns, metrics, or plots are accessed.",
     "selection_time": "Resolve exact dates once the data snapshot is frozen; record them in the experiment artifact before any holdout metrics are computed.",
-    "access": "Do not use holdout labels, returns, metrics, or plots for feature selection, hyperparameter tuning, model selection, or debugging."
+    "access": "Do not use holdout labels, returns, metrics, or plots for feature selection, hyperparameter tuning, model selection, debugging, or data repair. One confirmatory evaluation only, after code, features, costs, acceptance criteria, and independent review are frozen.",
+    "current_status": "No verified clean data span or exact holdout dates currently exist; holdout access remains unauthorized."
   },
   "pre_registered_acceptance_criteria": {
     "point_in_time_universe": "Independently sourced, timestamped NSE listing/delisting/suspension lifecycle and eligible ordinary-equity security identity, including inactive/delisted securities and effective dates.",
