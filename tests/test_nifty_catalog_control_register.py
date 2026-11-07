@@ -118,3 +118,18 @@ def test_2019_01_21_dena_vijaya_replacement_notice_is_not_a_flagship_nifty50_tra
     assert "Nifty PSU Bank" in row["notes"]
     assert "No flagship Nifty 50 constituent section or change" in row["notes"]
 
+def test_2019_04_08_excel_crop_replacement_notice_is_not_a_flagship_nifty50_transition():
+    with REGISTER.open(newline="", encoding="utf-8") as handle:
+        rows = {row["notice_id"]: row for row in csv.DictReader(handle)}
+    row = rows["NSE_INDICES_PR_2019-04-08_ind_prs08042019_pdf"]
+    assert row["notice_type"] == "MULTI_INDEX_REPLACEMENT_NO_NIFTY50_CHANGE"
+    assert row["publication_date"] == "2019-04-08"
+    assert row["effective_date"] == "2019-04-15"
+    assert row["nifty50_scope_result"] == "NO_CHANGE"
+    assert row["review_status"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
+    assert row["source_document_path"].endswith("NOTICE-NSE-ARCHIVE-2019-04-08-02ecb67eead3.pdf")
+    assert row["source_sha256"] == "a4ff43189ea06cc6dbf53f3c5ac615b1b0c030fe0678c6fe38e991a5a05716af"
+    assert "Nifty 500, Nifty Smallcap 250 and Nifty MidSmallcap 400 only" in row["notes"]
+    assert row["affected_symbols"] == "EXCELCROP;SUNCLAYLTD"
+    assert "No flagship Nifty 50 constituent section or change" in row["notes"]
+
