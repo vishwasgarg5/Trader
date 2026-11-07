@@ -1,7 +1,7 @@
 publication_date,title,source_url,review_candidate,scope_status,first_discovered_at_utc
 2018-01-02,"Change in NIFTY 10 Year SDL Index w.e.f. January 03, 2018",https://www.niftyindices.com/Press_Release/ind_prs02012018.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2018-01-05,"Revision of criteria, Renaming of NIFTY Midcap & Smallcap indices and Cessation of indices",https://www.niftyindices.com/Press_Release/ind_prs05012018.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2018-01-08,"Change in Indices w.e.f. February 05, 2018",https://www.niftyindices.com/Press_Release/ind_prs08012018.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
+2018-01-08,"Change in Indices w.e.f. February 05, 2018",https://www.niftyindices.com/Press_Release/ind_prs08012018.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
 2018-01-09,"Replacements in Fixed income Indices w.e.f. January 16, 2018",https://www.niftyindices.com/Press_Release/ind_prs09012018.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2018-01-09,"Change in NIFTY 10 Year SDL Index w.e.f. January 10, 2018",https://www.niftyindices.com/Press_Release/ind_prs09012018_1.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2018-01-16,"Change in NIFTY 10 Year SDL Index w.e.f. January 17, 2018",https://www.niftyindices.com/Press_Release/ind_prs16012018.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
@@ -184,7 +184,7 @@ publication_date,title,source_url,review_candidate,scope_status,first_discovered
 2019-12-10,"Change in NIFTY 10 Year SDL Index w.e.f. December 11, 2019",https://www.niftyindices.com/Press_Release/ind_prs10122019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-12-16,Replacements and revision in Index criteria,https://www.niftyindices.com/Press_Release/ind_prs16122019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2019-12-17,"Change in NIFTY 10 Year SDL Index w.e.f. December 18, 2019",https://www.niftyindices.com/Press_Release/ind_prs17122019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-12-18,"Replacement in indices w.e.f. December 26, 2019",https://www.niftyindices.com/Press_Release/ind_prs18122019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
+2019-12-18,"Replacement in indices w.e.f. December 26, 2019",https://www.niftyindices.com/Press_Release/ind_prs18122019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
 2019-12-19,"Replacement in indices w.e.f. December 27, 2019",https://www.niftyindices.com/Press_Release/ind_prs19122019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2019-12-23,Change in NIFTY 10 Year SDL Index w e f December 24 2019,https://www.niftyindices.com/Press_Release/ind_prs23122019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-12-24,"Change in the Fixed Income Indices w.e.f. January 01, 2020",https://www.niftyindices.com/Press_Release/ind_prs24122019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
