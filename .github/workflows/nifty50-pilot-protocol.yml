@@ -10,6 +10,14 @@ on:
       - "tests/test_nifty50_pilot_protocol.py"
       - "trader/nifty50_pit_readiness.py"
       - "tests/test_nifty50_pit_readiness.py"
+      - "trader/nifty50_price_data_readiness.py"
+      - "tests/test_nifty50_price_data_readiness.py"
+      - "trader/security_aliases.py"
+      - "trader/corporate_actions.py"
+      - "data/reference/nifty50_pilot_ohlcv.csv"
+      - "data/reference/nifty50_tri.csv"
+      - "data/reference/security_symbol_aliases.csv"
+      - "data/reference/corporate_actions.csv"
       - "trader/membership_evidence.py"
       - "data/reference/nifty50_*.csv"
       - ".github/workflows/nifty50-pilot-protocol.yml"
@@ -35,7 +43,7 @@ jobs:
           python -m json.tool config/nifty50_pilot_protocol.json > /dev/null
           python -m json.tool config/schemas/nifty50_pilot_protocol.schema.json > /dev/null
       - name: Install test runner and schema validator
-        run: python -m pip install --disable-pip-version-check pytest jsonschema
+        run: python -m pip install --disable-pip-version-check pytest jsonschema pandas numpy
       - name: Validate protocol against JSON Schema
         run: |
           python - <<'PY'
@@ -62,6 +70,23 @@ jobs:
             echo "PIT membership evidence is structurally complete; independent review remains separately required."
           elif [ "$status" -eq 1 ]; then
             echo "PIT membership correctly remains blocked by recorded evidence gaps."
+          else
+            exit "$status"
+          fi
+
+      - name: Run price and benchmark data contract tests
+        run: python -m pytest -q tests/test_nifty50_price_data_readiness.py
+      - name: Run price and benchmark readiness audit (expected fail-closed until source evidence is complete)
+        run: |
+          set +e
+          python -m trader.nifty50_price_data_readiness > "${{ runner.temp }}/nifty50-price-data-readiness.json"
+          status=$?
+          set -e
+          cat "${{ runner.temp }}/nifty50-price-data-readiness.json"
+          if [ "$status" -eq 0 ]; then
+            echo "Price and TRI data gates are structurally ready; independent source validation remains separately required."
+          elif [ "$status" -eq 1 ]; then
+            echo "Price and TRI research correctly remains blocked by missing or unverified evidence."
           else
             exit "$status"
           fi
