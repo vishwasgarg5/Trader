@@ -62,6 +62,7 @@ jobs:
           path: |
             data/reports/nifty50_notice_triage.json
             data/reference/nifty50_candidate_events.csv
+            data/reference/nifty50_notice_review_queue.csv
             data/reports/data_integrity.json
             data/reports/monitoring.json
           if-no-files-found: ignore
@@ -82,6 +83,7 @@ jobs:
               echo "main advanced; rebuilding generated outputs on latest main (attempt ${attempt})"
               git reset --hard origin/main
               python -m trader.pipeline
+              python -m trader.nifty_notice_triage
             fi
 
             git add data models
