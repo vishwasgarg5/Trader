@@ -251,3 +251,15 @@ Acceptance criteria:
 - Archived PDF SHA-256 carried from the annual archive inventory: `b7b869c46c3b526f790aa7fcd7147745bbe30740860dc909d3d7d3a2cd0302ec`. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-08-cb472e61d83b.txt`.
 - Updated annual inventory, AI-only scope register, manual review queue and regression test. Scope classification is AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs08072019.pdf
+
+### Additional notice screens — 2019-07-09 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official NSE Indices release dated 2019-07-09. Full-text screen: one Bihar State Development Loan security (IN1320180079) excluded and three securities (Bihar IN1320190011, Kerala IN2020190103, Madhya Pradesh IN2120190037) included in NIFTY 10 Year SDL fixed-income index effective 2019-07-10. No flagship NIFTY 50 equity constituent section or membership event.
+- Archived PDF SHA-256 carried from the annual archive inventory: `1cc36311db58844e82a51e1da52260e8210504bdd5c8af872d396be2d5038051`. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-09-c7702a0846f9.txt`.
+- Scope classification is AI-reviewed pending independent human sign-off; manual queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs09072019_1.pdf
+
+- Full-text screened the archived official NSE Indices release dated 2019-07-09. Full-text screen: Sirca Paints India Ltd. (SIRCA) excluded from NIFTY SME EMERGE, with no inclusion; effective 2019-07-16 (close of 2019-07-15). No flagship NIFTY 50 equity constituent section or membership event.
+- Archived PDF SHA-256 carried from the annual archive inventory: `e9fa07870d1ae9b0d15b527578694a0082f7ef25cf16145b21aefb7bdd7891fa`. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-09-ff433ab59d76.txt`.
+- Scope classification is AI-reviewed pending independent human sign-off; manual queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs09072019.pdf

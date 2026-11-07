@@ -79,6 +79,14 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-08-cb472e61d83b.txt",
             "required_text": ("NIFTY CPSE", "REC Limited", "RECLTD", "NIFTY SME EMERGE", "INFOBEAN", "SANGINITA", "July 15, 2019"),
         },
+        "NSE-ARCHIVE-2019-07-09-c7702a0846f9": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-09-c7702a0846f9.txt",
+            "required_text": ("NIFTY 10 Year SDL Index", "IN1320180079 Bihar", "IN1320190011 Bihar", "IN2020190103 Kerala", "IN2120190037 Madhya Pradesh"),
+        },
+        "NSE-ARCHIVE-2019-07-09-ff433ab59d76": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-09-ff433ab59d76.txt",
+            "required_text": ("NIFTY SME EMERGE", "Sirca Paints India Ltd.", "SIRCA", "No inclusion is being made", "July 16, 2019"),
+        },
         "NSE-ARCHIVE-2019-07-02-3d22aa40d54f": {
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-02-3d22aa40d54f.txt",
             "required_text": ("NIFTY 10 Year SDL Index", "IN1520180341 Gujarat", "IN3420180207 West Bengal", "IN1820190057 Jammu and Kashmir", "IN3120190043 Tamil Nadu"),
