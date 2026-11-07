@@ -67,6 +67,7 @@ def test_reconcile_matches_by_url_and_flags_register_only_and_missing_archive(tm
     assert any(x["issue_type"] == "LOCATED_BUT_NOT_ARCHIVED" for x in report["issues"])
     assert report["coverage_complete"] is False
     assert report["membership_written"] is False
+    assert f"{report['inventory_rows']}-row annual inventory" in report["policy"]
 
 
 def test_reconcile_keeps_inventory_only_as_candidates_not_false_missing_notices(tmp_path):
