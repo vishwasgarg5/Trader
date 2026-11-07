@@ -108,8 +108,8 @@ def test_ltim_symbol_history_uses_official_2026_rename_not_a_2023_vendor_alias()
     assert row["alias_symbol"] == "LTIM"
     assert row["official_symbol"] == "LTM"
     assert row["relation_type"] == "TICKER_RENAME_SAME_SECURITY"
-    assert row["valid_from"] == "2023-07-13"
-    assert row["valid_to"] == "2026-02-27"
+    assert row["valid_from"] == "2026-02-27"
+    assert row["valid_to"] == ""
     assert row["security_id"] == "INE214T01019"
     assert row["source_url"].endswith("/CML72948.pdf")
     assert row["verification_status"] == "UNVERIFIED"
@@ -142,3 +142,24 @@ def test_verified_alias_rejects_invalid_review_date(tmp_path):
     report = audit_security_aliases(path)
     assert report["ready"] is False
     assert any("reviewed_at must be an ISO calendar date" in error for error in report["errors"])
+
+
+
+def test_tata_motors_rename_and_tmcvl_listing_keep_distinct_security_ids():
+    root = Path(__file__).resolve().parents[1]
+    with (root / "data" / "reference" / "security_symbol_aliases.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = list(csv.DictReader(handle))
+    rename = next(item for item in rows if item["alias_id"] == "ALIAS-TATAMOTORS-TMPV")
+    separate = next(item for item in rows if item["alias_id"] == "ENTITY-TMCV-SEPARATE")
+    assert (rename["alias_symbol"], rename["official_symbol"]) == ("TATAMOTORS", "TMPV")
+    assert rename["security_id"] == "INE155A01022"
+    assert rename["valid_from"] == "2025-10-24"
+    assert rename["verification_status"] == "UNVERIFIED"
+    assert separate["alias_symbol"] == separate["official_symbol"] == "TMCV"
+    assert separate["relation_type"] == "SEPARATE_SECURITY"
+    assert separate["security_id"] == "INE1TAE01010"
+    assert separate["valid_from"] == "2025-11-12"
+    assert separate["security_id"] != rename["security_id"]
+    assert separate["verification_status"] == "UNVERIFIED"
