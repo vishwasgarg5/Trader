@@ -103,3 +103,18 @@ def test_2018_12_14_multi_index_replacement_notice_is_not_a_flagship_nifty50_tra
     assert "Nifty50 Value 20" in row["notes"]
     assert "No flagship Nifty 50 constituent section or change" in row["notes"]
 
+
+def test_2019_01_21_dena_vijaya_replacement_notice_is_not_a_flagship_nifty50_transition():
+    with REGISTER.open(newline="", encoding="utf-8") as handle:
+        rows = {row["notice_id"]: row for row in csv.DictReader(handle)}
+    row = rows["NSE_INDICES_PR_2019-01-21_ind_prs21012019_pdf"]
+    assert row["notice_type"] == "MULTI_INDEX_REPLACEMENT_NO_NIFTY50_CHANGE"
+    assert row["publication_date"] == "2019-01-21"
+    assert row["effective_date"] == "2019-01-28"
+    assert row["nifty50_scope_result"] == "NO_CHANGE"
+    assert row["review_status"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
+    assert row["source_document_path"].endswith("NOTICE-NSE-ARCHIVE-2019-01-21-57963c247a09.pdf")
+    assert row["source_sha256"] == "ff617ab210bc5a1519e2432ebc03a0737b2a103245b2cab0767442be7edd323d"
+    assert "Nifty PSU Bank" in row["notes"]
+    assert "No flagship Nifty 50 constituent section or change" in row["notes"]
+
