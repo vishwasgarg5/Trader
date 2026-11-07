@@ -23,6 +23,8 @@ Last reviewed: 2026-11-07. This plan tracks the live `main` branch. P1/P2 engine
 
 - The 2026-11-07 preflight reports 49 configured symbols with 741 OHLCV rows per symbol through 2026-11-05; the configured-price validation passes. This is a static configured panel, not the historical Nifty 50 universe.
 - PIT membership evidence is absent (0 rows). The corporate-action audit has two unresolved adjustment-factor rows; adjusted-price lineage remains unverified.
+- Cross-checking the 17 unique `REMOVE` symbols in the sample transition register against the current 49-symbol configured panel finds 14 not represented in that panel. This is a configuration-coverage gap, not proof that no vendor history exists; historical price coverage for those removed constituents remains unvalidated.
+- The symbol-alias ledger still has three `UNVERIFIED` entries (`LTM`→`LTIM`, `TATAMOTORS`→`TMPV`, and separate `TMCV` identity); `symbol_identity_ledger.csv` remains empty. Vendor-series continuity and original source-document archival are not complete.
 - Latest daily chronological holdout report: 28,567 train rows, 7,252 test rows (2026-03-24 through 2026-10-29), five-session purge; accuracy 0.6223 versus majority baseline 0.6338, ROC AUC 0.5738, before costs. This diagnostic does not establish a tradable edge and does not replace the pre-registered full experiment.
 - Monitoring remains `RESEARCH_HOLD`: PIT membership false, corporate-action lineage false, probability drift has only 2 of the required 40 sessions, and accuracy remains below the majority baseline. Promotion and live execution are both false.
 
