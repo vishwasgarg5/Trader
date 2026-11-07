@@ -19,11 +19,13 @@
 - Updated the annual inventory, discovery catalog, scope-review table, human review queue notes and 2018/2019 coverage notes. Both decisions are explicitly AI-only: `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; the 95-row human queue remains `PENDING_HUMAN_REVIEW`, with no reviewer or verified event fields filled.
 - Added `tests/test_nifty_unregistered_scope_review.py`. It checks the archived PDF bytes against the recorded SHA-256, the extracted-text scope evidence, and the continued human-review hold.
 
+- Full-text screened the archived 2024-10-10 NSE Indices Shariah review notice. It records 15 exclusions and 5 inclusions in Nifty500 Shariah only and explicitly says Nifty50 Shariah and Nifty Shariah 25 are unchanged; it contains no flagship Nifty 50 constituent transition. Effective 2024-10-31. Source SHA-256 from the archived inventory: `a24e99d89476f28d37954f5c818dbace7c6125d448ec050c1e0f949b6a0dd169`. Registered as AI-reviewed pending independent human sign-off, with a regression test.
+
 ### Verified evidence state
 
-- Annual notice inventory: 684 rows — 591 `DISCOVERED_UNREVIEWED`, 20 `CANDIDATE`, 73 `SCREENED_NO_NIFTY50_CHANGE`. 681 rows have archived PDF paths and hashes; three source URLs still return non-PDF responses: 2018-06-05, 2019-07-16 and 2023-03-14. Their contents remain unresolved; retain the retrieval failures and do not infer PDF contents.
+- Annual notice inventory: 684 rows — 590 `DISCOVERED_UNREVIEWED`, 20 `CANDIDATE`, 74 `SCREENED_NO_NIFTY50_CHANGE`. 681 rows have archived PDF paths and hashes; three source URLs still return non-PDF responses: 2018-06-05, 2019-07-16 and 2023-03-14. Their contents remain unresolved; retain the retrieval failures and do not infer PDF contents.
 - Archive discovery catalog: 697 rows (558 title candidates, 139 non-candidates). Fifteen catalog-only records remain outside the annual inventory after URL-level reconciliation; they are not silently counted as reviewed. Official PDF text has been inspected for three priority controls: the 2024-02-27 and 2024-08-16 notices only announce future Index Maintenance Sub-Committee review meetings, while the 2024-12-02 Strides Pharma corporate adjustment applies to Nifty Microcap 250 and Nifty Total Market only. All three controls are now registered in the curated notice register as `LOCATED_NOT_ARCHIVED`; original PDF bytes and hashes remain outstanding.
-- Curated notice register: 108 rows. Review states: 24 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW`, 81 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`, and 3 `LOCATED_NOT_ARCHIVED`. The three unarchived rows are the two 2024 meeting announcements and the 2024 Strides corporate-action control; none is counted as archived evidence.
+- Curated notice register: 109 rows. Review states: 24 `ARCHIVED_HASHED_PENDING_INDEPENDENT_REVIEW`, 82 `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`, and 3 `LOCATED_NOT_ARCHIVED`. The three unarchived rows are the two 2024 meeting announcements and the 2024 Strides corporate-action control; none is counted as archived evidence.
 - Transition register: 34 rows, all `SAMPLE_ONLY`. Special-membership ledger: 3 JIOFIN dummy/listed/removal events, all `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. The membership-interval file has zero data rows.
 - Annual coverage: all seven years (2018–2024) remain `NOT_STARTED`; every `official_notice_search_complete` flag remains false. Supersession review, authoritative snapshot reconciliation and independent sign-off are not complete.
 - Security identity: three alias/lineage rows exist, but none is verified (one explicitly `UNVERIFIED`, two lack a verification status). The two TMPV-related corporate-action rows still have blank adjustment factors and no archived original source documents.
@@ -35,6 +37,8 @@ The latest daily run generated successfully, but its reported metrics did not im
 **Promotion remains `RESEARCH_HOLD`; `promotion_eligible=false`; `live_execution_enabled=false`; the confirmatory holdout remains locked and unevaluated.**
 
 ### Workflow evidence
+
+- CI status for test commit `ccfce85861129c218c3372c396096bedde4bdce9` returned no status-check records at review time; do not treat that commit as CI-verified.
 
 - [CI run 42340279629](https://github.com/vishwasgarg5/Trader/actions/runs/42340279629) — success; unit tests (including the new scope-review test) and source reconciliation passed.
 - [Source archive run 42340279660](https://github.com/vishwasgarg5/Trader/actions/runs/42340279660) — success; archive/hash checks passed, with the three explicit non-PDF retrieval warnings above; no further archive commit was needed.
