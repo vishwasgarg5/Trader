@@ -35,6 +35,10 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
             "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-12-18-59730c1fbb54.txt",
             "required_text": ("NIFTY 500", "NIFTY Smallcap 250", "NIFTY MidSmallcap 400"),
         },
+        "NSE-ARCHIVE-2019-05-02-042b8cce9ec5": {
+            "text_path": "data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-02-042b8cce9ec5.txt",
+            "required_text": ("NIFTY 10 Year SDL Index", "IN3420180124 West Bengal", "There are no inclusion"),
+        },
     }
 
     for notice_id, case in cases.items():
