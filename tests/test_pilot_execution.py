@@ -82,10 +82,10 @@ def test_timezone_aware_liquidity_dates_are_normalized_to_nse_calendar():
     })
     # 18:30 UTC is 00:00 on the following NSE calendar date.
     result = assess_pilot_liquidity(
-        frame, as_of=pd.Timestamp("2026-01-22T00:00:00+05:30")
+        frame, as_of=pd.Timestamp("2026-01-30T00:00:00+05:30")
     )
     assert result["status"] == "PASS"
-    assert result["window_end"] == "2026-01-22"
+    assert result["window_end"] == "2026-01-30"
 
 
 def test_pilot_execution_constants_match_registered_protocol():
