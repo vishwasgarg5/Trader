@@ -173,3 +173,10 @@ Acceptance criteria:
 - Never mark a gate passed because a workflow succeeded or a file exists.
 - Update this register with evidence paths, hashes, reviewer, and test/run identifiers as work is completed.
 - Preserve `RESEARCH_HOLD`, `promotion_eligible: false`, and `live_execution_enabled: false` until every required approval is satisfied.
+
+### Additional notice screen — 2019-05-02 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official two-page NSE Indices PDF dated 2019-05-02. It announces replacements in the NIFTY 10 Year SDL fixed-income index effective 2019-05-03: seven state-development-loan securities are excluded and no inclusion is listed. The document contains no flagship NIFTY 50 constituent section or equity membership change.
+- Archived PDF SHA-256 `9a214f365f39a82cf4eca8b25ec750ab844099799fe6ca75f9da20e387861079` matches the annual inventory record.
+- Updated the annual notice inventory, unregistered-candidate scope-review table, and notice review queue. The classification is `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; queue remains `PENDING_HUMAN_REVIEW`. No reviewer identity or verified event fields were fabricated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs02052019.pdf
