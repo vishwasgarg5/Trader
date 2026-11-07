@@ -41,3 +41,15 @@ jobs:
           pip install -r requirements.txt
       - name: Run unit tests
         run: python -m pytest -q
+      - name: Reconcile NSE notice sources
+        run: python -m trader.nifty_notice_reconciliation
+      - name: Upload NSE source reconciliation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nifty50-source-reconciliation-${{ github.run_id }}
+          path: |
+            data/reports/nifty50_source_reconciliation.json
+            data/reports/nifty50_source_reconciliation.csv
+          if-no-files-found: ignore
+          retention-days: 90
