@@ -93,7 +93,7 @@ def test_missing_pdf_for_explicitly_other_index_is_not_nifty50_integrity_failure
         "https://example.test/sdl.pdf,,,DISCOVERED_UNREVIEWED\n",
         encoding="utf-8",
     )
-    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv")
+    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv", review_queue_path=tmp_path / "queue.csv")
     row = report["triage"][0]
     assert row["title_triage"] == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     assert row["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"
@@ -110,7 +110,7 @@ def test_missing_pdf_for_nifty_sdl_launch_is_out_of_scope(tmp_path):
         "https://example.test/sdl-launch.pdf,,,DISCOVERED_UNREVIEWED\n",
         encoding="utf-8",
     )
-    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv")
+    report = run(inventory, tmp_path / "report.json", tmp_path / "events.csv", review_queue_path=tmp_path / "queue.csv")
     row = report["triage"][0]
     assert row["title_triage"] == "LOW_PRIORITY_LIKELY_OTHER_INDEX"
     assert row["text_extraction_status"] == "OUT_OF_SCOPE_SOURCE_NOT_REQUIRED"
