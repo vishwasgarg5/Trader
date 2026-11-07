@@ -69,3 +69,21 @@ def test_yfinance_actions_are_reconciliation_only_and_keep_action_date():
     assert result.iloc[0]["action_date"] == pd.Timestamp("2025-10-14")
     assert result.iloc[0]["dividends"] == 5.0
     assert "announce_date" not in result.columns
+
+
+
+@pytest.mark.parametrize("field,expected_error", [
+    ("SYMBOL", "blank symbol"),
+    ("PURPOSE", "blank event_type"),
+])
+def test_loader_rejects_blank_required_text_fields(tmp_path, field, expected_error):
+    source = tmp_path / "nse.csv"
+    row = {
+        "SYMBOL": "TMPV", "PURPOSE": "DIVIDEND",
+        "ANNOUNCEMENT DATE": "2025-10-01", "EX-DATE": "2025-10-14",
+        "VALUE": "5.00",
+    }
+    row[field] = ""
+    _source(source, [row])
+    with pytest.raises(ValueError, match=expected_error):
+        normalize_nse_actions(source, "https://www.nseindia.com/example.csv")
