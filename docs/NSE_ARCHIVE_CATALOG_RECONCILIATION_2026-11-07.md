@@ -35,7 +35,7 @@ The 15 catalog-only URLs are all explicitly `review_candidate=false`. Their excl
 | 2024-02-27 | Meeting of the Index Maintenance Sub-Committee (Equity) | **Retain for scope review**; meeting notice alone does not establish an index decision |
 | 2024-08-16 | Meeting of the Index Maintenance Sub-Committee (Equity) | **Retain for scope review**; meeting notice alone does not establish an index decision |
 | 2024-11-28 | Corporate Adjustment for Emkay Taps and Cutting Tools Ltd. in Nifty SME Emerge | Corporate-action title for SME Emerge, not flagship Nifty 50 by title |
-| 2024-12-02 | Corporate Adjustment for Strides Pharma Science Ltd. | Archived source text scopes the dummy inclusion to Nifty Microcap 250 and Nifty Total Market; AI screen excludes flagship Nifty 50 membership, pending human sign-off |
+| 2024-12-02 | Corporate Adjustment for Strides Pharma Science Ltd. | **Blocked**: the same-date local extraction is the Nifty IPO replacement notice, not the Strides corporate-adjustment release; correct source bytes and hash required |
 
 ## Inventory-only sources
 
@@ -56,11 +56,12 @@ The official archive page independently displays the 2019-07-16 title as “Chan
 
 ## Acceptance impact
 
-This reconciliation explains the 15 catalog-only and two inventory-only URL differences. It does **not** complete annual archive discovery or source screening. The 2020 CPSE revision and the two 2024 Index Maintenance Sub-Committee meeting notices remain explicit triage work. The Strides corporate-adjustment notice is now AI-screened as outside flagship Nifty 50 scope, with human sign-off still pending. The three missing-PDF retrievals remain unresolved. The seven annual coverage rows must stay `NOT_STARTED`, and all `official_notice_search_complete` flags must stay false until full archive/ad-hoc reconciliation, supersession review, snapshot reconciliation, and independent review are evidenced.
+This reconciliation explains the 15 catalog-only and two inventory-only URL differences. It does **not** complete annual archive discovery or source screening. The 2020 CPSE revision and the two 2024 Index Maintenance Sub-Committee meeting notices remain explicit triage work. The Strides corporate-adjustment source remains blocked because the local same-date extraction is the separate Nifty IPO notice; the correct PDF bytes and matching hash must be archived before scope can be accepted. The three missing-PDF retrievals remain unresolved. The seven annual coverage rows must stay `NOT_STARTED`, and all `official_notice_search_complete` flags must stay false until full archive/ad-hoc reconciliation, supersession review, snapshot reconciliation, and independent review are evidenced.
 
 No constituent intervals were created or modified. No row was marked `VERIFIED`. Research hold and live-execution-disabled controls remain unchanged.
 
 
-## Additional source triage — 2024-12-02 Strides corporate adjustment
 
-The archived extracted text for the official [2 December 2024 Strides Pharma Science corporate-adjustment release](https://www.niftyindices.com/Press_Release/ind_prs02122024_1.pdf) identifies the dummy-symbol inclusion in **Nifty Microcap 250** and **Nifty Total Market** only. Its operative section contains no flagship Nifty 50 membership action. The discovery-catalog row remains `review_candidate=false` and is now marked `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; this is an automated scope triage, not independent approval or annual-coverage completion. A regression test locks the source-text scope and status. No membership interval or transition row was created or changed.
+## Source-identity mismatch — 2024-12-02 Strides corporate adjustment
+
+The official [2 December 2024 Strides corporate-adjustment URL](https://www.niftyindices.com/Press_Release/ind_prs02122024_1.pdf) is distinct from the same-date Nifty IPO replacement URL. The checked-in extracted text at `NSE-ARCHIVE-2024-12-02-295b1f169428.txt` is explicitly the **Nifty IPO** replacement notice, not the Strides notice. The Git tree also shows the two same-date PDF paths have identical blob content, so the local Strides-labelled artifact is not independent evidence for the Strides URL. The catalog row is therefore marked `SOURCE_ARCHIVE_IDENTITY_MISMATCH_BLOCKED`; it is not screened out of Nifty 50 scope. Correct source bytes, source URL/path reconciliation, SHA-256 verification, and independent review are required. A regression test prevents the Nifty IPO extraction from being reused as Strides evidence. No membership or annual coverage status was advanced.
