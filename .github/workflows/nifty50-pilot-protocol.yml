@@ -24,6 +24,17 @@ on:
       - "tests/test_pilot_execution.py"
       - "docs/nifty50-pilot-step-5-execution.md"
       - "trader/security_aliases.py"
+      - "trader/nifty50_index_reconstruction.py"
+      - "tests/test_nifty50_index_reconstruction.py"
+      - "docs/nifty50-index-reconstruction.md"
+      - "tests/test_security_aliases.py"
+      - "tests/test_corporate_actions.py"
+      - "tests/test_nifty50_transition_register.py"
+      - "tests/test_membership_evidence.py"
+      - "tests/test_membership_interval_semantics.py"
+      - "tests/test_special_membership_evidence.py"
+      - "tests/test_live_special_membership_ledger.py"
+      - "tests/test_membership_application.py"
       - "trader/corporate_actions.py"
       - "data/reference/nifty50_pilot_ohlcv.csv"
       - "data/reference/nifty50_tri.csv"
@@ -70,6 +81,14 @@ jobs:
         run: python -m pytest -q tests/test_nifty50_pilot_protocol.py
       - name: Run protocol validator
         run: python -m trader.pilot_protocol
+      - name: Test membership evidence and interval semantics
+        run: python -m pytest -q tests/test_membership_evidence.py tests/test_membership_interval_semantics.py tests/test_membership_application.py tests/test_special_membership_evidence.py tests/test_live_special_membership_ledger.py
+      - name: Test PIT membership readiness accounting
+        run: python -m pytest -q tests/test_nifty50_pit_readiness.py tests/test_nifty50_transition_register.py
+      - name: Test security identity and corporate-action evidence
+        run: python -m pytest -q tests/test_security_aliases.py tests/test_corporate_actions.py
+      - name: Test synthetic Nifty 50 price-index reconstruction
+        run: python -m pytest -q tests/test_nifty50_index_reconstruction.py
       - name: Run point-in-time membership readiness audit (expected fail-closed until evidence is complete)
         run: |
           set +e
