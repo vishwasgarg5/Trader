@@ -208,3 +208,11 @@ Acceptance criteria:
 - Archived PDF SHA-256: `a9bcace20ecf5038aa5101a32bfef7dae803f9fb9be2836da4a45a207eb45c1d`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-05-14-cde78c64905a.txt`.
 - Updated the annual notice inventory, unregistered-candidate scope-review table, human review queue and regression test. AI scope classification remains pending independent human sign-off; manual review remains `PENDING_HUMAN_REVIEW` and no verified symbol or reviewer fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf
+
+
+### Additional notice screen — 2019-06-13 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official 11-page NSE Indices PDF dated 2019-06-13. It announces changes effective 2019-06-28 across NIFTY 500, NIFTY Midcap 150, NIFTY Smallcap 250, NIFTY LargeMidcap 250, NIFTY MidSmallcap 400, NIFTY Midcap 50, NIFTY Infrastructure and strategy indices. The document contains no flagship NIFTY 50 constituent section or membership event.
+- Archived PDF SHA-256: `b05a59c604e1c29cfa00931c71d6ffd9fbe201f0be60b78235eb6f9635447338`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-13-8b59c9ce840e.txt`.
+- Normalized the annual inventory row to `NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE` / `SCREENED_NO_NIFTY50_CHANGE`, updated the manual review queue evidence note, and added a regression case that checks the archived PDF hash and extracted text. The scope register remains AI-reviewed pending human sign-off; manual queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified event fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs13062019.pdf
