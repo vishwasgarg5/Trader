@@ -136,7 +136,13 @@ def build_fixed_horizon_labels(
             result.update({
                 "net_stock_return": net_stock,
                 "net_relative_excess_return": relative,
-                "label": int(relative > PILOT_POSITIVE_EXCESS_THRESHOLD),
+                "label": int(
+                    relative > PILOT_POSITIVE_EXCESS_THRESHOLD
+                    and not math.isclose(
+                        relative, PILOT_POSITIVE_EXCESS_THRESHOLD,
+                        rel_tol=0.0, abs_tol=1e-12,
+                    )
+                ),
             })
         results.append(result)
 
