@@ -1,0 +1,27 @@
+{
+  "record_type": "AMC_ARCHIVE_DISCOVERY_ONLY",
+  "counts_as_acquisition_attempt": false,
+  "acquisition_attempts_consumed": 0,
+  "downloads_permitted": false,
+  "amc": "navi",
+  "official_archive_url": "https://navi.com/mutual-fund/downloads/portfolio/",
+  "retrieved_at": "2026-11-07T00:00:00+00:00",
+  "final_url": "https://navi.com/mutual-fund/downloads/portfolio/",
+  "controls": [
+    {"index": 0, "tag": "select", "name": "period", "options": ["Monthly", "Annual"]}
+  ],
+  "requests": [
+    {"url": "https://navi.com/mutual-fund/downloads/portfolio/", "method": "GET", "resource_type": "document", "host": "navi.com", "is_official_amc_domain": true}
+  ],
+  "responses": [
+    {"url": "https://navi.com/mutual-fund/downloads/portfolio/", "status": 200, "content_type": "text/html", "content_disposition": null, "host": "navi.com", "is_official_amc_domain": true}
+  ],
+  "download_events_cancelled": [],
+  "errors": [],
+  "limitations": [
+    "No controls were changed and no buttons or links were clicked.",
+    "No response bodies were read or persisted.",
+    "No workbook or other file was downloaded.",
+    "Network calls are metadata only; file/API payload completeness is not established."
+  ]
+}
