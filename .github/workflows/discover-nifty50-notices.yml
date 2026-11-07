@@ -59,7 +59,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/reference/extracted_notice_text/ data/reference/ocr_notice_text/ data/reference/nifty50_annual_notice_inventory.csv data/reference/nifty50_archive_discovery_catalog.csv data/reference/source_documents/ data/reports/nifty50_notice_discovery.json data/reports/nifty50_notice_text_screening.json data/reports/nifty50_notice_triage.json data/reference/nifty50_candidate_events.csv data/reports/nifty50_archive_catalog_audit.json
+          git add data/reference/extracted_notice_text/ data/reference/ocr_notice_text/ data/reference/nifty50_annual_notice_inventory.csv data/reference/nifty50_archive_discovery_catalog.csv data/reference/source_documents/ data/reports/nifty50_notice_discovery.json data/reports/nifty50_notice_text_screening.json data/reports/nifty50_notice_triage.json data/reference/nifty50_candidate_events.csv data/reference/nifty50_notice_review_queue.csv data/reports/nifty50_archive_catalog_audit.json
           git commit -m "Discover and archive Nifty Indices press-release candidates"
           for attempt in 1 2 3 4 5; do
             git fetch origin main
