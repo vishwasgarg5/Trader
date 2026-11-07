@@ -19,8 +19,8 @@ def test_title_triage_separates_constituent_changes_from_other_indices():
 def test_archive_title_prefix_is_removed_before_title_classification(tmp_path):
     inventory = tmp_path / "inventory.csv"
     inventory.write_text(
-        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\\n"
-        "n1,2018-01-01,Archive title: Changes in Indices,https://example.test/a,,,DISCOVERED_UNREVIEWED\\n",
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\n"
+        "n1,2018-01-01,Archive title: Changes in Indices,https://example.test/a,,,DISCOVERED_UNREVIEWED\n",
         encoding="utf-8",
     )
     report = run(
