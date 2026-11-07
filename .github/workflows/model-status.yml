@@ -2,9 +2,17 @@ name: Model Status
 
 on:
   workflow_dispatch:
+    inputs:
+      refresh_evidence:
+        description: "Run the automated NSE evidence refresh and audit"
+        required: false
+        type: boolean
+        default: false
   schedule:
     # 16:00 IST on NSE trading weekdays (after the cash-market close).
     - cron: "30 10 * * 1-5"
+    # Weekly NSE evidence refresh (Sunday 08:45 IST).
+    - cron: "15 3 * * 0"
   push:
     branches: [main]
     paths:
@@ -157,3 +165,152 @@ jobs:
             ${{ runner.temp }}/monitoring.json
           if-no-files-found: warn
           retention-days: 30
+
+
+  evidence-refresh:
+    name: Automated NSE evidence refresh (fail-closed)
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '15 3 * * 0') ||
+      (github.event_name == 'workflow_dispatch' && inputs.refresh_evidence == true)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install evidence and OCR dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Refresh official NSE Indices archive and source PDFs
+        id: discovery
+        continue-on-error: true
+        run: python -m trader.nifty_notice_discovery
+
+      - name: Rebuild page-level triage and review queue
+        id: triage
+        if: always()
+        continue-on-error: true
+        run: python -m trader.nifty_notice_triage
+
+      - name: Audit archive false-negative candidates
+        id: archive_audit
+        if: always()
+        continue-on-error: true
+        run: python -m trader.nifty_archive_catalog_audit
+
+      - name: Reconcile inventory, curated register and local PDF hashes
+        id: reconciliation
+        if: always()
+        continue-on-error: true
+        run: python -m trader.nifty_notice_reconciliation
+
+      - name: Run fail-closed membership evidence audit
+        id: membership_audit
+        if: always()
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from trader.membership_evidence import audit_membership_evidence, audit_special_membership_events
+
+          report = {
+              "historical_membership": audit_membership_evidence(
+                  Path("data/reference/nifty50_transition_register.csv"),
+                  Path("data/reference/nifty50_annual_coverage.csv"),
+                  Path("."),
+              ),
+              "special_membership": audit_special_membership_events(
+                  Path("data/reference/nifty50_special_membership_events.csv")
+              ),
+              "policy": "Automated structural and hash checks only. This audit does not independently authenticate exchange facts or create reviewer sign-off.",
+          }
+          report["ready"] = (
+              report["historical_membership"]["ready"]
+              and report["special_membership"]["ready"]
+          )
+          out = Path("data/reports/automated_membership_evidence_audit.json")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print(json.dumps({
+              "ready": report["ready"],
+              "historical_errors": len(report["historical_membership"]["errors"]),
+              "special_event_errors": len(report["special_membership"]["errors"]),
+          }, indent=2))
+          PY
+
+      - name: Publish evidence refresh summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          summary = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          files = {
+              "discovery": Path("data/reports/nifty50_notice_discovery.json"),
+              "triage": Path("data/reports/nifty50_notice_triage.json"),
+              "archive_audit": Path("data/reports/nifty50_archive_catalog_audit.json"),
+              "reconciliation": Path("data/reports/nifty50_source_reconciliation.json"),
+              "membership_audit": Path("data/reports/automated_membership_evidence_audit.json"),
+          }
+          lines = ["## Automated NSE evidence refresh", "",
+                   "This is machine triage and structural validation only; it cannot grant independent verification."]
+          for name, path in files.items():
+              lines.extend(["", f"### {name.replace('_', ' ').title()}"])
+              if not path.is_file():
+                  lines.append("- Report unavailable; inspect the corresponding step.")
+                  continue
+              report = json.loads(path.read_text(encoding="utf-8"))
+              for key in ("inventory_rows", "human_review_queue_rows", "catalog_rows_audited",
+                          "potential_false_negatives_for_source_review", "register_rows",
+                          "register_rows_without_inventory_match", "ready", "coverage_complete"):
+                  if key in report:
+                      lines.append(f"- {key}: {report[key]}")
+              if name == "membership_audit":
+                  lines.append(f"- Historical membership errors: {len(report['historical_membership']['errors'])}")
+                  lines.append(f"- Special-event errors: {len(report['special_membership']['errors'])}")
+          lines.extend(["", "**Promotion: disabled. Live execution: disabled. Research status: HOLD unless separately evidenced.**"])
+          with summary.open("a", encoding="utf-8") as handle:
+              handle.write("\n".join(lines) + "\n")
+          PY
+
+      - name: Upload machine-generated evidence and audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trader-nse-evidence-refresh-${{ github.run_id }}
+          path: |
+            data/reference/nifty50_annual_notice_inventory.csv
+            data/reference/nifty50_archive_discovery_catalog.csv
+            data/reference/nifty50_notice_register.csv
+            data/reference/nifty50_notice_review_queue.csv
+            data/reference/nifty50_candidate_events.csv
+            data/reference/source_documents/
+            data/reference/extracted_notice_text/
+            data/reference/ocr_notice_text/
+            data/reports/nifty50_notice_discovery.json
+            data/reports/nifty50_notice_triage.json
+            data/reports/nifty50_archive_catalog_audit.json
+            data/reports/nifty50_source_reconciliation.json
+            data/reports/nifty50_source_reconciliation.csv
+            data/reports/automated_membership_evidence_audit.json
+          if-no-files-found: warn
+          retention-days: 90
