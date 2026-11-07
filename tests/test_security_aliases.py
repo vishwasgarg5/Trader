@@ -2,7 +2,7 @@ import csv
 import hashlib
 from pathlib import Path
 
-from trader.security_aliases import audit_security_aliases
+from trader.security_aliases import audit_security_aliases, is_valid_isin
 
 
 FIELDS = [
@@ -28,7 +28,7 @@ def _verified_row(root: Path, **overrides) -> dict:
         "alias_id": "A1",
         "alias_symbol": "OLD",
         "official_symbol": "NEW",
-        "security_id": "INE000A01000",
+        "security_id": "INE214T01019",
         "relation_type": "TICKER_RENAME_SAME_SECURITY",
         "valid_from": "2024-01-01",
         "valid_to": "",
@@ -42,6 +42,15 @@ def _verified_row(root: Path, **overrides) -> dict:
     }
     row.update(overrides)
     return row
+
+
+def test_isin_validation_checks_shape_and_luhn_digit():
+    assert is_valid_isin("INE214T01019")
+    assert is_valid_isin("INE155A01022")
+    assert is_valid_isin("INE1TAE01010")
+    assert not is_valid_isin("INE214T01010")
+    assert not is_valid_isin("not-an-isin")
+    assert not is_valid_isin("INE214T0101")
 
 
 def test_verified_alias_requires_archived_source_and_stable_security_id(tmp_path):
@@ -80,7 +89,7 @@ def test_overlapping_alias_intervals_cannot_map_to_different_securities(tmp_path
         tmp_path,
         alias_id="A2",
         official_symbol="OTHER",
-        security_id="INE999A01000",
+        security_id="INE999A01007",
         valid_from="2024-06-01",
     )
     path = _write_ledger(tmp_path, [first, second])
@@ -96,6 +105,13 @@ def test_bad_source_digest_blocks_verified_alias(tmp_path):
     assert report["ready"] is False
     assert any("SHA-256 mismatch" in error for error in report["errors"])
 
+
+def test_invalid_isin_blocks_verified_alias(tmp_path):
+    row = _verified_row(tmp_path, security_id="INE214T01010")
+    path = _write_ledger(tmp_path, [row])
+    report = audit_security_aliases(path)
+    assert report["ready"] is False
+    assert any("valid ISIN" in error for error in report["errors"])
 
 
 def test_ltim_symbol_history_uses_official_2026_rename_not_a_2023_vendor_alias():
@@ -142,7 +158,6 @@ def test_verified_alias_rejects_invalid_review_date(tmp_path):
     report = audit_security_aliases(path)
     assert report["ready"] is False
     assert any("reviewed_at must be an ISO calendar date" in error for error in report["errors"])
-
 
 
 def test_tata_motors_rename_and_tmcvl_listing_keep_distinct_security_ids():
