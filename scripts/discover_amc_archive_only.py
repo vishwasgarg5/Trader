@@ -39,6 +39,7 @@ def main() -> int:
     controls: list[dict] = []
     errors: list[dict] = []
 
+    final_url = None
     with sync_playwright() as p:
         browser = p.chromium.launch()
         context = browser.new_context(accept_downloads=False)
@@ -79,6 +80,7 @@ def main() -> int:
         try:
             page.goto(source["url"], wait_until="domcontentloaded", timeout=60000)
             page.wait_for_timeout(5000)
+            final_url = page.url
             for index, element in enumerate(page.locator("select, input, button, [role=combobox], [role=button]").all()):
                 try:
                     controls.append({
@@ -108,7 +110,7 @@ def main() -> int:
         "amc": key,
         "official_archive_url": source["url"],
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
-        "final_url": page.url if not page.is_closed() else None,
+        "final_url": final_url,
         "controls": controls,
         "requests": requests,
         "responses": responses,

@@ -17,7 +17,6 @@ concurrency:
 
 jobs:
   acquire:
-    if: ${{ github.event.inputs.approved_design_commit_sha == github.sha }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
