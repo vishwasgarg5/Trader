@@ -5,8 +5,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from trader.costs import delivery_round_trip_cost
 from trader.pilot_execution import (
-    PILOT_MAX_PARTICIPATION, assess_pilot_liquidity, cap_pilot_fill, pilot_slippage_bps,
+    PILOT_MAX_PARTICIPATION, assess_pilot_liquidity, cap_pilot_fill,
+    pilot_delivery_round_trip_cost, pilot_slippage_bps,
 )
 
 
@@ -20,6 +22,44 @@ def test_registered_slippage_curve_at_reference_and_cap():
 def test_slippage_rejects_invalid_or_over_limit_participation(participation):
     with pytest.raises(ValueError):
         pilot_slippage_bps(participation)
+
+
+def test_pilot_delivery_cost_applies_registered_slippage_and_actual_notional():
+    estimate = pilot_delivery_round_trip_cost(
+        100.0, 105.0, notional_rupees=250_000.0,
+        participation_fraction=0.01,
+    )
+    expected = delivery_round_trip_cost(
+        100.0, 105.0, notional_rupees=250_000.0,
+        slippage_bps_per_side=40.0,
+    )
+    assert estimate["slippage_bps_per_side"] == pytest.approx(40.0)
+    assert estimate["slippage_rupees"] == pytest.approx(expected["slippage_rupees"])
+    assert estimate["total_cost_rupees"] == pytest.approx(expected["total_cost_rupees"])
+    assert estimate["participation_fraction"] == pytest.approx(0.01)
+    assert estimate["slippage_basis"] == "registered_pilot_scenario_not_observed_execution"
+
+
+def test_pilot_delivery_cost_stress_multiplier_changes_slippage_only():
+    base = pilot_delivery_round_trip_cost(
+        100.0, 100.0, notional_rupees=100_000.0,
+        participation_fraction=0.01,
+    )
+    stressed = pilot_delivery_round_trip_cost(
+        100.0, 100.0, notional_rupees=100_000.0,
+        participation_fraction=0.01, stress_multiplier=1.5,
+    )
+    assert stressed["slippage_bps_per_side"] == pytest.approx(60.0)
+    assert stressed["slippage_rupees"] == pytest.approx(base["slippage_rupees"] * 1.5)
+    assert stressed["brokerage_rupees"] == pytest.approx(base["brokerage_rupees"])
+    assert stressed["stt_rupees"] == pytest.approx(base["stt_rupees"])
+
+
+def test_pilot_delivery_cost_rejects_missing_or_invalid_notional():
+    with pytest.raises(ValueError, match="notional_rupees"):
+        pilot_delivery_round_trip_cost(
+            100, 100, notional_rupees=0, participation_fraction=0.01,
+        )
 
 
 def test_liquidity_uses_twenty_sessions_and_ignores_future_rows():
@@ -71,7 +111,6 @@ def test_fill_cap_rejects_participation_above_protocol_limit():
     with pytest.raises(ValueError, match="2%"):
         cap_pilot_fill(100, price_rupees=10, traded_value_rupees=100_000,
                        max_participation_fraction=0.03)
-
 
 
 def test_timezone_aware_liquidity_dates_are_normalized_to_nse_calendar():
