@@ -106,7 +106,7 @@ jobs:
           summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
           if not report_path.is_file():
               with summary_path.open("a", encoding="utf-8") as out:
-                  out.write("## Model status\\n\\nMonitoring report was not generated. Check earlier failed steps.\\n")
+                  out.write("## Model status\n\nMonitoring report was not generated. Check earlier failed steps.\n")
               raise SystemExit(0)
 
           report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -128,7 +128,7 @@ jobs:
           lines.extend(["", "### Errors"])
           lines.extend([f"- {item}" for item in report.get("errors", [])] or ["- None"])
           with summary_path.open("a", encoding="utf-8") as out:
-              out.write("\\n".join(lines) + "\\n")
+              out.write("\n".join(lines) + "\n")
           PY
 
       - name: Upload model status reports
