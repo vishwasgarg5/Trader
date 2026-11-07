@@ -180,3 +180,10 @@ Acceptance criteria:
 - Archived PDF SHA-256 `9a214f365f39a82cf4eca8b25ec750ab844099799fe6ca75f9da20e387861079` matches the annual inventory record.
 - Updated the annual notice inventory, unregistered-candidate scope-review table, and notice review queue. The classification is `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; queue remains `PENDING_HUMAN_REVIEW`. No reviewer identity or verified event fields were fabricated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs02052019.pdf
+
+### Additional notice screen — 2019-05-07 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official NSE Indices release dated 2019-05-07. It announces two inclusions (Kerala and Rajasthan state development loans) in the NIFTY 10 Year SDL fixed-income index effective 2019-05-08, with no exclusions. The notice contains no flagship NIFTY 50 equity constituent section or membership event.
+- Archived PDF SHA-256: `b820afda2c7659791b566f736a80d9e82c6dab57b90e3f8a2db843a074161697`, matching the annual inventory record.
+- Updated the annual notice inventory, unregistered-candidate scope-review table, notice review queue, and regression test. Classification remains `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`; manual queue remains `PENDING_HUMAN_REVIEW`.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs07052019.pdf
