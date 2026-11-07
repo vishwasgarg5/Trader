@@ -159,3 +159,31 @@ def test_review_queue_preserves_human_annotations_across_regeneration(tmp_path):
     assert regenerated["verified_out_symbols"] == "OLDCO"
     assert regenerated["verified_in_symbols"] == "NEWCO"
     assert regenerated["notes"] == "Checked against official notice"
+
+
+def test_review_queue_links_existing_curated_register_entry(tmp_path):
+    inventory = tmp_path / "inventory.csv"
+    inventory.write_text(
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\n"
+        "nifty50-2024,2024-02-20,Archive title: Changes in Indices,https://example.test/nifty50.pdf,,,DISCOVERED_UNREVIEWED\n",
+        encoding="utf-8",
+    )
+    register = tmp_path / "register.csv"
+    register.write_text(
+        "notice_id,source_url,nifty50_scope_result,review_status\n"
+        "curated-2024,https://example.test/nifty50.pdf,NIFTY50_CHANGE,AI_REVIEWED_PENDING_HUMAN_SIGNOFF\n",
+        encoding="utf-8",
+    )
+    queue = tmp_path / "queue.csv"
+    report = run(
+        inventory, tmp_path / "report.json", tmp_path / "events.csv",
+        review_queue_path=queue, register_path=register,
+    )
+    assert report["human_review_queue_rows"] == 1
+    import csv
+    with queue.open(newline="", encoding="utf-8") as handle:
+        row = next(csv.DictReader(handle))
+    assert row["register_notice_ids"] == "curated-2024"
+    assert row["register_scope_results"] == "NIFTY50_CHANGE"
+    assert row["register_review_statuses"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
+    assert row["register_link_status"] == "MATCHED_CURATED_REGISTER"
