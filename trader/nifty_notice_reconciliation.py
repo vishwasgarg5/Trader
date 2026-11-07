@@ -46,13 +46,30 @@ def normalize_url(value: str) -> str:
 
 
 def read_csv(path: Path, required: set[str]) -> list[dict[str, str]]:
+    """Read rows without crashing on ragged CSV; retain row-shape diagnostics."""
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         missing = required.difference(reader.fieldnames or [])
         if missing:
             raise ValueError(f"{path}: missing required columns: {sorted(missing)}")
-        return [{key: (value or "").strip() for key, value in row.items()}
-                for row in reader]
+        rows = []
+        for row in reader:
+            extras = row.pop(None, []) or []
+            missing_values = [
+                name for name in (reader.fieldnames or [])
+                if row.get(name) is None
+            ]
+            cleaned = {
+                key: (value.strip() if isinstance(value, str) else "")
+                for key, value in row.items() if key is not None
+            }
+            cleaned["__csv_line_number__"] = str(reader.line_num)
+            cleaned["__csv_extra_columns__"] = " | ".join(
+                value.strip() for value in extras if isinstance(value, str)
+            )
+            cleaned["__csv_missing_columns__"] = ";".join(missing_values)
+            rows.append(cleaned)
+        return rows
 
 
 def file_evidence(row: dict[str, str], root: Path) -> dict[str, str | bool]:
@@ -109,6 +126,21 @@ def reconcile(inventory_path: Path = INVENTORY, register_path: Path = REGISTER,
 
     issues: list[dict[str, str]] = []
     detail_rows: list[dict[str, str]] = []
+    for source_name, source_rows in (("inventory", inventory), ("register", register)):
+        for row in source_rows:
+            line_number = row.get("__csv_line_number__", "")
+            if row.get("__csv_extra_columns__"):
+                add_issue(
+                    issues, "CSV_EXTRA_COLUMNS", source_name, row.get("notice_id", ""),
+                    row.get("source_url", ""),
+                    f"line={line_number}; extra={row['__csv_extra_columns__']}",
+                )
+            if row.get("__csv_missing_columns__"):
+                add_issue(
+                    issues, "CSV_MISSING_COLUMNS", source_name, row.get("notice_id", ""),
+                    row.get("source_url", ""),
+                    f"line={line_number}; missing={row['__csv_missing_columns__']}",
+                )
     matched_register_rows = 0
     matched_inventory_ids: set[str] = set()
     ambiguous_matches = 0
