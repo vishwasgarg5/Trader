@@ -45,3 +45,7 @@ Yahoo Finance is unofficial and may have coverage, corporate-action or timestamp
 6. Add dashboard and optional Telegram alerts.
 
 The workflow runs weekdays at 10:20 UTC (15:50 IST), with manual dispatch. GitHub Actions has repository Contents write permission to commit generated files.
+
+## Nifty 50 pilot registration
+
+`NIFTY50_PILOT_001` is registered in `config/nifty50_pilot_protocol.json` as `DRAFT_NOT_FROZEN`. It is restricted to point-in-time Nifty 50 constituents, exactly five selections per qualifying date, and Nifty 50 TRI. No Nifty 200/500 expansion is permitted without a separate approved experiment using verified point-in-time membership. Pilot GO means eligibility for a separately approved broader experiment only; it does not authorize promotion, paper trading, evaluation, holdout access or live execution. See `docs/nifty50-pilot-registration.md`. The shared daily research universe remains unchanged except for this explicit experiment-scoped override.
