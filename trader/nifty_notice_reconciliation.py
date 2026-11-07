@@ -289,7 +289,7 @@ def reconcile(inventory_path: Path = INVENTORY, register_path: Path = REGISTER,
         "coverage_complete": False,
         "membership_written": False,
         "policy": (
-            "The 684-row annual inventory is a broad archive candidate/control ledger; "
+            f"The {len(inventory)}-row annual inventory is a broad archive candidate/control ledger; "
             "the notice register is a curated Nifty 50 evidence subset, so inventory-only "
             "rows are not automatically missing register entries. URL matching is canonical "
             "identity matching; duplicate register rows may represent distinct analytical roles "
