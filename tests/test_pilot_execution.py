@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -68,3 +71,31 @@ def test_fill_cap_rejects_participation_above_protocol_limit():
     with pytest.raises(ValueError, match="2%"):
         cap_pilot_fill(100, price_rupees=10, traded_value_rupees=100_000,
                        max_participation_fraction=0.03)
+
+
+
+def test_timezone_aware_liquidity_dates_are_normalized_to_nse_calendar():
+    dates = pd.bdate_range("2026-01-01", periods=21)
+    frame = pd.DataFrame({
+        "date": [d.strftime("%Y-%m-%dT18:30:00+00:00") for d in dates],
+        "traded_value_rupees": [60_000_000.0] * 21,
+    })
+    # 18:30 UTC is 00:00 on the following NSE calendar date.
+    result = assess_pilot_liquidity(
+        frame, as_of=pd.Timestamp("2026-01-22T00:00:00+05:30")
+    )
+    assert result["status"] == "PASS"
+    assert result["window_end"] == "2026-01-22"
+
+
+def test_pilot_execution_constants_match_registered_protocol():
+    root = Path(__file__).resolve().parents[1]
+    protocol = json.loads((root / "config" / "nifty50_pilot_protocol.json").read_text())
+    execution = protocol["execution"]
+    assert execution["liquidity_filter"]["metric"] == "20_session_median_traded_value"
+    assert execution["liquidity_filter"]["minimum_inr"] == 50_000_000
+    assert execution["max_order_participation_adv"] == PILOT_MAX_PARTICIPATION
+    assert execution["reference_label_participation_adv"] == 0.01
+    assert execution["slippage_bps_per_side"] == "15 + 25 * sqrt(participation_fraction / 0.01)"
+    assert execution["slippage_at_reference_participation_bps_per_side"] == 40
+    assert execution["stress_multiplier"] == 1.5
