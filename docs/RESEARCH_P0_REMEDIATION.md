@@ -194,3 +194,9 @@ Acceptance criteria:
 - Full-text screened the official NSE Indices release dated 2019-05-08. It excludes One Point One Solutions (`ONEPOINT`) from NIFTY SME EMERGE effective 2019-05-09 (close of 2019-05-08), with no inclusion. This is not a NIFTY 50 membership event.
 - Archived PDF SHA-256: `af50b6eebba05bfe608c1659cd1158e60a5a0b3a399a10a82ccc7d2e6a98e6c3`, matching the annual inventory record. Updated the annual inventory, unregistered-candidate scope review, notice review queue and regression test. AI scope review remains pending human sign-off.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs08052019.pdf
+
+### CI schema fix — 2019-05-02 classification normalization
+
+- Follow-up CI run `42352645468` still failed because the 2019-05-02 archived SDL notice retained the legacy value `EXPLICIT_FIXED_INCOME_SDL_NOT_NIFTY50_EQUITY`, while the regression test's canonical inventory contract requires `NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE` for all notices screened as not changing the flagship NIFTY 50.
+- Normalized the 2019-05-02 inventory value to the canonical classification. The source interpretation, PDF hash, extracted text, and pending-human-review status are unchanged. This corrects the schema inconsistency; it does not constitute human approval.
+- Official archive index lists the 2019-05-02, 2019-05-07 and 2019-05-08 press releases in its May 2019 archive. The 10 Year SDL index is a fixed-income portfolio of State Development Loans, not the flagship equity constituent list. Source: https://www.nseindia.com/static/nse-indices/press-releases
