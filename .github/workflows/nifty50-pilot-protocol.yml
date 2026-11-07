@@ -1,0 +1,55 @@
+name: Nifty 50 pilot protocol checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "config/nifty50_pilot_protocol.json"
+      - "config/schemas/nifty50_pilot_protocol.schema.json"
+      - "trader/pilot_protocol.py"
+      - "tests/test_nifty50_pilot_protocol.py"
+      - ".github/workflows/nifty50-pilot-protocol.yml"
+    paths:
+      - "config/nifty50_pilot_protocol.json"
+      - "config/schemas/nifty50_pilot_protocol.schema.json"
+      - "trader/pilot_protocol.py"
+      - "tests/test_nifty50_pilot_protocol.py"
+      - ".github/workflows/nifty50-pilot-protocol.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  protocol-contract:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate JSON syntax
+        run: |
+          python -m json.tool config/nifty50_pilot_protocol.json > /dev/null
+          python -m json.tool config/schemas/nifty50_pilot_protocol.schema.json > /dev/null
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest jsonschema
+      - name: Validate protocol against JSON Schema
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema import Draft202012Validator
+          with open('config/schemas/nifty50_pilot_protocol.schema.json', encoding='utf-8') as f:
+              schema = json.load(f)
+          with open('config/nifty50_pilot_protocol.json', encoding='utf-8') as f:
+              protocol = json.load(f)
+          Draft202012Validator(schema).validate(protocol)
+          PY
+      - name: Run protocol safety tests
+        run: python -m pytest -q tests/test_nifty50_pilot_protocol.py
+      - name: Run protocol validator
+        run: python -m trader.pilot_protocol
