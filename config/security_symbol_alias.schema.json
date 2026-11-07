@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Effective-dated security symbol identity evidence",
-  "description": "Separates same-security ticker changes, vendor aliases, and economically distinct securities. VERIFIED rows require a named independent reviewer and ISO review date in the runtime audit.",
+  "description": "Separates same-security ticker changes, vendor aliases, and economically distinct securities. security_id is an ISIN and is checked for ISO 6166 shape/check digit by the runtime audit. VERIFIED rows require a named independent reviewer and ISO review date.",
   "type": "object",
   "required": [
     "alias_id",
@@ -12,88 +12,26 @@
     "verification_status"
   ],
   "properties": {
-    "alias_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "alias_symbol": {
-      "type": "string",
-      "minLength": 1
-    },
-    "official_symbol": {
-      "type": "string",
-      "minLength": 1
-    },
+    "alias_id": {"type": "string", "minLength": 1},
+    "alias_symbol": {"type": "string", "minLength": 1},
+    "official_symbol": {"type": "string", "minLength": 1},
     "security_id": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{2}[A-Z0-9]{9}[0-9]$",
+      "description": "ISIN format; runtime audit also validates the Luhn check digit."
     },
     "relation_type": {
-      "enum": [
-        "TICKER_RENAME_SAME_SECURITY",
-        "VENDOR_ALIAS",
-        "SEPARATE_SECURITY"
-      ]
+      "enum": ["TICKER_RENAME_SAME_SECURITY", "VENDOR_ALIAS", "SEPARATE_SECURITY"]
     },
-    "valid_from": {
-      "type": "string",
-      "format": "date"
-    },
-    "valid_to": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
-    "source_url": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "uri"
-    },
-    "source_document_path": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "source_sha256": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "pattern": "^[0-9a-fA-F]{64}$"
-    },
-    "verification_status": {
-      "enum": [
-        "UNVERIFIED",
-        "SAMPLE_ONLY",
-        "VERIFIED"
-      ]
-    },
-    "notes": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reviewer": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reviewed_at": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    }
+    "valid_from": {"type": "string", "format": "date"},
+    "valid_to": {"type": ["string", "null"], "format": "date"},
+    "source_url": {"type": ["string", "null"], "format": "uri"},
+    "source_document_path": {"type": ["string", "null"]},
+    "source_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-fA-F]{64}$"},
+    "verification_status": {"enum": ["UNVERIFIED", "SAMPLE_ONLY", "VERIFIED"]},
+    "notes": {"type": ["string", "null"]},
+    "reviewer": {"type": ["string", "null"]},
+    "reviewed_at": {"type": ["string", "null"], "format": "date"}
   },
   "additionalProperties": false
 }
