@@ -9,6 +9,11 @@ on:
       - "trader/pilot_protocol.py"
       - "tests/test_nifty50_pilot_protocol.py"
       - "trader/nifty50_pit_readiness.py"
+      - "trader/nifty_notice_reconciliation.py"
+      - "tests/test_nifty_notice_reconciliation.py"
+      - "data/reference/source_documents/**"
+      - "data/reference/extracted_notice_text/**"
+      - "data/reference/ocr_notice_text/**"
       - "tests/test_nifty50_pit_readiness.py"
       - "trader/nifty50_price_data_readiness.py"
       - "tests/test_nifty50_price_data_readiness.py"
@@ -74,6 +79,10 @@ jobs:
             exit "$status"
           fi
 
+      - name: Test NSE source archive reconciliation
+        run: python -m pytest -q tests/test_nifty_notice_reconciliation.py
+      - name: Reconcile archived NSE notice sources (diagnostic; never writes membership)
+        run: python -m trader.nifty_notice_reconciliation
       - name: Run price and benchmark data contract tests
         run: python -m pytest -q tests/test_nifty50_price_data_readiness.py
       - name: Run price and benchmark readiness audit (expected fail-closed until source evidence is complete)
