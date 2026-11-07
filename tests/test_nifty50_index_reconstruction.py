@@ -72,3 +72,17 @@ def test_unreviewed_membership_does_not_count():
     m[0]["verification_status"] = "SAMPLE_ONLY"
     result = reconstruct_price_index([DAY], m, x, d, o, tolerance_points=0.01)
     assert result["status"] == "INSUFFICIENT_INPUTS"
+
+
+def test_investible_weight_factor_above_one_is_invalid():
+    m, x, d, o = fixtures()
+    x[0]["investible_weight_factor"] = 1.01
+    result = reconstruct_price_index([DAY], m, x, d, o, tolerance_points=0.01)
+    assert result["status"] == "INSUFFICIENT_INPUTS"
+    assert result["rows"][0]["status"] == "INSUFFICIENT_INPUTS"
+
+
+def test_match_is_only_labelled_cross_source_consistency_checked():
+    m, x, d, o = fixtures()
+    result = reconstruct_price_index([DAY], m, x, d, o, tolerance_points=0.01)
+    assert result["interpretation"] == "CROSS_SOURCE_CONSISTENCY_CHECKED"
