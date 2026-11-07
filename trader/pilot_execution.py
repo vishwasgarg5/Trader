@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import math
+from datetime import date
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -10,6 +12,31 @@ PILOT_MAX_PARTICIPATION = 0.02
 PILOT_REFERENCE_PARTICIPATION = 0.01
 PILOT_MIN_MEDIAN_TURNOVER_RUPEES = 50_000_000.0
 PILOT_LIQUIDITY_LOOKBACK_SESSIONS = 20
+
+
+def _nse_session_dates(values: pd.Series) -> pd.Series:
+    """Normalize naive NSE dates as local dates and aware timestamps to Asia/Kolkata."""
+    def as_date(value):
+        try:
+            stamp = pd.Timestamp(value)
+        except (TypeError, ValueError, OverflowError):
+            return pd.NaT
+        if pd.isna(stamp):
+            return pd.NaT
+        if stamp.tzinfo is not None:
+            stamp = stamp.tz_convert("Asia/Kolkata").tz_localize(None)
+        return stamp.normalize()
+
+    return pd.Series(values.map(as_date), index=values.index, dtype="datetime64[ns]")
+
+
+def _nse_cutoff(value: str | pd.Timestamp) -> pd.Timestamp:
+    stamp = pd.Timestamp(value)
+    if pd.isna(stamp):
+        raise ValueError("as_of must be a valid NSE calendar date")
+    if stamp.tzinfo is not None:
+        stamp = stamp.tz_convert("Asia/Kolkata").tz_localize(None)
+    return stamp.normalize()
 
 
 def pilot_slippage_bps(participation_fraction: float, *, stress_multiplier: float = 1.0) -> float:
@@ -28,8 +55,9 @@ def assess_pilot_liquidity(
 ) -> dict:
     """Fail-closed 20-session median traded-value screen, excluding future rows.
 
-    Required columns: date, traded_value_rupees. The latest 20 unique
-    observations on or before as_of are used; incomplete history is unresolved.
+    Required columns: date, traded_value_rupees. Session dates are interpreted
+    in Asia/Kolkata. The latest 20 unique observations on or before as_of are
+    used; incomplete history is unresolved.
     """
     required = {"date", "traded_value_rupees"}
     missing = required.difference(history.columns)
@@ -41,9 +69,9 @@ def assess_pilot_liquidity(
         raise ValueError("minimum median turnover must be finite and positive")
 
     data = history.loc[:, ["date", "traded_value_rupees"]].copy()
-    data["date"] = pd.to_datetime(data["date"], errors="coerce").dt.normalize()
+    data["date"] = _nse_session_dates(data["date"])
     data["traded_value_rupees"] = pd.to_numeric(data["traded_value_rupees"], errors="coerce")
-    cutoff = pd.Timestamp(as_of).normalize()
+    cutoff = _nse_cutoff(as_of)
     data = data.loc[data["date"].notna() & (data["date"] <= cutoff)]
     if data["date"].duplicated().any():
         raise ValueError("Liquidity history contains duplicate trading sessions")
