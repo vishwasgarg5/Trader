@@ -238,3 +238,12 @@ Primary-source references checked during this reconciliation:
 ## Scope correction — full point-in-time Nifty 50 supersedes legacy 49-name notes
 
 The current approved research universe is the **complete point-in-time Nifty 50**, with dated membership effective on each session and half-open intervals `[valid_from, valid_to)`. This decision supersedes older passages in this execution plan that describe the configured 49 symbols as the intended universe. The configured 49-name list is not a valid substitute for the historical Nifty 50 and must not be used to omit historical constituents. Research window: 2018-04-01 through 2024-12-31. No PIT ledger, full-universe price panel, model experiment, or holdout evaluation is authorized until the annual source inventory, supersession review, constituent snapshots, complete price coverage, symbol/corporate-action lineage, and independent review gates pass.
+
+
+## Universe scope supersession — 2026-11-07
+
+The prior P1 statement selecting the complete historical Nifty 50 as the candidate universe is superseded by the approved scope decision in `docs/RESEARCH_UNIVERSE_POLICY.md`: all eligible point-in-time NSE-listed ordinary equity securities are candidates; Nifty 500 is a benchmark/reference only. The Nifty 50 evidence work remains archived reference material and does not gate broader candidate selection.
+
+The replacement work is not complete: create and independently verify the historical listing/delisting/suspension security master; define and pre-register eligible series and point-in-time liquidity/data-quality rules; preserve inactive/delisted securities; resolve security identity and corporate-action lineage; and establish historical OHLCV coverage. The legacy 49-symbol list and current constituents are not substitutes. No full-universe experiment is authorized until these gates pass.
+
+Safety state is unchanged: `RESEARCH_HOLD`, final holdout `LOCKED_NOT_EVALUATED`, promotion false and live execution disabled.

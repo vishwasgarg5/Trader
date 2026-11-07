@@ -263,3 +263,14 @@ Acceptance criteria:
 - Archived PDF SHA-256 carried from the annual archive inventory: `e9fa07870d1ae9b0d15b527578694a0082f7ef25cf16145b21aefb7bdd7891fa`. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-09-ff433ab59d76.txt`.
 - Scope classification is AI-reviewed pending independent human sign-off; manual queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs09072019.pdf
+
+
+## Universe scope decision update — 2026-11-07
+
+The candidate-universe definition is changed from complete point-in-time Nifty 50 membership to **all eligible point-in-time NSE-listed ordinary equity securities**. Nifty 500 is retained as a benchmark/reference index, not as the candidate-universe gate. The authoritative policy and machine-readable scope are `docs/RESEARCH_UNIVERSE_POLICY.md` and `config/research_universe.json`.
+
+This scope change removes historical Nifty index membership reconstruction as a prerequisite for deciding which securities belong to the broader candidate universe. It does not remove the requirement for a point-in-time listing/delisting and suspension lifecycle, instrument/series eligibility, security identity, delisted-security price coverage, corporate-action lineage, liquidity/data-quality filters, source provenance or independent review. Current constituents cannot be backfilled into historical periods.
+
+The existing Nifty 50 notice archive, transition register, annual coverage records and human-review queue are retained as reference evidence. Existing AI-only classifications remain pending human sign-off. No historical security master has been created or verified by this decision, and no price data or eligibility thresholds have been fabricated.
+
+**Current state:** scope decided; security-master and historical data integration blocked; no full-universe experiment authorized. `RESEARCH_HOLD`, `promotion_eligible=false`, locked final holdout and `live_execution_enabled=false` remain unchanged.

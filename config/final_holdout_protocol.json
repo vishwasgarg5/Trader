@@ -8,7 +8,7 @@
     "access": "Do not use holdout labels, returns, metrics, or plots for feature selection, hyperparameter tuning, model selection, or debugging."
   },
   "pre_registered_acceptance_criteria": {
-    "point_in_time_universe": "Independently sourced, timestamped constituent membership including delisted constituents and effective dates.",
+    "point_in_time_universe": "Independently sourced, timestamped NSE listing/delisting/suspension lifecycle and eligible ordinary-equity security identity, including inactive/delisted securities and effective dates.",
     "portfolio_net_profitability": "Positive absolute portfolio net return after actual broker charges, taxes, slippage, and liquidity constraints.",
     "incremental_edge": "Positive lower bound of a pre-specified 95% dependence-aware confidence interval versus the frozen benchmark.",
     "robustness": "No single fold, symbol, sector, or market regime is responsible for the entire result.",

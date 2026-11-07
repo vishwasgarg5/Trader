@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "SCOPE_DECIDED_DATA_BLOCKED",
+  "effective_date": "2026-11-07",
+  "candidate_universe": {
+    "definition": "all_eligible_point_in_time_nse_listed_ordinary_equity_securities",
+    "exchange": "NSE",
+    "instrument_types": [
+      "ordinary_equity"
+    ],
+    "require_point_in_time_listing_status": true,
+    "include_delisted_historical_securities": true,
+    "exclude_non_ordinary_equity_by_default": true,
+    "eligibility_filters": {
+      "series": "NOT_YET_APPROVED",
+      "liquidity_thresholds": "NOT_YET_APPROVED",
+      "lookback_windows": "NOT_YET_APPROVED",
+      "suspension_treatment": "NOT_YET_APPROVED",
+      "data_quality_thresholds": "NOT_YET_APPROVED",
+      "market_cap_or_turnover_rules": "NOT_YET_APPROVED"
+    },
+    "filter_information_cutoff": "signal_date_only",
+    "missing_or_ambiguous_evidence": "FAIL_CLOSED_OR_QUARANTINE"
+  },
+  "benchmark": {
+    "primary_reference": "NIFTY_500",
+    "role": "benchmark_and_market_context_only",
+    "candidate_universe_gate": false,
+    "historical_index_membership_required_only_if_reconstructing_constituent_level_benchmark_returns": true
+  },
+  "required_lineage": [
+    "effective_dated_listing_and_delisting",
+    "suspension_and_trading_eligibility",
+    "instrument_type_and_series",
+    "stable_security_identity_and_symbol_aliases",
+    "corporate_actions_and_adjusted_price_factors",
+    "historical_ohlcv_coverage_including_inactive_securities",
+    "source_publication_timestamps_and_archived_evidence_hashes"
+  ],
+  "legacy_inputs": {
+    "config/universe.txt": "legacy_49_symbol_daily_snapshot_not_historical_universe_evidence",
+    "nifty50_notice_archive": "retain_as_reference_evidence_not_candidate_universe_gate"
+  },
+  "safeguards": {
+    "research_status": "RESEARCH_HOLD",
+    "promotion_eligible": false,
+    "final_holdout": "LOCKED_NOT_EVALUATED",
+    "live_execution_enabled": false,
+    "full_universe_experiment_authorized": false
+  }
+}
