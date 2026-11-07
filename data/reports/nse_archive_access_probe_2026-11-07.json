@@ -1,0 +1,78 @@
+{
+  "probe": "NSE_PUBLIC_ARCHIVE_ACCESS",
+  "observed_at_utc": "2026-11-07T15:25:53Z",
+  "repository": "vishwasgarg5/Trader",
+  "branch": "main",
+  "commit": "50d5d75259e3ed43a5fbd241d4b1c14e210df7f1",
+  "workflow_run": 42386319035,
+  "passed": 7,
+  "total": 7,
+  "all_samples_accessible": true,
+  "results": [
+    {
+      "sample": "legacy_2018_start",
+      "trade_date": "2018-01-02",
+      "http_status": 200,
+      "bytes_received": 69476,
+      "sha256": "73976825d277dc7f2d8e3ce6cac4dd8d3e795f296c031acc7a38528fd4700bb7",
+      "url": "https://archives.nseindia.com/content/historical/EQUITIES/2018/JAN/cm02JAN2018bhav.csv.zip",
+      "status": "PUBLIC_DOWNLOAD_AND_ZIP_VALID",
+      "csv_member": "cm02JAN2018bhav.csv"
+    },
+    {
+      "sample": "legacy_2020_midpoint",
+      "trade_date": "2020-03-19",
+      "http_status": 200,
+      "bytes_received": 70621,
+      "sha256": "9c590311f613e0c1f33d07ab52a3ba4426bd867ac3a258f7dce38748d6db55b7",
+      "url": "https://archives.nseindia.com/content/historical/EQUITIES/2020/MAR/cm19MAR2020bhav.csv.zip",
+      "status": "PUBLIC_DOWNLOAD_AND_ZIP_VALID",
+      "csv_member": "cm19MAR2020bhav.csv"
+    },
+    {
+      "sample": "legacy_last_session_before_cutover",
+      "trade_date": "2024-07-05",
+      "http_status": 200,
+      "bytes_received": 109203,
+      "sha256": "e08c8c0650e6807f8b1abd0658bc8d87cbe2d78c2fc77e05c82878f30be46665",
+      "url": "https://archives.nseindia.com/content/historical/EQUITIES/2024/JUL/cm05JUL2024bhav.csv.zip",
+      "status": "PUBLIC_DOWNLOAD_AND_ZIP_VALID",
+      "csv_member": "cm05JUL2024bhav.csv"
+    },
+    {
+      "sample": "udiff_first_session_after_cutover",
+      "trade_date": "2024-07-08",
+      "http_status": 200,
+      "bytes_received": 166236,
+      "sha256": "0ef55b77c30c8a57d5451cd371424242ad515f708630736ea6dc44c38d6e1e85",
+      "url": "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20240708_F_0000.csv.zip",
+      "status": "PUBLIC_DOWNLOAD_AND_ZIP_VALID",
+      "csv_member": "BhavCopy_NSE_CM_0_0_0_20240708_F_0000.csv"
+    },
+    {
+      "sample": "nifty50_2018_constituent_notice",
+      "http_status": 200,
+      "bytes_received": 575624,
+      "sha256": "a31019896822ef7a28f2229ba5e1552c835f51952ee033d02a5f79c9c7914b3d",
+      "url": "https://www.niftyindices.com/Press_Release/ind_prs21022018.pdf",
+      "status": "PUBLIC_PDF_DOWNLOAD"
+    },
+    {
+      "sample": "nifty50_2020_superseding_notice",
+      "http_status": 200,
+      "bytes_received": 686103,
+      "sha256": "4e7726fa8bfe5dc12f2b42121f69fd29bc7ec1da01c2c26dae84f2f3fe8e9f37",
+      "url": "https://www.niftyindices.com/Press_Release/ind_prs16032020.pdf",
+      "status": "PUBLIC_PDF_DOWNLOAD"
+    },
+    {
+      "sample": "nifty50_2024_constituent_notice",
+      "http_status": 200,
+      "bytes_received": 788856,
+      "sha256": "efc8eab5d129eaa2219e10b57ab9a5c3ce2d0cd7b8c5ebd2c7b6bc244a38b2b8",
+      "url": "https://www.niftyindices.com/Press_Release/ind_prs23082024.pdf",
+      "status": "PUBLIC_PDF_DOWNLOAD"
+    }
+  ],
+  "interpretation": "Representative unauthenticated access confirmed. This does not prove complete daily 2018-2024 coverage, comprehensive NSE member-circular coverage, TRI completeness, or redistribution rights."
+}
