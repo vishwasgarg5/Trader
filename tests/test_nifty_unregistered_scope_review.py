@@ -58,6 +58,7 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
         assert scope_row["review_status"] == "AI_REVIEWED"
         assert scope_row["human_signoff_required"].lower() == "true"
 
+        # Canonical inventory value for every AI-screened non-NIFTY-50 notice.
         assert inventory_row["observed_nifty50_effect"] == "NO_FLAGSHIP_NIFTY50_CONSTITUENT_CHANGE"
         assert inventory_row["review_status"] == "SCREENED_NO_NIFTY50_CHANGE"
         assert inventory_row["source_document_path"]
