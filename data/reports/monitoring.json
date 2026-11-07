@@ -45,15 +45,15 @@
       "signal_date": "2026-11-05"
     }
   },
-  "code_revision": "ac0dc3b7d23aab1e6b5d2808ba0ec9b7fd5b03f2",
+  "code_revision": "e4859ed0abb59a313f1dd38e2a6c4dca8e74bea5",
   "errors": [],
-  "generated_at_utc": "2026-11-06T19:22:43.587730+00:00",
+  "generated_at_utc": "2026-11-07T03:04:02.216962+00:00",
   "input_sha256": {
     "config/promotion_gate.json": "ed8d4cfd32fb0092de221e8eb78845dfb5d2f24d25d4d788dcce94c0c175c2f3",
-    "data/logs/predictions.csv": "9febdb75917a7792bb9f474584600b9288ab656479c963b7fd50f6991bdd96f6",
-    "data/reports/data_integrity.json": "ee80bfeaeed4832ab37c712c17b2f3c42ea4c5901dcb33be012a8cb48db30a12",
-    "data/reports/metrics.json": "6224da6f26e584ed9e7560794eecdb0078e210afba112259f86a25cdfd6fc440",
-    "data/signals/latest_signals.csv": "616e4e1cc9324cc8a3ed8a5ab9a752ca8b70e6132843b6fa5b7b6777226c3991"
+    "data/logs/predictions.csv": "296157b638615835d7bc12578498f6827522736602ca61984c3d2b9d80af43f1",
+    "data/reports/data_integrity.json": "91f9ce06350abd83c9e9a428d35058a26e3b203b1146d9c422bc4aed79015258",
+    "data/reports/metrics.json": "0bb1a561001cc2531387876b289a8584155a75355350dd2292a22aceea9733c6",
+    "data/signals/latest_signals.csv": "f9f37e29f8f8014620afd7e74e585c36df4252f53656ebc1880844fb1e2ff8c4"
   },
   "live_execution_enabled": false,
   "policy": "Monitoring is diagnostic only; it never authorizes promotion, holdout access, or live execution.",
