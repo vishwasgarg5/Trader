@@ -47,3 +47,27 @@ Security aliases and corporate-action adjustment factors still require source-le
 ## Safety
 
 Nifty 50 pilot only. Protocol remains `DRAFT_NOT_FROZEN`. Holdout access, evaluation, promotion, paper trading and live execution remain unauthorized.
+
+
+## Engineering closure update — 2026-11-07
+
+The conservative notice-triage queue is implemented and its CI run passed on commit `90ad01f1e96c8506fd61a1a927e583df61e93207` (run #42383794288). It remains a review queue only: all notices require human disposition, and no membership intervals or transitions were promoted.
+
+A diagnostic-only price-index reconstruction module is now present at `trader/nifty50_index_reconstruction.py`, with synthetic tests and this design note: `docs/nifty50-index-reconstruction.md`. It requires exactly 50 distinct reviewed constituents per date, effective-dated security inputs, a supplied divisor, official level observations, and an explicitly supplied positive pre-registered point tolerance. It does not fit parameters, change ledgers, or reconstruct TRI. Synthetic agreement is software validation, not historical evidence.
+
+The pilot workflow was expanded to exercise:
+- Membership evidence, interval semantics, special-membership evidence and PIT readiness tests.
+- Security alias, corporate-action ledger and transition-register tests.
+- Synthetic price-index reconstruction tests.
+- Existing notice triage, archive reconciliation, OHLCV/TRI contracts and execution constraints.
+
+### Current in-progress task disposition
+
+- **Step 2 — PIT membership:** triage engineering is implemented; evidence remains blocked. Current audit still reports zero verified transitions and zero complete annual coverage. The 687-row annual notice inventory and 697-row archive catalog remain unresolved under the latest reconciled counts. No human sign-offs were manufactured.
+- **Step 3 — security identity/corporate actions:** audit and regression coverage are implemented; evidence remains blocked. Alias mappings are not independently verified and corporate-action adjustment factors are not reconciled to adjusted price history.
+- **Step 4 — OHLCV/TRI:** data contracts and readiness checks are implemented; evidence remains blocked. The pilot OHLCV and TRI files remain empty/header-only; no official historical price, total-return or TRI observations were imported.
+- **Step 5 — costs/liquidity/fills:** deterministic research constraints and tests are implemented. Empirical evidence remains blocked pending official historical traded-value coverage and independent broker-tariff/contract-note reconciliation.
+
+The index reconstruction diagnostic cannot run on historical data until verified membership, security identity, daily prices, free-float shares/IWF, divisor and official index-level inputs are supplied. Its tolerance also needs explicit protocol registration before real-data comparison.
+
+**Overall roadmap remains 1/13 complete; Steps 2–5 remain IN_PROGRESS, with their safe engineering components implemented and their evidence gates open.** Steps 6–13 remain not started. Protocol remains `DRAFT_NOT_FROZEN`; holdout remains locked and unevaluated; evaluation, promotion, paper trading and live execution remain unauthorized.
