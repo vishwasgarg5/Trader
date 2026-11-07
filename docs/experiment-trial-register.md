@@ -119,3 +119,27 @@ The full point-in-time Nifty 50 evidence work is now tracked separately from mod
 - `trader/membership_evidence.py`: fail-closed completeness and local SHA-256 validator, with positive and negative tests.
 
 These controls do not authenticate the historical membership facts and do not make the T-0003 input eligible. Original NSE documents have not yet been archived; annual notice searches and independent snapshot reconciliation remain incomplete. The legacy `config/universe.txt` remains the daily signal input only and is not the T-0003 full-universe source. No model run was started.
+
+
+## NIFTY50_PILOT_001 protocol registration (not a model trial)
+
+| Field | Registration |
+|---|---|
+| Registration date | 2026-11-07 |
+| Baseline | `main` at `47892799d54093c0abc08a99c18bc14d206f45b1` |
+| Implementation branch | `pilot/nifty50-registration` |
+| Protocol | `config/nifty50_pilot_protocol.json` |
+| Protocol status | `DRAFT_NOT_FROZEN` |
+| Universe | Point-in-time Nifty 50 constituents only; exactly five selections per qualifying date |
+| Benchmark | Nifty 50 TRI |
+| Expansion | Prohibited; Nifty 200/500 requires a separately approved experiment with verified PIT membership |
+| Outcome restriction | GO means eligibility for a separately approved broader experiment only; no promotion, paper trading or live trading |
+| Evaluation authorization | **NOT AUTHORIZED** |
+| Holdout access | **LOCKED / NOT AUTHORIZED** |
+| Data feasibility | NOT VERIFIED |
+| Statistical power | NOT RUN; MDE ceiling fixed at 6 percentage points |
+| Freeze evidence | Pending protocol/data/code SHA-256 manifest and independent review |
+
+This is a protocol registration and is not an additional model trial or performance result. Existing T-0001, T-0002, T-0003 and historical run records above are preserved unchanged. The protocol is intentionally not frozen: broker tariff validation, exact factor formulas, inference sensitivity details, verified data coverage, power simulation inputs/results, trial census and holdout reconciliation remain open. No model evaluation may be started from this registration alone.
+
+The existing `config/final_holdout_protocol.json` remains at 12 months on this branch at this stage. The pilot-specific 18/24-month rule is recorded in the protocol; Issue #23 owns the config reconciliation. Do not inspect holdout outcomes or alter holdout data during this work.
