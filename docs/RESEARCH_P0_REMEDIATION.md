@@ -210,6 +210,13 @@ Acceptance criteria:
 - Source: https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf
 
 
+### Additional notice screen — 2019-06-18 (AI-only; human sign-off pending)
+
+- Full-text screened the archived official NSE Indices release dated 2019-06-18. It excludes six State Development Loan securities from the NIFTY 10 Year SDL fixed-income index effective 2019-06-19; no flagship NIFTY 50 constituent section or equity membership event appears in the extracted text.
+- Archived PDF SHA-256: `ccd61de6c4c289506b089a458bdec4917b1c6c40d61ecdf6074d2dd9f078e9aa`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-18-d3348f86fda0.txt`.
+- Updated the annual inventory, AI-only scope register, manual review queue and regression test. Independent human sign-off remains pending; the manual queue remains `PENDING_HUMAN_REVIEW`; no verified symbol or reviewer fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs18062019.pdf
+
 ### Additional notice screen — 2019-06-13 (AI-only; human sign-off pending)
 
 - Full-text screened the archived official 11-page NSE Indices PDF dated 2019-06-13. It announces changes effective 2019-06-28 across NIFTY 500, NIFTY Midcap 150, NIFTY Smallcap 250, NIFTY LargeMidcap 250, NIFTY MidSmallcap 400, NIFTY Midcap 50, NIFTY Infrastructure and strategy indices. The document contains no flagship NIFTY 50 constituent section or membership event.
