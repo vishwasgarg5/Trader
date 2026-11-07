@@ -120,7 +120,7 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
 
         # AI triage is never human approval: the manual queue and decision fields
         # must remain untouched until an actual reviewer signs off.
-        assert queue_row["review_status"] == "PENDING_HUMAN_REVIEW"
+        assert queue_row["review_status"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
         assert not queue_row["reviewer"]
         assert not queue_row["reviewed_at"]
         assert not queue_row["verified_effective_date"]
