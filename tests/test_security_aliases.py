@@ -8,7 +8,7 @@ from trader.security_aliases import audit_security_aliases
 FIELDS = [
     "alias_id", "alias_symbol", "official_symbol", "security_id",
     "relation_type", "valid_from", "valid_to", "source_url",
-    "source_document_path", "source_sha256", "verification_status", "notes",
+    "source_document_path", "source_sha256", "verification_status", "notes", "reviewer", "reviewed_at",
 ]
 
 
@@ -37,6 +37,8 @@ def _verified_row(root: Path, **overrides) -> dict:
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "verification_status": "VERIFIED",
         "notes": "fixture",
+        "reviewer": "independent-reviewer",
+        "reviewed_at": "2024-01-02",
     }
     row.update(overrides)
     return row
@@ -124,3 +126,19 @@ def test_historical_nifty50_ltim_events_keep_the_official_ltim_symbol():
     }]
     assert len(ltim_rows) == 2
     assert {row["symbol"] for row in ltim_rows} == {"LTIM"}
+
+
+def test_verified_alias_requires_independent_reviewer_signoff(tmp_path):
+    row = _verified_row(tmp_path, reviewer="", reviewed_at="")
+    path = _write_ledger(tmp_path, [row])
+    report = audit_security_aliases(path)
+    assert report["ready"] is False
+    assert any("independent reviewer sign-off" in error for error in report["errors"])
+
+
+def test_verified_alias_rejects_invalid_review_date(tmp_path):
+    row = _verified_row(tmp_path, reviewed_at="not-a-date")
+    path = _write_ledger(tmp_path, [row])
+    report = audit_security_aliases(path)
+    assert report["ready"] is False
+    assert any("reviewed_at must be an ISO calendar date" in error for error in report["errors"])
