@@ -120,25 +120,25 @@ publication_date,title,source_url,review_candidate,scope_status,first_discovered
 2019-04-15,"Change in NIFTY 10 Year SDL Index w.e.f. April 16, 2019",https://www.niftyindices.com/Press_Release/ind_prs15042019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-04-23,"Change in the Fixed Income Indices w.e.f. May 02, 2019",https://www.niftyindices.com/Press_Release/ind_prs23042019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2019-04-23,"Change in NIFTY 10 Year SDL Index w.e.f. April 24, 2019",https://www.niftyindices.com/Press_Release/ind_prs23042019_1.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-05-02,"Change in NIFTY 10 Year SDL Index w.e.f. May 03, 2019",https://www.niftyindices.com/Press_Release/ind_prs02052019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-05-07,"Change in NIFTY 10 Year SDL Index w.e.f. May 08, 2019",https://www.niftyindices.com/Press_Release/ind_prs07052019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-05-08,"Change in NIFTY SME EMERGE Index w.e.f. May 09, 2019",https://www.niftyindices.com/Press_Release/ind_prs08052019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-05-14,"Change in NIFTY 10 Year SDL Index w.e.f. May 15, 2019",https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
+2019-05-02,"Change in NIFTY 10 Year SDL Index w.e.f. May 03, 2019",https://www.niftyindices.com/Press_Release/ind_prs02052019.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-05-07,"Change in NIFTY 10 Year SDL Index w.e.f. May 08, 2019",https://www.niftyindices.com/Press_Release/ind_prs07052019.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-05-08,"Change in NIFTY SME EMERGE Index w.e.f. May 09, 2019",https://www.niftyindices.com/Press_Release/ind_prs08052019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-05-14,"Change in NIFTY 10 Year SDL Index w.e.f. May 15, 2019",https://www.niftyindices.com/Press_Release/ind_prs14052019.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
 2019-05-21,"Change in NIFTY 10 Year SDL Index w.e.f. May 22, 2019",https://www.niftyindices.com/Press_Release/ind_prs21052019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-05-28,"Change in NIFTY 10 Year SDL Index w.e.f. May 29, 2019",https://www.niftyindices.com/Press_Release/ind_prs28052019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-06-03,"Change in NIFTY 10 Year SDL Index w.e.f. June 04, 2019",https://www.niftyindices.com/Press_Release/ind_prs03062019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-06-11,"Change in NIFTY 10 Year SDL Index w.e.f. June 12, 2019",https://www.niftyindices.com/Press_Release/ind_prs11062019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-06-13,"Change in Indices w.e.f. June 28, 2019",https://www.niftyindices.com/Press_Release/ind_prs13062019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2019-06-13,"Change in NIFTY SME EMERGE Index w.e.f. June 20, 2019",https://www.niftyindices.com/Press_Release/ind_prs13062019_1.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-06-18,"Change in NIFTY 10 Year SDL Index w.e.f. June 19, 2019",https://www.niftyindices.com/Press_Release/ind_prs18062019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-06-24,"Change in the Fixed Income Indices w.e.f. July 01, 2019",https://www.niftyindices.com/Press_Release/ind_prs24062019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-06-25,"Change in NIFTY SME EMERGE Index w.e.f. June 25, 2019",https://www.niftyindices.com/Press_Release/ind_prs25062019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-06-25,"Change in NIFTY 10 Year SDL Index w.e.f. June 26, 2019",https://www.niftyindices.com/Press_Release/ind_prs25062019_1.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-06-28,NSE Indices launches NIFTY100 Alpha 30 Index,https://www.niftyindices.com/Press_Release/ind_prs28062019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-07-02,"Change in NIFTY 10 Year SDL Index w.e.f. July 03, 2019",https://www.niftyindices.com/Press_Release/ind_prs02072019.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
-2019-07-08,Revision in NIFTY CPSE and NIFTY SME EMERGE Indices,https://www.niftyindices.com/Press_Release/ind_prs08072019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-07-09,"Change in NIFTY SME EMERGE Index w.e.f. July 16, 2019",https://www.niftyindices.com/Press_Release/ind_prs09072019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
-2019-07-09,"Change in NIFTY 10 Year SDL Index w.e.f. July 10, 2019",https://www.niftyindices.com/Press_Release/ind_prs09072019_1.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
+2019-06-18,"Change in NIFTY 10 Year SDL Index w.e.f. June 19, 2019",https://www.niftyindices.com/Press_Release/ind_prs18062019.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-06-24,"Change in the Fixed Income Indices w.e.f. July 01, 2019",https://www.niftyindices.com/Press_Release/ind_prs24062019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-06-25,"Change in NIFTY SME EMERGE Index w.e.f. June 25, 2019",https://www.niftyindices.com/Press_Release/ind_prs25062019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-06-25,"Change in NIFTY 10 Year SDL Index w.e.f. June 26, 2019",https://www.niftyindices.com/Press_Release/ind_prs25062019_1.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-06-28,NSE Indices launches NIFTY100 Alpha 30 Index,https://www.niftyindices.com/Press_Release/ind_prs28062019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-07-02,"Change in NIFTY 10 Year SDL Index w.e.f. July 03, 2019",https://www.niftyindices.com/Press_Release/ind_prs02072019.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-07-08,Revision in NIFTY CPSE and NIFTY SME EMERGE Indices,https://www.niftyindices.com/Press_Release/ind_prs08072019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-07-09,"Change in NIFTY SME EMERGE Index w.e.f. July 16, 2019",https://www.niftyindices.com/Press_Release/ind_prs09072019.pdf,true,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
+2019-07-09,"Change in NIFTY 10 Year SDL Index w.e.f. July 10, 2019",https://www.niftyindices.com/Press_Release/ind_prs09072019_1.pdf,false,AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF,2026-11-06T15:34:40Z
 2019-07-11,"Change in NIFTY SME EMERGE Index w.e.f. July 18, 2019",https://www.niftyindices.com/Press_Release/ind_prs11072019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
 2019-07-16,"Change in NIFTY 10 Year SDL Index w.e.f. July 17, 2019",https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf,false,UNREVIEWED,2026-11-06T15:34:40Z
 2019-07-23,"Change in NIFTY SME EMERGE Index w.e.f. July 25, 2019",https://www.niftyindices.com/Press_Release/ind_prs23072019.pdf,true,UNREVIEWED,2026-11-06T15:34:40Z
