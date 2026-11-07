@@ -58,8 +58,7 @@ def normalize_nse_actions(source_path: Path, source_url: str) -> pd.DataFrame:
         return pd.DataFrame(columns=EVENT_COLUMNS)
     columns = _column_map(list(frame.columns))
     events = pd.DataFrame({name: frame[column] for name, column in columns.items()})
-    events["symbol"] = events["symbol"].astype(str).str.strip().str.upper()
-    events["event_type"] = events["event_type"].astype(str).str.strip().str.lower()
+    # pandas represents blank CSV cells as NaN; normalize them before string\n    # conversion so missing values cannot become the valid-looking text "NAN".\n    events["symbol"] = events["symbol"].fillna("").astype(str).str.strip().str.upper()\n    events["event_type"] = events["event_type"].fillna("").astype(str).str.strip().str.lower()
     for name in ("announce_date", "ex_date"):
         events[name] = pd.to_datetime(events[name], errors="coerce", dayfirst=True).dt.normalize()
     events["value"] = pd.to_numeric(
