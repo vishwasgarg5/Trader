@@ -76,9 +76,9 @@ The latest completed protocol workflow audit (run [#42381606001](https://github.
 | Transition register | 34 rows / 0 verified | Every in-scope transition verified and independently signed off |
 | Annual coverage | 0 of 7 years complete | 2018–2024 each complete |
 | Special membership events | 3 rows / 0 verified | All special events independently reviewed |
-| Annual notice inventory | 590 unresolved rows | Scope and disposition reviewed |
-| Archive discovery catalog | 694 unreviewed rows | Candidate and non-candidate dispositions reviewed |
+| Annual notice inventory | 687 unresolved rows | Scope and disposition reviewed with independent human sign-off |
+| Archive discovery catalog | 697 unresolved rows (694 unreviewed; 3 pending sign-off or blocked) | Candidate and non-candidate dispositions reviewed with independent human sign-off |
 
 The archive reconciliation sub-audit matched 112 of 117 curated notice-register rows to inventory records, with 5 register-only rows; it found 15 catalog-only URLs and 2 inventory URLs absent from the catalog. Across the inventory and register evidence checks, 798 local source files had matching recorded hashes and 6 rows had no local source path/hash recorded. These are structural audit counts, not proof that the contents were interpreted correctly or that the full archive search is complete.
 
-The audit explicitly returned `point_in_time_membership_verified=false` and `ready_for_pit_research=false`. The pilot must remain blocked until primary-source review, supersession reconciliation, 50-member snapshot checks (including documented special-event exceptions), and independent reviewer sign-off are complete.
+The counts above distinguish raw `UNREVIEWED` catalog rows from all unresolved rows. AI scope exclusions still awaiting human sign-off and source-identity mismatches remain unresolved; `SCREENED_NO_NIFTY50_CHANGE` inventory rows are AI screens, not completed independent reviews. The audit explicitly returned `point_in_time_membership_verified=false` and `ready_for_pit_research=false`. The pilot must remain blocked until primary-source review, supersession reconciliation, 50-member snapshot checks (including documented special-event exceptions), and independent reviewer sign-off are complete.
