@@ -226,3 +226,17 @@ The official October 22, 2021 NSE Indices press release has now been retrieved a
 - The PDF has not yet been archived and hashed in this repository. It is therefore documented as an audit finding only and has not been inserted into the hash-validated annual inventory.
 
 The September 20, April 22, June 15 and August 23, 2021 archive entries still require direct-PDF retrieval and scope review. Do not infer a direct URL from the archive title. The 2021 annual gate remains NOT_STARTED.
+
+
+## 2019-04-09 notice scope screen — 2026-11-07
+
+The archived official NSE Indices release dated 2019-04-09 was inspected using its extracted full text and checked against the archived source record:
+
+- Official PDF: https://www.niftyindices.com/Press_Release/ind_prs09042019.pdf
+- The notice is explicitly titled “Replacements in NIFTY 10 Year SDL Index” and states the changes become effective 2019-04-10.
+- It excludes 12 state-development loan securities and includes five, identified by ISIN in the annual notice register.
+- It contains no flagship NIFTY 50 constituent-change section. This is a negative scope screen, not a Nifty 50 transition.
+- Original PDF is already archived at `data/reference/source_documents/NOTICE-NSE-ARCHIVE-2019-04-09-901e85ba7a3b.pdf`; the inventory SHA-256 is retained unchanged: `3e6150ffa9a74b71d401c8e8cfa98b807db7d2d93a97872223644390cdc945f6`.
+- The annual inventory and notice register now classify it as `SCREENED_NO_NIFTY50_CHANGE` / `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. No reviewer identity or sign-off date is fabricated.
+
+This closes the AI scope-screen task for this single notice only. It does not complete 2019 annual archive reconciliation, supersession review, year-end snapshot reconciliation, or independent human review; 2019 coverage remains `NOT_STARTED` and the PIT membership ledger remains unauthorized.
