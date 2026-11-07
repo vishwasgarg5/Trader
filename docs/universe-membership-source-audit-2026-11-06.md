@@ -240,3 +240,13 @@ The archived official NSE Indices release dated 2019-04-09 was inspected using i
 - The annual inventory and notice register now classify it as `SCREENED_NO_NIFTY50_CHANGE` / `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. No reviewer identity or sign-off date is fabricated.
 
 This closes the AI scope-screen task for this single notice only. It does not complete 2019 annual archive reconciliation, supersession review, year-end snapshot reconciliation, or independent human review; 2019 coverage remains `NOT_STARTED` and the PIT membership ledger remains unauthorized.
+
+
+## 2019-04-23 notice pair scope screen — 2026-11-07
+
+Two separate archived official NSE Indices releases dated 2019-04-23 were inspected:
+
+1. [NIFTY G-Sec fixed-income replacements](https://www.niftyindices.com/Press_Release/ind_prs23042019.pdf), effective 2019-05-02. It changes NIFTY 11-15 yr G-Sec, NIFTY 15 yr and above G-Sec, and NIFTY Composite G-Sec only. Seven affected government-security ISINs are recorded in the notice register. No flagship NIFTY 50 constituent section/change was found.
+2. [NIFTY 10 Year SDL replacements](https://www.niftyindices.com/Press_Release/ind_prs23042019_1.pdf), effective 2019-04-24. It excludes four state-development loans and includes three, all recorded by ISIN in the notice register. No flagship NIFTY 50 constituent section/change was found.
+
+Both original PDFs are already archived in `data/reference/source_documents/` and their existing SHA-256 digests are retained in the inventory/register. The two inventory rows are now `SCREENED_NO_NIFTY50_CHANGE`; the register rows remain `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. These are AI negative scope screens only, not independent human verification or annual completeness evidence.
