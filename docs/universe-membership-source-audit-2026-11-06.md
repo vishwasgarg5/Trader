@@ -250,3 +250,15 @@ Two separate archived official NSE Indices releases dated 2019-04-23 were inspec
 2. [NIFTY 10 Year SDL replacements](https://www.niftyindices.com/Press_Release/ind_prs23042019_1.pdf), effective 2019-04-24. It excludes four state-development loans and includes three, all recorded by ISIN in the notice register. No flagship NIFTY 50 constituent section/change was found.
 
 Both original PDFs are already archived in `data/reference/source_documents/` and their existing SHA-256 digests are retained in the inventory/register. The two inventory rows are now `SCREENED_NO_NIFTY50_CHANGE`; the register rows remain `AI_REVIEWED_PENDING_HUMAN_SIGNOFF`. These are AI negative scope screens only, not independent human verification or annual completeness evidence.
+
+
+## 2019-06-03 notice scope screen — 2026-11-07
+
+The official NSE Indices release dated 2019-06-03 was opened and its complete two-page text inspected:
+
+- Official PDF: https://www.niftyindices.com/Press_Release/ind_prs03062019.pdf
+- Title: “Replacements in NIFTY 10 Year SDL Index”; changes effective 2019-06-04.
+- It excludes six state-development-loan securities and includes five, identified by ISIN in the notice.
+- The release contains no flagship NIFTY 50 constituent-change section. This is a negative scope screen, not a Nifty 50 transition.
+- The annual inventory row is now classified `SCREENED_NO_NIFTY50_CHANGE`; its existing archive path and recorded SHA-256 are retained unchanged. The PDF bytes were inspected from the official URL in this screening step; the recorded local digest was not independently recomputed here.
+- Independent human sign-off remains required. This does not complete 2019 annual archive reconciliation or authorize the PIT membership ledger.
