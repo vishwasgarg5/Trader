@@ -238,3 +238,9 @@ Acceptance criteria:
 - Archived PDF SHA-256: `9e88e10ecd77ccda7422650857f5d9529cc21efa177d37be7781b96828158297`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-06-28-b9d3352bec90.txt`.
 - Updated the annual notice inventory, AI-only scope register, manual review queue, and regression test. Classification remains AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
 - Source: https://www.niftyindices.com/Press_Release/ind_prs28062019.pdf
+
+### Additional notice screen — 2019-07-02 (AI-only; human sign-off pending)
+- Full-text screened the archived official NSE Indices release dated 2019-07-02. It excludes two State Development Loan securities (Gujarat and West Bengal) and includes five (Jammu and Kashmir, Kerala, Punjab, Rajasthan and Tamil Nadu) in the NIFTY 10 Year SDL fixed-income index effective 2019-07-03. The notice contains no flagship NIFTY 50 equity constituent section or membership event.
+- Archived PDF SHA-256: `2e139c45d4e8336e754caeab6b65def574b7d3266b9aa5245bade2719c8c28bf`, matching the annual inventory record. Extracted text: `data/reference/extracted_notice_text/NSE-ARCHIVE-2019-07-02-3d22aa40d54f.txt`.
+- Updated the annual notice inventory, AI-only scope register, manual review queue, and regression test. Classification remains AI-reviewed pending independent human sign-off; queue remains `PENDING_HUMAN_REVIEW`; no reviewer or verified membership fields were populated.
+- Source: https://www.niftyindices.com/Press_Release/ind_prs02072019.pdf
