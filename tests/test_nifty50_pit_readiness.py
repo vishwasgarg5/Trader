@@ -20,6 +20,11 @@ def test_repository_evidence_does_not_claim_pit_readiness():
     assert report["membership_interval_rows"] == 0
     assert report["annual_coverage_incomplete_years"]
     assert report["errors"]
+    # AI scope screens and pending-signoff catalog rows are still unresolved.
+    assert report["unreviewed_archive_catalog_rows"] == 694
+    assert report["unresolved_archive_catalog_rows"] == 697
+    # AI-screened inventory rows are not human-reviewed dispositions.
+    assert report["unresolved_annual_notice_rows"] == 687
 
 
 def test_empty_membership_history_is_never_ready(tmp_path):
