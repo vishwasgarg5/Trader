@@ -49,3 +49,8 @@ These are generated reports, not authoritative source ledgers. The triage is dia
 The official Nifty Indices historical reports page exposes a “Total Returns Index Values” report and a CSV output for Total Returns Index / Net Total Returns Index. This is the appropriate primary-source starting point for the Nifty 50 TRI series, but the public page alone does not establish that every daily observation for 2018–2024 can be retrieved without account, request, or rate limits.
 
 The official NSE “All Reports” page exposes daily/monthly report archives and historical index/total-return data selectors, while the Nifty Indices press-release archive exposes historical notice listings. These public interfaces establish discoverability, not complete downloadable coverage of every notice PDF or a verified historical constituent snapshot for every semi-annual boundary. Coverage must be tested year-by-year and recorded from actual downloaded files; no completeness claim is made here.
+
+
+## Generated-report freshness warning — 2026-11-07
+
+The current source inventory contains **687 notice rows** (header plus 687 records). The checked-in snapshot `data/reports/nifty50_notice_triage.json` reports 684 inventory rows and is stale relative to that input. Its `candidate_event_rows` value counts page-level text candidates, not unique notices or verified membership events. Do not use that stale JSON snapshot as a current denominator or interpret 1,297 page candidates as 1,297 membership events. Regenerate with `python -m trader.nifty_notice_triage` before analysis; compare `inventory_rows` to the current CSV row count and `human_review_queue_rows` to the generated queue row count. The source inventory and all review/sign-off states remain unchanged.
