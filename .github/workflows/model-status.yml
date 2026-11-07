@@ -66,9 +66,22 @@ jobs:
 
           if not model_path.is_file() or model_path.stat().st_size == 0:
               raise SystemExit("Saved model is missing or empty")
-          model = joblib.load(model_path)
+          artifact = joblib.load(model_path)
+          # The training pipeline persists a metadata bundle, not a bare estimator.
+          # Accept that documented bundle and retain compatibility with bare estimators.
+          if isinstance(artifact, dict):
+              model = artifact.get("model")
+              features = artifact.get("features")
+              if not isinstance(features, list) or not features or not all(
+                  isinstance(name, str) and name for name in features
+              ):
+                  raise SystemExit("Saved model bundle has missing or invalid features")
+          else:
+              model = artifact
           if not callable(getattr(model, "predict", None)):
-              raise SystemExit("Saved model does not expose predict()")
+              raise SystemExit("Saved model estimator does not expose predict()")
+          if not callable(getattr(model, "predict_proba", None)):
+              raise SystemExit("Saved model estimator does not expose predict_proba()")
 
           metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
           for key in ("accuracy", "roc_auc", "brier_score", "baseline_accuracy_majority"):
