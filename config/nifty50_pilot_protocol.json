@@ -315,7 +315,7 @@
     ]
   },
   "holdout": {
-    "current_repository_config": "config/final_holdout_protocol.json currently specifies 12 months; reconcile against the approved pilot 18/24-month rule before freeze",
+    "current_repository_config": "The controlling config/final_holdout_protocol.json defines the conditional 18/24-month rule; this field is descriptive only and must not override that rule.",
     "registered_pilot_rule": "if_verified_clean_data_span_at_least_7_years_then_24_months_else_if_5_to_under_7_years_then_18_months",
     "exact_dates": "select_from_verified_data_availability_before_examining_holdout_returns",
     "access": "physically_or_logically_isolated; evaluate once after freeze and independent approval",
@@ -346,7 +346,7 @@
     "complete power simulation design inputs and run simulation",
     "freeze exact factor formulas and inference sensitivity analysis",
     "reconstruct historical trial census for DSR",
-    "reconcile the 12-month repository holdout config with the registered 18/24-month pilot rule; no holdout access",
+    "confirm descriptive pilot wording remains aligned with the controlling conditional 18/24-month final holdout rule; no holdout access",
     "independent protocol review and SHA-256 registration"
   ]
 }
