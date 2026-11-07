@@ -161,17 +161,16 @@ def test_2020_nifty50_acceleration_survives_later_rebalancing_deferment_chain():
     assert "defer the above changes" in notice_texts["2020-03-25"]
     assert "except replacements in NIFTY 50 and NIFTY Bank index" in notice_texts["2020-05-13"]
 
-def test_strides_december_2024_corporate_adjustment_is_not_flagship_nifty50_membership():
-    """The archived notice scopes the dummy inclusion to Microcap 250 and Total Market."""
+
+def test_strides_source_archive_mismatch_remains_blocked():
+    """Do not classify a Strides URL from the same-date Nifty IPO PDF extraction."""
     from pathlib import Path
 
     root = Path(__file__).resolve().parents[1]
     notice_text = (root / "data/reference/extracted_notice_text/"
                    "NSE-ARCHIVE-2024-12-02-295b1f169428.txt").read_text(encoding="utf-8")
-    operative_section = notice_text.split("About NSE Indices Limited", 1)[0]
-    assert "Nifty Microcap 250" in operative_section
-    assert "Nifty Total Market" in operative_section
-    assert "Nifty 50" not in operative_section
+    assert "Replacement in Nifty IPO index" in notice_text
+    assert "Corporate Adjustment for Strides Pharma Science Ltd." not in notice_text
 
     with (root / "data/reference/nifty50_archive_discovery_catalog.csv").open(
         newline="", encoding="utf-8"
@@ -179,4 +178,4 @@ def test_strides_december_2024_corporate_adjustment_is_not_flagship_nifty50_memb
         rows = list(csv.DictReader(handle))
     row = next(item for item in rows if item["source_url"].endswith("ind_prs02122024_1.pdf"))
     assert row["review_candidate"] == "false"
-    assert row["scope_status"] == "AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF"
+    assert row["scope_status"] == "SOURCE_ARCHIVE_IDENTITY_MISMATCH_BLOCKED"
