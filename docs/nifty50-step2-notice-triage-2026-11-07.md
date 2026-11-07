@@ -9,7 +9,7 @@ This checkpoint records AI-assisted screening of official NSE Indices archive no
 - The existing 95-row review batch was reconciled into the current 108-row main-branch queue.
 - The remaining 13 2019 notices were checked against their archived official extracted PDF text and the existing source-scope evidence register.
 - All 13 were classified as non-flagship notices: NIFTY 10 Year SDL, G-Sec/fixed-income, SME Emerge/CPSE, or NIFTY100 Alpha 30 launch.
-- Five previously unclassified inventory rows were moved to the existing AI-screened/no-flagship-change state. The other eight were already in that state.
+- Three previously unclassified inventory rows were moved to the existing AI-screened/no-flagship-change state. The other eight were already in that state.
 - The matching archive-catalog rows were marked `AI_SCOPE_EXCLUSION_PENDING_HUMAN_SIGNOFF`.
 - All 108 queue rows now have AI triage dispositions. Candidate events remain notes-only; reviewer fields and verified effective-date/symbol fields remain blank.
 
@@ -27,7 +27,7 @@ This checkpoint records AI-assisted screening of official NSE Indices archive no
 | Independently verified transitions | 0 |
 | Complete annual coverage rows | 0 / 7 |
 
-The 102 screened rows are AI scope dispositions, not independent human approvals. The 565 unreviewed inventory rows include notices outside the high-priority queue that still require explicit disposition; this checkpoint does not silently classify them by title.
+The 100 screened rows are AI scope dispositions, not independent human approvals. The 567 unreviewed inventory rows include notices outside the high-priority queue that still require explicit disposition; this checkpoint does not silently classify them by title. The discovery catalog separately contains 15 AI scope dispositions pending human sign-off, one source-archive identity mismatch blocker, and 681 rows still marked UNREVIEWED.
 
 ## Open Step 2 acceptance gates
 
