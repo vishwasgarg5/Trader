@@ -120,3 +120,16 @@ def test_prior_trial_register_entries_are_preserved():
     assert "T-0002" in register
     assert "T-0003" in register
     assert "NIFTY50_PILOT_001 protocol registration (not a model trial)" in register
+
+def test_final_holdout_rule_matches_registered_18_or_24_month_policy():
+    holdout_path = ROOT / "config" / "final_holdout_protocol.json"
+    holdout = json.loads(holdout_path.read_text(encoding="utf-8"))
+    definition = holdout["holdout_definition"]
+    rule = definition["rule"]
+    assert "at least 7 complete years" in rule
+    assert "24 complete calendar months" in rule
+    assert "at least 5 but under 7 complete years" in rule
+    assert "18 complete calendar months" in rule
+    assert "fewer than 5 complete clean years" in rule
+    assert definition["current_status"].startswith("INCONCLUSIVE: 0 of 7 annual anchor years")
+    assert "12 complete calendar months" not in rule
