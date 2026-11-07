@@ -45,3 +45,17 @@ def test_catalog_controls_are_registered_without_fabricating_archive_or_membersh
     assert "Nifty Total Market" in strides["notes"]
     assert "not an additional membership transition" in feb["notes"]
     assert "not an additional membership transition" in aug["notes"]
+
+
+
+def test_2018_05_24_multi_index_notice_is_not_a_flagship_nifty50_transition():
+    with REGISTER.open(newline="", encoding="utf-8") as handle:
+        rows = {row["notice_id"]: row for row in csv.DictReader(handle)}
+    row = rows["NSE_INDICES_PR_2018-05-24_ind_prs24052018_pdf"]
+    assert row["notice_type"] == "MULTI_INDEX_REVIEW_NO_NIFTY50_CHANGE"
+    assert row["effective_date"] == "2018-06-29"
+    assert row["nifty50_scope_result"] == "NO_CHANGE"
+    assert row["review_status"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
+    assert row["source_document_path"].endswith("NOTICE-NSE-ARCHIVE-2018-05-24-51480acd46f7.pdf")
+    assert row["source_sha256"] == "bbc4a4c04cae7a1ff924e8b3ef3f7acc6b3a9da069a1d6a36cfe0ae99189e957"
+    assert "No flagship Nifty 50 constituent section" in row["notes"]
