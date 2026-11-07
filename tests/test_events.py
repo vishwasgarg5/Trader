@@ -87,3 +87,23 @@ def test_loader_rejects_blank_required_text_fields(tmp_path, field, expected_err
     _source(source, [row])
     with pytest.raises(ValueError, match=expected_error):
         normalize_nse_actions(source, "https://www.nseindia.com/example.csv")
+
+
+@pytest.mark.parametrize(
+    "announce_date,expected",
+    [
+        ("2025-10-01", "2025-10-01"),
+        ("01-10-2025", "2025-10-01"),
+        ("01/10/2025", "2025-10-01"),
+    ],
+)
+def test_loader_parses_iso_and_indian_day_first_dates(tmp_path, announce_date, expected):
+    source = tmp_path / "nse.csv"
+    _source(source, [{
+        "SYMBOL": "TMPV", "PURPOSE": "DIVIDEND",
+        "ANNOUNCEMENT DATE": announce_date, "EX-DATE": "14-10-2025",
+        "VALUE": "5.00",
+    }])
+    result = normalize_nse_actions(source, "https://www.nseindia.com/example.csv")
+    assert result.iloc[0]["announce_date"] == expected
+    assert result.iloc[0]["ex_date"] == "2025-10-14"
