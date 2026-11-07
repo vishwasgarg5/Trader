@@ -1,22 +1,99 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Effective-dated security symbol identity evidence",
-  "description": "Separates same-security ticker changes, vendor aliases, and economically distinct securities.",
+  "description": "Separates same-security ticker changes, vendor aliases, and economically distinct securities. VERIFIED rows require a named independent reviewer and ISO review date in the runtime audit.",
   "type": "object",
-  "required": ["alias_id", "alias_symbol", "official_symbol", "relation_type", "valid_from", "verification_status"],
+  "required": [
+    "alias_id",
+    "alias_symbol",
+    "official_symbol",
+    "relation_type",
+    "valid_from",
+    "verification_status"
+  ],
   "properties": {
-    "alias_id": {"type": "string", "minLength": 1},
-    "alias_symbol": {"type": "string", "minLength": 1},
-    "official_symbol": {"type": "string", "minLength": 1},
-    "security_id": {"type": ["string", "null"]},
-    "relation_type": {"enum": ["TICKER_RENAME_SAME_SECURITY", "VENDOR_ALIAS", "SEPARATE_SECURITY"]},
-    "valid_from": {"type": "string", "format": "date"},
-    "valid_to": {"type": ["string", "null"], "format": "date"},
-    "source_url": {"type": ["string", "null"], "format": "uri"},
-    "source_document_path": {"type": ["string", "null"]},
-    "source_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-fA-F]{64}$"},
-    "verification_status": {"enum": ["UNVERIFIED", "SAMPLE_ONLY", "VERIFIED"]},
-    "notes": {"type": ["string", "null"]}
+    "alias_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alias_symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "official_symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "security_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relation_type": {
+      "enum": [
+        "TICKER_RENAME_SAME_SECURITY",
+        "VENDOR_ALIAS",
+        "SEPARATE_SECURITY"
+      ]
+    },
+    "valid_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "valid_to": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "source_document_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "verification_status": {
+      "enum": [
+        "UNVERIFIED",
+        "SAMPLE_ONLY",
+        "VERIFIED"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
   },
   "additionalProperties": false
 }
