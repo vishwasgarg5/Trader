@@ -1,0 +1,33 @@
+name: NSE archive access probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-public-archives:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run offline probe unit tests
+        run: python -m pytest -q tests/test_nse_archive_access_probe.py
+      - name: Probe representative public archive endpoints
+        run: |
+          mkdir -p artifacts
+          python -m trader.nse_archive_access_probe | tee artifacts/nse-archive-access-probe.json
+      - name: Upload access probe evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nse-archive-access-probe
+          path: artifacts/nse-archive-access-probe.json
+          if-no-files-found: warn
+          retention-days: 30
