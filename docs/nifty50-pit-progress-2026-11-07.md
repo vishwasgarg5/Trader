@@ -1,0 +1,49 @@
+# Nifty 50 pilot — evidence progress log (2026-11-07)
+
+Status: **Steps 2–4 remain IN_PROGRESS.** This log records source checks and safe implementation work; it does not certify point-in-time membership, security identity, adjusted prices, or market data.
+
+## Step 2 — official source cross-check
+
+The 18 February 2020 NSE Indices press release initially scheduled the YESBANK removal / SHREECEM inclusion for 27 March 2020 (close 26 March). The official 16 March 2020 superseding release explicitly accelerates that Nifty 50 replacement to 19 March 2020 (close 18 March). The 16 March release names both securities and explicitly refers to the earlier 18 February announcement.
+
+- Initial official source: https://www.niftyindices.com/Press_Release/ind_prs18022020.pdf
+- Superseding official source: https://www.niftyindices.com/Press_Release/ind_prs16032020.pdf
+- Repository source text: `data/reference/extracted_notice_text/N50-NOTICE-2020-02-18.txt` and `data/reference/extracted_notice_text/N50-NOTICE-2020-03-16.txt`
+- Repository transition rows: `N50-2020-YESBANK-OUT` and `N50-2020-SHREECEM-IN`
+
+This confirms why the originally announced March 27 date must not be used as the final effective date. Both rows remain `SAMPLE_ONLY` pending independent human sign-off; this log does not promote them.
+
+## External membership dataset assessment — not imported
+
+A public third-party NSE historical-membership repository was inspected as a possible cross-check only:
+https://github.com/aditya-jha/nse-historical-membership
+
+It is not accepted as the pilot's source of truth and no rows were copied into `nifty50_membership.csv`, because:
+
+1. Its own validation report records 13 of 20 internal-consistency invariants failing.
+2. Its Nifty 50 history contains `snapshot_floor` intervals without a direct source URL, so those rows do not establish point-in-time effective dates.
+3. The inspected history uses `LTM` for an interval beginning in 2023, while the pilot's security identity evidence records LTIM as the official symbol at that time and a later LTIM-to-LTM rename in 2026. This requires source-level identity reconciliation, not ticker substitution.
+4. The repository README describes a CC BY 4.0 data licence while the inspected `LICENSE-DATA` text is a CC0 waiver. The licence statement needs clarification before redistributing its data.
+
+The external dataset may be used to identify discrepancies for manual investigation, never to fill missing intervals or to assert verification.
+
+## Source archive reconciliation added to CI
+
+The existing `trader.nifty_notice_reconciliation` audit compares the annual archive inventory, curated notice register, discovery catalog, archived source-document presence and recorded SHA-256 digests. It is diagnostic only and never edits membership rows or review states.
+
+The pilot workflow now runs its focused tests and reconciliation report whenever the reconciliation code, tests, archived source PDFs or extracted notice text change. A passing workflow means the diagnostic ran; it does not mean the evidence coverage is complete or that human review has occurred.
+
+## Remaining Step 2 gates
+
+- Review all in-scope official archive notices for 2018–2024, including OCR-only records and superseding/deferred notices.
+- Verify each transition against the original official PDF and reconcile all effective-date snapshots to 50 names, with documented exceptions for special events.
+- Build the interval ledger only from reviewed primary-source facts.
+- Obtain independent reviewer identity and date for each verified record.
+
+## Steps 3–4 remain blocked
+
+Security aliases and corporate-action adjustment factors still require source-level evidence and independent review. The OHLCV and Nifty 50 TRI CSV contracts remain empty; no historical observations have been invented or imported from an unapproved provider.
+
+## Safety
+
+Nifty 50 pilot only. Protocol remains `DRAFT_NOT_FROZEN`. Holdout access, evaluation, promotion, paper trading and live execution remain unauthorized.
