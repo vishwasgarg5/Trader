@@ -16,6 +16,7 @@ INVENTORY = Path("data/reference/nifty50_annual_notice_inventory.csv")
 REPORT = Path("data/reports/nifty50_notice_triage.json")
 EVENTS = Path("data/reference/nifty50_candidate_events.csv")
 REVIEW_QUEUE = Path("data/reference/nifty50_notice_review_queue.csv")
+NOTICE_REGISTER = Path("data/reference/nifty50_notice_register.csv")
 OCR_TEXT_DIR = Path("data/reference/ocr_notice_text")
 CATALOG = Path("data/reference/nifty50_archive_discovery_catalog.csv")
 
@@ -138,13 +139,16 @@ def _candidate_events(pdf_path: Path, source_sha256: str, notice_id: str) -> tup
     return events, status, ocr_metadata
 
 
-def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path) -> int:
+def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path,
+                        register_path: Path) -> int:
     """Write a high-priority review queue while preserving human annotations."""
     columns = [
         "notice_id", "announcement_date", "title", "source_url",
         "source_document_path", "source_sha256_expected", "title_triage",
         "text_extraction_status", "candidate_page_count", "candidate_event_rows",
-        "review_status", "reviewer", "reviewed_at", "verified_effective_date",
+        "register_notice_ids", "register_scope_results", "register_review_statuses",
+        "register_link_status", "review_status", "reviewer", "reviewed_at",
+        "verified_effective_date",
         "verified_out_symbols", "verified_in_symbols", "notes",
     ]
     previous = {}
@@ -153,6 +157,13 @@ def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path
             for old in csv.DictReader(handle):
                 if old.get("notice_id"):
                     previous[old["notice_id"]] = old
+    register_by_url = {}
+    if register_path.is_file():
+        with register_path.open(newline="", encoding="utf-8") as handle:
+            for register_row in csv.DictReader(handle):
+                url = (register_row.get("source_url") or "").strip()
+                if url:
+                    register_by_url.setdefault(url, []).append(register_row)
     event_counts = {}
     for event in events:
         event_counts[event["notice_id"]] = event_counts.get(event["notice_id"], 0) + 1
@@ -162,6 +173,7 @@ def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path
         if item["title_triage"] != "PRIORITY_CONSTITUENT_CHANGE_REVIEW":
             continue
         old = previous.get(item["notice_id"], {})
+        register_matches = register_by_url.get(item["source_url"], [])
         row = {
             "notice_id": item["notice_id"],
             "announcement_date": item["announcement_date"],
@@ -173,8 +185,12 @@ def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path
             "text_extraction_status": item["text_extraction_status"],
             "candidate_page_count": item["candidate_page_count"],
             "candidate_event_rows": event_counts.get(item["notice_id"], 0),
+            "register_notice_ids": "; ".join(match.get("notice_id", "") for match in register_matches),
+            "register_scope_results": "; ".join(match.get("nifty50_scope_result", "") for match in register_matches),
+            "register_review_statuses": "; ".join(match.get("review_status", "") for match in register_matches),
+            "register_link_status": "MATCHED_CURATED_REGISTER" if register_matches else "NOT_IN_CURATED_REGISTER",
         }
-        for field in columns[10:]:
+        for field in columns[14:]:
             row[field] = old.get(field, "")
         if not row["review_status"]:
             row["review_status"] = "PENDING_HUMAN_REVIEW"
@@ -190,7 +206,8 @@ def _write_review_queue(triage: list[dict], events: list[dict], queue_path: Path
 
 def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
         events_path: Path = EVENTS, catalog_path: Path = CATALOG,
-        review_queue_path: Path = REVIEW_QUEUE) -> dict:
+        review_queue_path: Path = REVIEW_QUEUE,
+        register_path: Path = NOTICE_REGISTER) -> dict:
     with inventory_path.open(newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     catalog_titles = {}
@@ -262,7 +279,7 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
         writer.writeheader()
         writer.writerows(events)
     report["human_review_queue_rows"] = _write_review_queue(
-        triage, events, review_queue_path
+        triage, events, review_queue_path, register_path
     )
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
