@@ -122,8 +122,8 @@ def test_missing_pdf_for_nifty_sdl_launch_is_out_of_scope(tmp_path):
 def test_review_queue_preserves_human_annotations_across_regeneration(tmp_path):
     inventory = tmp_path / "inventory.csv"
     inventory.write_text(
-        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\\n"
-        "nifty50-2024,2024-02-20,Archive title: Changes in Indices,https://example.test/nifty50.pdf,,,DISCOVERED_UNREVIEWED\\n",
+        "notice_id,announcement_date,notes,source_url,source_document_path,source_sha256,review_status\n"
+        "nifty50-2024,2024-02-20,Archive title: Changes in Indices,https://example.test/nifty50.pdf,,,DISCOVERED_UNREVIEWED\n",
         encoding="utf-8",
     )
     queue = tmp_path / "review_queue.csv"
