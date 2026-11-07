@@ -11,7 +11,7 @@ A URL-keyed comparison of the checked-in discovery catalog and annual notice inv
 | Dataset | Rows | Meaning |
 |---|---:|---|
 | `nifty50_archive_discovery_catalog.csv` | 697 | All discovered archive entries, including title-screened non-candidates |
-| `nifty50_annual_notice_inventory.csv` | 684 | Review-candidate inventory plus separately registered event sources |
+| `nifty50_annual_notice_inventory.csv` | 687 | Review-candidate inventory plus separately registered event sources |
 | Catalog-only URLs | 15 | Archive entries not copied into the candidate inventory |
 | Inventory-only URLs | 2 | Special-event sources hosted on the NSE archives host, not discovered as press-release archive entries |
 
@@ -65,3 +65,20 @@ No constituent intervals were created or modified. No row was marked `VERIFIED`.
 ## Source-identity mismatch — 2024-12-02 Strides corporate adjustment
 
 The official [2 December 2024 Strides corporate-adjustment URL](https://www.niftyindices.com/Press_Release/ind_prs02122024_1.pdf) is distinct from the same-date Nifty IPO replacement URL. The checked-in extracted text at `NSE-ARCHIVE-2024-12-02-295b1f169428.txt` is explicitly the **Nifty IPO** replacement notice, not the Strides notice. The Git tree also shows the two same-date PDF paths have identical blob content, so the local Strides-labelled artifact is not independent evidence for the Strides URL. The catalog row is therefore marked `SOURCE_ARCHIVE_IDENTITY_MISMATCH_BLOCKED`; it is not screened out of Nifty 50 scope. Correct source bytes, source URL/path reconciliation, SHA-256 verification, and independent review are required. A regression test prevents the Nifty IPO extraction from being reused as Strides evidence. No membership or annual coverage status was advanced.
+
+## Latest fail-closed readiness snapshot
+
+The latest completed protocol workflow audit (run [#42381606001](https://github.com/vishwasgarg5/Trader/actions/runs/42381606001), commit `58d442ee`) reported:
+
+| Gate | Observed | Required for Step 2 |
+|---|---:|---|
+| Effective-dated membership intervals | 0 rows / 0 verified | Complete source-backed interval history |
+| Transition register | 34 rows / 0 verified | Every in-scope transition verified and independently signed off |
+| Annual coverage | 0 of 7 years complete | 2018–2024 each complete |
+| Special membership events | 3 rows / 0 verified | All special events independently reviewed |
+| Annual notice inventory | 590 unresolved rows | Scope and disposition reviewed |
+| Archive discovery catalog | 694 unreviewed rows | Candidate and non-candidate dispositions reviewed |
+
+The archive reconciliation sub-audit matched 112 of 117 curated notice-register rows to inventory records, with 5 register-only rows; it found 15 catalog-only URLs and 2 inventory URLs absent from the catalog. Across the inventory and register evidence checks, 798 local source files had matching recorded hashes and 6 rows had no local source path/hash recorded. These are structural audit counts, not proof that the contents were interpreted correctly or that the full archive search is complete.
+
+The audit explicitly returned `point_in_time_membership_verified=false` and `ready_for_pit_research=false`. The pilot must remain blocked until primary-source review, supersession reconciliation, 50-member snapshot checks (including documented special-event exceptions), and independent reviewer sign-off are complete.
