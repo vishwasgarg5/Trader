@@ -73,3 +73,17 @@ def test_2024_10_10_shariah_review_is_not_a_flagship_nifty50_transition():
     assert row["source_sha256"] == "a24e99d89476f28d37954f5c818dbace7c6125d448ec050c1e0f949b6a0dd169"
     assert "15 exclusions and 5 inclusions in Nifty500 Shariah only" in row["notes"]
     assert "no change to Nifty50 Shariah and Nifty Shariah 25" in row["notes"]
+
+def test_2018_06_20_ht_media_replacement_notice_is_not_a_flagship_nifty50_transition():
+    with REGISTER.open(newline="", encoding="utf-8") as handle:
+        rows = {row["notice_id"]: row for row in csv.DictReader(handle)}
+    row = rows["NSE_INDICES_PR_2018-06-20_ind_prs20062018_pdf"]
+    assert row["notice_type"] == "MULTI_INDEX_REPLACEMENT_NO_NIFTY50_CHANGE"
+    assert row["publication_date"] == "2018-06-20"
+    assert row["effective_date"] == "2018-06-29"
+    assert row["nifty50_scope_result"] == "NO_CHANGE"
+    assert row["review_status"] == "AI_REVIEWED_PENDING_HUMAN_SIGNOFF"
+    assert row["source_document_path"].endswith("NOTICE-NSE-ARCHIVE-2018-06-20-93d360edf6a9.pdf")
+    assert row["source_sha256"] == "e4853e8962fd4df7156f7d7077d3df3aba6ba354eb368a771036e3c7a6ec9385"
+    assert "Nifty 500, Nifty Smallcap 250, Nifty MidSmallcap 400 and Nifty Media only" in row["notes"]
+    assert "No flagship Nifty 50 constituent section or change" in row["notes"]
