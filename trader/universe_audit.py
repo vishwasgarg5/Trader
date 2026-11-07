@@ -112,14 +112,12 @@ def audit_universe(
                 history["source_published_at"] = _india_calendar_dates(history["source_published_at"])
                 membership_symbols = set(history["symbol"].dropna())
                 missing_membership = sorted(set(symbols) - membership_symbols)
-                unexpected_membership = sorted(membership_symbols - set(symbols))
+                # Historical index members are expected to differ from today's
+                # configured ticker snapshot. Former, delisted and replaced symbols
+                # must remain in the point-in-time ledger to avoid survivorship bias.
                 if missing_membership:
                     membership["errors"].append(
                         f"configured symbols missing from membership evidence: {missing_membership}"
-                    )
-                if unexpected_membership:
-                    membership["errors"].append(
-                        f"membership evidence contains symbols outside configured universe: {unexpected_membership}"
                     )
                 if history["symbol"].eq("").any() or history["valid_from"].isna().any():
                     membership["errors"].append("blank symbols or invalid valid_from dates")
