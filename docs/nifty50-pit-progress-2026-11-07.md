@@ -78,3 +78,12 @@ The index reconstruction diagnostic cannot run on historical data until verified
 - Model Status run #42384466749 on commit `c55d0557c849bf1aef772ec72b47d1dee5fdeee4` completed successfully: **257 tests passed**; saved-model and safety-gate validation also passed.
 - The earlier syntax issue in the reconstruction diagnostic was caught by CI, corrected, and included in the successful 257-test run.
 - The dedicated Nifty 50 pilot workflow last confirmed green is #42383794288 on the notice-triage commit. The expanded workflow definition now includes membership/identity/corporate-action and reconstruction tests; the latest full-suite run is the verification evidence for the newly added reconstruction code.
+
+
+## Step 6 — fixed-horizon labels (engineering contract started)
+
+The pilot-specific module `trader/nifty50_pilot_labels.py` and synthetic tests are now present. It is deliberately separate from legacy triple-barrier labels. It calculates compounded net stock total return after a supplied fixed round-trip cost fraction, subtracts matched Nifty 50 TRI return, and assigns label 1 only when relative excess is strictly above 1 percentage point. Invalid or unavailable inputs remain UNRESOLVED, never negative. It requires an explicitly exact five-entry-session interval and verified prerequisite flags for membership, identity, stock total returns, TRI and execution costs.
+
+This is **not** permission to generate historical labels. The current Step 2–5 evidence blockers mean all real pilot labels remain disabled. Synthetic tests validate arithmetic and fail-closed behavior only. The pilot workflow now runs these tests on relevant changes.
+
+**Roadmap accounting:** Step 1 remains the only complete step (1/13). Steps 2–5 remain evidence-blocked; Step 6 has its calculation contract implemented but remains incomplete and data-blocked. Steps 7–13 have not started. Protocol remains `DRAFT_NOT_FROZEN`; holdout/evaluation and all trading permissions remain locked.
