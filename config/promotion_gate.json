@@ -11,5 +11,18 @@
     "Reconcile transaction costs and slippage against actual broker contract notes.",
     "Complete prospective paper trading and operational review.",
     "Obtain explicit independent approval for promotion and a separate authorization for any live execution."
-  ]
+  ],
+  "pilot_outcome_restrictions": {
+    "experiment_id": "NIFTY50_PILOT_001",
+    "pilot_go_meaning": "ELIGIBLE_FOR_SEPARATELY_APPROVED_BROADER_EXPERIMENT_ONLY",
+    "pilot_go_authorizes_promotion": false,
+    "pilot_go_authorizes_paper_trading": false,
+    "pilot_go_authorizes_live_trading": false,
+    "separate_approval_required_for_any_broader_experiment": true
+  },
+  "evaluation_controls": {
+    "model_evaluation_authorized": false,
+    "holdout_access_authorized": false,
+    "reason": "Pilot protocol is DRAFT_NOT_FROZEN; data feasibility, power, cost validation and independent review remain outstanding."
+  }
 }
