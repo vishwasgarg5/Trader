@@ -252,6 +252,35 @@ def make_model() -> Pipeline:
     ])
 
 
+def previous_close_baseline_metrics(targets: pd.Series, future_returns: pd.Series) -> dict:
+    """Evaluate a zero-return (previous-close carried forward) forecast baseline.
+
+    The baseline forecasts the signal-day close unchanged at the five-session
+    horizon. It therefore predicts no +1% upside event and forecasts a 0.0
+    holding-period return. This is a simple reference, not a tradable strategy.
+    """
+    aligned = pd.concat([
+        pd.to_numeric(targets, errors="coerce").rename("target"),
+        pd.to_numeric(future_returns, errors="coerce").rename("future_return"),
+    ], axis=1).dropna()
+    if aligned.empty:
+        raise ValueError("Previous-close baseline requires aligned labelled returns")
+    realised = aligned["future_return"].to_numpy(dtype=float)
+    if not np.isfinite(realised).all():
+        raise ValueError("Previous-close baseline returns must be finite")
+    zero_forecast = np.zeros(len(realised), dtype=float)
+    target = aligned["target"].to_numpy(dtype=int)
+    return {
+        "definition": "carry signal-day close forward unchanged for five sessions; forecast return = 0 and +1% upside class = 0",
+        "forecast_return": 0.0,
+        "upside_class_prediction": 0,
+        "accuracy": float(np.mean(target == 0)),
+        "return_mae": float(np.mean(np.abs(realised - zero_forecast))),
+        "return_rmse": float(np.sqrt(np.mean((realised - zero_forecast) ** 2))),
+        "rows": int(len(aligned)),
+    }
+
+
 def train_and_evaluate(frame: pd.DataFrame) -> tuple[Pipeline, dict]:
     labelled = frame.dropna(subset=["target"]).copy()
     dates = np.array(sorted(labelled.index.unique()))
@@ -281,6 +310,8 @@ def train_and_evaluate(frame: pd.DataFrame) -> tuple[Pipeline, dict]:
         "brier_score": float(brier_score_loss(test["target"], probabilities)),
         "roc_auc": float(roc_auc_score(test["target"], probabilities)),
         "baseline_accuracy_majority": float(max(test["target"].mean(), 1 - test["target"].mean())),
+        "previous_close_baseline": previous_close_baseline_metrics(test["target"], test["future_return"]),
+        "model_accuracy_minus_previous_close_baseline": float(accuracy_score(test["target"], predictions) - previous_close_baseline_metrics(test["target"], test["future_return"])["accuracy"]),
         "target_return": TARGET_RETURN,
         "horizon_sessions": HORIZON,
         "validation": "chronological holdout with five-session purge; before costs",

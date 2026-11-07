@@ -177,3 +177,25 @@ def test_download_prices_disables_parallel_yfinance_cache_writes(monkeypatch):
     assert calls["threads"] is False
     assert calls["auto_adjust"] is True
     assert calls["interval"] == "1d"
+
+def test_previous_close_baseline_is_zero_return_and_no_upside_prediction():
+    from trader.pipeline import previous_close_baseline_metrics
+
+    targets = pd.Series([0, 1, 0, 1])
+    future_returns = pd.Series([0.02, -0.01, 0.00, 0.03])
+    result = previous_close_baseline_metrics(targets, future_returns)
+
+    assert result["forecast_return"] == 0.0
+    assert result["upside_class_prediction"] == 0
+    assert result["accuracy"] == pytest.approx(0.5)
+    assert result["return_mae"] == pytest.approx(0.015)
+    assert result["return_rmse"] == pytest.approx(np.sqrt(0.00035))
+    assert result["rows"] == 4
+
+
+def test_previous_close_baseline_rejects_empty_aligned_data():
+    from trader.pipeline import previous_close_baseline_metrics
+
+    with pytest.raises(ValueError, match="aligned labelled returns"):
+        previous_close_baseline_metrics(pd.Series([np.nan]), pd.Series([np.nan]))
+
