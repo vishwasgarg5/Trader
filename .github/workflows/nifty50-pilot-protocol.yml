@@ -9,12 +9,6 @@ on:
       - "trader/pilot_protocol.py"
       - "tests/test_nifty50_pilot_protocol.py"
       - ".github/workflows/nifty50-pilot-protocol.yml"
-    paths:
-      - "config/nifty50_pilot_protocol.json"
-      - "config/schemas/nifty50_pilot_protocol.schema.json"
-      - "trader/pilot_protocol.py"
-      - "tests/test_nifty50_pilot_protocol.py"
-      - ".github/workflows/nifty50-pilot-protocol.yml"
   workflow_dispatch:
 
 permissions:
@@ -36,7 +30,7 @@ jobs:
         run: |
           python -m json.tool config/nifty50_pilot_protocol.json > /dev/null
           python -m json.tool config/schemas/nifty50_pilot_protocol.schema.json > /dev/null
-      - name: Install test runner
+      - name: Install test runner and schema validator
         run: python -m pip install --disable-pip-version-check pytest jsonschema
       - name: Validate protocol against JSON Schema
         run: |
