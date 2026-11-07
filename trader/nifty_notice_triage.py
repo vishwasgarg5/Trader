@@ -264,7 +264,7 @@ def run(inventory_path: Path = INVENTORY, report_path: Path = REPORT,
     report["human_review_queue_rows"] = _write_review_queue(
         triage, events, review_queue_path
     )
-    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 
