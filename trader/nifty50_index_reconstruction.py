@@ -139,7 +139,7 @@ def reconstruct_price_index(dates, membership, security_inputs, divisors,
             row = rows[0]
             close, shares, iwf = (_positive(row.get(k)) for k in
                                   ("close", "free_float_shares", "investible_weight_factor"))
-            if close is None or shares is None or iwf is None or not _reviewed(row):
+            if close is None or shares is None or iwf is None or iwf > 1.0 or not _reviewed(row):
                 missing.append(sid)
                 continue
             total += close * shares * iwf
@@ -164,7 +164,7 @@ def reconstruct_price_index(dates, membership, security_inputs, divisors,
         errors.append("no requested dates supplied")
     status = "INSUFFICIENT_INPUTS" if insufficient else ("MISMATCH" if mismatch else "MATCH")
     return {"status": status, "rows": results, "errors": errors,
-            "tolerance_points": float(tolerance_points), "parameter_fitting": False,
+            "tolerance_points": float(tolerance_points), "interpretation": ("CROSS_SOURCE_CONSISTENCY_CHECKED" if status == "MATCH" else "NOT_ESTABLISHED"),\n            "parameter_fitting": False,
             "membership_written": False, "tri_reconstructed": False,
             "limitations": [
                 "A level match is a consistency check, not proof that constituent history is correct; offsetting errors can match.",
