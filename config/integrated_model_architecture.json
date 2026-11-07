@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "status": "ARCHITECTURE_APPROVED_IMPLEMENTATION_PENDING",
+  "universe": "all_eligible_point_in_time_nse_listed_ordinary_equity_securities",
+  "benchmark": "NIFTY_500_REFERENCE_ONLY",
+  "prediction_horizon_sessions": 5,
+  "modules": {
+    "price_technical": {
+      "status": "EXISTS_BASELINE_NEEDS_REVALIDATION",
+      "inputs": [
+        "OHLCV",
+        "NIFTY_500_or_NIFTY_market_context",
+        "India_VIX",
+        "relative_strength",
+        "delivery_data"
+      ],
+      "role": "base_price_and_risk_features"
+    },
+    "corporate_action_adjustment": {
+      "status": "PARTIAL_BLOCKED",
+      "actions": [
+        "split",
+        "bonus",
+        "demerger",
+        "symbol_rename",
+        "rights_issue"
+      ],
+      "role": "correct_historical_price_and_share_quantity_lineage",
+      "must_not_become_alpha_feature_without_separate_validation": true
+    },
+    "dividend": {
+      "status": "PARTIAL_GENERIC_EVENT_INGESTION",
+      "inputs": [
+        "announcement_date",
+        "ex_date",
+        "amount_per_share",
+        "currency",
+        "record_date",
+        "payment_date",
+        "source_provenance"
+      ],
+      "role": "total_return_and_income_event_features"
+    },
+    "buyback": {
+      "status": "MISSING_DEDICATED_MODULE",
+      "inputs": [
+        "announcement_date",
+        "method",
+        "offer_price",
+        "market_price_at_announcement",
+        "shares_or_percent_sought",
+        "record_date",
+        "tender_window",
+        "completion_status",
+        "acceptance_ratio_when_published"
+      ],
+      "role": "event_impact_features",
+      "do_not_assume_announced_offer_completes": true
+    },
+    "news": {
+      "status": "MISSING",
+      "inputs": [
+        "published_at",
+        "first_seen_at",
+        "source",
+        "issuer_security_id",
+        "event_category",
+        "sentiment",
+        "relevance",
+        "novelty",
+        "confidence",
+        "source_hash"
+      ],
+      "role": "point_in_time_news_features",
+      "no_future_or_revised_story_leakage": true
+    },
+    "ipo_gmp": {
+      "status": "MISSING",
+      "inputs": [
+        "issue_price",
+        "gmp_value",
+        "gmp_observed_at",
+        "source",
+        "subscription_by_category",
+        "allotment_date",
+        "listing_date",
+        "listing_price",
+        "post_listing_outcomes"
+      ],
+      "role": "separate_ipo_listing_model",
+      "gmp_is_unofficial_and_never_guaranteed": true
+    },
+    "portfolio": {
+      "status": "EXISTS_SIMULATION_AND_DIAGNOSTICS",
+      "inputs": [
+        "candidate_scores",
+        "holdings",
+        "cash",
+        "costs",
+        "liquidity",
+        "sector_exposure",
+        "risk_limits"
+      ],
+      "role": "position_sizing_and_portfolio_construction",
+      "live_execution": false
+    },
+    "fusion_and_calibration": {
+      "status": "MISSING",
+      "role": "combine_module_outputs_without_double_counting_and_calibrate_probabilities",
+      "requires_chronological_nested_validation": true
+    },
+    "monitoring_and_reporting": {
+      "status": "PARTIAL",
+      "role": "coverage_data_quality_drift_calibration_costs_and_segment_performance"
+    }
+  },
+  "output_contract": [
+    "as_of_date",
+    "security_id",
+    "symbol",
+    "five_session_probability_or_expected_return",
+    "confidence_or_uncertainty",
+    "technical_score",
+    "buyback_event_score",
+    "dividend_total_return_context",
+    "news_score",
+    "ipo_model_output_when_applicable",
+    "corporate_action_data_quality_status",
+    "portfolio_eligibility",
+    "risk_and_liquidity_flags",
+    "research_signal"
+  ],
+  "evaluation": {
+    "development": "representative_point_in_time_stratified_sample; preregister_sample_size_seed_and_strata",
+    "freeze": "immutable_model_features_preprocessing_thresholds_costs_code_sha_data_sha_model_sha",
+    "broad_test": "frozen_inference_on_full_point_in_time_eligible_NSE_universe_no_refit_or_retuning",
+    "segments": [
+      "market_cap",
+      "liquidity",
+      "sector",
+      "listing_age",
+      "event_type",
+      "market_regime"
+    ],
+    "baselines": [
+      "previous_close_zero_return",
+      "majority_class",
+      "logistic",
+      "simple_factor",
+      "benchmark_total_return"
+    ],
+    "final_holdout": "LOCKED_NOT_EVALUATED"
+  },
+  "safety": {
+    "research_status": "RESEARCH_HOLD",
+    "promotion_eligible": false,
+    "live_execution_enabled": false,
+    "full_universe_experiment_authorized": false
+  }
+}
