@@ -93,3 +93,34 @@ def test_bad_source_digest_blocks_verified_alias(tmp_path):
     report = audit_security_aliases(path)
     assert report["ready"] is False
     assert any("SHA-256 mismatch" in error for error in report["errors"])
+
+
+
+def test_ltim_symbol_history_uses_official_2026_rename_not_a_2023_vendor_alias():
+    root = Path(__file__).resolve().parents[1]
+    with (root / "data" / "reference" / "security_symbol_aliases.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = list(csv.DictReader(handle))
+    row = next(item for item in rows if item["alias_id"] == "ALIAS-LTIM-LTM-NSE-RENAME-2026")
+    assert row["alias_symbol"] == "LTIM"
+    assert row["official_symbol"] == "LTM"
+    assert row["relation_type"] == "TICKER_RENAME_SAME_SECURITY"
+    assert row["valid_from"] == "2023-07-13"
+    assert row["valid_to"] == "2026-02-27"
+    assert row["security_id"] == "INE214T01019"
+    assert row["source_url"].endswith("/CML72948.pdf")
+    assert row["verification_status"] == "UNVERIFIED"
+
+
+def test_historical_nifty50_ltim_events_keep_the_official_ltim_symbol():
+    root = Path(__file__).resolve().parents[1]
+    with (root / "data" / "reference" / "nifty50_transition_register.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = list(csv.DictReader(handle))
+    ltim_rows = [row for row in rows if row["transition_id"] in {
+        "N50-2023-LTIM-IN", "N50-2024-LTIM-OUT"
+    }]
+    assert len(ltim_rows) == 2
+    assert {row["symbol"] for row in ltim_rows} == {"LTIM"}
