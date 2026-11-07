@@ -1,0 +1,95 @@
+{
+  "protocol_version": 1,
+  "status": "DESIGN_REGISTERED_DATA_AND_SAMPLE_RULES_BLOCKED",
+  "purpose": "Use a bounded representative development sample, freeze the complete model specification, then evaluate it unchanged on the broader point-in-time NSE-listed eligible-equity universe.",
+  "target": {
+    "definition": "five_session_forward_net_return_or_upside_target_as_selected_by_the_registered_experiment",
+    "horizon_sessions": 5,
+    "existing_experiment_target_must_not_be_silently_changed": true
+  },
+  "stage_1_development": {
+    "status": "NOT_AUTHORIZED_PENDING_SAMPLE_RULES_AND_DATA_GATES",
+    "universe_source": "point_in_time_nse_security_master",
+    "sample_design": "deterministic_stratified_sample_across_market_cap_liquidity_sector_and_listing_age",
+    "selection_information_cutoff": "each_signal_date_only",
+    "sample_size": null,
+    "strata_definitions": null,
+    "selection_seed": null,
+    "sample_rules_must_be_preregistered": true,
+    "use": [
+      "feature_and_pipeline_debugging",
+      "model_family_comparison",
+      "hyperparameter_selection",
+      "threshold_and_calibration_selection"
+    ],
+    "chronological_validation": true,
+    "purge_overlapping_labels": true,
+    "final_holdout_access": "PROHIBITED"
+  },
+  "stage_2_freeze": {
+    "status": "NOT_CREATED",
+    "required_artifacts": [
+      "model_family_and_hyperparameters",
+      "ordered_feature_names_and_definitions",
+      "imputation_scaling_and_preprocessing",
+      "target_and_label_rules",
+      "probability_calibration",
+      "signal_thresholds_and_ranking_rules",
+      "risk_and_position_rules",
+      "broker_cost_and_slippage_assumptions",
+      "training_window_and_random_seeds",
+      "source_code_commit_sha",
+      "development_data_snapshot_sha256",
+      "configuration_sha256",
+      "serialized_model_sha256"
+    ],
+    "freeze_manifest_path": "data/reports/frozen_model_specification.json",
+    "immutable_after_freeze": true,
+    "any_change_requires_new_model_version_and_new_unseen_evaluation_period": true
+  },
+  "stage_3_broad_evaluation": {
+    "status": "BLOCKED_UNTIL_SECURITY_MASTER_AND_PRICE_LINEAGE_VERIFIED",
+    "universe_source": "all_eligible_point_in_time_nse_listed_ordinary_equity_securities",
+    "must_include_inactive_and_delisted_securities_for_their_eligible_periods": true,
+    "apply_frozen_specification_without_refitting_or_retuning": true,
+    "report_segments": [
+      "market_cap",
+      "liquidity",
+      "sector",
+      "listing_age",
+      "market_regime"
+    ],
+    "compare_against": [
+      "previous_close_zero_return_baseline",
+      "majority_class_baseline",
+      "frozen_logistic_baseline",
+      "predeclared_simple_factor_and_portfolio_baselines"
+    ],
+    "include": [
+      "coverage_and_exclusion_counts",
+      "probability_calibration",
+      "classification_metrics",
+      "net_portfolio_returns_after_costs",
+      "turnover_and_capacity",
+      "drawdown_and_tail_risk",
+      "dependence_aware_confidence_intervals",
+      "fold_and_segment_stability"
+    ],
+    "final_confirmatory_holdout": "separate_locked_protocol_only"
+  },
+  "data_prerequisites": {
+    "point_in_time_security_master_verified": false,
+    "historical_ohlcv_coverage_verified_including_inactive_securities": false,
+    "security_identity_and_symbol_aliases_verified": false,
+    "corporate_action_adjustment_lineage_verified": false,
+    "eligibility_and_liquidity_filters_preregistered": false,
+    "broker_costs_and_slippage_reconciled": false
+  },
+  "safety": {
+    "research_status": "RESEARCH_HOLD",
+    "promotion_eligible": false,
+    "final_holdout": "LOCKED_NOT_EVALUATED",
+    "live_execution_enabled": false,
+    "full_universe_experiment_authorized": false
+  }
+}
