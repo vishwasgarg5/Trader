@@ -81,4 +81,5 @@ def test_full_text_scope_exclusions_are_archived_and_remain_human_pending():
         assert not queue_row["reviewed_at"]
         assert not queue_row["verified_effective_date"]
         assert not queue_row["verified_out_symbols"]
+        # Screening notes belong only in notes, never in verified symbol fields.
         assert not queue_row["verified_in_symbols"]
