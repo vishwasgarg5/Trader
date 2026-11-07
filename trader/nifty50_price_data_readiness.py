@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 from trader.corporate_actions import audit_corporate_action_ledger
 from trader.nifty50_pit_readiness import audit_pit_readiness
-from trader.security_aliases import audit_security_aliases
+from trader.security_aliases import audit_security_aliases, is_valid_isin
 
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = ROOT / "data" / "reference"
@@ -77,8 +77,12 @@ def _audit_rows(path: Path, rows: list[dict[str, str]], *, tri: bool) -> list[st
             errors.append(f"{label}: volume must be an integer")
         if not tri and not row.get("symbol", "").strip():
             errors.append(f"{label}: blank exchange symbol")
-        if not tri and not row.get("security_id", "").strip():
-            errors.append(f"{label}: blank stable security_id")
+        if not tri:
+            security_id = row.get("security_id", "").strip()
+            if not security_id:
+                errors.append(f"{label}: blank stable security_id")
+            elif not is_valid_isin(security_id):
+                errors.append(f"{label}: security_id must be a valid ISIN (shape and check digit)")
         if row.get("verification_status", "").strip() != "VERIFIED":
             errors.append(f"{label}: source row is not VERIFIED")
         if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
