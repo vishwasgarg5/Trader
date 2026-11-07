@@ -63,7 +63,20 @@ def normalize_nse_actions(source_path: Path, source_url: str) -> pd.DataFrame:
     events["symbol"] = events["symbol"].fillna("").astype(str).str.strip().str.upper()
     events["event_type"] = events["event_type"].fillna("").astype(str).str.strip().str.lower()
     for name in ("announce_date", "ex_date"):
-        events[name] = pd.to_datetime(events[name], errors="coerce", dayfirst=True).dt.normalize()
+        # NSE exports may contain both ISO (YYYY-MM-DD) and Indian
+        # day-first dates (DD-MM-YYYY / DD/MM/YYYY). Do not pass ISO
+        # dates through dayfirst=True: pandas can silently reinterpret
+        # 2025-10-01 as 2025-01-10.
+        raw_dates = events[name].astype("string").str.strip()
+        iso_mask = raw_dates.str.match(r"^\\d{4}-\\d{2}-\\d{2}$", na=False)
+        parsed_dates = pd.Series(pd.NaT, index=events.index, dtype="datetime64[ns]")
+        parsed_dates.loc[iso_mask] = pd.to_datetime(
+            raw_dates.loc[iso_mask], format="%Y-%m-%d", errors="coerce"
+        )
+        parsed_dates.loc[~iso_mask] = pd.to_datetime(
+            raw_dates.loc[~iso_mask], errors="coerce", dayfirst=True
+        )
+        events[name] = parsed_dates.dt.normalize()
     events["value"] = pd.to_numeric(
         events["value"].astype(str).str.replace(",", "", regex=False).str.replace("%", "", regex=False),
         errors="coerce",
