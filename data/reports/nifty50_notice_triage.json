@@ -1,6 +1,7 @@
 {
   "candidate_event_rows": 1297,
   "coverage_complete": false,
+  "human_review_queue_rows": 95,
   "inventory_rows": 684,
   "membership_written": false,
   "ocr_artifacts": [
