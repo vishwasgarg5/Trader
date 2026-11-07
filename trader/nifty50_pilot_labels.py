@@ -82,8 +82,14 @@ def build_fixed_horizon_labels(
             reason = "interval_dates_not_strictly_increasing"
         else:
             try:
-                entry_ordinal = int(row["entry_session_ordinal"])
-                exit_ordinal = int(row["exit_session_ordinal"])
+                entry_raw = float(row["entry_session_ordinal"])
+                exit_raw = float(row["exit_session_ordinal"])
+                valid_ordinals = (
+                    math.isfinite(entry_raw) and math.isfinite(exit_raw)
+                    and entry_raw.is_integer() and exit_raw.is_integer()
+                )
+                entry_ordinal = int(entry_raw) if valid_ordinals else -1
+                exit_ordinal = int(exit_raw) if valid_ordinals else -1
             except (TypeError, ValueError, OverflowError):
                 entry_ordinal = exit_ordinal = -1
             if entry_ordinal < 0 or exit_ordinal - entry_ordinal != PILOT_HOLDING_SESSIONS - 1:
