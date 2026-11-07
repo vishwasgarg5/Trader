@@ -40,9 +40,10 @@ def test_computes_net_total_return_relative_to_matched_tri():
 
 
 def test_threshold_is_strict_and_equality_is_negative():
-    # 1.5% gross less 0.5% costs = 1.0% net; TRI is zero.
+    # Gross return chosen so compounded net return is exactly 1.0%.
+    gross = 1.01 / 0.995 - 1.0
     result = build_fixed_horizon_labels(
-        _observations(stock_total_return=0.015, reference_cost_fraction=0.005,
+        _observations(stock_total_return=gross, reference_cost_fraction=0.005,
                       benchmark_tri_return=0.0), **READY
     ).iloc[0]
     assert result["net_relative_excess_return"] == pytest.approx(0.01)
