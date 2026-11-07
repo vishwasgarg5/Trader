@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vishwasgarg5/Trader/blob/main/config/schemas/nifty50_pilot_protocol.schema.json",
+  "title": "Nifty 50 pilot protocol",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "status",
+    "registration",
+    "universe",
+    "target",
+    "execution",
+    "portfolio",
+    "validation",
+    "statistical_power",
+    "inference",
+    "factors",
+    "evaluation_gates",
+    "power_and_sample_gates",
+    "data_feasibility",
+    "holdout",
+    "outcomes",
+    "safety",
+    "unresolved_freeze_items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "experiment_id": {
+      "const": "NIFTY50_PILOT_001"
+    },
+    "status": {
+      "enum": [
+        "DRAFT_NOT_FROZEN",
+        "FROZEN"
+      ]
+    },
+    "registration": {
+      "type": "object",
+      "required": [
+        "baseline_branch",
+        "baseline_commit",
+        "implementation_branch",
+        "evaluation_authorized",
+        "holdout_access_authorized"
+      ],
+      "properties": {
+        "baseline_branch": {
+          "const": "main"
+        },
+        "baseline_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "implementation_branch": {
+          "const": "main"
+        },
+        "evaluation_authorized": {
+          "const": false
+        },
+        "holdout_access_authorized": {
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "universe": {
+      "type": "object",
+      "required": [
+        "index",
+        "membership",
+        "selection_count",
+        "selection_fraction_at_full_universe",
+        "expansion_allowed",
+        "benchmark"
+      ],
+      "properties": {
+        "index": {
+          "const": "NIFTY_50"
+        },
+        "membership": {
+          "const": "point_in_time_constituents"
+        },
+        "selection_count": {
+          "const": 5
+        },
+        "selection_fraction_at_full_universe": {
+          "const": 0.1
+        },
+        "expansion_allowed": {
+          "const": false
+        },
+        "benchmark": {
+          "const": "NIFTY_50_TRI"
+        }
+      },
+      "additionalProperties": true
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "holding_period_trading_sessions",
+        "positive_class_rule",
+        "reference_costs_independent_of_portfolio_capital"
+      ],
+      "properties": {
+        "holding_period_trading_sessions": {
+          "const": 5
+        },
+        "positive_class_rule": {
+          "const": "net_relative_excess_return_strictly_greater_than_0.01"
+        },
+        "reference_costs_independent_of_portfolio_capital": {
+          "const": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "execution": {
+      "type": "object",
+      "required": [
+        "reference_capital_inr",
+        "max_order_participation_adv",
+        "reference_label_participation_adv",
+        "tariff_validation_required_before_freeze"
+      ],
+      "properties": {
+        "reference_capital_inr": {
+          "const": 10000000
+        },
+        "max_order_participation_adv": {
+          "const": 0.02
+        },
+        "reference_label_participation_adv": {
+          "const": 0.01
+        },
+        "tariff_validation_required_before_freeze": {
+          "const": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "portfolio": {
+      "type": "object",
+      "required": [
+        "mode",
+        "positions",
+        "sleeves",
+        "daily_replacement_fraction"
+      ],
+      "properties": {
+        "mode": {
+          "const": "long_only_cash_funded"
+        },
+        "positions": {
+          "const": 5
+        },
+        "sleeves": {
+          "const": 5
+        },
+        "daily_replacement_fraction": {
+          "const": 0.2
+        }
+      },
+      "additionalProperties": true
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "method",
+        "purge_trading_sessions",
+        "minimum_clean_development_years",
+        "minimum_qualifying_cross_sectional_dates",
+        "minimum_eligible_securities_per_date"
+      ],
+      "properties": {
+        "method": {
+          "const": "chronological_walk_forward"
+        },
+        "purge_trading_sessions": {
+          "const": 6
+        },
+        "minimum_clean_development_years": {
+          "const": 5
+        },
+        "minimum_qualifying_cross_sectional_dates": {
+          "const": 1000
+        },
+        "minimum_eligible_securities_per_date": {
+          "const": 30
+        }
+      },
+      "additionalProperties": true
+    },
+    "statistical_power": {
+      "type": "object",
+      "required": [
+        "mde_metric",
+        "maximum_permitted_mde_absolute",
+        "automatic_decision_if_mde_exceeds_ceiling"
+      ],
+      "properties": {
+        "mde_metric": {
+          "const": "top_five_precision_lift"
+        },
+        "maximum_permitted_mde_absolute": {
+          "const": 0.06
+        },
+        "automatic_decision_if_mde_exceeds_ceiling": {
+          "const": "INCONCLUSIVE"
+        }
+      },
+      "additionalProperties": true
+    },
+    "inference": {
+      "type": "object",
+      "required": [
+        "primary_hac",
+        "newey_west_daily_lags",
+        "primary_bootstrap",
+        "bootstrap_block_sessions"
+      ],
+      "properties": {
+        "primary_hac": {
+          "const": "Newey-West"
+        },
+        "newey_west_daily_lags": {
+          "const": 10
+        },
+        "primary_bootstrap": {
+          "const": "moving_time_block_bootstrap"
+        },
+        "bootstrap_block_sessions": {
+          "const": 20
+        }
+      },
+      "additionalProperties": true
+    },
+    "evaluation_gates": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16
+    },
+    "power_and_sample_gates": {
+      "type": "object",
+      "required": [
+        "precision_lift_mde_ceiling",
+        "min_clean_development_years",
+        "min_qualifying_dates",
+        "min_eligible_securities_per_date"
+      ],
+      "properties": {
+        "precision_lift_mde_ceiling": {
+          "const": 0.06
+        },
+        "min_clean_development_years": {
+          "const": 5
+        },
+        "min_qualifying_dates": {
+          "const": 1000
+        },
+        "min_eligible_securities_per_date": {
+          "const": 30
+        }
+      },
+      "additionalProperties": true
+    },
+    "data_feasibility": {
+      "type": "object",
+      "required": [
+        "status",
+        "required"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "NOT_VERIFIED",
+            "VERIFIED"
+          ]
+        },
+        "required": {
+          "type": "array",
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "holdout": {
+      "type": "object",
+      "required": [
+        "registered_pilot_rule",
+        "conflict_status"
+      ],
+      "properties": {
+        "conflict_status": {
+          "const": "UNRESOLVED_RECONCILIATION_REQUIRED"
+        }
+      },
+      "additionalProperties": true
+    },
+    "outcomes": {
+      "type": "object",
+      "required": [
+        "pilot_go_authorizes_promotion",
+        "pilot_go_authorizes_paper_trading",
+        "pilot_go_authorizes_live_trading"
+      ],
+      "properties": {
+        "pilot_go_authorizes_promotion": {
+          "const": false
+        },
+        "pilot_go_authorizes_paper_trading": {
+          "const": false
+        },
+        "pilot_go_authorizes_live_trading": {
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "safety": {
+      "type": "object",
+      "required": [
+        "promotion_eligible",
+        "paper_trading_eligible",
+        "live_execution_enabled",
+        "model_evaluation_authorized"
+      ],
+      "properties": {
+        "promotion_eligible": {
+          "const": false
+        },
+        "paper_trading_eligible": {
+          "const": false
+        },
+        "live_execution_enabled": {
+          "const": false
+        },
+        "model_evaluation_authorized": {
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "unresolved_freeze_items": {
+      "type": "array",
+      "minItems": 1
+    }
+  },
+  "additionalProperties": true
+}
