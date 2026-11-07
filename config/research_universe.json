@@ -46,6 +46,21 @@
     "promotion_eligible": false,
     "final_holdout": "LOCKED_NOT_EVALUATED",
     "live_execution_enabled": false,
-    "full_universe_experiment_authorized": false
+    "full_universe_experiment_authorized": false,
+    "nifty50_pilot_scope": "NIFTY50_PILOT_001 uses its experiment-scoped override only; no NIFTY_200/NIFTY_500 expansion.",
+    "pilot_go_authorizes_promotion": false,
+    "pilot_go_authorizes_paper_trading": false,
+    "pilot_go_authorizes_live_trading": false
+  },
+  "experiment_overrides": {
+    "NIFTY50_PILOT_001": {
+      "protocol": "config/nifty50_pilot_protocol.json",
+      "scope": "point_in_time_nifty50_constituents_only",
+      "benchmark": "NIFTY_50_TRI",
+      "selection_count": 5,
+      "expansion_allowed": false,
+      "status": "DRAFT_NOT_FROZEN",
+      "note": "This experiment-scoped override does not rewrite the broader NSE-listed research scope used by prior/other experiment records. The pilot must load this override explicitly; shared default universe settings are not permission to expand this pilot."
+    }
   }
 }
