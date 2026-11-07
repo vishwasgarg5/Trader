@@ -101,6 +101,20 @@ def test_json_schema_declares_core_contract_and_safety_fields():
     assert schema["properties"]["statistical_power"]["properties"]["maximum_permitted_mde_absolute"]["const"] == 0.06
 
 
+def test_final_holdout_rule_matches_registered_18_or_24_month_policy():
+    holdout_path = ROOT / "config" / "final_holdout_protocol.json"
+    holdout = json.loads(holdout_path.read_text(encoding="utf-8"))
+    definition = holdout["holdout_definition"]
+    rule = definition["rule"]
+    assert "at least 7 complete years" in rule
+    assert "24 complete calendar months" in rule
+    assert "at least 5 but under 7 complete years" in rule
+    assert "18 complete calendar months" in rule
+    assert "fewer than 5 complete clean years" in rule
+    assert definition["current_status"].startswith("No verified clean data span")
+    assert "12 complete calendar months" not in rule
+
+
 def test_shared_promotion_gate_remains_research_hold_and_non_trading():
     gate_path = ROOT / "config" / "promotion_gate.json"
     gate = json.loads(gate_path.read_text(encoding="utf-8"))
