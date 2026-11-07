@@ -154,20 +154,29 @@ def test_membership_history_must_cover_every_configured_symbol(tmp_path):
     assert any("BBB.NS" in error for error in report["membership_history"]["errors"])
 
 
-def test_membership_history_rejects_symbols_outside_configured_universe(tmp_path):
+def test_membership_history_allows_former_constituents_outside_current_universe(tmp_path):
     path = tmp_path / "universe_membership.csv"
     evidence = tmp_path / "circular.pdf"
     evidence.write_bytes(b"official evidence fixture")
-    pd.DataFrame([{
-        "symbol": "BBB.NS", "valid_from": "2020-01-01", "valid_to": "",
-        "source": "NSE circular", "source_url": "https://www.nseindia.com/",
-        "source_published_at": "2019-12-20T09:00:00+05:30",
-        "evidence_path": evidence.name,
-        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
-    }]).to_csv(path, index=False)
+    digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
+    pd.DataFrame([
+        {
+            "symbol": "AAA.NS", "valid_from": "2020-01-01", "valid_to": "",
+            "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+            "source_published_at": "2019-12-20T09:00:00+05:30",
+            "evidence_path": evidence.name, "evidence_sha256": digest,
+        },
+        {
+            "symbol": "FORMER.NS", "valid_from": "2018-01-01", "valid_to": "2020-01-01",
+            "source": "NSE circular", "source_url": "https://www.nseindia.com/",
+            "source_published_at": "2017-12-20T09:00:00+05:30",
+            "evidence_path": evidence.name, "evidence_sha256": digest,
+        },
+    ]).to_csv(path, index=False)
     report = audit_universe(_prices(), ["AAA.NS"], path)
-    assert report["membership_history"]["valid"] is False
-    assert any("BBB.NS" in error for error in report["membership_history"]["errors"])
+    assert report["membership_history"]["valid"] is True
+    assert report["membership_history"]["rows"] == 2
+    assert report["point_in_time_universe_verified"] is False
 
 
 def test_membership_evidence_path_cannot_escape_membership_directory(tmp_path):
