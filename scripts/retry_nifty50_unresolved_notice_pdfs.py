@@ -157,6 +157,29 @@ def advance_direct_fallback(item: dict, budget: Budget, url: str) -> bool:
     return True
 
 
+def reconcile_exhausted_direct_fallback(item: dict, attempt_log: list[dict]) -> bool:
+    """Migrate legacy state where three recorded timeouts did not advance the host index."""
+    index = item.get("next_direct_index", 0)
+    urls = item.get("direct_urls", [])
+    if index >= len(urls):
+        return False
+    url = urls[index]
+    matching = [entry for entry in attempt_log if entry.get("url") == url]
+    recent = matching[-3:]
+    if len(recent) != 3:
+        return False
+    if [entry.get("attempt") for entry in recent] != [1, 2, 3]:
+        return False
+    if any("error" not in entry or "http_status" in entry for entry in recent):
+        return False
+    item["next_direct_index"] = index + 1
+    item.setdefault("fallback_errors", []).append({
+        "url": url, "at_utc": stamp(),
+        "reason": "migrated_legacy_three_transient_failures"
+    })
+    return True
+
+
 def load_state() -> dict:
     if STATE_PATH.exists():
         state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
@@ -170,6 +193,9 @@ def load_state() -> dict:
             "next_capture_index": 0, "status": "PENDING",
             "attempts": [], "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         })
+        item = state["documents"][doc_id]
+        if reconcile_exhausted_direct_fallback(item, state.get("attempt_log", [])):
+            atomic(STATE_PATH, state)
     return state
 
 
