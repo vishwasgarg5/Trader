@@ -43,23 +43,52 @@ def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
     calls = []
 
     class Response:
-        def __enter__(self):
-            return self
+        url = "https://www.nseindia.com/dist/js/components/corporate-filing/test.js"
+        headers = {"Content-Type": "application/javascript"}
 
-        def __exit__(self, *args):
-            return False
+        def raise_for_status(self):
+            return None
 
-    def flaky_urlopen(request, timeout):
-        calls.append(timeout)
+        def iter_content(self, chunk_size):
+            yield b"const ok = true;"
+
+    def flaky_get(url, **kwargs):
+        calls.append(kwargs)
         if len(calls) == 1:
             raise TimeoutError("temporary read timeout")
         return Response()
 
-    monkeypatch.setattr(MODULE.urllib.request, "urlopen", flaky_urlopen)
+    monkeypatch.setattr(MODULE.curl_requests, "get", flaky_get)
     monkeypatch.setattr(MODULE.time, "sleep", lambda _seconds: None)
-    response = MODULE.open_with_retry(object(), timeout=MODULE.ASSET_TIMEOUT)
-    assert isinstance(response, Response)
-    assert calls == [MODULE.ASSET_TIMEOUT, MODULE.ASSET_TIMEOUT]
+    body, content_type, final_url = MODULE.fetch_asset(
+        "https://www.nseindia.com/dist/js/components/corporate-filing/test.js"
+    )
+    assert body == b"const ok = true;"
+    assert "javascript" in content_type
+    assert final_url.startswith("https://www.nseindia.com/")
+    assert len(calls) == 2
+    assert calls[0]["impersonate"] == "chrome"
+    assert calls[0]["timeout"] == (20, MODULE.ASSET_TIMEOUT)
+
+
+def test_asset_fetch_rejects_redirect_outside_official_hosts(monkeypatch):
+    class Response:
+        url = "https://evil.example/asset.js"
+        headers = {"Content-Type": "application/javascript"}
+
+        def raise_for_status(self):
+            return None
+
+        def iter_content(self, chunk_size):
+            yield b"malicious"
+
+    monkeypatch.setattr(MODULE.curl_requests, "get", lambda *args, **kwargs: Response())
+    try:
+        MODULE.fetch_asset("https://www.nseindia.com/dist/js/components/corporate-filing/test.js")
+    except ValueError as exc:
+        assert "redirect left official NSE host allowlist" in str(exc)
+    else:
+        raise AssertionError("off-host redirect must be rejected")
 
 
 def test_asset_audit_uses_bounded_concurrency_to_fit_workflow_timeout():
