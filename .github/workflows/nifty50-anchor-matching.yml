@@ -43,10 +43,12 @@ jobs:
                     "unexplained", len(pair["observed_changes_without_register_candidate"]),
                     "registered_not_visible", len(pair["registered_events_not_visible_in_anchor_difference"]))
           PY
-      - name: Upload human-review packet
+      - name: Upload machine comparison and blank human-review checklist
         uses: actions/upload-artifact@v4
         with:
           name: nifty50-anchor-matching-review-packet
-          path: data/reports/nifty50_anchor_matching_packet.json
+          path: |
+            data/reports/nifty50_anchor_matching_packet.json
+            data/reports/nifty50_anchor_human_review_checklist.csv
           if-no-files-found: error
           retention-days: 90
