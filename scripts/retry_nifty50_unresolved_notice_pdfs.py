@@ -203,10 +203,11 @@ def load_state() -> dict:
             "next_direct_index": 0, "cdx_checked": False, "cdx_captures": [],
             "cdx_url_variants": cdx_url_variants(original),
             "next_cdx_variant_index": 0, "cdx_queries": [],
-            "next_capture_index": 0, "status": "PENDING",
+            "next_capture_index": 0, "status": "PENDING", "resolution_status": "NOT_YET_RESOLVED",
             "attempts": [], "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         })
         item = state["documents"][doc_id]
+        item.setdefault("resolution_status", "NOT_YET_RESOLVED")
         item.setdefault("cdx_url_variants", cdx_url_variants(original))
         item.setdefault("cdx_queries", [])
         if "next_cdx_search_index" not in item:
@@ -502,16 +503,16 @@ def run() -> dict:
                     break
             if (item["status"] == "PENDING" and item["cdx_checked"]
                     and item["next_capture_index"] >= len(item["cdx_captures"])):
-                item["status"] = "DOCUMENT_UNAVAILABLE"
-                item["unavailable_reason"] = "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
-                item["classification"] = "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED"
+                # Exhausted searches are not proof of absence. Keep the document
+                # unresolved and eligible for a later retry/backoff cycle.
+                item["resolution_status"] = "NOT_YET_RESOLVED"
+                item["attempts_exhausted_current_cycle"] = True
             atomic(STATE_PATH, state)
             if budget.stop:
                 break
 
     complete = all(
         x["status"] == "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW"
-        or (x["status"] == "DOCUMENT_UNAVAILABLE" and x.get("cdx_checked", False))
         for x in state["documents"].values()
     )
     report = {"schema_version": 1, "run_at_utc": stamp(),
@@ -523,7 +524,7 @@ def run() -> dict:
               "documents": state["documents"], "attempt_log": state["attempt_log"],
               "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
               "limitations": ["A retrieved PDF is not a membership decision.",
-                              "A document unavailable after all recorded attempts remains unresolved, not out of scope.",
+                              "Empty CDX results and exhausted transient retries remain NOT_YET_RESOLVED, not evidence of absence.",
                               "No canonical membership, model, holdout, or trading state is modified."]}
     atomic(STATE_PATH, state)
     atomic(REPORT_PATH, report)
