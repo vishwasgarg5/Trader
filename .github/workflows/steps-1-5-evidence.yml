@@ -10,6 +10,8 @@ on:
       - ".github/workflows/steps-1-5-evidence.yml"
       - "trader/nifty50_tri_acquisition.py"
       - "tests/test_nifty50_tri_acquisition.py"
+      - "trader/nifty50_tri_calendar_audit.py"
+      - "tests/test_nifty50_tri_calendar_audit.py"
 
 permissions:
   contents: write
@@ -45,7 +47,7 @@ jobs:
       - name: Test TRI acquisition parser and safety rules
         run: |
           python -m py_compile trader/nifty50_tri_acquisition.py
-          python -m pytest -q tests/test_nifty50_tri_acquisition.py
+          python -m pytest -q tests/test_nifty50_tri_acquisition.py tests/test_nifty50_tri_calendar_audit.py
 
       - name: Acquire official NIFTY 50 gross TRI in six-month chunks (2018-2024)
         id: tri
@@ -57,6 +59,15 @@ jobs:
           set -e
           echo "Acquisition exit code: $code"
           # A source outage is recorded as a diagnostic; it does not authorize substitution.
+
+      - name: Audit TRI chronology and raw evidence hashes (no calendar certification)
+        if: always()
+        run: |
+          if test -s data/reference/nifty50_tri.csv; then
+            python -m trader.nifty50_tri_calendar_audit
+          else
+            echo "No normalized TRI file available; chronology audit skipped."
+          fi
 
       - name: Discover and archive official NSE Indices membership notice candidates (2018-2024)
         if: always()
