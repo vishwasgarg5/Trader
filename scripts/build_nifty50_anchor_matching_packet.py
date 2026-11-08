@@ -10,6 +10,8 @@ import argparse
 import base64
 import csv
 import hashlib
+import gzip
+import io
 import json
 import re
 from datetime import date
@@ -33,7 +35,13 @@ def decode_cdx_digest(value: str) -> bytes:
 
 
 def read_symbols(path: Path) -> list[str]:
-    with path.open(newline="", encoding="utf-8-sig") as handle:
+    if path.suffix == ".gz":
+        payload = gzip.decompress(path.read_bytes())
+        text = payload.decode("utf-8-sig")
+        handle = io.StringIO(text)
+    else:
+        handle = path.open(newline="", encoding="utf-8-sig")
+    with handle:
         reader = csv.DictReader(handle)
         if not reader.fieldnames:
             raise ValueError(f"{path}: missing CSV header")
