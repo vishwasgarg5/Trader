@@ -87,14 +87,14 @@ def fetch_bytes(
     last_error = None
 
     for attempt in range(1, attempts + 1):
-        existing = partial.stat().st_size if partial and partial.exists() else 0
-        request_headers = dict(headers or {})
-        if existing:
-            request_headers["Range"] = f"bytes={existing}-"
         for protocol, curl_options in (
             ("http2", {}),
             ("http1.1", {CurlOpt.HTTP_VERSION: CurlHttpVersion.V1_1}),
         ):
+            existing = partial.stat().st_size if partial and partial.exists() else 0
+            request_headers = dict(headers or {})
+            if existing:
+                request_headers["Range"] = f"bytes={existing}-"
             record = {
                 "attempt": attempt,
                 "protocol": protocol,
