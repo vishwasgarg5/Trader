@@ -17,6 +17,9 @@ class Nifty50TRIAcquisitionTests(unittest.TestCase):
     def test_wrong_index_rejected(self):
         p=json.dumps({"d":json.dumps([{"Index Name":"Nifty 500","Date":"31 Dec 2024","TotalReturnsIndex":"42000"}])}).encode()
         with self.assertRaisesRegex(ValueError,"unexpected index identity"): parse_response(p)
+    def test_missing_index_identity_rejected(self):
+        p=json.dumps({"d":json.dumps([{"Date":"31 Dec 2024","TotalReturnsIndex":"42000"}])}).encode()
+        with self.assertRaisesRegex(ValueError,"lacks explicit index identity"): parse_response(p)
     def test_net_tri_only_rejected(self):
         p=json.dumps({"d":json.dumps([{"Index Name":"Nifty 50","Date":"31 Dec 2024","NTR_Value":"42000"}])}).encode()
         with self.assertRaisesRegex(ValueError,"lacks date or Total Returns Index"): parse_response(p)
