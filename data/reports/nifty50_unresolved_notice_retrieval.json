@@ -489,6 +489,69 @@
       "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:26:08.684410+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:26:58.151772+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:27:50.549897+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:28:05.599168+00:00",
+      "attempt": 1,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f08712aea90>, 'Connection to web.archive.org timed out. (connect timeo",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:28:53.892347+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:29:16.911603+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f08712c4910>, 'Connection to web.archive.org timed out. (connect timeo",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:30:02.148177+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:30:22.073254+00:00",
+      "attempt": 2,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T12:31:13.678868+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "documents": {
@@ -634,7 +697,7 @@
         }
       ],
       "cdx_captures": [],
-      "cdx_checked": true,
+      "cdx_checked": false,
       "cdx_content_type": "application/json",
       "cdx_error": "CDX returned HTTP 503",
       "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
@@ -699,7 +762,7 @@
         }
       ],
       "cdx_response_row_count": 0,
-      "cdx_result": "EMPTY",
+      "cdx_result": "SEARCH_INCOMPLETE",
       "cdx_search_variants": [
         {
           "match_type": "exact",
@@ -759,7 +822,7 @@
         }
       ],
       "next_capture_index": 0,
-      "next_cdx_search_index": 6,
+      "next_cdx_search_index": 4,
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
@@ -821,7 +884,7 @@
         }
       ],
       "cdx_response_row_count": 0,
-      "cdx_result": "EMPTY",
+      "cdx_result": "SEARCH_INCOMPLETE",
       "cdx_search_variants": [
         {
           "match_type": "exact",
@@ -896,9 +959,9 @@
   ],
   "next_retry_at_utc": null,
   "request_budget": 18,
-  "requests_this_run": 13,
-  "run_at_utc": "2026-11-08T12:00:36.954427+00:00",
-  "runtime_seconds": 268.94,
+  "requests_this_run": 9,
+  "run_at_utc": "2026-11-08T12:31:13.679906+00:00",
+  "runtime_seconds": 350.21,
   "schema_version": 1,
   "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
   "status": "PARTIAL",
