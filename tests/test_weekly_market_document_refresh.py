@@ -135,3 +135,24 @@ def test_transient_timeout_is_retried(monkeypatch):
     assert body == b"<html>ok</html>"
     assert content_type == "text/html"
     assert calls["count"] == 3
+
+
+
+def test_identical_empty_exchange_shells_are_not_usable_coverage():
+    records = [
+        {"source_id": "BSE_ANNOUNCEMENTS", "publisher": "BSE",
+         "source_url": "https://www.bseindia.com/corporates/ann.html",
+         "sha256": "same", "visible_link_count": 0},
+        {"source_id": "BSE_CORPORATE_ACTIONS", "publisher": "BSE",
+         "source_url": "https://www.bseindia.com/corporates/corporate_act.html",
+         "sha256": "same", "visible_link_count": 0},
+    ]
+    digest_groups = {}
+    for record in records:
+        digest_groups.setdefault(record["sha256"], []).append(record)
+    flagged = [
+        record for record in records
+        if record["visible_link_count"] == 0
+        and len(digest_groups[record["sha256"]]) > 1
+    ]
+    assert len(flagged) == 2
