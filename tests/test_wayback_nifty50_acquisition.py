@@ -248,3 +248,36 @@ def test_full_cdx_quarter_recovery_is_idempotent_for_pending_and_verified_quarte
     }]
     assert MODULE.add_full_metadata_quarter_candidates(state, records) == 0
     assert state["pending_snapshots"] == [pending]
+
+
+def test_decode_replay_body_preserves_identity_and_decodes_gzip():
+    import gzip
+    payload = b"Symbol,ISIN\\nABC,INE123456789\\n"
+    encoded = gzip.compress(payload)
+    assert MODULE.decode_replay_body(payload, None) == payload
+    assert MODULE.decode_replay_body(encoded, "gzip") == payload
+
+
+def test_load_state_requeues_prior_digest_mismatch_once(tmp_path, monkeypatch):
+    snapshot = tmp_path / "old.csv"
+    snapshot.write_text("Symbol\\nABC\\n", encoding="utf-8")
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({
+        "schema_version": 1, "targets": {}, "pending_snapshots": [],
+        "completed_snapshots": [{
+            "capture_timestamp": "20230522051228", "original_url": MODULE.TARGETS[4],
+            "quarter": "2023-Q2", "cdx_digest": "A" * 32,
+            "status": "CDX_DIGEST_MISMATCH", "archive_path": str(snapshot),
+            "sha256": "old", "computed_cdx_digest": "B" * 32,
+        }],
+    }), encoding="utf-8")
+    monkeypatch.setattr(MODULE, "STATE_PATH", state_path)
+    state = MODULE.load_state()
+    assert len(state["completed_snapshots"]) == 0
+    assert len(state["pending_snapshots"]) == 1
+    assert state["pending_snapshots"][0]["status"] == "PENDING_DOWNLOAD"
+    assert state["pending_snapshots"][0]["raw_replay_retry_count"] == 1
+    state_path.write_text(json.dumps(state), encoding="utf-8")
+    state2 = MODULE.load_state()
+    assert len(state2["pending_snapshots"]) == 1
+    assert len(state2["completed_snapshots"]) == 0
