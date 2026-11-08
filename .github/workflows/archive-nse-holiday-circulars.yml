@@ -1,0 +1,48 @@
+name: Archive NSE annual trading-holiday circulars
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/archive_nse_holiday_circulars.py"
+      - ".github/workflows/archive-nse-holiday-circulars.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive-holiday-circulars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Acquire annual NSE circular PDFs and hashes
+        run: python scripts/archive_nse_holiday_circulars.py
+      - name: Persist all available source bytes and manifest
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reference/source_documents/nse_holiday_circulars data/reports/nifty50_tri_holiday_circular_archive.json
+          if git diff --cached --quiet; then
+            echo "No archive changes to commit"
+          else
+            git commit -m "Archive NSE annual trading-holiday circulars 2018-2024"
+            git push origin HEAD:main
+          fi
+      - name: Require all seven annual circulars
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, sys
+          with open("data/reports/nifty50_tri_holiday_circular_archive.json", encoding="utf-8") as f:
+              report = json.load(f)
+          expected = list(range(2018, 2025))
+          covered = sorted(report.get("covered_years", []))
+          print({"covered_years": covered, "expected_years": expected, "failures": report.get("failures", [])})
+          sys.exit(0 if covered == expected and not report.get("failures") else 1)
+          PY
