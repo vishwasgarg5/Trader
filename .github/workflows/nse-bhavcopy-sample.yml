@@ -1,0 +1,68 @@
+name: NSE bhavcopy sample ingestion
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/nse-bhavcopy-sample.yml"
+      - "scripts/acquire_nse_bhavcopy.py"
+      - "scripts/build_nse_bhavcopy_calendar_manifest.py"
+      - "tests/test_acquire_nse_bhavcopy.py"
+      - "tests/test_build_nse_bhavcopy_calendar_manifest.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/nifty50-wayback-acquisition-2026-11-08
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests pytest
+      - name: Test calendar manifest and bhavcopy parser
+        run: python -m pytest -q tests/test_build_nse_bhavcopy_calendar_manifest.py tests/test_acquire_nse_bhavcopy.py
+      - name: Build four-date candidate calendar
+        run: |
+          python scripts/build_nse_bhavcopy_calendar_manifest.py \
+            --dates 2018-01-02,2020-03-19,2024-07-05,2024-07-08 \
+            --output data/tmp/nse_bhavcopy_sample_calendar.csv
+      - name: Download and validate sample bhavcopies
+        run: |
+          python scripts/acquire_nse_bhavcopy.py \
+            --calendar-manifest data/tmp/nse_bhavcopy_sample_calendar.csv \
+            --allow-candidate-calendar \
+            --output-dir data/tmp/nse_bhavcopy_sample \
+            --report data/reports/nse_bhavcopy_sample_report.json
+      - name: Print sample coverage summary
+        if: always()
+        run: |
+          if [ -f data/reports/nse_bhavcopy_sample_report.json ]; then
+            python - <<'PY'
+            import json
+            from pathlib import Path
+            report = json.loads(Path("data/reports/nse_bhavcopy_sample_report.json").read_text())
+            print("STATUS", report["status"])
+            print("REQUESTED", report["calendar_manifest_rows"])
+            print("DOWNLOADED", report["downloaded_dates"])
+            print("FAILED", len(report["failed_dates"]))
+            for row in report["records"]:
+                print(row["trade_date"], row["eq_rows"], row["distinct_symbols"], row["sha256"])
+            PY
+          fi
+      - name: Upload sample acquisition report only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nse-bhavcopy-sample-report
+          path: data/reports/nse_bhavcopy_sample_report.json
+          if-no-files-found: warn
+          retention-days: 90
