@@ -15,10 +15,11 @@ import json
 import re
 import time
 import zipfile
+import urllib.error
+import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY_ROOT = "https://archives.nseindia.com/content/historical/EQUITIES"
