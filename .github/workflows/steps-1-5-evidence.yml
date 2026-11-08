@@ -21,7 +21,7 @@ concurrency:
 jobs:
   acquire-and-audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       PYTHONPATH: ${{ github.workspace }}
     steps:
@@ -47,7 +47,7 @@ jobs:
           python -m py_compile trader/nifty50_tri_acquisition.py
           python -m pytest -q tests/test_nifty50_tri_acquisition.py
 
-      - name: Acquire official NIFTY 50 Total Returns Index (2018-2024)
+      - name: Acquire official NIFTY 50 gross TRI in six-month chunks (2018-2024)
         id: tri
         run: |
           set +e
