@@ -13,23 +13,24 @@ REGISTER = pathlib.Path("data/reference/nifty50_tri_ad_hoc_closures.csv")
 MANIFEST = pathlib.Path("data/reports/nifty50_tri_ad_hoc_closure_archive.json")
 
 
-def download(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={
+def download(urls: list[str]) -> tuple[bytes, str]:
+    last_error = None
+    for url in urls:
+        request = urllib.request.Request(url, headers={
         "User-Agent": "Mozilla/5.0 (compatible; Nifty50ResearchEvidence/1.0)",
         "Referer": "https://www.nseindia.com/",
         "Accept": "application/pdf,*/*",
     })
-    last_error = None
-    for attempt in range(3):
-        try:
-            with urllib.request.urlopen(request, timeout=45) as response:
-                body = response.read()
-                if response.status != 200 or not body.startswith(b"%PDF-"):
-                    raise ValueError(f"not a PDF (HTTP {response.status}, {len(body)} bytes)")
-                return body
-        except Exception as exc:
-            last_error = exc
-            time.sleep(2 ** attempt)
+        for attempt in range(2):
+            try:
+                with urllib.request.urlopen(request, timeout=45) as response:
+                    body = response.read()
+                    if response.status != 200 or not body.startswith(b"%PDF-"):
+                        raise ValueError(f"not a PDF (HTTP {response.status}, {len(body)} bytes)")
+                    return body, url
+            except Exception as exc:
+                last_error = exc
+                time.sleep(2 ** attempt)
     raise RuntimeError(str(last_error))
 
 
@@ -40,7 +41,7 @@ def main() -> int:
     for source in sources:
         path = pathlib.Path(source["archive_path"])
         try:
-            body = download(source["source_url"])
+            urls = [source["source_url"]]\n            if source["circular_reference"] == "NSE/CMTR/57285":\n                urls.extend([\n                    "https://archives.nseindia.com/content/circulars/CMTR57285.pdf",\n                    "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf",\n                ])\n            body, successful_url = download(urls)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(body)
             records.append({
