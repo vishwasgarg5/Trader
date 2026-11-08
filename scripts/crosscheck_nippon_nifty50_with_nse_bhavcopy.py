@@ -18,7 +18,7 @@ import xlrd
 from scripts.build_nifty50_anchor_matching_packet import (
     load_transition_rows, load_verified_anchors,
 )
-from scripts.acquire_nse_bhavcopy import bhavcopy_url, parse_bhavcopy_zip
+from scripts.acquire_nse_bhavcopy import bhavcopy_url, fetch_bhavcopy, parse_bhavcopy_zip
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "data/reference/wayback_nifty50_acquisition_state.json"
@@ -104,9 +104,9 @@ def main() -> int:
     holdings = parse_nippon_nifty50_holdings(workbook_bytes)
 
     bhav_url = bhavcopy_url(AS_OF_DATE)
-    bhav_response = session.get(bhav_url, timeout=(20, 90))
-    bhav_response.raise_for_status()
-    bhav_bytes = bhav_response.content
+    # Reuse the bounded retrying downloader used by the NSE ingestion workflow.
+    # NSE archive read timeouts are transient; never substitute unverified data.
+    bhav_bytes, bhav_http_status = fetch_bhavcopy(bhav_url)
     bhav_sha = hashlib.sha256(bhav_bytes).hexdigest()
     bhav_member, bhav_rows = parse_bhavcopy_zip(bhav_bytes, AS_OF_DATE)
     mapped, missing_isins = map_isins_to_symbols(holdings, bhav_rows)
@@ -160,7 +160,7 @@ def main() -> int:
         },
         "bhavcopy_source": {
             "url": bhav_url, "trade_date": AS_OF_DATE,
-            "http_status": bhav_response.status_code,
+            "http_status": bhav_http_status,
             "sha256": bhav_sha, "zip_member": bhav_member,
             "eq_rows": len(bhav_rows), "distinct_eq_isins": len({x["isin"] for x in bhav_rows}),
         },
