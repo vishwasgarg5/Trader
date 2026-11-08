@@ -5,8 +5,8 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-SOURCE_PAGE="https://www.niftyindices.com/reports/historical-data"
-SOURCE_ENDPOINT="https://www.niftyindices.com/Backpage.aspx/getTotalReturnIndexString"
+SOURCE_PAGE="https://www.niftyindices.com/reports"
+SOURCE_ENDPOINT="https://niftyindices.com/BackPage/getTotalReturnIndexString"
 START_DATE=date(2018,1,1); END_DATE=date(2024,12,31)
 USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 TraderResearch/1.0"
 RAW_DIR=Path("data/reference/source_documents/nifty50_tri")
@@ -32,8 +32,14 @@ def parse_response(payload,start=START_DATE,end=END_DATE):
     except (UnicodeDecodeError,json.JSONDecodeError) as e:
         preview=payload[:180].decode("utf-8",errors="replace").replace("\\n"," ")
         raise ValueError(f"publisher response is not JSON; body preview={preview!r}") from e
-    if not isinstance(outer,dict) or "d" not in outer: raise ValueError("response missing ASP.NET d field")
-    rows=json.loads(outer["d"]) if isinstance(outer["d"],str) else outer["d"]
+    if isinstance(outer,list):
+        rows=outer
+    elif isinstance(outer,dict) and "d" in outer:
+        inner=outer["d"]
+        rows=json.loads(inner) if isinstance(inner,str) else inner
+    else:
+        raise ValueError("response is neither a JSON array nor an ASP.NET d payload")
+    if rows is False or rows == "false": rows=[]
     if not isinstance(rows,list) or not rows: raise ValueError("official TRI response contains no observations")
     out=[]
     for i,r in enumerate(rows,1):
