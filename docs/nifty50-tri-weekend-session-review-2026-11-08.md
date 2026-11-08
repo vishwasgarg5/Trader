@@ -8,10 +8,10 @@ The acquired TRI has seven weekend-dated observations. A weekend date is not aut
 
 ## Review outcome
 
-- Seven of seven weekend dates have a specific NSE circular reference and URL recorded for follow-up.
+- Seven of seven original NSE circular PDFs are now archived under `data/reference/source_documents/nse_circulars/`; each has a recorded byte count and SHA-256 digest in `data/reports/nifty50_tri_weekend_circular_archive.json`.
 - The January 20, 2024 session is recorded as the regular equity session ultimately conducted that day; the earlier proposed special DR-site schedule was withdrawn.
 - This is a source-discovery/reconciliation aid, **not** independent authentication of the acquired TRI values or proof that every row is a valid Nifty 50 TRI observation.
-- Original circular bytes still need to be archived and hashed; the circular references need independent review.
+- Original circular bytes are archived and SHA-256 hashed; PDF signature/hash checks establish downloaded-byte integrity only. All seven circulars still require independent review for publisher authenticity and full session semantics.
 - The 2018-01-01 first observation is not a weekend anomaly: contemporaneous market reporting confirms that NSE traded on that Monday. The TRI date/value still requires source-series review.
 
 ## Explicit remaining limits
