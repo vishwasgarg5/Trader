@@ -1,0 +1,58 @@
+name: NIFTY 50 Wayback snapshot acquisition
+
+on:
+  schedule:
+    - cron: "7 */4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nifty50-wayback-acquisition-state
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out the dedicated research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/nifty50-wayback-acquisition-2026-11-08
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests pytest
+      - name: Test acquisition safeguards
+        run: python -m pytest -q tests/test_wayback_nifty50_acquisition.py
+      - name: Run one bounded, resumable acquisition slice
+        run: python scripts/wayback_nifty50_acquisition.py
+      - name: Persist state, raw captures, manifests, and report on research branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reference/wayback_nifty50_acquisition_state.json
+          git add data/reference/wayback_nifty50_cdx
+          git add data/reference/source_documents/wayback_nifty50_snapshots
+          git add data/reports/wayback_nifty50_quarterly_coverage.json
+          if git diff --cached --quiet; then
+            echo "No acquisition state or evidence changes"
+          else
+            git commit -m "Advance bounded NIFTY 50 Wayback acquisition"
+            git pull --rebase origin research/nifty50-wayback-acquisition-2026-11-08
+            git push origin HEAD:research/nifty50-wayback-acquisition-2026-11-08
+          fi
+      - name: Upload quarterly coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nifty50-wayback-quarterly-coverage
+          path: data/reports/wayback_nifty50_quarterly_coverage.json
+          if-no-files-found: warn
+          retention-days: 90
