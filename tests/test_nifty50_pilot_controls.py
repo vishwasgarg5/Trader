@@ -69,7 +69,7 @@ def test_source_manifest_validates_hash_url_and_unique_ids():
 
 
 def test_sha256_is_over_original_bytes():
-    assert sha256_bytes(b"original") == "0682c5f2076f099c34cf3e6d6d1e7d5f5a3e2f8f2c2c1e5f0f8a5c7f9e0d8b"[:64] or len(sha256_bytes(b"original")) == 64
+    assert sha256_bytes(b"original") == "0682c5f2076f099c34cfdd15a9e063849ed437a49677e6fcc5b4198c76575be5"
 
 
 def test_mde_is_reproducible_and_respects_six_percentage_point_ceiling():
