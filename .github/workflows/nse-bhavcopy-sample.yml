@@ -46,17 +46,9 @@ jobs:
         if: always()
         run: |
           if [ -f data/reports/nse_bhavcopy_sample_report.json ]; then
-            python - <<'PY'
-            import json
-            from pathlib import Path
-            report = json.loads(Path("data/reports/nse_bhavcopy_sample_report.json").read_text())
-            print("STATUS", report["status"])
-            print("REQUESTED", report["calendar_manifest_rows"])
-            print("DOWNLOADED", report["downloaded_dates"])
-            print("FAILED", len(report["failed_dates"]))
-            for row in report["records"]:
-                print(row["trade_date"], row["eq_rows"], row["distinct_symbols"], row["sha256"])
-            PY
+            python -c 'import json; from pathlib import Path; r=json.loads(Path("data/reports/nse_bhavcopy_sample_report.json").read_text()); print("STATUS", r["status"]); print("REQUESTED", r["calendar_manifest_rows"]); print("DOWNLOADED", r["downloaded_dates"]); print("FAILED", len(r["failed_dates"])); [print(x["trade_date"], x["eq_rows"], x["distinct_symbols"], x["sha256"]) for x in r["records"]]'
+          else
+            echo "No sample report was generated."
           fi
       - name: Upload sample acquisition report only
         if: always()
