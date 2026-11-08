@@ -141,10 +141,10 @@ def parse_bhavcopy_zip(payload: bytes, expected_date: str) -> tuple[str, list[di
     return name, rows
 
 
-def load_calendar_manifest(path: Path) -> list[dict]:
+def load_calendar_manifest(path: Path, *, allow_candidate_calendar: bool = False) -> list[dict]:
     with path.open(newline="", encoding="utf-8-sig") as handle:
         rows = list(csv.DictReader(handle))
-    required = {"trade_date", "calendar_source_url", "calendar_source_path", "calendar_source_sha256"}
+    required = {"trade_date", "calendar_source_url", "calendar_source_path", "calendar_source_sha256", "calendar_review_status"}
     if not rows or not required.issubset(rows[0]):
         raise ValueError(f"calendar manifest requires columns: {sorted(required)}")
     seen = set()
@@ -162,6 +162,8 @@ def load_calendar_manifest(path: Path) -> list[dict]:
             raise ValueError(f"calendar source SHA-256 mismatch: {row['calendar_source_path']}")
         if not row["calendar_source_url"].startswith("https://"):
             raise ValueError(f"calendar source URL must be HTTPS for {day}")
+        if row["calendar_review_status"] != "HUMAN_REVIEWED" and not allow_candidate_calendar:
+            raise ValueError(f"calendar date {day} is not human-reviewed; pass --allow-candidate-calendar only for isolated research acquisition")
     return sorted(rows, key=lambda row: row["trade_date"])
 
 
@@ -206,6 +208,7 @@ def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -
                 "calendar_source_url": item["calendar_source_url"],
                 "calendar_source_path": item["calendar_source_path"],
                 "calendar_source_sha256": item["calendar_source_sha256"],
+                "calendar_review_status": item["calendar_review_status"],
                 "status": "DOWNLOADED_AND_VALIDATED",
             })
         except Exception as exc:
@@ -236,8 +239,11 @@ def main() -> int:
     parser.add_argument("--calendar-manifest", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "data/reference/nse_bhavcopy_2018_2024")
     parser.add_argument("--report", type=Path, default=ROOT / "data/reports/nse_bhavcopy_acquisition.json")
+    parser.add_argument("--allow-candidate-calendar", action="store_true",
+                        help="allow isolated research acquisition from an unreviewed candidate session list")
     args = parser.parse_args()
-    manifest = load_calendar_manifest(args.calendar_manifest)
+    manifest = load_calendar_manifest(args.calendar_manifest,
+                                      allow_candidate_calendar=args.allow_candidate_calendar)
     session = requests.Session()
     session.headers.update({"User-Agent": USER_AGENT, "Accept": "application/zip,*/*",
                             "Accept-Encoding": "identity"})
