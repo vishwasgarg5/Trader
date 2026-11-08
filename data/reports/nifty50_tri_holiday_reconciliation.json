@@ -1,23 +1,81 @@
 {
+  "ad_hoc_closure_archive_source": "data/reports/nifty50_tri_ad_hoc_closure_archive.json",
+  "ad_hoc_closure_checks": [
+    {
+      "archive_integrity_verified": true,
+      "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-04-29_NSE_CMTR_40536.pdf",
+      "archive_sha256_verified": "0ffd5d5c6f2e967947b0fafc45f285c2eff70abbde138b06e35d4ac8169ebc65",
+      "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "circular_reference": "NSE/CMTR/40536",
+      "description": "Parliamentary elections in Mumbai",
+      "event_type": "AD_HOC_CLOSURE",
+      "independent_review_status": "PENDING",
+      "interpretation": "NO_TRI_OBSERVATION_ON_EFFECTIVE_CLOSURE_EXPECTED",
+      "segment": "Capital Market",
+      "session_date": "2019-04-29",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR40536.pdf",
+      "supersedes_session_date": null,
+      "tri_observation_present": false
+    },
+    {
+      "archive_integrity_verified": true,
+      "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-10-21_NSE_MSD_42319.pdf",
+      "archive_sha256_verified": "bc49d7698fefa2b9ed3a5fbb2477dd74e5ed04dc69cec3ff5e9aca074fcc1b8a",
+      "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "circular_reference": "NSE/MSD/42319",
+      "description": "General Assembly elections in Maharashtra",
+      "event_type": "AD_HOC_CLOSURE",
+      "independent_review_status": "PENDING",
+      "interpretation": "NO_TRI_OBSERVATION_ON_EFFECTIVE_CLOSURE_EXPECTED",
+      "segment": "Capital Market",
+      "session_date": "2019-10-21",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD42319.pdf",
+      "supersedes_session_date": null,
+      "tri_observation_present": false
+    },
+    {
+      "archive_integrity_verified": false,
+      "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2023-06-29_NSE_CMTR_57285.pdf",
+      "archive_sha256_verified": null,
+      "archive_status": "SOURCE_IDENTIFIED_PDF_ARCHIVE_PENDING",
+      "circular_reference": "NSE/CMTR/57285",
+      "description": "Bakri Id trading holiday revised from June 28 to June 29 2023",
+      "event_type": "HOLIDAY_DATE_REVISION",
+      "independent_review_status": "PENDING",
+      "interpretation": "NO_TRI_OBSERVATION_ON_EFFECTIVE_CLOSURE_EXPECTED",
+      "segment": "Capital Market",
+      "session_date": "2023-06-29",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf",
+      "supersedes_session_date": "2023-06-28",
+      "tri_observation_present": false
+    }
+  ],
+  "ad_hoc_closure_register_source": "data/reference/nifty50_tri_ad_hoc_closures.csv",
   "audit_type": "HOLIDAY_CIRCULAR_TO_TRI_DIAGNOSTIC_CROSSCHECK",
   "calendar_completeness": "NOT_CERTIFIED",
   "counts": {
-    "candidate_holiday_dates_absent_from_tri": 124,
-    "candidate_holiday_dates_present_in_tri": 8,
+    "ad_hoc_or_revised_closure_dates": 3,
+    "ad_hoc_or_revised_closure_dates_absent_from_tri": 3,
+    "annual_holiday_dates_present_in_tri": 7,
+    "annual_holiday_dates_superseded": 1,
     "candidate_holiday_rows": 132,
     "distinct_candidate_holiday_dates": 132,
-    "distinct_unexplained_weekday_dates": 2,
+    "distinct_unexplained_weekday_dates": 0,
+    "effective_annual_holiday_dates": 131,
+    "gaps_explained_by_ad_hoc_or_revised_closure": 2,
     "gaps_over_three_calendar_days": 39,
-    "gaps_with_unexplained_weekdays": 2,
-    "gaps_without_unexplained_weekdays": 37,
+    "gaps_with_unexplained_weekdays": 0,
+    "gaps_without_unexplained_weekdays": 39,
     "holiday_rows_missing_source_weekday": 0,
     "holiday_weekday_mismatch_flags": 0,
+    "superseded_annual_holiday_dates_present_in_tri": 1,
     "weekend_session_register_date_count": 7,
     "weekend_session_register_dates_present_in_tri": 7
   },
   "experiment_id": "NIFTY50_PILOT_001",
   "gap_checks": [
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2018-01-26"
       ],
@@ -37,6 +95,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2018-03-02"
       ],
@@ -56,6 +115,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2018-03-29",
         "2018-03-30"
@@ -77,6 +137,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2018-11-23"
       ],
@@ -96,6 +157,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2019-03-04"
       ],
@@ -115,6 +177,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2019-04-19"
       ],
@@ -134,6 +197,9 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [
+        "2019-04-29"
+      ],
       "annual_circular_holiday_dates": [],
       "calendar_days_between": 4,
       "intervening_dates": [
@@ -143,16 +209,15 @@
       ],
       "next_session": "2019-04-30",
       "previous_session": "2019-04-26",
-      "status": "UNRESOLVED_WEEKDAY_GAP",
-      "unexplained_weekday_dates": [
-        "2019-04-29"
-      ],
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
       "weekend_dates": [
         "2019-04-27",
         "2019-04-28"
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2019-08-12"
       ],
@@ -172,6 +237,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2019-09-02"
       ],
@@ -191,6 +257,9 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [
+        "2019-10-21"
+      ],
       "annual_circular_holiday_dates": [],
       "calendar_days_between": 4,
       "intervening_dates": [
@@ -200,16 +269,15 @@
       ],
       "next_session": "2019-10-22",
       "previous_session": "2019-10-18",
-      "status": "UNRESOLVED_WEEKDAY_GAP",
-      "unexplained_weekday_dates": [
-        "2019-10-21"
-      ],
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
       "weekend_dates": [
         "2019-10-19",
         "2019-10-20"
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-02-21"
       ],
@@ -229,6 +297,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-04-06"
       ],
@@ -248,6 +317,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-04-10"
       ],
@@ -267,6 +337,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-05-01"
       ],
@@ -286,6 +357,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-05-25"
       ],
@@ -305,6 +377,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-10-02"
       ],
@@ -324,6 +397,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-11-30"
       ],
@@ -343,6 +417,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2020-12-25"
       ],
@@ -362,6 +437,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-03-29"
       ],
@@ -381,6 +457,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-04-02"
       ],
@@ -400,6 +477,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-09-10"
       ],
@@ -419,6 +497,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-10-15"
       ],
@@ -438,6 +517,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-11-05"
       ],
@@ -457,6 +537,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2021-11-19"
       ],
@@ -476,6 +557,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2022-03-18"
       ],
@@ -495,6 +577,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2022-04-14",
         "2022-04-15"
@@ -516,6 +599,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2022-08-15"
       ],
@@ -535,6 +619,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-04-07"
       ],
@@ -554,6 +639,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-04-14"
       ],
@@ -573,6 +659,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-05-01"
       ],
@@ -592,6 +679,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-10-02"
       ],
@@ -611,6 +699,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-11-27"
       ],
@@ -630,6 +719,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2023-12-25"
       ],
@@ -649,6 +739,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-01-26"
       ],
@@ -668,6 +759,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-03-08"
       ],
@@ -687,6 +779,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-03-25"
       ],
@@ -706,6 +799,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-03-29"
       ],
@@ -725,6 +819,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-06-17"
       ],
@@ -744,6 +839,7 @@
       ]
     },
     {
+      "ad_hoc_or_revised_closure_dates": [],
       "annual_circular_holiday_dates": [
         "2024-11-15"
       ],
@@ -774,6 +870,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -789,6 +886,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -804,6 +902,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -819,6 +918,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -834,6 +934,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -849,6 +950,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -864,6 +966,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -879,6 +982,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -894,6 +998,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -909,6 +1014,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -924,6 +1030,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -939,6 +1046,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -954,6 +1062,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 31,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Wednesday",
@@ -969,6 +1078,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 14,
       "source_text_line_number": 32,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -984,6 +1094,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 15,
       "source_text_line_number": 33,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -999,6 +1110,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 16,
       "source_text_line_number": 34,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1014,6 +1126,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 39,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1029,6 +1142,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 40,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1044,6 +1158,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 41,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1059,6 +1174,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1074,6 +1190,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1089,6 +1206,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1104,6 +1222,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1119,6 +1238,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1134,6 +1254,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1149,6 +1270,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1164,6 +1286,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1179,6 +1302,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1194,6 +1318,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1209,6 +1334,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1224,6 +1350,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1239,6 +1366,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1254,6 +1382,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 14,
       "source_text_line_number": 31,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1269,6 +1398,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 15,
       "source_text_line_number": 32,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1284,6 +1414,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 37,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1299,6 +1430,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 38,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1314,6 +1446,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 39,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1329,6 +1462,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 40,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Sunday",
@@ -1344,6 +1478,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 17,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1359,6 +1494,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1374,6 +1510,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1389,6 +1526,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1404,6 +1542,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1419,6 +1558,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1434,6 +1574,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1449,6 +1590,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1464,6 +1606,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1479,6 +1622,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1494,6 +1638,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1509,6 +1654,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1524,6 +1670,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 32,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1539,6 +1686,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 33,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1554,6 +1702,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 34,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1569,6 +1718,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 35,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1584,6 +1734,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 36,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1599,6 +1750,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 37,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1614,6 +1766,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 38,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Saturday",
@@ -1629,6 +1782,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 17,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1644,6 +1798,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1659,6 +1814,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -1674,6 +1830,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1689,6 +1846,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1704,6 +1862,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1719,6 +1878,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1734,6 +1894,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1749,6 +1910,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1764,6 +1926,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1779,6 +1942,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1794,6 +1958,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Thursday",
@@ -1809,6 +1974,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1824,6 +1990,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 14,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1839,6 +2006,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 34,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1854,6 +2022,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 35,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1869,6 +2038,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 36,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -1884,6 +2054,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 37,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1899,6 +2070,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 38,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -1914,6 +2086,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -1929,6 +2102,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -1944,6 +2118,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1959,6 +2134,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -1974,6 +2150,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -1989,6 +2166,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2004,6 +2182,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2019,6 +2198,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2034,6 +2214,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2049,6 +2230,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2064,6 +2246,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Monday",
@@ -2079,6 +2262,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2094,6 +2278,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2109,6 +2294,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 36,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2124,6 +2310,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 37,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2139,6 +2326,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 38,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2154,6 +2342,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 39,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2169,6 +2358,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 40,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2184,6 +2374,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -2199,6 +2390,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2214,6 +2406,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -2229,6 +2422,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2244,6 +2438,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2259,6 +2454,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2274,6 +2470,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2284,11 +2481,12 @@
       "calendar_day_type": "WEEKDAY",
       "date": "2023-06-28",
       "description": "Bakri Id",
-      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "interpretation": "ANNUAL_HOLIDAY_DATE_SUPERSEDED_BY_LATER_NSE_CIRCULAR",
       "page_number": 1,
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": true,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Wednesday",
@@ -2304,6 +2502,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2319,6 +2518,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2334,6 +2534,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2349,6 +2550,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2364,6 +2566,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Tuesday",
@@ -2379,6 +2582,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 14,
       "source_text_line_number": 31,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2394,6 +2598,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 15,
       "source_text_line_number": 32,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2409,6 +2614,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 9,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2424,6 +2630,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 10,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2439,6 +2646,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 11,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2454,6 +2662,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 12,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Sunday",
@@ -2469,6 +2678,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 18,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2484,6 +2694,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 19,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2499,6 +2710,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 20,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2514,6 +2726,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 21,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2529,6 +2742,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 22,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -2544,6 +2758,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 6,
       "source_text_line_number": 23,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2559,6 +2774,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 7,
       "source_text_line_number": 24,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2574,6 +2790,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 8,
       "source_text_line_number": 25,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Monday",
@@ -2589,6 +2806,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 9,
       "source_text_line_number": 26,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2604,6 +2822,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 10,
       "source_text_line_number": 27,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Thursday",
@@ -2619,6 +2838,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 11,
       "source_text_line_number": 28,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2634,6 +2854,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 12,
       "source_text_line_number": 29,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": true,
       "weekday_in_source": "Friday",
@@ -2649,6 +2870,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 13,
       "source_text_line_number": 30,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Friday",
@@ -2664,6 +2886,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 14,
       "source_text_line_number": 31,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKDAY_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Wednesday",
@@ -2679,6 +2902,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 1,
       "source_text_line_number": 8,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2694,6 +2918,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 2,
       "source_text_line_number": 9,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Sunday",
@@ -2709,6 +2934,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 3,
       "source_text_line_number": 10,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2724,6 +2950,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 4,
       "source_text_line_number": 11,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2739,6 +2966,7 @@
       "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
       "row_number": 5,
       "source_text_line_number": 12,
+      "superseded_by_later_nse_circular": false,
       "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
       "tri_observation_present": false,
       "weekday_in_source": "Saturday",
@@ -2748,7 +2976,7 @@
   ],
   "holiday_extraction_source": "data/reports/nifty50_tri_holiday_extraction.json",
   "independent_review_status": "PENDING",
-  "interpretation": "This is a diagnostic comparison only. A circular holiday absent from TRI is consistent with a closure but does not prove the entire calendar is complete. A TRI observation on a circular holiday requires session-type review. Unexplained weekdays may be missing data, ad-hoc closures, or other exchange events and must not be auto-classified.",
+  "interpretation": "This is a diagnostic comparison only. Later NSE circulars can revise annual holiday dates; superseded dates are not treated as effective closures. A TRI observation on an effective closure requires session-type review. Unexplained weekdays may be missing data or other exchange events and must not be auto-classified. Archived bytes and extracted text remain pending independent source and semantic review.",
   "research_status": "RESEARCH_HOLD",
   "source_authenticity": "PENDING_INDEPENDENT_REVIEW",
   "tri_source": "data/reference/nifty50_tri.csv",
