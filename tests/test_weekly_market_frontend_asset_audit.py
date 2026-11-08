@@ -37,3 +37,26 @@ def test_candidate_routes_are_review_only_and_not_general_navigation_links():
 def test_route_discovery_does_not_authorize_execution():
     assert "NOT_CALLED" in pathlib.Path("scripts/weekly_market_frontend_asset_audit.py").read_text()
     assert "candidate_routes_for_manual_review" in pathlib.Path("scripts/weekly_market_frontend_asset_audit.py").read_text()
+
+
+def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+    def flaky_urlopen(request, timeout):
+        calls.append(timeout)
+        if len(calls) == 1:
+            raise TimeoutError("temporary read timeout")
+        return Response()
+
+    monkeypatch.setattr(MODULE.urllib.request, "urlopen", flaky_urlopen)
+    monkeypatch.setattr(MODULE.time, "sleep", lambda _seconds: None)
+    response = MODULE.open_with_retry(object(), timeout=MODULE.ASSET_TIMEOUT)
+    assert isinstance(response, Response)
+    assert calls == [MODULE.ASSET_TIMEOUT, MODULE.ASSET_TIMEOUT]
