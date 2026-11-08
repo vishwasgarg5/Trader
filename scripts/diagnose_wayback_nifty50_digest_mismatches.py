@@ -151,7 +151,11 @@ def diagnose(state: dict, session: requests.Session, pause_seconds: float = 3.0)
                 "exact_capture_found": exact is not None,
                 "neighbour_capture_timestamp": neighbours[0]["timestamp"] if neighbours else None,
                 "attempts": attempts,
-                "decision": "REMAIN_QUARANTINED_UNLESS_A_FETCH_MATCHES_CDX_DIGEST",
+                "decision": (
+                    "CDX_DIGEST_MATCHED_ON_RAW_REPLAY_BYTES; PERSIST_AND_REVALIDATE_BEFORE_STATE_ACCEPTANCE"
+                    if any(a.get("wire_digest_match") or a.get("digest_match") for a in attempts)
+                    else "REMAIN_QUARANTINED_UNLESS_A_FETCH_MATCHES_CDX_DIGEST"
+                ),
             })
         except Exception as exc:
             results.append({
