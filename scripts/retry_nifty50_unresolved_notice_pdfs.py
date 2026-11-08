@@ -219,6 +219,16 @@ def load_state() -> dict:
             if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY":
                 item["cdx_checked"] = False
         item.setdefault("cdx_search_variants", cdx_search_variants(original))
+        # Migrate the old two broad domain scans to smaller date-window scans.
+        # Keep exact-URL results, but do not let old broad-domain results satisfy
+        # the narrower queries.
+        if any(
+            variant.get("match_type") == "domain" and "from_year" not in variant
+            for variant in item["cdx_search_variants"]
+        ):
+            item["cdx_search_variants"] = cdx_search_variants(original)
+            item["next_cdx_search_index"] = len(cdx_url_variants(original))
+            item["cdx_checked"] = False
         reconcile_cdx_search_progress(item)
         # Older persisted runs could mark a notice unavailable after exhausting
         # direct URLs even though domain-wide CDX searches later proved incomplete.
@@ -241,9 +251,14 @@ def cdx_search_variants(original: str) -> list[dict]:
     """Add domain-wide filename searches after exact official-host URL variants."""
     filename = pathlib.PurePosixPath(urlsplit(original).path).name
     exact = [{"url": url, "match_type": "exact"} for url in cdx_url_variants(original)]
+    # Broad 2018-2024 domain queries have repeatedly timed out or returned
+    # 503. Split each official host into two bounded date windows so CDX has
+    # less index work per request while preserving full pilot-period coverage.
     return exact + [
-        {"url": "niftyindices.com", "match_type": "domain", "filename": filename},
-        {"url": "nseindia.com", "match_type": "domain", "filename": filename},
+        {"url": host, "match_type": "domain", "filename": filename,
+         "from_year": start, "to_year": end}
+        for host in ("niftyindices.com", "nseindia.com")
+        for start, end in ((2018, 2020), (2021, 2024))
     ]
 
 
@@ -252,7 +267,8 @@ def cdx_request_params(variant: dict) -> dict:
         "url": variant["url"], "output": "json",
         "collapse": "digest",
         "fl": "timestamp,original,statuscode,mimetype,digest,length",
-        "from": "2018", "to": "2024"
+        "from": str(variant.get("from_year", 2018)),
+        "to": str(variant.get("to_year", 2024))
     }
     if variant.get("match_type") == "domain":
         params["matchType"] = "domain"
@@ -275,6 +291,8 @@ def reconcile_cdx_search_progress(item: dict) -> None:
             query for query in queries
             if query.get("url") == variant.get("url")
             and query.get("match_type", "exact") == variant.get("match_type", "exact")
+            and query.get("from_year") == variant.get("from_year")
+            and query.get("to_year") == variant.get("to_year")
         ]
         if not matching:
             next_index = index
@@ -402,6 +420,8 @@ def run() -> dict:
                     break
                 query_record = {
                     "url": cdx_url, "match_type": variant.get("match_type", "exact"),
+                    "from_year": variant.get("from_year"),
+                    "to_year": variant.get("to_year"),
                     "at_utc": stamp(), "http_status": response.status_code,
                     "content_type": response.headers.get("Content-Type", "")[:160]
                 }
