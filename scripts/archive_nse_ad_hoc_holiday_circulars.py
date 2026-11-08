@@ -55,7 +55,7 @@ def main() -> int:
                 "bytes": len(body),
                 "sha256": hashlib.sha256(body).hexdigest(),
                 "downloaded_from_url": successful_url,
-                "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+                "archive_status": ("ARCHIVED_OFFICIAL_HOST_PDF_SIGNATURE_VALID" if "nseindia.com" in successful_url else "ARCHIVED_THIRD_PARTY_MIRROR_PDF_SIGNATURE_VALID"),
                 "independent_review_status": "PENDING",
             })
         except Exception as exc:
