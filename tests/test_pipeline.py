@@ -213,5 +213,6 @@ def test_integrity_report_exposes_source_backed_muhurat_session_context(tmp_path
     assert context["classification"] == "SPECIAL_TRADING_SESSION"
     assert context["is_trading_session"] is True
     assert context["session"]["circular_reference"] == "NSE/CMTR/76941"
+    assert report["next_confirmed_nse_session"]["next_session_date"] == "2026-11-09"
     assert report["live_execution_enabled"] is False
     assert report["promotion_eligible"] is False
