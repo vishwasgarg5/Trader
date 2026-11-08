@@ -1,11 +1,11 @@
 {
-  "archived_count": 16,
-  "candidate_count": 16,
+  "archived_count": 0,
+  "candidate_count": 0,
   "changes_to_model_data": false,
   "egress_ip": {
-    "checked_at_utc": "2026-11-08T08:55:01.340086+00:00",
+    "checked_at_utc": "2026-11-08T09:35:55.607179+00:00",
     "http_status": 200,
-    "ip": "20.171.20.19",
+    "ip": "20.55.8.65",
     "service": "https://api.ipify.org?format=json"
   },
   "failed_count": 0,
@@ -15,457 +15,24 @@
   "paper_trading_eligible": false,
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
-  "results": [
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df50b00bff62ca85_nifty-50-at-20k.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df50b00bff62ca85_nifty-50-at-20k.pdf",
-          "attempt": 1,
-          "bytes_received": 774101,
-          "content_length": "774101",
-          "content_type": "application/pdf",
-          "final_url": "https://niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-at-20k.pdf?sfvrsn=54a79334_10",
-          "finished_at_utc": "2026-11-08T08:55:04.277029+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "df50b00bff62ca8568949f91faaf96ea70c898eb7fa282120d930cf91d8e5bbb",
-          "started_at_utc": "2026-11-08T08:55:02.988652+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 774101,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:02.988631+00:00",
-      "sha256": "df50b00bff62ca8568949f91faaf96ea70c898eb7fa282120d930cf91d8e5bbb",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-at-20k.pdf?sfvrsn=54a79334_10",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/99/99707b1690934ee6_25_Years_Journey_of_Nifty50_2022-01.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/99/99707b1690934ee6_25_Years_Journey_of_Nifty50_2022-01.pdf",
-          "attempt": 1,
-          "bytes_received": 1264348,
-          "content_length": "1264348",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/content/indices/25_Years_Journey_of_Nifty50_2022-01.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.276708+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "99707b1690934ee666563f8c3b49bc3117a338733b56d030a33149204bacbf36",
-          "started_at_utc": "2026-11-08T08:55:02.989244+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 1264348,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:02.989229+00:00",
-      "sha256": "99707b1690934ee666563f8c3b49bc3117a338733b56d030a33149204bacbf36",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/25_Years_Journey_of_Nifty50_2022-01.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/05/0581adce02e07ddb_Method_NIFTY_Equity_Indices.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/05/0581adce02e07ddb_Method_NIFTY_Equity_Indices.pdf",
-          "attempt": 1,
-          "bytes_received": 3287791,
-          "content_length": "3287791",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.257252+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "0581adce02e07ddbf4b76ee1691f7d29a1218be4fda15c9d036fcc3ac7a3425a",
-          "started_at_utc": "2026-11-08T08:55:02.989919+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 3287791,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:02.989901+00:00",
-      "sha256": "0581adce02e07ddbf4b76ee1691f7d29a1218be4fda15c9d036fcc3ac7a3425a",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/Method_NIFTY_Equity_Indices.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/49/49eff70c1d3978e7_Whitepaper_NIFTY50.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/49/49eff70c1d3978e7_Whitepaper_NIFTY50.pdf",
-          "attempt": 1,
-          "bytes_received": 1541082,
-          "content_length": "1541082",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/content/indices/Whitepaper_NIFTY50.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.240547+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "49eff70c1d3978e7966c69fb7f95487443b463c2d6eefeebc3129bbecb2a3939",
-          "started_at_utc": "2026-11-08T08:55:02.990543+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 1541082,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:02.990528+00:00",
-      "sha256": "49eff70c1d3978e7966c69fb7f95487443b463c2d6eefeebc3129bbecb2a3939",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/Whitepaper_NIFTY50.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/3c/3c98909d1e06ec78_ind_nifty50.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/3c/3c98909d1e06ec78_ind_nifty50.pdf",
-          "attempt": 1,
-          "bytes_received": 262903,
-          "content_length": "262903",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.494726+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "3c98909d1e06ec7887f9288250edf7f88b20d069e84748eb1dfbbd998246c642",
-          "started_at_utc": "2026-11-08T08:55:03.240788+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 262903,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:03.240776+00:00",
-      "sha256": "3c98909d1e06ec7887f9288250edf7f88b20d069e84748eb1dfbbd998246c642",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/2e/2e069d972d36be28_Nifty_2050_20whitepaper.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/2e/2e069d972d36be28_Nifty_2050_20whitepaper.pdf",
-          "attempt": 1,
-          "bytes_received": 730055,
-          "content_length": "730055",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/Nifty%2050%20whitepaper.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.499170+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "2e069d972d36be28d3afb1b165a8964f3c3c42c8ea41c41138dc2b2e0b97d627",
-          "started_at_utc": "2026-11-08T08:55:03.257792+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 730055,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:03.257781+00:00",
-      "sha256": "2e069d972d36be28d3afb1b165a8964f3c3c42c8ea41c41138dc2b2e0b97d627",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/Nifty%2050%20whitepaper.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df778c6833bea2b3_nifty-50-whitepaper-2024_0.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df778c6833bea2b3_nifty-50-whitepaper-2024_0.pdf",
-          "attempt": 1,
-          "bytes_received": 677817,
-          "content_length": "677817",
-          "content_type": "application/pdf",
-          "final_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/nifty-50-whitepaper-2024_0.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.535591+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "df778c6833bea2b36f919a30d106293f5c81c32efcb48c7d50c7745180610d3a",
-          "started_at_utc": "2026-11-08T08:55:03.276812+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 677817,
-      "http_status": 200,
-      "publisher": "NSE",
-      "retrieved_at_utc": "2026-11-08T08:55:03.276802+00:00",
-      "sha256": "df778c6833bea2b36f919a30d106293f5c81c32efcb48c7d50c7745180610d3a",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/nifty-50-whitepaper-2024_0.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/83/83ed8eee92d9af15_nifty_indices_benchmark_codes.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/83/83ed8eee92d9af15_nifty_indices_benchmark_codes.pdf",
-          "attempt": 1,
-          "bytes_received": 325407,
-          "content_length": "325407",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/BenchmarkCodes/nifty_indices_benchmark_codes.pdf",
-          "finished_at_utc": "2026-11-08T08:55:05.525673+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "83ed8eee92d9af15852747a1706885468cfb9ceccc17588c6477dd04872a3aec",
-          "started_at_utc": "2026-11-08T08:55:03.494829+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 325407,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:03.494819+00:00",
-      "sha256": "83ed8eee92d9af15852747a1706885468cfb9ceccc17588c6477dd04872a3aec",
-      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
-      "source_url": "https://www.niftyindices.com/BenchmarkCodes/nifty_indices_benchmark_codes.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/3c/3c98909d1e06ec78_ind_nifty50.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/3c/3c98909d1e06ec78_ind_nifty50.pdf",
-          "attempt": 1,
-          "bytes_received": 262903,
-          "content_length": "262903",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
-          "finished_at_utc": "2026-11-08T08:55:04.228098+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "3c98909d1e06ec7887f9288250edf7f88b20d069e84748eb1dfbbd998246c642",
-          "started_at_utc": "2026-11-08T08:55:03.499252+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 262903,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:03.499243+00:00",
-      "sha256": "3c98909d1e06ec7887f9288250edf7f88b20d069e84748eb1dfbbd998246c642",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/ce/ce478bdd24fb5fb7_Method_NIFTY_Equity_Indices.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/ce/ce478bdd24fb5fb7_Method_NIFTY_Equity_Indices.pdf",
-          "attempt": 1,
-          "bytes_received": 3697637,
-          "content_length": "3697637",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf",
-          "finished_at_utc": "2026-11-08T08:55:03.831451+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "ce478bdd24fb5fb7973fe3e23768469e835c0861db00b9a3c4aa50201f716cef",
-          "started_at_utc": "2026-11-08T08:55:03.535673+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 3697637,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:03.535664+00:00",
-      "sha256": "ce478bdd24fb5fb7973fe3e23768469e835c0861db00b9a3c4aa50201f716cef",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df50b00bff62ca85_nifty-50-at-20k.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/df/df50b00bff62ca85_nifty-50-at-20k.pdf",
-          "attempt": 1,
-          "bytes_received": 774101,
-          "content_length": "774101",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-at-20k.pdf",
-          "finished_at_utc": "2026-11-08T08:55:05.215309+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "df50b00bff62ca8568949f91faaf96ea70c898eb7fa282120d930cf91d8e5bbb",
-          "started_at_utc": "2026-11-08T08:55:03.831970+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 774101,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:03.831959+00:00",
-      "sha256": "df50b00bff62ca8568949f91faaf96ea70c898eb7fa282120d930cf91d8e5bbb",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-at-20k.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/95/95b79e97794ae96a_nifty-50-whitepaper-2024.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/95/95b79e97794ae96a_nifty-50-whitepaper-2024.pdf",
-          "attempt": 1,
-          "bytes_received": 677815,
-          "content_length": "677815",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper-2024.pdf",
-          "finished_at_utc": "2026-11-08T08:55:05.754949+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "95b79e97794ae96aaaa7559bb3832374ebfad26dde56a025d41c6b94cee89e2d",
-          "started_at_utc": "2026-11-08T08:55:04.228380+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 677815,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:04.228370+00:00",
-      "sha256": "95b79e97794ae96aaaa7559bb3832374ebfad26dde56a025d41c6b94cee89e2d",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper-2024.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/ba/baca394f89c0ca36_nifty-50-whitepaper_2023.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/ba/baca394f89c0ca36_nifty-50-whitepaper_2023.pdf",
-          "attempt": 1,
-          "bytes_received": 730053,
-          "content_length": "730053",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2023.pdf",
-          "finished_at_utc": "2026-11-08T08:55:06.373040+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "baca394f89c0ca362da21b51b1f81cded4ed1fe77800d16c04154e3c7b908f8e",
-          "started_at_utc": "2026-11-08T08:55:04.277385+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 730053,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:04.277374+00:00",
-      "sha256": "baca394f89c0ca362da21b51b1f81cded4ed1fe77800d16c04154e3c7b908f8e",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2023.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/49/494c272b28b86974_nifty-50-whitepaper_2025.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/49/494c272b28b86974_nifty-50-whitepaper_2025.pdf",
-          "attempt": 1,
-          "bytes_received": 3552904,
-          "content_length": "3552904",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2025.pdf",
-          "finished_at_utc": "2026-11-08T08:55:05.502215+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "494c272b28b8697466bec193e313d5e77010709e887855117ce013ce705ade09",
-          "started_at_utc": "2026-11-08T08:55:05.215594+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 3552904,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:05.215583+00:00",
-      "sha256": "494c272b28b8697466bec193e313d5e77010709e887855117ce013ce705ade09",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2025.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/f7/f7f2b7e914c71cc7_nifty-50-whitepaper_2026.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/f7/f7f2b7e914c71cc7_nifty-50-whitepaper_2026.pdf",
-          "attempt": 1,
-          "bytes_received": 27510053,
-          "content_length": "27510053",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2026.pdf",
-          "finished_at_utc": "2026-11-08T08:55:08.251894+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "f7f2b7e914c71cc7f42da088ea070db4b161fb784bbb484d68e8440cc66f6e8f",
-          "started_at_utc": "2026-11-08T08:55:05.502554+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 27510053,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:05.502543+00:00",
-      "sha256": "f7f2b7e914c71cc7f42da088ea070db4b161fb784bbb484d68e8440cc66f6e8f",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2026.pdf",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    },
-    {
-      "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/34/34cb295b0ae58a99_trackingerror.pdf",
-      "attempts": [
-        {
-          "archive_path": "data/reference/source_documents/nse_curl_cffi_retry/34/34cb295b0ae58a99_trackingerror.pdf",
-          "attempt": 1,
-          "bytes_received": 25636,
-          "content_length": "25636",
-          "content_type": "application/pdf",
-          "final_url": "https://www.niftyindices.com/docs/default-source/tracking-error/trackingerror.pdf?sfvrsn=7e449b34_2",
-          "finished_at_utc": "2026-11-08T08:55:05.786471+00:00",
-          "http_status": 200,
-          "ok": true,
-          "sha256": "34cb295b0ae58a9909a1feb726e81c69790fda6f1d82be7685a79b816c42f94d",
-          "started_at_utc": "2026-11-08T08:55:05.526052+00:00",
-          "validated": true
-        }
-      ],
-      "bytes_received": 25636,
-      "http_status": 200,
-      "publisher": "NSE_INDICES",
-      "retrieved_at_utc": "2026-11-08T08:55:05.526041+00:00",
-      "sha256": "34cb295b0ae58a9909a1feb726e81c69790fda6f1d82be7685a79b816c42f94d",
-      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
-      "source_url": "https://www.niftyindices.com/docs/default-source/tracking-error/trackingerror.pdf?sfvrsn=7e449b34_2",
-      "status": "ARCHIVED_VALIDATED_PDF"
-    }
-  ],
-  "run_at_utc": "2026-11-08T08:55:10.526185+00:00",
+  "results": [],
+  "run_at_utc": "2026-11-08T09:36:01.786588+00:00",
   "schema_version": 1,
   "status": "COMPLETE",
   "transport_checks": [
     {
       "bytes_received": 131072,
       "content_type": "application/json",
-      "elapsed_seconds": 0.246,
+      "elapsed_seconds": 1.386,
       "http_status": 200,
       "method": "requests",
       "ok": true,
       "url": "https://web.archive.org/cdx/search/cdx?url=https%3A//www.nseindia.com/&output=json"
     },
     {
-      "bytes_received": 131427,
+      "bytes_received": 131399,
       "content_type": "application/json",
-      "elapsed_seconds": 0.897,
+      "elapsed_seconds": 0.374,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
@@ -474,7 +41,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.339,
+      "elapsed_seconds": 0.432,
       "http_status": 200,
       "method": "requests",
       "ok": true,
@@ -483,7 +50,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.043,
+      "elapsed_seconds": 0.046,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
