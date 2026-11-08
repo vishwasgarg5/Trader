@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from trader.market_calendar import classify_nse_session_date, load_special_sessions
+from trader.market_calendar import (classify_nse_session_date, load_calendar, load_special_sessions, next_nse_session_date)
 
 
 def test_november_8_2026_is_recognized_as_sunday_muhurat_session():
@@ -20,19 +20,42 @@ def test_november_8_2026_is_recognized_as_sunday_muhurat_session():
 def test_timezone_aware_utc_timestamp_is_converted_to_nse_date():
     result = classify_nse_session_date(datetime(2026, 11, 8, 18, 45, tzinfo=timezone.utc))
     assert result["date"] == "2026-11-09"
-    assert result["classification"] == "WEEKDAY_REQUIRES_OFFICIAL_HOLIDAY_CALENDAR"
+    assert result["classification"] == "REGULAR_TRADING_SESSION"
 
 
 def test_unregistered_weekend_is_not_assumed_to_be_open():
     result = classify_nse_session_date("2026-11-07")
-    assert result["classification"] == "WEEKEND_NO_SESSION_CONFIRMED"
-    assert result["is_trading_session"] is None
+    assert result["classification"] == "WEEKEND_NO_SESSION"
+    assert result["is_trading_session"] is False
 
 
-def test_weekday_is_not_assumed_open_without_full_holiday_calendar():
+def test_november_10_2026_is_official_exchange_holiday():
     result = classify_nse_session_date("2026-11-10")
-    assert result["classification"] == "WEEKDAY_REQUIRES_OFFICIAL_HOLIDAY_CALENDAR"
+    assert result["classification"] == "EXCHANGE_HOLIDAY"
+    assert result["is_trading_session"] is False
+    assert result["holiday"]["name"] == "Diwali-Balipratipada"
+
+
+def test_date_outside_verified_calendar_coverage_is_unknown():
+    result = classify_nse_session_date("2027-01-04")
+    assert result["classification"] == "OUTSIDE_VERIFIED_CALENDAR_COVERAGE"
     assert result["is_trading_session"] is None
+
+
+def test_next_session_after_muhurat_is_monday_november_9():
+    result = next_nse_session_date("2026-11-08")
+    assert result["next_session_date"] == "2026-11-09"
+    assert result["classification"] == "REGULAR_TRADING_SESSION"
+
+
+def test_next_session_skips_diwali_balipratipada_holiday():
+    result = next_nse_session_date("2026-11-09")
+    assert result["next_session_date"] == "2026-11-11"
+
+
+def test_next_session_fails_closed_when_search_reaches_unverified_year():
+    with pytest.raises(RuntimeError, match="verified calendar coverage"):
+        next_nse_session_date("2026-12-31")
 
 
 def test_special_session_register_rejects_duplicate_dates(tmp_path):
