@@ -9,7 +9,9 @@ on:
     paths:
       - ".github/workflows/weekly-market-document-refresh.yml"
       - "scripts/weekly_market_document_refresh.py"
+      - "scripts/weekly_market_document_acquisition.py"
       - "tests/test_weekly_market_document_refresh.py"
+      - "tests/test_weekly_market_document_acquisition.py"
 
 permissions:
   contents: write
@@ -36,10 +38,13 @@ jobs:
         run: python -m pip install --disable-pip-version-check pytest
       - name: Test discovery and evidence safeguards
         run: |
-          python -m pytest -q tests/test_weekly_market_document_refresh.py
+          python -m pytest -q tests/test_weekly_market_document_refresh.py tests/test_weekly_market_document_acquisition.py
       - name: Acquire official NSE and BSE landing-page snapshots
         run: |
           python scripts/weekly_market_document_refresh.py
+      - name: Acquire allowlisted primary-source PDF documents
+        run: |
+          python scripts/weekly_market_document_acquisition.py
       - name: Commit weekly source snapshots and report
         if: always()
         run: |
@@ -47,9 +52,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A data/reference/source_documents data/reports
           if git diff --cached --quiet; then
-            echo "No new page snapshots or report changes"
+            echo "No new source snapshots, documents, or reports"
           else
-            git commit -m "Refresh weekly NSE and BSE market document sources"
+            git commit -m "Refresh weekly NSE and BSE market documents"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
