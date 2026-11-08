@@ -10,3 +10,4 @@ pypdf>=5,<7
 pymupdf>=1.24,<2
 pytesseract>=0.3.10,<1
 Pillow>=10,<13
+curl_cffi>=0.7,<1
