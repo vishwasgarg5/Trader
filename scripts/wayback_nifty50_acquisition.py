@@ -46,7 +46,7 @@ MAX_RETRIES = 3
 CONNECT_TIMEOUT = 15
 READ_TIMEOUT = 45
 MAX_CSV_BYTES = 5 * 1024 * 1024
-ALLOWED_MIME = {"text/csv", "application/vnd.ms-excel", "text/plain", "application/octet-stream"}
+ALLOWED_MIME = {"text/csv", "application/csv", "application/vnd.ms-excel", "text/plain", "application/octet-stream"}
 
 
 def utcnow() -> datetime:
