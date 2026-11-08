@@ -10,6 +10,8 @@ on:
       - "data/reference/nifty50_tri_weekend_session_review.csv"
       - "data/reports/nifty50_tri_calendar_audit.json"
       - "data/reports/nifty50_tri_holiday_extraction.json"
+      - "data/reference/nifty50_tri_ad_hoc_closures.csv"
+      - "data/reports/nifty50_tri_ad_hoc_closure_archive.json"
   workflow_dispatch:
 
 permissions:
