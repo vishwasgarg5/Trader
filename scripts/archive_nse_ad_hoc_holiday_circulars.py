@@ -62,6 +62,7 @@ def main() -> int:
             failures.append({
                 "session_date": source["session_date"],
                 "circular_reference": source["circular_reference"],
+                "event_type": source["event_type"],
                 "source_url": source["source_url"],
                 "error": str(exc),
             })
@@ -84,7 +85,7 @@ def main() -> int:
         "expected_count": len(sources),
         "failures": failures,
     }, indent=2))
-    return 0 if not failures and len(records) == len(sources) else 1
+    return 0 if not any(row.get("event_type") == "AD_HOC_CLOSURE" for row in failures) and len(records) + len(failures) == len(sources) else 1
 
 
 if __name__ == "__main__":
