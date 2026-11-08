@@ -17,10 +17,10 @@ def download(urls: list[str]) -> tuple[bytes, str]:
     last_error = None
     for url in urls:
         request = urllib.request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0 (compatible; Nifty50ResearchEvidence/1.0)",
-        "Referer": "https://www.nseindia.com/",
-        "Accept": "application/pdf,*/*",
-    })
+            "User-Agent": "Mozilla/5.0 (compatible; Nifty50ResearchEvidence/1.0)",
+            "Referer": "https://www.nseindia.com/",
+            "Accept": "application/pdf,*/*",
+        })
         for attempt in range(2):
             try:
                 with urllib.request.urlopen(request, timeout=45) as response:
@@ -41,13 +41,20 @@ def main() -> int:
     for source in sources:
         path = pathlib.Path(source["archive_path"])
         try:
-            urls = [source["source_url"]]\n            if source["circular_reference"] == "NSE/CMTR/57285":\n                urls.extend([\n                    "https://archives.nseindia.com/content/circulars/CMTR57285.pdf",\n                    "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf",\n                ])\n            body, successful_url = download(urls)
+            urls = [source["source_url"]]
+            if source["circular_reference"] == "NSE/CMTR/57285":
+                urls.extend([
+                    "https://archives.nseindia.com/content/circulars/CMTR57285.pdf",
+                    "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf",
+                ])
+            body, successful_url = download(urls)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(body)
             records.append({
                 **source,
                 "bytes": len(body),
                 "sha256": hashlib.sha256(body).hexdigest(),
+                "downloaded_from_url": successful_url,
                 "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
                 "independent_review_status": "PENDING",
             })
@@ -60,7 +67,7 @@ def main() -> int:
             })
     report = {
         "experiment_id": "NIFTY50_PILOT_001",
-        "purpose": "Archive additional NSE Capital Market closure circulars identified in TRI gap diagnostics",
+        "purpose": "Archive additional NSE Capital Market closure and holiday-revision circulars identified in TRI diagnostics",
         "records": records,
         "failures": failures,
         "archived_count": len(records),
