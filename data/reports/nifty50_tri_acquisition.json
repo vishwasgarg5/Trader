@@ -1,0 +1,21 @@
+{
+  "error": "ValueError: publisher response is not JSON; body preview=' <!DOCTYPE html> <html> <head> <meta charset=\"utf-8\" /> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\" /> <meta http-equiv=\"X-UA-Compatibl'",
+  "experiment_id": "NIFTY50_PILOT_001",
+  "explicitly_excluded_series": [
+    "Net Total Return Index",
+    "price-return index"
+  ],
+  "holdout_access_authorized": false,
+  "independent_verification": "PENDING",
+  "index": "NIFTY 50",
+  "requested_end": "2024-12-31",
+  "requested_start": "2018-01-01",
+  "retrieved_at_ist": "2026-11-08T10:17:12.007363+05:30",
+  "retrieved_at_utc": "2026-11-08T04:47:12.007363+00:00",
+  "reviewer": null,
+  "series": "Total Returns Index (gross TRI)",
+  "source_endpoint": "https://www.niftyindices.com/Backpage.aspx/getTotalReturnIndexString",
+  "source_owner": "NSE Indices",
+  "source_page": "https://www.niftyindices.com/reports/historical-data",
+  "status": "ACQUISITION_FAILED"
+}
