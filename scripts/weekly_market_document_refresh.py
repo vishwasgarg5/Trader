@@ -25,6 +25,8 @@ from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
 
+from trader.market_source_fetcher import fetch_bytes
+
 ROOT = pathlib.Path(".")
 ARCHIVE = ROOT / "data/reference/source_documents/weekly_market_pages"
 REPORT = ROOT / "data/reports/weekly_market_document_refresh.json"
@@ -85,19 +87,23 @@ def now_ist():
     return datetime.now(ZoneInfo("Asia/Kolkata")).isoformat()
 
 def open_with_retries(request, timeout=TIMEOUT_SECONDS):
-    """Retry transient network/server failures without relaxing host or content checks."""
-    for attempt in range(RETRY_ATTEMPTS):
-        try:
-            return urllib.request.urlopen(request, timeout=timeout)
-        except urllib.error.HTTPError as exc:
-            if exc.code not in {408, 425, 429, 500, 502, 503, 504} or attempt == RETRY_ATTEMPTS - 1:
-                raise
-        except (urllib.error.URLError, TimeoutError, ConnectionError):
-            if attempt == RETRY_ATTEMPTS - 1:
-                raise
-        time.sleep(min(2 ** attempt, 8))
-    raise RuntimeError("retry loop exited unexpectedly")
+    """Deprecated compatibility shim; use the shared source fetcher."""
+    raise RuntimeError("Use trader.market_source_fetcher.fetch_bytes")
 
+def fetch(url: str):
+    allowed = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
+               "archives.nseindia.com", "bseindia.com", "www.bseindia.com",
+               "niftyindices.com", "www.niftyindices.com"}
+    body, metadata = fetch_bytes(
+        url, allowed_hosts=allowed, headers=HEADERS,
+        max_bytes=MAX_BYTES, timeout=(20, TIMEOUT_SECONDS),
+        attempts=3, expected_content_type=(),
+    )
+    content_type = metadata.get("content_type", "")
+    if not (body.lstrip().lower().startswith((b"<!doctype html", b"<html", b"<?xml"))
+            or "html" in content_type.lower()):
+        raise ValueError(f"unexpected HTML content type: {content_type}")
+    return body, content_type, None
 def fetch(url: str):
     request = urllib.request.Request(url, headers=HEADERS)
     with open_with_retries(request) as response:
@@ -152,35 +158,33 @@ def parse_current_constituents(body: bytes):
     return symbols
 
 def acquire_current_constituents(run_at: str):
-    request = urllib.request.Request(CONSTITUENT_URL, headers=HEADERS)
+    allowed = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com"}
     try:
-        with open_with_retries(request) as response:
-            final_host = (urllib.parse.urlsplit(response.geturl()).hostname or "").lower()
-            if final_host not in {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com"}:
-                raise ValueError("constituent CSV redirect left official NSE host allowlist")
-            body = response.read(MAX_BYTES + 1)
-            if len(body) > MAX_BYTES:
-                raise ValueError("constituent CSV exceeded size limit")
-            content_type = response.headers.get("Content-Type", "")
-            symbols = parse_current_constituents(body)
-            digest = hashlib.sha256(body).hexdigest()
-            CONSTITUENT_ARCHIVE.mkdir(parents=True, exist_ok=True)
-            path = CONSTITUENT_ARCHIVE / f"nifty50_current_{digest[:16]}.csv"
-            path.write_bytes(body)
-            return {
-                "source_url": CONSTITUENT_URL, "retrieved_at_ist": run_at,
-                "archive_path": path.as_posix(), "bytes": len(body),
-                "sha256": digest, "content_type": content_type,
-                "row_count": len(symbols), "unique_symbol_count": len(set(symbols)),
-                "symbols": symbols,
-                "status": "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY",
-                "use_restriction": "Not eligible to populate historical membership intervals or establish past constituent membership.",
-            }, None
+        body, metadata = fetch_bytes(
+            CONSTITUENT_URL, allowed_hosts=allowed, headers=HEADERS,
+            max_bytes=MAX_BYTES, timeout=(20, TIMEOUT_SECONDS),
+            attempts=3, expected_content_type=(),
+        )
+        symbols = parse_current_constituents(body)
+        digest = hashlib.sha256(body).hexdigest()
+        CONSTITUENT_ARCHIVE.mkdir(parents=True, exist_ok=True)
+        path = CONSTITUENT_ARCHIVE / f"nifty50_current_{digest[:16]}.csv"
+        path.write_bytes(body)
+        return {
+            "source_url": CONSTITUENT_URL, "retrieved_at_ist": run_at,
+            "archive_path": path.as_posix(), "bytes": len(body),
+            "sha256": digest, "content_type": metadata.get("content_type"),
+            "transport": metadata,
+            "row_count": len(symbols), "unique_symbol_count": len(set(symbols)),
+            "symbols": symbols,
+            "status": "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY",
+            "use_restriction": "Not eligible to populate historical membership intervals or establish past constituent membership.",
+        }, None
     except Exception as exc:
         return None, {"source_url": CONSTITUENT_URL,
                       "status": "CURRENT_COMPOSITION_SNAPSHOT_UNAVAILABLE_OR_INVALID",
+                      "transport": getattr(exc, "metadata", {}),
                       "error": f"{type(exc).__name__}: {exc}"[:1000]}
-
 def main() -> int:
     ARCHIVE.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
