@@ -7,6 +7,7 @@
     {
       "circular_reference": "NSE/CMTR/57285",
       "error": "HTTP Error 403: Forbidden",
+      "event_type": "HOLIDAY_DATE_REVISION",
       "session_date": "2023-06-29",
       "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf"
     }
