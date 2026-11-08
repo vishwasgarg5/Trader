@@ -5,7 +5,7 @@
     "archive_path": "data/reference/source_documents/nifty50_constituent_snapshots/nifty50_current_f5ba4027d935ae72.csv",
     "bytes": 3344,
     "content_type": "text/csv",
-    "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+    "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
     "row_count": 50,
     "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
     "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
@@ -70,29 +70,29 @@
           "content_length": "3344",
           "content_type": "text/csv",
           "final_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
-          "finished_at_utc": "2026-11-08T09:33:18.238080+00:00",
+          "finished_at_utc": "2026-11-08T09:53:41.798820+00:00",
           "http_status": 200,
           "ok": true,
           "partial_bytes_before": 0,
           "protocol": "http2",
           "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
-          "started_at_utc": "2026-11-08T09:33:17.825927+00:00"
+          "started_at_utc": "2026-11-08T09:53:41.555372+00:00"
         }
       ],
       "bytes": 3344,
       "content_type": "text/csv",
       "egress_ip": {
-        "checked_at_utc": "2026-11-08T09:33:17.713848+00:00",
+        "checked_at_utc": "2026-11-08T09:53:41.457194+00:00",
         "http_status": 200,
-        "ip": "74.159.117.65",
+        "ip": "20.72.213.160",
         "service": "https://api.ipify.org?format=json"
       },
       "final_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
-      "finished_at_utc": "2026-11-08T09:33:18.238098+00:00",
+      "finished_at_utc": "2026-11-08T09:53:41.798838+00:00",
       "http_status": 200,
       "requested_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
       "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
-      "started_at_utc": "2026-11-08T09:33:17.713834+00:00",
+      "started_at_utc": "2026-11-08T09:53:41.457182+00:00",
       "status": "FETCHED_AND_VALIDATED"
     },
     "unique_symbol_count": 50,
@@ -126,7 +126,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
@@ -141,7 +141,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
@@ -156,7 +156,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
@@ -2000,7 +2000,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "20c270382c51ed46c34c4ec7e75abcd4092ac41ef8c02a02b5ce154681209516",
       "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
@@ -3936,7 +3936,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "b6fd6e28e44489b1c88d06b13b23aeac1965b3ea240b7a28665e2a83ef8d85e7",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
@@ -5764,7 +5764,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "26deab2064535052b84f72bf7c69eec9d32cfeb17172ed53a0d497a35ac258ba",
       "source_id": "NIFTY_INDICES_RECONSTITUTION_CALENDAR",
@@ -5772,8 +5772,8 @@
       "visible_link_count": 453
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_786c8592949bf7f5.html",
-      "bytes": 402940,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_bd7253f1cc0fb75f.html",
+      "bytes": 402938,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -8976,16 +8976,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "786c8592949bf7f5e4e1fe30afdbdada7ba1b668a3e43f9818de6259a743b191",
+      "sha256": "bd7253f1cc0fb75fd25e717dc78e04e0948da6d3000d391fb246b0bf8f08fd31",
       "source_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
       "visible_link_count": 799
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_89e765007c28393f.html",
-      "bytes": 336974,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_d6ca62378740f95a.html",
+      "bytes": 336972,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -11868,16 +11868,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "89e765007c28393fe7809c81c0aa13db2e75c1bb7836fbb949a7a3b9345067de",
+      "sha256": "d6ca62378740f95a0885c3210fa4df84ec21e968518e0cbccaf5e3950ccaca27",
       "source_id": "NSE_BUYBACKS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
       "visible_link_count": 719
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_c92bf305a18ba37c.html",
-      "bytes": 366002,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_7eee1d0a8a86f9bd.html",
+      "bytes": 366000,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -14848,16 +14848,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "c92bf305a18ba37c1f3a834af53b4f69e05284d0a7914d023f1c9ffea73d6d88",
+      "sha256": "7eee1d0a8a86f9bd9d3c81e18d7711865516666200ff5f8fbd48a53c6c319b0e",
       "source_id": "NSE_CORPORATE_ACTIONS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
       "visible_link_count": 741
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_92ccec7bbf595d8e.html",
-      "bytes": 370728,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_121a5fb8f79e6c5d.html",
+      "bytes": 370724,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -17016,7 +17016,7 @@
         },
         {
           "href": "/companies-listing/corporate-filings-announcements",
-          "label": "35 Corporate Announcements"
+          "label": "36 Corporate Announcements"
         },
         {
           "href": "/companies-listing/corporate-filings-actions",
@@ -17031,12 +17031,8 @@
           "label": ""
         },
         {
-          "href": "/get-quotes/equity?symbol=ZEELEARN",
-          "label": "ZEELEARN"
-        },
-        {
-          "href": "/get-quotes/equity?symbol=SOUTHWEST",
-          "label": "SOUTHWEST"
+          "href": "/get-quotes/equity?symbol=KAYA",
+          "label": "KAYA"
         },
         {
           "href": "/get-quotes/equity?symbol=ZEELEARN",
@@ -17047,8 +17043,12 @@
           "label": "SOUTHWEST"
         },
         {
-          "href": "/get-quotes/equity?symbol=AGL",
-          "label": "AGL"
+          "href": "/get-quotes/equity?symbol=ZEELEARN",
+          "label": "ZEELEARN"
+        },
+        {
+          "href": "/get-quotes/equity?symbol=SOUTHWEST",
+          "label": "SOUTHWEST"
         },
         {
           "href": "/companies-listing/corporate-filings-actions",
@@ -17596,16 +17596,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "92ccec7bbf595d8ed97c46bfa8c523c6f2bdfa2cd9232d8f255eabb7a3953e68",
+      "sha256": "121a5fb8f79e6c5d16858d4bc058b4b869ed0f6b88fc787803ff9f767af96997",
       "source_id": "NSE_CORPORATE_FILINGS_DASHBOARD",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-application",
       "visible_link_count": 683
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_exchange_circulars_9f7786835466482e.html",
-      "bytes": 328884,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_exchange_circulars_be97b18eeae9ad33.html",
+      "bytes": 328882,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -20368,16 +20368,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "9f7786835466482ef1694a4a892f72f5a9834f7013673be637661cef3b410501",
+      "sha256": "be97b18eeae9ad337750c8994027820ea44e791150d581ac1ab8000dd5d42fcf",
       "source_id": "NSE_EXCHANGE_CIRCULARS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-circulars",
       "visible_link_count": 689
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_e935302572a6abf9.html",
-      "bytes": 325297,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_c75b5e5c26b4a5af.html",
+      "bytes": 325295,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -23084,16 +23084,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "e935302572a6abf9038cecbb8c186611f7b23627da93b9542f1fd81960aa579f",
+      "sha256": "c75b5e5c26b4a5afdacdfd350bbcca836b72338780dfc5cc05ec166d10aa0050",
       "source_id": "NSE_HOLIDAYS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-holidays",
       "visible_link_count": 675
     }
   ],
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T15:03:15.261163+05:30",
+  "run_at_ist": "2026-11-08T15:23:38.294914+05:30",
   "schema_version": 1,
   "scope": {
     "exchange_wide_sources": [
@@ -23126,7 +23126,7 @@
     {
       "error": "ValueError: URL must use HTTPS and an explicitly allowlisted official host",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "source_id": "NSE_NIFTY50_PROFILE",
       "source_url": "https://betanseapi.nseindia.com/static/products-services/indices-nifty50-index",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
@@ -23134,7 +23134,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
       "source_url": "https://www.bseindia.com/corporates/ann.html",
@@ -23143,7 +23143,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
       "source_url": "https://www.bseindia.com/corporates/corporate_act.html",
@@ -23152,7 +23152,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T15:03:15.261163+05:30",
+      "retrieved_at_ist": "2026-11-08T15:23:38.294914+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
       "source_url": "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars.aspx",
