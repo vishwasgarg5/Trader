@@ -277,6 +277,24 @@ def capture_key(item: dict) -> str:
     return f"{item['original_url']}|{item['capture_timestamp']}|{item.get('cdx_digest','')}"
 
 
+def capture_matches_target(original: str, target: str) -> bool:
+    """Allow scheme/standard-port variants of the queried URL, but not other hosts or paths."""
+    try:
+        captured = urlsplit(original)
+        requested = urlsplit(target)
+        return (
+            captured.scheme in {"http", "https"}
+            and requested.scheme in {"http", "https"}
+            and captured.hostname == requested.hostname
+            and captured.path == requested.path
+            and captured.query == ""
+            and captured.fragment == ""
+            and captured.port in (None, 80, 443)
+        )
+    except ValueError:
+        return False
+
+
 def add_collapsed_captures(state: dict, target: str, rows: list[list[str]]) -> int:
     known = {capture_key(x) for x in state["pending_snapshots"] + state["completed_snapshots"]}
     added = 0
@@ -284,7 +302,7 @@ def add_collapsed_captures(state: dict, target: str, rows: list[list[str]]) -> i
         if len(row) < 6:
             continue
         timestamp, original, status, mimetype, digest, length = row[:6]
-        if original != target or status != "200" or mimetype.lower() not in ALLOWED_MIME:
+        if not capture_matches_target(original, target) or status != "200" or mimetype.lower() not in ALLOWED_MIME:
             continue
         if len(timestamp) != 14 or not timestamp[:4].isdigit() or int(timestamp[:4]) not in YEARS:
             continue
@@ -302,8 +320,8 @@ def add_collapsed_captures(state: dict, target: str, rows: list[list[str]]) -> i
 
 
 def snapshot_url(timestamp: str, original: str) -> str:
-    if original not in TARGETS or not re.fullmatch(r"\d{14}", timestamp):
-        raise ValueError("snapshot URL requires an allowlisted target and 14-digit timestamp")
+    if not any(capture_matches_target(original, target) for target in TARGETS) or not re.fullmatch(r"\d{14}", timestamp):
+        raise ValueError("snapshot URL requires an allowlisted host/path and 14-digit timestamp")
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
 
