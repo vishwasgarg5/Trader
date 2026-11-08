@@ -286,3 +286,16 @@ def test_load_state_reopens_stale_unavailable_notice_when_cdx_search_is_incomple
     assert item["resolution_status"] == "NOT_YET_RESOLVED"
     assert "unavailable_reason" not in item
     assert item["classification"] == "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
+
+
+def test_saved_pdf_advances_resolution_status_but_keeps_scope_review_pending(tmp_path, monkeypatch):
+    monkeypatch.setattr(MODULE, "ARCHIVE", tmp_path)
+    payload = b"%PDF-1.7\\nminimal test document\\n%%EOF\\n"
+    saved = MODULE.save_pdf(
+        "NSE-ARCHIVE-TEST", payload,
+        "https://www.niftyindices.com/example.pdf", "OFFICIAL_HOST_BYTES"
+    )
+    assert saved["status"] == "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW"
+    assert saved["resolution_status"] == "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW"
+    assert saved["pdf_validation"] == "SIGNATURE_AND_EOF_VALID"
+    assert Path(saved["archive_path"]).is_file()
