@@ -23,7 +23,7 @@ ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_documents"
 MAX_BYTES = 25 * 1024 * 1024
 TIMEOUT = 20
 ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
-                 "bseindia.com", "www.bseindia.com", "www.bseindia.com"}
+                 "bseindia.com", "www.bseindia.com", "niftyindices.com", "www.niftyindices.com"}
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
     "Accept": "application/pdf,application/octet-stream;q=0.9,*/*;q=0.5",
