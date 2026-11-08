@@ -395,3 +395,32 @@ def validate_source_manifest(records: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("source_url must be HTTPS")
     result["retrieved_at"] = _utc_series(result["retrieved_at"], "retrieved_at")
     return result
+
+
+def verify_source_manifest_payloads(
+    records: pd.DataFrame, payloads: dict[str, bytes]
+) -> dict:
+    """Compare retained source-byte payloads with manifest SHA-256 values.
+
+    This proves byte-for-byte consistency only; it does not establish that the
+    publisher is authoritative or that the source content is historically valid.
+    """
+    manifest = validate_source_manifest(records)
+    expected_ids = set(manifest["source_id"].astype(str))
+    supplied_ids = set(payloads)
+    missing = sorted(expected_ids - supplied_ids)
+    unexpected = sorted(supplied_ids - expected_ids)
+    mismatches = []
+    for row in manifest.to_dict(orient="records"):
+        source_id = str(row["source_id"])
+        if source_id in payloads and sha256_bytes(payloads[source_id]) != str(row["source_sha256"]):
+            mismatches.append(source_id)
+    return {
+        "passed": not missing and not unexpected and not mismatches,
+        "verified_count": len(expected_ids) - len(missing) - len(mismatches),
+        "missing_payloads": missing,
+        "unexpected_payloads": unexpected,
+        "hash_mismatches": sorted(mismatches),
+        "authenticity_verified": False,
+        "historical_validity_verified": False,
+    }
