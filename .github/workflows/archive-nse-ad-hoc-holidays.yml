@@ -35,7 +35,7 @@ jobs:
             git commit -m "Archive NSE ad-hoc holiday circulars for 2019"
             git push origin HEAD:main
           fi
-      - name: Require both circulars
+      - name: Require all three circulars
         if: always()
         run: |
           python - <<'PY'
@@ -46,5 +46,5 @@ jobs:
               sys.exit("ad-hoc archive manifest missing")
           report = json.loads(path.read_text(encoding="utf-8"))
           print({"archived_count": report.get("archived_count"), "failures": report.get("failures")})
-          sys.exit(0 if report.get("archived_count") == 2 and not report.get("failures") else 1)
+          sys.exit(0 if report.get("archived_count") == 3 and not report.get("failures") else 1)
           PY
