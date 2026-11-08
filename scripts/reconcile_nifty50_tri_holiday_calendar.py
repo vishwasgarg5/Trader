@@ -36,19 +36,27 @@ def load_dates() -> tuple[list[date], set[date]]:
 def load_ad_hoc_closures() -> list[dict]:
     manifest = json.loads(AD_HOC_MANIFEST.read_text(encoding="utf-8"))
     archived = {row["circular_reference"]: row for row in manifest.get("records", [])}
-    if manifest.get("failures"):
-        raise ValueError("ad-hoc closure archive contains download failures")
+    failed = {row["circular_reference"]: row for row in manifest.get("failures", [])}
     result = []
     with AD_HOC_REGISTER.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             archived_row = archived.get(row["circular_reference"])
-            if not archived_row:
-                raise ValueError(f"missing archived circular: {row['circular_reference']}")
-            path = Path(archived_row["archive_path"])
-            raw = path.read_bytes()
-            digest = hashlib.sha256(raw).hexdigest()
-            if digest != archived_row["sha256"]:
-                raise ValueError(f"SHA-256 mismatch for {row['circular_reference']}")
+            if archived_row:
+                path = Path(archived_row["archive_path"])
+                raw = path.read_bytes()
+                digest = hashlib.sha256(raw).hexdigest()
+                if digest != archived_row["sha256"]:
+                    raise ValueError(f"SHA-256 mismatch for {row['circular_reference']}")
+                archive_verified = True
+                archive_status = "ARCHIVED_PDF_SIGNATURE_VALID"
+                archive_sha256 = digest
+            else:
+                failure = failed.get(row["circular_reference"])
+                if not failure or row["event_type"] != "HOLIDAY_DATE_REVISION":
+                    raise ValueError(f"missing archived circular: {row['circular_reference']}")
+                archive_verified = False
+                archive_status = "SOURCE_IDENTIFIED_PDF_ARCHIVE_PENDING"
+                archive_sha256 = None
             result.append({
                 **row,
                 "session_date": date.fromisoformat(row["session_date"]),
@@ -56,11 +64,15 @@ def load_ad_hoc_closures() -> list[dict]:
                     date.fromisoformat(row["supersedes_session_date"])
                     if row["supersedes_session_date"] else None
                 ),
-                "archive_sha256_verified": digest,
+                "archive_sha256_verified": archive_sha256,
+                "archive_integrity_verified": archive_verified,
+                "archive_status": archive_status,
                 "independent_review_status": "PENDING",
             })
-    if len(result) != manifest.get("expected_count") or len(result) != manifest.get("archived_count"):
+    if len(result) != manifest.get("expected_count"):
         raise ValueError("ad-hoc register and archive manifest counts do not match")
+    if len(archived) + len(failed) != manifest.get("expected_count"):
+        raise ValueError("ad-hoc archive manifest does not account for every registered circular")
     return result
 
 
