@@ -203,23 +203,73 @@ def build_packet(state: dict, transitions: list[dict], root: Path) -> dict:
     }
 
 
+def build_review_rows(packet: dict) -> list[dict]:
+    """Create a blank, non-authoritative reviewer checklist from the packet."""
+    fields = {"row_type": "", "record_id": "", "quarter": "", "as_of_date": "",
+        "from_quarter": "", "to_quarter": "", "symbol": "", "action": "",
+        "effective_date": "", "source_url": "", "source_document_path": "",
+        "current_status": "", "reviewer_decision": "", "reviewer_name": "",
+        "reviewed_at_utc": "", "review_notes": ""}
+    rows = []
+    for anchor in packet["anchors"]:
+        row = dict(fields)
+        row.update({"row_type": "ANCHOR_SNAPSHOT", "record_id": anchor["timestamp"],
+                    "quarter": anchor["quarter"], "as_of_date": anchor["as_of_date"],
+                    "source_url": anchor["original_url"], "source_document_path": anchor["archive_path"],
+                    "current_status": anchor["review_status"]})
+        rows.append(row)
+    for pair in packet["adjacent_anchor_comparisons"]:
+        row = dict(fields)
+        row.update({"row_type": "ANCHOR_PAIR",
+                    "record_id": pair["from_anchor"]["timestamp"] + "__" + pair["to_anchor"]["timestamp"],
+                    "from_quarter": pair["from_anchor"]["quarter"],
+                    "to_quarter": pair["to_anchor"]["quarter"], "current_status": pair["pair_status"],
+                    "review_notes": "observed=" + str(len(pair["observed_snapshot_changes"])) +
+                        "; registered=" + str(len(pair["registered_events_in_window"])) +
+                        "; unexplained=" + str(len(pair["observed_changes_without_register_candidate"])) +
+                        "; not_visible=" + str(len(pair["registered_events_not_visible_in_anchor_difference"]))})
+        rows.append(row)
+        for event in pair["registered_events_in_window"]:
+            row = dict(fields)
+            row.update({"row_type": "TRANSITION_EVENT", "record_id": event["transition_id"],
+                        "from_quarter": pair["from_anchor"]["quarter"], "to_quarter": pair["to_anchor"]["quarter"],
+                        "symbol": event["symbol"], "action": event["action"], "effective_date": event["effective_date"],
+                        "source_url": event["source_url"], "source_document_path": event["source_document_path"],
+                        "current_status": event["verification_status"], "review_notes": event["notes"]})
+            rows.append(row)
+    return rows
+
+
+def write_review_csv(path: Path, packet: dict) -> int:
+    rows = build_review_rows(packet)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fields = list(rows[0]) if rows else ["row_type", "record_id", "quarter", "as_of_date",
+        "from_quarter", "to_quarter", "symbol", "action", "effective_date", "source_url",
+        "source_document_path", "current_status", "reviewer_decision", "reviewer_name",
+        "reviewed_at_utc", "review_notes"]
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+    return len(rows)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--state", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--transitions", type=Path, default=DEFAULT_TRANSITIONS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--review-csv", type=Path, default=DEFAULT_REVIEW_CSV)
     args = parser.parse_args()
     packet = build_packet(json.loads(args.state.read_text(encoding="utf-8")),
                           load_transition_rows(args.transitions), ROOT)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({
-        "status": packet["status"],
-        "anchors": packet["anchor_count"],
-        "pairs": packet["adjacent_anchor_pair_count"],
-        "rejected_or_alternate": len(packet["rejected_or_alternate_candidates"]),
-        "output": args.output.as_posix(),
-    }, indent=2))
+    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    review_rows = write_review_csv(args.review_csv, packet)
+    print(json.dumps({"status": packet["status"], "anchors": packet["anchor_count"],
+                      "pairs": packet["adjacent_anchor_pair_count"], "review_rows": review_rows,
+                      "rejected_or_alternate": len(packet["rejected_or_alternate_candidates"]),
+                      "output": args.output.as_posix(), "review_csv": args.review_csv.as_posix()}, indent=2))
     return 0 if packet["anchor_count"] >= 2 else 1
 
 
