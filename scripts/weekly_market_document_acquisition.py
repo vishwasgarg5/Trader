@@ -65,15 +65,30 @@ def open_with_retry(request, timeout):
 def download_one(item):
     url, source_id, publisher = item
     request = urllib.request.Request(url, headers=HEADERS)
+    stage = "request_headers"
+    started = time.monotonic()
+    bytes_read = 0
     try:
         with open_with_retry(request, timeout=TIMEOUT) as response:
+            stage = "validate_redirect_and_headers"
             final_url = response.geturl()
             final = urllib.parse.urlsplit(final_url)
             if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
                 raise ValueError("redirect left official NSE/BSE host allowlist")
-            body = response.read(MAX_BYTES + 1)
-            if len(body) > MAX_BYTES:
-                raise ValueError("document exceeded 25 MiB safety limit")
+            content_type = response.headers.get("Content-Type", "")
+            content_length = response.headers.get("Content-Length")
+            stage = "read_response_body"
+            chunks = []
+            while True:
+                chunk = response.read(64 * 1024)
+                if not chunk:
+                    break
+                bytes_read += len(chunk)
+                if bytes_read > MAX_BYTES:
+                    raise ValueError("document exceeded 25 MiB safety limit")
+                chunks.append(chunk)
+            body = b"".join(chunks)
+            stage = "validate_pdf_signature"
             if not body.startswith(b"%PDF-"):
                 raise ValueError("response does not have a PDF file signature")
             digest = hashlib.sha256(body).hexdigest()
@@ -89,7 +104,8 @@ def download_one(item):
                 "source_id": source_id, "publisher": publisher, "source_url": url,
                 "final_url": final_url, "archive_path": path.as_posix(),
                 "bytes": len(body), "sha256": digest,
-                "content_type": response.headers.get("Content-Type", ""),
+                "content_type": content_type, "content_length_header": content_length,
+                "retrieval_elapsed_seconds": round(time.monotonic() - started, 3),
                 "retrieved_at_ist": now_ist(),
                 "evidence_status": "PRIMARY_SOURCE_PDF_BYTES_ARCHIVED",
                 "semantic_review_status": "NOT_REVIEWED",
@@ -98,6 +114,8 @@ def download_one(item):
         return None, {
             "source_id": source_id, "publisher": publisher, "source_url": url,
             "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED",
+            "failure_stage": stage, "bytes_received_before_failure": bytes_read,
+            "elapsed_seconds": round(time.monotonic() - started, 3),
             "error": f"{type(exc).__name__}: {exc}"[:1000],
         }
 
