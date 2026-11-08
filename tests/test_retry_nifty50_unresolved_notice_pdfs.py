@@ -157,3 +157,62 @@ def test_domain_cdx_query_filters_to_the_registered_pdf_filename():
         "statuscode:200", "original:.*ind_prs05062018\\.pdf$"
     ]
 
+
+def test_failed_domain_cdx_query_remains_incomplete_and_resumable():
+    original = MODULE.DOCUMENTS["NSE-ARCHIVE-2019-07-16-3a8719394912"]
+    variants = MODULE.cdx_search_variants(original)
+    queries = [
+        {"url": variant["url"], "match_type": variant["match_type"],
+         "http_status": 200, "result": "EMPTY"}
+        for variant in variants[:4]
+    ]
+    queries.extend([
+        {"url": variants[4]["url"], "match_type": "domain",
+         "http_status": 503, "result": "HTTP_ERROR"},
+        {"url": variants[5]["url"], "match_type": "domain",
+         "http_status": 503, "result": "HTTP_ERROR"},
+    ])
+    item = {"cdx_search_variants": variants, "cdx_queries": queries,
+            "cdx_captures": [], "next_cdx_search_index": 6,
+            "cdx_checked": True, "cdx_result": "EMPTY"}
+    MODULE.reconcile_cdx_search_progress(item)
+    assert item["next_cdx_search_index"] == 4
+    assert item["cdx_checked"] is False
+    assert item["cdx_result"] == "SEARCH_INCOMPLETE"
+
+
+def test_empty_cdx_is_only_final_after_every_variant_has_valid_response():
+    original = MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
+    variants = MODULE.cdx_search_variants(original)
+    item = {
+        "cdx_search_variants": variants,
+        "cdx_queries": [
+            {"url": variant["url"], "match_type": variant["match_type"],
+             "http_status": 200, "result": "EMPTY"}
+            for variant in variants
+        ],
+        "cdx_captures": [],
+    }
+    MODULE.reconcile_cdx_search_progress(item)
+    assert item["next_cdx_search_index"] == len(variants)
+    assert item["cdx_checked"] is True
+    assert item["cdx_result"] == "EMPTY"
+
+
+def test_malformed_http_200_cdx_response_does_not_complete_variant():
+    original = MODULE.DOCUMENTS["NSE-ARCHIVE-2023-03-14-5b13b76a2af9"]
+    variants = MODULE.cdx_search_variants(original)
+    item = {
+        "cdx_search_variants": variants,
+        "cdx_queries": [
+            {"url": variant["url"], "match_type": variant["match_type"],
+             "http_status": 200, "result": "EMPTY"}
+            for variant in variants[:4]
+        ] + [{"url": variants[4]["url"], "match_type": "domain",
+              "http_status": 200, "result": "INVALID_RESPONSE"}],
+        "cdx_captures": [],
+    }
+    MODULE.reconcile_cdx_search_progress(item)
+    assert item["next_cdx_search_index"] == 4
+    assert item["cdx_checked"] is False
+    assert item["cdx_result"] == "SEARCH_INCOMPLETE"
