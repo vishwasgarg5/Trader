@@ -21,10 +21,10 @@ TEXT_ROOT = Path("data/reference/extracted_text/nse_holiday_circulars")
 MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
 WEEKDAYS = "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
 ROW_START = re.compile(
-    rf"^\\s*(\\d{{1,2}})\\s+({MONTHS})\\s+(\\d{{1,2}}),?\\s*(20\\d{{2}})\\s*(.*)$",
+    rf"^\s*(\d{{1,2}})\s+({MONTHS})\s+(\d{{1,2}}),?\s*(20\d{{2}})\s*(.*)$",
     re.I,
 )
-WEEKDAY_START = re.compile(rf"^\\s*({WEEKDAYS})\\b\\s*(.*)$", re.I)
+WEEKDAY_START = re.compile(rf"^\s*({WEEKDAYS})\b\s*(.*)$", re.I)
 
 
 def extract_candidates(text: str, expected_year: int, page_number: int) -> list[dict]:
@@ -66,7 +66,7 @@ def extract_candidates(text: str, expected_year: int, page_number: int) -> list[
             "weekday_matches_date": (
                 parsed.strftime("%A").lower() == weekday.lower() if weekday else None
             ),
-            "description": re.sub(r"\\s+", " ", description).strip() or None,
+            "description": re.sub(r"\s+", " ", description).strip() or None,
             "table_type": table_type,
             "row_number": int(row_number),
             "page_number": page_number,
@@ -95,10 +95,10 @@ def main() -> int:
                 pages.append(page_text)
                 candidates.extend(extract_candidates(page_text, year, page_number))
             text_path = TEXT_ROOT / f"{year}_{item['circular_reference']}.txt"
-            extracted_text = "\\n\\n".join(
-                f"===== PAGE {i} =====\\n{page}" for i, page in enumerate(pages, start=1)
+            extracted_text = "\n\n".join(
+                f"===== PAGE {i} =====\n{page}" for i, page in enumerate(pages, start=1)
             )
-            text_path.write_text(extracted_text + "\\n", encoding="utf-8")
+            text_path.write_text(extracted_text + "\n", encoding="utf-8")
             records.append({
                 "year": year,
                 "circular_reference": item["circular_reference"],
@@ -137,7 +137,7 @@ def main() -> int:
         "holdout_access_authorized": False,
     }
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
         "extracted_years": report["extracted_years"],
         "extracted_count": report["extracted_count"],
