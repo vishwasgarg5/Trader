@@ -63,6 +63,7 @@ def test_wayback_snapshot_url_is_limited_to_dated_allowlisted_csv():
     for timestamp, original in (
         ("2020-06-01", target),
         ("20200601000000", "https://evil.example/constituents.csv"),
+        ("20200601000000", "http://evil.example/constituents.csv"),
     ):
         try:
             MODULE.wayback_snapshot_url(timestamp, original)
@@ -95,7 +96,6 @@ def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch
     target = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
     monkeypatch.setattr(MODULE, "WAYBACK_SNAPSHOT_ARCHIVE", tmp_path)
     rows = ["timestamp", "original", "statuscode", "mimetype", "digest", "length"]
-    rows = [rows, ["20200601000000", target, "200", "text/csv", "CDXHASH", "100"]]
 
     csv_rows = ["Company Name,Industry,Symbol,Series,ISIN Code"]
     csv_rows.extend(f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}" for i in range(50))
@@ -114,6 +114,7 @@ def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch
     assert len(result) == 1
     assert result[0]["status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
     assert result[0]["validation"]["distinct_symbol_count"] == 50
+    assert result[0]["cdx_sha1_verified"] is True
     assert (tmp_path / result[0]["archive_path"].split("/")[-1]).exists()
 
 
@@ -127,3 +128,31 @@ def test_wayback_cdx_json_parser_accepts_array_of_rows_and_rejects_other_shapes(
             pass
         else:
             raise AssertionError("invalid CDX response shape was accepted")
+
+
+def test_legacy_http_wayback_capture_is_allowlisted_without_enabling_live_http():
+    legacy = "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv"
+    assert not MODULE.allowed_url(legacy)
+    assert legacy in MODULE.wayback_targets()
+    assert MODULE.wayback_snapshot_url("20180530101725", legacy) == (
+        "https://web.archive.org/web/20180530101725id_/" + legacy
+    )
+    try:
+        MODULE.wayback_snapshot_url("20180530101725", "http://www.niftyindices.com/other.csv")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("unlisted HTTP Wayback original URL was accepted")
+
+
+def test_wayback_cdx_sha1_digest_is_verified():
+    payload = b"official archived csv bytes\\n"
+    digest = MODULE.wayback_cdx_sha1_digest(payload)
+    assert len(digest) == 32
+    assert MODULE.verify_wayback_cdx_digest(payload, digest) == digest
+    try:
+        MODULE.verify_wayback_cdx_digest(payload, "A" * 32)
+    except ValueError as exc:
+        assert "digest mismatch" in str(exc)
+    else:
+        raise AssertionError("mismatched CDX digest was accepted")
