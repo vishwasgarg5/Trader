@@ -1,6 +1,11 @@
 name: Acquire AMC historical portfolio snapshot
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/acquire-amc-historical-portfolio.yml"
+      - "scripts/acquire_amc_historical_portfolio.py"
   workflow_dispatch:
 
 permissions:
