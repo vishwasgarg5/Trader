@@ -172,3 +172,44 @@ def test_collapsed_capture_queue_accepts_application_csv_mimetype():
     state = {"pending_snapshots": [], "completed_snapshots": []}
     assert MODULE.add_collapsed_captures(state, target, rows) == 1
     assert state["pending_snapshots"][0]["quarter"] == "2018-Q4"
+
+def test_capture_target_accepts_nse_apex_alias_for_official_www_host():
+    target = "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+    assert MODULE.capture_matches_target(
+        "https://nseindia.com/content/indices/ind_nifty50list.csv", target
+    )
+    assert not MODULE.capture_matches_target(
+        "https://evil.example/content/indices/ind_nifty50list.csv", target
+    )
+
+
+def test_full_cdx_recovers_one_candidate_for_each_uncovered_quarter():
+    shared_digest = "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6"
+    state = {
+        "pending_snapshots": [],
+        "completed_snapshots": [{
+            "capture_timestamp": "20180929103632",
+            "original_url": "http://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+            "quarter": "2018-Q3", "cdx_digest": shared_digest,
+            "cdx_digest_validation": "MATCH",
+            "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+        }],
+    }
+    records = [{
+        "captures": [
+            {"quarter": "2019-Q1", "timestamp": "20190201175058",
+             "original_url": "http://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+             "statuscode": "200", "mimetype": "application/octet-stream",
+             "digest": shared_digest, "length": "1713"},
+            {"quarter": "2024-Q3", "timestamp": "20240701180136",
+             "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+             "statuscode": "200", "mimetype": "application/octet-stream",
+             "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR", "length": "2232"},
+        ],
+    }]
+    assert MODULE.add_full_metadata_quarter_candidates(state, records) == 2
+    assert {item["quarter"] for item in state["pending_snapshots"]} == {
+        "2019-Q1", "2024-Q3"
+    }
+    assert all(item["candidate_source"] == "FULL_CDX_QUARTER_GAP_RECOVERY"
+               for item in state["pending_snapshots"])
