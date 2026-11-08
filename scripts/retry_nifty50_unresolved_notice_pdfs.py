@@ -207,12 +207,13 @@ def load_state() -> dict:
             "attempts": [], "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         })
         item = state["documents"][doc_id]
+        had_cdx_variant_index = "next_cdx_variant_index" in item
         item.setdefault("cdx_url_variants", cdx_url_variants(original))
         item.setdefault("cdx_queries", [])
         item.setdefault("next_cdx_variant_index", 0)
         # Migrate the previous single-host lookup: the original URL was already
         # checked, so continue with the first alternate host rather than repeating it.
-        if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY" and "next_cdx_variant_index" not in item:
+        if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY" and not had_cdx_variant_index:
             item["next_cdx_variant_index"] = 1
             item["cdx_checked"] = False
             item["cdx_queries"].append({
