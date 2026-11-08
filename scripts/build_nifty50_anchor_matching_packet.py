@@ -264,7 +264,7 @@ def main() -> int:
     packet = build_packet(json.loads(args.state.read_text(encoding="utf-8")),
                           load_transition_rows(args.transitions), ROOT)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    args.output.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     review_rows = write_review_csv(args.review_csv, packet)
     print(json.dumps({"status": packet["status"], "anchors": packet["anchor_count"],
                       "pairs": packet["adjacent_anchor_pair_count"], "review_rows": review_rows,
