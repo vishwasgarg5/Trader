@@ -10,7 +10,7 @@ import pandas as pd
 import yfinance as yf
 
 from trader.corporate_actions import audit_corporate_action_ledger
-from trader.market_calendar import classify_nse_session_date
+from trader.market_calendar import classify_nse_session_date, next_nse_session_date
 from trader.universe_audit import audit_universe
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.impute import SimpleImputer
@@ -168,10 +168,18 @@ def write_data_integrity_report(
         evidence_gaps.append("Corporate-action adjusted-price lineage is not independently verified.")
     nse_now = pd.Timestamp.now(tz="Asia/Kolkata") if as_of is None else as_of
     calendar_context = classify_nse_session_date(nse_now)
+    try:
+        next_session_context = next_nse_session_date(nse_now)
+    except RuntimeError as exc:
+        next_session_context = {
+            "status": "UNRESOLVED_OUTSIDE_VERIFIED_CALENDAR",
+            "error": str(exc),
+        }
     report = {
         "schema_version": 1,
         "generated_at_utc": pd.Timestamp.now(tz="UTC").isoformat(),
         "nse_session_calendar_context": calendar_context,
+        "next_confirmed_nse_session": next_session_context,
         "configured_symbols": list(tickers),
         "configured_symbol_count": len(tickers),
         "price_validation": {
