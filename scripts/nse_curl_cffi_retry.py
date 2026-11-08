@@ -6,6 +6,7 @@ source acquisition diagnostics only: it never updates model data or membership.
 """
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import io
@@ -30,6 +31,8 @@ CONNECT_TIMEOUT = 20
 READ_TIMEOUT = 180
 ATTEMPTS = 3
 BACKOFF_SECONDS = (3, 10)
+WAYBACK_REPLAY_ATTEMPTS = 3
+WAYBACK_429_BACKOFF_SECONDS = (10, 30)
 USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 HEADERS = {
@@ -53,7 +56,14 @@ SNAPSHOT_CSV_TARGETS = {
     "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
     "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
 }
-SNAPSHOT_HISTORY_TARGETS = SNAPSHOT_CSV_TARGETS | {
+# Historical CDX records include the legacy HTTP endpoint. HTTP is permitted
+# only as an exact Wayback original URL; live NSE downloads remain HTTPS-only.
+LEGACY_HTTP_SNAPSHOT_CSV_TARGETS = {
+    "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+    "http://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+}
+SNAPSHOT_CDX_TARGETS = SNAPSHOT_CSV_TARGETS | LEGACY_HTTP_SNAPSHOT_CSV_TARGETS
+SNAPSHOT_HISTORY_TARGETS = SNAPSHOT_CDX_TARGETS | {
     "https://www.nseindia.com/content/indices/IndexInclExcl.xls",
     "https://archives.nseindia.com/content/indices/IndexInclExcl.xls",
 }
@@ -213,7 +223,7 @@ def wayback_targets() -> list[str]:
 
 
 def wayback_snapshot_url(timestamp: str, original: str) -> str:
-    if not re.fullmatch(r"\d{14}", timestamp) or original not in SNAPSHOT_CSV_TARGETS:
+    if not re.fullmatch(r"\d{14}", timestamp) or original not in SNAPSHOT_CDX_TARGETS:
         raise ValueError("Wayback snapshot must reference a dated capture of an allowlisted Nifty 50 CSV")
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
@@ -250,8 +260,51 @@ def parse_cdx_json(payload: str) -> list[list[str]]:
     return rows
 
 
+def wayback_cdx_sha1_digest(payload: bytes) -> str:
+    """Return the uppercase Base32 SHA-1 digest used by Wayback CDX."""
+    return base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=")
+
+
+def verify_wayback_cdx_digest(payload: bytes, expected: str) -> str:
+    if not re.fullmatch(r"[A-Z2-7]{32}", expected or ""):
+        raise ValueError("CDX SHA-1 digest is missing or malformed")
+    actual = wayback_cdx_sha1_digest(payload)
+    if actual != expected:
+        raise ValueError(f"Wayback CDX SHA-1 digest mismatch: expected {expected}, received {actual}")
+    return actual
+
+
+def fetch_wayback_snapshot_with_retry(session, timestamp: str, original: str):
+    """Fetch one CDX capture, retrying only HTTP 429 with bounded backoff."""
+    url = wayback_snapshot_url(timestamp, original)
+    waits = []
+    response = None
+    for attempt in range(1, WAYBACK_REPLAY_ATTEMPTS + 1):
+        response = session.get(
+            url,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "text/csv,*/*;q=0.5",
+                "Accept-Encoding": "identity",
+                "Cache-Control": "no-cache",
+            },
+            timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
+        )
+        if response.status_code != 429 or attempt == WAYBACK_REPLAY_ATTEMPTS:
+            return response, attempt, waits
+        retry_after = getattr(response, "headers", {}).get("Retry-After", "")
+        try:
+            delay = min(60, max(0, int(retry_after)))
+        except (TypeError, ValueError):
+            delay = WAYBACK_429_BACKOFF_SECONDS[attempt - 1]
+        waits.append(delay)
+        if delay:
+            time.sleep(delay)
+    return response, WAYBACK_REPLAY_ATTEMPTS, waits
+
+
 def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[list[str]]) -> list[dict]:
-    if target not in SNAPSHOT_CSV_TARGETS:
+    if target not in SNAPSHOT_CDX_TARGETS:
         return []
     WAYBACK_SNAPSHOT_ARCHIVE.mkdir(parents=True, exist_ok=True)
     snapshots = []
@@ -261,20 +314,20 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
         timestamp, original, status, mimetype, cdx_digest, length = row[:6]
         if original != target or not timestamp.startswith(tuple(str(year) for year in range(2018, 2025))):
             continue
-        if status != "200" or mimetype not in {"text/csv", "application/vnd.ms-excel", "text/plain"}:
+        if status != "200" or mimetype not in {"text/csv", "application/vnd.ms-excel", "text/plain", "application/octet-stream"}:
             continue
         record = {"capture_timestamp": timestamp, "original_url": original, "cdx_digest": cdx_digest}
         try:
-            response = session.get(
-                wayback_snapshot_url(timestamp, original),
-                headers={"User-Agent": USER_AGENT, "Accept": "text/csv,*/*;q=0.5"},
-                timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
+            response, fetch_attempts, retry_waits = fetch_wayback_snapshot_with_retry(
+                session, timestamp, original
             )
+            record.update({"fetch_attempts": fetch_attempts, "retry_wait_seconds": retry_waits})
             if response.status_code != 200:
                 raise ValueError(f"Wayback snapshot returned HTTP {response.status_code}")
             payload = response.content
             if not payload or len(payload) > 5 * 1024 * 1024:
                 raise ValueError("Wayback snapshot is empty or exceeds 5 MiB")
+            verified_cdx_digest = verify_wayback_cdx_digest(payload, cdx_digest)
             validation = validate_constituent_snapshot(payload)
             digest = hashlib.sha256(payload).hexdigest()
             path = WAYBACK_SNAPSHOT_ARCHIVE / f"{timestamp}_{digest[:16]}.csv"
@@ -284,6 +337,8 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
                 "archive_path": path.as_posix(),
                 "bytes_received": len(payload),
                 "sha256": digest,
+                "cdx_sha1_verified": True,
+                "verified_cdx_sha1": verified_cdx_digest,
                 "validation": validation,
                 "status": (
                     "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
