@@ -90,6 +90,21 @@ def test_capture_target_accepts_http_default_port_variant_without_widening_allow
     assert MODULE.snapshot_url("20180128030056", archived_original).endswith(archived_original)
 
 
+def test_collapsed_capture_queue_accepts_http_default_port_variant_idempotently():
+    target = MODULE.TARGETS[0]
+    original = "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv"
+    rows = [[
+        "timestamp", "original", "statuscode", "mimetype", "digest", "length"
+    ], [
+        "20180128030056", original, "200", "application/octet-stream",
+        "KH6SOBBVQ5CRSCCU6GDS4CPXBSCMCSXM", "1735"
+    ]]
+    state = {"pending_snapshots": [], "completed_snapshots": []}
+    assert MODULE.add_collapsed_captures(state, target, rows) == 1
+    assert state["pending_snapshots"][0]["original_url"] == original
+    assert MODULE.add_collapsed_captures(state, target, rows) == 0
+
+
 def test_quarter_matrix_has_28_quarters():
     assert len(MODULE.all_quarters()) == 28
     assert MODULE.all_quarters()[0] == "2018-Q1"
