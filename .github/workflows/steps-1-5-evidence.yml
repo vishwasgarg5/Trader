@@ -131,10 +131,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- data/reference/nifty50_tri.csv \
-            data/reference/source_documents/nifty50_tri_2018-2024_official_response.json \
-            data/reports/nifty50_tri_acquisition.json \
-            data/reports/steps_1_5_readiness.json || true
+          git add -A -- data/reference/nifty50_tri.csv data/reference/source_documents/nifty50_tri data/reports
           if ! git diff --cached --quiet; then
             git commit -m "Record automated Nifty 50 TRI acquisition and Steps 1-5 evidence audit"
             git push origin HEAD:main
@@ -149,7 +146,7 @@ jobs:
           name: trader-steps-1-5-evidence-${{ github.run_id }}
           path: |
             data/reference/nifty50_tri.csv
-            data/reference/source_documents/nifty50_tri_2018-2024_official_response.json
+            data/reference/source_documents/nifty50_tri/
             data/reports/nifty50_tri_acquisition.json
             data/reports/steps_1_5_readiness.json
           if-no-files-found: warn
