@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from trader.market_calendar import (classify_nse_session_date, load_calendar, load_special_sessions, next_nse_session_date)
+from trader.market_calendar import (DEFAULT_SPECIAL_SESSIONS_PATH, classify_nse_session_date, load_special_sessions, next_nse_session_date)
 
 
 def test_november_8_2026_is_recognized_as_sunday_muhurat_session():
@@ -59,18 +59,8 @@ def test_next_session_fails_closed_when_search_reaches_unverified_year():
 
 
 def test_special_session_register_rejects_duplicate_dates(tmp_path):
-    payload = {
-        "exchange": "National Stock Exchange of India",
-        "segment": "CAPITAL_MARKET",
-        "special_sessions": [
-            {"date": "2026-11-08", "status": "OPEN",
-             "session_type": "SPECIAL_LIVE_TRADING_SESSION",
-             "circular_reference": "NSE/CMTR/76941", "source_url": "https://example.invalid/a"},
-            {"date": "2026-11-08", "status": "OPEN",
-             "session_type": "SPECIAL_LIVE_TRADING_SESSION",
-             "circular_reference": "NSE/CMTR/76941", "source_url": "https://example.invalid/b"}
-        ]
-    }
+    payload = json.loads(DEFAULT_SPECIAL_SESSIONS_PATH.read_text(encoding="utf-8"))
+    payload["special_sessions"].append(dict(payload["special_sessions"][0]))
     path = tmp_path / "sessions.json"
     path.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ValueError, match="duplicate special-session date"):
@@ -78,16 +68,11 @@ def test_special_session_register_rejects_duplicate_dates(tmp_path):
 
 
 def test_missing_source_lineage_is_rejected(tmp_path):
-    payload = {
-        "exchange": "National Stock Exchange of India",
-        "segment": "CAPITAL_MARKET",
-        "special_sessions": [{
-            "date": "2026-11-08", "status": "OPEN",
-            "session_type": "SPECIAL_LIVE_TRADING_SESSION",
-            "circular_reference": "", "source_url": ""
-        }]
-    }
+    payload = json.loads(DEFAULT_SPECIAL_SESSIONS_PATH.read_text(encoding="utf-8"))
+    payload["special_sessions"][0]["circular_reference"] = ""
+    payload["special_sessions"][0]["source_url"] = ""
     path = tmp_path / "sessions.json"
     path.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ValueError, match="lacks source lineage"):
         load_special_sessions(path)
+
