@@ -156,3 +156,10 @@ def test_identical_empty_exchange_shells_are_not_usable_coverage():
         and len(digest_groups[record["sha256"]]) > 1
     ]
     assert len(flagged) == 2
+
+
+def test_official_consolidated_nse_filings_dashboard_is_in_weekly_sources():
+    assert (
+        "NSE_CORPORATE_FILINGS_DASHBOARD",
+        "https://www.nseindia.com/companies-listing/corporate-filings-application",
+    ) in MODULE.SOURCES
