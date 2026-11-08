@@ -57,8 +57,10 @@ def candidate_routes(script_text: str):
     for match in ROUTE_RE.finditer(script_text):
         value = match.group(1)
         low = value.lower()
-        if (value.startswith("/") and not value.startswith("//")
-                and any(token in low for token in ("/api/", "corporate-", "corporate/", "announcements"))):
+        # Only retain explicit API paths. Ordinary page/navigation paths may
+        # contain words such as "corporate" or "announcements" but are not
+        # evidence of an API contract.
+        if value.startswith("/api/") and not value.startswith("//"):
             routes.add(value)
     return sorted(routes)
 
