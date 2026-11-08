@@ -1,27 +1,42 @@
 from pathlib import Path
+import csv
 
 from trader.nifty50_price_data_readiness import _audit_rows, audit_price_data_readiness
 
 
-def test_current_repository_fails_closed_without_price_or_tri_observations():
+def test_current_repository_fails_closed_without_verified_ohlcv_and_prerequisites():
     root = Path(__file__).resolve().parents[1] / "data" / "reference"
     report = audit_price_data_readiness(root)
     assert report["ready_for_price_and_benchmark_research"] is False
     assert report["ohlcv_rows"] == 0
-    assert report["tri_rows"] == 0
+    # TRI has been acquired, but acquisition is not independent verification.
+    assert report["tri_rows"] > 0
     assert report["membership_prerequisite_ready"] is False
     assert report["security_identity_prerequisite_ready"] is False
     assert report["corporate_action_adjustment_verified"] is False
-    assert any("no verified historical observations" in error for error in report["errors"])
+    assert any(
+        "nifty50_pilot_ohlcv.csv: no verified historical observations" in error
+        for error in report["errors"]
+    )
     assert any("Step 2 prerequisite blocked" in error for error in report["errors"])
     assert any("Step 3 prerequisite blocked" in error for error in report["errors"])
 
 
-def test_ohlcv_and_tri_contract_files_are_header_only_not_synthetic_data():
+def test_ohlcv_remains_header_only_while_acquired_tri_is_pending_review():
     root = Path(__file__).resolve().parents[1] / "data" / "reference"
-    for name in ("nifty50_pilot_ohlcv.csv", "nifty50_tri.csv"):
-        lines = (root / name).read_text(encoding="utf-8").splitlines()
-        assert len(lines) == 1
+    ohlcv_lines = (root / "nifty50_pilot_ohlcv.csv").read_text(encoding="utf-8").splitlines()
+    assert len(ohlcv_lines) == 1
+
+    with (root / "nifty50_tri.csv").open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        assert {
+            "session_date", "tri_close", "source_url", "evidence_path",
+            "evidence_sha256", "verification_status", "reviewer", "reviewed_at",
+        }.issubset(set(reader.fieldnames or []))
+    assert rows
+    assert all(row["verification_status"] == "ACQUIRED_PENDING_INDEPENDENT_REVIEW" for row in rows)
+    assert all(not row["reviewer"] and not row["reviewed_at"] for row in rows)
 
 
 def _valid_ohlcv_row(**overrides):
