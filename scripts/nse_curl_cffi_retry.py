@@ -221,7 +221,7 @@ def wayback_targets() -> list[str]:
 
 
 def wayback_snapshot_url(timestamp: str, original: str) -> str:
-    if not re.fullmatch(r"\d{14}", timestamp) or original not in SNAPSHOT_CSV_TARGETS:
+    if not re.fullmatch(r"\d{14}", timestamp) or original not in SNAPSHOT_CDX_TARGETS:
         raise ValueError("Wayback snapshot must reference a dated capture of an allowlisted Nifty 50 CSV")
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
