@@ -213,7 +213,7 @@ def wayback_targets() -> list[str]:
 
 
 def wayback_snapshot_url(timestamp: str, original: str) -> str:
-    if not re.fullmatch(r"\\d{14}", timestamp) or original not in SNAPSHOT_CSV_TARGETS:
+    if not re.fullmatch(r"\d{14}", timestamp) or original not in SNAPSHOT_CSV_TARGETS:
         raise ValueError("Wayback snapshot must reference a dated capture of an allowlisted Nifty 50 CSV")
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
@@ -332,7 +332,7 @@ def ingest_wayback() -> dict:
                               "A 50-row CSV is not accepted without primary-source and independent review.",
                               "No model, price, TRI, membership, or trading state is changed."]}
     WAYBACK_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 
