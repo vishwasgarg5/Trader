@@ -35,7 +35,7 @@ def download(urls: list[str]) -> tuple[bytes, str]:
 
 
 def main() -> int:
-    records, failures = [], []
+    records, failures, corroborating_records, corroborating_failures = [], [], [], []
     with REGISTER.open(newline="", encoding="utf-8") as handle:
         sources = list(csv.DictReader(handle))
     for source in sources:
@@ -66,6 +66,33 @@ def main() -> int:
                 "source_url": source["source_url"],
                 "error": str(exc),
             })
+            if source["circular_reference"] == "NSE/CMTR/57285":
+                press_release_url = "https://niftyindices.com/Press_Release/ind_prs27062023.pdf"
+                press_release_path = pathlib.Path(
+                    "data/reference/source_documents/nse_ad_hoc_holiday_circulars/"
+                    "2023-06-27_NSE_Indices_press_release.pdf"
+                )
+                try:
+                    body, successful_url = download([press_release_url])
+                    press_release_path.parent.mkdir(parents=True, exist_ok=True)
+                    press_release_path.write_bytes(body)
+                    corroborating_records.append({
+                        "related_circular_reference": "NSE/CMTR/57285",
+                        "document_type": "OFFICIAL_NSE_INDICES_PRESS_RELEASE_CORROBORATION_NOT_CIRCULAR",
+                        "source_url": press_release_url,
+                        "downloaded_from_url": successful_url,
+                        "archive_path": press_release_path.as_posix(),
+                        "bytes": len(body),
+                        "sha256": hashlib.sha256(body).hexdigest(),
+                        "archive_status": "ARCHIVED_OFFICIAL_NSE_INDICES_PDF_SIGNATURE_VALID",
+                        "independent_review_status": "PENDING",
+                    })
+                except Exception as corroboration_error:
+                    corroborating_failures.append({
+                        "related_circular_reference": "NSE/CMTR/57285",
+                        "source_url": press_release_url,
+                        "error": str(corroboration_error),
+                    })
     report = {
         "experiment_id": "NIFTY50_PILOT_001",
         "purpose": "Archive additional NSE Capital Market closure and holiday-revision circulars identified in TRI diagnostics",
