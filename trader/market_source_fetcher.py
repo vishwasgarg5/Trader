@@ -93,6 +93,7 @@ def fetch_bytes(
         ):
             existing = partial.stat().st_size if partial and partial.exists() else 0
             request_headers = dict(headers or {})
+            request_headers.setdefault("Accept-Encoding", "identity")
             if existing:
                 request_headers["Range"] = f"bytes={existing}-"
             record = {
