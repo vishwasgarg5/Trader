@@ -60,6 +60,15 @@ def sha256(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def wayback_cdx_digest(payload: bytes) -> str:
+    """Internet Archive CDX body digest: SHA-1 encoded as unpadded Base32."""
+    return base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=")
+
+
+def cdx_digest_matches(payload: bytes, expected: str) -> bool:
+    return wayback_cdx_digest(payload) == expected
+
+
 def atomic_json(path: pathlib.Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -77,6 +86,19 @@ def load_state() -> dict:
     for target in TARGETS:
         state["targets"].setdefault(target, {"metadata_done": False, "collapsed_done": False,
                                               "full_capture_count": 0, "candidate_count": 0})
+    # Reconcile existing downloads against CDX body digests before counting them usable.
+    for item in state.get("completed_snapshots", []):
+        archive_path = pathlib.Path(item.get("archive_path", ""))
+        expected = item.get("cdx_digest")
+        if expected and archive_path.is_file():
+            actual = wayback_cdx_digest(archive_path.read_bytes())
+            item["computed_cdx_digest"] = actual
+            if actual != expected:
+                item.setdefault("pre_digest_validation_status", item.get("status"))
+                item["status"] = "CDX_DIGEST_MISMATCH"
+                item["cdx_digest_validation"] = "MISMATCH"
+            else:
+                item["cdx_digest_validation"] = "MATCH"
     return state
 
 
@@ -158,6 +180,7 @@ def request_one(session: requests.Session, url: str, params: dict | None,
             response = session.get(url, params=params, headers={
                 "User-Agent": USER_AGENT,
                 "Accept": "application/json,text/csv,*/*;q=0.5",
+                "Accept-Encoding": "identity",
             }, timeout=(CONNECT_TIMEOUT, READ_TIMEOUT))
             state["attempt_log"].append({"at_utc": iso_now(), "label": label,
                                          "attempt": attempt, "http_status": response.status_code})
@@ -333,7 +356,19 @@ def download_capture(session: requests.Session, item: dict, state: dict,
         return None
     if response.status_code != 200:
         item.update({"status": "FETCH_FAILED", "last_http_status": response.status_code,
-                     "last_attempt_at_utc": iso_now()})
+                     "last_attempt_at_utc": iso_now(), "response_url": response.url})
+        return item
+    actual_cdx_digest = wayback_cdx_digest(response.content)
+    if item.get("cdx_digest") and actual_cdx_digest != item["cdx_digest"]:
+        item.update({
+            "status": "CDX_DIGEST_MISMATCH",
+            "expected_cdx_digest": item["cdx_digest"],
+            "computed_cdx_digest": actual_cdx_digest,
+            "response_url": response.url,
+            "memento_datetime": response.headers.get("Memento-Datetime"),
+            "content_encoding": response.headers.get("Content-Encoding"),
+            "last_attempt_at_utc": iso_now(),
+        })
         return item
     try:
         validation = validate_snapshot(response.content)
@@ -345,7 +380,11 @@ def download_capture(session: requests.Session, item: dict, state: dict,
         item.update({"status": validation["candidate_status"], "archive_path": path.as_posix(),
                      "bytes_received": len(response.content), "sha256": digest,
                      "validation": validation, "retrieved_at_utc": iso_now(),
-                     "evidence_class": "WAYBACK_SUPPLEMENTARY"})
+                     "evidence_class": "WAYBACK_SUPPLEMENTARY",
+                     "computed_cdx_digest": actual_cdx_digest, "cdx_digest_validation": "MATCH",
+                     "response_url": response.url,
+                     "memento_datetime": response.headers.get("Memento-Datetime"),
+                     "content_encoding": response.headers.get("Content-Encoding")})
     except Exception as exc:
         item.update({"status": "SNAPSHOT_INVALID", "error": f"{type(exc).__name__}: {exc}"[:700],
                      "retrieved_at_utc": iso_now()})
