@@ -6,7 +6,6 @@ gets three attempts, bounded connect/read timeouts, and structured timing output
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import pathlib
 import socket
@@ -144,49 +143,6 @@ def curl_cffi_once(url):
                     "bytes_received": count}
     return run
 
-async def playwright_probes(urls):
-    from playwright.async_api import async_playwright
-    output = []
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        for target in urls:
-            url = target["url"]
-            host = urlsplit(url).hostname
-            context = await browser.new_context(user_agent=HEADERS["User-Agent"],
-                extra_http_headers={"Accept-Language": HEADERS["Accept-Language"],
-                                    "Referer": "https://www.nseindia.com/"})
-            page = await context.new_page()
-            home = "https://www.nseindia.com/" if host and host.endswith("nseindia.com") else "https://www.niftyindices.com/"
-            cookie_result = {"homepage": home}
-            try:
-                response = await page.goto(home, wait_until="domcontentloaded", timeout=30000)
-                cookie_result["homepage_status"] = response.status if response else None
-                cookie_result["cookies"] = len(await context.cookies())
-            except Exception as exc:
-                cookie_result["homepage_error"] = f"{type(exc).__name__}: {exc}"[:500]
-            async def attempt():
-                started = time.monotonic()
-                response = await page.goto(url, wait_until="commit", timeout=(CONNECT_TIMEOUT + READ_TIMEOUT) * 1000)
-                body = await response.body() if response else b""
-                return {"status_code": response.status if response else None,
-                        "final_url": page.url, "bytes_received": min(len(body), MAX_BODY_BYTES),
-                        "content_type": response.headers.get("content-type") if response else None,
-                        "ttfb_seconds": round(time.monotonic() - started, 3)}
-            attempts = []
-            for n in range(1, ATTEMPTS + 1):
-                try:
-                    attempts.append({"attempt": n, "ok": True, **await attempt()})
-                    break
-                except Exception as exc:
-                    attempts.append({"attempt": n, "ok": False,
-                                     "error": f"{type(exc).__name__}: {exc}"[:700]})
-                    if n < ATTEMPTS:
-                        await asyncio.sleep(BACKOFF[n - 1])
-            output.append({"method": "playwright_homepage_cookies", "url": url,
-                           "homepage_session": cookie_result, "attempts": attempts})
-            await context.close()
-        await browser.close()
-    return output
 
 def main():
     hosts = sorted({urlsplit(x["url"]).hostname for x in URLS if urlsplit(x["url"]).hostname})
@@ -201,15 +157,9 @@ def main():
                                 ("curl_cffi_chrome_impersonation", curl_cffi_once)):
             report["http_probes"].append({"label": target["label"], "method": method,
                                          "attempts": retry(method, url, factory(url))})
-    try:
-        report["playwright_probes"] = asyncio.run(playwright_probes(URLS))
-    except Exception as exc:
-        report["playwright_error"] = f"{type(exc).__name__}: {exc}"[:1000]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps({"network": report["network"], "http_probes": report["http_probes"],
-                      "playwright_probes": report.get("playwright_probes"),
-                      "playwright_error": report.get("playwright_error")}, indent=2))
+    print(json.dumps({"network": report["network"], "http_probes": report["http_probes"]}, indent=2))
     return 0
 
 if __name__ == "__main__":
