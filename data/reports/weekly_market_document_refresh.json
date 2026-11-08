@@ -5,7 +5,7 @@
     "archive_path": "data/reference/source_documents/nifty50_constituent_snapshots/nifty50_current_f5ba4027d935ae72.csv",
     "bytes": 3344,
     "content_type": "text/csv",
-    "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+    "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
     "row_count": 50,
     "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
     "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
@@ -69,8 +69,8 @@
   "historical_prices_or_tri_modified": false,
   "holdout_accessed": false,
   "issuer_filter_status": "BLOCKED_EMPTY_POINT_IN_TIME_MEMBERSHIP_REGISTER",
-  "landing_pages_archived": 11,
-  "landing_pages_expected": 11,
+  "landing_pages_archived": 12,
+  "landing_pages_expected": 12,
   "limitations": [
     "Landing-page HTML is discovery evidence only; it is not the underlying circular or issuer filing.",
     "Visible links are not proof that all exchange documents were enumerated.",
@@ -93,7 +93,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
@@ -108,7 +108,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
@@ -123,7 +123,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
@@ -1967,7 +1967,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "20c270382c51ed46c34c4ec7e75abcd4092ac41ef8c02a02b5ce154681209516",
       "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
@@ -3903,7 +3903,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "b6fd6e28e44489b1c88d06b13b23aeac1965b3ea240b7a28665e2a83ef8d85e7",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
@@ -5731,7 +5731,7 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "26deab2064535052b84f72bf7c69eec9d32cfeb17172ed53a0d497a35ac258ba",
       "source_id": "NIFTY_INDICES_RECONSTITUTION_CALENDAR",
@@ -5739,7 +5739,7 @@
       "visible_link_count": 453
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_70a620db278fe2a3.html",
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_0beea0ce89f158e5.html",
       "bytes": 402575,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
@@ -8943,15 +8943,15 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "70a620db278fe2a384124c7a25324c78f62944ca8bced09eae1b3b12f411a54d",
+      "sha256": "0beea0ce89f158e5a606a330b1756abfcdca5f41d83912f3bf04b52173b67a41",
       "source_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
       "visible_link_count": 799
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_1cda68109fd801c8.html",
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_ab89741bfffe9773.html",
       "bytes": 336609,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
@@ -11835,15 +11835,15 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "1cda68109fd801c82f80436a12738cbef92012aaa56451cfab878b230a69c743",
+      "sha256": "ab89741bfffe97733a31b517196568bb75943f58b0102e3555e9ff8fdc771e33",
       "source_id": "NSE_BUYBACKS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
       "visible_link_count": 719
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_e3b3de8079f86425.html",
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_9a8f9539b25dfe59.html",
       "bytes": 365637,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
@@ -14815,16 +14815,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "e3b3de8079f86425b7dca4a663caf785c3af7490a687a9a069595c9cab99c122",
+      "sha256": "9a8f9539b25dfe59b3cf3ac985033125470862f91018d04f226752e2993c09c3",
       "source_id": "NSE_CORPORATE_ACTIONS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
       "visible_link_count": 741
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_efa8fd8750df8f99.html",
-      "bytes": 370490,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_4984ada45c37dd0e.html",
+      "bytes": 370472,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -16983,7 +16983,7 @@
         },
         {
           "href": "/companies-listing/corporate-filings-announcements",
-          "label": "14 Corporate Announcements"
+          "label": "15 Corporate Announcements"
         },
         {
           "href": "/companies-listing/corporate-filings-actions",
@@ -16998,6 +16998,10 @@
           "label": ""
         },
         {
+          "href": "/get-quotes/equity?symbol=KRN",
+          "label": "KRN"
+        },
+        {
           "href": "/get-quotes/equity?symbol=HPIL",
           "label": "HPIL"
         },
@@ -17008,10 +17012,6 @@
         {
           "href": "/get-quotes/equity?symbol=ARE&M",
           "label": "ARE&M"
-        },
-        {
-          "href": "/get-quotes/equity?symbol=NEOGEN",
-          "label": "NEOGEN"
         },
         {
           "href": "/get-quotes/equity?symbol=NEOGEN",
@@ -17563,15 +17563,2787 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "efa8fd8750df8f99dd0b2377642d2426b594bff65260981a5e7b2dd36750d8b3",
+      "sha256": "4984ada45c37dd0eea8c3edd7f589a9eb8567222ddf04c4aa35117a24b5e16f4",
       "source_id": "NSE_CORPORATE_FILINGS_DASHBOARD",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-application",
       "visible_link_count": 683
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_1e16b90313efb949.html",
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_exchange_circulars_e25d2f04afc7c77b.html",
+      "bytes": 328519,
+      "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
+      "http_content_type": "text/html; charset=utf-8",
+      "http_last_modified": null,
+      "links": [
+        {
+          "href": "/market-data/closing-auction-session",
+          "label": "CAS"
+        },
+        {
+          "href": "/option-chain",
+          "label": "Option Chain"
+        },
+        {
+          "href": "#modal_market_turnover_popup",
+          "label": "Market Turnover"
+        },
+        {
+          "href": "/market-data/new-stock-exchange-listings-today",
+          "label": "Listings"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ipo",
+          "label": "IPO"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "Circulars"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Report"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-application",
+          "label": "Corporates"
+        },
+        {
+          "href": "/resources/exchange-communication-press-releases",
+          "label": "Press Releases"
+        },
+        {
+          "href": "/contact/contact-us",
+          "label": "Contact Us"
+        },
+        {
+          "href": "/",
+          "label": ""
+        },
+        {
+          "href": "/index-tracker/NIFTY%2050",
+          "label": ""
+        },
+        {
+          "href": "/currency-getquote?symbol=USDINR#inr-contracts",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": "Market Capitalization"
+        },
+        {
+          "href": "/",
+          "label": "Home"
+        },
+        {
+          "href": "javascript:;",
+          "label": "About"
+        },
+        {
+          "href": "/national-stock-exchange/about-nse-company",
+          "label": "About Us"
+        },
+        {
+          "href": "/structure-key-personnel/corporate-structure",
+          "label": "Structure & Key Personnel"
+        },
+        {
+          "href": "/national-stock-exchange/awards-recognition",
+          "label": "Awards and Recognitions"
+        },
+        {
+          "href": "/regulations/exchange-market-regulations-rules-byelaws-nseil",
+          "label": "Regulations"
+        },
+        {
+          "href": "/events",
+          "label": "Event Gallery"
+        },
+        {
+          "href": "/static/resources/exchange-communication-media-queries",
+          "label": "Media"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "/careers-at-nse",
+          "label": "Careers"
+        },
+        {
+          "href": "/contact/contact-us",
+          "label": "Contact Us"
+        },
+        {
+          "href": "/nse-academy/nse-academy-overview",
+          "label": "NAL Academy Limited"
+        },
+        {
+          "href": "https://www.nseclearing.in/about-nse-clearing",
+          "label": "NSE Clearing"
+        },
+        {
+          "href": "/nse-data-and-analytics",
+          "label": "NSE Data & Analytics"
+        },
+        {
+          "href": "/nse-foundation/about-us",
+          "label": "NSE Foundation"
+        },
+        {
+          "href": "/nse-indices",
+          "label": "NSE Indices"
+        },
+        {
+          "href": "/nse-international-exchange/about",
+          "label": "NSE International Exchange"
+        },
+        {
+          "href": "/nseint_clearing/nse-international-clearing-overview",
+          "label": "NSE International Clearing"
+        },
+        {
+          "href": "/nse-investments",
+          "label": "NSE Investments"
+        },
+        {
+          "href": "/national-stock-exchange/our-group",
+          "label": "View all"
+        },
+        {
+          "href": "/products-services/about-equity-market",
+          "label": "Equity Market"
+        },
+        {
+          "href": "/products-services/about-indices",
+          "label": "Indices"
+        },
+        {
+          "href": "/products-services/emerge-platform-about-sme",
+          "label": "Emerge Platform"
+        },
+        {
+          "href": "/products-services/mf-about-mfss",
+          "label": "Mutual Funds"
+        },
+        {
+          "href": "/products-services/about-equity-derivatives",
+          "label": "Equity Derivatives"
+        },
+        {
+          "href": "/products-services/about-currency-derivatives",
+          "label": "Currency Derivatives"
+        },
+        {
+          "href": "/products-services/about-commodity-derivatives",
+          "label": "Commodity Derivatives"
+        },
+        {
+          "href": "/products-services/about-interest-rate-derivatives",
+          "label": "Interest Rate Derivatives"
+        },
+        {
+          "href": "/products-services/fixed-income-debt-overview",
+          "label": "Fixed Income and Debt"
+        },
+        {
+          "href": "/products-services/about-initial-public-offerings",
+          "label": "Public Issues"
+        },
+        {
+          "href": "/static/products-services/about-electronic-gold-receipts",
+          "label": "Electronic Gold Receipts"
+        },
+        {
+          "href": "https://www.nseindia.com/national-stock-exchange/about-nse-company",
+          "label": "About Us Find everything about the leading stock exchange of India"
+        },
+        {
+          "href": "https://www.nseindia.com/national-stock-exchange/our-group",
+          "label": "Our Group Check NSE's group of the companies"
+        },
+        {
+          "href": "https://www.nseindia.com/products-services",
+          "label": "Our Products Browse a comprehensive and innovative product and service offerings by NSE"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Market Data"
+        },
+        {
+          "href": "/market-data/new-stock-exchange-listings-today",
+          "label": "New Listings"
+        },
+        {
+          "href": "/market-data/pre-open-market-cm-and-emerge-market",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/live-equity-market",
+          "label": "Equity & SME Market"
+        },
+        {
+          "href": "/market-data/exchange-traded-funds-etf",
+          "label": "Exchange Traded Funds"
+        },
+        {
+          "href": "/market-data/closing-auction-session",
+          "label": "Closing Auction Session (CAS)"
+        },
+        {
+          "href": "/market-data/live-market-indices",
+          "label": "Indices"
+        },
+        {
+          "href": "/market-data/top-gainers-losers",
+          "label": "Gainers/Losers"
+        },
+        {
+          "href": "/market-data/volume-gainers-spurts",
+          "label": "Volume Gainers"
+        },
+        {
+          "href": "/market-data/most-active-equities",
+          "label": "Most Active Equities"
+        },
+        {
+          "href": "/market-data/upper-band-hitters",
+          "label": "Price Band Hitters"
+        },
+        {
+          "href": "/market-data/52-week-high-equity-market",
+          "label": "52 Week High/Low"
+        },
+        {
+          "href": "/market-data/large-deals",
+          "label": "Large Deals"
+        },
+        {
+          "href": "/market-data/advance",
+          "label": "Advances / Declines"
+        },
+        {
+          "href": "/market-data/securities-lending-and-borrowing",
+          "label": "Securities Lending & Borrowing"
+        },
+        {
+          "href": "/market-data/stocks-in-call-auction",
+          "label": "Call auction for Illiquid Securities"
+        },
+        {
+          "href": "/market-data/securities-available-for-trading",
+          "label": "Securities available for Trading"
+        },
+        {
+          "href": "/market-data/price-bands-surveillance-actions",
+          "label": "Price Bands & Surveillance Actions"
+        },
+        {
+          "href": "/all-reports/historical-equities-fii-fpi-dii-trading-activity",
+          "label": "Position/Investment Limits"
+        },
+        {
+          "href": "/market-data/legend-of-series",
+          "label": "Legend of series"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/pre-open-market-fno",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/equity-derivatives-watch",
+          "label": "Derivatives Market"
+        },
+        {
+          "href": "/option-chain",
+          "label": "Option Chain"
+        },
+        {
+          "href": "/market-data/most-active-contracts",
+          "label": "Most Active Contracts"
+        },
+        {
+          "href": "/market-data/most-active-underlying",
+          "label": "Most Active Underlying"
+        },
+        {
+          "href": "/market-data/oi-spurts",
+          "label": "Change in Open Interest"
+        },
+        {
+          "href": "/market-data/liquidity-enhancement-scheme",
+          "label": "Liquidity Enhancement Scheme"
+        },
+        {
+          "href": "/market-data/securities-information-contracts-available-for-trading",
+          "label": "Contracts available for Trading"
+        },
+        {
+          "href": "/all-reports-derivatives",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives-derivative-market",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/pre-open-market-egr",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/egr",
+          "label": "Normal Market"
+        },
+        {
+          "href": "/market-data/block-deals",
+          "label": "Block Deals Market"
+        },
+        {
+          "href": "/all-reports-egr",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/historical-data/egr",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/bonds-traded-in-capital-market",
+          "label": "Traded on CM"
+        },
+        {
+          "href": "/market-data/debt-market-reporting-corporate-bonds-traded-on-exchange",
+          "label": "CBRICS"
+        },
+        {
+          "href": "/market-data/debt-market-request-for-quote-rfq",
+          "label": "RFQ"
+        },
+        {
+          "href": "/market-data/debt-market-negotiated-trades-reporting",
+          "label": "Negotiated Trades"
+        },
+        {
+          "href": "/market-data/debt-market-trade-repository",
+          "label": "Trade Repository"
+        },
+        {
+          "href": "/market-data/debt-market-tri-party-repo",
+          "label": "Tri-Party Repo"
+        },
+        {
+          "href": "/all-reports-debt",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives-debt-market",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/yield-calculator",
+          "label": "Yield Price Calculator"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ipo",
+          "label": "IPO"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs",
+          "label": "Offer For Sale"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ncb-gsec",
+          "label": "NCB G-SEC"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-ipp",
+          "label": "Institutional Placement Program (IPP)"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-tender-offer",
+          "label": "Tender Offer"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-rights",
+          "label": "Rights"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-invits",
+          "label": "INVITS"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-reits",
+          "label": "REITS"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-reverse-book-building",
+          "label": "Reverse Book Building"
+        },
+        {
+          "href": "/market-data/liquidity-window-facility",
+          "label": "Liquidity Window Facility"
+        },
+        {
+          "href": "/primary-market/ebp-placement-reporting",
+          "label": "EBP"
+        },
+        {
+          "href": "https://www.nseindia.com/market-data/analysis-and-tools-capital-market-snapshot",
+          "label": "Market Snapshot Live Analysis of top gainers/losers, most active securities/contracts, price band hitters, overview of the market."
+        },
+        {
+          "href": "https://www.nseindia.com/option-chain",
+          "label": "Option Chain View Option chain for the exchange"
+        },
+        {
+          "href": "https://www.nseindia.com/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports View Historical Reports of securities/contracts traded on the Exchange."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Invest"
+        },
+        {
+          "href": "/invest/first-time-investor-getting-started",
+          "label": "Investing in Securities Market"
+        },
+        {
+          "href": "/invest/first-time-investor-stamp-duty-charges-taxes",
+          "label": "Charges and Taxes"
+        },
+        {
+          "href": "/invest/investor-charter",
+          "label": "Investor Charter"
+        },
+        {
+          "href": "/invest/be-a-smart-investor",
+          "label": "Protection from Fraud"
+        },
+        {
+          "href": "/invest/investors-awareness-programs",
+          "label": "Investor Awareness Programs"
+        },
+        {
+          "href": "/invest/investors-regulatory-actions",
+          "label": "Regulatory Action"
+        },
+        {
+          "href": "/registered-client-accounts",
+          "label": "Registered Client Accounts"
+        },
+        {
+          "href": "/invest/foreign_portfolio_investors",
+          "label": "Foreign Portfolio Investors (FPI)"
+        },
+        {
+          "href": "/invest/find-a-stock-broker",
+          "label": "Locate your Stock Broker"
+        },
+        {
+          "href": "/invest/company-listing-directory-resources-for-investors",
+          "label": "Company Directory"
+        },
+        {
+          "href": "/static/invest/verify-trades-ipo-bids",
+          "label": "Verify Trades/IPO Bids"
+        },
+        {
+          "href": "/invest/exit-option-for-share-holders",
+          "label": "Exit Option for shareholders"
+        },
+        {
+          "href": "/feedback/new",
+          "label": "Feedback"
+        },
+        {
+          "href": "https://www.nseindia.com/invest/investors-home",
+          "label": "Investor's Home Investor education on how to invest safely and protect your investments."
+        },
+        {
+          "href": "https://www.nseindia.com/invest/first-time-investor-products",
+          "label": "Product Information Browse NSE products under Cash, derivatives, currency derivatives etc."
+        },
+        {
+          "href": "https://smartodr.in/login",
+          "label": "LOGIN TO SMARTODR Online Dispute Resolution Mechanism for filing complaints"
+        },
+        {
+          "href": "javascript:;",
+          "label": "List"
+        },
+        {
+          "href": "/companies-listing/raising-capital-onboarding-process",
+          "label": "On-boarding Process"
+        },
+        {
+          "href": "/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+          "label": "Primary Market - Main Board"
+        },
+        {
+          "href": "/companies-listing/raising-capital-public-issues-listing-on-emerge",
+          "label": "Primary Market - SME"
+        },
+        {
+          "href": "/companies-listing/raising-capital-debt-private-placement",
+          "label": "Debt - Private Placement"
+        },
+        {
+          "href": "/sse",
+          "label": "Social Stock Exchange"
+        },
+        {
+          "href": "/companies-listing/raising-capital-mutual-funds-etfs-process",
+          "label": "Mutual Fund/ETFs/AIFs"
+        },
+        {
+          "href": "/companies-listing/raising-capital-further-issues-main-sme-checklist",
+          "label": "Further Issues"
+        },
+        {
+          "href": "/companies-listing/public-issue-advertisements",
+          "label": "Public Issue Advertisements"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-announcements",
+          "label": "Announcements"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-board-meetings",
+          "label": "Board Meetings"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-actions",
+          "label": "Corporate Actions"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-financial-results",
+          "label": "Financial Results"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-shareholding-pattern",
+          "label": "Shareholding Pattern"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-shareholding-pattern-sdd",
+          "label": "Shareholding Pattern SDD"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-offer-documents",
+          "label": "Issuer Offer documents/Issue Summary Document"
+        },
+        {
+          "href": "/companies-listing/corporate-integrated-filing",
+          "label": "Integrated Filing- Financials"
+        },
+        {
+          "href": "/companies-listing/corporate-integrated-filing?integratedType=integratedfilinggovernance",
+          "label": "Integrated Filing- Governance"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-scheme-document",
+          "label": "Scheme of Arrangement"
+        },
+        {
+          "href": "/companies-listing/sebi-regulations",
+          "label": "SEBI Regulations"
+        },
+        {
+          "href": "/companies-listing/compliance-information-compliance-calendar-main-board",
+          "label": "Compliance Information"
+        },
+        {
+          "href": "/companies-listing/xbrl-information",
+          "label": "XBRL Information"
+        },
+        {
+          "href": "http://ec2-3-221-41-38.compute-1.amazonaws.com",
+          "label": "XBRL To Excel Converter"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-directory",
+          "label": "Company Directory"
+        },
+        {
+          "href": "/companies-listing/circular-for-listed-companies-equity-market",
+          "label": "Circulars to Listed Companies"
+        },
+        {
+          "href": "https://neaps.nseindia.com/NEWLISTINGCORP/",
+          "label": "NEAPS Portal"
+        },
+        {
+          "href": "/static/list/list-of-companies-proposed-to-be-delisted",
+          "label": "Delisting of Companies"
+        },
+        {
+          "href": "/static/list/public-notice-compulsory-delisting",
+          "label": "Public Notice Compulsory Delisting"
+        },
+        {
+          "href": "/static/list/orders-of-delisting",
+          "label": "Orders of Delisting Committee"
+        },
+        {
+          "href": "https://www.nseindia.com/companies-listing/corporate-filings-application",
+          "label": "Corporates Home Important information, reference material and latest announcements for corporates"
+        },
+        {
+          "href": "https://www.nseindia.com/regulations/listing-compliance",
+          "label": "Company Compliance Information Status of compliance's under various Regulatory requirements"
+        },
+        {
+          "href": "https://iinvest.cogencis.com",
+          "label": "Cogencis iInvest Tool for informed investment decisions"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Trade"
+        },
+        {
+          "href": "/trade/admission-process-documents-to-become-a-member",
+          "label": "Process & FAQs"
+        },
+        {
+          "href": "/trade/membership-types",
+          "label": "Eligibility Criteria & Categories"
+        },
+        {
+          "href": "/trade/deposits-networth-requirements-for-membership",
+          "label": "Fees, Deposits & Networth"
+        },
+        {
+          "href": "/trade/membership-using-enit",
+          "label": "Using ENIT"
+        },
+        {
+          "href": "/trade/members-change-in-name",
+          "label": "Change In Membership"
+        },
+        {
+          "href": "/trade/members-compliance",
+          "label": "Member Compliance"
+        },
+        {
+          "href": "/trade/membership-suspension-expulsion",
+          "label": "Disciplinary Action"
+        },
+        {
+          "href": "/trade/membership-formats",
+          "label": "Format"
+        },
+        {
+          "href": "/trade/platform-services-neat-trading-system",
+          "label": "NSE Trading Technology"
+        },
+        {
+          "href": "/trade/platform-services-non-neat-front-end",
+          "label": "NEAT & Non-NEAT Front end"
+        },
+        {
+          "href": "/trade/platform-services-test-and-simulated-market-facility",
+          "label": "Test Market Facility"
+        },
+        {
+          "href": "/trade/platform-services-connectivity",
+          "label": "Connectivity & User Id"
+        },
+        {
+          "href": "https://www.nseindia.com/trade/members-homepage",
+          "label": "Member's Home Important Information, reference materials and latest announcements for members."
+        },
+        {
+          "href": "https://ims.connect2nsccl.com/MemberPortal/",
+          "label": "Member Portal ENIT - A Portal for Trading Members of NSE to manage their Membership and Compliance requirements."
+        },
+        {
+          "href": "https://www.nseindia.com/resources/exchange-communication-circulars",
+          "label": "Exchange Communication Browse Exchange circulars, press release and media articles."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Regulation"
+        },
+        {
+          "href": "/regulations/exchange-market-regulations-rules-byelaws-nseil",
+          "label": "Market Rules & Regulations"
+        },
+        {
+          "href": "/static/regulations/exchange-market-surveillance-actions",
+          "label": "Market Surveillance"
+        },
+        {
+          "href": "/regulations/exchange-disclosures-details-of-vigil-mechanism",
+          "label": "Exchange Disclosures"
+        },
+        {
+          "href": "/regulations/exchange-defaulting-clients",
+          "label": "Defaulting Clients"
+        },
+        {
+          "href": "/regulations/unsolicited-messages-report",
+          "label": "Investor's Beware"
+        },
+        {
+          "href": "/submit-tipoff",
+          "label": "Submit a Tip-Off"
+        },
+        {
+          "href": "/trade/members-compliance",
+          "label": "Member Compliance"
+        },
+        {
+          "href": "/invest/complaint-arbitration-status",
+          "label": "Complaint against Members"
+        },
+        {
+          "href": "/regulations/exchange-market-surveillance-regulatory-actions",
+          "label": "Action against Members"
+        },
+        {
+          "href": "/regulations/member-sebi-debarred-entities",
+          "label": "Debarred Entities"
+        },
+        {
+          "href": "/regulations/member-circulars-for-members",
+          "label": "Circulars for Members"
+        },
+        {
+          "href": "/regulations/public-notice",
+          "label": "Public Notice"
+        },
+        {
+          "href": "/regulations/listing-compliance",
+          "label": "Company Compliance"
+        },
+        {
+          "href": "/regulations/clarification-verification-to-market-rumour",
+          "label": "Rumour Verification"
+        },
+        {
+          "href": "/regulations/queries-raised-to-listed-companies",
+          "label": "Queries raised to Listed Companies"
+        },
+        {
+          "href": "/regulations/listing-compliance/non-compliant-companies-list",
+          "label": "List of Non-Compliant Companies"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Learn"
+        },
+        {
+          "href": "/learn/overview-about-nse-academy",
+          "label": "About NAL Academy Limited (formerly known as NSE Academy Limited)"
+        },
+        {
+          "href": "/learn/process-to-register-ncfm-nse-certification-in-financial-markets",
+          "label": "Get started for NCFM"
+        },
+        {
+          "href": "/learn/self-study-ncfm-modules-all",
+          "label": "NCFM Certification Modules"
+        },
+        {
+          "href": "/static/learn/updates-and-announcements",
+          "label": "Updates & Announcements"
+        },
+        {
+          "href": "/learn/interactive-courses",
+          "label": "Online Interactive Courses"
+        },
+        {
+          "href": "/learn/recorded-courses",
+          "label": "Online / Self-Paced Courses"
+        },
+        {
+          "href": "/learn/class-room-courses",
+          "label": "Class Room Courses"
+        },
+        {
+          "href": "/learn/partner-programs",
+          "label": "Partner Programs"
+        },
+        {
+          "href": "/learn/nse-international-certificate-program",
+          "label": "International Certificate Program"
+        },
+        {
+          "href": "/learn/courses-for-under-graduates",
+          "label": "Modules for Under graduates"
+        },
+        {
+          "href": "/learn/courses-for-post-graduates",
+          "label": "Post Graduate Programs"
+        },
+        {
+          "href": "/learn/courses-for-working-professionals",
+          "label": "Modules for Professionals"
+        },
+        {
+          "href": "/learn/academic-calendar",
+          "label": "Program Calendar"
+        },
+        {
+          "href": "https://www.nseindia.com/learn/find-a-course",
+          "label": "Find a course Click here to find a course"
+        },
+        {
+          "href": "https://www.nseindia.com/learn/nse-knowledge-hub",
+          "label": "NAL Knowledge Hub Click here to join the platform"
+        },
+        {
+          "href": "https://www.nseacademy.com/ncfm/",
+          "label": "NCFM Login NCFM Portal for online testing and certification programmes offered by NAL Academy."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Resources"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "Circulars"
+        },
+        {
+          "href": "/resources/exchange-communication-press-releases",
+          "label": "Press Releases"
+        },
+        {
+          "href": "/market-data/market-timings",
+          "label": "Market Timings"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "#",
+          "label": "Upcoming Events"
+        },
+        {
+          "href": "/resources/exchange-communication-media-queries",
+          "label": "Media Center"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Market Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/resources/forms-formats-members",
+          "label": "Forms & Formats"
+        },
+        {
+          "href": "/national-stock-exchange/nse-volume-business-growth",
+          "label": "Business Growth & Volume"
+        },
+        {
+          "href": "/resources/faqs",
+          "label": "FAQs"
+        },
+        {
+          "href": "/report-detail/eq_security",
+          "label": "Security-wise Price Volume Archives"
+        },
+        {
+          "href": "/report-detail/fo_eq_security",
+          "label": "Contract-wise Price Volume Archives"
+        },
+        {
+          "href": "/historical-spot-price",
+          "label": "Historical Spot Rate"
+        },
+        {
+          "href": "/reports-indices-historical-index-data",
+          "label": "Historical Index Data"
+        },
+        {
+          "href": "/reports-indices-historical-vix",
+          "label": "Historical Data - India Vix"
+        },
+        {
+          "href": "https://www.nseindia.com/resources/exchange-communication-circulars",
+          "label": "Exchange Communication Find all communication issued by the Exchange in this section"
+        },
+        {
+          "href": "https://www.nseindia.com/all-reports",
+          "label": "Downloads Daily and Archive Reports, Formats and Business Growth download it here"
+        },
+        {
+          "href": "https://www.nseindia.com/market-data/real-time-data-subscription",
+          "label": "Market Data Products NSE's market data products such real time, delayed, snapshot, historical data etc."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Complaints"
+        },
+        {
+          "href": "/complaints/complaint-at-exchange",
+          "label": "Brief Overview"
+        },
+        {
+          "href": "/complaints/process-of-making-a-complaint",
+          "label": "Process"
+        },
+        {
+          "href": "/complaints/online-dispute-resolution",
+          "label": "Online Dispute Resolution"
+        },
+        {
+          "href": "/complaints/arbitration-panel",
+          "label": "Arbitration Panel"
+        },
+        {
+          "href": "/complaints/defaulters-committee",
+          "label": "Members Committee (formerly Member and Core Settlement Guarantee Fund Committee)"
+        },
+        {
+          "href": "/complaints/file-a-complaint-online",
+          "label": "How to Lodge a complaint online and Track your complaint"
+        },
+        {
+          "href": "/complaints/about-arbitration",
+          "label": "Filing Arbitration/Appellate"
+        },
+        {
+          "href": "/complaints/about-defaulter-section",
+          "label": "Defaulter Committee Claim"
+        },
+        {
+          "href": "/complaints/details-to-be-provided-for-lodging-claims",
+          "label": "Details to be provided for lodging claims"
+        },
+        {
+          "href": "/complaints/submit-tipoff",
+          "label": "Anonymous Portal - Suspicious activity"
+        },
+        {
+          "href": "/complaints/defaulter-expelled-members",
+          "label": "Defaulter/Expelled Members"
+        },
+        {
+          "href": "/complaints/arbitration-hearing",
+          "label": "Arbitration/Appellate Hearing"
+        },
+        {
+          "href": "/complaints/arbitration-awards",
+          "label": "Arbitration/Appellate Awards"
+        },
+        {
+          "href": "/complaints/investor-protection-fund-trust",
+          "label": "Investor Protection Trust Fund"
+        },
+        {
+          "href": "/complaints/complaints-public-notice",
+          "label": "Public Notice"
+        },
+        {
+          "href": "https://smartodr.in/login",
+          "label": "LOGIN TO SMARTODR Online Dispute Resolution Mechanism for filing complaints"
+        },
+        {
+          "href": "https://www.nseindia.com/complaints/arbitration-status",
+          "label": "Reports Periodic reports pertaining to complaints/arbitration"
+        },
+        {
+          "href": "https://www.nseindia.com/contact/investor-services-centre",
+          "label": "Investor Services Centre Contact details of all Investor Services Centre"
+        },
+        {
+          "href": "javascript:;",
+          "label": "RESEARCH"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-pulse",
+          "label": "Market Pulse"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-insights",
+          "label": "Macro & Market Insights"
+        },
+        {
+          "href": "/research/publications-reports-corporate-governance-reports",
+          "label": "Corporate Governance"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-insights",
+          "label": "Factbook & ISMR"
+        },
+        {
+          "href": "/research/research-initiatives",
+          "label": "NSE RI"
+        },
+        {
+          "href": "/research/research-initiatives",
+          "label": "Ongoing"
+        },
+        {
+          "href": "/research/working-papers",
+          "label": "Working Paper Series"
+        },
+        {
+          "href": "/research/past-initiatives",
+          "label": "Past Initiatives"
+        },
+        {
+          "href": "/research/events-upcoming-programs",
+          "label": "Upcoming Programs"
+        },
+        {
+          "href": "/research/events-seminars-panel-dicussions",
+          "label": "Seminars & Panel Discussions"
+        },
+        {
+          "href": "/research/events-conferences",
+          "label": "Conferences"
+        },
+        {
+          "href": "/research/events-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "https://www.nseindia.com/static/research/overview-about-epr",
+          "label": "Overview Explore NSE's research activities, publications, initiatives, engagements and more."
+        },
+        {
+          "href": "https://www.nseindia.com/research/publications-reports-nse-market-pulse",
+          "label": "Publications Discover market insights, reports and analysis on India'a financial markets."
+        },
+        {
+          "href": "https://www.nseindia.com/research/subscription-form",
+          "label": "Subscribe to NSE Research Subscribe to receive latest NSE Research directly publications in your inbox."
+        },
+        {
+          "href": "/static/investor-relations/announcements",
+          "label": "Investor Relations"
+        },
+        {
+          "href": "/index-tracker/NIFTY%2050",
+          "label": ""
+        },
+        {
+          "href": "/currency-getquote?symbol=USDINR#inr-contracts",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": "Market Capitalization"
+        },
+        {
+          "href": "/",
+          "label": "Home"
+        },
+        {
+          "href": "javascript:;",
+          "label": "About"
+        },
+        {
+          "href": "/national-stock-exchange/about-nse-company",
+          "label": "About Us"
+        },
+        {
+          "href": "/structure-key-personnel/corporate-structure",
+          "label": "Structure & Key Personnel"
+        },
+        {
+          "href": "/national-stock-exchange/awards-recognition",
+          "label": "Awards and Recognitions"
+        },
+        {
+          "href": "/regulations/exchange-market-regulations-rules-byelaws-nseil",
+          "label": "Regulations"
+        },
+        {
+          "href": "/events",
+          "label": "Event Gallery"
+        },
+        {
+          "href": "/static/resources/exchange-communication-media-queries",
+          "label": "Media"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "/careers-at-nse",
+          "label": "Careers"
+        },
+        {
+          "href": "/contact/contact-us",
+          "label": "Contact Us"
+        },
+        {
+          "href": "/nse-academy/nse-academy-overview",
+          "label": "NAL Academy Limited"
+        },
+        {
+          "href": "https://www.nseclearing.in/about-nse-clearing",
+          "label": "NSE Clearing"
+        },
+        {
+          "href": "/nse-data-and-analytics",
+          "label": "NSE Data & Analytics"
+        },
+        {
+          "href": "/nse-foundation/about-us",
+          "label": "NSE Foundation"
+        },
+        {
+          "href": "/nse-indices",
+          "label": "NSE Indices"
+        },
+        {
+          "href": "/nse-international-exchange/about",
+          "label": "NSE International Exchange"
+        },
+        {
+          "href": "/nseint_clearing/nse-international-clearing-overview",
+          "label": "NSE International Clearing"
+        },
+        {
+          "href": "/nse-investments",
+          "label": "NSE Investments"
+        },
+        {
+          "href": "/national-stock-exchange/our-group",
+          "label": "View all"
+        },
+        {
+          "href": "/products-services/about-equity-market",
+          "label": "Equity Market"
+        },
+        {
+          "href": "/products-services/about-indices",
+          "label": "Indices"
+        },
+        {
+          "href": "/products-services/emerge-platform-about-sme",
+          "label": "Emerge Platform"
+        },
+        {
+          "href": "/products-services/mf-about-mfss",
+          "label": "Mutual Funds"
+        },
+        {
+          "href": "/products-services/about-equity-derivatives",
+          "label": "Equity Derivatives"
+        },
+        {
+          "href": "/products-services/about-currency-derivatives",
+          "label": "Currency Derivatives"
+        },
+        {
+          "href": "/products-services/about-commodity-derivatives",
+          "label": "Commodity Derivatives"
+        },
+        {
+          "href": "/products-services/about-interest-rate-derivatives",
+          "label": "Interest Rate Derivatives"
+        },
+        {
+          "href": "/products-services/fixed-income-debt-overview",
+          "label": "Fixed Income and Debt"
+        },
+        {
+          "href": "/products-services/about-initial-public-offerings",
+          "label": "Public Issues"
+        },
+        {
+          "href": "/static/products-services/about-electronic-gold-receipts",
+          "label": "Electronic Gold Receipts"
+        },
+        {
+          "href": "https://www.nseindia.com/national-stock-exchange/about-nse-company",
+          "label": "About Us Find everything about the leading stock exchange of India"
+        },
+        {
+          "href": "https://www.nseindia.com/national-stock-exchange/our-group",
+          "label": "Our Group Check NSE's group of the companies"
+        },
+        {
+          "href": "https://www.nseindia.com/products-services",
+          "label": "Our Products Browse a comprehensive and innovative product and service offerings by NSE"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Market Data"
+        },
+        {
+          "href": "/market-data/new-stock-exchange-listings-today",
+          "label": "New Listings"
+        },
+        {
+          "href": "/market-data/pre-open-market-cm-and-emerge-market",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/live-equity-market",
+          "label": "Equity & SME Market"
+        },
+        {
+          "href": "/market-data/exchange-traded-funds-etf",
+          "label": "Exchange Traded Funds"
+        },
+        {
+          "href": "/market-data/closing-auction-session",
+          "label": "Closing Auction Session (CAS)"
+        },
+        {
+          "href": "/market-data/live-market-indices",
+          "label": "Indices"
+        },
+        {
+          "href": "/market-data/top-gainers-losers",
+          "label": "Gainers/Losers"
+        },
+        {
+          "href": "/market-data/volume-gainers-spurts",
+          "label": "Volume Gainers"
+        },
+        {
+          "href": "/market-data/most-active-equities",
+          "label": "Most Active Equities"
+        },
+        {
+          "href": "/market-data/upper-band-hitters",
+          "label": "Price Band Hitters"
+        },
+        {
+          "href": "/market-data/52-week-high-equity-market",
+          "label": "52 Week High/Low"
+        },
+        {
+          "href": "/market-data/large-deals",
+          "label": "Large Deals"
+        },
+        {
+          "href": "/market-data/advance",
+          "label": "Advances / Declines"
+        },
+        {
+          "href": "/market-data/securities-lending-and-borrowing",
+          "label": "Securities Lending & Borrowing"
+        },
+        {
+          "href": "/market-data/stocks-in-call-auction",
+          "label": "Call auction for Illiquid Securities"
+        },
+        {
+          "href": "/market-data/securities-available-for-trading",
+          "label": "Securities available for Trading"
+        },
+        {
+          "href": "/market-data/price-bands-surveillance-actions",
+          "label": "Price Bands & Surveillance Actions"
+        },
+        {
+          "href": "/all-reports/historical-equities-fii-fpi-dii-trading-activity",
+          "label": "Position/Investment Limits"
+        },
+        {
+          "href": "/market-data/legend-of-series",
+          "label": "Legend of series"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/pre-open-market-fno",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/equity-derivatives-watch",
+          "label": "Derivatives Market"
+        },
+        {
+          "href": "/option-chain",
+          "label": "Option Chain"
+        },
+        {
+          "href": "/market-data/most-active-contracts",
+          "label": "Most Active Contracts"
+        },
+        {
+          "href": "/market-data/most-active-underlying",
+          "label": "Most Active Underlying"
+        },
+        {
+          "href": "/market-data/oi-spurts",
+          "label": "Change in Open Interest"
+        },
+        {
+          "href": "/market-data/liquidity-enhancement-scheme",
+          "label": "Liquidity Enhancement Scheme"
+        },
+        {
+          "href": "/market-data/securities-information-contracts-available-for-trading",
+          "label": "Contracts available for Trading"
+        },
+        {
+          "href": "/all-reports-derivatives",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives-derivative-market",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/pre-open-market-egr",
+          "label": "Pre-Open Market"
+        },
+        {
+          "href": "/market-data/egr",
+          "label": "Normal Market"
+        },
+        {
+          "href": "/market-data/block-deals",
+          "label": "Block Deals Market"
+        },
+        {
+          "href": "/historical-data/egr",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/historical-data/egr",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/market-data/bonds-traded-in-capital-market",
+          "label": "Traded on CM"
+        },
+        {
+          "href": "/market-data/debt-market-reporting-corporate-bonds-traded-on-exchange",
+          "label": "CBRICS"
+        },
+        {
+          "href": "/market-data/debt-market-request-for-quote-rfq",
+          "label": "RFQ"
+        },
+        {
+          "href": "/market-data/debt-market-negotiated-trades-reporting",
+          "label": "Negotiated Trades"
+        },
+        {
+          "href": "/market-data/debt-market-trade-repository",
+          "label": "Trade Repository"
+        },
+        {
+          "href": "/market-data/debt-market-tri-party-repo",
+          "label": "Tri-Party Repo"
+        },
+        {
+          "href": "/all-reports-debt",
+          "label": "Daily Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives-debt-market",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/yield-calculator",
+          "label": "Yield Price Calculator"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ipo",
+          "label": "IPO"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs",
+          "label": "Offer For Sale"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ncb-gsec",
+          "label": "NCB G-SEC"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-ipp",
+          "label": "Institutional Placement Program (IPP)"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-tender-offer",
+          "label": "Tender Offer"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-rights",
+          "label": "Rights"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-invits",
+          "label": "INVITS"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-reits",
+          "label": "REITS"
+        },
+        {
+          "href": "/market-data/all-upcoming-issues-ofs-reverse-book-building",
+          "label": "Reverse Book Building"
+        },
+        {
+          "href": "/market-data/liquidity-window-facility",
+          "label": "Liquidity Window Facility"
+        },
+        {
+          "href": "/primary-market/ebp-placement-reporting",
+          "label": "EBP"
+        },
+        {
+          "href": "https://www.nseindia.com/market-data/analysis-and-tools-capital-market-snapshot",
+          "label": "Market Snapshot Live Analysis of top gainers/losers, most active securities/contracts, price band hitters, overview of the market."
+        },
+        {
+          "href": "https://www.nseindia.com/option-chain",
+          "label": "Option Chain View Option chain for the exchange"
+        },
+        {
+          "href": "https://www.nseindia.com/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports View Historical Reports of securities/contracts traded on the Exchange."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Invest"
+        },
+        {
+          "href": "/invest/first-time-investor-getting-started",
+          "label": "Investing in Securities Market"
+        },
+        {
+          "href": "/invest/first-time-investor-stamp-duty-charges-taxes",
+          "label": "Charges and Taxes"
+        },
+        {
+          "href": "/invest/investor-charter",
+          "label": "Investor Charter"
+        },
+        {
+          "href": "/invest/be-a-smart-investor",
+          "label": "Protection from Fraud"
+        },
+        {
+          "href": "/invest/investors-awareness-programs",
+          "label": "Investor Awareness Programs"
+        },
+        {
+          "href": "/invest/investors-regulatory-actions",
+          "label": "Regulatory Action"
+        },
+        {
+          "href": "/registered-client-accounts",
+          "label": "Registered Client Accounts"
+        },
+        {
+          "href": "/invest/foreign_portfolio_investors",
+          "label": "Foreign Portfolio Investors (FPI)"
+        },
+        {
+          "href": "/invest/find-a-stock-broker",
+          "label": "Locate your Stock Broker"
+        },
+        {
+          "href": "/invest/company-listing-directory-resources-for-investors",
+          "label": "Company Directory"
+        },
+        {
+          "href": "/static/invest/verify-trades-ipo-bids",
+          "label": "Verify Trades/IPO Bids"
+        },
+        {
+          "href": "/invest/exit-option-for-share-holders",
+          "label": "Exit Option for shareholders"
+        },
+        {
+          "href": "/feedback/new",
+          "label": "Feedback"
+        },
+        {
+          "href": "https://www.nseindia.com/invest/investors-home",
+          "label": "Investor's Home Investor education on how to invest safely and protect your investments."
+        },
+        {
+          "href": "https://www.nseindia.com/invest/first-time-investor-products",
+          "label": "Product Information Browse NSE products under Cash, derivatives, currency derivatives etc."
+        },
+        {
+          "href": "https://smartodr.in/login",
+          "label": "LOGIN TO SMARTODR Online Dispute Resolution Mechanism for filing complaints"
+        },
+        {
+          "href": "javascript:;",
+          "label": "List"
+        },
+        {
+          "href": "/companies-listing/raising-capital-onboarding-process",
+          "label": "On-boarding Process"
+        },
+        {
+          "href": "/companies-listing/raising-capital-public-issues-eligibility-equity-debt",
+          "label": "Primary Market - Main Board"
+        },
+        {
+          "href": "/companies-listing/raising-capital-public-issues-listing-on-emerge",
+          "label": "Primary Market - SME"
+        },
+        {
+          "href": "/companies-listing/raising-capital-debt-private-placement",
+          "label": "Debt - Private Placement"
+        },
+        {
+          "href": "/sse",
+          "label": "Social Stock Exchange"
+        },
+        {
+          "href": "/companies-listing/raising-capital-mutual-funds-etfs-process",
+          "label": "Mutual Fund/ETFs/AIFs"
+        },
+        {
+          "href": "/companies-listing/raising-capital-further-issues-main-sme-checklist",
+          "label": "Further Issues"
+        },
+        {
+          "href": "/companies-listing/public-issue-advertisements",
+          "label": "Public Issue Advertisements"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-announcements",
+          "label": "Announcements"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-board-meetings",
+          "label": "Board Meetings"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-actions",
+          "label": "Corporate Actions"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-financial-results",
+          "label": "Financial Results"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-shareholding-pattern",
+          "label": "Shareholding Pattern"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-shareholding-pattern-sdd",
+          "label": "Shareholding Pattern SDD"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-offer-documents",
+          "label": "Issuer Offer documents/Issue Summary Document"
+        },
+        {
+          "href": "/companies-listing/corporate-integrated-filing",
+          "label": "Integrated Filing- Financials"
+        },
+        {
+          "href": "/companies-listing/corporate-integrated-filing?integratedType=integratedfilinggovernance",
+          "label": "Integrated Filing- Governance"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-scheme-document",
+          "label": "Scheme of Arrangement"
+        },
+        {
+          "href": "/companies-listing/sebi-regulations",
+          "label": "SEBI Regulations"
+        },
+        {
+          "href": "/companies-listing/compliance-information-compliance-calendar-main-board",
+          "label": "Compliance Information"
+        },
+        {
+          "href": "/companies-listing/xbrl-information",
+          "label": "XBRL Information"
+        },
+        {
+          "href": "http://ec2-3-221-41-38.compute-1.amazonaws.com",
+          "label": "XBRL To Excel Converter"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-directory",
+          "label": "Company Directory"
+        },
+        {
+          "href": "/companies-listing/circular-for-listed-companies-equity-market",
+          "label": "Circulars to Listed Companies"
+        },
+        {
+          "href": "https://neaps.nseindia.com/NEWLISTINGCORP/",
+          "label": "NEAPS Portal"
+        },
+        {
+          "href": "/static/list/list-of-companies-proposed-to-be-delisted",
+          "label": "Delisting of Companies"
+        },
+        {
+          "href": "/static/list/public-notice-compulsory-delisting",
+          "label": "Public Notice Compulsory Delisting"
+        },
+        {
+          "href": "/static/list/orders-of-delisting",
+          "label": "Orders of Delisting Committee"
+        },
+        {
+          "href": "https://www.nseindia.com/companies-listing/corporate-filings-application",
+          "label": "Corporates Home Important information, reference material and latest announcements for corporates"
+        },
+        {
+          "href": "https://www.nseindia.com/regulations/listing-compliance",
+          "label": "Company Compliance Information Status of compliance's under various Regulatory requirements"
+        },
+        {
+          "href": "https://iinvest.cogencis.com",
+          "label": "Cogencis iInvest Tool for informed investment decisions"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Trade"
+        },
+        {
+          "href": "/trade/admission-process-documents-to-become-a-member",
+          "label": "Process & FAQs"
+        },
+        {
+          "href": "/trade/membership-types",
+          "label": "Eligibility Criteria & Categories"
+        },
+        {
+          "href": "/trade/deposits-networth-requirements-for-membership",
+          "label": "Fees, Deposits & Networth"
+        },
+        {
+          "href": "/trade/membership-using-enit",
+          "label": "Using ENIT"
+        },
+        {
+          "href": "/trade/members-change-in-name",
+          "label": "Change In Membership"
+        },
+        {
+          "href": "/trade/members-compliance",
+          "label": "Member Compliance"
+        },
+        {
+          "href": "/trade/membership-suspension-expulsion",
+          "label": "Disciplinary Action"
+        },
+        {
+          "href": "/trade/membership-formats",
+          "label": "Format"
+        },
+        {
+          "href": "/trade/platform-services-neat-trading-system",
+          "label": "NSE Trading Technology"
+        },
+        {
+          "href": "/trade/platform-services-non-neat-front-end",
+          "label": "NEAT & Non-NEAT Front end"
+        },
+        {
+          "href": "/trade/platform-services-test-and-simulated-market-facility",
+          "label": "Test Market Facility"
+        },
+        {
+          "href": "/trade/platform-services-connectivity",
+          "label": "Connectivity & User Id"
+        },
+        {
+          "href": "https://www.nseindia.com/trade/members-homepage",
+          "label": "Member's Home Important Information, reference materials and latest announcements for members."
+        },
+        {
+          "href": "https://ims.connect2nsccl.com/MemberPortal/",
+          "label": "Member Portal ENIT - A Portal for Trading Members of NSE to manage their Membership and Compliance requirements."
+        },
+        {
+          "href": "https://www.nseindia.com/resources/exchange-communication-circulars",
+          "label": "Exchange Communication Browse Exchange circulars, press release and media articles."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Regulation"
+        },
+        {
+          "href": "/regulations/exchange-market-regulations-rules-byelaws-nseil",
+          "label": "Market Rules & Regulations"
+        },
+        {
+          "href": "/static/regulations/exchange-market-surveillance-actions",
+          "label": "Market Surveillance"
+        },
+        {
+          "href": "/regulations/exchange-disclosures-details-of-vigil-mechanism",
+          "label": "Exchange Disclosures"
+        },
+        {
+          "href": "/regulations/exchange-defaulting-clients",
+          "label": "Defaulting Clients"
+        },
+        {
+          "href": "/regulations/unsolicited-messages-report",
+          "label": "Investor's Beware"
+        },
+        {
+          "href": "/submit-tipoff",
+          "label": "Submit a Tip-Off"
+        },
+        {
+          "href": "/trade/members-compliance",
+          "label": "Member Compliance"
+        },
+        {
+          "href": "/invest/complaint-arbitration-status",
+          "label": "Complaint against Members"
+        },
+        {
+          "href": "/regulations/exchange-market-surveillance-regulatory-actions",
+          "label": "Action against Members"
+        },
+        {
+          "href": "/regulations/member-sebi-debarred-entities",
+          "label": "Debarred Entities"
+        },
+        {
+          "href": "/regulations/member-circulars-for-members",
+          "label": "Circulars for Members"
+        },
+        {
+          "href": "/regulations/public-notice",
+          "label": "Public Notice"
+        },
+        {
+          "href": "/regulations/listing-compliance",
+          "label": "Company Compliance"
+        },
+        {
+          "href": "/regulations/clarification-verification-to-market-rumour",
+          "label": "Rumour Verification"
+        },
+        {
+          "href": "/regulations/queries-raised-to-listed-companies",
+          "label": "Queries raised to Listed Companies"
+        },
+        {
+          "href": "/regulations/listing-compliance/non-compliant-companies-list",
+          "label": "List of Non-Compliant Companies"
+        },
+        {
+          "href": "javascript:;",
+          "label": "Learn"
+        },
+        {
+          "href": "/learn/overview-about-nse-academy",
+          "label": "About NAL Academy Limited (formerly known as NSE Academy Limited)"
+        },
+        {
+          "href": "/learn/process-to-register-ncfm-nse-certification-in-financial-markets",
+          "label": "Get started for NCFM"
+        },
+        {
+          "href": "/learn/self-study-ncfm-modules-all",
+          "label": "NCFM Certification Modules"
+        },
+        {
+          "href": "/static/learn/updates-and-announcements",
+          "label": "Updates & Announcements"
+        },
+        {
+          "href": "/learn/interactive-courses",
+          "label": "Online Interactive Courses"
+        },
+        {
+          "href": "/learn/recorded-courses",
+          "label": "Online / Self-Paced Courses"
+        },
+        {
+          "href": "/learn/class-room-courses",
+          "label": "Class Room Courses"
+        },
+        {
+          "href": "/learn/partner-programs",
+          "label": "Partner Programs"
+        },
+        {
+          "href": "/learn/nse-international-certificate-program",
+          "label": "International Certificate Program"
+        },
+        {
+          "href": "/learn/courses-for-under-graduates",
+          "label": "Modules for Under graduates"
+        },
+        {
+          "href": "/learn/courses-for-post-graduates",
+          "label": "Post Graduate Programs"
+        },
+        {
+          "href": "/learn/courses-for-working-professionals",
+          "label": "Modules for Professionals"
+        },
+        {
+          "href": "/learn/academic-calendar",
+          "label": "Program Calendar"
+        },
+        {
+          "href": "https://www.nseindia.com/learn/find-a-course",
+          "label": "Find a course Click here to find a course"
+        },
+        {
+          "href": "https://www.nseindia.com/learn/nse-knowledge-hub",
+          "label": "NAL Knowledge Hub Click here to join the platform"
+        },
+        {
+          "href": "https://www.nseacademy.com/ncfm/",
+          "label": "NCFM Login NCFM Portal for online testing and certification programmes offered by NAL Academy."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Resources"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "Circulars"
+        },
+        {
+          "href": "/resources/exchange-communication-press-releases",
+          "label": "Press Releases"
+        },
+        {
+          "href": "/market-data/market-timings",
+          "label": "Market Timings"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "#",
+          "label": "Upcoming Events"
+        },
+        {
+          "href": "/resources/exchange-communication-media-queries",
+          "label": "Media Center"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Market Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/resources/forms-formats-members",
+          "label": "Forms & Formats"
+        },
+        {
+          "href": "/national-stock-exchange/nse-volume-business-growth",
+          "label": "Business Growth & Volume"
+        },
+        {
+          "href": "/resources/faqs",
+          "label": "FAQs"
+        },
+        {
+          "href": "/report-detail/eq_security",
+          "label": "Security-wise Price Volume Archives"
+        },
+        {
+          "href": "/report-detail/fo_eq_security",
+          "label": "Contract-wise Price Volume Archives"
+        },
+        {
+          "href": "/historical-spot-price",
+          "label": "Historical Spot Rate"
+        },
+        {
+          "href": "/reports-indices-historical-index-data",
+          "label": "Historical Index Data"
+        },
+        {
+          "href": "/reports-indices-historical-vix",
+          "label": "Historical Data - India Vix"
+        },
+        {
+          "href": "https://www.nseindia.com/resources/exchange-communication-circulars",
+          "label": "Exchange Communication Find all communication issued by the Exchange in this section"
+        },
+        {
+          "href": "https://www.nseindia.com/all-reports",
+          "label": "Downloads Daily and Archive Reports, Formats and Business Growth download it here"
+        },
+        {
+          "href": "https://www.nseindia.com/market-data/real-time-data-subscription",
+          "label": "Market Data Products NSE's market data products such real time, delayed, snapshot, historical data etc."
+        },
+        {
+          "href": "javascript:;",
+          "label": "Complaints"
+        },
+        {
+          "href": "/complaints/complaint-at-exchange",
+          "label": "Brief Overview"
+        },
+        {
+          "href": "/complaints/process-of-making-a-complaint",
+          "label": "Process"
+        },
+        {
+          "href": "/complaints/online-dispute-resolution",
+          "label": "Online Dispute Resolution"
+        },
+        {
+          "href": "/complaints/arbitration-panel",
+          "label": "Arbitration Panel"
+        },
+        {
+          "href": "/complaints/defaulters-committee",
+          "label": "Members Committee (formerly Member and Core Settlement Guarantee Fund Committee)"
+        },
+        {
+          "href": "/complaints/file-a-complaint-online",
+          "label": "How to Lodge a complaint online and Track your complaint"
+        },
+        {
+          "href": "/complaints/about-arbitration",
+          "label": "Filing Arbitration/Appellate"
+        },
+        {
+          "href": "/complaints/about-defaulter-section",
+          "label": "Defaulter Committee Claim"
+        },
+        {
+          "href": "/complaints/details-to-be-provided-for-lodging-claims",
+          "label": "Details to be provided for lodging claims"
+        },
+        {
+          "href": "/complaints/submit-tipoff",
+          "label": "Anonymous Portal - Suspicious activity"
+        },
+        {
+          "href": "/complaints/defaulter-expelled-members",
+          "label": "Defaulter/Expelled Members"
+        },
+        {
+          "href": "/complaints/arbitration-hearing",
+          "label": "Arbitration/Appellate Hearing"
+        },
+        {
+          "href": "/complaints/arbitration-awards",
+          "label": "Arbitration/Appellate Awards"
+        },
+        {
+          "href": "/complaints/investor-protection-fund-trust",
+          "label": "Investor Protection Trust Fund"
+        },
+        {
+          "href": "/complaints/complaints-public-notice",
+          "label": "Public Notice"
+        },
+        {
+          "href": "https://smartodr.in/login",
+          "label": "LOGIN TO SMARTODR Online Dispute Resolution Mechanism for filing complaints"
+        },
+        {
+          "href": "https://www.nseindia.com/complaints/arbitration-status",
+          "label": "Reports Periodic reports pertaining to complaints/arbitration"
+        },
+        {
+          "href": "https://www.nseindia.com/contact/investor-services-centre",
+          "label": "Investor Services Centre Contact details of all Investor Services Centre"
+        },
+        {
+          "href": "javascript:;",
+          "label": "RESEARCH"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-pulse",
+          "label": "Market Pulse"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-insights",
+          "label": "Macro & Market Insights"
+        },
+        {
+          "href": "/research/publications-reports-corporate-governance-reports",
+          "label": "Corporate Governance"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-insights",
+          "label": "Factbook & ISMR"
+        },
+        {
+          "href": "/research/research-initiatives",
+          "label": "NSE RI"
+        },
+        {
+          "href": "/research/research-initiatives",
+          "label": "Ongoing"
+        },
+        {
+          "href": "/research/working-papers",
+          "label": "Working Paper Series"
+        },
+        {
+          "href": "/research/past-initiatives",
+          "label": "Past Initiatives"
+        },
+        {
+          "href": "/research/events-upcoming-programs",
+          "label": "Upcoming Programs"
+        },
+        {
+          "href": "/research/events-seminars-panel-dicussions",
+          "label": "Seminars & Panel Discussions"
+        },
+        {
+          "href": "/research/events-conferences",
+          "label": "Conferences"
+        },
+        {
+          "href": "/research/events-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "https://www.nseindia.com/static/research/overview-about-epr",
+          "label": "Overview Explore NSE's research activities, publications, initiatives, engagements and more."
+        },
+        {
+          "href": "https://www.nseindia.com/research/publications-reports-nse-market-pulse",
+          "label": "Publications Discover market insights, reports and analysis on India'a financial markets."
+        },
+        {
+          "href": "https://www.nseindia.com/research/subscription-form",
+          "label": "Subscribe to NSE Research Subscribe to receive latest NSE Research directly publications in your inbox."
+        },
+        {
+          "href": "/static/investor-relations/announcements",
+          "label": "Investor Relations"
+        },
+        {
+          "href": "#",
+          "label": "A+"
+        },
+        {
+          "href": "#",
+          "label": "Reset"
+        },
+        {
+          "href": "#",
+          "label": "A-"
+        },
+        {
+          "href": "#",
+          "label": "High Contrast"
+        },
+        {
+          "href": "#",
+          "label": "Reset"
+        },
+        {
+          "href": "https://www.nsenmf.com/",
+          "label": "Mutual Fund"
+        },
+        {
+          "href": "https://www.ncfm-india.com/ORE/OREloginPage.jsp",
+          "label": "NCFM"
+        },
+        {
+          "href": "#",
+          "label": ""
+        },
+        {
+          "href": "/feedback/new",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": ""
+        },
+        {
+          "href": "/",
+          "label": "Home"
+        },
+        {
+          "href": "#href-0",
+          "label": "Exchange Communication"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "Circulars"
+        },
+        {
+          "href": "/static/resources/consolidated-master-circulars",
+          "label": "Consolidated/Master Circulars"
+        },
+        {
+          "href": "/market-data/market-timings",
+          "label": "Market Timings"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "/static/resources/exchange-communication-contingency-drill-calendar",
+          "label": "Contingency Drill"
+        },
+        {
+          "href": "#",
+          "label": "Media Center"
+        },
+        {
+          "href": "/resources/exchange-communication-media-queries",
+          "label": "Media Queries"
+        },
+        {
+          "href": "/resources/exchange-communication-press-releases",
+          "label": "Press Releases"
+        },
+        {
+          "href": "/resources/exchange-communication-press-releases-archives",
+          "label": "Press Releases - Archives"
+        },
+        {
+          "href": "/resources/coffee-table-book",
+          "label": "Coffee Table Book & Reference Materials"
+        },
+        {
+          "href": "/resources/exchange-communication-nse-spotlight",
+          "label": "NSE SPOTLIGHT"
+        },
+        {
+          "href": "/resources/exchange-communication-media-resources",
+          "label": "Media Resources"
+        },
+        {
+          "href": "#href-1",
+          "label": "Downloads"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Daily Market Reports"
+        },
+        {
+          "href": "/resources/historical-reports-capital-market-daily-monthly-archives",
+          "label": "Historical Reports"
+        },
+        {
+          "href": "/resources/forms-formats-members",
+          "label": "Forms & Formats"
+        },
+        {
+          "href": "/national-stock-exchange/nse-volume-business-growth",
+          "label": "Business Growth & Volume"
+        },
+        {
+          "href": "/resources/faqs",
+          "label": "FAQs"
+        },
+        {
+          "href": "#href-2",
+          "label": "Research"
+        },
+        {
+          "href": "#",
+          "label": "Overview"
+        },
+        {
+          "href": "/static/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/static/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/static/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
+          "href": "#",
+          "label": "Publications & Reports"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-pulse",
+          "label": "Market Pulse"
+        },
+        {
+          "href": "/research/publications-reports-nse-market-insights",
+          "label": "Macro Reports & Market Insights"
+        },
+        {
+          "href": "/research/publications-reports-corporate-governance-reports",
+          "label": "Corporate Governance"
+        },
+        {
+          "href": "/static/research/working-papers",
+          "label": "Working Papers"
+        },
+        {
+          "href": "/static/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "#",
+          "label": "Initiatives"
+        },
+        {
+          "href": "/static/research/initiatives-nse-ri",
+          "label": "NSE RI"
+        },
+        {
+          "href": "/static/research/initiatives-workshops",
+          "label": "Workshops"
+        },
+        {
+          "href": "/static/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/static/research/initiatives-data-for-research",
+          "label": "Data for Research"
+        },
+        {
+          "href": "/static/research/initiatives-data-for-analytics",
+          "label": "Data for Analytics"
+        },
+        {
+          "href": "/static/research/past-initiatives",
+          "label": "Past Initiatives"
+        },
+        {
+          "href": "#",
+          "label": "Engagements"
+        },
+        {
+          "href": "/static/research/engagements-conferences",
+          "label": "Conferences"
+        },
+        {
+          "href": "/static/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/static/research/engagements-roundtables",
+          "label": "Roundtables"
+        },
+        {
+          "href": "#",
+          "label": "Engagements"
+        },
+        {
+          "href": "/research/events-upcoming-programs",
+          "label": "Upcoming Programs"
+        },
+        {
+          "href": "/research/events-seminars-panel-dicussions",
+          "label": "Seminars & Panel Discussions"
+        },
+        {
+          "href": "/research/events-conferences",
+          "label": "Conferences"
+        },
+        {
+          "href": "/research/events-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "https://nsearchives.nseindia.com//content/RSS/Circulars.xml",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": "Subscribe"
+        },
+        {
+          "href": "/resources/circulars-registration-form",
+          "label": "Register"
+        },
+        {
+          "href": "/resources/circulars-modification-form",
+          "label": "Modify"
+        },
+        {
+          "href": "/resources/circulars-deregistration-form",
+          "label": "Deregister"
+        },
+        {
+          "href": "#AboutCirculars",
+          "label": "About using this section"
+        },
+        {
+          "href": "#",
+          "label": "1D"
+        },
+        {
+          "href": "#",
+          "label": "1W"
+        },
+        {
+          "href": "#",
+          "label": "1M"
+        },
+        {
+          "href": "#",
+          "label": "3M"
+        },
+        {
+          "href": "#",
+          "label": "6M"
+        },
+        {
+          "href": "#",
+          "label": "1Y"
+        },
+        {
+          "href": "#",
+          "label": "Custom"
+        },
+        {
+          "href": "#",
+          "label": "Clear"
+        },
+        {
+          "href": "#",
+          "label": ""
+        },
+        {
+          "href": "#",
+          "label": "Download (.csv)"
+        },
+        {
+          "href": "/national-stock-exchange/about-nse-company",
+          "label": "About Us"
+        },
+        {
+          "href": "/structure-key-personnel/corporate-structure",
+          "label": "Structure & Key Personnel"
+        },
+        {
+          "href": "/national-stock-exchange/awards-recognition",
+          "label": "Awards and Recognitions"
+        },
+        {
+          "href": "/regulations/exchange-market-regulations-rules-byelaws-nseil",
+          "label": "Regulations"
+        },
+        {
+          "href": "/event-gallery",
+          "label": "Event Gallery"
+        },
+        {
+          "href": "/resources/exchange-communication-media-center",
+          "label": "Media"
+        },
+        {
+          "href": "/resources/exchange-communication-holidays",
+          "label": "Holidays"
+        },
+        {
+          "href": "/careers-at-nse",
+          "label": "Careers"
+        },
+        {
+          "href": "/contact/contact-us",
+          "label": "Contact Us"
+        },
+        {
+          "href": "/static/contact/contact-us",
+          "label": "Web Information Manager"
+        },
+        {
+          "href": "/nse-academy/nse-academy-overview",
+          "label": "NAL Academy Limited"
+        },
+        {
+          "href": "/nse-clearing",
+          "label": "NSE Clearing"
+        },
+        {
+          "href": "/nse-data-and-analytics",
+          "label": "NSE Data & Analytics"
+        },
+        {
+          "href": "/nse-foundation/about-us",
+          "label": "NSE Foundation"
+        },
+        {
+          "href": "/nse-indices",
+          "label": "NSE Indices"
+        },
+        {
+          "href": "/nse-international-exchange/about",
+          "label": "NSE International Exchange"
+        },
+        {
+          "href": "/nseint_clearing/nse-international-clearing-overview",
+          "label": "NSE International Clearing"
+        },
+        {
+          "href": "/nse-investments",
+          "label": "NSE Investments"
+        },
+        {
+          "href": "/national-stock-exchange/our-group",
+          "label": "View all"
+        },
+        {
+          "href": "/products-services/about-equity-market",
+          "label": "Equity Market"
+        },
+        {
+          "href": "/products-services/about-indices",
+          "label": "Indices"
+        },
+        {
+          "href": "/products-services/emerge-platform-about-sme",
+          "label": "Emerge Platform"
+        },
+        {
+          "href": "/products-services/mf-about-mfss",
+          "label": "Mutual Funds"
+        },
+        {
+          "href": "/products-services/about-equity-derivatives",
+          "label": "Equity Derivatives"
+        },
+        {
+          "href": "/products-services/about-currency-derivatives",
+          "label": "Currency Derivatives"
+        },
+        {
+          "href": "/products-services/about-commodity-derivatives",
+          "label": "Commodity Derivatives"
+        },
+        {
+          "href": "/products-services/about-interest-rate-derivatives",
+          "label": "Interest Rate Derivatives"
+        },
+        {
+          "href": "/products-services/fixed-income-debt-overview",
+          "label": "Fixed Income and Debt"
+        },
+        {
+          "href": "/products-services/about-initial-public-offerings",
+          "label": "Public Issues"
+        },
+        {
+          "href": "/nse-disclaimer",
+          "label": "Disclaimer"
+        },
+        {
+          "href": "/privacy-policy",
+          "label": "Privacy Policy"
+        },
+        {
+          "href": "/nse-terms-of-use",
+          "label": "Terms of Use"
+        },
+        {
+          "href": "/nse-copyright",
+          "label": "Copyright"
+        },
+        {
+          "href": "/feedback/new",
+          "label": "Feedback"
+        },
+        {
+          "href": "/sitemap",
+          "label": "Site Map"
+        },
+        {
+          "href": "/website-policies",
+          "label": "Website Policies"
+        },
+        {
+          "href": "https://inspection.nseindia.com/empanelment_auditor/auditor/auditorRegistration/",
+          "label": "Empanelment of Internal Auditors/System Auditor of Members"
+        },
+        {
+          "href": "https://inspection.nseindia.com/empanelment_auditor/auditor/viewEmpanelledAuditors/",
+          "label": "List of Empaneled Audit Firms"
+        },
+        {
+          "href": "/static/help",
+          "label": "Help"
+        },
+        {
+          "href": "/static/resources/faqs",
+          "label": "FAQs"
+        },
+        {
+          "href": "https://apps.apple.com/in/app/nseindia/id6736678487",
+          "label": ""
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=com.nse.nseindia",
+          "label": ""
+        },
+        {
+          "href": "https://eipo.nseindia.com/eipodc/rest/login",
+          "label": "NSE GO-BID"
+        },
+        {
+          "href": "https://www.ncfm-india.com/ORE/OREloginPage.jsp",
+          "label": "NCFM"
+        },
+        {
+          "href": "/nse-copyright",
+          "label": "Copyright \u00a9"
+        },
+        {
+          "href": "https://wa.me/918655986573?text=Hi",
+          "label": "'WhatsApp of NSEIndia"
+        },
+        {
+          "href": "https://www.facebook.com/NationalStockExchange/",
+          "label": "Follow us our Facebook"
+        },
+        {
+          "href": "https://twitter.com/NSEIndia?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+          "label": "Follow us on Twitter"
+        },
+        {
+          "href": "https://in.linkedin.com/company/national-stock-exchange-of-india-limited",
+          "label": "Follow us our LinkedIn"
+        },
+        {
+          "href": "https://www.youtube.com/user/NSEIL1india",
+          "label": "Subscribe us our Youtube"
+        },
+        {
+          "href": "https://www.instagram.com/nseindia",
+          "label": "Follow us our Instagram"
+        },
+        {
+          "href": "https://www.nseindia.com/rss-feed",
+          "label": "Follow us our RSS"
+        },
+        {
+          "href": "#qinvest_equity_mr",
+          "label": "Equity Market Report"
+        },
+        {
+          "href": "#qinvest_deriv_mr",
+          "label": "Derivatives Market Report"
+        },
+        {
+          "href": "#qinvest_debt_mr",
+          "label": "Debt Market Report"
+        },
+        {
+          "href": "#",
+          "label": "Multiple file Download"
+        },
+        {
+          "href": "/all-reports",
+          "label": "Customize Reports for Download"
+        },
+        {
+          "href": "#",
+          "label": "Multiple file Download"
+        },
+        {
+          "href": "/all-reports-derivatives",
+          "label": "Customize Reports for Download"
+        },
+        {
+          "href": "#",
+          "label": "Multiple file Download"
+        },
+        {
+          "href": "/all-reports-debt",
+          "label": "Customize Reports for Download"
+        },
+        {
+          "href": "/market-data/analysis-and-tools-capital-market-snapshot",
+          "label": "View Details"
+        },
+        {
+          "href": "#qlink_corporate_01",
+          "label": "All Companies"
+        },
+        {
+          "href": "#",
+          "label": "Launch"
+        },
+        {
+          "href": "#circulars_equity",
+          "label": "Equity"
+        },
+        {
+          "href": "#circulars_debt",
+          "label": "DEBT"
+        },
+        {
+          "href": "/companies-listing/circular-for-listed-companies-equity-market",
+          "label": "View All"
+        },
+        {
+          "href": "/companies-listing/circular-for-listed-companies-debt-market",
+          "label": "View All"
+        },
+        {
+          "href": "/companies-listing/corporate-filings-application",
+          "label": "Go to Corporates Dashboard"
+        },
+        {
+          "href": "#q_members_circulars",
+          "label": "Latest Circulars"
+        },
+        {
+          "href": "#q_members_trading",
+          "label": "Trading"
+        },
+        {
+          "href": "#q_members_clearing",
+          "label": "Clearing"
+        },
+        {
+          "href": "#q_members_listing",
+          "label": "Listing"
+        },
+        {
+          "href": "#q_members_compliance",
+          "label": "Compliance"
+        },
+        {
+          "href": "#q_members_others",
+          "label": "Others"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "#",
+          "label": "Download"
+        },
+        {
+          "href": "/resources/exchange-communication-circulars",
+          "label": "View All Circulars"
+        },
+        {
+          "href": "http://feeds.feedburner.com/nseindia/circulars",
+          "label": "Subscribe to RSS Feed"
+        },
+        {
+          "href": "tel:18002660050",
+          "label": "1800 266 0050"
+        },
+        {
+          "href": "tel:02268645400",
+          "label": "022 68645400"
+        },
+        {
+          "href": "tel:02250998100",
+          "label": "022 50998100"
+        },
+        {
+          "href": "tel:18002660050",
+          "label": "1800 266 0050"
+        },
+        {
+          "href": "tel:02268645400",
+          "label": "022 68645400"
+        },
+        {
+          "href": "tel:02250998100",
+          "label": "022 50998100"
+        }
+      ],
+      "publisher": "NSE",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
+      "semantic_review_status": "NOT_REVIEWED",
+      "sha256": "e25d2f04afc7c77b24692d6a100b90f62b7186463b3beae9d7069da1a142ced2",
+      "source_id": "NSE_EXCHANGE_CIRCULARS",
+      "source_url": "https://www.nseindia.com/resources/exchange-communication-circulars",
+      "visible_link_count": 689
+    },
+    {
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_2fcb78f7e5ade244.html",
       "bytes": 324932,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
@@ -20279,16 +23051,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "1e16b90313efb949c206ad1215d9892015233e92a83aad595e5e2a22ede8f15b",
+      "sha256": "2fcb78f7e5ade2441d624a349b1b134f5e43fe030fe91e525023d949de1e75c1",
       "source_id": "NSE_HOLIDAYS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-holidays",
       "visible_link_count": 675
     }
   ],
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T12:00:32.171007+05:30",
+  "run_at_ist": "2026-11-08T12:07:28.256121+05:30",
   "schema_version": 1,
   "scope": {
     "exchange_wide_sources": [
@@ -20321,7 +23093,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
       "source_url": "https://www.bseindia.com/corporates/ann.html",
@@ -20330,7 +23102,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
       "source_url": "https://www.bseindia.com/corporates/corporate_act.html",
@@ -20339,7 +23111,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T12:00:32.171007+05:30",
+      "retrieved_at_ist": "2026-11-08T12:07:28.256121+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
       "source_url": "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars.aspx",
