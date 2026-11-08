@@ -17,9 +17,10 @@ The runner does not download data, read the production model, or open the final 
 
 Required columns:
 
-- `signal_date`: date after the session close when the signal is formed
+- `signal_date`: trading date used for grouping and ranking
+- `signal_timestamp`: exact timestamp when the signal is formed, after the session close
 - `symbol`: security symbol
-- `feature_available_at`: latest availability timestamp for the row's features; must be no later than signal_date
+- `feature_available_at`: latest availability timestamp for the row's features; must be no later than signal_timestamp
 - `outcome_end_date`: date the realised outcome window ends; must be after signal_date
 - `net_return`: realised outcome return after the declared exploratory cost assumptions
 
