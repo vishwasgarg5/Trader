@@ -55,7 +55,7 @@
       "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
     }
   ],
-  "completed_snapshot_downloads": 12,
+  "completed_snapshot_downloads": 18,
   "full_cdx_metadata_records": [
     {
       "archive_path": "data/reference/wayback_nifty50_cdx/full_2dc6eb7b6c42c183bf1e.json",
@@ -520,18 +520,32 @@
       "usable_capture_count": 1
     },
     "2018-Q4": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "f00e6a2b98c1be8da5af1b19080aaa9a75d3f09867cb94eaa1be7e611f307e99",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20181028012125"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2019-Q1": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "http://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "ab2ba82a0eb5e4deb890cec8ebecaf4644a4ca695ebc688dbaec4d580f14e236",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20190201175058"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2019-Q2": {
       "captures": [],
@@ -548,11 +562,18 @@
       "usable_capture_count": 0
     },
     "2019-Q4": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "https://nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "e38bacbbf034758665c855f307835fb4e51be443b3aafcf3a7b3f0eb6d57cccd",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20191218174357"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2020-Q1": {
       "captures": [],
@@ -569,18 +590,32 @@
       "usable_capture_count": 0
     },
     "2020-Q3": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "70d75ecb02e87bcef49dda8a8cdbc5e9f386be58da147240bac4e169bab816b7",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20200910201244"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2020-Q4": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "35b112ba1eafc5141d058f1c31bb24a54d81a527da3818d5b31148950bca611c",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20201107195003"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2021-Q1": {
       "captures": [],
@@ -736,12 +771,18 @@
           "sha256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
           "status": "CDX_DIGEST_MISMATCH",
           "timestamp": "20240819184501"
+        },
+        {
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "04e18d679f517fcad1eae56b80c97f45616f78214e5ab517b28254de72e2c51f",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20240701180136"
         }
       ],
-      "downloaded_capture_count": 1,
+      "downloaded_capture_count": 2,
       "full_cdx_capture_count": 3,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2024-Q4": {
       "captures": [
@@ -759,15 +800,15 @@
     }
   },
   "request_budget": 24,
-  "requests_this_run": 0,
-  "run_at_utc": "2026-11-08T12:25:23.385377+00:00",
+  "requests_this_run": 6,
+  "run_at_utc": "2026-11-08T12:32:18.019839+00:00",
   "runtime_budget_seconds": 1200,
-  "runtime_seconds": 0.0,
+  "runtime_seconds": 20.93,
   "schema_version": 1,
   "status": "COMPLETE",
   "stop_reason": "WORK_REMAINING",
   "target_errors": [],
   "targets_complete": 6,
   "targets_total": 6,
-  "usable_quarters": 10
+  "usable_quarters": 16
 }
