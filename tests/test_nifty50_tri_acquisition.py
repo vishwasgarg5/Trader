@@ -9,6 +9,11 @@ class Nifty50TRIAcquisitionTests(unittest.TestCase):
           {"Index Name":"Nifty 50","Date":"01 Jan 2018","TotalReturnsIndex":"15000.00","NTR_Value":"14900.00"}])}).encode()
         r=parse_response(p)
         self.assertEqual(r[0],(date(2018,1,1),15000.0)); self.assertEqual(r[-1],(date(2024,12,31),42000.5))
+    def test_parses_direct_json_array_response(self):
+        p=json.dumps([
+          {"Index Name":"NIFTY 50","Date":"01 Jan 2018","TotalReturnsIndex":"15000.00","NTR_Value":"14900.00"}
+        ]).encode()
+        self.assertEqual(parse_response(p)[0],(date(2018,1,1),15000.0))
     def test_wrong_index_rejected(self):
         p=json.dumps({"d":json.dumps([{"Index Name":"Nifty 500","Date":"31 Dec 2024","TotalReturnsIndex":"42000"}])}).encode()
         with self.assertRaisesRegex(ValueError,"unexpected index identity"): parse_response(p)
