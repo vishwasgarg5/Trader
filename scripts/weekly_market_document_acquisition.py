@@ -10,6 +10,7 @@ import hashlib
 import json
 import pathlib
 import re
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -22,6 +23,8 @@ REPORT_OUT = pathlib.Path("data/reports/weekly_market_document_acquisition.json"
 ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_documents")
 MAX_BYTES = 25 * 1024 * 1024
 TIMEOUT = 20
+MAX_ATTEMPTS = 2
+RETRY_BACKOFF_SECONDS = 2
 ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
                  "bseindia.com", "www.bseindia.com", "niftyindices.com", "www.niftyindices.com"}
 HEADERS = {
@@ -45,11 +48,25 @@ def safe_pdf_url(base_url: str, href: str):
         return None
     return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, parsed.query, ""))
 
+def open_with_retry(request, timeout):
+    """Retry transient network failures once; never retry validation failures."""
+    last_error = None
+    for attempt in range(MAX_ATTEMPTS):
+        try:
+            return urllib.request.urlopen(request, timeout=timeout)
+        except (TimeoutError, urllib.error.URLError) as exc:
+            if isinstance(exc, urllib.error.HTTPError) and 400 <= exc.code < 500 and exc.code != 429:
+                raise
+            last_error = exc
+            if attempt + 1 < MAX_ATTEMPTS:
+                time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
+    raise last_error
+
 def download_one(item):
     url, source_id, publisher = item
     request = urllib.request.Request(url, headers=HEADERS)
     try:
-        with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
+        with open_with_retry(request, timeout=TIMEOUT) as response:
             final_url = response.geturl()
             final = urllib.parse.urlsplit(final_url)
             if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
