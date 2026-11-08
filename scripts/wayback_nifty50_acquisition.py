@@ -357,10 +357,6 @@ def add_full_metadata_quarter_candidates(state: dict, records: list[dict]) -> in
         and item.get("status") == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
     }
     pending_quarters = {item.get("quarter") for item in pending}
-    attempted_digests = {
-        (item.get("quarter"), item.get("cdx_digest"))
-        for item in completed if item.get("cdx_digest")
-    }
     known = {capture_key(item) for item in pending + completed}
     added = 0
     for record in records:
@@ -370,8 +366,6 @@ def add_full_metadata_quarter_candidates(state: dict, records: list[dict]) -> in
             original = capture.get("original_url", "")
             cdx_digest = capture.get("digest", "")
             if quarter in verified_quarters or quarter in pending_quarters:
-                continue
-            if (quarter, cdx_digest) in attempted_digests:
                 continue
             if capture.get("statuscode") != "200" or capture.get("mimetype", "").lower() not in ALLOWED_MIME:
                 continue
