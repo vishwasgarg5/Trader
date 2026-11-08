@@ -1,6 +1,8 @@
 name: NSE controlled curl_cffi archive retry and Wayback CDX
 
 on:
+  schedule:
+    - cron: "15 2 * * 1,3,5"
   workflow_dispatch:
   push:
     branches: [main]
