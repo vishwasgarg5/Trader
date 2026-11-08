@@ -1,0 +1,5 @@
+[["timestamp","original","statuscode","mimetype","digest","length"],
+["20181028012125","https://www.nseindia.com/content/indices/ind_nifty50list.csv","200","application/csv","QIL3O7JSQCHCJMBPAH4PFUTYR3DZBKLL","1671"],
+["20191218174357","https://nseindia.com/content/indices/ind_nifty50list.csv","200","application/csv","LS5WVT7O3QBLKSFUZMTXG34PREJUEOGM","1705"],
+["20200910201244","https://www1.nseindia.com/content/indices/ind_nifty50list.csv","200","application/csv","7H3YTM7H25TQCGKCJMH2LKPEQ4PMNLZD","1684"],
+["20201107195003","https://www1.nseindia.com/content/indices/ind_nifty50list.csv","200","application/csv","SNWXR75QWF62R36SBVHJHKMECDKAVWZZ","1658"]]

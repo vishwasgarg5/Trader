@@ -1,0 +1,752 @@
+{
+  "collapsed_download_candidate_records": [
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_db3b5f01dd638bd1b846.json",
+      "bytes_received": 1216,
+      "capture_count": 7,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:05.688784+00:00",
+      "sha256": "db3b5f01dd638bd1b8460a0ed1ba8bee9e9fe246c97f08c0dedf5d08214d6e2b",
+      "target_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_db3b5f01dd638bd1b846.json",
+      "bytes_received": 1216,
+      "capture_count": 7,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:11.847061+00:00",
+      "sha256": "db3b5f01dd638bd1b8460a0ed1ba8bee9e9fe246c97f08c0dedf5d08214d6e2b",
+      "target_url": "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_efd2d17465c4436f2572.json",
+      "bytes_received": 663,
+      "capture_count": 4,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:17.811771+00:00",
+      "sha256": "efd2d17465c4436f257243cca2835adc7e02a062e36754fb06717a6768a77f4f",
+      "target_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_efd2d17465c4436f2572.json",
+      "bytes_received": 663,
+      "capture_count": 4,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:23.585011+00:00",
+      "sha256": "efd2d17465c4436f257243cca2835adc7e02a062e36754fb06717a6768a77f4f",
+      "target_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_cb96454d483cfbb722e7.json",
+      "bytes_received": 657,
+      "capture_count": 4,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:29.844564+00:00",
+      "sha256": "cb96454d483cfbb722e78658cca465736ddac53cc5e1666cd3377c715893f2c1",
+      "target_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/collapsed_1f8fff1d7d563f5714e5.json",
+      "bytes_received": 219,
+      "capture_count": 1,
+      "kind": "collapsed",
+      "retrieved_at_utc": "2026-11-08T10:25:35.661897+00:00",
+      "sha256": "1f8fff1d7d563f5714e5194883a3a2816c81a7b1a45bd3ec5531af553573c603",
+      "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    }
+  ],
+  "completed_snapshot_downloads": 9,
+  "full_cdx_metadata_records": [
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_2dc6eb7b6c42c183bf1e.json",
+      "bytes_received": 2030,
+      "capture_count": 12,
+      "captures": [
+        {
+          "digest": "KH6SOBBVQ5CRSCCU6GDS4CPXBSCMCSXM",
+          "length": "1735",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q1",
+          "statuscode": "200",
+          "timestamp": "20180128030056"
+        },
+        {
+          "digest": "KH6SOBBVQ5CRSCCU6GDS4CPXBSCMCSXM",
+          "length": "1638",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q1",
+          "statuscode": "200",
+          "timestamp": "20180329152722"
+        },
+        {
+          "digest": "2UIWHAOLNRA4AABGUMZA6DYYNADM6QRA",
+          "length": "1606",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q2",
+          "statuscode": "200",
+          "timestamp": "20180530101725"
+        },
+        {
+          "digest": "2UIWHAOLNRA4AABGUMZA6DYYNADM6QRA",
+          "length": "1546",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q3",
+          "statuscode": "200",
+          "timestamp": "20180730115922"
+        },
+        {
+          "digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6",
+          "length": "1586",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q3",
+          "statuscode": "200",
+          "timestamp": "20180929103632"
+        },
+        {
+          "digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6",
+          "length": "1713",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2019-Q1",
+          "statuscode": "200",
+          "timestamp": "20190201175058"
+        },
+        {
+          "digest": "6YOZFIZCBSMSN3VOD74HSIPAZQXMUNOX",
+          "length": "1580",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2021-Q2",
+          "statuscode": "200",
+          "timestamp": "20210615183523"
+        },
+        {
+          "digest": "XBYAYWUIRDZDOO3CT7OUNHH37Q3RAS27",
+          "length": "1749",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2022-Q3",
+          "statuscode": "200",
+          "timestamp": "20220728034149"
+        },
+        {
+          "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+          "length": "2238",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q2",
+          "statuscode": "200",
+          "timestamp": "20240524073805"
+        },
+        {
+          "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+          "length": "2232",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q3",
+          "statuscode": "200",
+          "timestamp": "20240701180136"
+        },
+        {
+          "digest": "T7DQERLRMYXGXOQQ4KQH57VTCP25QPK5",
+          "length": "2244",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q4",
+          "statuscode": "200",
+          "timestamp": "20241110013717"
+        },
+        {
+          "digest": "T7DQERLRMYXGXOQQ4KQH57VTCP25QPK5",
+          "length": "1964",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q4",
+          "statuscode": "200",
+          "timestamp": "20241203035638"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:02.699590+00:00",
+      "sha256": "2dc6eb7b6c42c183bf1e29b9156884c9c004602b2a1c479c833b9577334565b8",
+      "target_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_2dc6eb7b6c42c183bf1e.json",
+      "bytes_received": 2030,
+      "capture_count": 12,
+      "captures": [
+        {
+          "digest": "KH6SOBBVQ5CRSCCU6GDS4CPXBSCMCSXM",
+          "length": "1735",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q1",
+          "statuscode": "200",
+          "timestamp": "20180128030056"
+        },
+        {
+          "digest": "KH6SOBBVQ5CRSCCU6GDS4CPXBSCMCSXM",
+          "length": "1638",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q1",
+          "statuscode": "200",
+          "timestamp": "20180329152722"
+        },
+        {
+          "digest": "2UIWHAOLNRA4AABGUMZA6DYYNADM6QRA",
+          "length": "1606",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q2",
+          "statuscode": "200",
+          "timestamp": "20180530101725"
+        },
+        {
+          "digest": "2UIWHAOLNRA4AABGUMZA6DYYNADM6QRA",
+          "length": "1546",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q3",
+          "statuscode": "200",
+          "timestamp": "20180730115922"
+        },
+        {
+          "digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6",
+          "length": "1586",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2018-Q3",
+          "statuscode": "200",
+          "timestamp": "20180929103632"
+        },
+        {
+          "digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6",
+          "length": "1713",
+          "mimetype": "application/octet-stream",
+          "original_url": "http://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2019-Q1",
+          "statuscode": "200",
+          "timestamp": "20190201175058"
+        },
+        {
+          "digest": "6YOZFIZCBSMSN3VOD74HSIPAZQXMUNOX",
+          "length": "1580",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2021-Q2",
+          "statuscode": "200",
+          "timestamp": "20210615183523"
+        },
+        {
+          "digest": "XBYAYWUIRDZDOO3CT7OUNHH37Q3RAS27",
+          "length": "1749",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2022-Q3",
+          "statuscode": "200",
+          "timestamp": "20220728034149"
+        },
+        {
+          "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+          "length": "2238",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q2",
+          "statuscode": "200",
+          "timestamp": "20240524073805"
+        },
+        {
+          "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+          "length": "2232",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q3",
+          "statuscode": "200",
+          "timestamp": "20240701180136"
+        },
+        {
+          "digest": "T7DQERLRMYXGXOQQ4KQH57VTCP25QPK5",
+          "length": "2244",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q4",
+          "statuscode": "200",
+          "timestamp": "20241110013717"
+        },
+        {
+          "digest": "T7DQERLRMYXGXOQQ4KQH57VTCP25QPK5",
+          "length": "1964",
+          "mimetype": "application/octet-stream",
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "quarter": "2024-Q4",
+          "statuscode": "200",
+          "timestamp": "20241203035638"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:09.759602+00:00",
+      "sha256": "2dc6eb7b6c42c183bf1e29b9156884c9c004602b2a1c479c833b9577334565b8",
+      "target_url": "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_efd2d17465c4436f2572.json",
+      "bytes_received": 663,
+      "capture_count": 4,
+      "captures": [
+        {
+          "digest": "QIL3O7JSQCHCJMBPAH4PFUTYR3DZBKLL",
+          "length": "1671",
+          "mimetype": "application/csv",
+          "original_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2018-Q4",
+          "statuscode": "200",
+          "timestamp": "20181028012125"
+        },
+        {
+          "digest": "LS5WVT7O3QBLKSFUZMTXG34PREJUEOGM",
+          "length": "1705",
+          "mimetype": "application/csv",
+          "original_url": "https://nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2019-Q4",
+          "statuscode": "200",
+          "timestamp": "20191218174357"
+        },
+        {
+          "digest": "7H3YTM7H25TQCGKCJMH2LKPEQ4PMNLZD",
+          "length": "1684",
+          "mimetype": "application/csv",
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2020-Q3",
+          "statuscode": "200",
+          "timestamp": "20200910201244"
+        },
+        {
+          "digest": "SNWXR75QWF62R36SBVHJHKMECDKAVWZZ",
+          "length": "1658",
+          "mimetype": "application/csv",
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2020-Q4",
+          "statuscode": "200",
+          "timestamp": "20201107195003"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:15.515596+00:00",
+      "sha256": "efd2d17465c4436f257243cca2835adc7e02a062e36754fb06717a6768a77f4f",
+      "target_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_efd2d17465c4436f2572.json",
+      "bytes_received": 663,
+      "capture_count": 4,
+      "captures": [
+        {
+          "digest": "QIL3O7JSQCHCJMBPAH4PFUTYR3DZBKLL",
+          "length": "1671",
+          "mimetype": "application/csv",
+          "original_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2018-Q4",
+          "statuscode": "200",
+          "timestamp": "20181028012125"
+        },
+        {
+          "digest": "LS5WVT7O3QBLKSFUZMTXG34PREJUEOGM",
+          "length": "1705",
+          "mimetype": "application/csv",
+          "original_url": "https://nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2019-Q4",
+          "statuscode": "200",
+          "timestamp": "20191218174357"
+        },
+        {
+          "digest": "7H3YTM7H25TQCGKCJMH2LKPEQ4PMNLZD",
+          "length": "1684",
+          "mimetype": "application/csv",
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2020-Q3",
+          "statuscode": "200",
+          "timestamp": "20200910201244"
+        },
+        {
+          "digest": "SNWXR75QWF62R36SBVHJHKMECDKAVWZZ",
+          "length": "1658",
+          "mimetype": "application/csv",
+          "original_url": "https://www1.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2020-Q4",
+          "statuscode": "200",
+          "timestamp": "20201107195003"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:20.554378+00:00",
+      "sha256": "efd2d17465c4436f257243cca2835adc7e02a062e36754fb06717a6768a77f4f",
+      "target_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_14f1ad2f024c93d5addf.json",
+      "bytes_received": 804,
+      "capture_count": 5,
+      "captures": [
+        {
+          "digest": "6YOZFIZCBSMSN3VOD74HSIPAZQXMUNOX",
+          "length": "1807",
+          "mimetype": "text/csv",
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2021-Q3",
+          "statuscode": "200",
+          "timestamp": "20210903113122"
+        },
+        {
+          "digest": "6YOZFIZCBSMSN3VOD74HSIPAZQXMUNOX",
+          "length": "1803",
+          "mimetype": "text/csv",
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2021-Q3",
+          "statuscode": "200",
+          "timestamp": "20210903123857"
+        },
+        {
+          "digest": "ANH7FADPYCSUVTKEIBGA2ARDQJYFEKB5",
+          "length": "1863",
+          "mimetype": "text/csv",
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2023-Q1",
+          "statuscode": "200",
+          "timestamp": "20230126060250"
+        },
+        {
+          "digest": "FEZNETGKL447RI2R5XVIGSFOVCI4Z2L4",
+          "length": "2086",
+          "mimetype": "text/csv",
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2023-Q2",
+          "statuscode": "200",
+          "timestamp": "20230522051228"
+        },
+        {
+          "digest": "KKSWH5ABAXHF2OP4L5UEYXTLRSTEESMA",
+          "length": "1663",
+          "mimetype": "text/csv",
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2024-Q1",
+          "statuscode": "200",
+          "timestamp": "20240205222833"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:26.818521+00:00",
+      "sha256": "14f1ad2f024c93d5addf91cd6ffa5d92e0ff0758d9b7a1ac5c270d39b5a5f5a6",
+      "target_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_nifty50_cdx/full_1f8fff1d7d563f5714e5.json",
+      "bytes_received": 219,
+      "capture_count": 1,
+      "captures": [
+        {
+          "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+          "length": "2352",
+          "mimetype": "text/csv",
+          "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "quarter": "2024-Q3",
+          "statuscode": "200",
+          "timestamp": "20240819184501"
+        }
+      ],
+      "kind": "full",
+      "retrieved_at_utc": "2026-11-08T10:25:35.139619+00:00",
+      "sha256": "1f8fff1d7d563f5714e5194883a3a2816c81a7b1a45bd3ec5531af553573c603",
+      "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    }
+  ],
+  "limitations": [
+    "All Wayback captures are supplementary evidence, never effective-date decisions.",
+    "CDX digest collapse reduces download candidates; uncollapsed metadata is retained for capture windows.",
+    "50-row snapshots are candidate anchors only; non-50 snapshots are retained for review.",
+    "Missing archive quarters are reported and are not treated as proof of non-membership.",
+    "No canonical membership, model, price/TRI, holdout, or trading state is modified."
+  ],
+  "next_retry_at_utc": null,
+  "pending_snapshot_downloads": 0,
+  "quarter_count": 28,
+  "quarterly_coverage": {
+    "2018-Q1": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 4,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2018-Q2": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2018-Q3": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 4,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2018-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2019-Q1": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2019-Q2": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2019-Q3": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2019-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2020-Q1": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2020-Q2": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2020-Q3": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2020-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 2,
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
+    },
+    "2021-Q1": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2021-Q2": {
+      "captures": [
+        {
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "ebf5372eba6be1318abe3d6b143af2280bb8d996b41bee7ee8d8c7b47912f646",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20210615183523"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 2,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2021-Q3": {
+      "captures": [
+        {
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "ebf5372eba6be1318abe3d6b143af2280bb8d996b41bee7ee8d8c7b47912f646",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20210903113122"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 2,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2021-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2022-Q1": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2022-Q2": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2022-Q3": {
+      "captures": [
+        {
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "4f4435c0f0ea12a5f09711afc755d246092aa9f6848d83b492db1f9a00138044",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20220728034149"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 2,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2022-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2023-Q1": {
+      "captures": [
+        {
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "6291c898e93077ba72aa42e9b10c8a49ea259a3c541ed98f24445f36ece16397",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20230126060250"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 1,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2023-Q2": {
+      "captures": [
+        {
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "6291c898e93077ba72aa42e9b10c8a49ea259a3c541ed98f24445f36ece16397",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20230522051228"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 1,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2023-Q3": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2023-Q4": {
+      "captures": [],
+      "downloaded_capture_count": 0,
+      "full_cdx_capture_count": 0,
+      "status": "MISSING",
+      "usable_capture_count": 0
+    },
+    "2024-Q1": {
+      "captures": [
+        {
+          "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "c28d945bb2e23ad7a3ae4f8e1319010c9796d252de07aefed5d93f53112d03ba",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20240205222833"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 1,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2024-Q2": {
+      "captures": [
+        {
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "04e18d679f517fcad1eae56b80c97f45616f78214e5ab517b28254de72e2c51f",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20240524073805"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 2,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2024-Q3": {
+      "captures": [
+        {
+          "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20240819184501"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 3,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    },
+    "2024-Q4": {
+      "captures": [
+        {
+          "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "222a52f838bff623244be25592931e9b064a1375ac2fbc0ba23241aab25a0db5",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20241110013717"
+        }
+      ],
+      "downloaded_capture_count": 1,
+      "full_cdx_capture_count": 4,
+      "status": "USABLE",
+      "usable_capture_count": 1
+    }
+  },
+  "request_budget": 24,
+  "requests_this_run": 21,
+  "run_at_utc": "2026-11-08T10:26:09.029389+00:00",
+  "runtime_budget_seconds": 1200,
+  "runtime_seconds": 66.57,
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "stop_reason": "WORK_REMAINING",
+  "target_errors": [],
+  "targets_complete": 6,
+  "targets_total": 6,
+  "usable_quarters": 9
+}
