@@ -20,7 +20,7 @@ It is **not** independent human verification, does not promote any candidate to 
 | N50-NOTICE-2020-03-25 | 2020-03-25 | 2020-03-27 | Further deferment evidence; no new NIFTY 50 constituent change established |
 | N50-NOTICE-2020-05-13 | 2020-05-13 | 2020-06-26 (notice-wide date) | Confirms NIFTY 50 and NIFTY Bank had already rebalanced on 2020-03-19; does not reverse that event |
 | N50-NOTICE-2020-07-02 | 2020-07-02 | 2020-07-31 | OUT VEDL; IN HDFCLIFE |
-| N50-NOTICE-2020-08-20 | 2020-08-20 | 2020-09-25 | Candidate OUT INFRATEL, ZEEL; IN DIVISLAB, SBILIFE; verify precise scope against the primary PDF |
+| N50-NOTICE-2020-08-20 | 2020-08-20 | 2020-09-25 | Primary PDF page 4, section 2(a): OUT INFRATEL, ZEEL; IN DIVISLAB, SBILIFE |
 | N50-NOTICE-2021-02-23 | 2021-02-23 | 2021-03-31 | OUT GAIL; IN TATACONSUM |
 | N50-NOTICE-2022-02-24 | 2022-02-24 | 2022-03-31 | OUT IOC; IN APOLLOHOSP |
 | N50-NOTICE-2022-09-01 | 2022-09-01 | 2022-09-30 | OUT SHREECEM; IN ADANIENT |
