@@ -23,7 +23,7 @@ from trader.market_source_fetcher import fetch_bytes, FetchError
 REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
 REPORT_OUT = pathlib.Path("data/reports/weekly_market_document_acquisition.json")
 ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_documents")
-MAX_BYTES = 50 * 1024 * 1024
+MAX_BYTES = 25 * 1024 * 1024
 TIMEOUT = 60
 MAX_ATTEMPTS = 2
 RETRY_BACKOFF_SECONDS = 2
@@ -63,7 +63,7 @@ def download_one(item):
             url,
             allowed_hosts=ALLOWED_HOSTS,
             headers=HEADERS,
-            max_bytes=50 * 1024 * 1024,
+            max_bytes=MAX_BYTES,
             timeout=(20, 180),
             attempts=3,
             pdf=True,
