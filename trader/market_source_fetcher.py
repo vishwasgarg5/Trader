@@ -87,9 +87,9 @@ def fetch_bytes(
     last_error = None
 
     for attempt in range(1, attempts + 1):
-        for protocol, curl_options in (
-            ("http2", {}),
-            ("http1.1", {CurlOpt.HTTP_VERSION: CurlHttpVersion.V1_1}),
+        for protocol, http_version in (
+            ("http2", CurlHttpVersion.V2_0),
+            ("http1.1", CurlHttpVersion.V1_1),
         ):
             existing = partial.stat().st_size if partial and partial.exists() else 0
             request_headers = dict(headers or {})
@@ -111,7 +111,7 @@ def fetch_bytes(
                         timeout=timeout,
                         stream=True,
                         allow_redirects=True,
-                        curl_options=curl_options,
+                        http_version=http_version,
                     )
                     final_url = str(response.url)
                     validate_official_url(final_url, allowed_hosts)
