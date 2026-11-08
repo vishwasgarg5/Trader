@@ -28,7 +28,7 @@ def build_manifest(tri_path: Path, dates: set[str] | None = None) -> list[dict]:
         if not reader.fieldnames or not required.issubset(reader.fieldnames):
             raise ValueError(f"TRI file requires columns: {sorted(required)}")
         rows = list(reader)
-    manifest, seen = [], set()
+    manifest, seen, verified_sources = [], set(), {}
     for row in rows:
         day = date.fromisoformat(row["session_date"]).isoformat()
         if dates is not None and day not in dates:
@@ -40,9 +40,10 @@ def build_manifest(tri_path: Path, dates: set[str] | None = None) -> list[dict]:
         source.relative_to(ROOT.resolve())
         if not source.is_file():
             raise ValueError(f"TRI source evidence missing for {day}: {row['evidence_path']}")
-        actual = hashlib.sha256(source.read_bytes()).hexdigest()
         expected = row["evidence_sha256"].strip().lower()
-        if actual != expected:
+        if source not in verified_sources:
+            verified_sources[source] = hashlib.sha256(source.read_bytes()).hexdigest()
+        if verified_sources[source] != expected:
             raise ValueError(f"TRI source SHA-256 mismatch for {day}: {row['evidence_path']}")
         if not row["source_url"].startswith("https://"):
             raise ValueError(f"TRI source URL is not HTTPS for {day}")
