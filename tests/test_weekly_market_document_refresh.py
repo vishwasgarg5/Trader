@@ -163,3 +163,10 @@ def test_official_consolidated_nse_filings_dashboard_is_in_weekly_sources():
         "NSE_CORPORATE_FILINGS_DASHBOARD",
         "https://www.nseindia.com/companies-listing/corporate-filings-application",
     ) in MODULE.SOURCES
+
+
+def test_official_nifty_indices_historical_and_reconstitution_sources_are_registered():
+    sources = dict(MODULE.SOURCES)
+    assert sources["NIFTY_INDICES_HISTORICAL_DATA"] == "https://www.niftyindices.com/reports/historical-data"
+    assert sources["NIFTY_INDICES_RECONSTITUTION_CALENDAR"] == "https://www.niftyindices.com/resources/index-rebalancing-schedule"
+    assert sources["NIFTY_INDICES_NIFTY50_PROFILE"] == "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50"
