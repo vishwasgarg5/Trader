@@ -30,6 +30,11 @@ jobs:
         run: python -m pip install --disable-pip-version-check requests pytest
       - name: Test calendar manifest and bhavcopy parser
         run: python -m pytest -q tests/test_build_nse_bhavcopy_calendar_manifest.py tests/test_acquire_nse_bhavcopy.py
+      - name: Build full candidate session calendar from TRI dates
+        run: |
+          python scripts/build_nse_bhavcopy_calendar_manifest.py \
+            --output data/tmp/nse_bhavcopy_calendar_candidate.csv
+          python -c 'import csv; from pathlib import Path; print("CANDIDATE_SESSION_DATES", sum(1 for _ in csv.DictReader(Path("data/tmp/nse_bhavcopy_calendar_candidate.csv").open())))'
       - name: Build four-date candidate calendar
         run: |
           python scripts/build_nse_bhavcopy_calendar_manifest.py \
@@ -50,6 +55,14 @@ jobs:
           else
             echo "No sample report was generated."
           fi
+      - name: Upload candidate session calendar
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nse-bhavcopy-candidate-calendar
+          path: data/tmp/nse_bhavcopy_calendar_candidate.csv
+          if-no-files-found: warn
+          retention-days: 90
       - name: Upload sample acquisition report only
         if: always()
         uses: actions/upload-artifact@v4
