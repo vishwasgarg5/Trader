@@ -124,9 +124,9 @@ def main():
     except Exception as e:
         report["error"]=f"{type(e).__name__}: {e}"
         META_PATH.parent.mkdir(parents=True,exist_ok=True)
-        META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+        META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n",encoding="utf-8")
         print(json.dumps(report,indent=2,sort_keys=True)); return 1
-    META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+    META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     print(json.dumps(report,indent=2,sort_keys=True)); return 0
 
 if __name__=="__main__": sys.exit(main())
