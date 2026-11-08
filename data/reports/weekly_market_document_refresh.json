@@ -34,7 +34,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
@@ -49,7 +49,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
@@ -64,7 +64,7 @@
       "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
@@ -73,7 +73,7 @@
     }
   ],
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T11:23:33.187857+05:30",
+  "run_at_ist": "2026-11-08T11:24:51.878144+05:30",
   "schema_version": 1,
   "scope": {
     "exchange_wide_sources": [
@@ -106,15 +106,15 @@
     {
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
-      "source_id": "NSE_ANNOUNCEMENTS",
-      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
+      "source_id": "NSE_CORPORATE_ACTIONS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
     },
     {
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
       "source_id": "NSE_HOLIDAYS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-holidays",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
@@ -122,17 +122,17 @@
     {
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
-      "source_id": "NSE_BUYBACKS",
-      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
+      "source_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
     },
     {
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-08T11:23:33.187857+05:30",
-      "source_id": "NSE_CORPORATE_ACTIONS",
-      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
+      "retrieved_at_ist": "2026-11-08T11:24:51.878144+05:30",
+      "source_id": "NSE_BUYBACKS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
     }
   ]
