@@ -229,34 +229,45 @@ def ingest_wayback() -> dict:
                               "A CDX row does not establish source authenticity or document meaning.",
                               "No model, price, TRI, membership, or trading state is changed."]}
     WAYBACK_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return report
 
 
 def main() -> int:
     egress = get_egress_ip()
     candidates = source_candidates()
+    transport_checks = [
+        transport_check(WAYBACK_CDX + "?url=" + quote("https://www.nseindia.com/") + "&output=json", "requests"),
+        transport_check(WAYBACK_CDX + "?url=" + quote("https://www.nseindia.com/") + "&output=json", "curl_cffi"),
+        transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "requests"),
+        transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "curl_cffi"),
+    ]
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        pdf_future = pool.submit(lambda: [download_one(item) for item in candidates])
+        wayback_future = pool.submit(ingest_wayback)
+        results = pdf_future.result()
+        wayback = wayback_future.result()
+    archived = sum(x["status"] == "ARCHIVED_VALIDATED_PDF" for x in results)
+    failed = len(results) - archived
+    report = {
+        "schema_version": 1, "run_at_utc": now_utc(), "egress_ip": egress,
+        "transport_checks": transport_checks, "candidate_count": len(candidates),
+        "archived_count": archived, "failed_count": failed, "results": results,
+        "status": "COMPLETE" if failed == 0 else "PARTIAL",
+        "research_status": "RESEARCH_HOLD", "changes_to_model_data": False,
+        "historical_prices_or_tri_modified": False, "holdout_accessed": False,
+        "promotion_eligible": False, "paper_trading_eligible": False,
+        "live_execution_enabled": False,
+    }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    report = {"schema_version": 1, "run_at_utc": now_utc(), "egress_ip": egress,
-              "transport_checks": [
-                  transport_check(WAYBACK_CDX + "?url=" + quote("https://www.nseindia.com/") + "&output=json", "requests"),
-                  transport_check(WAYBACK_CDX + "?url=" + quote("https://www.nseindia.com/") + "&output=json", "curl_cffi"),
-                  transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "requests"),
-                  transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "curl_cffi"),
-              ],
-              "candidate_count": len(candidates), "archived_count": sum(x["status"] == "ARCHIVED_VALIDATED_PDF" for x in results),
-              "failed_count": sum(x["status"] != "ARCHIVED_VALIDATED_PDF" for x in results),
-              "results": results, "status": "COMPLETE" if all(x["status"] == "ARCHIVED_VALIDATED_PDF" for x in results) else "PARTIAL",
-              "research_status": "RESEARCH_HOLD", "changes_to_model_data": False,
-              "historical_prices_or_tri_modified": False, "holdout_accessed": False,
-              "promotion_eligible": False, "paper_trading_eligible": False, "live_execution_enabled": False}
-    OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
-    wayback = ingest_wayback()
-    print(json.dumps({"candidate_count": len(candidates), "archived_count": report["archived_count"],
-                      "failed_count": report["failed_count"], "wayback_targets": wayback["targets_checked"],
-                      "wayback_archived": wayback["records_archived"], "wayback_failures": len(wayback["failures"]),
-                      "egress_ip": egress.get("ip")}, indent=2))
-    return 0 if report["failed_count"] == 0 else 1
+    OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "candidate_count": len(candidates), "archived_count": archived,
+        "failed_count": failed, "wayback_targets": wayback["targets_checked"],
+        "wayback_archived": wayback["records_archived"],
+        "wayback_failures": len(wayback["failures"]), "egress_ip": egress.get("ip"),
+    }, indent=2))
+    return 0 if failed == 0 else 1
 
 
 if __name__ == "__main__":
