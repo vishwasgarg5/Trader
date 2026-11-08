@@ -13,6 +13,8 @@ import html
 import json
 import pathlib
 import re
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -22,6 +24,9 @@ REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
 REPORT_OUT = pathlib.Path("data/reports/weekly_market_frontend_asset_audit.json")
 ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_frontend_assets")
 MAX_BYTES = 5 * 1024 * 1024
+ASSET_TIMEOUT = 30
+MAX_ATTEMPTS = 2
+RETRY_BACKOFF_SECONDS = 2
 ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com"}
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
@@ -65,12 +70,27 @@ def candidate_routes(script_text: str):
     return sorted(routes)
 
 
+def open_with_retry(request, timeout):
+    """Retry transient network failures once without retrying HTTP 4xx validation failures."""
+    last_error = None
+    for attempt in range(MAX_ATTEMPTS):
+        try:
+            return urllib.request.urlopen(request, timeout=timeout)
+        except (TimeoutError, urllib.error.URLError) as exc:
+            if isinstance(exc, urllib.error.HTTPError) and 400 <= exc.code < 500 and exc.code != 429:
+                raise
+            last_error = exc
+            if attempt + 1 < MAX_ATTEMPTS:
+                time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
+    raise last_error
+
+
 def fetch_asset(url: str):
     parsed = urllib.parse.urlsplit(url)
     if parsed.scheme != "https" or (parsed.hostname or "").lower() not in ALLOWED_HOSTS:
         raise ValueError("asset URL is outside official NSE HTTPS allowlist")
     request = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with open_with_retry(request, timeout=ASSET_TIMEOUT) as response:
         final = urllib.parse.urlsplit(response.geturl())
         if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
             raise ValueError("asset redirect left official NSE host allowlist")
