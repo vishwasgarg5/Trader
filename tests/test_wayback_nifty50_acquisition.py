@@ -218,3 +218,33 @@ def test_full_cdx_recovers_one_candidate_for_each_uncovered_quarter():
     }
     assert all(item["candidate_source"] == "FULL_CDX_QUARTER_GAP_RECOVERY"
                for item in state["pending_snapshots"])
+
+def test_full_cdx_quarter_recovery_is_idempotent_for_pending_and_verified_quarters():
+    pending = {
+        "capture_timestamp": "20240701180136",
+        "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+        "quarter": "2024-Q3", "cdx_digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+        "status": "PENDING_DOWNLOAD",
+    }
+    verified = {
+        "capture_timestamp": "20180929103632",
+        "original_url": "http://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+        "quarter": "2018-Q3", "cdx_digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6",
+        "cdx_digest_validation": "MATCH",
+        "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+    }
+    state = {"pending_snapshots": [pending], "completed_snapshots": [verified]}
+    records = [{
+        "captures": [
+            {"quarter": "2024-Q3", "timestamp": "20240819184501",
+             "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+             "statuscode": "200", "mimetype": "text/csv",
+             "digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR", "length": "2352"},
+            {"quarter": "2018-Q3", "timestamp": "20180929103632",
+             "original_url": "http://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+             "statuscode": "200", "mimetype": "application/octet-stream",
+             "digest": "GYG2MUVZFF6WE5UCSPAMYLZTRIZGQLZ6", "length": "1586"},
+        ],
+    }]
+    assert MODULE.add_full_metadata_quarter_candidates(state, records) == 0
+    assert state["pending_snapshots"] == [pending]
