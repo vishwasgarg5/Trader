@@ -1,4 +1,5 @@
 import importlib.util
+from types import SimpleNamespace
 from pathlib import Path
 
 SPEC = importlib.util.spec_from_file_location(
@@ -32,6 +33,23 @@ def test_pdf_validation_requires_signature_and_eof():
             pass
         else:
             raise AssertionError("invalid PDF accepted")
+
+
+def test_transient_direct_failure_advances_to_next_official_fallback():
+    item = {"next_direct_index": 0}
+    assert MODULE.advance_direct_fallback(
+        item, SimpleNamespace(stop=None), "https://nsearchives.nseindia.com/example.pdf"
+    )
+    assert item["next_direct_index"] == 1
+    assert item["fallback_errors"][0]["reason"] == "request_failed_after_retries"
+
+
+def test_budget_or_throttle_stop_does_not_advance_notice_fallback():
+    item = {"next_direct_index": 2}
+    assert not MODULE.advance_direct_fallback(
+        item, SimpleNamespace(stop="HTTP_429_THROTTLED"), "https://nsearchives.nseindia.com/example.pdf"
+    )
+    assert item["next_direct_index"] == 2
 
 
 def test_retry_after_seconds_supported():
