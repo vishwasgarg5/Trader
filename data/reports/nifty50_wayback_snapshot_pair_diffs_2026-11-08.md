@@ -8,7 +8,7 @@ No canonical membership ledger, model, holdout, or trading state is modified by 
 
 ## Snapshot inventory
 
-All eight captures below validated as 50 rows, 50 distinct symbols, 50 distinct ISINs, with no duplicate symbols and no missing ISINs. The 2021-06-15 and 2021-09-03 captures have identical raw-byte SHA-256 values and therefore identical constituent sets.
+All nine captures below validated as 50 rows, 50 distinct symbols, 50 distinct ISINs, with no duplicate symbols and no missing ISINs. The 2021-06-15 and 2021-09-03 captures have identical raw-byte SHA-256 values and therefore identical constituent sets.
 
 | Capture timestamp (UTC) | Quarter | Original URL host/path | Local SHA-256 | Validation |
 |---|---|---|---|---|
