@@ -1,0 +1,133 @@
+{
+  "changes_to_model_data": false,
+  "discovery_status": "PARTIAL",
+  "historical_prices_or_tri_modified": false,
+  "holdout_accessed": false,
+  "issuer_filter_status": "BLOCKED_EMPTY_POINT_IN_TIME_MEMBERSHIP_REGISTER",
+  "landing_pages_archived": 3,
+  "landing_pages_expected": 7,
+  "limitations": [
+    "Landing-page HTML is discovery evidence only; it is not the underlying circular or issuer filing.",
+    "Visible links are not proof that all exchange documents were enumerated.",
+    "No issuer events are promoted into the verified corporate-action ledger by this script.",
+    "No PDF/filing bytes are archived unless a separate document-acquisition step downloads and validates them.",
+    "A SHA-256 digest proves downloaded-byte integrity only, not publisher authenticity or document meaning.",
+    "No event extraction, supersession decision, or independent review is performed here.",
+    "The point-in-time NIFTY 50 membership register must be populated and independently verified before issuer-specific inclusion is automated."
+  ],
+  "live_execution_enabled": false,
+  "membership_register_rows": 0,
+  "paper_trading_eligible": false,
+  "promotion_eligible": false,
+  "records": [
+    {
+      "archive_path": "data/reference/source_documents/weekly_market_pages/bse_announcements_722e4ec3f94b4c59.html",
+      "bytes": 16912,
+      "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
+      "http_content_type": "text/html",
+      "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
+      "links": [],
+      "publisher": "BSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "semantic_review_status": "NOT_REVIEWED",
+      "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
+      "source_id": "BSE_ANNOUNCEMENTS",
+      "source_url": "https://www.bseindia.com/corporates/ann.html",
+      "visible_link_count": 0
+    },
+    {
+      "archive_path": "data/reference/source_documents/weekly_market_pages/bse_corporate_actions_722e4ec3f94b4c59.html",
+      "bytes": 16912,
+      "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
+      "http_content_type": "text/html",
+      "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
+      "links": [],
+      "publisher": "BSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "semantic_review_status": "NOT_REVIEWED",
+      "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
+      "source_id": "BSE_CORPORATE_ACTIONS",
+      "source_url": "https://www.bseindia.com/corporates/corporate_act.html",
+      "visible_link_count": 0
+    },
+    {
+      "archive_path": "data/reference/source_documents/weekly_market_pages/bse_notices_circulars_722e4ec3f94b4c59.html",
+      "bytes": 16912,
+      "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
+      "http_content_type": "text/html",
+      "http_last_modified": "Wed, 04 Nov 2026 13:09:47 GMT",
+      "links": [],
+      "publisher": "BSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "semantic_review_status": "NOT_REVIEWED",
+      "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
+      "source_id": "BSE_NOTICES_CIRCULARS",
+      "source_url": "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars.aspx",
+      "visible_link_count": 0
+    }
+  ],
+  "research_status": "RESEARCH_HOLD",
+  "run_at_ist": "2026-11-08T11:13:02.320558+05:30",
+  "schema_version": 1,
+  "scope": {
+    "exchange_wide_sources": [
+      "NSE",
+      "BSE"
+    ],
+    "issuer_scope": "NIFTY50_PILOT_001_ONLY",
+    "requested_document_types": [
+      "circulars",
+      "notices",
+      "trading_holidays",
+      "special_sessions",
+      "market_timings",
+      "settlement_changes",
+      "dividends",
+      "buybacks",
+      "bonus_issues",
+      "splits",
+      "rights_issues",
+      "mergers_demergers",
+      "board_meetings",
+      "financial_results",
+      "material_disclosures",
+      "corrections",
+      "cancellations",
+      "superseding_notices"
+    ]
+  },
+  "source_failures": [
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "source_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+      "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "source_id": "NSE_CORPORATE_ACTIONS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
+      "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "source_id": "NSE_BUYBACKS",
+      "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
+      "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE",
+      "retrieved_at_ist": "2026-11-08T11:13:02.320558+05:30",
+      "source_id": "NSE_HOLIDAYS",
+      "source_url": "https://www.nseindia.com/resources/exchange-communication-holidays",
+      "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
+    }
+  ]
+}
