@@ -133,30 +133,49 @@ def test_cdx_capture_rows_handles_header_and_headerless_responses():
     assert MODULE.cdx_capture_rows([capture]) == [capture]
 
 
-def test_domain_wide_cdx_searches_follow_exact_host_variants():
+def test_domain_wide_cdx_searches_are_split_into_bounded_date_windows():
     original = MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
     variants = MODULE.cdx_search_variants(original)
-    assert len(variants) == 6
+    assert len(variants) == 8
     assert all(x["match_type"] == "exact" for x in variants[:4])
-    assert variants[4] == {
-        "url": "niftyindices.com", "match_type": "domain",
-        "filename": "ind_prs05062018.pdf"
-    }
-    assert variants[5] == {
-        "url": "nseindia.com", "match_type": "domain",
-        "filename": "ind_prs05062018.pdf"
-    }
+    domain = variants[4:]
+    assert [(x["url"], x["from_year"], x["to_year"]) for x in domain] == [
+        ("niftyindices.com", 2018, 2020),
+        ("niftyindices.com", 2021, 2024),
+        ("nseindia.com", 2018, 2020),
+        ("nseindia.com", 2021, 2024),
+    ]
 
 
-def test_domain_cdx_query_filters_to_the_registered_pdf_filename():
+def test_domain_cdx_query_filters_filename_and_uses_bounded_dates():
     variant = MODULE.cdx_search_variants(
         MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
-    )[-2]
+    )[4]
     params = MODULE.cdx_request_params(variant)
     assert params["matchType"] == "domain"
+    assert params["from"] == "2018"
+    assert params["to"] == "2020"
     assert params["filter"] == [
         "statuscode:200", "original:.*ind_prs05062018\\.pdf$"
     ]
+
+
+def test_reconcile_requires_matching_domain_date_window():
+    variants = MODULE.cdx_search_variants(
+        MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
+    )
+    queries = [
+        {"url": variant["url"], "match_type": variant["match_type"],
+         "from_year": variant.get("from_year"), "to_year": variant.get("to_year"),
+         "http_status": 200, "result": "EMPTY"}
+        for variant in variants[:5]
+    ]
+    item = {"cdx_search_variants": variants, "cdx_queries": queries,
+            "cdx_captures": []}
+    MODULE.reconcile_cdx_search_progress(item)
+    assert item["next_cdx_search_index"] == 5
+    assert item["cdx_checked"] is False
+    assert item["cdx_result"] == "SEARCH_INCOMPLETE"
 
 
 def test_failed_domain_cdx_query_remains_incomplete_and_resumable():
