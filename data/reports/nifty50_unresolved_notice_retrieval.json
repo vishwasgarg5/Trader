@@ -293,6 +293,27 @@
       "http_status": 200,
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:53:33.904649+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:53:36.712838+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:53:40.025914+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "documents": {
@@ -305,9 +326,12 @@
         }
       ],
       "cdx_captures": [],
-      "cdx_checked": false,
-      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
-      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
+      "cdx_checked": true,
+      "cdx_content_type": "application/json",
+      "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_response_row_count": 0,
+      "cdx_result": "EMPTY",
+      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs05062018.pdf",
@@ -334,7 +358,8 @@
       "next_capture_index": 0,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
-      "status": "PENDING"
+      "status": "DOCUMENT_UNAVAILABLE",
+      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
     },
     "NSE-ARCHIVE-2019-07-16-3a8719394912": {
       "attempts": [
@@ -345,9 +370,12 @@
         }
       ],
       "cdx_captures": [],
-      "cdx_checked": false,
-      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
-      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
+      "cdx_checked": true,
+      "cdx_content_type": "application/json",
+      "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_response_row_count": 0,
+      "cdx_result": "EMPTY",
+      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
@@ -374,7 +402,8 @@
       "next_capture_index": 0,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
-      "status": "PENDING"
+      "status": "DOCUMENT_UNAVAILABLE",
+      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
     },
     "NSE-ARCHIVE-2023-03-14-5b13b76a2af9": {
       "attempts": [
@@ -385,9 +414,12 @@
         }
       ],
       "cdx_captures": [],
-      "cdx_checked": false,
-      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
-      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
+      "cdx_checked": true,
+      "cdx_content_type": "application/json",
+      "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_response_row_count": 0,
+      "cdx_result": "EMPTY",
+      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs14032023.pdf",
@@ -414,7 +446,8 @@
       "next_capture_index": 0,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
-      "status": "PENDING"
+      "status": "DOCUMENT_UNAVAILABLE",
+      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
     }
   },
   "limitations": [
@@ -424,11 +457,11 @@
   ],
   "next_retry_at_utc": null,
   "request_budget": 12,
-  "requests_this_run": 12,
-  "run_at_utc": "2026-11-08T11:22:44.315240+00:00",
-  "runtime_seconds": 444.26,
+  "requests_this_run": 3,
+  "run_at_utc": "2026-11-08T11:53:40.027420+00:00",
+  "runtime_seconds": 6.47,
   "schema_version": 1,
   "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
-  "status": "PARTIAL",
-  "stop_reason": "WORK_REMAINS"
+  "status": "COMPLETE",
+  "stop_reason": "ALL_DOCUMENTS_ATTEMPTED"
 }
