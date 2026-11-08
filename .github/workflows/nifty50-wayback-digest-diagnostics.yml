@@ -1,6 +1,13 @@
 name: NIFTY 50 Wayback digest diagnostics
 
 on:
+  push:
+    branches:
+      - research/nifty50-wayback-acquisition-2026-11-08
+    paths:
+      - ".github/workflows/nifty50-wayback-digest-diagnostics.yml"
+      - "scripts/diagnose_wayback_nifty50_digest_mismatches.py"
+      - "data/reference/wayback_nifty50_acquisition_state.json"
   workflow_dispatch:
 
 permissions:
