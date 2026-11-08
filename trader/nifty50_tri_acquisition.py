@@ -1,199 +1,132 @@
-"""Acquire the official Nifty Indices NIFTY 50 Total Returns Index series.
-
-The endpoint is an undocumented JSON service exposed by the official NSE Indices
-historical-data page. This script preserves the exact HTTP response bytes and
-writes a separately normalized CSV. Acquisition is NOT independent verification.
-"""
+"""Acquire official NSE Indices NIFTY 50 gross TRI, preserving raw responses."""
 from __future__ import annotations
-
-import csv
-import hashlib
-import json
-import math
-import os
-import sys
-import urllib.error
-import urllib.request
-from datetime import date, datetime, timezone
+import csv, hashlib, json, math, sys, time, urllib.error, urllib.request
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-SOURCE_PAGE = "https://www.niftyindices.com/reports/historical-data"
-SOURCE_ENDPOINT = "https://www.niftyindices.com/Backpage.aspx/getTotalReturnIndexString"
-START_DATE = date(2018, 1, 1)
-END_DATE = date(2024, 12, 31)
-USER_AGENT = "Trader-NIFTY50-research-evidence/1.0 (automated official-source acquisition)"
-MAX_RESPONSE_BYTES = 20 * 1024 * 1024
-RAW_PATH = Path("data/reference/source_documents/nifty50_tri_2018-2024_official_response.json")
-CSV_PATH = Path("data/reference/nifty50_tri.csv")
-META_PATH = Path("data/reports/nifty50_tri_acquisition.json")
-CSV_FIELDS = [
-    "session_date", "tri_close", "source_url", "source_published_at",
-    "evidence_path", "evidence_sha256", "verification_status", "reviewer", "reviewed_at",
-]
+SOURCE_PAGE="https://www.niftyindices.com/reports/historical-data"
+SOURCE_ENDPOINT="https://www.niftyindices.com/Backpage.aspx/getTotalReturnIndexString"
+START_DATE=date(2018,1,1); END_DATE=date(2024,12,31)
+USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 TraderResearch/1.0"
+RAW_DIR=Path("data/reference/source_documents/nifty50_tri")
+CSV_PATH=Path("data/reference/nifty50_tri.csv")
+META_PATH=Path("data/reports/nifty50_tri_acquisition.json")
+FIELDS=["session_date","tri_close","source_url","source_published_at","evidence_path","evidence_sha256","verification_status","reviewer","reviewed_at"]
 
+def parse_date(v):
+    for fmt in ("%d %b %Y","%d-%b-%Y","%d %B %Y","%Y-%m-%d","%d/%m/%Y"):
+        try: return datetime.strptime(str(v).strip(),fmt).date()
+        except ValueError: pass
+    raise ValueError(f"unrecognized source date: {v!r}")
 
-def _date_value(value: object) -> date:
-    text = str(value or "").strip()
-    for fmt in ("%d %b %Y", "%d-%b-%Y", "%d %B %Y", "%Y-%m-%d", "%d/%m/%Y"):
-        try:
-            return datetime.strptime(text, fmt).date()
-        except ValueError:
-            pass
-    raise ValueError(f"unrecognized source date: {text!r}")
-
-
-def _find_field(row: dict, candidates: tuple[str, ...]) -> object | None:
-    normalized = {str(key).strip().lower().replace("_", "").replace(" ", ""): value
-                  for key, value in row.items()}
-    for candidate in candidates:
-        key = candidate.lower().replace("_", "").replace(" ", "")
-        if key in normalized:
-            return normalized[key]
+def field(row,names):
+    d={str(k).strip().lower().replace("_","").replace(" ",""):v for k,v in row.items()}
+    for n in names:
+        k=n.lower().replace("_","").replace(" ","")
+        if k in d: return d[k]
     return None
 
+def parse_response(payload,start=START_DATE,end=END_DATE):
+    try: outer=json.loads(payload.decode("utf-8-sig"))
+    except (UnicodeDecodeError,json.JSONDecodeError) as e:
+        preview=payload[:180].decode("utf-8",errors="replace").replace("\\n"," ")
+        raise ValueError(f"publisher response is not JSON; body preview={preview!r}") from e
+    if not isinstance(outer,dict) or "d" not in outer: raise ValueError("response missing ASP.NET d field")
+    rows=json.loads(outer["d"]) if isinstance(outer["d"],str) else outer["d"]
+    if not isinstance(rows,list) or not rows: raise ValueError("official TRI response contains no observations")
+    out=[]
+    for i,r in enumerate(rows,1):
+        if not isinstance(r,dict): raise ValueError(f"source row {i} is not an object")
+        name=field(r,("indexName","Index Name","name"))
+        if name is not None and str(name).strip().upper().replace(" ","")!="NIFTY50":
+            raise ValueError(f"unexpected index identity in row {i}: {name!r}")
+        dt=field(r,("HistoricalDate","Date","IndexDate"))
+        val=field(r,("Total Returns Index","TotalReturnsIndex","TRI","triValue","TotalReturnIndexValue"))
+        if dt is None or val is None: raise ValueError(f"source row {i} lacks date or Total Returns Index field")
+        day=parse_date(dt); x=float(str(val).replace(",","").strip())
+        if not math.isfinite(x) or x<=0: raise ValueError(f"invalid TRI value in row {i}")
+        if start<=day<=end: out.append((day,x))
+    if not out: raise ValueError(f"no TRI observations for {start}..{end}")
+    out.sort()
+    ds=[x[0] for x in out]
+    if len(ds)!=len(set(ds)): raise ValueError("duplicate TRI session dates returned by official source")
+    return out
 
-def parse_response(payload: bytes) -> list[tuple[date, float]]:
-    outer = json.loads(payload.decode("utf-8-sig"))
-    if not isinstance(outer, dict) or "d" not in outer:
-        raise ValueError("official response has no expected ASP.NET 'd' payload")
-    inner = outer["d"]
-    rows = json.loads(inner) if isinstance(inner, str) else inner
-    if not isinstance(rows, list) or not rows:
-        raise ValueError("official TRI response contains no observations")
+def chunks():
+    cur=START_DATE
+    while cur<=END_DATE:
+        boundary=date(cur.year,6,30) if cur.month<=6 else date(cur.year,12,31)
+        stop=min(boundary,END_DATE)
+        yield cur,stop
+        cur=stop+timedelta(days=1)
 
-    parsed: list[tuple[date, float]] = []
-    for index, row in enumerate(rows, start=1):
-        if not isinstance(row, dict):
-            raise ValueError(f"source row {index} is not an object")
-        index_name = _find_field(row, ("indexName", "IndexName", "name"))
-        if index_name is not None and str(index_name).strip().upper().replace(" ", "") != "NIFTY50":
-            raise ValueError(f"unexpected index identity in row {index}: {index_name!r}")
-        raw_date = _find_field(row, ("HistoricalDate", "Date", "IndexDate"))
-        raw_value = _find_field(row, (
-            "Total Returns Index", "TotalReturnsIndex", "TRI", "triValue",
-            "TotalReturnIndexValue",
-        ))
-        if raw_date is None or raw_value is None:
-            raise ValueError(f"source row {index} lacks date or Total Returns Index field")
-        session = _date_value(raw_date)
+def fetch_chunk(start,end):
+    cinfo=f"{{'name':'NIFTY 50','startDate':'{start:%d-%b-%Y}','endDate':'{end:%d-%b-%Y}','indexName':'NIFTY 50'}}"
+    req=urllib.request.Request(SOURCE_ENDPOINT,data=json.dumps({"cinfo":cinfo}).encode(),headers={
+        "Content-Type":"application/json; charset=UTF-8","X-Requested-With":"XMLHttpRequest",
+        "Referer":SOURCE_PAGE,"User-Agent":USER_AGENT,"Accept":"application/json, text/plain, */*",
+        "Origin":"https://www.niftyindices.com"},method="POST")
+    error=None
+    for attempt in range(1,4):
         try:
-            value = float(str(raw_value).replace(",", "").strip())
-        except (TypeError, ValueError) as exc:
-            raise ValueError(f"source row {index} has invalid TRI value") from exc
-        if not math.isfinite(value) or value <= 0:
-            raise ValueError(f"source row {index} has non-positive/non-finite TRI")
-        if START_DATE <= session <= END_DATE:
-            parsed.append((session, value))
+            with urllib.request.urlopen(req,timeout=120) as resp:
+                data=resp.read(20*1024*1024+1)
+                if resp.status!=200: raise RuntimeError(f"HTTP {resp.status}")
+                if len(data)>20*1024*1024: raise RuntimeError("response exceeds 20 MiB")
+                return data
+        except urllib.error.HTTPError as e:
+            error=RuntimeError(f"HTTP {e.code}: {e.read(300).decode(errors='replace')}")
+        except Exception as e: error=e
+        if attempt<3: time.sleep(2*attempt)
+    raise RuntimeError(f"request {start}..{end} failed: {error}")
 
-    if not parsed:
-        raise ValueError("no NIFTY 50 TRI observations fall inside requested date range")
-    parsed.sort(key=lambda item: item[0])
-    dates = [item[0] for item in parsed]
-    if len(dates) != len(set(dates)):
-        raise ValueError("duplicate TRI session dates returned by official source")
-    if dates[0] > START_DATE or dates[-1] < date(2024, 12, 31):
-        raise ValueError(
-            f"source coverage does not span requested window: {dates[0]} to {dates[-1]}"
-        )
-    return parsed
+def fetch():
+    RAW_DIR.mkdir(parents=True,exist_ok=True)
+    all_rows=[]; ev=[]
+    for start,end in chunks():
+        path=RAW_DIR/f"nifty50_tri_{start.isoformat()}_{end.isoformat()}.json"
+        raw=fetch_chunk(start,end); path.write_bytes(raw)
+        digest=hashlib.sha256(raw).hexdigest()
+        rows=parse_response(raw,start,end); all_rows.extend(rows)
+        ev.append({"requested_start":start.isoformat(),"requested_end":end.isoformat(),
+                   "raw_response_path":path.as_posix(),"raw_response_bytes":len(raw),
+                   "raw_response_sha256":digest,"record_count":len(rows),
+                   "first_session":rows[0][0].isoformat(),"last_session":rows[-1][0].isoformat()})
+    all_rows.sort(); ds=[r[0] for r in all_rows]
+    if len(ds)!=len(set(ds)): raise ValueError("duplicate dates across TRI chunks")
+    if not ds or ds[0]>START_DATE+timedelta(days=7) or ds[-1]<END_DATE-timedelta(days=7):
+        raise ValueError(f"coverage does not span requested window: {ds[0] if ds else None}..{ds[-1] if ds else None}")
+    return all_rows,ev
 
-
-def fetch() -> tuple[bytes, list[tuple[date, float]]]:
-    # The cinfo string shape is the request convention used by the official page.
-    cinfo = (
-        "{'name':'NIFTY 50','startDate':'01-Jan-2018',"
-        "'endDate':'31-Dec-2024','indexName':'NIFTY 50'}"
-    )
-    body = json.dumps({"cinfo": cinfo}).encode("utf-8")
-    request = urllib.request.Request(
-        SOURCE_ENDPOINT,
-        data=body,
-        headers={
-            "Content-Type": "application/json; charset=UTF-8",
-            "X-Requested-With": "XMLHttpRequest",
-            "Referer": SOURCE_PAGE,
-            "User-Agent": USER_AGENT,
-            "Accept": "application/json, text/plain, */*",
-        },
-        method="POST",
-    )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        if response.status != 200:
-            raise RuntimeError(f"official TRI endpoint returned HTTP {response.status}")
-        payload = response.read(MAX_RESPONSE_BYTES + 1)
-    if len(payload) > MAX_RESPONSE_BYTES:
-        raise RuntimeError("official TRI response exceeds 20 MiB safety limit")
-    rows = parse_response(payload)
-    return payload, rows
-
-
-def main() -> int:
-    retrieved = datetime.now(timezone.utc)
-    ist = retrieved.astimezone(ZoneInfo("Asia/Kolkata"))
-    report = {
-        "experiment_id": "NIFTY50_PILOT_001",
-        "source_page": SOURCE_PAGE,
-        "source_endpoint": SOURCE_ENDPOINT,
-        "source_owner": "NSE Indices",
-        "index": "NIFTY 50",
-        "series": "Total Returns Index",
-        "explicitly_excluded_series": ["Net Total Return Index", "price-return index"],
-        "requested_start": START_DATE.isoformat(),
-        "requested_end": END_DATE.isoformat(),
-        "retrieved_at_utc": retrieved.isoformat(),
-        "retrieved_at_ist": ist.isoformat(),
-        "status": "ACQUISITION_FAILED",
-        "independent_verification": "PENDING",
-        "reviewer": None,
-        "holdout_access_authorized": False,
-    }
+def main():
+    now=datetime.now(timezone.utc)
+    report={"experiment_id":"NIFTY50_PILOT_001","source_page":SOURCE_PAGE,"source_endpoint":SOURCE_ENDPOINT,
+      "source_owner":"NSE Indices","index":"NIFTY 50","series":"Total Returns Index (gross TRI)",
+      "explicitly_excluded_series":["Net Total Return Index","price-return index"],
+      "requested_start":START_DATE.isoformat(),"requested_end":END_DATE.isoformat(),
+      "retrieved_at_utc":now.isoformat(),"retrieved_at_ist":now.astimezone(ZoneInfo("Asia/Kolkata")).isoformat(),
+      "status":"ACQUISITION_FAILED","independent_verification":"PENDING","reviewer":None,"holdout_access_authorized":False}
     try:
-        payload, rows = fetch()
-        digest = hashlib.sha256(payload).hexdigest()
-        RAW_PATH.parent.mkdir(parents=True, exist_ok=True)
-        CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
-        META_PATH.parent.mkdir(parents=True, exist_ok=True)
-        RAW_PATH.write_bytes(payload)
-        with CSV_PATH.open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS)
-            writer.writeheader()
-            for session, value in rows:
-                writer.writerow({
-                    "session_date": session.isoformat(),
-                    "tri_close": format(value, ".10g"),
-                    "source_url": SOURCE_ENDPOINT,
-                    "source_published_at": "",
-                    "evidence_path": RAW_PATH.as_posix(),
-                    "evidence_sha256": digest,
-                    "verification_status": "ACQUIRED_PENDING_INDEPENDENT_REVIEW",
-                    "reviewer": "",
-                    "reviewed_at": "",
-                })
-        report.update({
-            "status": "ACQUIRED_PENDING_CALENDAR_AND_INDEPENDENT_REVIEW",
-            "record_count": len(rows),
-            "first_session": rows[0][0].isoformat(),
-            "last_session": rows[-1][0].isoformat(),
-            "raw_response_path": RAW_PATH.as_posix(),
-            "normalized_csv_path": CSV_PATH.as_posix(),
-            "raw_response_bytes": len(payload),
-            "raw_response_sha256": digest,
-            "normalization": "Date + Total Returns Index only; Net TRI and price index excluded",
-            "calendar_completeness": "NOT_YET_VERIFIED",
-            "source_authenticity_review": "PENDING",
-        })
-    except Exception as exc:
-        report["error"] = f"{type(exc).__name__}: {exc}"
-        print(json.dumps(report, indent=2, sort_keys=True))
-        META_PATH.parent.mkdir(parents=True, exist_ok=True)
-        META_PATH.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        return 1
+        rows,ev=fetch(); CSV_PATH.parent.mkdir(parents=True,exist_ok=True); META_PATH.parent.mkdir(parents=True,exist_ok=True)
+        with CSV_PATH.open("w",newline="",encoding="utf-8") as f:
+            w=csv.DictWriter(f,fieldnames=FIELDS); w.writeheader()
+            for day,val in rows:
+                e=next(x for x in ev if x["requested_start"]<=day.isoformat()<=x["requested_end"])
+                w.writerow({"session_date":day.isoformat(),"tri_close":format(val,".10g"),
+                  "source_url":SOURCE_ENDPOINT,"source_published_at":"","evidence_path":e["raw_response_path"],
+                  "evidence_sha256":e["raw_response_sha256"],"verification_status":"ACQUIRED_PENDING_INDEPENDENT_REVIEW",
+                  "reviewer":"","reviewed_at":""})
+        report.update({"status":"ACQUIRED_PENDING_CALENDAR_AND_INDEPENDENT_REVIEW","record_count":len(rows),
+          "first_session":rows[0][0].isoformat(),"last_session":rows[-1][0].isoformat(),"chunk_evidence":ev,
+          "normalized_csv_path":CSV_PATH.as_posix(),"calendar_completeness":"NOT_YET_VERIFIED",
+          "source_authenticity_review":"PENDING"})
+    except Exception as e:
+        report["error"]=f"{type(e).__name__}: {e}"
+        META_PATH.parent.mkdir(parents=True,exist_ok=True)
+        META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+        print(json.dumps(report,indent=2,sort_keys=True)); return 1
+    META_PATH.write_text(json.dumps(report,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+    print(json.dumps(report,indent=2,sort_keys=True)); return 0
 
-    META_PATH.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps(report, indent=2, sort_keys=True))
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+if __name__=="__main__": sys.exit(main())
