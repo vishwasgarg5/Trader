@@ -30,6 +30,7 @@ def inspect_workbook(payload: bytes) -> dict:
     book = xlrd.open_workbook(file_contents=payload, on_demand=False)
     sheets = []
     hits = []
+    target_scheme_sheets = []
     for sheet in book.sheets():
         preview = []
         for r in range(min(sheet.nrows, 8)):
@@ -37,6 +38,16 @@ def inspect_workbook(payload: bytes) -> dict:
                             for c in range(min(sheet.ncols, 12))])
         sheets.append({"name": sheet.name, "rows": sheet.nrows,
                        "columns": sheet.ncols, "preview": preview})
+        if sheet.name == "NF":
+            target_scheme_sheets.append({
+                "sheet_name": sheet.name,
+                "rows": sheet.nrows,
+                "columns": sheet.ncols,
+                "all_rows": [
+                    [str(sheet.cell_value(r, c)).strip() for c in range(sheet.ncols)]
+                    for r in range(sheet.nrows)
+                ],
+            })
         for r in range(sheet.nrows):
             values = [str(sheet.cell_value(r, c)).strip()
                       for c in range(sheet.ncols)]
@@ -47,6 +58,7 @@ def inspect_workbook(payload: bytes) -> dict:
     return {
         "sheet_count": len(sheets),
         "sheets": sheets,
+        "target_scheme_sheets": target_scheme_sheets,
         "nifty_keyword_rows": hits[:1000],
         "nifty_keyword_row_count": len(hits),
         "nifty_50_index_fund_scheme_name_found": any(
