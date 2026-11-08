@@ -431,7 +431,11 @@ def run() -> dict:
             if budget.stop:
                 break
 
-    complete = all(x["status"] != "PENDING" for x in state["documents"].values())
+    complete = all(
+        x["status"] == "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW"
+        or (x["status"] == "DOCUMENT_UNAVAILABLE" and x.get("cdx_checked", False))
+        for x in state["documents"].values()
+    )
     report = {"schema_version": 1, "run_at_utc": stamp(),
               "status": "COMPLETE" if complete else "PARTIAL",
               "stop_reason": budget.stop or ("ALL_DOCUMENTS_ATTEMPTED" if complete else "WORK_REMAINS"),
