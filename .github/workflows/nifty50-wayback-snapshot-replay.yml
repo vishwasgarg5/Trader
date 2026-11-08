@@ -1,0 +1,50 @@
+name: NIFTY 50 historical snapshot replay (PR validation)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/nifty50-wayback-snapshot-replay.yml"
+      - "scripts/nse_curl_cffi_retry.py"
+      - "tests/test_nse_curl_cffi_retry.py"
+      - "data/reports/weekly_market_document_acquisition.json"
+      - "data/reports/weekly_market_document_refresh.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nifty50-wayback-snapshot-replay-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  replay-candidate-snapshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out proposed PR revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install acquisition clients and test runner
+        run: python -m pip install --disable-pip-version-check pytest requests curl_cffi
+      - name: Run acquisition safeguard tests
+        run: python -m pytest -q tests/test_nse_curl_cffi_retry.py
+      - name: Replay official PDF retries and Wayback CDX candidates
+        run: python scripts/nse_curl_cffi_retry.py
+      - name: Upload candidate snapshots and acquisition reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nifty50-wayback-replay-pr-${{ github.event.pull_request.number }}
+          path: |
+            data/reference/source_documents/wayback_nifty50_snapshots/
+            data/reference/wayback_cdx/
+            data/reports/nse_curl_cffi_retry.json
+            data/reports/wayback_cdx_ingestion.json
+          if-no-files-found: warn
+          retention-days: 30
