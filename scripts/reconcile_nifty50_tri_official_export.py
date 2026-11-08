@@ -28,12 +28,8 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
 
 
 def windows():
-    current = START
-    while current <= END:
-        boundary = date(current.year, 6, 30) if current.month <= 6 else date(current.year, 12, 31)
-        stop = min(boundary, END)
-        yield current, stop
-        current = stop + timedelta(days=1)
+    # One native UI export for the full pilot window avoids repeated requests.
+    yield START, END
 
 
 def fetch(start: date, end: date) -> bytes:
@@ -51,9 +47,9 @@ def fetch(start: date, end: date) -> bytes:
         "Accept": "application/json, text/plain, */*",
     }, method="POST")
     last = None
-    for attempt in range(3):
+    for attempt in range(2):
         try:
-            with urllib.request.urlopen(req, timeout=120) as response:
+            with urllib.request.urlopen(req, timeout=60) as response:
                 body = response.read(20 * 1024 * 1024 + 1)
                 if response.status != 200 or len(body) > 20 * 1024 * 1024:
                     raise RuntimeError(f"unexpected HTTP/response size: {response.status}/{len(body)}")
@@ -66,8 +62,8 @@ def fetch(start: date, end: date) -> bytes:
             last = f"HTTP {exc.code}: {exc.read(300).decode(errors='replace')}"
         except Exception as exc:
             last = f"{type(exc).__name__}: {exc}"
-        if attempt < 2:
-            time.sleep(2 ** attempt)
+        if attempt < 1:
+            time.sleep(2)
     raise RuntimeError(last or "request failed")
 
 
