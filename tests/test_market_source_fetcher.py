@@ -83,7 +83,7 @@ def test_http2_failure_falls_back_to_http11(monkeypatch):
         headers = {"Content-Type": "application/pdf", "Content-Length": "19"}
 
         def iter_content(self, chunk_size):
-            yield b"%PDF-1.7\\nbody\\n%%EOF"
+            yield b"%PDF-1.7\nbody\n%%EOF"
 
     class Session:
         def __init__(self, **kwargs): pass
