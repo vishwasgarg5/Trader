@@ -48,6 +48,25 @@ jobs:
         run: python -m pytest -q tests/test_wayback_nifty50_acquisition.py
       - name: Test unresolved notice retrieval safeguards
         run: python -m pytest -q tests/test_retry_nifty50_unresolved_notice_pdfs.py
+      - name: Build anchor matching review packet on pull requests
+        if: github.event_name == 'pull_request'
+        run: python scripts/build_nifty50_anchor_matching_packet.py
+      - name: Print anchor matching summary
+        if: github.event_name == 'pull_request'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("data/reports/nifty50_anchor_matching_packet.json").read_text())
+          print("ANCHORS", report["anchor_count"])
+          print("PAIRS", report["adjacent_anchor_pair_count"])
+          for pair in report["adjacent_anchor_comparisons"]:
+              print(pair["from_anchor"]["quarter"], "->", pair["to_anchor"]["quarter"],
+                    "observed", len(pair["observed_snapshot_changes"]),
+                    "register_matches", len(pair["observed_changes_with_register_candidate"]),
+                    "unexplained", len(pair["observed_changes_without_register_candidate"]),
+                    "register_not_visible", len(pair["registered_events_not_visible_in_anchor_difference"]))
+          PY
       - name: Run bounded, resumable snapshot acquisition
         if: github.event_name != 'pull_request'
         run: python scripts/wayback_nifty50_acquisition.py
@@ -82,5 +101,13 @@ jobs:
         with:
           name: nifty50-wayback-quarterly-coverage
           path: data/reports/wayback_nifty50_quarterly_coverage.json
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Upload anchor matching review packet
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: nifty50-anchor-matching-review-packet
+          path: data/reports/nifty50_anchor_matching_packet.json
           if-no-files-found: warn
           retention-days: 90
