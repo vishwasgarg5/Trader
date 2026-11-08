@@ -102,7 +102,7 @@ def audit(csv_path: Path = CSV_PATH) -> dict:
 def main() -> int:
     report = audit()
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REPORT_PATH.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    REPORT_PATH.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0
 
