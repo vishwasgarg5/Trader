@@ -146,6 +146,17 @@ class Budget:
         return None
 
 
+def advance_direct_fallback(item: dict, budget: Budget, url: str) -> bool:
+    """Move past a host only after transient retries are exhausted, never on a budget/429 stop."""
+    if budget.stop is not None:
+        return False
+    item["next_direct_index"] += 1
+    item.setdefault("fallback_errors", []).append({
+        "url": url, "at_utc": stamp(), "reason": "request_failed_after_retries"
+    })
+    return True
+
+
 def load_state() -> dict:
     if STATE_PATH.exists():
         state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
@@ -217,12 +228,7 @@ def run() -> dict:
                 if response is None:
                     # Exhausted transient retries on this host: persist progress to the
                     # next official-host fallback. Do not advance on a budget/429 stop.
-                    if budget.stop is None:
-                        item["next_direct_index"] += 1
-                        item.setdefault("fallback_errors", []).append({
-                            "url": url, "at_utc": stamp(),
-                            "reason": "request_failed_after_retries"
-                        })
+                    if advance_direct_fallback(item, budget, url):
                         atomic(STATE_PATH, state)
                     break
                 item["attempts"].append({"url": url, "at_utc": stamp(), "http_status": response.status_code})
