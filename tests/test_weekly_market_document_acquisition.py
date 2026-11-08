@@ -34,3 +34,26 @@ def test_pdf_archive_contract_keeps_execution_gates_closed():
     assert MODULE.MAX_BYTES == 25 * 1024 * 1024
     assert "nsearchives.nseindia.com" in MODULE.ALLOWED_HOSTS
     assert "www.bseindia.com" in MODULE.ALLOWED_HOSTS
+
+
+def test_transient_pdf_download_timeout_is_retried(monkeypatch):
+    calls = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+    def flaky_urlopen(request, timeout):
+        calls.append(timeout)
+        if len(calls) == 1:
+            raise TimeoutError("temporary read timeout")
+        return Response()
+
+    monkeypatch.setattr(MODULE.urllib.request, "urlopen", flaky_urlopen)
+    monkeypatch.setattr(MODULE.time, "sleep", lambda _seconds: None)
+    response = MODULE.open_with_retry(object(), timeout=MODULE.TIMEOUT)
+    assert isinstance(response, Response)
+    assert calls == [MODULE.TIMEOUT, MODULE.TIMEOUT]
