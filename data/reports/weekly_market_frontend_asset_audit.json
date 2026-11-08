@@ -4,67 +4,67 @@
   "changes_to_model_data": false,
   "failures": [
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/corporate-governance.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/shareholder-pattern.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/results-comparison.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format13.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format11.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format10.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/sections/corporate-filings.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/announcements-csp.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_BUYBACKS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/daily-buy-back.js?v=06112026",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
     },
     {
-      "error": "TimeoutError: The read operation timed out",
+      "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "source_page_id": "NSE_CORPORATE_ACTIONS",
       "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/corporate-actions.js",
       "status": "ASSET_UNAVAILABLE_OR_REJECTED"
@@ -83,7 +83,7 @@
   "paper_trading_eligible": false,
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T14:19:11.306624+05:30",
+  "run_at_ist": "2026-11-08T14:30:03.379144+05:30",
   "schema_version": 1,
   "status": "PARTIAL"
 }\n

@@ -4,7 +4,7 @@
   "document_failures": [
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.345,
+      "elapsed_seconds": 122.179,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE_INDICES",
@@ -14,27 +14,7 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.347,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
-      "source_url": "https://www.niftyindices.com/docs/default-source/tracking-error/trackingerror.pdf?sfvrsn=7e449b34_2",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.349,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
-      "source_url": "https://www.niftyindices.com/BenchmarkCodes/nifty_indices_benchmark_codes.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.368,
+      "elapsed_seconds": 122.18,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE_INDICES",
@@ -44,7 +24,27 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.314,
+      "elapsed_seconds": 122.22,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
+      "source_url": "https://www.niftyindices.com/BenchmarkCodes/nifty_indices_benchmark_codes.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.237,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
+      "source_url": "https://www.niftyindices.com/docs/default-source/tracking-error/trackingerror.pdf?sfvrsn=7e449b34_2",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.188,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE_INDICES",
@@ -54,17 +54,7 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.322,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper-2024.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.325,
+      "elapsed_seconds": 122.206,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE_INDICES",
@@ -74,7 +64,17 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.305,
+      "elapsed_seconds": 122.167,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
+      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper-2024.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.225,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE_INDICES",
@@ -84,37 +84,7 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.143,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2023.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.352,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/Nifty%2050%20whitepaper.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.375,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/nifty-50-whitepaper-2024_0.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.461,
+      "elapsed_seconds": 122.256,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE",
@@ -124,7 +94,47 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.34,
+      "elapsed_seconds": 122.286,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
+      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2023.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.283,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE",
+      "source_id": "NSE_NIFTY50_PROFILE",
+      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/nifty-50-whitepaper-2024_0.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.279,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE",
+      "source_id": "NSE_NIFTY50_PROFILE",
+      "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/Nifty%2050%20whitepaper.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.208,
+      "error": "TimeoutError: The read operation timed out",
+      "failure_stage": "request_headers",
+      "publisher": "NSE",
+      "source_id": "NSE_NIFTY50_PROFILE",
+      "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "bytes_received_before_failure": 0,
+      "elapsed_seconds": 122.307,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE",
@@ -134,17 +144,7 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.119,
-      "error": "TimeoutError: The read operation timed out",
-      "failure_stage": "request_headers",
-      "publisher": "NSE",
-      "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/Whitepaper_NIFTY50.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.159,
+      "elapsed_seconds": 122.282,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE",
@@ -154,12 +154,12 @@
     },
     {
       "bytes_received_before_failure": 0,
-      "elapsed_seconds": 122.121,
+      "elapsed_seconds": 122.316,
       "error": "TimeoutError: The read operation timed out",
       "failure_stage": "request_headers",
       "publisher": "NSE",
       "source_id": "NSE_NIFTY50_PROFILE",
-      "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf",
+      "source_url": "https://nsearchives.nseindia.com/content/indices/Whitepaper_NIFTY50.pdf",
       "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
     }
   ],
@@ -178,7 +178,7 @@
   "pdf_documents_archived": 0,
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T14:27:20.688633+05:30",
+  "run_at_ist": "2026-11-08T14:38:12.454605+05:30",
   "schema_version": 1,
   "status": "PARTIAL"
 }
