@@ -210,6 +210,25 @@ def load_state() -> dict:
     return state
 
 
+def parse_cdx_json(payload: bytes | str) -> list[list[str]]:
+    """Parse CDX output=json, treating a valid empty result as zero captures."""
+    if isinstance(payload, bytes):
+        text = payload.decode("utf-8-sig", errors="strict")
+    else:
+        text = payload.lstrip("\\ufeff")
+    try:
+        rows = json.loads(text)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        preview = text[:240].replace("\\n", " ")
+        raise ValueError(f"CDX response is not valid JSON: {type(exc).__name__}; body={preview!r}") from exc
+    if rows == []:
+        return []
+    if not isinstance(rows, list) or any(not isinstance(row, list) for row in rows):
+        preview = text[:240].replace("\\n", " ")
+        raise ValueError(f"CDX JSON must be an array of rows; body={preview!r}")
+    return rows
+
+
 def extract_pdf(data: bytes) -> dict:
     from pypdf import PdfReader
     reader = PdfReader(io.BytesIO(data), strict=False)
@@ -296,11 +315,15 @@ def run() -> dict:
                     break
                 if response.status_code == 200:
                     try:
-                        rows = response.json()
-                        if not isinstance(rows, list) or not rows:
-                            raise ValueError("CDX response is not a non-empty JSON row list")
-                        item["cdx_captures"] = rows[1:]
+                        rows = parse_cdx_json(response.content)
+                        # A syntactically valid empty CDX result is a completed lookup,
+                        # not a parser failure. Preserve the distinction in state/report.
+                        item["cdx_response_row_count"] = len(rows)
+                        item["cdx_captures"] = rows[1:] if rows else []
+                        item["cdx_result"] = "EMPTY" if not rows else "ROWS_RETURNED"
+                        item["cdx_content_type"] = response.headers.get("Content-Type", "")[:160]
                         item["cdx_metadata_sha256"] = digest(response.content)
+                        item.pop("cdx_error", None)
                         item["cdx_checked"] = True
                     except Exception as exc:
                         item["cdx_error"] = f"{type(exc).__name__}: {exc}"[:500]
