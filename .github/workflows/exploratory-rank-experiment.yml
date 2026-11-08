@@ -1,0 +1,67 @@
+name: Exploratory NIFTY 50 Rank Experiment
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs after the existing Sunday market-document refresh (03:30 UTC).
+    - cron: "30 4 * * 0"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exploratory-rank-experiment
+  cancel-in-progress: false
+
+jobs:
+  exploratory-rank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run isolated exploratory experiment when a development panel exists
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          mkdir -p data/experimental/reports
+          if [ -f data/experimental/development_panel.csv ] && [ -f data/experimental/development_manifest.json ]; then
+            python -m trader.exploratory_rank_experiment \
+              --input data/experimental/development_panel.csv \
+              --manifest data/experimental/development_manifest.json \
+              --output data/experimental/reports/rank_experiment_${GITHUB_RUN_ID}.json \
+              --features "ret_1,ret_3,ret_5,ret_10,ret_20,sma_5_gap,sma_20_gap,sma_50_gap,rsi_14,macd_gap,bb_position,atr_pct,volume_ratio,relative_ret_5,relative_ret_10,relative_ret_20,relative_strength_rank_5"
+          else
+            cat > data/experimental/reports/rank_experiment_${GITHUB_RUN_ID}.json <<'JSON'
+          {
+            "status": "WAITING_FOR_DEVELOPMENT_PANEL",
+            "experiment_status": "EXPLORATORY_UNVERIFIED_DATA",
+            "reason": "The development-only panel and explicit holdout-excluding manifest have not been supplied by a verified data preparation stage.",
+            "holdout_accessed": false,
+            "production_model_modified": false,
+            "promotion_eligible": false,
+            "paper_trading_eligible": false,
+            "live_trading_eligible": false
+          }
+          JSON
+          fi
+
+      - name: Upload exploratory report
+        uses: actions/upload-artifact@v4
+        with:
+          name: exploratory-rank-report-${{ github.run_id }}
+          path: data/experimental/reports/rank_experiment_${{ github.run_id }}.json
+          if-no-files-found: error
+          retention-days: 90

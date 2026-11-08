@@ -1,0 +1,81 @@
+{
+  "experiment_id": "NIFTY50_EXPLORATORY_RANK_001",
+  "status": "EXPLORATORY_UNVERIFIED_DATA",
+  "purpose": "Explore cross-sectional NIFTY 50 ranking quality in parallel with the blocked point-in-time data pipeline.",
+  "universe": {
+    "index": "NIFTY_50",
+    "scope": "current_universe_exploration_only",
+    "selection_count": 5,
+    "minimum_eligible_securities_per_date": 30,
+    "universe_expansion_allowed": false
+  },
+  "data": {
+    "dataset_scope": "development_only",
+    "holdout_included": false,
+    "production_data_authorized": false,
+    "required_timestamps": [
+      "signal_date",
+      "signal_timestamp",
+      "feature_available_at",
+      "outcome_end_date"
+    ],
+    "required_outcome": "net_return_after_declared_cost_assumptions",
+    "integrity_status": "NOT_INDEPENDENTLY_VERIFIED"
+  },
+  "features": [
+    "ret_1",
+    "ret_3",
+    "ret_5",
+    "ret_10",
+    "ret_20",
+    "sma_5_gap",
+    "sma_20_gap",
+    "sma_50_gap",
+    "rsi_14",
+    "macd_gap",
+    "bb_position",
+    "atr_pct",
+    "volume_ratio",
+    "relative_ret_5",
+    "relative_ret_10",
+    "relative_ret_20",
+    "relative_strength_rank_5"
+  ],
+  "models": [
+    "regularized_logistic",
+    "regularized_gradient_boosting",
+    "equal_weight_rank_ensemble",
+    "previous_close_5d_momentum"
+  ],
+  "validation": {
+    "method": "chronological_walk_forward",
+    "training_years": 3,
+    "test_months": 3,
+    "purge_rule": "outcome_end_date < test_start",
+    "preprocessing": "within-date percentile ranks; train-only median imputation and scaling",
+    "holdout_access": false,
+    "random_split": false
+  },
+  "reporting": {
+    "metrics": [
+      "top5_precision",
+      "top5_precision_lift",
+      "mean_daily_rank_ic",
+      "mean_daily_auc",
+      "top5_mean_net_return",
+      "universe_mean_net_return",
+      "top5_minus_universe_mean_net_return"
+    ],
+    "label_all_outputs": "EXPLORATORY_UNVERIFIED_DATA",
+    "report_every_run": true
+  },
+  "safety": {
+    "production_model_modified": false,
+    "production_data_modified": false,
+    "research_status": "RESEARCH_HOLD",
+    "promotion_eligible": false,
+    "paper_trading_eligible": false,
+    "live_trading_eligible": false,
+    "final_holdout_status": "LOCKED_NOT_EVALUATED"
+  }
+}
