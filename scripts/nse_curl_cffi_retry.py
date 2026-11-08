@@ -31,6 +31,8 @@ CONNECT_TIMEOUT = 20
 READ_TIMEOUT = 180
 ATTEMPTS = 3
 BACKOFF_SECONDS = (3, 10)
+WAYBACK_REPLAY_ATTEMPTS = 3
+WAYBACK_429_BACKOFF_SECONDS = (10, 30)
 USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 HEADERS = {
@@ -272,6 +274,35 @@ def verify_wayback_cdx_digest(payload: bytes, expected: str) -> str:
     return actual
 
 
+def fetch_wayback_snapshot_with_retry(session, timestamp: str, original: str):
+    """Fetch one CDX capture, retrying only HTTP 429 with bounded backoff."""
+    url = wayback_snapshot_url(timestamp, original)
+    waits = []
+    response = None
+    for attempt in range(1, WAYBACK_REPLAY_ATTEMPTS + 1):
+        response = session.get(
+            url,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "text/csv,*/*;q=0.5",
+                "Accept-Encoding": "identity",
+                "Cache-Control": "no-cache",
+            },
+            timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
+        )
+        if response.status_code != 429 or attempt == WAYBACK_REPLAY_ATTEMPTS:
+            return response, attempt, waits
+        retry_after = getattr(response, "headers", {}).get("Retry-After", "")
+        try:
+            delay = min(60, max(0, int(retry_after)))
+        except (TypeError, ValueError):
+            delay = WAYBACK_429_BACKOFF_SECONDS[attempt - 1]
+        waits.append(delay)
+        if delay:
+            time.sleep(delay)
+    return response, WAYBACK_REPLAY_ATTEMPTS, waits
+
+
 def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[list[str]]) -> list[dict]:
     if target not in SNAPSHOT_CDX_TARGETS:
         return []
@@ -287,11 +318,10 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
             continue
         record = {"capture_timestamp": timestamp, "original_url": original, "cdx_digest": cdx_digest}
         try:
-            response = session.get(
-                wayback_snapshot_url(timestamp, original),
-                headers={"User-Agent": USER_AGENT, "Accept": "text/csv,*/*;q=0.5"},
-                timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
+            response, fetch_attempts, retry_waits = fetch_wayback_snapshot_with_retry(
+                session, timestamp, original
             )
+            record.update({"fetch_attempts": fetch_attempts, "retry_wait_seconds": retry_waits})
             if response.status_code != 200:
                 raise ValueError(f"Wayback snapshot returned HTTP {response.status_code}")
             payload = response.content
