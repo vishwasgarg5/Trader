@@ -115,3 +115,15 @@ def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch
     assert result[0]["status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
     assert result[0]["validation"]["distinct_symbol_count"] == 50
     assert (tmp_path / result[0]["archive_path"].split("/")[-1]).exists()
+
+
+def test_wayback_cdx_json_parser_accepts_array_of_rows_and_rejects_other_shapes():
+    payload = '[["timestamp","original"],["20200601000000","https://example.com/a.csv"]]'
+    assert MODULE.parse_cdx_json(payload)[1][0] == "20200601000000"
+    for invalid in ('not json', '{"rows": []}', '[]'):
+        try:
+            MODULE.parse_cdx_json(invalid)
+        except (ValueError, TypeError):
+            pass
+        else:
+            raise AssertionError("invalid CDX response shape was accepted")
