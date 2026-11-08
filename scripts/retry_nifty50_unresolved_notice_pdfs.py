@@ -207,20 +207,18 @@ def load_state() -> dict:
             "attempts": [], "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         })
         item = state["documents"][doc_id]
-        had_cdx_variant_index = "next_cdx_variant_index" in item
         item.setdefault("cdx_url_variants", cdx_url_variants(original))
         item.setdefault("cdx_queries", [])
-        item.setdefault("next_cdx_variant_index", 0)
-        # Migrate the previous single-host lookup: the original URL was already
-        # checked, so continue with the first alternate host rather than repeating it.
-        if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY" and not had_cdx_variant_index:
-            item["next_cdx_variant_index"] = 1
-            item["cdx_checked"] = False
-            item["cdx_queries"].append({
-                "url": original, "result": "EMPTY",
-                "metadata_sha256": item.get("cdx_metadata_sha256"),
-                "migrated_from_single_host_lookup": True
-            })
+        if "next_cdx_search_index" not in item:
+            # Continue after exact-host lookups already completed by earlier runs.
+            item["next_cdx_search_index"] = (
+                len(item["cdx_url_variants"])
+                if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY"
+                else item.get("next_cdx_variant_index", 0)
+            )
+            if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY":
+                item["cdx_checked"] = False
+        item.setdefault("cdx_search_variants", cdx_search_variants(original))
         if reconcile_exhausted_direct_fallback(item, state.get("attempt_log", [])):
             atomic(STATE_PATH, state)
     return state
@@ -229,6 +227,34 @@ def load_state() -> dict:
 def cdx_url_variants(original: str) -> list[str]:
     """Search the original URL and each already-approved official-host alias."""
     return list(dict.fromkeys([original, *direct_fallbacks(original)]))
+
+
+def cdx_search_variants(original: str) -> list[dict]:
+    """Add domain-wide filename searches after exact official-host URL variants."""
+    filename = pathlib.PurePosixPath(urlsplit(original).path).name
+    exact = [{"url": url, "match_type": "exact"} for url in cdx_url_variants(original)]
+    return exact + [
+        {"url": "niftyindices.com", "match_type": "domain", "filename": filename},
+        {"url": "nseindia.com", "match_type": "domain", "filename": filename},
+    ]
+
+
+def cdx_request_params(variant: dict) -> dict:
+    params = {
+        "url": variant["url"], "output": "json",
+        "collapse": "digest",
+        "fl": "timestamp,original,statuscode,mimetype,digest,length",
+        "from": "2018", "to": "2024"
+    }
+    if variant.get("match_type") == "domain":
+        params["matchType"] = "domain"
+        params["filter"] = [
+            "statuscode:200",
+            f"original:.*{re.escape(variant['filename'])}$"
+        ]
+    else:
+        params["filter"] = "statuscode:200"
+    return params
 
 
 def cdx_capture_rows(rows: list[list[str]]) -> list[list[str]]:
@@ -333,19 +359,18 @@ def run() -> dict:
                     break
                 continue
             while (item["next_direct_index"] >= len(item["direct_urls"])
-                   and item["next_cdx_variant_index"] < len(item["cdx_url_variants"])):
-                cdx_url = item["cdx_url_variants"][item["next_cdx_variant_index"]]
-                response = budget.request(session, CDX, {
-                    "url": cdx_url, "output": "json",
-                    "filter": "statuscode:200", "collapse": "digest",
-                    "fl": "timestamp,original,statuscode,mimetype,digest,length",
-                    "from": "2018", "to": "2024"
-                }, f"cdx:{doc_id}:{item['next_cdx_variant_index']}")
+                   and item["next_cdx_search_index"] < len(item["cdx_search_variants"])):
+                variant_index = item["next_cdx_search_index"]
+                variant = item["cdx_search_variants"][variant_index]
+                cdx_url = variant["url"]
+                response = budget.request(session, CDX, cdx_request_params(variant),
+                                          f"cdx:{doc_id}:{variant_index}:{variant.get('match_type')}")
                 if response is None:
                     break
-                item["next_cdx_variant_index"] += 1
+                item["next_cdx_search_index"] += 1
                 query_record = {
-                    "url": cdx_url, "at_utc": stamp(), "http_status": response.status_code,
+                    "url": cdx_url, "match_type": variant.get("match_type", "exact"),
+                    "at_utc": stamp(), "http_status": response.status_code,
                     "content_type": response.headers.get("Content-Type", "")[:160]
                 }
                 if response.status_code == 200:
@@ -376,7 +401,7 @@ def run() -> dict:
                     query_record["error"] = f"CDX returned HTTP {response.status_code}"
                     item["cdx_error"] = query_record["error"]
                 item.setdefault("cdx_queries", []).append(query_record)
-                item["cdx_checked"] = item["next_cdx_variant_index"] >= len(item["cdx_url_variants"])
+                item["cdx_checked"] = item["next_cdx_search_index"] >= len(item["cdx_search_variants"])
                 item["cdx_result"] = "ROWS_RETURNED" if item["cdx_captures"] else (
                     "EMPTY" if item["cdx_checked"] else "SEARCH_INCOMPLETE"
                 )
