@@ -39,7 +39,7 @@ def test_route_discovery_does_not_authorize_execution():
     assert "candidate_routes_for_manual_review" in pathlib.Path("scripts/weekly_market_frontend_asset_audit.py").read_text()
 
 
-def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
+def test_frontend_asset_fetch_delegates_retry_policy_to_shared_fetcher(monkeypatch):
     calls = []
 
     class Response:
@@ -54,9 +54,11 @@ def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
 
     def flaky_fetch(url, **kwargs):
         calls.append(kwargs)
-        if len(calls) == 1:
-            raise TimeoutError("temporary read timeout")
-        return b"const ok = true;", {"final_url": url, "content_type": "application/javascript"}
+        return b"const ok = true;", {
+            "final_url": url,
+            "content_type": "application/javascript",
+            "attempts": [{"attempt": 1, "ok": False}, {"attempt": 2, "ok": True}],
+        }
 
     monkeypatch.setattr(MODULE, "fetch_bytes", flaky_fetch)
     body, content_type, final_url, transport = MODULE.fetch_asset(
@@ -65,8 +67,9 @@ def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
     assert body == b"const ok = true;"
     assert "javascript" in content_type
     assert final_url.startswith("https://www.nseindia.com/")
-    assert len(calls) == 2
+    assert len(calls) == 1
     assert calls[0]["attempts"] == 3
+    assert len(transport["attempts"]) == 2
     assert calls[0]["timeout"] == (20, MODULE.ASSET_TIMEOUT)
 
 
