@@ -1,0 +1,93 @@
+{
+  "archived_count": 7,
+  "calendar_completeness": "NOT_CERTIFIED",
+  "covered_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "expected_count": 7,
+  "experiment_id": "NIFTY50_PILOT_001",
+  "failures": [],
+  "holdout_access_authorized": false,
+  "independent_review_status": "PENDING",
+  "interpretation": "Archival does not itself extract or certify the full calendar; independent review and session-level reconciliation remain required.",
+  "purpose": "Archive annual NSE Capital Market trading-holiday circulars for 2018-2024 calendar reconciliation",
+  "records": [
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2018_NSE_CMTR_36475.pdf",
+      "bytes": 183198,
+      "circular_reference": "NSE_CMTR_36475",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "d80ac64d32806f9ada629bc96ba91c6d85546dfde405f4468bbfcb194fdb22fb",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR36475.pdf",
+      "year": 2018
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2019_NSE_CMTR_39612.pdf",
+      "bytes": 205887,
+      "circular_reference": "NSE_CMTR_39612",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "3fe8f7356085b75a14efec16e765216d09b99be6f00ff2305d813a864394ab88",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR39612.pdf",
+      "year": 2019
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2020_NSE_CMTR_42877.pdf",
+      "bytes": 192477,
+      "circular_reference": "NSE_CMTR_42877",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "635535e35ddc37e79b188d9f21409210cfdef00f44cde1cb980c4f64ed005eaf",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR42877.pdf",
+      "year": 2020
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2021_NSE_CMTR_46623.pdf",
+      "bytes": 75512,
+      "circular_reference": "NSE_CMTR_46623",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "3c922e234ad2cbe8320cc34507e281477e0ce273ba9ee39d73da2a49d5629add",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR46623.pdf",
+      "year": 2021
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2022_NSE_CMTR_50560.pdf",
+      "bytes": 94485,
+      "circular_reference": "NSE_CMTR_50560",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "731a4f0f3b3633e53ff344ffda23dab0277c4a6608f5a6da8874f931c9be4ead",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR50560.pdf",
+      "year": 2022
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2023_NSE_CMTR_54757.pdf",
+      "bytes": 97353,
+      "circular_reference": "NSE_CMTR_54757",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "035ea9a4178e322549b87c6d72f7fc74c7cec06e2d6074c01ac2a7e6a5a7b621",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR54757.pdf",
+      "year": 2023
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_holiday_circulars/2024_NSE_CMTR_59722.pdf",
+      "bytes": 97711,
+      "circular_reference": "NSE_CMTR_59722",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "sha256": "7157229ba94c179d280dd0d732da56d0992c482e862fac72d9d3879626c77c8a",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR59722.pdf",
+      "year": 2024
+    }
+  ],
+  "research_status": "RESEARCH_HOLD"
+}
