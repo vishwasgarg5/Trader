@@ -159,3 +159,16 @@ def test_load_state_revalidates_existing_snapshot_cdx_digests(tmp_path, monkeypa
     assert mismatching["cdx_digest_validation"] == "MISMATCH"
     assert mismatching["status"] == "CDX_DIGEST_MISMATCH"
     assert mismatching["pre_digest_validation_status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
+
+def test_collapsed_capture_queue_accepts_application_csv_mimetype():
+    target = MODULE.TARGETS[2]
+    original = "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+    rows = [[
+        "timestamp", "original", "statuscode", "mimetype", "digest", "length"
+    ], [
+        "20181028012125", original, "200", "application/csv",
+        "QIL3O7JSQCHCJMBPAH4PFUTYR3DZBKLL", "1671"
+    ]]
+    state = {"pending_snapshots": [], "completed_snapshots": []}
+    assert MODULE.add_collapsed_captures(state, target, rows) == 1
+    assert state["pending_snapshots"][0]["quarter"] == "2018-Q4"
