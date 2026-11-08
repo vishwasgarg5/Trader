@@ -55,7 +55,7 @@
       "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
     }
   ],
-  "completed_snapshot_downloads": 9,
+  "completed_snapshot_downloads": 12,
   "full_cdx_metadata_records": [
     {
       "archive_path": "data/reference/wayback_nifty50_cdx/full_2dc6eb7b6c42c183bf1e.json",
@@ -478,25 +478,46 @@
   "quarter_count": 28,
   "quarterly_coverage": {
     "2018-Q1": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "684f58aad740079458d5f204a250ac0eec98de6180d2b3121dc469ba697f0f88",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20180128030056"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 4,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2018-Q2": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "1300ed616e536040b1379e1151383581bfe10c9fd100bb410e46f4a67f2e678d",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20180530101725"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 2,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2018-Q3": {
-      "captures": [],
-      "downloaded_capture_count": 0,
+      "captures": [
+        {
+          "original_url": "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+          "sha256": "ab2ba82a0eb5e4deb890cec8ebecaf4644a4ca695ebc688dbaec4d580f14e236",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20180929103632"
+        }
+      ],
+      "downloaded_capture_count": 1,
       "full_cdx_capture_count": 4,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2018-Q4": {
       "captures": [],
@@ -657,14 +678,14 @@
         {
           "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
           "sha256": "6291c898e93077ba72aa42e9b10c8a49ea259a3c541ed98f24445f36ece16397",
-          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "status": "CDX_DIGEST_MISMATCH",
           "timestamp": "20230522051228"
         }
       ],
       "downloaded_capture_count": 1,
       "full_cdx_capture_count": 1,
-      "status": "USABLE",
-      "usable_capture_count": 1
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
     },
     "2023-Q3": {
       "captures": [],
@@ -713,14 +734,14 @@
         {
           "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
           "sha256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
-          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "status": "CDX_DIGEST_MISMATCH",
           "timestamp": "20240819184501"
         }
       ],
       "downloaded_capture_count": 1,
       "full_cdx_capture_count": 3,
-      "status": "USABLE",
-      "usable_capture_count": 1
+      "status": "AVAILABLE",
+      "usable_capture_count": 0
     },
     "2024-Q4": {
       "captures": [
@@ -738,15 +759,15 @@
     }
   },
   "request_budget": 24,
-  "requests_this_run": 0,
-  "run_at_utc": "2026-11-08T10:42:56.633599+00:00",
+  "requests_this_run": 3,
+  "run_at_utc": "2026-11-08T10:51:03.176198+00:00",
   "runtime_budget_seconds": 1200,
-  "runtime_seconds": 0.0,
+  "runtime_seconds": 8.04,
   "schema_version": 1,
   "status": "COMPLETE",
   "stop_reason": "WORK_REMAINING",
   "target_errors": [],
   "targets_complete": 6,
   "targets_total": 6,
-  "usable_quarters": 9
+  "usable_quarters": 10
 }
