@@ -11,6 +11,7 @@ import json
 import pathlib
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from urllib.parse import quote, urlsplit
 
@@ -52,6 +53,17 @@ def now_utc() -> str:
 def allowed_url(url: str) -> bool:
     parsed = urlsplit(url)
     return parsed.scheme == "https" and (parsed.hostname or "").lower() in ALLOWED_HOSTS
+
+
+def validate_pdf(body: bytes, content_length: str | None = None) -> None:
+    if content_length:
+        expected = int(content_length)
+        if expected != len(body):
+            raise ValueError(f"Content-Length mismatch: expected {expected}, received {len(body)}")
+    if not body.startswith(b"%PDF"):
+        raise ValueError("body does not start with %PDF")
+    if not body.rstrip().endswith(b"%%EOF"):
+        raise ValueError("body does not end with %%EOF")
 
 
 def get_egress_ip() -> dict:
@@ -106,14 +118,7 @@ def download_one(item: dict) -> dict:
                             raise ValueError(f"document exceeded {MAX_BYTES} byte cap")
                         chunks.append(chunk)
                 body = b"".join(chunks)
-                if record["content_length"]:
-                    expected = int(record["content_length"])
-                    if expected != len(body):
-                        raise ValueError(f"Content-Length mismatch: expected {expected}, received {len(body)}")
-                if not body.startswith(b"%PDF"):
-                    raise ValueError("body does not start with %PDF")
-                if not body.rstrip().endswith(b"%%EOF"):
-                    raise ValueError("body does not end with %%EOF")
+                validate_pdf(body, record["content_length"])
                 digest = hashlib.sha256(body).hexdigest()
                 filename = re.sub(r"[^A-Za-z0-9._-]", "_", pathlib.PurePosixPath(urlsplit(record["final_url"]).path).name)[:120]
                 if not filename.lower().endswith(".pdf"):
@@ -148,18 +153,26 @@ def transport_check(url: str, method: str) -> dict:
     item = {"url": url, "method": method}
     try:
         if method == "requests":
-            response = requests.get(url, headers=HEADERS, timeout=(CONNECT_TIMEOUT, 30), stream=True)
+            with requests.get(url, headers=HEADERS, timeout=(CONNECT_TIMEOUT, 30), stream=True) as response:
+                count = 0
+                for chunk in response.iter_content(16 * 1024):
+                    if chunk:
+                        count += len(chunk)
+                        if count >= 128 * 1024:
+                            break
+                item.update({"http_status": response.status_code, "bytes_received": count,
+                             "content_type": response.headers.get("Content-Type"), "ok": response.status_code == 200})
         else:
             with c_requests.Session(impersonate="chrome") as session:
                 response = session.get(url, headers=HEADERS, timeout=(CONNECT_TIMEOUT, 30), stream=True)
-        count = 0
-        for chunk in response.iter_content(16 * 1024):
-            if chunk:
-                count += len(chunk)
-                if count >= 128 * 1024:
-                    break
-        item.update({"http_status": response.status_code, "bytes_received": count,
-                     "content_type": response.headers.get("Content-Type"), "ok": response.status_code == 200})
+                count = 0
+                for chunk in response.iter_content(16 * 1024):
+                    if chunk:
+                        count += len(chunk)
+                        if count >= 128 * 1024:
+                            break
+                item.update({"http_status": response.status_code, "bytes_received": count,
+                             "content_type": response.headers.get("Content-Type"), "ok": response.status_code == 200})
     except Exception as exc:
         item.update({"ok": False, "error": f"{type(exc).__name__}: {exc}"[:500]})
     item["elapsed_seconds"] = round(time.monotonic() - started, 3)
@@ -223,7 +236,6 @@ def ingest_wayback() -> dict:
 def main() -> int:
     egress = get_egress_ip()
     candidates = source_candidates()
-    results = [download_one(item) for item in candidates]
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     report = {"schema_version": 1, "run_at_utc": now_utc(), "egress_ip": egress,
               "transport_checks": [
