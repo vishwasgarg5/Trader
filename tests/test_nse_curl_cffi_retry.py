@@ -167,7 +167,7 @@ def test_wayback_snapshot_retries_429_with_identity_encoding_and_bounded_backoff
     monkeypatch.setattr(MODULE.time, "sleep", waits.append)
     csv_rows = ["Company Name,Industry,Symbol,Series,ISIN Code"]
     csv_rows.extend(f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}" for i in range(50))
-    payload = ("\\n".join(csv_rows) + "\\n").encode()
+    payload = ("\n".join(csv_rows) + "\n").encode()
     digest = MODULE.wayback_cdx_sha1_digest(payload)
     cdx_rows = [
         ["timestamp", "original", "statuscode", "mimetype", "digest", "length"],
