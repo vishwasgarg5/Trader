@@ -76,6 +76,20 @@ def test_retry_after_supports_seconds_and_http_date():
     assert MODULE.parse_retry_after(None) is None
 
 
+
+def test_capture_target_accepts_http_default_port_variant_without_widening_allowlist():
+    target = MODULE.TARGETS[0]
+    archived_original = "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv"
+    assert MODULE.capture_matches_target(archived_original, target)
+    assert not MODULE.capture_matches_target(
+        "https://evil.example/IndexConstituent/ind_nifty50list.csv", target
+    )
+    assert not MODULE.capture_matches_target(
+        "https://www.niftyindices.com/other.csv", target
+    )
+    assert MODULE.snapshot_url("20180128030056", archived_original).endswith(archived_original)
+
+
 def test_quarter_matrix_has_28_quarters():
     assert len(MODULE.all_quarters()) == 28
     assert MODULE.all_quarters()[0] == "2018-Q1"
