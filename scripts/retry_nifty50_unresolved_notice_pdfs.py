@@ -2,6 +2,7 @@
 """Resumable retrieval of three unresolved official NSE Indices notice PDFs."""
 from __future__ import annotations
 
+import base64
 import hashlib
 import io
 import json
@@ -45,6 +46,15 @@ def stamp() -> str:
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def wayback_cdx_digest(data: bytes) -> str:
+    """Return the unpadded Base32 SHA-1 digest used by Wayback CDX."""
+    return base64.b32encode(hashlib.sha1(data).digest()).decode("ascii").rstrip("=")
+
+
+def cdx_digest_matches(data: bytes, expected: str) -> bool:
+    return bool(expected) and wayback_cdx_digest(data) == expected.strip().upper()
 
 
 def atomic(path: pathlib.Path, value: dict) -> None:
@@ -120,7 +130,8 @@ class Budget:
             self.state["last_request_at_utc"] = self.last.isoformat()
             try:
                 response = session.get(url, params=params, headers={
-                    "User-Agent": USER_AGENT, "Accept": "application/pdf,application/json,*/*;q=0.5"
+                    "User-Agent": USER_AGENT, "Accept": "application/pdf,application/json,*/*;q=0.5",
+                    "Accept-Encoding": "identity"
                 }, timeout=TIMEOUT)
             except requests.RequestException as exc:
                 self.state["attempt_log"].append({"at_utc": stamp(), "url": url, "label": label,
@@ -313,10 +324,19 @@ def run() -> dict:
                                          "http_status": response.status_code, "cdx_digest": cdx_digest})
                 item["next_capture_index"] += 1
                 if response.status_code == 200:
+                    actual_cdx_digest = wayback_cdx_digest(response.content)
+                    digest_match = cdx_digest_matches(response.content, cdx_digest)
+                    item["attempts"][-1]["cdx_digest_actual"] = actual_cdx_digest
+                    item["attempts"][-1]["cdx_digest_validation"] = "MATCH" if digest_match else "MISMATCH"
+                    if not digest_match:
+                        item["attempts"][-1]["validation_error"] = "Wayback replay body does not match the CDX SHA-1 digest"
+                        atomic(STATE_PATH, state)
+                        continue
                     try:
                         saved = save_pdf(doc_id, response.content, archive_url, "WAYBACK_SUPPLEMENTARY_BYTES")
                         item.update(saved)
                         item["cdx_digest"] = cdx_digest
+                        item["cdx_digest_validation"] = "MATCH"
                         break
                     except Exception as exc:
                         item["attempts"][-1]["validation_error"] = f"{type(exc).__name__}: {exc}"[:500]
