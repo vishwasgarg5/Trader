@@ -375,7 +375,7 @@ def add_full_metadata_quarter_candidates(state: dict, records: list[dict]) -> in
                 continue
             if capture.get("statuscode") != "200" or capture.get("mimetype", "").lower() not in ALLOWED_MIME:
                 continue
-            if not re.fullmatch(r"\\d{14}", timestamp):
+            if not re.fullmatch("[0-9]{14}", timestamp):
                 continue
             if not any(capture_matches_target(original, target) for target in TARGETS):
                 continue
