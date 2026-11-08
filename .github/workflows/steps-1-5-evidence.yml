@@ -58,6 +58,17 @@ jobs:
           echo "Acquisition exit code: $code"
           # A source outage is recorded as a diagnostic; it does not authorize substitution.
 
+      - name: Discover and archive official NSE Indices membership notice candidates (2018-2024)
+        if: always()
+        continue-on-error: true
+        run: |
+          set +e
+          python -m trader.nifty_notice_discovery --start-year 2018 --end-year 2024
+          code=$?
+          echo "Membership archive discovery exit code: $code"
+          echo "- Membership archive discovery exit code: $code" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
       - name: Audit Steps 2-5 evidence and cost configuration
         if: always()
         run: |
@@ -131,7 +142,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- data/reference/nifty50_tri.csv data/reference/source_documents/nifty50_tri data/reports
+          git add -A -- data/reference data/reports
           if ! git diff --cached --quiet; then
             git commit -m "Record automated Nifty 50 TRI acquisition and Steps 1-5 evidence audit"
             git push origin HEAD:main
