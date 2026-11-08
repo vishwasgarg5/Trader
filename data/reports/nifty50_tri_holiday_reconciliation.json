@@ -1,0 +1,2756 @@
+{
+  "audit_type": "HOLIDAY_CIRCULAR_TO_TRI_DIAGNOSTIC_CROSSCHECK",
+  "calendar_completeness": "NOT_CERTIFIED",
+  "counts": {
+    "candidate_holiday_dates_absent_from_tri": 124,
+    "candidate_holiday_dates_present_in_tri": 8,
+    "candidate_holiday_rows": 132,
+    "distinct_candidate_holiday_dates": 132,
+    "distinct_unexplained_weekday_dates": 2,
+    "gaps_over_three_calendar_days": 39,
+    "gaps_with_unexplained_weekdays": 2,
+    "gaps_without_unexplained_weekdays": 37,
+    "holiday_rows_missing_source_weekday": 0,
+    "holiday_weekday_mismatch_flags": 0,
+    "weekend_session_register_date_count": 7,
+    "weekend_session_register_dates_present_in_tri": 7
+  },
+  "experiment_id": "NIFTY50_PILOT_001",
+  "gap_checks": [
+    {
+      "annual_circular_holiday_dates": [
+        "2018-01-26"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2018-01-26",
+        "2018-01-27",
+        "2018-01-28"
+      ],
+      "next_session": "2018-01-29",
+      "previous_session": "2018-01-25",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2018-01-27",
+        "2018-01-28"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2018-03-02"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2018-03-02",
+        "2018-03-03",
+        "2018-03-04"
+      ],
+      "next_session": "2018-03-05",
+      "previous_session": "2018-03-01",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2018-03-03",
+        "2018-03-04"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2018-03-29",
+        "2018-03-30"
+      ],
+      "calendar_days_between": 5,
+      "intervening_dates": [
+        "2018-03-29",
+        "2018-03-30",
+        "2018-03-31",
+        "2018-04-01"
+      ],
+      "next_session": "2018-04-02",
+      "previous_session": "2018-03-28",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2018-03-31",
+        "2018-04-01"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2018-11-23"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2018-11-23",
+        "2018-11-24",
+        "2018-11-25"
+      ],
+      "next_session": "2018-11-26",
+      "previous_session": "2018-11-22",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2018-11-24",
+        "2018-11-25"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2019-03-04"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-03-02",
+        "2019-03-03",
+        "2019-03-04"
+      ],
+      "next_session": "2019-03-05",
+      "previous_session": "2019-03-01",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2019-03-02",
+        "2019-03-03"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2019-04-19"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-04-19",
+        "2019-04-20",
+        "2019-04-21"
+      ],
+      "next_session": "2019-04-22",
+      "previous_session": "2019-04-18",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2019-04-20",
+        "2019-04-21"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-04-27",
+        "2019-04-28",
+        "2019-04-29"
+      ],
+      "next_session": "2019-04-30",
+      "previous_session": "2019-04-26",
+      "status": "UNRESOLVED_WEEKDAY_GAP",
+      "unexplained_weekday_dates": [
+        "2019-04-29"
+      ],
+      "weekend_dates": [
+        "2019-04-27",
+        "2019-04-28"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2019-08-12"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-08-10",
+        "2019-08-11",
+        "2019-08-12"
+      ],
+      "next_session": "2019-08-13",
+      "previous_session": "2019-08-09",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2019-08-10",
+        "2019-08-11"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2019-09-02"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-08-31",
+        "2019-09-01",
+        "2019-09-02"
+      ],
+      "next_session": "2019-09-03",
+      "previous_session": "2019-08-30",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2019-08-31",
+        "2019-09-01"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2019-10-19",
+        "2019-10-20",
+        "2019-10-21"
+      ],
+      "next_session": "2019-10-22",
+      "previous_session": "2019-10-18",
+      "status": "UNRESOLVED_WEEKDAY_GAP",
+      "unexplained_weekday_dates": [
+        "2019-10-21"
+      ],
+      "weekend_dates": [
+        "2019-10-19",
+        "2019-10-20"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-02-21"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-02-21",
+        "2020-02-22",
+        "2020-02-23"
+      ],
+      "next_session": "2020-02-24",
+      "previous_session": "2020-02-20",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-02-22",
+        "2020-02-23"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-04-06"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-04-04",
+        "2020-04-05",
+        "2020-04-06"
+      ],
+      "next_session": "2020-04-07",
+      "previous_session": "2020-04-03",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-04-04",
+        "2020-04-05"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-04-10"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-04-10",
+        "2020-04-11",
+        "2020-04-12"
+      ],
+      "next_session": "2020-04-13",
+      "previous_session": "2020-04-09",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-04-11",
+        "2020-04-12"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-05-01"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-05-01",
+        "2020-05-02",
+        "2020-05-03"
+      ],
+      "next_session": "2020-05-04",
+      "previous_session": "2020-04-30",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-05-02",
+        "2020-05-03"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-05-25"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-05-23",
+        "2020-05-24",
+        "2020-05-25"
+      ],
+      "next_session": "2020-05-26",
+      "previous_session": "2020-05-22",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-05-23",
+        "2020-05-24"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-10-02"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-10-02",
+        "2020-10-03",
+        "2020-10-04"
+      ],
+      "next_session": "2020-10-05",
+      "previous_session": "2020-10-01",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-10-03",
+        "2020-10-04"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-11-30"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-11-28",
+        "2020-11-29",
+        "2020-11-30"
+      ],
+      "next_session": "2020-12-01",
+      "previous_session": "2020-11-27",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-11-28",
+        "2020-11-29"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2020-12-25"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2020-12-25",
+        "2020-12-26",
+        "2020-12-27"
+      ],
+      "next_session": "2020-12-28",
+      "previous_session": "2020-12-24",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2020-12-26",
+        "2020-12-27"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-03-29"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-03-27",
+        "2021-03-28",
+        "2021-03-29"
+      ],
+      "next_session": "2021-03-30",
+      "previous_session": "2021-03-26",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-03-27",
+        "2021-03-28"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-04-02"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-04-02",
+        "2021-04-03",
+        "2021-04-04"
+      ],
+      "next_session": "2021-04-05",
+      "previous_session": "2021-04-01",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-04-03",
+        "2021-04-04"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-09-10"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-09-10",
+        "2021-09-11",
+        "2021-09-12"
+      ],
+      "next_session": "2021-09-13",
+      "previous_session": "2021-09-09",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-09-11",
+        "2021-09-12"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-10-15"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-10-15",
+        "2021-10-16",
+        "2021-10-17"
+      ],
+      "next_session": "2021-10-18",
+      "previous_session": "2021-10-14",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-10-16",
+        "2021-10-17"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-11-05"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-11-05",
+        "2021-11-06",
+        "2021-11-07"
+      ],
+      "next_session": "2021-11-08",
+      "previous_session": "2021-11-04",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-11-06",
+        "2021-11-07"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2021-11-19"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2021-11-19",
+        "2021-11-20",
+        "2021-11-21"
+      ],
+      "next_session": "2021-11-22",
+      "previous_session": "2021-11-18",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2021-11-20",
+        "2021-11-21"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2022-03-18"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2022-03-18",
+        "2022-03-19",
+        "2022-03-20"
+      ],
+      "next_session": "2022-03-21",
+      "previous_session": "2022-03-17",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2022-03-19",
+        "2022-03-20"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2022-04-14",
+        "2022-04-15"
+      ],
+      "calendar_days_between": 5,
+      "intervening_dates": [
+        "2022-04-14",
+        "2022-04-15",
+        "2022-04-16",
+        "2022-04-17"
+      ],
+      "next_session": "2022-04-18",
+      "previous_session": "2022-04-13",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2022-04-16",
+        "2022-04-17"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2022-08-15"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2022-08-13",
+        "2022-08-14",
+        "2022-08-15"
+      ],
+      "next_session": "2022-08-16",
+      "previous_session": "2022-08-12",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2022-08-13",
+        "2022-08-14"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-04-07"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-04-07",
+        "2023-04-08",
+        "2023-04-09"
+      ],
+      "next_session": "2023-04-10",
+      "previous_session": "2023-04-06",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-04-08",
+        "2023-04-09"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-04-14"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-04-14",
+        "2023-04-15",
+        "2023-04-16"
+      ],
+      "next_session": "2023-04-17",
+      "previous_session": "2023-04-13",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-04-15",
+        "2023-04-16"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-05-01"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-04-29",
+        "2023-04-30",
+        "2023-05-01"
+      ],
+      "next_session": "2023-05-02",
+      "previous_session": "2023-04-28",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-04-29",
+        "2023-04-30"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-10-02"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-09-30",
+        "2023-10-01",
+        "2023-10-02"
+      ],
+      "next_session": "2023-10-03",
+      "previous_session": "2023-09-29",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-09-30",
+        "2023-10-01"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-11-27"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-11-25",
+        "2023-11-26",
+        "2023-11-27"
+      ],
+      "next_session": "2023-11-28",
+      "previous_session": "2023-11-24",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-11-25",
+        "2023-11-26"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2023-12-25"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2023-12-23",
+        "2023-12-24",
+        "2023-12-25"
+      ],
+      "next_session": "2023-12-26",
+      "previous_session": "2023-12-22",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2023-12-23",
+        "2023-12-24"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-01-26"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-01-26",
+        "2024-01-27",
+        "2024-01-28"
+      ],
+      "next_session": "2024-01-29",
+      "previous_session": "2024-01-25",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-01-27",
+        "2024-01-28"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-03-08"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-03-08",
+        "2024-03-09",
+        "2024-03-10"
+      ],
+      "next_session": "2024-03-11",
+      "previous_session": "2024-03-07",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-03-09",
+        "2024-03-10"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-03-25"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-03-23",
+        "2024-03-24",
+        "2024-03-25"
+      ],
+      "next_session": "2024-03-26",
+      "previous_session": "2024-03-22",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-03-23",
+        "2024-03-24"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-03-29"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-03-29",
+        "2024-03-30",
+        "2024-03-31"
+      ],
+      "next_session": "2024-04-01",
+      "previous_session": "2024-03-28",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-03-30",
+        "2024-03-31"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-06-17"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-06-15",
+        "2024-06-16",
+        "2024-06-17"
+      ],
+      "next_session": "2024-06-18",
+      "previous_session": "2024-06-14",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-06-15",
+        "2024-06-16"
+      ]
+    },
+    {
+      "annual_circular_holiday_dates": [
+        "2024-11-15"
+      ],
+      "calendar_days_between": 4,
+      "intervening_dates": [
+        "2024-11-15",
+        "2024-11-16",
+        "2024-11-17"
+      ],
+      "next_session": "2024-11-18",
+      "previous_session": "2024-11-14",
+      "status": "NO_UNEXPLAINED_WEEKDAY_IN_GAP",
+      "unexplained_weekday_dates": [],
+      "weekend_dates": [
+        "2024-11-16",
+        "2024-11-17"
+      ]
+    }
+  ],
+  "holdout_access_authorized": false,
+  "holiday_date_checks": [
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-02-13",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-03-02",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-03-29",
+      "description": "Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-03-30",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-08-22",
+      "description": "Bakri ID",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-09-13",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-09-20",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-10-02",
+      "description": "Mahatama Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-10-18",
+      "description": "Dasera",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-11-07",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 31,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-11-08",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 14,
+      "source_text_line_number": 32,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-11-23",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 15,
+      "source_text_line_number": 33,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2018-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 16,
+      "source_text_line_number": 34,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2018-03-25",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 39,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2018-04-14",
+      "description": "Dr.Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 40,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2018-06-16",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 41,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-03-04",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-03-21",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-04-17",
+      "description": "Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-04-19",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-06-05",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-08-12",
+      "description": "Bakri Id",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-09-02",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-09-10",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-10-08",
+      "description": "Dasera",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-10-28",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-11-12",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 14,
+      "source_text_line_number": 31,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2019-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 15,
+      "source_text_line_number": 32,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2019-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 37,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2019-04-13",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 38,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2019-04-14",
+      "description": "Dr.Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 39,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2019-10-27",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 40,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": true
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-02-21",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 17,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-03-10",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-04-02",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-04-06",
+      "description": "Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-04-10",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-04-14",
+      "description": "Dr.Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-05-25",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-11-16",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-11-30",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2020-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 32,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-08-01",
+      "description": "Bakri Id",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 33,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 34,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-08-22",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 35,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-08-30",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 36,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-10-25",
+      "description": "Dasera",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 37,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2020-11-14",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 38,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": true
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 17,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-03-11",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-03-29",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-04-02",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-04-14",
+      "description": "Dr.Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-04-21",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-05-13",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-07-21",
+      "description": "Bakri Id",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-08-19",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-09-10",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-10-15",
+      "description": "Dussehra",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-11-04",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-11-05",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2021-11-19",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 14,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2021-04-25",
+      "description": "Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 34,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2021-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 35,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2021-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 36,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2021-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 37,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2021-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 38,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-03-01",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-03-18",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-04-14",
+      "description": "Dr. Baba Saheb Ambedkar Jayanti/ Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-04-15",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-05-03",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-08-09",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-08-31",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-10-05",
+      "description": "Dussehra",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-10-24",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-10-26",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2022-11-08",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2022-04-10",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 36,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2022-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 37,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2022-07-10",
+      "description": "Bakri Id",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 38,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2022-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 39,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2022-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 40,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-03-07",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-03-30",
+      "description": "Ram Navami",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-04-04",
+      "description": "Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-04-07",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-04-14",
+      "description": "Dr. Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-06-28",
+      "description": "Bakri Id",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-08-15",
+      "description": "Independence Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-09-19",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-10-24",
+      "description": "Dussehra",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-11-14",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Tuesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-11-27",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 14,
+      "source_text_line_number": 31,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2023-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 15,
+      "source_text_line_number": 32,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2023-02-18",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 9,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2023-04-22",
+      "description": "Id-Ul-Fitr (Ramzan ID)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 10,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2023-07-29",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 11,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2023-11-12",
+      "description": "Diwali-Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 12,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": true
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-01-26",
+      "description": "Republic Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 18,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-03-08",
+      "description": "Mahashivratri",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 19,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-03-25",
+      "description": "Holi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 20,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-03-29",
+      "description": "Good Friday",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 21,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-04-11",
+      "description": "Id-Ul-Fitr (Ramadan Eid)",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 22,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-04-17",
+      "description": "Shri Ram Navmi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 6,
+      "source_text_line_number": 23,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-05-01",
+      "description": "Maharashtra Day",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 7,
+      "source_text_line_number": 24,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-06-17",
+      "description": "Bakri Id",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 8,
+      "source_text_line_number": 25,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Monday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-07-17",
+      "description": "Moharram",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 9,
+      "source_text_line_number": 26,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-08-15",
+      "description": "Independence Day/Parsi New Year",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 10,
+      "source_text_line_number": 27,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Thursday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-10-02",
+      "description": "Mahatma Gandhi Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 11,
+      "source_text_line_number": 28,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-11-01",
+      "description": "Diwali Laxmi Pujan*",
+      "interpretation": "TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_REVIEW_SESSION_TYPE",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 12,
+      "source_text_line_number": 29,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": true,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-11-15",
+      "description": "Gurunanak Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 13,
+      "source_text_line_number": 30,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Friday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKDAY",
+      "date": "2024-12-25",
+      "description": "Christmas",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 1,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 14,
+      "source_text_line_number": 31,
+      "table_type": "WEEKDAY_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Wednesday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2024-04-14",
+      "description": "Dr. Baba Saheb Ambedkar Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 1,
+      "source_text_line_number": 8,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2024-04-21",
+      "description": "Shri Mahavir Jayanti",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 2,
+      "source_text_line_number": 9,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Sunday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2024-09-07",
+      "description": "Ganesh Chaturthi",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 3,
+      "source_text_line_number": 10,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2024-10-12",
+      "description": "Dussehra",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 4,
+      "source_text_line_number": 11,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    },
+    {
+      "calendar_day_type": "WEEKEND",
+      "date": "2024-11-02",
+      "description": "Diwali-Balipratipada",
+      "interpretation": "NO_TRI_OBSERVATION_ON_CIRCULAR_HOLIDAY_EXPECTED_CLOSED",
+      "page_number": 2,
+      "review_status": "UNREVIEWED_EXTRACTION_CANDIDATE",
+      "row_number": 5,
+      "source_text_line_number": 12,
+      "table_type": "WEEKEND_DATED_HOLIDAY_TABLE",
+      "tri_observation_present": false,
+      "weekday_in_source": "Saturday",
+      "weekday_matches_date": true,
+      "weekend_session_register_match": false
+    }
+  ],
+  "holiday_extraction_source": "data/reports/nifty50_tri_holiday_extraction.json",
+  "independent_review_status": "PENDING",
+  "interpretation": "This is a diagnostic comparison only. A circular holiday absent from TRI is consistent with a closure but does not prove the entire calendar is complete. A TRI observation on a circular holiday requires session-type review. Unexplained weekdays may be missing data, ad-hoc closures, or other exchange events and must not be auto-classified.",
+  "research_status": "RESEARCH_HOLD",
+  "source_authenticity": "PENDING_INDEPENDENT_REVIEW",
+  "tri_source": "data/reference/nifty50_tri.csv",
+  "weekend_session_register_source": "data/reference/nifty50_tri_weekend_session_review.csv"
+}
