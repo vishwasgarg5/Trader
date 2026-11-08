@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEGACY_ROOT = "https://archives.nseindia.com/content/historical/EQUITIES"
 UDIFF_ROOT = "https://nsearchives.nseindia.com/content/cm"
 USER_AGENT = "Trader-NIFTY50-Bhavcopy-Acquisition/1.0 (+https://github.com/vishwasgarg5/Trader)"
-TIMEOUT = (15, 60)
+TIMEOUT = (15, 30)
 MAX_BYTES = 30 * 1024 * 1024
 CANONICAL_FIELDS = [
     "trade_date", "symbol", "series", "isin", "open", "high", "low",
@@ -178,14 +178,27 @@ def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -
         url = bhavcopy_url(day)
         try:
             response = None
+            last_error = None
             for attempt in range(3):
-                response = session.get(url, timeout=TIMEOUT)
-                if response.status_code == 429 or response.status_code in (500, 502, 503, 504):
+                try:
+                    response = session.get(url, timeout=TIMEOUT)
+                    if response.status_code == 429 or response.status_code in (500, 502, 503, 504):
+                        if attempt < 2:
+                            response.close()
+                            time.sleep(3 * (attempt + 1))
+                            continue
+                    response.raise_for_status()
+                    break
+                except requests.RequestException as exc:
+                    last_error = exc
+                    if response is not None:
+                        response.close()
                     if attempt < 2:
                         time.sleep(3 * (attempt + 1))
                         continue
-                break
-            response.raise_for_status()
+                    raise
+            if response is None:
+                raise RuntimeError(f"bhavcopy request did not return a response: {last_error}")
             payload = response.content
             if len(payload) > MAX_BYTES:
                 raise ValueError("download exceeds 30 MiB")
@@ -203,8 +216,8 @@ def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -
                 "trade_date": day, "url": url, "http_status": response.status_code,
                 "sha256": sha, "bytes_received": len(payload), "zip_member": member,
                 "eq_rows": len(rows), "distinct_symbols": len({r["symbol"] for r in rows}),
-                "raw_path": raw_path.relative_to(ROOT).as_posix(),
-                "parsed_path": parsed_path.relative_to(ROOT).as_posix(),
+                "raw_path": raw_path.resolve().relative_to(ROOT.resolve()).as_posix(),
+                "parsed_path": parsed_path.resolve().relative_to(ROOT.resolve()).as_posix(),
                 "calendar_source_url": item["calendar_source_url"],
                 "calendar_source_path": item["calendar_source_path"],
                 "calendar_source_sha256": item["calendar_source_sha256"],
