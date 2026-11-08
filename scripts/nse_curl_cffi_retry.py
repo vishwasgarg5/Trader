@@ -312,7 +312,7 @@ def ingest_wayback() -> dict:
                 path = WAYBACK_ARCHIVE / f"{digest[:16]}.json"
                 if not path.exists():
                     path.write_bytes(payload)
-                rows = list(csv.reader(io.StringIO(response.text)))
+                rows = [json.loads(line) for line in response.text.splitlines() if line.strip()]
                 records.append({"target_url": target, "http_status": response.status_code,
                                 "bytes_received": len(payload), "sha256": digest,
                                 "archive_path": path.as_posix(), "retrieved_at_utc": now_utc(),
