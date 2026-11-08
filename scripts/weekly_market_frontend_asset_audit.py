@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Archive observed official NSE corporate-filing frontend assets for endpoint discovery.
+
+This step follows only script URLs actually referenced by an archived NSE landing page.
+It records candidate API route strings found in those scripts but NEVER calls those routes.
+That separation prevents guessed endpoints or undocumented calls from being mistaken for
+verified filing data.
+"""
+from __future__ import annotations
+
+import hashlib
+import html
+import json
+import pathlib
+import re
+import urllib.parse
+import urllib.request
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
+REPORT_OUT = pathlib.Path("data/reports/weekly_market_frontend_asset_audit.json")
+ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_frontend_assets")
+MAX_BYTES = 5 * 1024 * 1024
+ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
+    "Accept": "application/javascript,text/javascript,*/*;q=0.5",
+}
+SCRIPT_RE = re.compile(r"""<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']""", re.I)
+ROUTE_RE = re.compile(r"""["'`]([^"'\`\s]{1,500})["'`]""")
+RELEVANT_PATHS = ("/dist/js/components/corporate-filing/", "/dist/js/sections/corporate-filings.js")
+
+
+def now_ist():
+    return datetime.now(ZoneInfo("Asia/Kolkata")).isoformat()
+
+
+def observed_script_urls(page_html: str, page_url: str):
+    """Return only relevant script assets explicitly observed in official page HTML."""
+    found, seen = [], set()
+    for match in SCRIPT_RE.finditer(page_html):
+        url = urllib.parse.urljoin(page_url, html.unescape(match.group(1).strip()))
+        parsed = urllib.parse.urlsplit(url)
+        host = (parsed.hostname or "").lower()
+        if (parsed.scheme == "https" and host in ALLOWED_HOSTS
+                and any(parsed.path.startswith(path) for path in RELEVANT_PATHS)
+                and url not in seen):
+            seen.add(url)
+            found.append(url)
+    return found
+
+
+def candidate_routes(script_text: str):
+    """Extract route-like literals for human review; do not execute or request them."""
+    routes = set()
+    for match in ROUTE_RE.finditer(script_text):
+        value = match.group(1)
+        low = value.lower()
+        if (value.startswith("/") and not value.startswith("//")
+                and any(token in low for token in ("/api/", "corporate-", "corporate/", "announcements"))):
+            routes.add(value)
+    return sorted(routes)
+
+
+def fetch_asset(url: str):
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.scheme != "https" or (parsed.hostname or "").lower() not in ALLOWED_HOSTS:
+        raise ValueError("asset URL is outside official NSE HTTPS allowlist")
+    request = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(request, timeout=30) as response:
+        final = urllib.parse.urlsplit(response.geturl())
+        if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
+            raise ValueError("asset redirect left official NSE host allowlist")
+        body = response.read(MAX_BYTES + 1)
+        if len(body) > MAX_BYTES:
+            raise ValueError("asset exceeded 5 MiB safety limit")
+        content_type = response.headers.get("Content-Type", "")
+        if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
+            raise ValueError(f"unexpected JavaScript content type: {content_type}")
+        return body, content_type, response.geturl()
+
+
+def main():
+    ARCHIVE.mkdir(parents=True, exist_ok=True)
+    report = json.loads(REPORT_IN.read_text(encoding="utf-8"))
+    assets, failures, seen = [], [], set()
+    for page in report.get("records", []):
+        if page.get("publisher") != "NSE":
+            continue
+        path = pathlib.Path(page.get("archive_path", ""))
+        if not path.is_file():
+            failures.append({"source_id": page.get("source_id"), "status": "PAGE_ARCHIVE_MISSING"})
+            continue
+        page_html = path.read_text(encoding="utf-8", errors="replace")
+        for url in observed_script_urls(page_html, page.get("source_url", "")):
+            if url in seen:
+                continue
+            seen.add(url)
+            try:
+                body, content_type, final_url = fetch_asset(url)
+                digest = hashlib.sha256(body).hexdigest()
+                archive_path = ARCHIVE / f"{digest[:16]}_{pathlib.PurePosixPath(urllib.parse.urlsplit(final_url).path).name}"
+                if not archive_path.exists():
+                    archive_path.write_bytes(body)
+                text = body.decode("utf-8", errors="replace")
+                assets.append({
+                    "source_page_id": page.get("source_id"),
+                    "source_url": url,
+                    "final_url": final_url,
+                    "archive_path": archive_path.as_posix(),
+                    "bytes": len(body),
+                    "sha256": digest,
+                    "content_type": content_type,
+                    "candidate_routes_for_manual_review": candidate_routes(text),
+                    "evidence_status": "OBSERVED_OFFICIAL_FRONTEND_ASSET_ARCHIVED",
+                    "route_execution_status": "NOT_CALLED",
+                })
+            except Exception as exc:
+                failures.append({"source_page_id": page.get("source_id"), "source_url": url,
+                                 "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+                                 "error": f"{type(exc).__name__}: {exc}"[:800]})
+    output = {
+        "schema_version": 1,
+        "run_at_ist": now_ist(),
+        "observed_asset_count": len(assets) + len(failures),
+        "assets_archived": len(assets),
+        "failures": failures,
+        "assets": sorted(assets, key=lambda x: x["source_url"]),
+        "status": "PARTIAL" if failures else ("ASSETS_ARCHIVED" if assets else "NO_RELEVANT_ASSETS_OBSERVED"),
+        "limitations": [
+            "Only script URLs explicitly observed in archived official NSE HTML are fetched.",
+            "Route strings are candidates for manual review, not verified API contracts.",
+            "No candidate route is called and no filing data is inferred from frontend code.",
+            "This step does not update corporate-action ledgers, model data, prices, TRI, labels, or trading controls."
+        ],
+        "changes_to_model_data": False,
+        "historical_prices_or_tri_modified": False,
+        "holdout_accessed": False,
+        "research_status": "RESEARCH_HOLD",
+        "promotion_eligible": False,
+        "paper_trading_eligible": False,
+        "live_execution_enabled": False,
+    }
+    REPORT_OUT.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps({k: output[k] for k in ("observed_asset_count", "assets_archived", "failures", "status")}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
