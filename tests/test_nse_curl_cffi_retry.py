@@ -99,7 +99,7 @@ def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch
 
     csv_rows = ["Company Name,Industry,Symbol,Series,ISIN Code"]
     csv_rows.extend(f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}" for i in range(50))
-    payload = ("\\n".join(csv_rows) + "\\n").encode()
+    payload = ("\n".join(csv_rows) + "\n").encode()
 
     class Response:
         status_code = 200
