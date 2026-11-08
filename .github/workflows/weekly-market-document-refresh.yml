@@ -28,6 +28,8 @@ jobs:
   discover-and-archive:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      PYTHONPATH: .
     steps:
       - name: Check out main
         uses: actions/checkout@v4
