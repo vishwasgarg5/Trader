@@ -158,6 +158,11 @@ def test_identical_empty_exchange_shells_are_not_usable_coverage():
     assert len(flagged) == 2
 
 
+def test_observed_nse_exchange_circulars_page_is_registered():
+    sources = dict(MODULE.SOURCES)
+    assert sources["NSE_EXCHANGE_CIRCULARS"] == "https://www.nseindia.com/resources/exchange-communication-circulars"
+
+
 def test_official_consolidated_nse_filings_dashboard_is_in_weekly_sources():
     assert (
         "NSE_CORPORATE_FILINGS_DASHBOARD",
