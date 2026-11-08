@@ -1,0 +1,238 @@
+{
+  "audit_type": "STRUCTURAL_CHRONOLOGY_AND_RAW_EVIDENCE_LINKAGE",
+  "calendar_completeness": "NOT_CERTIFIED_NO_INDEPENDENT_EXCHANGE_CALENDAR",
+  "chronology_and_hash_checks": "PASS",
+  "experiment_id": "NIFTY50_PILOT_001",
+  "first_session": "2018-01-01",
+  "gaps_over_three_calendar_days": [
+    {
+      "calendar_days_between": 4,
+      "next_session": "2018-01-29",
+      "previous_session": "2018-01-25"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2018-03-05",
+      "previous_session": "2018-03-01"
+    },
+    {
+      "calendar_days_between": 5,
+      "next_session": "2018-04-02",
+      "previous_session": "2018-03-28"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2018-11-26",
+      "previous_session": "2018-11-22"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-03-05",
+      "previous_session": "2019-03-01"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-04-22",
+      "previous_session": "2019-04-18"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-04-30",
+      "previous_session": "2019-04-26"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-08-13",
+      "previous_session": "2019-08-09"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-09-03",
+      "previous_session": "2019-08-30"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2019-10-22",
+      "previous_session": "2019-10-18"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-02-24",
+      "previous_session": "2020-02-20"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-04-07",
+      "previous_session": "2020-04-03"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-04-13",
+      "previous_session": "2020-04-09"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-05-04",
+      "previous_session": "2020-04-30"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-05-26",
+      "previous_session": "2020-05-22"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-10-05",
+      "previous_session": "2020-10-01"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-12-01",
+      "previous_session": "2020-11-27"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2020-12-28",
+      "previous_session": "2020-12-24"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-03-30",
+      "previous_session": "2021-03-26"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-04-05",
+      "previous_session": "2021-04-01"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-09-13",
+      "previous_session": "2021-09-09"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-10-18",
+      "previous_session": "2021-10-14"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-11-08",
+      "previous_session": "2021-11-04"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2021-11-22",
+      "previous_session": "2021-11-18"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2022-03-21",
+      "previous_session": "2022-03-17"
+    },
+    {
+      "calendar_days_between": 5,
+      "next_session": "2022-04-18",
+      "previous_session": "2022-04-13"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2022-08-16",
+      "previous_session": "2022-08-12"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-04-10",
+      "previous_session": "2023-04-06"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-04-17",
+      "previous_session": "2023-04-13"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-05-02",
+      "previous_session": "2023-04-28"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-10-03",
+      "previous_session": "2023-09-29"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-11-28",
+      "previous_session": "2023-11-24"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2023-12-26",
+      "previous_session": "2023-12-22"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-01-29",
+      "previous_session": "2024-01-25"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-03-11",
+      "previous_session": "2024-03-07"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-03-26",
+      "previous_session": "2024-03-22"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-04-01",
+      "previous_session": "2024-03-28"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-06-18",
+      "previous_session": "2024-06-14"
+    },
+    {
+      "calendar_days_between": 4,
+      "next_session": "2024-11-18",
+      "previous_session": "2024-11-14"
+    }
+  ],
+  "holdout_access_authorized": false,
+  "last_session": "2024-12-31",
+  "limitations": [
+    "Weekend-dated observations are reported for review, not automatically rejected; special trading sessions may exist.",
+    "Calendar gaps are diagnostics and are not interpreted as missing sessions without an authoritative exchange calendar.",
+    "Hash linkage proves local bytes match the recorded digest, not that the source is authentic or semantically correct.",
+    "No independent reviewer identity or sign-off is inferred."
+  ],
+  "observation_count": 1734,
+  "raw_source_bytes_total": 247778,
+  "raw_source_files_verified": 14,
+  "raw_source_linked_observations": 1734,
+  "research_status": "RESEARCH_HOLD",
+  "reviewer": null,
+  "source_authenticity": "PENDING_INDEPENDENT_REVIEW",
+  "source_csv": "data/reference/nifty50_tri.csv",
+  "weekend_dated_observations": [
+    "2019-10-27",
+    "2020-02-01",
+    "2020-11-14",
+    "2023-11-12",
+    "2024-01-20",
+    "2024-03-02",
+    "2024-05-18"
+  ],
+  "yearly_observation_counts": {
+    "2018": 246,
+    "2019": 245,
+    "2020": 252,
+    "2021": 248,
+    "2022": 248,
+    "2023": 246,
+    "2024": 249
+  }
+}
