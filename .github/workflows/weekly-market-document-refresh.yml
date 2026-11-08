@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install test runner
-        run: python -m pip install --disable-pip-version-check pytest
+        run: python -m pip install --disable-pip-version-check pytest curl_cffi
       - name: Test discovery and evidence safeguards
         run: |
           python -m pytest -q tests/test_weekly_market_document_refresh.py tests/test_weekly_market_document_acquisition.py tests/test_weekly_market_frontend_asset_audit.py
