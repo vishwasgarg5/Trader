@@ -15,7 +15,6 @@ from email.utils import parsedate_to_datetime
 from urllib.parse import urlsplit
 
 import requests
-from pypdf import PdfReader
 
 REPO_URL = "https://github.com/vishwasgarg5/Trader"
 USER_AGENT = f"Trader-NIFTY50-Notice-Evidence/1.0 (+{REPO_URL})"
@@ -162,6 +161,7 @@ def load_state() -> dict:
 
 
 def extract_pdf(data: bytes) -> dict:
+    from pypdf import PdfReader
     reader = PdfReader(io.BytesIO(data), strict=False)
     pages = []
     for i, page in enumerate(reader.pages, start=1):
