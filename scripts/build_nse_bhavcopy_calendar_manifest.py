@@ -23,10 +23,11 @@ FIELDS = [
 
 def build_manifest(tri_path: Path, dates: set[str] | None = None) -> list[dict]:
     with tri_path.open(newline="", encoding="utf-8-sig") as handle:
-        rows = list(csv.DictReader(handle))
-    required = {"session_date", "source_url", "evidence_path", "evidence_sha256", "verification_status"}
-    if not rows or not required.issubset(rows[0]):
-        raise ValueError(f"TRI file requires columns: {sorted(required)}")
+        reader = csv.DictReader(handle)
+        required = {"session_date", "source_url", "evidence_path", "evidence_sha256", "verification_status"}
+        if not reader.fieldnames or not required.issubset(reader.fieldnames):
+            raise ValueError(f"TRI file requires columns: {sorted(required)}")
+        rows = list(reader)
     manifest, seen = [], set()
     for row in rows:
         day = date.fromisoformat(row["session_date"]).isoformat()
