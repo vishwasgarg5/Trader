@@ -183,13 +183,16 @@ def test_failed_domain_cdx_query_remains_incomplete_and_resumable():
     variants = MODULE.cdx_search_variants(original)
     queries = [
         {"url": variant["url"], "match_type": variant["match_type"],
+         "from_year": variant.get("from_year"), "to_year": variant.get("to_year"),
          "http_status": 200, "result": "EMPTY"}
         for variant in variants[:4]
     ]
     queries.extend([
         {"url": variants[4]["url"], "match_type": "domain",
+         "from_year": variants[4]["from_year"], "to_year": variants[4]["to_year"],
          "http_status": 503, "result": "HTTP_ERROR"},
         {"url": variants[5]["url"], "match_type": "domain",
+         "from_year": variants[5]["from_year"], "to_year": variants[5]["to_year"],
          "http_status": 503, "result": "HTTP_ERROR"},
     ])
     item = {"cdx_search_variants": variants, "cdx_queries": queries,
@@ -208,6 +211,7 @@ def test_empty_cdx_is_only_final_after_every_variant_has_valid_response():
         "cdx_search_variants": variants,
         "cdx_queries": [
             {"url": variant["url"], "match_type": variant["match_type"],
+             "from_year": variant.get("from_year"), "to_year": variant.get("to_year"),
              "http_status": 200, "result": "EMPTY"}
             for variant in variants
         ],
@@ -229,6 +233,7 @@ def test_malformed_http_200_cdx_response_does_not_complete_variant():
              "http_status": 200, "result": "EMPTY"}
             for variant in variants[:4]
         ] + [{"url": variants[4]["url"], "match_type": "domain",
+              "from_year": variants[4]["from_year"], "to_year": variants[4]["to_year"],
               "http_status": 200, "result": "INVALID_RESPONSE"}],
         "cdx_captures": [],
     }
