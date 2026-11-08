@@ -1,60 +1,185 @@
 {
   "cdx_endpoint": "https://web.archive.org/cdx/search/cdx",
-  "constituent_snapshot_count": 0,
-  "constituent_snapshots": [],
-  "failures": [
+  "constituent_snapshot_count": 5,
+  "constituent_snapshots": [
     {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:31.264362+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://archives.nseindia.com/content/indices/IndexInclExcl.xls"
+      "archive_path": "data/reference/source_documents/wayback_nifty50_snapshots/20210903113122_ebf5372eba6be131.csv",
+      "bytes_received": 3002,
+      "capture_timestamp": "20210903113122",
+      "cdx_digest": "6YOZFIZCBSMSN3VOD74HSIPAZQXMUNOX",
+      "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+      "sha256": "ebf5372eba6be1318abe3d6b143af2280bb8d996b41bee7ee8d8c7b47912f646",
+      "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+      "validation": {
+        "all_rows_have_valid_isin": true,
+        "distinct_symbol_count": 50,
+        "exactly_50_distinct_symbols": true,
+        "row_count": 50,
+        "symbols": [
+          "ADANIPORTS",
+          "ASIANPAINT",
+          "AXISBANK",
+          "BAJAJ-AUTO",
+          "BAJAJFINSV",
+          "BAJFINANCE",
+          "BHARTIARTL",
+          "BPCL",
+          "BRITANNIA",
+          "CIPLA",
+          "COALINDIA",
+          "DIVISLAB",
+          "DRREDDY",
+          "EICHERMOT",
+          "GRASIM",
+          "HCLTECH",
+          "HDFC",
+          "HDFCBANK",
+          "HDFCLIFE",
+          "HEROMOTOCO",
+          "HINDALCO",
+          "HINDUNILVR",
+          "ICICIBANK",
+          "INDUSINDBK",
+          "INFY",
+          "IOC",
+          "ITC",
+          "JSWSTEEL",
+          "KOTAKBANK",
+          "LT",
+          "M&M",
+          "MARUTI",
+          "NESTLEIND",
+          "NTPC",
+          "ONGC",
+          "POWERGRID",
+          "RELIANCE",
+          "SBILIFE",
+          "SBIN",
+          "SHREECEM",
+          "SUNPHARMA",
+          "TATACONSUM",
+          "TATAMOTORS",
+          "TATASTEEL",
+          "TCS",
+          "TECHM",
+          "TITAN",
+          "ULTRACEMCO",
+          "UPL",
+          "WIPRO"
+        ],
+        "valid_isin_row_count": 50
+      }
     },
     {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:31.390869+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"
+      "capture_timestamp": "20230126060250",
+      "cdx_digest": "ANH7FADPYCSUVTKEIBGA2ARDQJYFEKB5",
+      "error": "ValueError: Wayback snapshot returned HTTP 429",
+      "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+      "status": "SNAPSHOT_FETCH_OR_VALIDATION_FAILED"
     },
     {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:35.556524+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+      "capture_timestamp": "20230522051228",
+      "cdx_digest": "FEZNETGKL447RI2R5XVIGSFOVCI4Z2L4",
+      "error": "ValueError: Wayback snapshot returned HTTP 429",
+      "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+      "status": "SNAPSHOT_FETCH_OR_VALIDATION_FAILED"
     },
     {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:35.865805+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+      "capture_timestamp": "20240205222833",
+      "cdx_digest": "KKSWH5ABAXHF2OP4L5UEYXTLRSTEESMA",
+      "error": "ValueError: Wayback snapshot returned HTTP 429",
+      "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+      "status": "SNAPSHOT_FETCH_OR_VALIDATION_FAILED"
     },
     {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:36.007023+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
-    },
-    {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:36.746828+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://www.nseindia.com/content/indices/IndexInclExcl.xls"
-    },
-    {
-      "error": "JSONDecodeError: Expecting value: line 1 column 69 (char 68)",
-      "retrieved_at_utc": "2026-11-08T09:36:36.869024+00:00",
-      "status": "CDX_QUERY_FAILED",
-      "target_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+      "capture_timestamp": "20240819184501",
+      "cdx_digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+      "error": "ValueError: Wayback snapshot returned HTTP 429",
+      "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+      "status": "SNAPSHOT_FETCH_OR_VALIDATION_FAILED"
     }
   ],
+  "failures": [],
   "limitations": [
     "CDX metadata and archived page captures are candidate evidence only.",
     "Wayback capture dates are not membership effective dates.",
     "A 50-row CSV is not accepted without primary-source and independent review.",
     "No model, price, TRI, membership, or trading state is changed."
   ],
-  "records": [],
-  "records_archived": 0,
-  "run_at_utc": "2026-11-08T09:36:36.869790+00:00",
+  "records": [
+    {
+      "archive_path": "data/reference/wayback_cdx/0c480c5a0b6bf2ad.json",
+      "bytes_received": 232,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:37.209549+00:00",
+      "row_count": 1,
+      "sha256": "0c480c5a0b6bf2ad6bb7270e260c17ab5fac325c10dc0157f50aa21f0502bf42",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://archives.nseindia.com/content/indices/IndexInclExcl.xls"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/cb96454d483cfbb7.json",
+      "bytes_received": 657,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:38.390231+00:00",
+      "row_count": 4,
+      "sha256": "cb96454d483cfbb722e78658cca465736ddac53cc5e1666cd3377c715893f2c1",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/db3b5f01dd638bd1.json",
+      "bytes_received": 1216,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:43.612140+00:00",
+      "row_count": 7,
+      "sha256": "db3b5f01dd638bd1b8460a0ed1ba8bee9e9fe246c97f08c0dedf5d08214d6e2b",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/1f8fff1d7d563f57.json",
+      "bytes_received": 219,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:43.825294+00:00",
+      "row_count": 1,
+      "sha256": "1f8fff1d7d563f5714e5194883a3a2816c81a7b1a45bd3ec5531af553573c603",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/db3b5f01dd638bd1.json",
+      "bytes_received": 1216,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:45.151479+00:00",
+      "row_count": 7,
+      "sha256": "db3b5f01dd638bd1b8460a0ed1ba8bee9e9fe246c97f08c0dedf5d08214d6e2b",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/3ffef7952be510b0.json",
+      "bytes_received": 386,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:45.624111+00:00",
+      "row_count": 2,
+      "sha256": "3ffef7952be510b039b1c57a2efaa9bccdeaec9f1bab8c053cd549a93663b60d",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://www.nseindia.com/content/indices/IndexInclExcl.xls"
+    },
+    {
+      "archive_path": "data/reference/wayback_cdx/efd2d17465c4436f.json",
+      "bytes_received": 663,
+      "http_status": 200,
+      "retrieved_at_utc": "2026-11-08T09:37:45.913406+00:00",
+      "row_count": 4,
+      "sha256": "efd2d17465c4436f257243cca2835adc7e02a062e36754fb06717a6768a77f4f",
+      "status": "CDX_METADATA_ARCHIVED",
+      "target_url": "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
+    }
+  ],
+  "records_archived": 7,
+  "run_at_utc": "2026-11-08T09:37:45.914247+00:00",
   "schema_version": 2,
   "targets_checked": 7
 }
