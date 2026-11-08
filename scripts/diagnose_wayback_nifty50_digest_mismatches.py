@@ -21,6 +21,7 @@ OUTPUT_PATH = ROOT / "data/reports/nifty50_wayback_digest_diagnostics.json"
 CDX_URL = "https://web.archive.org/cdx/search/cdx"
 USER_AGENT = "Trader-NIFTY50-Digest-Diagnostic/1.0 (+https://github.com/vishwasgarg5/Trader)"
 TIMEOUT = (15, 45)
+MAX_BYTES = 5 * 1024 * 1024
 
 
 def decode_digest(value: str) -> bytes:
@@ -76,6 +77,7 @@ def fetch_capture(session: requests.Session, record: dict, expected: str) -> dic
             decoded_payload = gzip.decompress(wire_payload)
         else:
             decoded_payload = wire_payload
+    response.close()
     wire_digest = (base64.b32encode(hashlib.sha1(wire_payload).digest()).decode("ascii").rstrip("=")
                    if wire_payload else None)
     decoded_digest = (base64.b32encode(hashlib.sha1(decoded_payload).digest()).decode("ascii").rstrip("=")
