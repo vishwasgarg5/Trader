@@ -219,6 +219,7 @@ def load_state() -> dict:
             if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY":
                 item["cdx_checked"] = False
         item.setdefault("cdx_search_variants", cdx_search_variants(original))
+        reconcile_cdx_search_progress(item)
         if reconcile_exhausted_direct_fallback(item, state.get("attempt_log", [])):
             atomic(STATE_PATH, state)
     return state
@@ -255,6 +256,31 @@ def cdx_request_params(variant: dict) -> dict:
     else:
         params["filter"] = "statuscode:200"
     return params
+
+
+def reconcile_cdx_search_progress(item: dict) -> None:
+    """Only treat a CDX variant as complete after a valid HTTP 200 JSON result."""
+    variants = item.get("cdx_search_variants", [])
+    queries = item.get("cdx_queries", [])
+    next_index = len(variants)
+    for index, variant in enumerate(variants):
+        matching = [
+            query for query in queries
+            if query.get("url") == variant.get("url")
+            and query.get("match_type", "exact") == variant.get("match_type", "exact")
+        ]
+        if not matching:
+            next_index = index
+            break
+        latest = matching[-1]
+        if latest.get("http_status") != 200 or latest.get("result") not in {"EMPTY", "ROWS_RETURNED"}:
+            next_index = index
+            break
+    item["next_cdx_search_index"] = next_index
+    item["cdx_checked"] = next_index >= len(variants)
+    item["cdx_result"] = "ROWS_RETURNED" if item.get("cdx_captures") else (
+        "EMPTY" if item["cdx_checked"] else "SEARCH_INCOMPLETE"
+    )
 
 
 def cdx_capture_rows(rows: list[list[str]]) -> list[list[str]]:
@@ -367,7 +393,6 @@ def run() -> dict:
                                           f"cdx:{doc_id}:{variant_index}:{variant.get('match_type')}")
                 if response is None:
                     break
-                item["next_cdx_search_index"] += 1
                 query_record = {
                     "url": cdx_url, "match_type": variant.get("match_type", "exact"),
                     "at_utc": stamp(), "http_status": response.status_code,
@@ -401,15 +426,16 @@ def run() -> dict:
                     query_record["error"] = f"CDX returned HTTP {response.status_code}"
                     item["cdx_error"] = query_record["error"]
                 item.setdefault("cdx_queries", []).append(query_record)
-                item["cdx_checked"] = item["next_cdx_search_index"] >= len(item["cdx_search_variants"])
-                item["cdx_result"] = "ROWS_RETURNED" if item["cdx_captures"] else (
-                    "EMPTY" if item["cdx_checked"] else "SEARCH_INCOMPLETE"
-                )
+                if query_record.get("result") in {"EMPTY", "ROWS_RETURNED"}:
+                    item["next_cdx_search_index"] = variant_index + 1
+                reconcile_cdx_search_progress(item)
                 item["cdx_response_row_count"] = sum(
                     q.get("response_row_count", 0) for q in item["cdx_queries"]
                 )
                 atomic(STATE_PATH, state)
-                if budget.stop:
+                if budget.stop or query_record.get("result") not in {"EMPTY", "ROWS_RETURNED"}:
+                    # Retry this exact query on a later bounded slice; never turn
+                    # HTTP errors or malformed JSON into a completed empty search.
                     break
             while item["next_capture_index"] < len(item["cdx_captures"]):
                 row = item["cdx_captures"][item["next_capture_index"]]
