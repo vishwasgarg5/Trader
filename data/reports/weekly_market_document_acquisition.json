@@ -1,0 +1,23 @@
+{
+  "changes_to_model_data": false,
+  "discovered_pdf_candidates": 0,
+  "document_failures": [],
+  "documents": [],
+  "historical_prices_or_tri_modified": false,
+  "holdout_accessed": false,
+  "limitations": [
+    "Only PDF links explicitly present in successfully acquired official landing-page HTML are considered.",
+    "JavaScript-only listings, API-fed tables, and documents behind interactive sessions may not be discovered.",
+    "PDF signature and host allowlisting do not establish issuer authenticity or event meaning.",
+    "No event extraction, correction/supersession decision, independent review, or corporate-action ledger update occurs.",
+    "Point-in-time NIFTY 50 membership remains a prerequisite for issuer-specific filtering."
+  ],
+  "live_execution_enabled": false,
+  "paper_trading_eligible": false,
+  "pdf_documents_archived": 0,
+  "promotion_eligible": false,
+  "research_status": "RESEARCH_HOLD",
+  "run_at_ist": "2026-11-08T11:23:00.210979+05:30",
+  "schema_version": 1,
+  "status": "NO_PDF_LINKS_DISCOVERED"
+}
