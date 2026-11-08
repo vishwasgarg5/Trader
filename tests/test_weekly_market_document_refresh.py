@@ -83,21 +83,21 @@ def test_constituent_acquisition_reports_50_rows_without_name_error(monkeypatch,
     assert record["status"] == "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY"
 
 
-def test_transient_timeout_is_retried(monkeypatch):
-    calls = {"count": 0}
-    def flaky_fetch(*args, **kwargs):
-        calls["count"] += 1
-        if calls["count"] < 3:
-            raise TimeoutError("temporary timeout")
-        return b"<html>ok</html>", {"content_type": "text/html", "final_url": "https://www.nseindia.com/test"}
+def test_fetch_delegates_retry_policy_to_shared_fetcher(monkeypatch):
+    calls = []
+    def fake_fetch(*args, **kwargs):
+        calls.append(kwargs)
+        return b"<html>ok</html>", {
+            "content_type": "text/html",
+            "final_url": "https://www.nseindia.com/test",
+        }
 
-    monkeypatch.setattr(MODULE, "fetch_bytes", flaky_fetch)
+    monkeypatch.setattr(MODULE, "fetch_bytes", fake_fetch)
     body, content_type, _ = MODULE.fetch("https://www.nseindia.com/test")
     assert body == b"<html>ok</html>"
     assert content_type == "text/html"
-    assert calls["count"] == 3
-
-
+    assert len(calls) == 1
+    assert calls[0]["attempts"] == 3
 
 def test_identical_empty_exchange_shells_are_not_usable_coverage():
     records = [
