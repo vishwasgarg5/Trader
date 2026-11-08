@@ -52,3 +52,16 @@ It is **not** independent human verification, does not promote any candidate to 
 - Pilot gate: RESEARCH HOLD.
 
 This report is a review aid only. A candidate notice, a plausible transition, a source hash, or a successful CI run is not a verified point-in-time membership interval.
+
+
+## Primary-source discrepancy resolved during follow-up
+
+A cross-file consistency check found that the review-queue note for `N50-NOTICE-2020-08-20` incorrectly said that no dedicated flagship NIFTY 50 replacement section was present. Direct inspection of the official 19-page NSE Indices PDF resolves this: page 4, section 2(a), is explicitly headed `NIFTY 50` and lists:
+
+- OUT: INFRATEL and ZEEL
+- IN: DIVISLAB and SBILIFE
+- Effective: 2020-09-25 (close of 2020-09-24)
+
+The queue note was corrected on this research branch in commit `e4ea172559bc36655d06800a6cd58391ea09a975`. The inventory and source register already contained the same transition. This correction reconciles the AI-triage narrative with the primary PDF; it is **not** independent human sign-off, does not populate verified event fields, and does not authorize membership-interval construction.
+
+Primary source: [Official NSE Indices press release, 20 August 2020](https://www.niftyindices.com/Press_Release/ind_prs20082020.pdf).
