@@ -76,3 +76,15 @@ def test_missing_source_lineage_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="lacks source lineage"):
         load_special_sessions(path)
 
+def test_ad_hoc_january_15_holiday_has_its_own_nse_circular_lineage():
+    result = classify_nse_session_date("2026-01-15")
+    assert result["classification"] == "EXCHANGE_HOLIDAY"
+    assert result["holiday"]["circular_reference"] == "NSE/CMTR/72260"
+    assert result["holiday"]["source_url"].endswith("/CMTR72260.pdf")
+
+
+def test_muhurat_special_session_overrides_diwali_holiday_label():
+    result = classify_nse_session_date("2026-11-08")
+    assert result["classification"] == "SPECIAL_TRADING_SESSION"
+    assert result["is_trading_session"] is True
+
