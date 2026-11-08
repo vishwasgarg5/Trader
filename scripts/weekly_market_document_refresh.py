@@ -116,24 +116,30 @@ def acquire_page(source_id: str, url: str, run_at: str):
             "error": f"{type(exc).__name__}: {exc}"[:1000],
         }
 
+def parse_current_constituents(body: bytes):
+    rows = list(csv.DictReader(body.decode("utf-8-sig").splitlines()))
+    if not rows:
+        raise ValueError("constituent CSV has no data rows")
+    symbol_key = next((key for key in rows[0] if key and key.strip().lower() == "symbol"), None)
+    if not symbol_key:
+        raise ValueError("constituent CSV has no Symbol column")
+    symbols = [row.get(symbol_key, "").strip().upper() for row in rows]
+    if len(rows) != 50 or any(not symbol for symbol in symbols) or len(set(symbols)) != 50:
+        raise ValueError(f"expected exactly 50 unique non-empty symbols; received {len(rows)} rows")
+    return symbols
+
 def acquire_current_constituents(run_at: str):
     request = urllib.request.Request(CONSTITUENT_URL, headers=HEADERS)
     try:
         with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+            final_host = (urllib.parse.urlsplit(response.geturl()).hostname or "").lower()
+            if final_host not in {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com"}:
+                raise ValueError("constituent CSV redirect left official NSE host allowlist")
             body = response.read(MAX_BYTES + 1)
             if len(body) > MAX_BYTES:
                 raise ValueError("constituent CSV exceeded size limit")
             content_type = response.headers.get("Content-Type", "")
-            text = body.decode("utf-8-sig")
-            rows = list(csv.DictReader(text.splitlines()))
-            if not rows:
-                raise ValueError("constituent CSV has no data rows")
-            symbol_key = next((key for key in rows[0] if key and key.strip().lower() == "symbol"), None)
-            if not symbol_key:
-                raise ValueError("constituent CSV has no Symbol column")
-            symbols = [row.get(symbol_key, "").strip().upper() for row in rows]
-            if len(rows) != 50 or any(not symbol for symbol in symbols) or len(set(symbols)) != 50:
-                raise ValueError(f"expected exactly 50 unique non-empty symbols; received {len(rows)} rows")
+            symbols = parse_current_constituents(body)
             digest = hashlib.sha256(body).hexdigest()
             CONSTITUENT_ARCHIVE.mkdir(parents=True, exist_ok=True)
             path = CONSTITUENT_ARCHIVE / f"nifty50_current_{digest[:16]}.csv"
