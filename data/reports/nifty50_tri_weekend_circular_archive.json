@@ -1,0 +1,82 @@
+{
+  "archived_count": 7,
+  "expected_count": 7,
+  "experiment_id": "NIFTY50_PILOT_001",
+  "failures": [],
+  "holdout_access_authorized": false,
+  "interpretation": "PDF signature and SHA-256 verify downloaded-byte integrity only; they do not prove publisher authenticity, full circular semantics, or TRI correctness.",
+  "purpose": "Archive source circulars for weekend-dated TRI observations",
+  "records": [
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2019-10-27_NSE_CMTR_42403.pdf",
+      "bytes": 240400,
+      "circular_reference": "NSE_CMTR_42403",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2019-10-27",
+      "sha256": "9a4e8e80a4342560d52491e889fdae4d8384fa8e19f910fa59395269aabe4097",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR42403.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2020-02-01_NSE_CMTR_43290.pdf",
+      "bytes": 204418,
+      "circular_reference": "NSE_CMTR_43290",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2020-02-01",
+      "sha256": "2f667503047c3399bc7c013271dd64b3119bc532b0cbb6d988d4d9a6998da4a9",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR43290.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2020-11-14_NSE_CMTR_46230.pdf",
+      "bytes": 227332,
+      "circular_reference": "NSE_CMTR_46230",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2020-11-14",
+      "sha256": "dc545416272a0da2d7465e66b879f884fa6c49bdead5b9e0cc5ae15d1e5672be",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR46230.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2023-11-12_NSE_ISC_59313.pdf",
+      "bytes": 158782,
+      "circular_reference": "NSE_ISC_59313",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2023-11-12",
+      "sha256": "b5528adc6e6305a372e10d53d7aca77b4b330533411a114e167cbcbb850324ac",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/ISC59313.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2024-01-20_NSE_MSD_60340.pdf",
+      "bytes": 89845,
+      "circular_reference": "NSE_MSD_60340",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2024-01-20",
+      "sha256": "6d165b8d132b7b430ae79032356ea331fab3d852192b74df4bc9e56722f54cdd",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD60340.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2024-03-02_NSE_MSD_60677.pdf",
+      "bytes": 163493,
+      "circular_reference": "NSE_MSD_60677",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2024-03-02",
+      "sha256": "04b67f39314bae95672d86497c28cbed6cea698ad6f029ba47ef74feb9f6da91",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD60677.pdf"
+    },
+    {
+      "archive_path": "data/reference/source_documents/nse_circulars/2024-05-18_NSE_MSD_61893.pdf",
+      "bytes": 135194,
+      "circular_reference": "NSE_MSD_61893",
+      "download_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "independent_review_status": "PENDING",
+      "session_date": "2024-05-18",
+      "sha256": "2483f60d67c34231d6fd25024cf5767c031b234196a7a475535d434cd4e758c8",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD61893.pdf"
+    }
+  ],
+  "research_status": "RESEARCH_HOLD"
+}
