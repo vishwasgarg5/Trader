@@ -78,7 +78,7 @@ def test_constituent_snapshot_validation_requires_50_symbols_and_valid_isins():
         f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}"
         for i in range(50)
     )
-    result = MODULE.validate_constituent_snapshot(("\\n".join(rows) + "\\n").encode())
+    result = MODULE.validate_constituent_snapshot(("\n".join(rows) + "\n").encode())
     assert result["exactly_50_distinct_symbols"] is True
     assert result["all_rows_have_valid_isin"] is True
     assert result["distinct_symbol_count"] == 50
