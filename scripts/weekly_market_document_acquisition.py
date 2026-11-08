@@ -23,7 +23,7 @@ from trader.market_source_fetcher import fetch_bytes, FetchError
 REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
 REPORT_OUT = pathlib.Path("data/reports/weekly_market_document_acquisition.json")
 ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_documents")
-MAX_BYTES = 25 * 1024 * 1024
+MAX_BYTES = 50 * 1024 * 1024
 TIMEOUT = 60
 MAX_ATTEMPTS = 2
 RETRY_BACKOFF_SECONDS = 2
