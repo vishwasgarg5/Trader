@@ -14,6 +14,7 @@ import json
 import pathlib
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -26,6 +27,7 @@ ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_frontend_a
 MAX_BYTES = 5 * 1024 * 1024
 ASSET_TIMEOUT = 60
 MAX_ATTEMPTS = 2
+MAX_WORKERS = 4
 RETRY_BACKOFF_SECONDS = 2
 ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com"}
 HEADERS = {
@@ -103,10 +105,40 @@ def fetch_asset(url: str):
         return body, content_type, response.geturl()
 
 
+def inspect_asset(source_page_id: str, url: str):
+    """Fetch and validate one observed asset; safe to run concurrently."""
+    try:
+        body, content_type, final_url = fetch_asset(url)
+        digest = hashlib.sha256(body).hexdigest()
+        archive_path = ARCHIVE / f"{digest[:16]}_{pathlib.PurePosixPath(urllib.parse.urlsplit(final_url).path).name}"
+        if not archive_path.exists():
+            archive_path.write_bytes(body)
+        text = body.decode("utf-8", errors="replace")
+        return ({
+            "source_page_id": source_page_id,
+            "source_url": url,
+            "final_url": final_url,
+            "archive_path": archive_path.as_posix(),
+            "bytes": len(body),
+            "sha256": digest,
+            "content_type": content_type,
+            "candidate_routes_for_manual_review": candidate_routes(text),
+            "evidence_status": "OBSERVED_OFFICIAL_FRONTEND_ASSET_ARCHIVED",
+            "route_execution_status": "NOT_CALLED",
+        }, None)
+    except Exception as exc:
+        return (None, {
+            "source_page_id": source_page_id,
+            "source_url": url,
+            "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+            "error": f"{type(exc).__name__}: {exc}"[:800],
+        })
+
+
 def main():
     ARCHIVE.mkdir(parents=True, exist_ok=True)
     report = json.loads(REPORT_IN.read_text(encoding="utf-8"))
-    assets, failures, seen = [], [], set()
+    failures, seen, tasks = [], set(), []
     for page in report.get("records", []):
         if page.get("publisher") != "NSE":
             continue
@@ -116,32 +148,19 @@ def main():
             continue
         page_html = path.read_text(encoding="utf-8", errors="replace")
         for url in observed_script_urls(page_html, page.get("source_url", "")):
-            if url in seen:
-                continue
-            seen.add(url)
-            try:
-                body, content_type, final_url = fetch_asset(url)
-                digest = hashlib.sha256(body).hexdigest()
-                archive_path = ARCHIVE / f"{digest[:16]}_{pathlib.PurePosixPath(urllib.parse.urlsplit(final_url).path).name}"
-                if not archive_path.exists():
-                    archive_path.write_bytes(body)
-                text = body.decode("utf-8", errors="replace")
-                assets.append({
-                    "source_page_id": page.get("source_id"),
-                    "source_url": url,
-                    "final_url": final_url,
-                    "archive_path": archive_path.as_posix(),
-                    "bytes": len(body),
-                    "sha256": digest,
-                    "content_type": content_type,
-                    "candidate_routes_for_manual_review": candidate_routes(text),
-                    "evidence_status": "OBSERVED_OFFICIAL_FRONTEND_ASSET_ARCHIVED",
-                    "route_execution_status": "NOT_CALLED",
-                })
-            except Exception as exc:
-                failures.append({"source_page_id": page.get("source_id"), "source_url": url,
-                                 "status": "ASSET_UNAVAILABLE_OR_REJECTED",
-                                 "error": f"{type(exc).__name__}: {exc}"[:800]})
+            if url not in seen:
+                seen.add(url)
+                tasks.append((page.get("source_id"), url))
+
+    assets = []
+    # Concurrent fetches keep bounded retries within the workflow's 20-minute job limit.
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+        for asset, failure in pool.map(lambda task: inspect_asset(*task), tasks):
+            if asset:
+                assets.append(asset)
+            if failure:
+                failures.append(failure)
+
     output = {
         "schema_version": 1,
         "run_at_ist": now_ist(),
@@ -164,10 +183,9 @@ def main():
         "paper_trading_eligible": False,
         "live_execution_enabled": False,
     }
-    REPORT_OUT.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    REPORT_OUT.write_text(json.dumps(output, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
     print(json.dumps({k: output[k] for k in ("observed_asset_count", "assets_archived", "failures", "status")}, indent=2))
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

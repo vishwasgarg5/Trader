@@ -60,3 +60,10 @@ def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
     response = MODULE.open_with_retry(object(), timeout=MODULE.ASSET_TIMEOUT)
     assert isinstance(response, Response)
     assert calls == [MODULE.ASSET_TIMEOUT, MODULE.ASSET_TIMEOUT]
+
+
+def test_asset_audit_uses_bounded_concurrency_to_fit_workflow_timeout():
+    assert MODULE.MAX_WORKERS == 4
+    source = pathlib.Path("scripts/weekly_market_frontend_asset_audit.py").read_text()
+    assert "ThreadPoolExecutor(max_workers=MAX_WORKERS)" in source
+    assert "pool.map" in source
