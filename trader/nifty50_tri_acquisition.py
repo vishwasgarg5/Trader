@@ -45,7 +45,9 @@ def parse_response(payload,start=START_DATE,end=END_DATE):
     for i,r in enumerate(rows,1):
         if not isinstance(r,dict): raise ValueError(f"source row {i} is not an object")
         name=field(r,("indexName","Index Name","name"))
-        if name is not None and str(name).strip().upper().replace(" ","")!="NIFTY50":
+        if name is None or not str(name).strip():
+            raise ValueError(f"source row {i} lacks explicit index identity")
+        if str(name).strip().upper().replace(" ","")!="NIFTY50":
             raise ValueError(f"unexpected index identity in row {i}: {name!r}")
         dt=field(r,("HistoricalDate","Date","IndexDate"))
         val=field(r,("Total Returns Index","TotalReturnsIndex","TRI","triValue","TotalReturnIndexValue"))
