@@ -9,6 +9,7 @@ from __future__ import annotations
 import base64
 import csv
 import hashlib
+import gzip
 import io
 import json
 import os
@@ -84,6 +85,32 @@ def load_state() -> dict:
         state = {"schema_version": 1, "created_at_utc": iso_now(), "targets": {},
                  "pending_snapshots": [], "completed_snapshots": [],
                  "attempt_log": [], "last_request_at_utc": None}
+    # One bounded retry for legacy mismatches: the old downloader hashed
+    # requests.Response.content, which transparently decompresses gzip bodies.
+    retry = []
+    retained = []
+    for item in state.get("completed_snapshots", []):
+        if item.get("status") == "CDX_DIGEST_MISMATCH" and not item.get("raw_replay_retry_count"):
+            item["raw_replay_retry_count"] = 1
+            item["prior_digest_mismatch"] = {
+                "computed_cdx_digest": item.get("computed_cdx_digest"),
+                "attempted_at_utc": item.get("last_attempt_at_utc"),
+                "content_encoding": item.get("content_encoding"),
+            }
+            item["status"] = "PENDING_DOWNLOAD"
+            for key in ("archive_path", "sha256", "validation", "bytes_received",
+                        "decoded_bytes_received", "computed_cdx_digest",
+                        "cdx_digest_validation", "retrieved_at_utc"):
+                item.pop(key, None)
+            retry.append(item)
+        else:
+            retained.append(item)
+    state["completed_snapshots"] = retained
+    known_pending = {capture_key(x) for x in state.get("pending_snapshots", [])}
+    for item in retry:
+        if capture_key(item) not in known_pending:
+            state.setdefault("pending_snapshots", []).append(item)
+            known_pending.add(capture_key(item))
     for target in TARGETS:
         state["targets"].setdefault(target, {"metadata_done": False, "collapsed_done": False,
                                               "full_capture_count": 0, "candidate_count": 0})
@@ -172,7 +199,8 @@ class RunBudget:
 
 
 def request_one(session: requests.Session, url: str, params: dict | None,
-                state: dict, budget: RunBudget, label: str) -> requests.Response | None:
+                state: dict, budget: RunBudget, label: str,
+                stream: bool = False) -> requests.Response | None:
     for attempt in range(1, MAX_RETRIES + 1):
         if not budget.before_request():
             return None
@@ -182,7 +210,7 @@ def request_one(session: requests.Session, url: str, params: dict | None,
                 "User-Agent": USER_AGENT,
                 "Accept": "application/json,text/csv,*/*;q=0.5",
                 "Accept-Encoding": "identity",
-            }, timeout=(CONNECT_TIMEOUT, READ_TIMEOUT))
+            }, timeout=(CONNECT_TIMEOUT, READ_TIMEOUT), stream=stream)
             state["attempt_log"].append({"at_utc": iso_now(), "label": label,
                                          "attempt": attempt, "http_status": response.status_code})
             if response.status_code == 429:
@@ -196,6 +224,7 @@ def request_one(session: requests.Session, url: str, params: dict | None,
                 return None
             if response.status_code in (500, 502, 503, 504) and attempt < MAX_RETRIES:
                 delay = min(30, 3 * (2 ** (attempt - 1))) + random.uniform(0, 2)
+                response.close()
                 time.sleep(delay)
                 continue
             return response
@@ -397,43 +426,86 @@ def snapshot_url(timestamp: str, original: str) -> str:
     return f"https://web.archive.org/web/{timestamp}id_/{original}"
 
 
+def decode_replay_body(raw_payload: bytes, content_encoding: str | None) -> bytes:
+    """Decode the replay entity for CSV parsing while retaining raw bytes for CDX hashing."""
+    encoding = (content_encoding or "").lower()
+    if "gzip" not in encoding:
+        return raw_payload
+    with gzip.GzipFile(fileobj=io.BytesIO(raw_payload)) as handle:
+        decoded = handle.read(MAX_CSV_BYTES + 1)
+    if len(decoded) > MAX_CSV_BYTES:
+        raise ValueError("decompressed CSV exceeds 5 MiB")
+    return decoded
+
+
 def download_capture(session: requests.Session, item: dict, state: dict,
                      budget: RunBudget) -> dict | None:
     response = request_one(session, snapshot_url(item["capture_timestamp"], item["original_url"]),
-                           None, state, budget, f"snapshot:{item['capture_timestamp']}")
+                           None, state, budget, f"snapshot:{item['capture_timestamp']}",
+                           stream=True)
     if response is None:
         return None
     if response.status_code != 200:
         item.update({"status": "FETCH_FAILED", "last_http_status": response.status_code,
                      "last_attempt_at_utc": iso_now(), "response_url": response.url})
+        response.close()
         return item
-    actual_cdx_digest = wayback_cdx_digest(response.content)
-    if item.get("cdx_digest") and actual_cdx_digest != item["cdx_digest"]:
+    try:
+        response.raw.decode_content = False
+        raw_payload = response.raw.read(MAX_CSV_BYTES + 1)
+        if len(raw_payload) > MAX_CSV_BYTES:
+            raise ValueError("raw replay body exceeds 5 MiB")
+        content_encoding = response.headers.get("Content-Encoding")
+        decoded_payload = decode_replay_body(raw_payload, content_encoding)
+        response_url = response.url
+        memento_datetime = response.headers.get("Memento-Datetime")
+        response.close()
+    except Exception:
+        response.close()
+        raise
+    raw_digest = wayback_cdx_digest(raw_payload)
+    decoded_digest = wayback_cdx_digest(decoded_payload)
+    expected = item.get("cdx_digest")
+    # CDX digests apply to the archived entity bytes. Some replay responses carry
+    # Content-Encoding: gzip; requests.Response.content silently decompresses
+    # those bytes and therefore cannot be used for the primary CDX comparison.
+    if expected and raw_digest == expected:
+        evidence_payload = raw_payload
+        digest_source = "RAW_REPLAY_ENTITY"
+        extension = ".csv.gz" if "gzip" in (content_encoding or "").lower() else ".csv"
+    elif expected and decoded_digest == expected:
+        evidence_payload = decoded_payload
+        digest_source = "DECODED_REPLAY_ENTITY"
+        extension = ".csv"
+    else:
         item.update({
             "status": "CDX_DIGEST_MISMATCH",
-            "expected_cdx_digest": item["cdx_digest"],
-            "computed_cdx_digest": actual_cdx_digest,
-            "response_url": response.url,
-            "memento_datetime": response.headers.get("Memento-Datetime"),
-            "content_encoding": response.headers.get("Content-Encoding"),
+            "expected_cdx_digest": expected,
+            "computed_cdx_digest": raw_digest,
+            "decoded_cdx_digest": decoded_digest,
+            "cdx_digest_validation": "MISMATCH",
+            "response_url": response_url,
+            "memento_datetime": memento_datetime,
+            "content_encoding": content_encoding,
+            "raw_bytes_received": len(raw_payload),
+            "decoded_bytes_received": len(decoded_payload),
             "last_attempt_at_utc": iso_now(),
         })
         return item
     try:
-        validation = validate_snapshot(response.content)
-        digest = sha256(response.content)
+        validation = validate_snapshot(decoded_payload)
+        digest = sha256(evidence_payload)
         SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
-        path = SNAPSHOT_DIR / f"{item['capture_timestamp']}_{digest[:16]}.csv"
+        path = SNAPSHOT_DIR / f"{item['capture_timestamp']}_{digest[:16]}{extension}"
         if not path.exists():
-            path.write_bytes(response.content)
+            path.write_bytes(evidence_payload)
         item.update({"status": validation["candidate_status"], "archive_path": path.as_posix(),
-                     "bytes_received": len(response.content), "sha256": digest,
-                     "validation": validation, "retrieved_at_utc": iso_now(),
-                     "evidence_class": "WAYBACK_SUPPLEMENTARY",
-                     "computed_cdx_digest": actual_cdx_digest, "cdx_digest_validation": "MATCH",
-                     "response_url": response.url,
-                     "memento_datetime": response.headers.get("Memento-Datetime"),
-                     "content_encoding": response.headers.get("Content-Encoding")})
+                     "bytes_received": len(evidence_payload), "decoded_bytes_received": len(decoded_payload),
+                     "sha256": digest, "validation": validation, "retrieved_at_utc": iso_now(),
+                     "evidence_class": "WAYBACK_SUPPLEMENTARY", "digest_source": digest_source,
+                     "computed_cdx_digest": expected, "decoded_cdx_digest": decoded_digest,
+                     "cdx_digest_validation": "MATCH", "response_url": response_url,
+                     "memento_datetime": memento_datetime, "content_encoding": content_encoding})
     except Exception as exc:
         item.update({"status": "SNAPSHOT_INVALID", "error": f"{type(exc).__name__}: {exc}"[:700],
                      "retrieved_at_utc": iso_now()})
