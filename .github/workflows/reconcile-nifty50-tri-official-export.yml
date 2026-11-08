@@ -1,0 +1,63 @@
+name: Reconcile NIFTY 50 TRI against NSE report-page export
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/reconcile_nifty50_tri_official_export.py"
+      - ".github/workflows/reconcile-nifty50-tri-official-export.yml"
+      - "data/reference/nifty50_tri.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nifty50-tri-official-export-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reconcile-tri:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Capture official NSE report-page TRI export
+        run: python scripts/reconcile_nifty50_tri_official_export.py
+      - name: Persist raw export and reconciliation
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/reference/source_documents/nifty50_tri_ui_export data/reports/nifty50_tri_ui_export_reconciliation.json
+          if git diff --cached --quiet; then
+            echo "No TRI export evidence changes"
+          else
+            git commit -m "Reconcile NIFTY 50 TRI against NSE report-page export"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Require exact row and value match
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+          p = Path("data/reports/nifty50_tri_ui_export_reconciliation.json")
+          if not p.exists():
+              sys.exit("TRI export reconciliation report missing")
+          r = json.loads(p.read_text(encoding="utf-8"))
+          print({
+              "cross_capture_result": r.get("cross_capture_result"),
+              "acquired_row_count": r.get("acquired_row_count"),
+              "ui_export_row_count": r.get("ui_export_row_count"),
+              "failures": len(r.get("failures", [])),
+              "missing": len(r.get("missing_dates_in_ui_export", [])),
+              "extra": len(r.get("extra_dates_in_ui_export", [])),
+              "mismatches": len(r.get("value_mismatches", [])),
+          })
+          sys.exit(0 if r.get("cross_capture_result") == "EXACT_MATCH" else 1)
+          PY
