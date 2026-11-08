@@ -48,8 +48,8 @@ def test_report_schema_contract_keeps_research_safety_explicit():
     assert "NSE" in {"NSE" if item[0].startswith("NSE_") else "BSE" for item in MODULE.SOURCES}
 
 def test_current_constituent_csv_requires_exactly_50_unique_symbols():
-    body = ("Symbol,Company Name\\n" + "".join(
-        f"SYM{i},Company {i}\\n" for i in range(50)
+    body = ("Symbol,Company Name\n" + "".join(
+        f"SYM{i},Company {i}\n" for i in range(50)
     )).encode()
     symbols = MODULE.parse_current_constituents(body)
     assert len(symbols) == 50
@@ -57,7 +57,7 @@ def test_current_constituent_csv_requires_exactly_50_unique_symbols():
 
 
 def test_current_constituent_csv_rejects_duplicates_and_wrong_count():
-    duplicate = ("Symbol\\n" + "SAME\\n" * 50).encode()
+    duplicate = ("Symbol\n" + "SAME\n" * 50).encode()
     try:
         MODULE.parse_current_constituents(duplicate)
     except ValueError as exc:
@@ -65,7 +65,7 @@ def test_current_constituent_csv_rejects_duplicates_and_wrong_count():
     else:
         raise AssertionError("duplicate symbols accepted")
 
-    short = ("Symbol\\n" + "".join(f"SYM{i}\\n" for i in range(49))).encode()
+    short = ("Symbol\n" + "".join(f"SYM{i}\n" for i in range(49))).encode()
     try:
         MODULE.parse_current_constituents(short)
     except ValueError as exc:
@@ -75,5 +75,5 @@ def test_current_constituent_csv_rejects_duplicates_and_wrong_count():
 
 
 def test_constituent_snapshot_is_explicitly_not_historical_membership():
-    assert "nsearchives.nseindia.com/content/indices/ind_nifty50list.csv" == MODULE.CONSTITUENT_URL
+    assert "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv" == MODULE.CONSTITUENT_URL
     assert MODULE.TIMEOUT_SECONDS <= 15
