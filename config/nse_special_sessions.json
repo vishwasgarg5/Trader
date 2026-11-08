@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "exchange": "National Stock Exchange of India",
+  "segment": "CAPITAL_MARKET",
+  "timezone": "Asia/Kolkata",
+  "scope": "Explicit, source-backed weekend special-session overrides only; this is not a complete holiday calendar.",
+  "special_sessions": [
+    {
+      "date": "2026-11-08",
+      "name": "Diwali Muhurat Trading",
+      "session_type": "SPECIAL_LIVE_TRADING_SESSION",
+      "weekday": "Sunday",
+      "status": "OPEN",
+      "circular_reference": "NSE/CMTR/76941",
+      "circular_date": "2026-10-19",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR76941.pdf",
+      "source_status": "OFFICIAL_NSE_CIRCULAR_RECORDED_NOT_INDEPENDENTLY_REVIEWED",
+      "sessions": {
+        "block_deal": {"start": "13:50", "end": "14:05"},
+        "preopen_order_entry": {"start": "14:05", "end": "14:15"},
+        "preopen_matching": {"start": "14:15", "end": "14:17"},
+        "preopen_buffer": {"start": "14:17", "end": "14:20"},
+        "continuous_trading": {"start": "14:20", "end": null},
+        "cash_close_cas_securities": "15:15",
+        "cash_close_non_cas_securities": "15:30",
+        "cas_order_entry": {"start": "15:20", "end": "15:30"},
+        "cas_matching": {"start": "15:30", "end": "15:35"},
+        "cas_transition": {"start": "15:35", "end": "15:50"},
+        "post_close": {"start": "15:50", "end": "16:00"},
+        "special_preopen_ipo_relisted": {"start": "14:05", "end": "14:50"},
+        "special_preopen_ipo_relisted_regular_trading": {"start": "15:05", "end": "15:30"},
+        "call_auction_illiquid": {"start": "14:25", "end": "15:10"},
+        "trade_modification_cutoff": "16:15"
+      },
+      "settlement_obligation": true,
+      "notes": [
+        "Continuous cash trading opens at 14:20 IST.",
+        "Cash close is 15:15 for CAS securities and 15:30 for non-CAS securities.",
+        "The circular is a date-specific override; it does not establish a complete 2026 exchange holiday calendar."
+      ]
+    }
+  ]
+}
