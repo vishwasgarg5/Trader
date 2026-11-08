@@ -18,21 +18,9 @@ def test_link_parser_extracts_labels_and_relative_urls():
 
 
 def test_fetch_rejects_non_html(monkeypatch):
-    class Headers(dict):
-        def get(self, key, default=None):
-            return super().get(key, default)
-
-    class Response:
-        status = 200
-        headers = Headers({"Content-Type": "application/pdf", "Last-Modified": None})
-        def read(self, limit):
-            return b"%PDF-1.7"
-        def __enter__(self):
-            return self
-        def __exit__(self, *args):
-            return False
-
-    monkeypatch.setattr(MODULE.urllib.request, "urlopen", lambda *a, **k: Response())
+    monkeypatch.setattr(MODULE, "fetch_bytes", lambda *a, **k: (
+        b"%PDF-1.7", {"content_type": "application/pdf", "final_url": "https://www.nseindia.com/page"}
+    ))
     try:
         MODULE.fetch("https://exchange.example/page")
     except ValueError as exc:
@@ -81,24 +69,12 @@ def test_constituent_snapshot_is_explicitly_not_historical_membership():
 
 
 def test_constituent_acquisition_reports_50_rows_without_name_error(monkeypatch, tmp_path):
-    class Headers(dict):
-        def get(self, key, default=None):
-            return super().get(key, default)
-
-    class Response:
-        headers = Headers({"Content-Type": "text/csv"})
-        def geturl(self):
-            return MODULE.CONSTITUENT_URL
-        def read(self, limit):
-            return ("Symbol,Company Name\n" + "".join(
-                f"SYM{i},Company {i}\n" for i in range(50)
-            )).encode()
-        def __enter__(self):
-            return self
-        def __exit__(self, *args):
-            return False
-
-    monkeypatch.setattr(MODULE.urllib.request, "urlopen", lambda *a, **k: Response())
+    monkeypatch.setattr(MODULE, "fetch_bytes", lambda *a, **k: (
+        ("Symbol,Company Name\n" + "".join(
+            f"SYM{i},Company {i}\n" for i in range(50)
+        )).encode(),
+        {"content_type": "text/csv", "final_url": MODULE.CONSTITUENT_URL},
+    ))
     monkeypatch.setattr(MODULE, "CONSTITUENT_ARCHIVE", tmp_path)
     record, failure = MODULE.acquire_current_constituents("2026-11-08T12:00:00+05:30")
     assert failure is None
@@ -107,36 +83,21 @@ def test_constituent_acquisition_reports_50_rows_without_name_error(monkeypatch,
     assert record["status"] == "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY"
 
 
-def test_transient_timeout_is_retried(monkeypatch):
-    class Headers(dict):
-        def get(self, key, default=None):
-            return super().get(key, default)
+def test_fetch_delegates_retry_policy_to_shared_fetcher(monkeypatch):
+    calls = []
+    def fake_fetch(*args, **kwargs):
+        calls.append(kwargs)
+        return b"<html>ok</html>", {
+            "content_type": "text/html",
+            "final_url": "https://www.nseindia.com/test",
+        }
 
-    class Response:
-        status = 200
-        headers = Headers({"Content-Type": "text/html"})
-        def read(self, limit):
-            return b"<html>ok</html>"
-        def __enter__(self):
-            return self
-        def __exit__(self, *args):
-            return False
-
-    calls = {"count": 0}
-    def flaky_urlopen(*args, **kwargs):
-        calls["count"] += 1
-        if calls["count"] < 3:
-            raise TimeoutError("temporary timeout")
-        return Response()
-
-    monkeypatch.setattr(MODULE.urllib.request, "urlopen", flaky_urlopen)
-    monkeypatch.setattr(MODULE.time, "sleep", lambda seconds: None)
+    monkeypatch.setattr(MODULE, "fetch_bytes", fake_fetch)
     body, content_type, _ = MODULE.fetch("https://www.nseindia.com/test")
     assert body == b"<html>ok</html>"
     assert content_type == "text/html"
-    assert calls["count"] == 3
-
-
+    assert len(calls) == 1
+    assert calls[0]["attempts"] == 3
 
 def test_identical_empty_exchange_shells_are_not_usable_coverage():
     records = [

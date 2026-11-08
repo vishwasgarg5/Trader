@@ -39,7 +39,7 @@ def test_route_discovery_does_not_authorize_execution():
     assert "candidate_routes_for_manual_review" in pathlib.Path("scripts/weekly_market_frontend_asset_audit.py").read_text()
 
 
-def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
+def test_frontend_asset_fetch_delegates_retry_policy_to_shared_fetcher(monkeypatch):
     calls = []
 
     class Response:
@@ -52,22 +52,24 @@ def test_transient_frontend_asset_timeout_is_retried(monkeypatch):
         def iter_content(self, chunk_size):
             yield b"const ok = true;"
 
-    def flaky_get(url, **kwargs):
+    def flaky_fetch(url, **kwargs):
         calls.append(kwargs)
-        if len(calls) == 1:
-            raise TimeoutError("temporary read timeout")
-        return Response()
+        return b"const ok = true;", {
+            "final_url": url,
+            "content_type": "application/javascript",
+            "attempts": [{"attempt": 1, "ok": False}, {"attempt": 2, "ok": True}],
+        }
 
-    monkeypatch.setattr(MODULE.curl_requests, "get", flaky_get)
-    monkeypatch.setattr(MODULE.time, "sleep", lambda _seconds: None)
-    body, content_type, final_url = MODULE.fetch_asset(
+    monkeypatch.setattr(MODULE, "fetch_bytes", flaky_fetch)
+    body, content_type, final_url, transport = MODULE.fetch_asset(
         "https://www.nseindia.com/dist/js/components/corporate-filing/test.js"
     )
     assert body == b"const ok = true;"
     assert "javascript" in content_type
     assert final_url.startswith("https://www.nseindia.com/")
-    assert len(calls) == 2
-    assert calls[0]["impersonate"] == "chrome"
+    assert len(calls) == 1
+    assert calls[0]["attempts"] == 3
+    assert len(transport["attempts"]) == 2
     assert calls[0]["timeout"] == (20, MODULE.ASSET_TIMEOUT)
 
 
@@ -82,7 +84,9 @@ def test_asset_fetch_rejects_redirect_outside_official_hosts(monkeypatch):
         def iter_content(self, chunk_size):
             yield b"malicious"
 
-    monkeypatch.setattr(MODULE.curl_requests, "get", lambda *args, **kwargs: Response())
+    monkeypatch.setattr(MODULE, "fetch_bytes", lambda *args, **kwargs: (
+        b"malicious", {"final_url": "https://evil.example/asset.js", "content_type": "application/javascript"}
+    ))
     try:
         MODULE.fetch_asset("https://www.nseindia.com/dist/js/components/corporate-filing/test.js")
     except ValueError as exc:
