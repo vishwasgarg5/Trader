@@ -1,0 +1,40 @@
+name: Reconcile NSE holidays against NIFTY 50 TRI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/reconcile_nifty50_tri_holiday_calendar.py"
+      - ".github/workflows/reconcile-nifty50-tri-holidays.yml"
+      - "data/reference/nifty50_tri.csv"
+      - "data/reference/nifty50_tri_weekend_session_review.csv"
+      - "data/reports/nifty50_tri_calendar_audit.json"
+      - "data/reports/nifty50_tri_holiday_extraction.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile-holiday-calendar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Build diagnostic reconciliation
+        run: python scripts/reconcile_nifty50_tri_holiday_calendar.py
+      - name: Persist reconciliation report
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reports/nifty50_tri_holiday_reconciliation.json
+          if git diff --cached --quiet; then
+            echo "No reconciliation report changes"
+          else
+            git commit -m "Add NSE holiday and NIFTY 50 TRI reconciliation"
+            git push origin HEAD:main
+          fi
