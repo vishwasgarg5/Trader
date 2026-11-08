@@ -1,12 +1,19 @@
 {
   "archived_count": 2,
   "calendar_completeness": "NOT_CERTIFIED",
-  "expected_count": 2,
+  "expected_count": 3,
   "experiment_id": "NIFTY50_PILOT_001",
-  "failures": [],
+  "failures": [
+    {
+      "circular_reference": "NSE/CMTR/57285",
+      "error": "HTTP Error 403: Forbidden",
+      "session_date": "2023-06-29",
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf"
+    }
+  ],
   "holdout_access_authorized": false,
   "independent_review_status": "PENDING",
-  "purpose": "Archive additional NSE Capital Market closure circulars identified in TRI gap diagnostics",
+  "purpose": "Archive additional NSE Capital Market closure and holiday-revision circulars identified in TRI diagnostics",
   "records": [
     {
       "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-04-29_NSE_CMTR_40536.pdf",
@@ -14,11 +21,14 @@
       "bytes": 214283,
       "circular_reference": "NSE/CMTR/40536",
       "description": "Parliamentary elections in Mumbai",
+      "downloaded_from_url": "https://nsearchives.nseindia.com/content/circulars/CMTR40536.pdf",
+      "event_type": "AD_HOC_CLOSURE",
       "independent_review_status": "PENDING",
       "segment": "Capital Market",
       "session_date": "2019-04-29",
       "sha256": "0ffd5d5c6f2e967947b0fafc45f285c2eff70abbde138b06e35d4ac8169ebc65",
-      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR40536.pdf"
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR40536.pdf",
+      "supersedes_session_date": ""
     },
     {
       "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-10-21_NSE_MSD_42319.pdf",
@@ -26,11 +36,14 @@
       "bytes": 112758,
       "circular_reference": "NSE/MSD/42319",
       "description": "General Assembly elections in Maharashtra",
+      "downloaded_from_url": "https://nsearchives.nseindia.com/content/circulars/MSD42319.pdf",
+      "event_type": "AD_HOC_CLOSURE",
       "independent_review_status": "PENDING",
       "segment": "Capital Market",
       "session_date": "2019-10-21",
       "sha256": "bc49d7698fefa2b9ed3a5fbb2477dd74e5ed04dc69cec3ff5e9aca074fcc1b8a",
-      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD42319.pdf"
+      "source_url": "https://nsearchives.nseindia.com/content/circulars/MSD42319.pdf",
+      "supersedes_session_date": ""
     }
   ],
   "research_status": "RESEARCH_HOLD"
