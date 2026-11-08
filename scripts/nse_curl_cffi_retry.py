@@ -148,6 +148,11 @@ def download_one(item: dict) -> dict:
     return result
 
 
+def download_all(candidates: list[dict]) -> list[dict]:
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        return list(pool.map(download_one, candidates))
+
+
 def transport_check(url: str, method: str) -> dict:
     started = time.monotonic()
     item = {"url": url, "method": method}
@@ -243,7 +248,7 @@ def main() -> int:
         transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "curl_cffi"),
     ]
     with ThreadPoolExecutor(max_workers=2) as pool:
-        pdf_future = pool.submit(lambda: [download_one(item) for item in candidates])
+        pdf_future = pool.submit(download_all, candidates)
         wayback_future = pool.submit(ingest_wayback)
         results = pdf_future.result()
         wayback = wayback_future.result()
