@@ -87,7 +87,10 @@ def fetch_asset(url: str):
         expected_content_type=(),
         resume_path=ARCHIVE / ".partial" / (hashlib.sha256(url.encode("utf-8")).hexdigest() + ".part"),
     )
-    validate_official_url(metadata["final_url"], ALLOWED_HOSTS)
+    try:
+        validate_official_url(metadata["final_url"], ALLOWED_HOSTS)
+    except ValueError as exc:
+        raise ValueError("redirect left official NSE host allowlist") from exc
     final = urllib.parse.urlsplit(metadata["final_url"])
     content_type = metadata.get("content_type", "")
     if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
