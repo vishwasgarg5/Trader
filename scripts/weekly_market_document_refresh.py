@@ -103,7 +103,7 @@ def fetch(url: str):
     content_type = metadata.get("content_type", "")
     if not (body.lstrip().lower().startswith((b"<!doctype html", b"<html", b"<?xml"))
             or "html" in content_type.lower()):
-        raise ValueError(f"unexpected HTML content type: {content_type}")
+        raise ValueError(f"unexpected content type for HTML page: {content_type}")
     return body, content_type, None
 def acquire_page(source_id: str, url: str, run_at: str):
     publisher = ("NSE_INDICES" if source_id.startswith("NIFTY_INDICES_") else ("NSE" if source_id.startswith("NSE_") else "BSE"))
