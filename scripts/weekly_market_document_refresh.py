@@ -15,6 +15,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -29,11 +30,12 @@ ARCHIVE = ROOT / "data/reference/source_documents/weekly_market_pages"
 REPORT = ROOT / "data/reports/weekly_market_document_refresh.json"
 MEMBERSHIP = ROOT / "data/reference/nifty50_membership.csv"
 MAX_BYTES = 20 * 1024 * 1024
-TIMEOUT_SECONDS = 15
+TIMEOUT_SECONDS = 45
+RETRY_ATTEMPTS = 3
 CONSTITUENT_URL = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
 CONSTITUENT_ARCHIVE = ROOT / "data/reference/source_documents/nifty50_constituent_snapshots"
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/pdf;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-IN,en;q=0.9",
 }
@@ -76,9 +78,23 @@ class LinkParser(HTMLParser):
 def now_ist():
     return datetime.now(ZoneInfo("Asia/Kolkata")).isoformat()
 
+def open_with_retries(request, timeout=TIMEOUT_SECONDS):
+    """Retry transient network/server failures without relaxing host or content checks."""
+    for attempt in range(RETRY_ATTEMPTS):
+        try:
+            return urllib.request.urlopen(request, timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code not in {408, 425, 429, 500, 502, 503, 504} or attempt == RETRY_ATTEMPTS - 1:
+                raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError):
+            if attempt == RETRY_ATTEMPTS - 1:
+                raise
+        time.sleep(min(2 ** attempt, 8))
+    raise RuntimeError("retry loop exited unexpectedly")
+
 def fetch(url: str):
     request = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+    with open_with_retries(request) as response:
         body = response.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise ValueError(f"response exceeded {MAX_BYTES} byte safety limit")
@@ -132,7 +148,7 @@ def parse_current_constituents(body: bytes):
 def acquire_current_constituents(run_at: str):
     request = urllib.request.Request(CONSTITUENT_URL, headers=HEADERS)
     try:
-        with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+        with open_with_retries(request) as response:
             final_host = (urllib.parse.urlsplit(response.geturl()).hostname or "").lower()
             if final_host not in {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com"}:
                 raise ValueError("constituent CSV redirect left official NSE host allowlist")
@@ -149,7 +165,7 @@ def acquire_current_constituents(run_at: str):
                 "source_url": CONSTITUENT_URL, "retrieved_at_ist": run_at,
                 "archive_path": path.as_posix(), "bytes": len(body),
                 "sha256": digest, "content_type": content_type,
-                "row_count": len(rows), "unique_symbol_count": len(set(symbols)),
+                "row_count": len(symbols), "unique_symbol_count": len(set(symbols)),
                 "symbols": symbols,
                 "status": "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY",
                 "use_restriction": "Not eligible to populate historical membership intervals or establish past constituent membership.",
