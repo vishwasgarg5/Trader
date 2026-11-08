@@ -62,6 +62,69 @@
       "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
       "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
       "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:43:41.823448+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:44:30.500245+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:45:21.835505+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:46:06.911428+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:46:56.767422+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:47:48.599445+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:48:33.773822+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:49:23.504414+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T10:50:16.304369+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='nsearchives.nseindia.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf"
     }
   ],
   "created_at_utc": "2026-11-08T10:26:09.149184+00:00",
@@ -115,6 +178,6 @@
       "status": "PENDING"
     }
   },
-  "last_request_at_utc": "2026-11-08T10:32:42.374768+00:00",
+  "last_request_at_utc": "2026-11-08T10:49:31.183589+00:00",
   "schema_version": 1
 }
