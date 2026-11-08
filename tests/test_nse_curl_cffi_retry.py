@@ -93,7 +93,7 @@ def test_constituent_snapshot_validation_requires_50_symbols_and_valid_isins():
 
 
 def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch, tmp_path):
-    target = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    target = "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv"
     monkeypatch.setattr(MODULE, "WAYBACK_SNAPSHOT_ARCHIVE", tmp_path)
     rows = ["timestamp", "original", "statuscode", "mimetype", "digest", "length"]
 
