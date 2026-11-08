@@ -82,10 +82,36 @@ def test_constituent_snapshot_validation_requires_50_symbols_and_valid_isins():
     assert result["exactly_50_distinct_symbols"] is True
     assert result["all_rows_have_valid_isin"] is True
     assert result["distinct_symbol_count"] == 50
-    invalid = ("Company Name,Industry,Symbol,Series\\nA,Industry,AAA,EQ\\n").encode()
+    invalid = ("Company Name,Industry,Symbol,Series\nA,Industry,AAA,EQ\n").encode()
     try:
         MODULE.validate_constituent_snapshot(invalid)
     except ValueError:
         pass
     else:
         raise AssertionError("snapshot without ISIN was accepted")
+
+
+def test_wayback_snapshot_archiver_records_only_validated_candidates(monkeypatch, tmp_path):
+    target = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    monkeypatch.setattr(MODULE, "WAYBACK_SNAPSHOT_ARCHIVE", tmp_path)
+    rows = ["timestamp", "original", "statuscode", "mimetype", "digest", "length"]
+    rows = [rows, ["20200601000000", target, "200", "text/csv", "CDXHASH", "100"]]
+
+    csv_rows = ["Company Name,Industry,Symbol,Series,ISIN Code"]
+    csv_rows.extend(f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}" for i in range(50))
+    payload = ("\\n".join(csv_rows) + "\\n").encode()
+
+    class Response:
+        status_code = 200
+        content = payload
+
+    class Session:
+        def get(self, url, **kwargs):
+            assert url == MODULE.wayback_snapshot_url("20200601000000", target)
+            return Response()
+
+    result = MODULE.archive_wayback_constituent_snapshots(Session(), target, rows)
+    assert len(result) == 1
+    assert result[0]["status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
+    assert result[0]["validation"]["distinct_symbol_count"] == 50
+    assert (tmp_path / result[0]["archive_path"].split("/")[-1]).exists()
