@@ -18,6 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 import urllib.error
 import urllib.parse
 import urllib.request
+from curl_cffi import requests as curl_requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -72,37 +73,49 @@ def candidate_routes(script_text: str):
     return sorted(routes)
 
 
-def open_with_retry(request, timeout):
-    """Retry transient network failures once without retrying HTTP 4xx validation failures."""
+def fetch_asset(url: str):
+    """Fetch an observed asset with a browser-like TLS fingerprint and bounded retries."""
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.scheme != "https" or (parsed.hostname or "").lower() not in ALLOWED_HOSTS:
+        raise ValueError("asset URL is outside official NSE HTTPS allowlist")
     last_error = None
     for attempt in range(MAX_ATTEMPTS):
         try:
-            return urllib.request.urlopen(request, timeout=timeout)
-        except (TimeoutError, urllib.error.URLError) as exc:
-            if isinstance(exc, urllib.error.HTTPError) and 400 <= exc.code < 500 and exc.code != 429:
+            response = curl_requests.get(
+                url,
+                headers=HEADERS,
+                timeout=(20, ASSET_TIMEOUT),
+                impersonate="chrome",
+                allow_redirects=True,
+                stream=True,
+            )
+            final_url = response.url
+            final = urllib.parse.urlsplit(final_url)
+            if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
+                raise ValueError("asset redirect left official NSE host allowlist")
+            response.raise_for_status()
+            chunks = []
+            total = 0
+            for chunk in response.iter_content(chunk_size=64 * 1024):
+                if not chunk:
+                    continue
+                total += len(chunk)
+                if total > MAX_BYTES:
+                    raise ValueError("asset exceeded 5 MiB safety limit")
+                chunks.append(chunk)
+            body = b"".join(chunks)
+            content_type = response.headers.get("Content-Type", "")
+            if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
+                raise ValueError(f"unexpected JavaScript content type: {content_type}")
+            return body, content_type, final_url
+        except Exception as exc:
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            if status is not None and 400 <= status < 500 and status != 429:
                 raise
             last_error = exc
             if attempt + 1 < MAX_ATTEMPTS:
                 time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
     raise last_error
-
-
-def fetch_asset(url: str):
-    parsed = urllib.parse.urlsplit(url)
-    if parsed.scheme != "https" or (parsed.hostname or "").lower() not in ALLOWED_HOSTS:
-        raise ValueError("asset URL is outside official NSE HTTPS allowlist")
-    request = urllib.request.Request(url, headers=HEADERS)
-    with open_with_retry(request, timeout=ASSET_TIMEOUT) as response:
-        final = urllib.parse.urlsplit(response.geturl())
-        if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
-            raise ValueError("asset redirect left official NSE host allowlist")
-        body = response.read(MAX_BYTES + 1)
-        if len(body) > MAX_BYTES:
-            raise ValueError("asset exceeded 5 MiB safety limit")
-        content_type = response.headers.get("Content-Type", "")
-        if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
-            raise ValueError(f"unexpected JavaScript content type: {content_type}")
-        return body, content_type, response.geturl()
 
 
 def inspect_asset(source_page_id: str, url: str):
