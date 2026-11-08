@@ -622,6 +622,69 @@
       "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7fa96bba22d0>, 'Connection to web.archive.org timed out. (connect timeout=15)",
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:08:52.669308+00:00",
+      "attempt": 1,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:09:41.676382+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:10:34.517400+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:10:49.538519+00:00",
+      "attempt": 1,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f39caff3b50>, 'Connection to web.archive.org timed out. (connect timeo",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:11:09.339412+00:00",
+      "attempt": 2,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f39cb01ccd0>, 'Connection to web.archive.org timed out. (connect timeo",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:11:31.919504+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f39cb01ded0>, 'Connection to web.archive.org timed out. (connect timeo",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:11:47.006896+00:00",
+      "attempt": 1,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f39caff36d0>, 'Connection to web.archive.org timed out. (connect timeout=15)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:12:06.695568+00:00",
+      "attempt": 2,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2024&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f39caff2b50>, 'Connection to web.archive.org timed out. (connect timeout=15)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T13:13:02.606996+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "documents": {
@@ -726,7 +789,7 @@
         "https://archives.nseindia.com/Press_Release/ind_prs05062018.pdf",
         "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
       ],
-      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
+      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs05062018.pdf",
@@ -755,8 +818,7 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
-      "status": "DOCUMENT_UNAVAILABLE",
-      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
+      "status": "PENDING"
     },
     "NSE-ARCHIVE-2019-07-16-3a8719394912": {
       "attempts": [
@@ -867,7 +929,7 @@
         "https://archives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
         "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
       ],
-      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
+      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
@@ -896,8 +958,7 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
-      "status": "DOCUMENT_UNAVAILABLE",
-      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
+      "status": "PENDING"
     },
     "NSE-ARCHIVE-2023-03-14-5b13b76a2af9": {
       "attempts": [
@@ -1000,7 +1061,7 @@
         "https://archives.nseindia.com/Press_Release/ind_prs14032023.pdf",
         "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
       ],
-      "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
+      "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf",
         "https://archives.nseindia.com/Press_Release/ind_prs14032023.pdf",
@@ -1029,8 +1090,7 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
-      "status": "DOCUMENT_UNAVAILABLE",
-      "unavailable_reason": "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
+      "status": "PENDING"
     }
   },
   "limitations": [
@@ -1040,9 +1100,9 @@
   ],
   "next_retry_at_utc": null,
   "request_budget": 18,
-  "requests_this_run": 10,
-  "run_at_utc": "2026-11-08T12:38:19.835037+00:00",
-  "runtime_seconds": 361.72,
+  "requests_this_run": 9,
+  "run_at_utc": "2026-11-08T13:13:02.608535+00:00",
+  "runtime_seconds": 255.23,
   "schema_version": 1,
   "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
   "status": "PARTIAL",
