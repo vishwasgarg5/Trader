@@ -1,0 +1,170 @@
+name: Steps 1-5 evidence acquisition and readiness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 4 * * 1"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/steps-1-5-evidence.yml"
+      - "trader/nifty50_tri_acquisition.py"
+      - "tests/test_nifty50_tri_acquisition.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trader-steps-1-5-evidence
+  cancel-in-progress: false
+
+jobs:
+  acquire-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test and project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Test TRI acquisition parser and safety rules
+        run: |
+          python -m py_compile trader/nifty50_tri_acquisition.py
+          python -m pytest -q tests/test_nifty50_tri_acquisition.py
+
+      - name: Acquire official NIFTY 50 Total Returns Index (2018-2024)
+        id: tri
+        run: |
+          set +e
+          python -m trader.nifty50_tri_acquisition
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+          echo "Acquisition exit code: $code"
+          # A source outage is recorded as a diagnostic; it does not authorize substitution.
+
+      - name: Audit Steps 2-5 evidence and cost configuration
+        if: always()
+        run: |
+          mkdir -p data/reports
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from trader.membership_evidence import audit_membership_evidence, audit_special_membership_events
+          from trader.security_aliases import audit_security_aliases
+          from trader.corporate_actions import audit_corporate_action_ledger
+          from trader.nifty50_price_data_readiness import audit_price_data_readiness
+          from trader.costs import load_groww_delivery_costs
+
+          root = Path(".")
+          ref = root / "data/reference"
+          membership = audit_membership_evidence(
+              ref / "nifty50_transition_register.csv",
+              ref / "nifty50_annual_coverage.csv",
+              root,
+          )
+          special = audit_special_membership_events(ref / "nifty50_special_membership_events.csv")
+          aliases = audit_security_aliases(ref / "security_symbol_aliases.csv", ref)
+          actions = audit_corporate_action_ledger(ref / "corporate_actions.csv")
+          prices = audit_price_data_readiness(ref)
+          costs = load_groww_delivery_costs()
+          report = {
+              "experiment_id": "NIFTY50_PILOT_001",
+              "generated_by": "GitHub Actions",
+              "steps": {
+                  "1_official_tri": {
+                      "acquisition_report": "data/reports/nifty50_tri_acquisition.json",
+                      "status": "SEE_ACQUISITION_REPORT",
+                  },
+                  "2_point_in_time_membership": membership,
+                  "2_special_membership_events": special,
+                  "3_security_identity": aliases,
+                  "3_corporate_actions": actions,
+                  "4_ohlcv_and_tri_readiness": prices,
+                  "5_cost_profile": {
+                      "profile": "config/broker_costs_groww.json",
+                      "validated_by_loader": True,
+                      "slippage_is_scenario_assumption": True,
+                      "contract_note_reconciliation_evidence_present": False,
+                  },
+              },
+              "overall_status": "RESEARCH_HOLD",
+              "limitations": [
+                  "Structural checks do not independently authenticate exchange facts.",
+                  "No automated process may fabricate reviewer identity or sign-off.",
+                  "TRI acquisition does not certify calendar completeness or source series semantics.",
+                  "No holdout, promotion, paper trading or live trading is authorized.",
+              ],
+          }
+          out = Path("data/reports/steps_1_5_readiness.json")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print(json.dumps({
+              "membership_ready": membership["ready"],
+              "special_membership_ready": special["ready"],
+              "security_identity_ready": aliases["ready"],
+              "corporate_actions_valid": actions["valid"],
+              "price_and_tri_ready": prices["ready_for_price_and_benchmark_research"],
+              "research_status": "RESEARCH_HOLD",
+          }, indent=2))
+          PY
+
+      - name: Commit acquired originals, normalized TRI and evidence reports to main
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- data/reference/nifty50_tri.csv \
+            data/reference/source_documents/nifty50_tri_2018-2024_official_response.json \
+            data/reports/nifty50_tri_acquisition.json \
+            data/reports/steps_1_5_readiness.json || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Record automated Nifty 50 TRI acquisition and Steps 1-5 evidence audit"
+            git push origin HEAD:main
+          else
+            echo "No evidence changes to commit."
+          fi
+
+      - name: Upload acquisition and readiness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trader-steps-1-5-evidence-${{ github.run_id }}
+          path: |
+            data/reference/nifty50_tri.csv
+            data/reference/source_documents/nifty50_tri_2018-2024_official_response.json
+            data/reports/nifty50_tri_acquisition.json
+            data/reports/steps_1_5_readiness.json
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Publish run outcome
+        if: always()
+        run: |
+          {
+            echo "## Steps 1-5 evidence run"
+            echo
+            echo "- TRI acquisition exit code: ${{ steps.tri.outputs.exit_code || 'not-run' }}"
+            echo "- Nifty 50 TRI source: official NSE Indices endpoint"
+            echo "- Membership, identity, corporate-action and OHLCV gates: fail-closed audit"
+            echo "- Research hold, holdout lock and trading restrictions remain active"
+            echo
+            echo "See the uploaded evidence artifact and committed reports for details."
+          } >> "$GITHUB_STEP_SUMMARY"
