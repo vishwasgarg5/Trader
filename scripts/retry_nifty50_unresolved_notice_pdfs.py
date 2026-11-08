@@ -240,13 +240,18 @@ def run() -> dict:
                 }, f"cdx:{doc_id}")
                 if response is None:
                     break
-                item["cdx_checked"] = True
-                try:
-                    rows = response.json()
-                    item["cdx_captures"] = rows[1:] if isinstance(rows, list) and rows else []
-                    item["cdx_metadata_sha256"] = digest(response.content)
-                except Exception as exc:
-                    item["cdx_error"] = f"{type(exc).__name__}: {exc}"[:500]
+                if response.status_code == 200:
+                    try:
+                        rows = response.json()
+                        if not isinstance(rows, list) or not rows:
+                            raise ValueError("CDX response is not a non-empty JSON row list")
+                        item["cdx_captures"] = rows[1:]
+                        item["cdx_metadata_sha256"] = digest(response.content)
+                        item["cdx_checked"] = True
+                    except Exception as exc:
+                        item["cdx_error"] = f"{type(exc).__name__}: {exc}"[:500]
+                else:
+                    item["cdx_error"] = f"CDX returned HTTP {response.status_code}"
                 atomic(STATE_PATH, state)
             while item["cdx_checked"] and item["next_capture_index"] < len(item["cdx_captures"]):
                 row = item["cdx_captures"][item["next_capture_index"]]
