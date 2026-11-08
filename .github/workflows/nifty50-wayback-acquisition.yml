@@ -11,6 +11,15 @@ on:
       - "scripts/retry_nifty50_unresolved_notice_pdfs.py"
       - "tests/test_wayback_nifty50_acquisition.py"
       - "tests/test_retry_nifty50_unresolved_notice_pdfs.py"
+  push:
+    branches:
+      - research/nifty50-wayback-acquisition-2026-11-08
+    paths:
+      - ".github/workflows/nifty50-wayback-acquisition.yml"
+      - "scripts/wayback_nifty50_acquisition.py"
+      - "scripts/retry_nifty50_unresolved_notice_pdfs.py"
+      - "tests/test_wayback_nifty50_acquisition.py"
+      - "tests/test_retry_nifty50_unresolved_notice_pdfs.py"
 
 permissions:
   contents: write
