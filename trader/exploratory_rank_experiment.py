@@ -24,7 +24,7 @@ from sklearn.preprocessing import StandardScaler
 
 STATUS = "EXPLORATORY_UNVERIFIED_DATA"
 REQUIRED_COLUMNS = {
-    "signal_date", "symbol", "feature_available_at",
+    "signal_date", "signal_timestamp", "symbol", "feature_available_at",
     "outcome_end_date", "net_return",
 }
 FORBIDDEN_FEATURE_TOKENS = (
@@ -56,16 +56,15 @@ def load_development_panel(csv_path: Path, manifest_path: Path) -> tuple[pd.Data
     missing = REQUIRED_COLUMNS.difference(frame.columns)
     if missing:
         raise ValueError(f"panel is missing required columns: {sorted(missing)}")
-    frame["signal_date"] = pd.to_datetime(frame["signal_date"], errors="raise").dt.tz_localize(None)
-    frame["feature_available_at"] = pd.to_datetime(
-        frame["feature_available_at"], errors="raise"
-    ).dt.tz_localize(None)
+    frame["signal_date"] = pd.to_datetime(frame["signal_date"], errors="raise").dt.tz_localize(None).dt.normalize()
+    frame["signal_timestamp"] = pd.to_datetime(frame["signal_timestamp"], errors="raise").dt.tz_localize(None)
+    frame["feature_available_at"] = pd.to_datetime(frame["feature_available_at"], errors="raise").dt.tz_localize(None)
     frame["outcome_end_date"] = pd.to_datetime(
         frame["outcome_end_date"], errors="raise"
     ).dt.tz_localize(None)
     if frame[["signal_date", "symbol"]].duplicated().any():
         raise ValueError("panel contains duplicate signal_date/symbol rows")
-    if (frame["feature_available_at"] > frame["signal_date"]).any():
+    if (frame["feature_available_at"] > frame["signal_timestamp"]).any():
         raise ValueError("future-dated feature availability detected")
     if (frame["outcome_end_date"] <= frame["signal_date"]).any():
         raise ValueError("outcome_end_date must be after signal_date")
@@ -184,7 +183,11 @@ def evaluate_walk_forward(
         raise ValueError(f"frame is missing required columns: {sorted(missing)}")
 
     data = frame.copy()
-    data["signal_date"] = pd.to_datetime(data["signal_date"]).dt.tz_localize(None)
+    data["signal_date"] = pd.to_datetime(data["signal_date"]).dt.tz_localize(None).dt.normalize()
+    data["signal_timestamp"] = pd.to_datetime(data["signal_timestamp"]).dt.tz_localize(None)
+    data["feature_available_at"] = pd.to_datetime(data["feature_available_at"]).dt.tz_localize(None)
+    if (data["feature_available_at"] > data["signal_timestamp"]).any():
+        raise ValueError("future-dated feature availability detected")
     data["outcome_end_date"] = pd.to_datetime(data["outcome_end_date"]).dt.tz_localize(None)
     data["net_return"] = pd.to_numeric(data["net_return"], errors="coerce")
     data = data.dropna(subset=["net_return"])
