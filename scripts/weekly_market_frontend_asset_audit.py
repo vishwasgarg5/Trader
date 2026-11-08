@@ -22,6 +22,8 @@ from curl_cffi import requests as curl_requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from trader.market_source_fetcher import fetch_bytes
+
 REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
 REPORT_OUT = pathlib.Path("data/reports/weekly_market_frontend_asset_audit.json")
 ARCHIVE = pathlib.Path("data/reference/source_documents/weekly_market_frontend_assets")
@@ -74,50 +76,53 @@ def candidate_routes(script_text: str):
 
 
 def fetch_asset(url: str):
-    """Fetch an observed asset with a browser-like TLS fingerprint and bounded retries."""
-    parsed = urllib.parse.urlsplit(url)
-    if parsed.scheme != "https" or (parsed.hostname or "").lower() not in ALLOWED_HOSTS:
-        raise ValueError("asset URL is outside official NSE HTTPS allowlist")
-    last_error = None
-    for attempt in range(MAX_ATTEMPTS):
-        try:
-            response = curl_requests.get(
-                url,
-                headers=HEADERS,
-                timeout=(20, ASSET_TIMEOUT),
-                impersonate="chrome",
-                allow_redirects=True,
-                stream=True,
-            )
-            final_url = response.url
-            final = urllib.parse.urlsplit(final_url)
-            if final.scheme != "https" or (final.hostname or "").lower() not in ALLOWED_HOSTS:
-                raise ValueError("asset redirect left official NSE host allowlist")
-            response.raise_for_status()
-            chunks = []
-            total = 0
-            for chunk in response.iter_content(chunk_size=64 * 1024):
-                if not chunk:
-                    continue
-                total += len(chunk)
-                if total > MAX_BYTES:
-                    raise ValueError("asset exceeded 5 MiB safety limit")
-                chunks.append(chunk)
-            body = b"".join(chunks)
-            content_type = response.headers.get("Content-Type", "")
-            if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
-                raise ValueError(f"unexpected JavaScript content type: {content_type}")
-            return body, content_type, final_url
-        except Exception as exc:
-            status = getattr(getattr(exc, "response", None), "status_code", None)
-            if status is not None and 400 <= status < 500 and status != 429:
-                raise
-            last_error = exc
-            if attempt + 1 < MAX_ATTEMPTS:
-                time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
-    raise last_error
+    """Fetch an observed NSE asset through the shared HTTP/1.1-fallback client."""
+    body, metadata = fetch_bytes(
+        url,
+        allowed_hosts=ALLOWED_HOSTS,
+        headers=HEADERS,
+        max_bytes=MAX_BYTES,
+        timeout=(20, ASSET_TIMEOUT),
+        attempts=3,
+        expected_content_type=(),
+        resume_path=ARCHIVE / ".partial" / (hashlib.sha256(url.encode("utf-8")).hexdigest() + ".part"),
+    )
+    final = urllib.parse.urlsplit(metadata["final_url"])
+    content_type = metadata.get("content_type", "")
+    if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
+        raise ValueError(f"unexpected JavaScript content type: {content_type}")
+    return body, content_type, metadata["final_url"], metadata
 
-
+def inspect_asset(source_page_id: str, url: str):
+    """Fetch and validate one observed asset; safe to run concurrently."""
+    try:
+        body, content_type, final_url, transport = fetch_asset(url)
+        digest = hashlib.sha256(body).hexdigest()
+        archive_path = ARCHIVE / f"{digest[:16]}_{pathlib.PurePosixPath(urllib.parse.urlsplit(final_url).path).name}"
+        if not archive_path.exists():
+            archive_path.write_bytes(body)
+        text = body.decode("utf-8", errors="replace")
+        return ({
+            "source_page_id": source_page_id,
+            "source_url": url,
+            "final_url": final_url,
+            "archive_path": archive_path.as_posix(),
+            "bytes": len(body),
+            "sha256": digest,
+            "content_type": content_type,
+            "transport": transport,
+            "candidate_routes_for_manual_review": candidate_routes(text),
+            "evidence_status": "OBSERVED_OFFICIAL_FRONTEND_ASSET_ARCHIVED",
+            "route_execution_status": "NOT_CALLED",
+        }, None)
+    except Exception as exc:
+        return (None, {
+            "source_page_id": source_page_id,
+            "source_url": url,
+            "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+            "transport": getattr(exc, "metadata", {}),
+            "error": f"{type(exc).__name__}: {exc}"[:800],
+        })
 def inspect_asset(source_page_id: str, url: str):
     """Fetch and validate one observed asset; safe to run concurrently."""
     try:
