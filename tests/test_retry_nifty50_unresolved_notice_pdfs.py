@@ -52,6 +52,30 @@ def test_budget_or_throttle_stop_does_not_advance_notice_fallback():
     assert item["next_direct_index"] == 2
 
 
+def test_legacy_three_timeouts_are_reconciled_to_next_official_host():
+    urls = MODULE.direct_fallbacks(MODULE.DOCUMENTS[next(iter(MODULE.DOCUMENTS))])
+    item = {"direct_urls": urls, "next_direct_index": 0}
+    attempt_log = [
+        {"url": urls[0], "attempt": n, "error": "ReadTimeout"}
+        for n in (1, 2, 3)
+    ]
+    assert MODULE.reconcile_exhausted_direct_fallback(item, attempt_log)
+    assert item["next_direct_index"] == 1
+    assert item["fallback_errors"][0]["reason"] == "migrated_legacy_three_transient_failures"
+
+
+def test_legacy_fallback_reconciliation_does_not_advance_on_incomplete_or_http_attempts():
+    urls = MODULE.direct_fallbacks(MODULE.DOCUMENTS[next(iter(MODULE.DOCUMENTS))])
+    item = {"direct_urls": urls, "next_direct_index": 0}
+    incomplete = [{"url": urls[0], "attempt": n, "error": "ReadTimeout"} for n in (1, 2)]
+    assert not MODULE.reconcile_exhausted_direct_fallback(item, incomplete)
+    http_response = [{"url": urls[0], "attempt": 1, "error": "ReadTimeout"},
+                     {"url": urls[0], "attempt": 2, "error": "ReadTimeout"},
+                     {"url": urls[0], "attempt": 3, "http_status": 404}]
+    assert not MODULE.reconcile_exhausted_direct_fallback(item, http_response)
+    assert item["next_direct_index"] == 0
+
+
 def test_retry_after_seconds_supported():
     assert MODULE.retry_after("17") == 17
     assert MODULE.retry_after(None) is None
