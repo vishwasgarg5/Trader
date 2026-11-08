@@ -216,3 +216,47 @@ def test_malformed_http_200_cdx_response_does_not_complete_variant():
     assert item["next_cdx_search_index"] == 4
     assert item["cdx_checked"] is False
     assert item["cdx_result"] == "SEARCH_INCOMPLETE"
+
+
+def test_load_state_reopens_stale_unavailable_notice_when_cdx_search_is_incomplete(tmp_path, monkeypatch):
+    doc_id, original = next(iter(MODULE.DOCUMENTS.items()))
+    variants = MODULE.cdx_search_variants(original)
+    queries = [
+        {"url": variant["url"], "match_type": variant.get("match_type", "exact"),
+         "http_status": 200, "result": "EMPTY"}
+        for variant in variants[:4]
+    ]
+    queries.append({
+        "url": variants[4]["url"], "match_type": "domain",
+        "http_status": 503, "result": "HTTP_ERROR",
+    })
+    state_path = tmp_path / "notice-state.json"
+    state_path.write_text(json.dumps({
+        "schema_version": 1,
+        "documents": {
+            doc_id: {
+                "original_url": original,
+                "direct_urls": MODULE.direct_fallbacks(original),
+                "next_direct_index": len(MODULE.direct_fallbacks(original)),
+                "cdx_search_variants": variants,
+                "cdx_queries": queries,
+                "cdx_captures": [],
+                "next_cdx_search_index": 4,
+                "cdx_checked": False,
+                "cdx_result": "SEARCH_INCOMPLETE",
+                "status": "DOCUMENT_UNAVAILABLE",
+                "unavailable_reason": "stale terminal status from an earlier run",
+            }
+        },
+        "attempt_log": [],
+    }), encoding="utf-8")
+    monkeypatch.setattr(MODULE, "STATE_PATH", state_path)
+
+    state = MODULE.load_state()
+    item = state["documents"][doc_id]
+
+    assert item["cdx_checked"] is False
+    assert item["cdx_result"] == "SEARCH_INCOMPLETE"
+    assert item["status"] == "PENDING"
+    assert "unavailable_reason" not in item
+    assert item["classification"] == "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
