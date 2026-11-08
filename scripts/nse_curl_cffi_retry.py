@@ -283,7 +283,7 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
         timestamp, original, status, mimetype, cdx_digest, length = row[:6]
         if original != target or not timestamp.startswith(tuple(str(year) for year in range(2018, 2025))):
             continue
-        if status != "200" or mimetype not in {"text/csv", "application/vnd.ms-excel", "text/plain"}:
+        if status != "200" or mimetype not in {"text/csv", "application/vnd.ms-excel", "text/plain", "application/octet-stream"}:
             continue
         record = {"capture_timestamp": timestamp, "original_url": original, "cdx_digest": cdx_digest}
         try:
