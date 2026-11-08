@@ -6,6 +6,7 @@ source acquisition diagnostics only: it never updates model data or membership.
 """
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import io
@@ -53,7 +54,14 @@ SNAPSHOT_CSV_TARGETS = {
     "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
     "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
 }
-SNAPSHOT_HISTORY_TARGETS = SNAPSHOT_CSV_TARGETS | {
+# Historical CDX records include the legacy HTTP endpoint. HTTP is permitted
+# only as an exact Wayback original URL; live NSE downloads remain HTTPS-only.
+LEGACY_HTTP_SNAPSHOT_CSV_TARGETS = {
+    "http://www.niftyindices.com:80/IndexConstituent/ind_nifty50list.csv",
+    "http://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+}
+SNAPSHOT_CDX_TARGETS = SNAPSHOT_CSV_TARGETS | LEGACY_HTTP_SNAPSHOT_CSV_TARGETS
+SNAPSHOT_HISTORY_TARGETS = SNAPSHOT_CDX_TARGETS | {
     "https://www.nseindia.com/content/indices/IndexInclExcl.xls",
     "https://archives.nseindia.com/content/indices/IndexInclExcl.xls",
 }
@@ -250,8 +258,22 @@ def parse_cdx_json(payload: str) -> list[list[str]]:
     return rows
 
 
+def wayback_cdx_sha1_digest(payload: bytes) -> str:
+    """Return the uppercase Base32 SHA-1 digest used by Wayback CDX."""
+    return base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=")
+
+
+def verify_wayback_cdx_digest(payload: bytes, expected: str) -> str:
+    if not re.fullmatch(r"[A-Z2-7]{32}", expected or ""):
+        raise ValueError("CDX SHA-1 digest is missing or malformed")
+    actual = wayback_cdx_sha1_digest(payload)
+    if actual != expected:
+        raise ValueError(f"Wayback CDX SHA-1 digest mismatch: expected {expected}, received {actual}")
+    return actual
+
+
 def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[list[str]]) -> list[dict]:
-    if target not in SNAPSHOT_CSV_TARGETS:
+    if target not in SNAPSHOT_CDX_TARGETS:
         return []
     WAYBACK_SNAPSHOT_ARCHIVE.mkdir(parents=True, exist_ok=True)
     snapshots = []
@@ -275,6 +297,7 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
             payload = response.content
             if not payload or len(payload) > 5 * 1024 * 1024:
                 raise ValueError("Wayback snapshot is empty or exceeds 5 MiB")
+            verified_cdx_digest = verify_wayback_cdx_digest(payload, cdx_digest)
             validation = validate_constituent_snapshot(payload)
             digest = hashlib.sha256(payload).hexdigest()
             path = WAYBACK_SNAPSHOT_ARCHIVE / f"{timestamp}_{digest[:16]}.csv"
@@ -284,6 +307,8 @@ def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[l
                 "archive_path": path.as_posix(),
                 "bytes_received": len(payload),
                 "sha256": digest,
+                "cdx_sha1_verified": True,
+                "verified_cdx_sha1": verified_cdx_digest,
                 "validation": validation,
                 "status": (
                     "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
