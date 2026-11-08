@@ -3,9 +3,9 @@
   "candidate_count": 0,
   "changes_to_model_data": false,
   "egress_ip": {
-    "checked_at_utc": "2026-11-08T09:37:31.888969+00:00",
+    "checked_at_utc": "2026-11-08T09:38:08.411268+00:00",
     "http_status": 200,
-    "ip": "20.161.184.82",
+    "ip": "172.174.190.117",
     "service": "https://api.ipify.org?format=json"
   },
   "failed_count": 0,
@@ -16,23 +16,23 @@
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
   "results": [],
-  "run_at_utc": "2026-11-08T09:37:45.915093+00:00",
+  "run_at_utc": "2026-11-08T09:38:22.222794+00:00",
   "schema_version": 1,
   "status": "COMPLETE",
   "transport_checks": [
     {
       "bytes_received": 131072,
       "content_type": "application/json",
-      "elapsed_seconds": 1.496,
+      "elapsed_seconds": 1.354,
       "http_status": 200,
       "method": "requests",
       "ok": true,
       "url": "https://web.archive.org/cdx/search/cdx?url=https%3A//www.nseindia.com/&output=json"
     },
     {
-      "bytes_received": 131398,
+      "bytes_received": 131399,
       "content_type": "application/json",
-      "elapsed_seconds": 2.256,
+      "elapsed_seconds": 1.04,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
@@ -41,7 +41,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.387,
+      "elapsed_seconds": 0.467,
       "http_status": 200,
       "method": "requests",
       "ok": true,
@@ -50,7 +50,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.322,
+      "elapsed_seconds": 0.041,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
