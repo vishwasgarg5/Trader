@@ -23,8 +23,8 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 LEGACY_ROOT = "https://archives.nseindia.com/content/historical/EQUITIES"
 UDIFF_ROOT = "https://nsearchives.nseindia.com/content/cm"
-USER_AGENT = "Trader-NIFTY50-Bhavcopy-Acquisition/1.0 (+https://github.com/vishwasgarg5/Trader)"
-TIMEOUT = (15, 30)
+USER_AGENT = "Trader-Nifty50-Pilot-Archive-Probe/1.0 (research access check)"
+TIMEOUT_SECONDS = 30
 MAX_BYTES = 30 * 1024 * 1024
 CANONICAL_FIELDS = [
     "trade_date", "symbol", "series", "isin", "open", "high", "low",
@@ -39,6 +39,32 @@ def bhavcopy_url(trade_date: str) -> str:
         return (f"{LEGACY_ROOT}/{day.year}/{month}/"
                 f"cm{day.day:02d}{month}{day.year}bhav.csv.zip")
     return (f"{UDIFF_ROOT}/BhavCopy_NSE_CM_0_0_0_{day:%Y%m%d}_F_0000.csv.zip")
+
+
+
+def fetch_bhavcopy(url: str) -> tuple[bytes, int]:
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
+    last_error = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+                status = int(response.status)
+                payload = response.read(MAX_BYTES + 1)
+            if len(payload) > MAX_BYTES:
+                raise ValueError("bhavcopy download exceeds 30 MiB")
+            if status != 200:
+                raise ValueError(f"unexpected bhavcopy HTTP status {status}")
+            return payload, status
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in (429, 500, 502, 503, 504) or attempt == 2:
+                raise
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            last_error = exc
+            if attempt == 2:
+                raise
+        time.sleep(3 * (attempt + 1))
+    raise RuntimeError(f"bhavcopy request failed after retries: {last_error}")
 
 
 def _header_map(headers: list[str]) -> dict[str, str]:
@@ -167,7 +193,7 @@ def load_calendar_manifest(path: Path, *, allow_candidate_calendar: bool = False
     return sorted(rows, key=lambda row: row["trade_date"])
 
 
-def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -> dict:
+def acquire(manifest: list[dict], output_dir: Path) -> dict:
     raw_dir = output_dir / "raw"
     parsed_dir = output_dir / "parsed"
     raw_dir.mkdir(parents=True, exist_ok=True)
@@ -177,31 +203,7 @@ def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -
         day = item["trade_date"]
         url = bhavcopy_url(day)
         try:
-            response = None
-            last_error = None
-            for attempt in range(3):
-                try:
-                    response = session.get(url, timeout=TIMEOUT)
-                    if response.status_code == 429 or response.status_code in (500, 502, 503, 504):
-                        if attempt < 2:
-                            response.close()
-                            time.sleep(3 * (attempt + 1))
-                            continue
-                    response.raise_for_status()
-                    break
-                except requests.RequestException as exc:
-                    last_error = exc
-                    if response is not None:
-                        response.close()
-                    if attempt < 2:
-                        time.sleep(3 * (attempt + 1))
-                        continue
-                    raise
-            if response is None:
-                raise RuntimeError(f"bhavcopy request did not return a response: {last_error}")
-            payload = response.content
-            if len(payload) > MAX_BYTES:
-                raise ValueError("download exceeds 30 MiB")
+            payload, http_status = fetch_bhavcopy(url)
             sha = hashlib.sha256(payload).hexdigest()
             member, rows = parse_bhavcopy_zip(payload, day)
             raw_path = raw_dir / f"{day}_{sha}.zip"
@@ -213,7 +215,7 @@ def acquire(manifest: list[dict], output_dir: Path, session: requests.Session) -
                 writer.writeheader()
                 writer.writerows(rows)
             results.append({
-                "trade_date": day, "url": url, "http_status": response.status_code,
+                "trade_date": day, "url": url, "http_status": http_status,
                 "sha256": sha, "bytes_received": len(payload), "zip_member": member,
                 "eq_rows": len(rows), "distinct_symbols": len({r["symbol"] for r in rows}),
                 "raw_path": raw_path.resolve().relative_to(ROOT.resolve()).as_posix(),
@@ -257,10 +259,7 @@ def main() -> int:
     args = parser.parse_args()
     manifest = load_calendar_manifest(args.calendar_manifest,
                                       allow_candidate_calendar=args.allow_candidate_calendar)
-    session = requests.Session()
-    session.headers.update({"User-Agent": USER_AGENT, "Accept": "application/zip,*/*",
-                            "Accept-Encoding": "identity"})
-    report = acquire(manifest, args.output_dir, session)
+    report = acquire(manifest, args.output_dir)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"status": report["status"], "downloaded_dates": report["downloaded_dates"],
