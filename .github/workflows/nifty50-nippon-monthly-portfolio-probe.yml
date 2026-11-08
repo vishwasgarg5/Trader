@@ -1,0 +1,45 @@
+name: NIFTY 50 Nippon monthly portfolio source probe
+
+on:
+  push:
+    branches:
+      - research/nifty50-wayback-acquisition-2026-11-08
+    paths:
+      - scripts/probe_nippon_monthly_portfolio.py
+      - .github/workflows/nifty50-nippon-monthly-portfolio-probe.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/probe_nippon_monthly_portfolio.py
+      - .github/workflows/nifty50-nippon-monthly-portfolio-probe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/nifty50-wayback-acquisition-2026-11-08
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install probe dependencies
+        run: python -m pip install --disable-pip-version-check requests xlrd
+      - name: Download and inspect official AMC workbook
+        run: python scripts/probe_nippon_monthly_portfolio.py
+      - name: Upload original workbook and probe report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nippon-monthly-portfolio-source-probe
+          path: |
+            data/probes/nippon_monthly_portfolio/NIMF-MONTHLY-PORTFOLIO-31-Dec-24.xls
+            data/probes/nippon_monthly_portfolio/probe_report.json
+          if-no-files-found: error
+          retention-days: 90
