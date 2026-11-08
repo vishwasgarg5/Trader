@@ -21,8 +21,9 @@ def _panel(days=520, names=6):
             signal = float(stock_index) / names + np.sin(day_index / 13 + stock_index) * 0.01
             rows.append({
                 "signal_date": date,
+                "signal_timestamp": date + pd.Timedelta(hours=16),
                 "symbol": f"S{stock_index:02d}",
-                "feature_available_at": date,
+                "feature_available_at": date + pd.Timedelta(hours=15, minutes=30),
                 "outcome_end_date": date + pd.Timedelta(days=5),
                 "net_return": signal * 0.01 + np.cos(day_index / 9 + stock_index) * 0.002,
                 "ret_5": signal,
@@ -65,7 +66,7 @@ def test_future_feature_timestamp_is_rejected(tmp_path):
     csv_path = tmp_path / "panel.csv"
     manifest_path = tmp_path / "manifest.json"
     panel = _panel(days=10)
-    panel.loc[0, "feature_available_at"] = panel.loc[0, "signal_date"] + pd.Timedelta(days=1)
+    panel.loc[0, "feature_available_at"] = panel.loc[0, "signal_timestamp"] + pd.Timedelta(minutes=1)
     panel.to_csv(csv_path, index=False)
     manifest_path.write_text(json.dumps({
         "status": STATUS,
