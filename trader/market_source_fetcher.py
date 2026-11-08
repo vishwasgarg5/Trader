@@ -144,7 +144,7 @@ def fetch_bytes(
                                 if not chunk:
                                     continue
                                 handle.write(chunk)
-                                if handle.tell() + (existing if mode == "ab" else 0) > max_bytes:
+                                if handle.tell() > max_bytes:
                                     raise ValueError(f"response exceeded {max_bytes} byte cap")
                         body = partial.read_bytes()
                     else:
