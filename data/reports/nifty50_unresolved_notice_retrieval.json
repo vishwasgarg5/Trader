@@ -209,6 +209,90 @@
       "error": "ReadTimeout: HTTPSConnectionPool(host='www.niftyindices.com', port=443): Read timed out. (read timeout=45)",
       "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
       "url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:16:05.224616+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:16:53.624572+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:17:45.585000+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:17:46.075709+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:18:33.810480+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:19:22.209062+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:20:13.505048+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:20:13.767279+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:21:01.660335+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:21:51.099744+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:22:43.774502+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='niftyindices.com', port=443): Read timed out. (read timeout=45)",
+      "label": "direct:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
+    },
+    {
+      "at_utc": "2026-11-08T11:22:44.313497+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "documents": {
@@ -222,6 +306,7 @@
       ],
       "cdx_captures": [],
       "cdx_checked": false,
+      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
       "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf",
@@ -239,10 +324,15 @@
           "at_utc": "2026-11-08T10:53:33.903473+00:00",
           "reason": "request_failed_after_retries",
           "url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:17:45.585032+00:00",
+          "reason": "request_failed_after_retries",
+          "url": "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
         }
       ],
       "next_capture_index": 0,
-      "next_direct_index": 3,
+      "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
       "status": "PENDING"
     },
@@ -256,6 +346,7 @@
       ],
       "cdx_captures": [],
       "cdx_checked": false,
+      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
       "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
@@ -273,10 +364,15 @@
           "at_utc": "2026-11-08T10:56:03.663447+00:00",
           "reason": "request_failed_after_retries",
           "url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:20:13.505106+00:00",
+          "reason": "request_failed_after_retries",
+          "url": "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
         }
       ],
       "next_capture_index": 0,
-      "next_direct_index": 3,
+      "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
       "status": "PENDING"
     },
@@ -290,6 +386,7 @@
       ],
       "cdx_captures": [],
       "cdx_checked": false,
+      "cdx_error": "ValueError: CDX response is not a non-empty JSON row list",
       "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf",
@@ -307,10 +404,15 @@
           "at_utc": "2026-11-08T10:58:33.699583+00:00",
           "reason": "request_failed_after_retries",
           "url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:22:43.774573+00:00",
+          "reason": "request_failed_after_retries",
+          "url": "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
         }
       ],
       "next_capture_index": 0,
-      "next_direct_index": 3,
+      "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
       "status": "PENDING"
     }
@@ -323,8 +425,8 @@
   "next_retry_at_utc": null,
   "request_budget": 12,
   "requests_this_run": 12,
-  "run_at_utc": "2026-11-08T10:58:33.701523+00:00",
-  "runtime_seconds": 450.32,
+  "run_at_utc": "2026-11-08T11:22:44.315240+00:00",
+  "runtime_seconds": 444.26,
   "schema_version": 1,
   "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
   "status": "PARTIAL",
