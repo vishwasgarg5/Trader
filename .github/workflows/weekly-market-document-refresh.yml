@@ -48,9 +48,6 @@ jobs:
       - name: Acquire official NSE and BSE landing-page snapshots
         run: |
           python scripts/weekly_market_document_refresh.py
-      - name: Inspect observed official NSE filing frontend assets
-        run: |
-          python scripts/weekly_market_frontend_asset_audit.py
       - name: Acquire allowlisted primary-source PDF documents
         run: |
           python scripts/weekly_market_document_acquisition.py
