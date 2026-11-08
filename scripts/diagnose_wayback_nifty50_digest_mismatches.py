@@ -164,6 +164,7 @@ def main() -> int:
     report = diagnose(json.loads(args.state.read_text(encoding="utf-8")), session)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(report, indent=2, sort_keys=True))
     print(json.dumps({"mismatches": report["mismatch_count"],
                       "results": len(report["results"]), "output": args.output.as_posix()}, indent=2))
     return 0
