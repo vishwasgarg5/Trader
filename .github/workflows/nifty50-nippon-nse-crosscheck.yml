@@ -32,6 +32,8 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check requests xlrd
+      - name: Test fail-closed ISIN mapping
+        run: python -m pytest -q tests/test_nippon_nifty50_crosscheck.py
       - name: Run Nippon holdings to NSE ISIN mapping and anchor comparison
         run: python scripts/crosscheck_nippon_nifty50_with_nse_bhavcopy.py
       - name: Upload cross-check report
