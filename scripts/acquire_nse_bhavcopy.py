@@ -52,7 +52,7 @@ def _header_map(headers: list[str]) -> dict[str, str]:
         "low": ("low", "lwpric"),
         "close": ("close", "clspric"),
         "previous_close": ("prevclose", "previousclose", "prvsclsgpric"),
-        "volume": ("tottrdqty", "totaltradedquantity", "ttltradgvvol"),
+        "volume": ("tottrdqty", "totaltradedquantity", "ttltradgvol"),
         "turnover": ("tottrdval", "totaltradedvalue", "ttltrfval"),
         "trade_date": ("timestamp", "date1", "trddt", "traddt"),
     }
