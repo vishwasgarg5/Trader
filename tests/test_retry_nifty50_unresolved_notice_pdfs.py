@@ -130,3 +130,30 @@ def test_cdx_capture_rows_handles_header_and_headerless_responses():
     capture = ["20200101000000", "https://example.test/a.pdf", "200", "application/pdf", "ABC", "123"]
     assert MODULE.cdx_capture_rows([header, capture]) == [capture]
     assert MODULE.cdx_capture_rows([capture]) == [capture]
+
+
+def test_domain_wide_cdx_searches_follow_exact_host_variants():
+    original = MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
+    variants = MODULE.cdx_search_variants(original)
+    assert len(variants) == 6
+    assert all(x["match_type"] == "exact" for x in variants[:4])
+    assert variants[4] == {
+        "url": "niftyindices.com", "match_type": "domain",
+        "filename": "ind_prs05062018.pdf"
+    }
+    assert variants[5] == {
+        "url": "nseindia.com", "match_type": "domain",
+        "filename": "ind_prs05062018.pdf"
+    }
+
+
+def test_domain_cdx_query_filters_to_the_registered_pdf_filename():
+    variant = MODULE.cdx_search_variants(
+        MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
+    )[-2]
+    params = MODULE.cdx_request_params(variant)
+    assert params["matchType"] == "domain"
+    assert params["filter"] == [
+        "statuscode:200", "original:.*ind_prs05062018\\.pdf$"
+    ]
+
