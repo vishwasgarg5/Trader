@@ -161,7 +161,7 @@ def test_load_state_revalidates_existing_snapshot_cdx_digests(tmp_path, monkeypa
     assert mismatching["pre_digest_validation_status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
 
 def test_collapsed_capture_queue_accepts_application_csv_mimetype():
-    target = MODULE.TARGETS[2]
+    target = MODULE.TARGETS[3]
     original = "https://www.nseindia.com/content/indices/ind_nifty50list.csv"
     rows = [[
         "timestamp", "original", "statuscode", "mimetype", "digest", "length"
