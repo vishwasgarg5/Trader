@@ -358,8 +358,10 @@ def save_pdf(doc_id: str, data: bytes, source_url: str, evidence_class: str) -> 
         extracted = extract_pdf(data)
     except Exception as exc:
         extracted = {"text_extraction": "FAILED", "error": f"{type(exc).__name__}: {exc}"[:500]}
-    return {"status": "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW", "archive_path": path.as_posix(),
-            "sha256": file_hash, "bytes_received": len(data), "source_url": source_url,
+    return {"status": "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW",
+            "resolution_status": "RETRIEVED_PENDING_PRIMARY_SCOPE_REVIEW",
+            "archive_path": path.as_posix(), "sha256": file_hash,
+            "bytes_received": len(data), "source_url": source_url,
             "evidence_class": evidence_class, "retrieved_at_utc": stamp(),
             "pdf_validation": "SIGNATURE_AND_EOF_VALID", "extracted_content": extracted}
 
