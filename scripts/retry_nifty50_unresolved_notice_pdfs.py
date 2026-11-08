@@ -234,7 +234,7 @@ def load_state() -> dict:
         # Older persisted runs could mark a notice unavailable after exhausting
         # direct URLs even though domain-wide CDX searches later proved incomplete.
         # Reopen that stale terminal status until every CDX variant has a valid result.
-        if item.get("status") == "DOCUMENT_UNAVAILABLE" and not item.get("cdx_checked"):
+        if item.get("status") == "DOCUMENT_UNAVAILABLE":
             item["status"] = "PENDING"
             item.pop("unavailable_reason", None)
             item["classification"] = "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
