@@ -1,0 +1,36 @@
+name: Archive NSE weekend-session circulars
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/archive_nse_weekend_circulars.py"
+      - ".github/workflows/archive-nse-weekend-circulars.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive-circulars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Acquire original NSE circular PDFs and hash bytes
+        run: python scripts/archive_nse_weekend_circulars.py
+      - name: Persist archived source bytes and manifest to main
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reference/source_documents/nse_circulars data/reports/nifty50_tri_weekend_circular_archive.json
+          if git diff --cached --quiet; then
+            echo "No archive changes to commit"
+          else
+            git commit -m "Archive NSE circulars for TRI weekend sessions"
+            git push origin HEAD:main
+          fi
