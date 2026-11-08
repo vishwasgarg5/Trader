@@ -46,7 +46,7 @@ jobs:
         if: always()
         run: |
           if [ -f data/reports/nse_bhavcopy_sample_report.json ]; then
-            python -c 'import json; from pathlib import Path; r=json.loads(Path("data/reports/nse_bhavcopy_sample_report.json").read_text()); print("STATUS", r["status"]); print("REQUESTED", r["calendar_manifest_rows"]); print("DOWNLOADED", r["downloaded_dates"]); print("FAILED", len(r["failed_dates"])); [print(x["trade_date"], x["eq_rows"], x["distinct_symbols"], x["sha256"]) for x in r["records"]]'
+            python -c 'import json; from pathlib import Path; r=json.loads(Path("data/reports/nse_bhavcopy_sample_report.json").read_text()); print("STATUS", r["status"]); print("REQUESTED", r["calendar_manifest_rows"]); print("DOWNLOADED", r["downloaded_dates"]); print("FAILED", len(r["failed_dates"])); [print("FAILURE", x) for x in r["failed_dates"]]; [print(x["trade_date"], x["eq_rows"], x["distinct_symbols"], x["sha256"]) for x in r["records"]]'
           else
             echo "No sample report was generated."
           fi
