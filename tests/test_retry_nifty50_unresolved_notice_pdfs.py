@@ -283,5 +283,6 @@ def test_load_state_reopens_stale_unavailable_notice_when_cdx_search_is_incomple
     assert item["cdx_checked"] is False
     assert item["cdx_result"] == "SEARCH_INCOMPLETE"
     assert item["status"] == "PENDING"
+    assert item["resolution_status"] == "NOT_YET_RESOLVED"
     assert "unavailable_reason" not in item
     assert item["classification"] == "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
