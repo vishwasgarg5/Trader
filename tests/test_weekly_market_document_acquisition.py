@@ -36,27 +36,19 @@ def test_pdf_archive_contract_keeps_execution_gates_closed():
     assert "www.bseindia.com" in MODULE.ALLOWED_HOSTS
 
 
-def test_transient_pdf_download_timeout_is_retried(monkeypatch):
+def test_pdf_acquisition_delegates_to_shared_fetcher(monkeypatch, tmp_path):
     calls = []
-
-    class Response:
-        def __enter__(self):
-            return self
-
-        def __exit__(self, *args):
-            return False
-
-    def flaky_urlopen(request, timeout):
-        calls.append(timeout)
-        if len(calls) == 1:
-            raise TimeoutError("temporary read timeout")
-        return Response()
-
-    monkeypatch.setattr(MODULE.urllib.request, "urlopen", flaky_urlopen)
-    monkeypatch.setattr(MODULE.time, "sleep", lambda _seconds: None)
-    response = MODULE.open_with_retry(object(), timeout=MODULE.TIMEOUT)
-    assert isinstance(response, Response)
-    assert calls == [MODULE.TIMEOUT, MODULE.TIMEOUT]
+    body = b"%PDF-1.7\\nbody\\n%%EOF"
+    def fake_fetch(url, **kwargs):
+        calls.append((url, kwargs))
+        return body, {"final_url": url, "sha256": "a" * 64, "content_type": "application/pdf"}
+    monkeypatch.setattr(MODULE, "fetch_bytes", fake_fetch)
+    monkeypatch.setattr(MODULE, "ARCHIVE", tmp_path)
+    record, failure = MODULE.download_one(("https://www.nseindia.com/a.pdf", "NSE_TEST", "NSE"))
+    assert failure is None
+    assert record["sha256"] == "a" * 64
+    assert calls[0][1]["pdf"] is True
+    assert calls[0][1]["attempts"] == 3
 
 
 def test_nse_official_document_archive_host_is_allowlisted():
