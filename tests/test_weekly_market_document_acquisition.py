@@ -57,3 +57,11 @@ def test_transient_pdf_download_timeout_is_retried(monkeypatch):
     response = MODULE.open_with_retry(object(), timeout=MODULE.TIMEOUT)
     assert isinstance(response, Response)
     assert calls == [MODULE.TIMEOUT, MODULE.TIMEOUT]
+
+
+def test_nse_official_document_archive_host_is_allowlisted():
+    assert "archives.nseindia.com" in MODULE.ALLOWED_HOSTS
+    assert MODULE.safe_pdf_url(
+        "https://www.nseindia.com/profile",
+        "https://archives.nseindia.com/content/indices/Method_Nifty_50.pdf",
+    ) == "https://archives.nseindia.com/content/indices/Method_Nifty_50.pdf"

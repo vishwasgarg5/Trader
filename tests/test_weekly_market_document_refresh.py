@@ -175,3 +175,10 @@ def test_official_nifty_indices_historical_and_reconstitution_sources_are_regist
     assert sources["NIFTY_INDICES_HISTORICAL_DATA"] == "https://www.niftyindices.com/reports/historical-data"
     assert sources["NIFTY_INDICES_RECONSTITUTION_CALENDAR"] == "https://www.niftyindices.com/resources/index-rebalancing-schedule"
     assert sources["NIFTY_INDICES_NIFTY50_PROFILE"] == "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50"
+
+
+def test_official_nse_nifty50_profile_source_is_registered():
+    assert (
+        "NSE_NIFTY50_PROFILE",
+        "https://betanseapi.nseindia.com/static/products-services/indices-nifty50-index",
+    ) in MODULE.SOURCES

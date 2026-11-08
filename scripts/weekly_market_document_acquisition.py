@@ -25,7 +25,7 @@ MAX_BYTES = 25 * 1024 * 1024
 TIMEOUT = 60
 MAX_ATTEMPTS = 2
 RETRY_BACKOFF_SECONDS = 2
-ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
+ALLOWED_HOSTS = {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com", "archives.nseindia.com",
                  "bseindia.com", "www.bseindia.com", "niftyindices.com", "www.niftyindices.com"}
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
