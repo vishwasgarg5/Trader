@@ -1,0 +1,47 @@
+name: Weekly NSE and BSE market-document discovery
+
+on:
+  schedule:
+    - cron: "30 3 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-market-document-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover-and-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test discovery and evidence safeguards
+        run: |
+          python -m pytest -q tests/test_weekly_market_document_refresh.py
+      - name: Acquire official NSE and BSE landing-page snapshots
+        run: |
+          python scripts/weekly_market_document_refresh.py
+      - name: Commit weekly source snapshots and report
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/reference/source_documents/weekly_market_pages data/reports/weekly_market_document_refresh.json
+          if git diff --cached --quiet; then
+            echo "No new page snapshots or report changes"
+          else
+            git commit -m "Refresh weekly NSE and BSE market document sources"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
