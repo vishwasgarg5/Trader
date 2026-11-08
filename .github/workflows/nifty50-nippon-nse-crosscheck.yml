@@ -1,0 +1,43 @@
+name: NIFTY 50 Nippon and NSE quarterly cross-check
+
+on:
+  push:
+    branches:
+      - research/nifty50-wayback-acquisition-2026-11-08
+    paths:
+      - scripts/crosscheck_nippon_nifty50_with_nse_bhavcopy.py
+      - .github/workflows/nifty50-nippon-nse-crosscheck.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/crosscheck_nippon_nifty50_with_nse_bhavcopy.py
+      - .github/workflows/nifty50-nippon-nse-crosscheck.yml
+
+permissions:
+  contents: read
+
+jobs:
+  crosscheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/nifty50-wayback-acquisition-2026-11-08
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests xlrd
+      - name: Run Nippon holdings to NSE ISIN mapping and anchor comparison
+        run: python scripts/crosscheck_nippon_nifty50_with_nse_bhavcopy.py
+      - name: Upload cross-check report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nippon-nse-nifty50-crosscheck
+          path: data/reports/nippon_nifty50_2024q4_crosscheck.json
+          if-no-files-found: error
+          retention-days: 90
