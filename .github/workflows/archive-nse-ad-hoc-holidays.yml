@@ -9,6 +9,10 @@ on:
       - "data/reference/nifty50_tri_ad_hoc_closures.csv"
   workflow_dispatch:
 
+concurrency:
+  group: nse-ad-hoc-holiday-archive-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -32,7 +36,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "No ad-hoc archive changes"
           else
-            git commit -m "Archive NSE ad-hoc holiday circulars for 2019"
+            git commit -m "Archive NSE ad-hoc and revised holiday circulars"
+            git pull --rebase origin main
             git push origin HEAD:main
           fi
       - name: Require all three circulars
