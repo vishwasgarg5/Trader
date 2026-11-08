@@ -1,5 +1,6 @@
 import base64
 import hashlib
+import json
 import importlib.util
 from pathlib import Path
 
@@ -119,3 +120,42 @@ def test_quarter_matrix_has_28_quarters():
     assert len(MODULE.all_quarters()) == 28
     assert MODULE.all_quarters()[0] == "2018-Q1"
     assert MODULE.all_quarters()[-1] == "2024-Q4"
+
+
+
+def test_load_state_revalidates_existing_snapshot_cdx_digests(tmp_path, monkeypatch):
+    matching_bytes = b"verified archived snapshot bytes\\n"
+    mismatching_bytes = b"replayed bytes that do not match CDX\\n"
+    matching_path = tmp_path / "matching.csv"
+    mismatching_path = tmp_path / "mismatching.csv"
+    matching_path.write_bytes(matching_bytes)
+    mismatching_path.write_bytes(mismatching_bytes)
+
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({
+        "schema_version": 1,
+        "targets": {},
+        "pending_snapshots": [],
+        "completed_snapshots": [
+            {
+                "archive_path": str(matching_path),
+                "cdx_digest": MODULE.wayback_cdx_digest(matching_bytes),
+                "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+            },
+            {
+                "archive_path": str(mismatching_path),
+                "cdx_digest": "A" * 32,
+                "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+            },
+        ],
+    }), encoding="utf-8")
+    monkeypatch.setattr(MODULE, "STATE_PATH", state_path)
+
+    state = MODULE.load_state()
+    matching, mismatching = state["completed_snapshots"]
+
+    assert matching["cdx_digest_validation"] == "MATCH"
+    assert matching["status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
+    assert mismatching["cdx_digest_validation"] == "MISMATCH"
+    assert mismatching["status"] == "CDX_DIGEST_MISMATCH"
+    assert mismatching["pre_digest_validation_status"] == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
