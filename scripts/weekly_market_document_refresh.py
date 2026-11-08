@@ -42,6 +42,7 @@ HEADERS = {
 
 SOURCES = [
     ("NSE_ANNOUNCEMENTS", "https://www.nseindia.com/companies-listing/corporate-filings-announcements"),
+    ("NSE_CORPORATE_FILINGS_DASHBOARD", "https://www.nseindia.com/companies-listing/corporate-filings-application"),
     ("NSE_CORPORATE_ACTIONS", "https://www.nseindia.com/companies-listing/corporate-filings-actions"),
     ("NSE_BUYBACKS", "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back"),
     ("NSE_HOLIDAYS", "https://www.nseindia.com/resources/exchange-communication-holidays"),
