@@ -220,6 +220,13 @@ def load_state() -> dict:
                 item["cdx_checked"] = False
         item.setdefault("cdx_search_variants", cdx_search_variants(original))
         reconcile_cdx_search_progress(item)
+        # Older persisted runs could mark a notice unavailable after exhausting
+        # direct URLs even though domain-wide CDX searches later proved incomplete.
+        # Reopen that stale terminal status until every CDX variant has a valid result.
+        if item.get("status") == "DOCUMENT_UNAVAILABLE" and not item.get("cdx_checked"):
+            item["status"] = "PENDING"
+            item.pop("unavailable_reason", None)
+            item["classification"] = "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         if reconcile_exhausted_direct_fallback(item, state.get("attempt_log", [])):
             atomic(STATE_PATH, state)
     return state
