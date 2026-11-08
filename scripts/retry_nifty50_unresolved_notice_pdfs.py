@@ -215,6 +215,15 @@ def run() -> dict:
                 url = item["direct_urls"][item["next_direct_index"]]
                 response = budget.request(session, url, None, f"direct:{doc_id}")
                 if response is None:
+                    # Exhausted transient retries on this host: persist progress to the
+                    # next official-host fallback. Do not advance on a budget/429 stop.
+                    if budget.stop is None:
+                        item["next_direct_index"] += 1
+                        item.setdefault("fallback_errors", []).append({
+                            "url": url, "at_utc": stamp(),
+                            "reason": "request_failed_after_retries"
+                        })
+                        atomic(STATE_PATH, state)
                     break
                 item["attempts"].append({"url": url, "at_utc": stamp(), "http_status": response.status_code})
                 item["next_direct_index"] += 1
