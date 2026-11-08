@@ -15,7 +15,7 @@ concurrency:
 jobs:
   acquire:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Check out the dedicated research branch
         uses: actions/checkout@v4
@@ -41,13 +41,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/reference/wayback_nifty50_acquisition_state.json
-          git add data/reference/wayback_nifty50_cdx
-          git add data/reference/source_documents/wayback_nifty50_snapshots
-          git add data/reports/wayback_nifty50_quarterly_coverage.json
-          git add data/reference/nifty50_unresolved_notice_state.json
-          git add data/reference/source_documents/nifty50_unresolved_notices
-          git add data/reports/nifty50_unresolved_notice_retrieval.json
+          for path in \
+            data/reference/wayback_nifty50_acquisition_state.json \
+            data/reference/wayback_nifty50_cdx \
+            data/reference/source_documents/wayback_nifty50_snapshots \
+            data/reports/wayback_nifty50_quarterly_coverage.json \
+            data/reference/nifty50_unresolved_notice_state.json \
+            data/reference/source_documents/nifty50_unresolved_notices \
+            data/reports/nifty50_unresolved_notice_retrieval.json; do
+            if [ -e "$path" ]; then git add -A "$path"; fi
+          done
           if git diff --cached --quiet; then
             echo "No acquisition state or evidence changes"
           else
