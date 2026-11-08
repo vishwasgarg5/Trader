@@ -193,6 +193,11 @@ def test_full_cdx_recovers_one_candidate_for_each_uncovered_quarter():
             "quarter": "2018-Q3", "cdx_digest": shared_digest,
             "cdx_digest_validation": "MATCH",
             "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+        }, {
+            "capture_timestamp": "20240819184501",
+            "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+            "quarter": "2024-Q3", "cdx_digest": "OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR",
+            "cdx_digest_validation": "MISMATCH", "status": "CDX_DIGEST_MISMATCH",
         }],
     }
     records = [{
