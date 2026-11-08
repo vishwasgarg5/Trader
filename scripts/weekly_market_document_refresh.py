@@ -46,6 +46,9 @@ SOURCES = [
     ("NSE_CORPORATE_ACTIONS", "https://www.nseindia.com/companies-listing/corporate-filings-actions"),
     ("NSE_BUYBACKS", "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back"),
     ("NSE_HOLIDAYS", "https://www.nseindia.com/resources/exchange-communication-holidays"),
+    ("NIFTY_INDICES_HISTORICAL_DATA", "https://www.niftyindices.com/reports/historical-data"),
+    ("NIFTY_INDICES_RECONSTITUTION_CALENDAR", "https://www.niftyindices.com/resources/index-rebalancing-schedule"),
+    ("NIFTY_INDICES_NIFTY50_PROFILE", "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50"),
     ("BSE_ANNOUNCEMENTS", "https://www.bseindia.com/corporates/ann.html"),
     ("BSE_CORPORATE_ACTIONS", "https://www.bseindia.com/corporates/corporate_act.html"),
     ("BSE_NOTICES_CIRCULARS", "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars.aspx"),
@@ -109,7 +112,7 @@ def fetch(url: str):
         return body, content_type, response.headers.get("Last-Modified")
 
 def acquire_page(source_id: str, url: str, run_at: str):
-    publisher = "NSE" if source_id.startswith("NSE_") else "BSE"
+    publisher = ("NSE_INDICES" if source_id.startswith("NIFTY_INDICES_") else ("NSE" if source_id.startswith("NSE_") else "BSE"))
     try:
         body, content_type, last_modified = fetch(url)
         digest = hashlib.sha256(body).hexdigest()
