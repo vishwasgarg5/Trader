@@ -23,7 +23,7 @@ STATE_PATH = pathlib.Path("data/reference/nifty50_unresolved_notice_state.json")
 REPORT_PATH = pathlib.Path("data/reports/nifty50_unresolved_notice_retrieval.json")
 ARCHIVE = pathlib.Path("data/reference/source_documents/nifty50_unresolved_notices")
 CDX = "https://web.archive.org/cdx/search/cdx"
-REQUEST_BUDGET = 12
+REQUEST_BUDGET = 18
 RUNTIME_BUDGET = 15 * 60
 MIN_INTERVAL = 3.0
 TIMEOUT = (15, 45)
@@ -201,13 +201,40 @@ def load_state() -> dict:
         state["documents"].setdefault(doc_id, {
             "original_url": original, "direct_urls": direct_fallbacks(original),
             "next_direct_index": 0, "cdx_checked": False, "cdx_captures": [],
+            "cdx_url_variants": cdx_url_variants(original),
+            "next_cdx_variant_index": 0, "cdx_queries": [],
             "next_capture_index": 0, "status": "PENDING",
             "attempts": [], "classification": "UNCLASSIFIED_PENDING_PRIMARY_DOCUMENT_REVIEW"
         })
         item = state["documents"][doc_id]
+        item.setdefault("cdx_url_variants", cdx_url_variants(original))
+        item.setdefault("cdx_queries", [])
+        item.setdefault("next_cdx_variant_index", 0)
+        # Migrate the previous single-host lookup: the original URL was already
+        # checked, so continue with the first alternate host rather than repeating it.
+        if item.get("cdx_checked") and item.get("cdx_result") == "EMPTY" and "next_cdx_variant_index" not in item:
+            item["next_cdx_variant_index"] = 1
+            item["cdx_checked"] = False
+            item["cdx_queries"].append({
+                "url": original, "result": "EMPTY",
+                "metadata_sha256": item.get("cdx_metadata_sha256"),
+                "migrated_from_single_host_lookup": True
+            })
         if reconcile_exhausted_direct_fallback(item, state.get("attempt_log", [])):
             atomic(STATE_PATH, state)
     return state
+
+
+def cdx_url_variants(original: str) -> list[str]:
+    """Search the original URL and each already-approved official-host alias."""
+    return list(dict.fromkeys([original, *direct_fallbacks(original)]))
+
+
+def cdx_capture_rows(rows: list[list[str]]) -> list[list[str]]:
+    """Strip the optional CDX JSON header without dropping a headerless first capture."""
+    if rows and {str(value).lower() for value in rows[0]} >= {"timestamp", "original"}:
+        return rows[1:]
+    return rows
 
 
 def parse_cdx_json(payload: bytes | str) -> list[list[str]]:
@@ -304,33 +331,61 @@ def run() -> dict:
                 if budget.stop:
                     break
                 continue
-            if item["next_direct_index"] >= len(item["direct_urls"]) and not item["cdx_checked"]:
+            while (item["next_direct_index"] >= len(item["direct_urls"])
+                   and item["next_cdx_variant_index"] < len(item["cdx_url_variants"])):
+                cdx_url = item["cdx_url_variants"][item["next_cdx_variant_index"]]
                 response = budget.request(session, CDX, {
-                    "url": item["original_url"], "output": "json",
+                    "url": cdx_url, "output": "json",
                     "filter": "statuscode:200", "collapse": "digest",
                     "fl": "timestamp,original,statuscode,mimetype,digest,length",
                     "from": "2018", "to": "2024"
-                }, f"cdx:{doc_id}")
+                }, f"cdx:{doc_id}:{item['next_cdx_variant_index']}")
                 if response is None:
                     break
+                item["next_cdx_variant_index"] += 1
+                query_record = {
+                    "url": cdx_url, "at_utc": stamp(), "http_status": response.status_code,
+                    "content_type": response.headers.get("Content-Type", "")[:160]
+                }
                 if response.status_code == 200:
                     try:
                         rows = parse_cdx_json(response.content)
-                        # A syntactically valid empty CDX result is a completed lookup,
-                        # not a parser failure. Preserve the distinction in state/report.
-                        item["cdx_response_row_count"] = len(rows)
-                        item["cdx_captures"] = rows[1:] if rows else []
-                        item["cdx_result"] = "EMPTY" if not rows else "ROWS_RETURNED"
-                        item["cdx_content_type"] = response.headers.get("Content-Type", "")[:160]
-                        item["cdx_metadata_sha256"] = digest(response.content)
+                        captures = cdx_capture_rows(rows)
+                        query_record.update({
+                            "result": "ROWS_RETURNED" if captures else "EMPTY",
+                            "response_row_count": len(rows),
+                            "capture_count": len(captures),
+                            "metadata_sha256": digest(response.content)
+                        })
+                        known = {
+                            (row[0], row[1], row[4])
+                            for row in item["cdx_captures"] if len(row) >= 5
+                        }
+                        for row in captures:
+                            if len(row) >= 6 and (row[0], row[1], row[4]) not in known:
+                                item["cdx_captures"].append(row)
+                                known.add((row[0], row[1], row[4]))
                         item.pop("cdx_error", None)
-                        item["cdx_checked"] = True
                     except Exception as exc:
-                        item["cdx_error"] = f"{type(exc).__name__}: {exc}"[:500]
+                        query_record["result"] = "INVALID_RESPONSE"
+                        query_record["error"] = f"{type(exc).__name__}: {exc}"[:500]
+                        item["cdx_error"] = query_record["error"]
                 else:
-                    item["cdx_error"] = f"CDX returned HTTP {response.status_code}"
+                    query_record["result"] = "HTTP_ERROR"
+                    query_record["error"] = f"CDX returned HTTP {response.status_code}"
+                    item["cdx_error"] = query_record["error"]
+                item.setdefault("cdx_queries", []).append(query_record)
+                item["cdx_checked"] = item["next_cdx_variant_index"] >= len(item["cdx_url_variants"])
+                item["cdx_result"] = "ROWS_RETURNED" if item["cdx_captures"] else (
+                    "EMPTY" if item["cdx_checked"] else "SEARCH_INCOMPLETE"
+                )
+                item["cdx_response_row_count"] = sum(
+                    q.get("response_row_count", 0) for q in item["cdx_queries"]
+                )
                 atomic(STATE_PATH, state)
-            while item["cdx_checked"] and item["next_capture_index"] < len(item["cdx_captures"]):
+                if budget.stop:
+                    break
+            while item["next_capture_index"] < len(item["cdx_captures"]):
                 row = item["cdx_captures"][item["next_capture_index"]]
                 if len(row) < 6:
                     item["next_capture_index"] += 1
@@ -366,7 +421,8 @@ def run() -> dict:
                 atomic(STATE_PATH, state)
                 if budget.stop:
                     break
-            if item["status"] == "PENDING" and item["cdx_checked"] and item["next_capture_index"] >= len(item["cdx_captures"]):
+            if (item["status"] == "PENDING" and item["cdx_checked"]
+                    and item["next_capture_index"] >= len(item["cdx_captures"])):
                 item["status"] = "DOCUMENT_UNAVAILABLE"
                 item["unavailable_reason"] = "All direct official-host URLs and returned Wayback captures were attempted without a valid PDF."
                 item["classification"] = "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED"
