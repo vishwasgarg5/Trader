@@ -199,3 +199,19 @@ def test_previous_close_baseline_rejects_empty_aligned_data():
     with pytest.raises(ValueError, match="aligned labelled returns"):
         previous_close_baseline_metrics(pd.Series([np.nan]), pd.Series([np.nan]))
 
+def test_integrity_report_exposes_source_backed_muhurat_session_context(tmp_path):
+    from trader.pipeline import write_data_integrity_report
+
+    report = write_data_integrity_report(
+        ["AAA.NS"],
+        {"AAA.NS": pd.DataFrame()},
+        tmp_path / "data_integrity.json",
+        as_of="2026-11-08T20:00:00+05:30",
+    )
+    context = report["nse_session_calendar_context"]
+    assert context["date"] == "2026-11-08"
+    assert context["classification"] == "SPECIAL_TRADING_SESSION"
+    assert context["is_trading_session"] is True
+    assert context["session"]["circular_reference"] == "NSE/CMTR/76941"
+    assert report["live_execution_enabled"] is False
+    assert report["promotion_eligible"] is False
