@@ -306,10 +306,14 @@ def capture_matches_target(original: str, target: str) -> bool:
     try:
         captured = urlsplit(original)
         requested = urlsplit(target)
+        requested_hosts = {requested.hostname}
+        # NSE's apex and www hostnames serve the same official constituent path.
+        if requested.hostname == "www.nseindia.com":
+            requested_hosts.add("nseindia.com")
         return (
             captured.scheme in {"http", "https"}
             and requested.scheme in {"http", "https"}
-            and captured.hostname == requested.hostname
+            and captured.hostname in requested_hosts
             and captured.path == requested.path
             and captured.query == ""
             and captured.fragment == ""
@@ -340,6 +344,56 @@ def add_collapsed_captures(state: dict, target: str, rows: list[list[str]]) -> i
             known.add(key)
             added += 1
     state["pending_snapshots"].sort(key=lambda x: (x["capture_timestamp"], x["original_url"]))
+    return added
+
+
+def add_full_metadata_quarter_candidates(state: dict, records: list[dict]) -> int:
+    """Recover one verified-download candidate for quarters hidden by digest collapse."""
+    pending = state.setdefault("pending_snapshots", [])
+    completed = state.setdefault("completed_snapshots", [])
+    verified_quarters = {
+        item.get("quarter") for item in completed
+        if item.get("cdx_digest_validation") == "MATCH"
+        and item.get("status") == "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
+    }
+    pending_quarters = {item.get("quarter") for item in pending}
+    attempted_digests = {
+        (item.get("quarter"), item.get("cdx_digest"))
+        for item in completed if item.get("cdx_digest")
+    }
+    known = {capture_key(item) for item in pending + completed}
+    added = 0
+    for record in records:
+        for capture in record.get("captures", []):
+            quarter = capture.get("quarter")
+            timestamp = capture.get("timestamp", "")
+            original = capture.get("original_url", "")
+            cdx_digest = capture.get("digest", "")
+            if quarter in verified_quarters or quarter in pending_quarters:
+                continue
+            if (quarter, cdx_digest) in attempted_digests:
+                continue
+            if capture.get("statuscode") != "200" or capture.get("mimetype", "").lower() not in ALLOWED_MIME:
+                continue
+            if not re.fullmatch(r"\\d{14}", timestamp):
+                continue
+            if not any(capture_matches_target(original, target) for target in TARGETS):
+                continue
+            item = {
+                "capture_timestamp": timestamp, "original_url": original,
+                "http_status": 200, "mimetype": capture.get("mimetype", ""),
+                "cdx_digest": cdx_digest, "cdx_length": capture.get("length", ""),
+                "quarter": quarter, "status": "PENDING_DOWNLOAD",
+                "candidate_source": "FULL_CDX_QUARTER_GAP_RECOVERY"
+            }
+            key = capture_key(item)
+            if key in known:
+                continue
+            pending.append(item)
+            known.add(key)
+            pending_quarters.add(quarter)
+            added += 1
+    pending.sort(key=lambda x: (x["capture_timestamp"], x["original_url"]))
     return added
 
 
@@ -523,6 +577,9 @@ def run() -> dict:
                     state["target_errors"].append({"target_url": target, "kind": "COLLAPSED_CDX",
                                                    "at_utc": iso_now(), "http_status": response.status_code})
                 atomic_json(STATE_PATH, state)
+        add_full_metadata_quarter_candidates(state, metadata_records)
+        atomic_json(STATE_PATH, state)
+
         while state["pending_snapshots"] and budget.can_request() and not budget.throttled:
             item = state["pending_snapshots"][0]
             result = download_capture(session, item, state, budget)
