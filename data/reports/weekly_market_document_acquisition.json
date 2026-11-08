@@ -20,13 +20,6 @@
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE_INDICES",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "error": "TimeoutError: The read operation timed out",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
       "source_url": "https://www.niftyindices.com/Methodology/Method_NIFTY_Equity_Indices.pdf",
       "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
     },
@@ -34,7 +27,21 @@
       "error": "TimeoutError: The read operation timed out",
       "publisher": "NSE_INDICES",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
+      "source_url": "https://www.niftyindices.com/Factsheet/ind_nifty50.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
       "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2026.pdf",
+      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "publisher": "NSE_INDICES",
+      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
+      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2025.pdf",
       "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
     },
     {
@@ -49,13 +56,6 @@
       "publisher": "NSE_INDICES",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
       "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-at-20k.pdf",
-      "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
-    },
-    {
-      "error": "TimeoutError: The read operation timed out",
-      "publisher": "NSE_INDICES",
-      "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
-      "source_url": "https://www.niftyindices.com/docs/default-source/indices/nifty-50/nifty-50-whitepaper_2025.pdf",
       "status": "DOCUMENT_UNAVAILABLE_OR_REJECTED"
     },
     {
@@ -81,7 +81,7 @@
   "pdf_documents_archived": 0,
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T12:40:18.713319+05:30",
+  "run_at_ist": "2026-11-08T12:54:12.201876+05:30",
   "schema_version": 1,
   "status": "PARTIAL"
 }
