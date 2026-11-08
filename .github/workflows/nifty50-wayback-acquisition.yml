@@ -27,11 +27,15 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install acquisition dependencies
-        run: python -m pip install --disable-pip-version-check requests pytest
+        run: python -m pip install --disable-pip-version-check requests pytest pypdf
       - name: Test acquisition safeguards
         run: python -m pytest -q tests/test_wayback_nifty50_acquisition.py
-      - name: Run one bounded, resumable acquisition slice
+      - name: Test unresolved notice retrieval safeguards
+        run: python -m pytest -q tests/test_retry_nifty50_unresolved_notice_pdfs.py
+      - name: Run bounded, resumable snapshot acquisition
         run: python scripts/wayback_nifty50_acquisition.py
+      - name: Run bounded, resumable unresolved-notice retrieval
+        run: python scripts/retry_nifty50_unresolved_notice_pdfs.py
       - name: Persist state, raw captures, manifests, and report on research branch
         if: always()
         run: |
@@ -41,6 +45,9 @@ jobs:
           git add data/reference/wayback_nifty50_cdx
           git add data/reference/source_documents/wayback_nifty50_snapshots
           git add data/reports/wayback_nifty50_quarterly_coverage.json
+          git add data/reference/nifty50_unresolved_notice_state.json
+          git add data/reference/source_documents/nifty50_unresolved_notices
+          git add data/reports/nifty50_unresolved_notice_retrieval.json
           if git diff --cached --quiet; then
             echo "No acquisition state or evidence changes"
           else
