@@ -45,3 +45,47 @@ def test_wayback_cdx_and_nsearchives_transport_checks_are_both_configured():
     assert 'transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "requests")' in source
     assert 'transport_check("https://nsearchives.nseindia.com/content/indices/ind_nifty50.pdf", "curl_cffi")' in source
     assert "wayback_future = pool.submit(ingest_wayback)" in source
+
+
+def test_wayback_targets_include_official_historical_constituent_files():
+    targets = MODULE.wayback_targets()
+    assert "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv" in targets
+    assert "https://archives.nseindia.com/content/indices/ind_nifty50list.csv" in targets
+    assert "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv" in targets
+    assert "https://www.nseindia.com/content/indices/IndexInclExcl.xls" in targets
+
+
+def test_wayback_snapshot_url_is_limited_to_dated_allowlisted_csv():
+    target = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+    assert MODULE.wayback_snapshot_url("20200601000000", target) == (
+        "https://web.archive.org/web/20200601000000id_/" + target
+    )
+    for timestamp, original in (
+        ("2020-06-01", target),
+        ("20200601000000", "https://evil.example/constituents.csv"),
+    ):
+        try:
+            MODULE.wayback_snapshot_url(timestamp, original)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("unsafe or undated Wayback snapshot URL was accepted")
+
+
+def test_constituent_snapshot_validation_requires_50_symbols_and_valid_isins():
+    rows = ["Company Name,Industry,Symbol,Series,ISIN Code"]
+    rows.extend(
+        f"Company {i},Industry,SYMBOL{i},EQ,INE{i:09d}"
+        for i in range(50)
+    )
+    result = MODULE.validate_constituent_snapshot(("\\n".join(rows) + "\\n").encode())
+    assert result["exactly_50_distinct_symbols"] is True
+    assert result["all_rows_have_valid_isin"] is True
+    assert result["distinct_symbol_count"] == 50
+    invalid = ("Company Name,Industry,Symbol,Series\\nA,Industry,AAA,EQ\\n").encode()
+    try:
+        MODULE.validate_constituent_snapshot(invalid)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("snapshot without ISIN was accepted")
