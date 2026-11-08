@@ -1,3 +1,5 @@
+import base64
+import hashlib
 import importlib.util
 from pathlib import Path
 
@@ -69,6 +71,14 @@ def test_snapshot_url_requires_allowlisted_target_and_timestamp():
             pass
         else:
             raise AssertionError("unsafe snapshot URL accepted")
+
+
+def test_wayback_cdx_digest_matches_base32_sha1_body_digest():
+    payload = b"sample archived CSV bytes\\n"
+    expected = base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=")
+    assert MODULE.wayback_cdx_digest(payload) == expected
+    assert MODULE.cdx_digest_matches(payload, expected)
+    assert not MODULE.cdx_digest_matches(payload, "A" * 32)
 
 
 def test_retry_after_supports_seconds_and_http_date():
