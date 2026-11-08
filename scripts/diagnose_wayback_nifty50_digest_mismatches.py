@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import gzip
 import json
 import re
 import time
@@ -59,9 +60,26 @@ def cdx_records(session: requests.Session, item: dict) -> list[dict]:
 def fetch_capture(session: requests.Session, record: dict, expected: str) -> dict:
     url = f"https://web.archive.org/web/{record['timestamp']}id_/{record['original']}"
     response = session.get(url, headers={"User-Agent": USER_AGENT,
-        "Accept-Encoding": "identity"}, timeout=TIMEOUT)
-    payload = response.content if response.status_code == 200 else b""
-    actual = base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=") if payload else None
+        "Accept-Encoding": "identity"}, timeout=TIMEOUT, stream=True)
+    wire_payload = b""
+    decoded_payload = b""
+    encoding = (response.headers.get("Content-Encoding") or "").lower()
+    if response.status_code == 200:
+        # requests.Response.content transparently decompresses Content-Encoding.
+        # CDX digest/length may refer to the stored encoded payload, so retain and
+        # compare the undecoded entity bytes separately from the CSV bytes.
+        response.raw.decode_content = False
+        wire_payload = response.raw.read(MAX_BYTES + 1)
+        if len(wire_payload) > MAX_BYTES:
+            raise ValueError("Wayback replay exceeds diagnostic byte cap")
+        if "gzip" in encoding:
+            decoded_payload = gzip.decompress(wire_payload)
+        else:
+            decoded_payload = wire_payload
+    wire_digest = (base64.b32encode(hashlib.sha1(wire_payload).digest()).decode("ascii").rstrip("=")
+                   if wire_payload else None)
+    decoded_digest = (base64.b32encode(hashlib.sha1(decoded_payload).digest()).decode("ascii").rstrip("=")
+                      if decoded_payload else None)
     return {
         "timestamp": record["timestamp"],
         "original_url": record["original"],
@@ -70,11 +88,15 @@ def fetch_capture(session: requests.Session, record: dict, expected: str) -> dic
         "cdx_digest": expected,
         "cdx_length": record.get("length"),
         "http_status": response.status_code,
-        "bytes_received": len(payload),
-        "computed_digest": actual,
-        "digest_match": bool(payload) and digest_matches(payload, expected),
+        "wire_bytes_received": len(wire_payload),
+        "decoded_bytes_received": len(decoded_payload),
+        "wire_computed_digest": wire_digest,
+        "decoded_computed_digest": decoded_digest,
+        "wire_digest_match": bool(wire_payload) and digest_matches(wire_payload, expected),
+        "decoded_digest_match": bool(decoded_payload) and digest_matches(decoded_payload, expected),
+        "digest_match": bool(wire_payload) and digest_matches(wire_payload, expected),
         "memento_datetime": response.headers.get("Memento-Datetime"),
-        "content_encoding": response.headers.get("Content-Encoding"),
+        "content_encoding": encoding or None,
         "response_url": response.url,
     }
 
