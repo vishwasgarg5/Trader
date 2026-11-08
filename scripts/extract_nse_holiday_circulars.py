@@ -22,8 +22,8 @@ MONTHS = (
     "January|February|March|April|May|June|July|August|September|October|November|December"
 )
 DATE_PATTERNS = (
-    re.compile(rf"\\b({MONTHS})\\s+(\\d{{1,2}}),?\\s+(20\\d{{2}})\\b", re.I),
-    re.compile(rf"\\b(\\d{{1,2}})\\s+({MONTHS})\\s+(20\\d{{2}})\\b", re.I),
+    re.compile(rf"\b({MONTHS})\s+(\d{{1,2}}),?\s+(20\d{{2}})\b", re.I),
+    re.compile(rf"\b(\d{{1,2}})\s+({MONTHS})\s+(20\d{{2}})\b", re.I),
 )
 WEEKDAYS = "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
 
@@ -47,8 +47,8 @@ def extract_candidates(text: str, expected_year: int, page_number: int) -> list[
                 continue
             seen.add(parsed.isoformat())
             start, end = max(0, match.start() - 100), min(len(text), match.end() + 140)
-            context = re.sub(r"\\s+", " ", text[start:end]).strip()
-            weekday_match = re.search(rf"\\b({WEEKDAYS})\\b", context, re.I)
+            context = re.sub(r"\s+", " ", text[start:end]).strip()
+            weekday_match = re.search(rf"\b({WEEKDAYS})\b", context, re.I)
             candidates.append({
                 "date": parsed.isoformat(),
                 "weekday_in_context": weekday_match.group(1) if weekday_match else None,
@@ -82,10 +82,10 @@ def main() -> int:
                 pages.append(page_text)
                 candidates.extend(extract_candidates(page_text, year, page_number))
             text_path = TEXT_ROOT / f"{year}_{item['circular_reference']}.txt"
-            extracted_text = "\\n\\n".join(
-                f"===== PAGE {i} =====\\n{page}" for i, page in enumerate(pages, start=1)
+            extracted_text = "\n\n".join(
+                f"===== PAGE {i} =====\n{page}" for i, page in enumerate(pages, start=1)
             )
-            text_path.write_text(extracted_text + "\\n", encoding="utf-8")
+            text_path.write_text(extracted_text + "\n", encoding="utf-8")
             records.append({
                 "year": year,
                 "circular_reference": item["circular_reference"],
@@ -118,7 +118,7 @@ def main() -> int:
         "holdout_access_authorized": False,
     }
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+    REPORT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
         "extracted_years": report["extracted_years"],
         "extracted_count": report["extracted_count"],
