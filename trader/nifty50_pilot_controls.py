@@ -390,7 +390,7 @@ def validate_source_manifest(records: pd.DataFrame) -> pd.DataFrame:
     if result["source_id"].duplicated().any():
         raise ValueError("source_id values must be unique")
     if result["source_sha256"].map(lambda x: not bool(SHA256_RE.fullmatch(str(x)))).any():
-        raise ValueError("source_sha256 must be lowercase 64-character hex")
+        raise ValueError("source_sha256 must be lowercase 64-character SHA-256 hex")
     if result["source_url"].map(lambda x: urlparse(str(x)).scheme != "https" or not urlparse(str(x)).netloc).any():
         raise ValueError("source_url must be HTTPS")
     result["retrieved_at"] = _utc_series(result["retrieved_at"], "retrieved_at")
