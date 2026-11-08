@@ -153,12 +153,12 @@ def request_one(session: requests.Session, url: str, params: dict | None,
     for attempt in range(1, MAX_RETRIES + 1):
         if not budget.before_request():
             return None
+        budget.record_request(state)
         try:
             response = session.get(url, params=params, headers={
                 "User-Agent": USER_AGENT,
                 "Accept": "application/json,text/csv,*/*;q=0.5",
             }, timeout=(CONNECT_TIMEOUT, READ_TIMEOUT))
-            budget.record_request(state)
             state["attempt_log"].append({"at_utc": iso_now(), "label": label,
                                          "attempt": attempt, "http_status": response.status_code})
             if response.status_code == 429:
@@ -363,6 +363,32 @@ def build_coverage(state: dict, cdx_metadata: list[dict]) -> dict:
 
 def run() -> dict:
     state = load_state()
+    saved_retry = state.get("next_retry_at_utc")
+    if saved_retry:
+        try:
+            retry_at = datetime.fromisoformat(saved_retry)
+            if retry_at > utcnow():
+                report = {
+                    "schema_version": 1, "run_at_utc": iso_now(), "status": "PARTIAL",
+                    "stop_reason": "WAITING_FOR_RETRY_AFTER", "next_retry_at_utc": saved_retry,
+                    "requests_this_run": 0, "request_budget": REQUEST_BUDGET,
+                    "runtime_seconds": 0, "runtime_budget_seconds": RUNTIME_BUDGET_SECONDS,
+                    "targets_complete": sum(1 for t in TARGETS if state["targets"][t]["metadata_done"] and state["targets"][t]["collapsed_done"]),
+                    "targets_total": len(TARGETS), "pending_snapshot_downloads": len(state["pending_snapshots"]),
+                    "completed_snapshot_downloads": len(state["completed_snapshots"]),
+                    "usable_quarters": 0, "quarter_count": 28,
+                    "quarterly_coverage": build_coverage(state, state.get("full_cdx_metadata", [])),
+                    "full_cdx_metadata_records": state.get("full_cdx_metadata", []),
+                    "collapsed_download_candidate_records": state.get("collapsed_cdx_metadata", []),
+                    "target_errors": state.get("target_errors", []),
+                    "limitations": ["Wayback Retry-After is still in force; no request was sent.",
+                                    "Wayback captures are supplementary and never effective-date decisions."]
+                }
+                atomic_json(REPORT_PATH, report)
+                return report
+        except ValueError:
+            pass
+    state.pop("next_retry_at_utc", None)
     budget = RunBudget(state)
     MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
     metadata_records = state.setdefault("full_cdx_metadata", [])
