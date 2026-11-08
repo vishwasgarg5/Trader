@@ -1,11 +1,6 @@
 name: Acquire AMC historical portfolio snapshot
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/acquire-amc-historical-portfolio.yml"
-      - "scripts/acquire_amc_historical_portfolio.py"
   workflow_dispatch:
 
 permissions:
@@ -25,45 +20,48 @@ jobs:
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install browser automation
+      - name: Install browser automation and workbook parser
         run: |
           python -m pip install --upgrade pip
-          python -m pip install playwright
+          python -m pip install playwright openpyxl
           python -m playwright install --with-deps chromium
-
-      - name: Discover and acquire original AMC bytes
+      - name: Run single corrected-design acquisition attempt
         run: python scripts/acquire_amc_historical_portfolio.py
-
-      - name: Preserve diagnostics
+      - name: Preserve diagnostics even on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: amc-acquisition-diagnostics-${{ github.run_id }}
+          name: motilal-corrected-attempt-003-${{ github.run_id }}
           path: acquisition-output/
           if-no-files-found: warn
-          retention-days: 30
-
-      - name: Commit original bytes and provenance when acquired
+          retention-days: 90
+      - name: Commit original bytes, pre-parse hashes, provenance and ISIN extraction
         if: success()
         run: |
-          if [ -f acquisition-output/acquisition_result.json ] && grep -q '"status": "ACQUIRED"' acquisition-output/acquisition_result.json; then
-            mkdir -p data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund
-            cp acquisition-output/*.xlsx data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund/ 2>/dev/null || true
-            cp acquisition-output/*.xls data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund/ 2>/dev/null || true
-            cp acquisition-output/acquisition_result.json data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund/provenance.json
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund/
-            if ! git diff --cached --quiet; then
-              git commit -m "Acquire original Motilal Oswal Dec 2024 Nifty 50 portfolio"
-              git push
-            fi
-          else
-            echo "No verified December 2024 Nifty 50 AMC workbook acquired; no evidence files committed."
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("acquisition-output/acquisition_result.json").read_text())
+          if result["status"] != "ACQUIRED" or not result["monthly_december_2024_acquired"]:
+              raise SystemExit("Monthly December 2024 workbook not acquired; no evidence commit.")
+          root = Path("data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund")
+          root.mkdir(parents=True, exist_ok=True)
+          for item in result["downloads"]:
+              if item["target_type"] not in ("monthly_2024-12", "fortnightly_2024-12-15"):
+                  continue
+              for filename in (item["saved_filename"], item.get("equity_isin_file")):
+                  if filename:
+                      (root / filename).write_bytes((Path("acquisition-output") / filename).read_bytes())
+          (root / "provenance.json").write_text(json.dumps(result, indent=2))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/amc_snapshots/2024-12/motilal-oswal-nifty-50-index-fund/
+          if ! git diff --cached --quiet; then
+            git commit -m "Acquire original Motilal Oswal Dec 2024 Nifty 50 portfolio"
+            git push
           fi
