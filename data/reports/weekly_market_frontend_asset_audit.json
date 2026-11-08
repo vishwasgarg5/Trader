@@ -2,7 +2,844 @@
   "assets": [],
   "assets_archived": 0,
   "changes_to_model_data": false,
-  "failures": [],
+  "failures": [
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/corporate-governance.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:33:18.676050+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:33:18.554937+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:39.744774+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:33:18.676104+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:41.868710+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:34:41.745264+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:01.933525+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:34:41.868737+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:07.064151+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:36:06.933613+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.130941+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:36:07.064198+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:33:18.425229+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:37:27.130979+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/corporate-governance.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:33:18.425208+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/shareholder-pattern.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:33:18.805342+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:33:18.642136+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:38.871572+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:33:18.805402+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:41.001919+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:34:40.871777+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:01.067681+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:34:41.001963+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:06.197734+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:36:06.067879+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.267035+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:36:06.197780+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:33:18.425461+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:37:27.267048+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/shareholder-pattern.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:33:18.425454+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:33:18.677392+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:33:18.554624+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:39.744234+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:33:18.677420+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:41.864508+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:34:41.744515+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:01.932183+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:34:41.864554+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:07.066795+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:36:06.932379+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.131036+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:36:07.066820+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:33:18.426372+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:37:27.131049+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:33:18.426364+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/results-comparison.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:33:18.675253+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:33:18.559420+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:39.743882+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:33:18.675309+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:34:41.877539+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:34:41.744115+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:02.945365+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:34:41.877567+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:36:08.105524+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:36:07.945577+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:29.174421+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:36:08.105575+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:33:18.426919+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:37:29.174442+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/results-comparison.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:33:18.426911+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format13.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.380517+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:37:27.260927+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:48.449207+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:37:27.380545+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:50.581841+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:38:50.449442+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:11.647873+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:38:50.581873+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:16.762243+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:40:16.647995+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:36.826562+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:40:16.762272+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:37:27.131519+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:41:36.826575+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format13.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:37:27.131515+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format11.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.378690+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:37:27.258316+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:48.449247+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:37:27.378738+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:50.551203+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:38:50.449566+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:11.619971+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:38:50.551248+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:16.743302+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:40:16.620173+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:36.812605+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:40:16.743346+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:37:27.131316+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:41:36.812627+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format11.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:37:27.131311+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format10.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:27.498719+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:37:27.381290+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:47.567579+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:37:27.498763+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:49.722317+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:38:49.567778+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:09.791970+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:38:49.722363+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:14.950292+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:40:14.792173+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:36.020441+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:40:14.950337+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:37:27.267220+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:41:36.020465+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/financial-results-formats/format10.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:37:27.267216+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/sections/corporate-filings.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:37:29.408979+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:37:29.302686+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:49.474143+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:37:29.409024+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:38:51.584381+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:38:51.474341+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:12.651351+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:38:51.584427+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:40:17.774499+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:40:17.651551+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:37.839096+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:40:17.774544+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:37:29.174648+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:41:37.839122+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/sections/corporate-filings.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:37:29.174642+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_ANNOUNCEMENTS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/announcements-csp.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:36.314054+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:41:36.148709+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:57.379706+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:41:36.314127+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:59.500835+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:42:59.379905+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:19.569833+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:42:59.500881+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:24.689427+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:44:24.570027+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:45:45.765718+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:44:24.689475+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:41:36.020627+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:45:45.765741+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/announcements-csp.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:41:36.020624+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_BUYBACKS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/daily-buy-back.js?v=06112026",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:37.072251+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:41:36.919717+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:57.138336+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:41:37.072284+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:59.239964+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:42:59.138455+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:19.305621+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:42:59.239990+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:24.455897+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:44:24.305737+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:45:44.522216+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:44:24.455945+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:41:36.812772+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:45:44.522238+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/daily-buy-back.js?v=06112026",
+        "started_at_utc": "2026-11-08T09:41:36.812769+00:00",
+        "status": "FETCH_FAILED"
+      }
+    },
+    {
+      "error": "FetchError: Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "source_page_id": "NSE_CORPORATE_ACTIONS",
+      "source_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/corporate-actions.js",
+      "status": "ASSET_UNAVAILABLE_OR_REJECTED",
+      "transport": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:41:37.042532+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:41:36.934021+00:00"
+          },
+          {
+            "attempt": 1,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:57.110140+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:41:37.042576+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:42:59.230844+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:42:59.110343+00:00"
+          },
+          {
+            "attempt": 2,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:19.298724+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:42:59.230888+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "HTTPError: Failed to perform, curl: (92) HTTP/2 stream 1 reset by server (error 0x2 INTERNAL_ERROR). See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:44:24.471174+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http2",
+            "started_at_utc": "2026-11-08T09:44:24.298922+00:00"
+          },
+          {
+            "attempt": 3,
+            "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+            "finished_at_utc": "2026-11-08T09:45:45.539258+00:00",
+            "ok": false,
+            "partial_bytes_before": 0,
+            "protocol": "http1.1",
+            "started_at_utc": "2026-11-08T09:44:24.471207+00:00"
+          }
+        ],
+        "egress_ip": {
+          "checked_at_utc": "2026-11-08T09:41:36.826714+00:00",
+          "http_status": 200,
+          "ip": "74.159.117.65",
+          "service": "https://api.ipify.org?format=json"
+        },
+        "error": "Timeout: Failed to perform, curl: (28) Operation too slow. Less than 1 bytes/sec transferred the last 80 seconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+        "finished_at_utc": "2026-11-08T09:45:45.539280+00:00",
+        "partial_bytes_retained": 0,
+        "requested_url": "https://www.nseindia.com/dist/js/components/corporate-filing/csps/corporate-actions.js",
+        "started_at_utc": "2026-11-08T09:41:36.826709+00:00",
+        "status": "FETCH_FAILED"
+      }
+    }
+  ],
   "historical_prices_or_tri_modified": false,
   "holdout_accessed": false,
   "limitations": [
@@ -12,11 +849,11 @@
     "This step does not update corporate-action ledgers, model data, prices, TRI, labels, or trading controls."
   ],
   "live_execution_enabled": false,
-  "observed_asset_count": 0,
+  "observed_asset_count": 11,
   "paper_trading_eligible": false,
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-08T15:00:22.977910+05:30",
+  "run_at_ist": "2026-11-08T15:15:45.766855+05:30",
   "schema_version": 1,
-  "status": "NO_RELEVANT_ASSETS_OBSERVED"
+  "status": "PARTIAL"
 }\n
