@@ -24,13 +24,24 @@ All nine captures below validated as 50 rows, 50 distinct symbols, 50 distinct I
 
 Note: this inventory has nine capture timestamps across the eight lines? The first two 2021 captures and the two 2023 captures are separately retained; all rows above are distinct captures. The local SHA-256 is the hash of the downloaded raw bytes. The CDX digest is a separate Wayback metadata field and is not substituted for the local hash.
 
+## CDX-to-download integrity anomaly — quarantine before using diffs
+
+A cross-check of the acquisition state exposed two internal inconsistencies that must be resolved before treating these raw downloads as authenticated Wayback captures:
+
+- **2023-01-26 vs 2023-05-22:** both downloaded files have the same local SHA-256 (`6291c898e93077ba72aa42e9b10c8a49ea259a3c541ed98f24445f36ece16397`), but their CDX metadata digests differ (`ANH7FADPYCSUVTKEIBGA2ARDQJYFEKB5` vs `FEZNETGKL447RI2R5XVIGSFOVCI4Z2L4`).
+- **2024-05-24 vs 2024-08-19:** their CDX metadata digest is the same (`OOKVMLPTG4NXLNGPK6NU5BBFKBIP4OVR`), but their downloaded local SHA-256 values differ (`04e18d679f517fcad1eae56b80c97f45616f78214e5ab517b28254de72e2c51f` vs `9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28`).
+
+Internet Archive documents CDX `digest` as a Base32-encoded SHA-1 of the archived response body; the raw `id_` replay is expected to preserve that body. The acquisition worker previously did not compare the downloaded bytes to this digest. It has now been patched to request identity encoding, compute the Base32 SHA-1, record the replay URL/Memento metadata, and mark mismatches `CDX_DIGEST_MISMATCH` rather than usable snapshots. Existing completed files are also rechecked when state is loaded. See the [Internet Archive CDX documentation](https://github.com/internetarchive/wayback/blob/master/wayback-cdx-server/README.md) and [digest usage notes](https://wayback.readthedocs.io/en/stable/usage.html).
+
+**Consequence:** treat all pair differences below as exploratory until the latest worker reports `cdx_digest_validation=MATCH` for each capture. In particular, quarantine the 2023-01/05 and 2024-05/08 pairs now; do not use the 2024 seven-out/seven-in diff as a membership inference. The new digest-verification regression test and existing-state reconciliation have not yet passed CI on the current head.
+
 ## Consecutive symbol-set differences
 
 The comparison key here is the listed trading symbol. A symbol leaving/entering the CSV is only a candidate set difference between two capture dates, not proof of the effective date or a formal index committee decision.
 
 ### 2021-06-15 → 2021-09-03
 
-No symbol-set difference. The raw-byte hashes are identical.
+No symbol-set difference in the downloaded files. The local raw-byte hashes are identical, but CDX digest metadata differs; this pair is quarantined pending digest verification.
 
 ### 2021-09-03 → 2022-07-28
 
@@ -64,7 +75,7 @@ No symbol-set difference. The raw-byte hashes are identical.
 
 ### 2024-05-24 → 2024-08-19
 
-Seven symbol exits and seven entries are visible:
+Seven symbol exits and seven entries are visible in the downloaded files (QUARANTINED pending CDX digest verification):
 
 - Symbols out: BPCL, BRITANNIA, DIVISLAB, HEROMOTOCO, INDUSINDBK, LTIM, TATAMOTORS.
 - Symbols in: BEL, ETERNAL, INDIGO, JIOFIN, MAXHEALTH, TMPV, TRENT.
