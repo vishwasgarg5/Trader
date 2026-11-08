@@ -30,8 +30,7 @@ jobs:
           python-version: "3.11"
       - name: Install probe clients
         run: |
-          python -m pip install --disable-pip-version-check requests curl_cffi playwright
-          python -m playwright install --with-deps chromium
+          python -m pip install --disable-pip-version-check requests curl_cffi
       - name: Probe DNS TCP TLS and HTTP transports
         run: python scripts/market_source_transport_probe.py
       - name: Upload diagnostic report
