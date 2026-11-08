@@ -38,7 +38,9 @@ def test_pdf_validation_requires_signature_and_eof():
         def get(self, *args, **kwargs): return Response()
 
     original = MODULE.curl_requests.Session
+    original_egress = MODULE.egress_identity
     MODULE.curl_requests.Session = Session
+    MODULE.egress_identity = lambda: {"ip": "198.51.100.1"}
     try:
         body, meta = MODULE.fetch_bytes(
             "https://www.nseindia.com/a.pdf", allowed_hosts={"www.nseindia.com"},
@@ -48,6 +50,7 @@ def test_pdf_validation_requires_signature_and_eof():
         assert meta["status"] == "FETCHED_AND_VALIDATED"
     finally:
         MODULE.curl_requests.Session = original
+        MODULE.egress_identity = original_egress
 
 
 def test_fetch_failure_exposes_auditable_metadata(monkeypatch):
