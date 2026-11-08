@@ -46,6 +46,7 @@ SOURCES = [
     ("NSE_CORPORATE_ACTIONS", "https://www.nseindia.com/companies-listing/corporate-filings-actions"),
     ("NSE_BUYBACKS", "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back"),
     ("NSE_HOLIDAYS", "https://www.nseindia.com/resources/exchange-communication-holidays"),
+    ("NSE_EXCHANGE_CIRCULARS", "https://www.nseindia.com/resources/exchange-communication-circulars"),
     ("NIFTY_INDICES_HISTORICAL_DATA", "https://www.niftyindices.com/reports/historical-data"),
     ("NIFTY_INDICES_RECONSTITUTION_CALENDAR", "https://www.niftyindices.com/resources/index-rebalancing-schedule"),
     ("NIFTY_INDICES_NIFTY50_PROFILE", "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50"),
