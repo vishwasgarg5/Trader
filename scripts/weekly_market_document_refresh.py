@@ -104,21 +104,6 @@ def fetch(url: str):
             or "html" in content_type.lower()):
         raise ValueError(f"unexpected HTML content type: {content_type}")
     return body, content_type, None
-def fetch(url: str):
-    request = urllib.request.Request(url, headers=HEADERS)
-    with open_with_retries(request) as response:
-        body = response.read(MAX_BYTES + 1)
-        if len(body) > MAX_BYTES:
-            raise ValueError(f"response exceeded {MAX_BYTES} byte safety limit")
-        content_type = response.headers.get("Content-Type", "")
-        status = getattr(response, "status", 200)
-        if status != 200:
-            raise ValueError(f"HTTP {status}")
-        if not (body.lstrip().lower().startswith((b"<!doctype html", b"<html", b"<?xml"))
-                or "html" in content_type.lower()):
-            raise ValueError(f"unexpected content type: {content_type}")
-        return body, content_type, response.headers.get("Last-Modified")
-
 def acquire_page(source_id: str, url: str, run_at: str):
     publisher = ("NSE_INDICES" if source_id.startswith("NIFTY_INDICES_") else ("NSE" if source_id.startswith("NSE_") else "BSE"))
     try:
