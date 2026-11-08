@@ -11,6 +11,7 @@ from trader.nifty50_pilot_controls import (
     sha256_bytes,
     validate_point_in_time_features,
     validate_source_manifest,
+    verify_source_manifest_payloads,
 )
 
 
@@ -161,3 +162,20 @@ def test_all_sixteen_gates_fail_closed_and_pilot_go_never_authorizes_deployment(
     )
     assert passed["status"] == "ELIGIBLE_FOR_SEPARATELY_APPROVED_BROADER_EXPERIMENT"
     assert passed["pilot_go_authorizes_paper_trading"] is False
+
+
+def test_source_manifest_compares_original_payload_hashes():
+    payload = b"official source bytes"
+    import hashlib
+    digest = hashlib.sha256(payload).hexdigest()
+    manifest = pd.DataFrame([{
+        "source_id":"NSE-RAW-1","source_url":"https://nseindia.com/archive.pdf",
+        "source_sha256":digest,"retrieved_at":"2024-01-02T10:00:00Z"
+    }])
+    result = verify_source_manifest_payloads(manifest, {"NSE-RAW-1":payload})
+    assert result["passed"] is True
+    assert result["verified_count"] == 1
+    assert result["authenticity_verified"] is False
+    corrupted = verify_source_manifest_payloads(manifest, {"NSE-RAW-1":b"modified"})
+    assert corrupted["passed"] is False
+    assert corrupted["hash_mismatches"] == ["NSE-RAW-1"]
