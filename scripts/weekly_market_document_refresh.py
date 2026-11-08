@@ -8,6 +8,7 @@ missing. It never mutates prices, labels, TRI, model state, or execution gates.
 """
 from __future__ import annotations
 
+import csv
 import hashlib
 import html
 import json
@@ -16,7 +17,8 @@ import re
 import sys
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
@@ -26,6 +28,9 @@ ARCHIVE = ROOT / "data/reference/source_documents/weekly_market_pages"
 REPORT = ROOT / "data/reports/weekly_market_document_refresh.json"
 MEMBERSHIP = ROOT / "data/reference/nifty50_membership.csv"
 MAX_BYTES = 20 * 1024 * 1024
+TIMEOUT_SECONDS = 15
+CONSTITUENT_URL = "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
+CONSTITUENT_ARCHIVE = ROOT / "data/reference/source_documents/nifty50_constituent_snapshots"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; TraderResearchEvidenceBot/1.0; +https://github.com/vishwasgarg5/Trader)",
     "Accept": "text/html,application/xhtml+xml,application/pdf;q=0.9,*/*;q=0.8",
@@ -72,7 +77,7 @@ def now_ist():
 
 def fetch(url: str):
     request = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(request, timeout=45) as response:
+    with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
         body = response.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise ValueError(f"response exceeded {MAX_BYTES} byte safety limit")
@@ -85,43 +90,84 @@ def fetch(url: str):
             raise ValueError(f"unexpected content type: {content_type}")
         return body, content_type, response.headers.get("Last-Modified")
 
+def acquire_page(source_id: str, url: str, run_at: str):
+    publisher = "NSE" if source_id.startswith("NSE_") else "BSE"
+    try:
+        body, content_type, last_modified = fetch(url)
+        digest = hashlib.sha256(body).hexdigest()
+        path = ARCHIVE / f"{source_id.lower()}_{digest[:16]}.html"
+        path.write_bytes(body)
+        parser = LinkParser()
+        parser.feed(body.decode("utf-8", errors="replace"))
+        return {
+            "source_id": source_id, "publisher": publisher, "source_url": url,
+            "retrieved_at_ist": run_at, "http_content_type": content_type,
+            "http_last_modified": last_modified, "archive_path": path.as_posix(),
+            "bytes": len(body), "sha256": digest,
+            "visible_link_count": len(parser.links), "links": parser.links[:5000],
+            "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
+            "semantic_review_status": "NOT_REVIEWED",
+        }, None
+    except Exception as exc:
+        return None, {
+            "source_id": source_id, "publisher": publisher, "source_url": url,
+            "retrieved_at_ist": run_at,
+            "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE",
+            "error": f"{type(exc).__name__}: {exc}"[:1000],
+        }
+
+def acquire_current_constituents(run_at: str):
+    request = urllib.request.Request(CONSTITUENT_URL, headers=HEADERS)
+    try:
+        with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+            body = response.read(MAX_BYTES + 1)
+            if len(body) > MAX_BYTES:
+                raise ValueError("constituent CSV exceeded size limit")
+            content_type = response.headers.get("Content-Type", "")
+            text = body.decode("utf-8-sig")
+            rows = list(csv.DictReader(text.splitlines()))
+            if not rows:
+                raise ValueError("constituent CSV has no data rows")
+            symbol_key = next((key for key in rows[0] if key and key.strip().lower() == "symbol"), None)
+            if not symbol_key:
+                raise ValueError("constituent CSV has no Symbol column")
+            symbols = [row.get(symbol_key, "").strip().upper() for row in rows]
+            if len(rows) != 50 or any(not symbol for symbol in symbols) or len(set(symbols)) != 50:
+                raise ValueError(f"expected exactly 50 unique non-empty symbols; received {len(rows)} rows")
+            digest = hashlib.sha256(body).hexdigest()
+            CONSTITUENT_ARCHIVE.mkdir(parents=True, exist_ok=True)
+            path = CONSTITUENT_ARCHIVE / f"nifty50_current_{digest[:16]}.csv"
+            path.write_bytes(body)
+            return {
+                "source_url": CONSTITUENT_URL, "retrieved_at_ist": run_at,
+                "archive_path": path.as_posix(), "bytes": len(body),
+                "sha256": digest, "content_type": content_type,
+                "row_count": len(rows), "unique_symbol_count": len(set(symbols)),
+                "symbols": symbols,
+                "status": "CURRENT_COMPOSITION_SNAPSHOT_ARCHIVED_NOT_POINT_IN_TIME_HISTORY",
+                "use_restriction": "Not eligible to populate historical membership intervals or establish past constituent membership.",
+            }, None
+    except Exception as exc:
+        return None, {"source_url": CONSTITUENT_URL,
+                      "status": "CURRENT_COMPOSITION_SNAPSHOT_UNAVAILABLE_OR_INVALID",
+                      "error": f"{type(exc).__name__}: {exc}"[:1000]}
+
 def main() -> int:
     ARCHIVE.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     run_at = now_ist()
     records, failures = [], []
-    for source_id, url in SOURCES:
-        try:
-            body, content_type, last_modified = fetch(url)
-            digest = hashlib.sha256(body).hexdigest()
-            path = ARCHIVE / f"{source_id.lower()}_{digest[:16]}.html"
-            path.write_bytes(body)
-            parser = LinkParser()
-            parser.feed(body.decode("utf-8", errors="replace"))
-            records.append({
-                "source_id": source_id,
-                "publisher": "NSE" if source_id.startswith("NSE_") else "BSE",
-                "source_url": url,
-                "retrieved_at_ist": run_at,
-                "http_content_type": content_type,
-                "http_last_modified": last_modified,
-                "archive_path": path.as_posix(),
-                "bytes": len(body),
-                "sha256": digest,
-                "visible_link_count": len(parser.links),
-                "links": parser.links[:5000],
-                "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
-                "semantic_review_status": "NOT_REVIEWED",
-            })
-        except Exception as exc:
-            failures.append({
-                "source_id": source_id,
-                "publisher": "NSE" if source_id.startswith("NSE_") else "BSE",
-                "source_url": url,
-                "retrieved_at_ist": run_at,
-                "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE",
-                "error": f"{type(exc).__name__}: {exc}"[:1000],
-            })
+    with ThreadPoolExecutor(max_workers=len(SOURCES)) as pool:
+        futures = {pool.submit(acquire_page, source_id, url, run_at): (source_id, url)
+                   for source_id, url in SOURCES}
+        for future in as_completed(futures):
+            record, failure = future.result()
+            if record:
+                records.append(record)
+            if failure:
+                failures.append(failure)
+    records.sort(key=lambda item: item["source_id"])
+    constituent_snapshot, constituent_failure = acquire_current_constituents(run_at)
 
     membership_rows = 0
     if MEMBERSHIP.exists():
@@ -153,6 +199,8 @@ def main() -> int:
             "MEMBERSHIP_ROWS_PRESENT_BUT_INDEPENDENT_VERIFICATION_MUST_BE_CHECKED"
         ),
         "records": records,
+        "current_constituent_snapshot": constituent_snapshot,
+        "constituent_snapshot_failure": constituent_failure,
         "limitations": [
             "Landing-page HTML is discovery evidence only; it is not the underlying circular or issuer filing.",
             "Visible links are not proof that all exchange documents were enumerated.",
@@ -160,7 +208,7 @@ def main() -> int:
             "No PDF/filing bytes are archived unless a separate document-acquisition step downloads and validates them.",
             "A SHA-256 digest proves downloaded-byte integrity only, not publisher authenticity or document meaning.",
             "No event extraction, supersession decision, or independent review is performed here.",
-            "The point-in-time NIFTY 50 membership register must be populated and independently verified before issuer-specific inclusion is automated."
+            "The downloaded current constituent snapshot is not historical point-in-time membership evidence. A dated official change/circular history and independently reviewed validity intervals are still required before issuer-specific inclusion is automated."
         ],
         "changes_to_model_data": False,
         "historical_prices_or_tri_modified": False,
@@ -175,6 +223,7 @@ def main() -> int:
         "run_at_ist": run_at,
         "landing_pages_archived": len(records),
         "landing_pages_expected": len(SOURCES),
+        "current_constituent_snapshot_status": (constituent_snapshot or {}).get("status", (constituent_failure or {}).get("status")),
         "source_failures": failures,
         "membership_register_rows": membership_rows,
         "discovery_status": report["discovery_status"],
