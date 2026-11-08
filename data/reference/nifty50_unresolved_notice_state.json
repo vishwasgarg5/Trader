@@ -776,6 +776,69 @@
       "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:05:37.572849+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:06:25.845469+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:06:48.136227+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs05062018%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f87e5cf67d0>, 'Connection to web.archive.org timed out. (connect timeout=15)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:06:53.180814+00:00",
+      "attempt": 1,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:07:01.193279+00:00",
+      "attempt": 2,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:07:13.578324+00:00",
+      "attempt": 3,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:07:58.629618+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:08:17.244588+00:00",
+      "attempt": 2,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f87e5d25b10>, 'Connection to web.archive.org timed out. (connect timeout",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:08:38.689776+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f87e5d26a50>, 'Connection to web.archive.org timed out. (connect timeout",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "created_at_utc": "2026-11-08T10:26:09.149184+00:00",
@@ -954,6 +1017,7 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
+      "resolution_status": "NOT_YET_RESOLVED",
       "status": "PENDING"
     },
     "NSE-ARCHIVE-2019-07-16-3a8719394912": {
@@ -1027,6 +1091,17 @@
           "match_type": "domain",
           "result": "HTTP_ERROR",
           "url": "nseindia.com"
+        },
+        {
+          "at_utc": "2026-11-08T14:07:13.578342+00:00",
+          "content_type": "text/html",
+          "error": "CDX returned HTTP 503",
+          "from_year": 2018,
+          "http_status": 503,
+          "match_type": "domain",
+          "result": "HTTP_ERROR",
+          "to_year": 2020,
+          "url": "niftyindices.com"
         }
       ],
       "cdx_response_row_count": 0,
@@ -1112,6 +1187,7 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
+      "resolution_status": "NOT_YET_RESOLVED",
       "status": "PENDING"
     },
     "NSE-ARCHIVE-2023-03-14-5b13b76a2af9": {
@@ -1262,9 +1338,10 @@
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
+      "resolution_status": "NOT_YET_RESOLVED",
       "status": "PENDING"
     }
   },
-  "last_request_at_utc": "2026-11-08T13:57:43.457277+00:00",
+  "last_request_at_utc": "2026-11-08T14:08:23.666574+00:00",
   "schema_version": 1
 }
