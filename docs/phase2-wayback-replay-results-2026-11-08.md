@@ -67,3 +67,27 @@ The ZIP artifact also contains other CSV files already present in the checked-ou
 2. Investigate the 2023-05-22 digest mismatch without accepting or substituting bytes.
 3. Continue quarterly coverage recovery and exact-date reconciliation.
 4. Obtain independent human review before any candidate or transition row can be promoted.
+
+
+## Follow-up replay with bounded HTTP 429 retries
+
+A second replay was run after adding the bounded retry policy and regression test.
+
+- Run: https://github.com/vishwasgarg5/Trader/actions/runs/42504385598
+- Artifact: `nifty50-wayback-replay-pr-37` (artifact ID `13626872544`)
+- Tested commit: `ad81099df2b6f30e446ca60e245332b073ff7067`
+- Full Python test job: passed.
+- Dedicated Wayback safeguard/replay job: passed.
+
+The new artifact report records 12 targeted capture attempts:
+- **10 digest-verified, structurally valid 50-constituent candidate snapshots**.
+- **1 capture still blocked by HTTP 429** after three attempts (10s and 30s backoff).
+- **1 capture (2023-05-22) rejected for CDX SHA-1 mismatch**. No bytes from this capture were accepted.
+
+Two rate-limited captures that failed in the earlier replay now succeeded after bounded retries:
+- 2024-05-24 — succeeded on attempt 3 after 10s and 30s waits.
+- 2024-11-10 — succeeded on attempt 2 after a 10s wait.
+
+The 10 candidates include a 2018-01-28 capture, which is outside the registered 2018-04-01 research window and must not be counted as an in-window quarter anchor. All candidate files remain PR artifacts; they have not been promoted into the main-branch snapshot inventory or canonical membership ledger.
+
+The remaining 2024-08-19 HTTP 429 and 2023-05-22 digest mismatch remain quarantined. The successful run is an acquisition milestone only; it does not complete quarterly coverage, transition verification, or independent review.
