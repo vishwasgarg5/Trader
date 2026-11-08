@@ -1,3 +1,5 @@
+import base64
+import hashlib
 import importlib.util
 from types import SimpleNamespace
 from pathlib import Path
@@ -79,3 +81,13 @@ def test_legacy_fallback_reconciliation_does_not_advance_on_incomplete_or_http_a
 def test_retry_after_seconds_supported():
     assert MODULE.retry_after("17") == 17
     assert MODULE.retry_after(None) is None
+
+
+def test_wayback_cdx_digest_matches_base32_sha1_body():
+    payload = b"%PDF-1.7\\nminimal\\n%%EOF\\n"
+    expected = base64.b32encode(hashlib.sha1(payload).digest()).decode("ascii").rstrip("=")
+    assert MODULE.wayback_cdx_digest(payload) == expected
+    assert MODULE.cdx_digest_matches(payload, expected)
+    assert MODULE.cdx_digest_matches(payload, expected.lower())
+    assert not MODULE.cdx_digest_matches(payload + b"changed", expected)
+    assert not MODULE.cdx_digest_matches(payload, "")
