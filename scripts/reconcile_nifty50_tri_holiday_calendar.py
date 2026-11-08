@@ -2,7 +2,7 @@
 """Cross-check NSE holiday candidates against acquired NIFTY 50 TRI dates.
 
 Diagnostic only: source bytes and dates remain pending independent review.
-This report must never certify calendar coverage.
+This report must never certify calendar coverage.\nA pending PDF archive remains explicitly provisional in the report.
 """
 from __future__ import annotations
 
