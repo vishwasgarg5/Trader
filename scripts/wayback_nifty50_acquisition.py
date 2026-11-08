@@ -413,6 +413,23 @@ def run() -> dict:
     metadata_records = state.setdefault("full_cdx_metadata", [])
     collapsed_records = state.setdefault("collapsed_cdx_metadata", [])
     state.setdefault("target_errors", [])
+
+    # Re-read saved collapsed manifests so a later code fix can recover candidates
+    # that an earlier exact-URL filter skipped. capture_key keeps this idempotent.
+    for record in collapsed_records:
+        target = record.get("target_url")
+        archive_path = pathlib.Path(record.get("archive_path", ""))
+        if target not in TARGETS or not archive_path.is_file():
+            continue
+        try:
+            rows = parse_cdx(archive_path.read_text(encoding="utf-8"))
+            add_collapsed_captures(state, target, rows)
+        except Exception as exc:
+            state["target_errors"].append({
+                "target_url": target, "kind": "COLLAPSED_CDX_REPLAY",
+                "at_utc": iso_now(), "error": str(exc)[:500]
+            })
+
     with requests.Session() as session:
         session.headers.update({"User-Agent": USER_AGENT})
         for target in TARGETS:
