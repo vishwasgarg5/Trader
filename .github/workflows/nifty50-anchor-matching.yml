@@ -1,0 +1,52 @@
+name: NIFTY 50 anchor matching packet
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/nifty50-anchor-matching.yml"
+      - "scripts/build_nifty50_anchor_matching_packet.py"
+      - "data/reference/wayback_nifty50_acquisition_state.json"
+      - "data/reference/source_documents/wayback_nifty50_snapshots/**"
+      - "data/reference/nifty50_transition_register.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-review-packet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out research branch
+        uses: actions/checkout@v4
+        with:
+          ref: research/nifty50-wayback-acquisition-2026-11-08
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build anchor matching packet
+        run: |
+          python scripts/build_nifty50_anchor_matching_packet.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("data/reports/nifty50_anchor_matching_packet.json").read_text())
+          print("ANCHORS", report["anchor_count"])
+          print("PAIRS", report["adjacent_anchor_pair_count"])
+          print("REJECTED_OR_ALTERNATE", len(report["rejected_or_alternate_candidates"]))
+          for pair in report["adjacent_anchor_comparisons"]:
+              print(pair["from_anchor"]["quarter"], "->", pair["to_anchor"]["quarter"],
+                    "observed", len(pair["observed_snapshot_changes"]),
+                    "matched_register_candidates", len(pair["observed_changes_with_register_candidate"]),
+                    "unexplained", len(pair["observed_changes_without_register_candidate"]),
+                    "registered_not_visible", len(pair["registered_events_not_visible_in_anchor_difference"]))
+          PY
+      - name: Upload human-review packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: nifty50-anchor-matching-review-packet
+          path: data/reports/nifty50_anchor_matching_packet.json
+          if-no-files-found: error
+          retention-days: 90
