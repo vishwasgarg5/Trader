@@ -98,6 +98,7 @@ def fetch(url: str):
         url, allowed_hosts=allowed, headers=HEADERS,
         max_bytes=MAX_BYTES, timeout=(20, TIMEOUT_SECONDS),
         attempts=3, expected_content_type=(),
+        resume_path=ARCHIVE / ".partial" / (hashlib.sha256(url.encode("utf-8")).hexdigest() + ".part"),
     )
     content_type = metadata.get("content_type", "")
     if not (body.lstrip().lower().startswith((b"<!doctype html", b"<html", b"<?xml"))
@@ -149,6 +150,7 @@ def acquire_current_constituents(run_at: str):
             CONSTITUENT_URL, allowed_hosts=allowed, headers=HEADERS,
             max_bytes=MAX_BYTES, timeout=(20, TIMEOUT_SECONDS),
             attempts=3, expected_content_type=(),
+            resume_path=CONSTITUENT_ARCHIVE / ".partial" / (hashlib.sha256(CONSTITUENT_URL.encode("utf-8")).hexdigest() + ".part"),
         )
         symbols = parse_current_constituents(body)
         digest = hashlib.sha256(body).hexdigest()
