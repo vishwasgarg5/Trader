@@ -81,15 +81,15 @@ def validate_features(frame: pd.DataFrame, features: list[str]) -> list[str]:
         raise ValueError("at least one explicitly registered feature is required")
     if len(features) != len(set(features)):
         raise ValueError("feature list contains duplicates")
-    missing = set(features).difference(frame.columns)
-    if missing:
-        raise ValueError(f"requested features are absent: {sorted(missing)}")
     forbidden = [
         name for name in features
         if any(token in name.lower() for token in FORBIDDEN_FEATURE_TOKENS)
     ]
     if forbidden:
         raise ValueError(f"outcome/label-like columns cannot be features: {forbidden}")
+    missing = set(features).difference(frame.columns)
+    if missing:
+        raise ValueError(f"requested features are absent: {sorted(missing)}")
     return features
 
 
