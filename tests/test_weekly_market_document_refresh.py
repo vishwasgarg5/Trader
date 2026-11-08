@@ -90,8 +90,8 @@ def test_constituent_acquisition_reports_50_rows_without_name_error(monkeypatch,
         def geturl(self):
             return MODULE.CONSTITUENT_URL
         def read(self, limit):
-            return ("Symbol,Company Name\\n" + "".join(
-                f"SYM{i},Company {i}\\n" for i in range(50)
+            return ("Symbol,Company Name\n" + "".join(
+                f"SYM{i},Company {i}\n" for i in range(50)
             )).encode()
         def __enter__(self):
             return self
