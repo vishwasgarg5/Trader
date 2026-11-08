@@ -66,3 +66,40 @@ def test_matching_packet_rejects_payload_if_cdx_digest_does_not_match(tmp_path):
     packet = build_packet(state, [], tmp_path)
     assert packet["anchor_count"] == 0
     assert len(packet["rejected_or_alternate_candidates"]) == 1
+
+
+
+def test_review_checklist_contains_anchor_pair_and_transition_rows(tmp_path):
+    from scripts.build_nifty50_anchor_matching_packet import build_review_rows, write_review_csv
+    first = [f"S{i:02d}" for i in range(50)]
+    second = first[1:] + ["NEWCO"]
+    p1, p2 = tmp_path / "a.csv", tmp_path / "b.csv"
+    sha1, cdx1 = _snapshot(p1, first)
+    sha2, cdx2 = _snapshot(p2, second)
+    state = {"completed_snapshots": [
+        {"status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+         "archive_path": "a.csv", "sha256": sha1, "cdx_digest": cdx1,
+         "cdx_digest_validation": "MATCH", "capture_timestamp": "20200101000000",
+         "quarter": "2020-Q1", "original_url": "https://example.com/a.csv",
+         "validation": {"distinct_symbol_count": 50}},
+        {"status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+         "archive_path": "b.csv", "sha256": sha2, "cdx_digest": cdx2,
+         "cdx_digest_validation": "MATCH", "capture_timestamp": "20200401000000",
+         "quarter": "2020-Q2", "original_url": "https://example.com/a.csv",
+         "validation": {"distinct_symbol_count": 50}},
+    ]}
+    packet = build_packet(state, [{
+        "transition_id": "T1", "symbol": "NEWCO", "action": "ADD",
+        "effective_date": "2020-02-01", "verification_status": "SAMPLE_ONLY",
+        "source_url": "https://example.com/notice.pdf",
+    }], tmp_path)
+    rows = build_review_rows(packet)
+    assert [row["row_type"] for row in rows] == [
+        "ANCHOR_SNAPSHOT", "ANCHOR_SNAPSHOT", "ANCHOR_PAIR", "TRANSITION_EVENT"
+    ]
+    out = tmp_path / "review.csv"
+    assert write_review_csv(out, packet) == 4
+    parsed = list(csv.DictReader(out.open(encoding="utf-8")))
+    assert parsed[-1]["current_status"] == "SAMPLE_ONLY"
+    assert parsed[-1]["reviewer_decision"] == ""
+    assert parsed[-1]["reviewer_name"] == ""
