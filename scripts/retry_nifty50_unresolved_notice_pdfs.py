@@ -94,10 +94,12 @@ class Budget:
         self.started = time.monotonic()
         self.count = 0
         self.last = None
-        try:
-            self.last = datetime.fromisoformat(state.get("last_request_at_utc", ""))
-        except ValueError:
-            pass
+        saved_last = state.get("last_request_at_utc")
+        if saved_last:
+            try:
+                self.last = datetime.fromisoformat(saved_last)
+            except ValueError:
+                self.last = None
         self.stop = None
         self.next_retry = None
 
