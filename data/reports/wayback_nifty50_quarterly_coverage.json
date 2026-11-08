@@ -712,15 +712,15 @@
       "captures": [
         {
           "original_url": "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
-          "sha256": "6291c898e93077ba72aa42e9b10c8a49ea259a3c541ed98f24445f36ece16397",
-          "status": "CDX_DIGEST_MISMATCH",
+          "sha256": "6f8cc1fa422706ac27884bc9aea6dc9acb550597036bf79427fd7e4c3ddcea9d",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
           "timestamp": "20230522051228"
         }
       ],
       "downloaded_capture_count": 1,
       "full_cdx_capture_count": 1,
-      "status": "AVAILABLE",
-      "usable_capture_count": 0
+      "status": "USABLE",
+      "usable_capture_count": 1
     },
     "2023-Q3": {
       "captures": [],
@@ -767,22 +767,22 @@
     "2024-Q3": {
       "captures": [
         {
-          "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
-          "sha256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
-          "status": "CDX_DIGEST_MISMATCH",
-          "timestamp": "20240819184501"
-        },
-        {
           "original_url": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
           "sha256": "04e18d679f517fcad1eae56b80c97f45616f78214e5ab517b28254de72e2c51f",
           "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
           "timestamp": "20240701180136"
+        },
+        {
+          "original_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+          "sha256": "04e18d679f517fcad1eae56b80c97f45616f78214e5ab517b28254de72e2c51f",
+          "status": "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW",
+          "timestamp": "20240819184501"
         }
       ],
       "downloaded_capture_count": 2,
       "full_cdx_capture_count": 3,
       "status": "USABLE",
-      "usable_capture_count": 1
+      "usable_capture_count": 2
     },
     "2024-Q4": {
       "captures": [
@@ -800,15 +800,15 @@
     }
   },
   "request_budget": 24,
-  "requests_this_run": 0,
-  "run_at_utc": "2026-11-08T14:04:52.357347+00:00",
+  "requests_this_run": 2,
+  "run_at_utc": "2026-11-08T14:10:38.019791+00:00",
   "runtime_budget_seconds": 1200,
-  "runtime_seconds": 0.0,
+  "runtime_seconds": 3.06,
   "schema_version": 1,
   "status": "COMPLETE",
   "stop_reason": "WORK_REMAINING",
   "target_errors": [],
   "targets_complete": 6,
   "targets_total": 6,
-  "usable_quarters": 16
+  "usable_quarters": 17
 }

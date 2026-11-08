@@ -839,6 +839,104 @@
       "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=niftyindices.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs14032023%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f87e5d26a50>, 'Connection to web.archive.org timed out. (connect timeout",
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:11:23.349421+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:12:13.140046+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:12:34.369021+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs05062018%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f70f9b22a50>, 'Connection to web.archive.org timed out. (connect timeout=15)",
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:12:53.804481+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:13:20.984363+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:14:06.032871+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:14:25.706974+00:00",
+      "attempt": 2,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f70f9b5d750>, 'Connection to web.archive.org timed out. (connect timeout=1",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:14:47.882619+00:00",
+      "attempt": 3,
+      "error": "ConnectTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Max retries exceeded with url: /cdx/search/cdx?url=nseindia.com&output=json&collapse=digest&fl=timestamp%2Coriginal%2Cstatuscode%2Cmimetype%2Cdigest%2Clength&from=2018&to=2020&matchType=domain&filter=statuscode%3A200&filter=original%3A.%2Aind_prs16072019_1%5C.pdf%24 (Caused by ConnectTimeoutError(<HTTPSConnection(host='web.archive.org', port=443) at 0x7f70f9b5efd0>, 'Connection to web.archive.org timed out. (connect timeout=1",
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:6:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:14:53.057957+00:00",
+      "attempt": 1,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:15:02.076953+00:00",
+      "attempt": 2,
+      "http_status": 503,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:15:40.486119+00:00",
+      "attempt": 3,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:4:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:16:25.492052+00:00",
+      "attempt": 1,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:16:45.197813+00:00",
+      "attempt": 2,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=15)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T14:17:36.636059+00:00",
+      "attempt": 3,
+      "error": "ReadTimeout: HTTPSConnectionPool(host='web.archive.org', port=443): Read timed out. (read timeout=45)",
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:5:domain",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "created_at_utc": "2026-11-08T10:26:09.149184+00:00",
@@ -1031,7 +1129,6 @@
       "cdx_captures": [],
       "cdx_checked": false,
       "cdx_content_type": "application/json",
-      "cdx_error": "CDX returned HTTP 503",
       "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
       "cdx_queries": [
         {
@@ -1101,6 +1198,32 @@
           "match_type": "domain",
           "result": "HTTP_ERROR",
           "to_year": 2020,
+          "url": "niftyindices.com"
+        },
+        {
+          "at_utc": "2026-11-08T14:12:53.804500+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "from_year": 2018,
+          "http_status": 200,
+          "match_type": "domain",
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "to_year": 2020,
+          "url": "niftyindices.com"
+        },
+        {
+          "at_utc": "2026-11-08T14:13:20.984400+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "from_year": 2021,
+          "http_status": 200,
+          "match_type": "domain",
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "to_year": 2024,
           "url": "niftyindices.com"
         }
       ],
@@ -1183,7 +1306,7 @@
         }
       ],
       "next_capture_index": 0,
-      "next_cdx_search_index": 4,
+      "next_cdx_search_index": 6,
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
@@ -1252,6 +1375,19 @@
           "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
           "response_row_count": 0,
           "result": "EMPTY",
+          "url": "niftyindices.com"
+        },
+        {
+          "at_utc": "2026-11-08T14:15:40.486138+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "from_year": 2018,
+          "http_status": 200,
+          "match_type": "domain",
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "to_year": 2020,
           "url": "niftyindices.com"
         }
       ],
@@ -1334,7 +1470,7 @@
         }
       ],
       "next_capture_index": 0,
-      "next_cdx_search_index": 4,
+      "next_cdx_search_index": 5,
       "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
@@ -1342,6 +1478,6 @@
       "status": "PENDING"
     }
   },
-  "last_request_at_utc": "2026-11-08T14:08:23.666574+00:00",
+  "last_request_at_utc": "2026-11-08T14:16:51.470295+00:00",
   "schema_version": 1
 }
