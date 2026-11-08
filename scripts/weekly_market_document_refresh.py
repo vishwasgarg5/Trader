@@ -190,6 +190,29 @@ def main() -> int:
             if failure:
                 failures.append(failure)
     records.sort(key=lambda item: item["source_id"])
+    # Preserve empty responses as bytes, but do not count identical zero-link
+    # shells as usable discovery sources.
+    digest_groups = {}
+    for record in records:
+        digest_groups.setdefault(record["sha256"], []).append(record)
+    shell_failures = []
+    for record in records:
+        duplicate_shell = (
+            record["visible_link_count"] == 0
+            and len(digest_groups[record["sha256"]]) > 1
+        )
+        if duplicate_shell:
+            record["evidence_status"] = "LANDING_PAGE_BYTES_ARCHIVED_BUT_IDENTICAL_EMPTY_SHELL"
+            shell_failures.append({
+                "source_id": record["source_id"],
+                "publisher": record["publisher"],
+                "source_url": record["source_url"],
+                "retrieved_at_ist": run_at,
+                "status": "IDENTICAL_EMPTY_LANDING_PAGE_SHELL",
+                "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
+                "sha256": record["sha256"],
+            })
+    failures.extend(shell_failures)
     constituent_snapshot, constituent_failure = acquire_current_constituents(run_at)
 
     membership_rows = 0
