@@ -22,7 +22,7 @@ from curl_cffi import requests as curl_requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from trader.market_source_fetcher import fetch_bytes
+from trader.market_source_fetcher import fetch_bytes, validate_official_url
 
 REPORT_IN = pathlib.Path("data/reports/weekly_market_document_refresh.json")
 REPORT_OUT = pathlib.Path("data/reports/weekly_market_frontend_asset_audit.json")
@@ -87,6 +87,7 @@ def fetch_asset(url: str):
         expected_content_type=(),
         resume_path=ARCHIVE / ".partial" / (hashlib.sha256(url.encode("utf-8")).hexdigest() + ".part"),
     )
+    validate_official_url(metadata["final_url"], ALLOWED_HOSTS)
     final = urllib.parse.urlsplit(metadata["final_url"])
     content_type = metadata.get("content_type", "")
     if "javascript" not in content_type.lower() and not final.path.lower().endswith(".js"):
