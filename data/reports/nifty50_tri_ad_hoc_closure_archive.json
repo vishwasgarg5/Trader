@@ -18,7 +18,7 @@
   "records": [
     {
       "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-04-29_NSE_CMTR_40536.pdf",
-      "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "archive_status": "ARCHIVED_OFFICIAL_HOST_PDF_SIGNATURE_VALID",
       "bytes": 214283,
       "circular_reference": "NSE/CMTR/40536",
       "description": "Parliamentary elections in Mumbai",
@@ -33,7 +33,7 @@
     },
     {
       "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2019-10-21_NSE_MSD_42319.pdf",
-      "archive_status": "ARCHIVED_PDF_SIGNATURE_VALID",
+      "archive_status": "ARCHIVED_OFFICIAL_HOST_PDF_SIGNATURE_VALID",
       "bytes": 112758,
       "circular_reference": "NSE/MSD/42319",
       "description": "General Assembly elections in Maharashtra",
