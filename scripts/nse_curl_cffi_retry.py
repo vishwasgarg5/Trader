@@ -6,7 +6,9 @@ source acquisition diagnostics only: it never updates model data or membership.
 """
 from __future__ import annotations
 
+import csv
 import hashlib
+import io
 import json
 import pathlib
 import re
@@ -43,6 +45,18 @@ ALLOWED_HOSTS = {
     "archives.nseindia.com",
 }
 WAYBACK_CDX = "https://web.archive.org/cdx/search/cdx"
+WAYBACK_SNAPSHOT_ARCHIVE = pathlib.Path("data/reference/source_documents/wayback_nifty50_snapshots")
+SNAPSHOT_CSV_TARGETS = {
+    "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
+    "https://archives.nseindia.com/content/indices/ind_nifty50list.csv",
+    "https://www.nseindia.com/content/indices/ind_nifty50list.csv",
+    "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+    "https://niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+}
+SNAPSHOT_HISTORY_TARGETS = SNAPSHOT_CSV_TARGETS | {
+    "https://www.nseindia.com/content/indices/IndexInclExcl.xls",
+    "https://archives.nseindia.com/content/indices/IndexInclExcl.xls",
+}
 IP_ECHO = "https://api.ipify.org?format=json"
 
 
@@ -186,28 +200,108 @@ def transport_check(url: str, method: str) -> dict:
 
 def wayback_targets() -> list[str]:
     refresh = pathlib.Path("data/reports/weekly_market_document_refresh.json")
-    if not refresh.exists():
-        return ["https://www.nseindia.com/resources/exchange-communication-circulars"]
-    data = json.loads(refresh.read_text(encoding="utf-8"))
-    urls = []
-    for row in data.get("records", []):
-        url = row.get("source_url", "")
-        host = (urlsplit(url).hostname or "").lower()
-        if host in {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
-                    "niftyindices.com", "www.niftyindices.com"}:
-            urls.append(url)
-    return sorted(set(urls))
+    urls = set(SNAPSHOT_HISTORY_TARGETS)
+    if refresh.exists():
+        data = json.loads(refresh.read_text(encoding="utf-8"))
+        for row in data.get("records", []):
+            url = row.get("source_url", "")
+            host = (urlsplit(url).hostname or "").lower()
+            if host in {"nseindia.com", "www.nseindia.com", "nsearchives.nseindia.com",
+                        "archives.nseindia.com", "niftyindices.com", "www.niftyindices.com"}:
+                urls.add(url)
+    return sorted(urls)
+
+
+def wayback_snapshot_url(timestamp: str, original: str) -> str:
+    if not re.fullmatch(r"\\d{14}", timestamp) or original not in SNAPSHOT_CSV_TARGETS:
+        raise ValueError("Wayback snapshot must reference a dated capture of an allowlisted Nifty 50 CSV")
+    return f"https://web.archive.org/web/{timestamp}id_/{original}"
+
+
+def validate_constituent_snapshot(payload: bytes) -> dict:
+    text = payload.decode("utf-8-sig", errors="replace")
+    if "<html" in text[:500].lower() or "<!doctype" in text[:500].lower():
+        raise ValueError("Wayback response is HTML, not a constituent CSV")
+    rows = list(csv.DictReader(io.StringIO(text)))
+    if not rows:
+        raise ValueError("constituent CSV has no data rows")
+    headers = {key.strip().lower(): key for key in (rows[0].keys() if rows else [])}
+    symbol_key = next((headers[k] for k in ("symbol", "trading symbol", "ticker") if k in headers), None)
+    isin_key = next((headers[k] for k in ("isin code", "isin") if k in headers), None)
+    if not symbol_key or not isin_key:
+        raise ValueError("constituent CSV must expose Symbol and ISIN columns")
+    symbols = [row.get(symbol_key, "").strip().upper() for row in rows]
+    isins = [row.get(isin_key, "").strip().replace(" ", "").upper() for row in rows]
+    valid = [(s, i) for s, i in zip(symbols, isins) if s and re.fullmatch(r"[A-Z]{2}[A-Z0-9]{10}", i)]
+    return {
+        "row_count": len(rows),
+        "distinct_symbol_count": len(set(symbols) - {""}),
+        "valid_isin_row_count": len(valid),
+        "exactly_50_distinct_symbols": len(set(symbols) - {""}) == 50,
+        "all_rows_have_valid_isin": len(valid) == len(rows),
+        "symbols": sorted(set(symbols) - {""}),
+    }
+
+
+def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[list[str]]) -> list[dict]:
+    if target not in SNAPSHOT_CSV_TARGETS:
+        return []
+    WAYBACK_SNAPSHOT_ARCHIVE.mkdir(parents=True, exist_ok=True)
+    snapshots = []
+    for row in cdx_rows[1:]:
+        if len(row) < 6:
+            continue
+        timestamp, original, status, mimetype, cdx_digest, length = row[:6]
+        if original != target or not timestamp.startswith(tuple(str(year) for year in range(2018, 2025))):
+            continue
+        if status != "200" or mimetype not in {"text/csv", "application/vnd.ms-excel", "text/plain"}:
+            continue
+        record = {"capture_timestamp": timestamp, "original_url": original, "cdx_digest": cdx_digest}
+        try:
+            response = session.get(
+                wayback_snapshot_url(timestamp, original),
+                headers={"User-Agent": USER_AGENT, "Accept": "text/csv,*/*;q=0.5"},
+                timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
+            )
+            if response.status_code != 200:
+                raise ValueError(f"Wayback snapshot returned HTTP {response.status_code}")
+            payload = response.content
+            if not payload or len(payload) > 5 * 1024 * 1024:
+                raise ValueError("Wayback snapshot is empty or exceeds 5 MiB")
+            validation = validate_constituent_snapshot(payload)
+            digest = hashlib.sha256(payload).hexdigest()
+            path = WAYBACK_SNAPSHOT_ARCHIVE / f"{timestamp}_{digest[:16]}.csv"
+            if not path.exists():
+                path.write_bytes(payload)
+            record.update({
+                "archive_path": path.as_posix(),
+                "bytes_received": len(payload),
+                "sha256": digest,
+                "validation": validation,
+                "status": (
+                    "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
+                    if validation["exactly_50_distinct_symbols"] and validation["all_rows_have_valid_isin"]
+                    else "ARCHIVED_SNAPSHOT_REQUIRES_REVIEW"
+                ),
+            })
+        except Exception as exc:
+            record.update({"status": "SNAPSHOT_FETCH_OR_VALIDATION_FAILED",
+                           "error": f"{type(exc).__name__}: {exc}"[:700]})
+        snapshots.append(record)
+    return snapshots
 
 
 def ingest_wayback() -> dict:
     WAYBACK_ARCHIVE.mkdir(parents=True, exist_ok=True)
     targets = wayback_targets()
-    records, failures = [], []
+    records, failures, snapshots = [], [], []
     with c_requests.Session(impersonate="chrome") as session:
         for target in targets:
             params = {"url": target, "output": "json", "filter": "statuscode:200",
                       "fl": "timestamp,original,statuscode,mimetype,digest,length",
                       "collapse": "digest"}
+            if target in SNAPSHOT_HISTORY_TARGETS:
+                params.update({"from": "2018", "to": "2024"})
             try:
                 response = session.get(WAYBACK_CDX, params=params,
                                        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
@@ -218,23 +312,27 @@ def ingest_wayback() -> dict:
                 path = WAYBACK_ARCHIVE / f"{digest[:16]}.json"
                 if not path.exists():
                     path.write_bytes(payload)
+                rows = list(csv.reader(io.StringIO(response.text)))
                 records.append({"target_url": target, "http_status": response.status_code,
                                 "bytes_received": len(payload), "sha256": digest,
                                 "archive_path": path.as_posix(), "retrieved_at_utc": now_utc(),
-                                "row_count": max(0, len(response.text.splitlines()) - 1),
+                                "row_count": max(0, len(rows) - 1),
                                 "status": "CDX_METADATA_ARCHIVED"})
+                snapshots.extend(archive_wayback_constituent_snapshots(session, target, rows))
             except Exception as exc:
                 failures.append({"target_url": target, "retrieved_at_utc": now_utc(),
                                  "status": "CDX_QUERY_FAILED",
                                  "error": f"{type(exc).__name__}: {exc}"[:700]})
-    report = {"schema_version": 1, "run_at_utc": now_utc(), "cdx_endpoint": WAYBACK_CDX,
+    report = {"schema_version": 2, "run_at_utc": now_utc(), "cdx_endpoint": WAYBACK_CDX,
               "targets_checked": len(targets), "records_archived": len(records),
-              "failures": failures, "records": records,
-              "limitations": ["CDX metadata only; archived payloads are not downloaded.",
-                              "A CDX row does not establish source authenticity or document meaning.",
+              "failures": failures, "records": records, "constituent_snapshots": snapshots,
+              "constituent_snapshot_count": len(snapshots),
+              "limitations": ["CDX metadata and archived page captures are candidate evidence only.",
+                              "Wayback capture dates are not membership effective dates.",
+                              "A 50-row CSV is not accepted without primary-source and independent review.",
                               "No model, price, TRI, membership, or trading state is changed."]}
     WAYBACK_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    WAYBACK_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
     return report
 
 
