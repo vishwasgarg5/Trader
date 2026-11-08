@@ -113,3 +113,20 @@ def test_cdx_parser_rejects_non_row_json_with_diagnostic_preview():
         assert "rate limited" in str(exc)
     else:
         raise AssertionError("non-row CDX JSON accepted")
+
+
+def test_cdx_variants_cover_original_and_all_official_host_aliases_without_duplicates():
+    original = MODULE.DOCUMENTS["NSE-ARCHIVE-2018-06-05-209df26d1951"]
+    urls = MODULE.cdx_url_variants(original)
+    assert urls[0] == original
+    assert len(urls) == 4
+    assert len(urls) == len(set(urls))
+    assert "nsearchives.nseindia.com" in urls[1]
+    assert "archives.nseindia.com" in urls[2]
+
+
+def test_cdx_capture_rows_handles_header_and_headerless_responses():
+    header = ["timestamp", "original", "statuscode", "mimetype", "digest", "length"]
+    capture = ["20200101000000", "https://example.test/a.pdf", "200", "application/pdf", "ABC", "123"]
+    assert MODULE.cdx_capture_rows([header, capture]) == [capture]
+    assert MODULE.cdx_capture_rows([capture]) == [capture]
