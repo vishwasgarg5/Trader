@@ -314,6 +314,90 @@
       "http_status": 200,
       "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9",
       "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:39.397059+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:0",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:43.626042+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:1",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:45.105906+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:2",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:48.255520+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2018-06-05-209df26d1951:3",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:51.401592+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:0",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:54:54.039841+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:1",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:00.005547+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:2",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:00.291577+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2019-07-16-3a8719394912:3",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:04.753618+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:0",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:06.205933+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:1",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:09.236721+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:2",
+      "url": "https://web.archive.org/cdx/search/cdx"
+    },
+    {
+      "at_utc": "2026-11-08T11:55:12.322738+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "label": "cdx:NSE-ARCHIVE-2023-03-14-5b13b76a2af9:3",
+      "url": "https://web.archive.org/cdx/search/cdx"
     }
   ],
   "documents": {
@@ -329,8 +413,56 @@
       "cdx_checked": true,
       "cdx_content_type": "application/json",
       "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_queries": [
+        {
+          "at_utc": "2026-11-08T11:54:39.397078+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:54:43.626083+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:54:45.105941+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://archives.nseindia.com/Press_Release/ind_prs05062018.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:54:48.255557+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
+        }
+      ],
       "cdx_response_row_count": 0,
       "cdx_result": "EMPTY",
+      "cdx_url_variants": [
+        "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
+        "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf",
+        "https://archives.nseindia.com/Press_Release/ind_prs05062018.pdf",
+        "https://niftyindices.com/Press_Release/ind_prs05062018.pdf"
+      ],
       "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs05062018.pdf",
@@ -356,6 +488,7 @@
         }
       ],
       "next_capture_index": 0,
+      "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs05062018.pdf",
       "status": "DOCUMENT_UNAVAILABLE",
@@ -373,8 +506,56 @@
       "cdx_checked": true,
       "cdx_content_type": "application/json",
       "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_queries": [
+        {
+          "at_utc": "2026-11-08T11:54:51.401626+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:54:54.039881+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:55:00.005582+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://archives.nseindia.com/Press_Release/ind_prs16072019_1.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:55:00.291607+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+        }
+      ],
       "cdx_response_row_count": 0,
       "cdx_result": "EMPTY",
+      "cdx_url_variants": [
+        "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
+        "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
+        "https://archives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
+        "https://niftyindices.com/Press_Release/ind_prs16072019_1.pdf"
+      ],
       "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs16072019_1.pdf",
@@ -400,6 +581,7 @@
         }
       ],
       "next_capture_index": 0,
+      "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs16072019_1.pdf",
       "status": "DOCUMENT_UNAVAILABLE",
@@ -417,8 +599,56 @@
       "cdx_checked": true,
       "cdx_content_type": "application/json",
       "cdx_metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "cdx_queries": [
+        {
+          "at_utc": "2026-11-08T11:55:04.753654+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:55:06.205975+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:55:09.236759+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://archives.nseindia.com/Press_Release/ind_prs14032023.pdf"
+        },
+        {
+          "at_utc": "2026-11-08T11:55:12.322769+00:00",
+          "capture_count": 0,
+          "content_type": "application/json",
+          "http_status": 200,
+          "metadata_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+          "response_row_count": 0,
+          "result": "EMPTY",
+          "url": "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
+        }
+      ],
       "cdx_response_row_count": 0,
       "cdx_result": "EMPTY",
+      "cdx_url_variants": [
+        "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
+        "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf",
+        "https://archives.nseindia.com/Press_Release/ind_prs14032023.pdf",
+        "https://niftyindices.com/Press_Release/ind_prs14032023.pdf"
+      ],
       "classification": "UNCLASSIFIED_SCOPE_REVIEW_REQUIRED",
       "direct_urls": [
         "https://nsearchives.nseindia.com/Press_Release/ind_prs14032023.pdf",
@@ -444,6 +674,7 @@
         }
       ],
       "next_capture_index": 0,
+      "next_cdx_variant_index": 4,
       "next_direct_index": 4,
       "original_url": "https://www.niftyindices.com/Press_Release/ind_prs14032023.pdf",
       "status": "DOCUMENT_UNAVAILABLE",
@@ -456,10 +687,10 @@
     "No canonical membership, model, holdout, or trading state is modified."
   ],
   "next_retry_at_utc": null,
-  "request_budget": 12,
-  "requests_this_run": 3,
-  "run_at_utc": "2026-11-08T11:53:40.027420+00:00",
-  "runtime_seconds": 6.47,
+  "request_budget": 18,
+  "requests_this_run": 12,
+  "run_at_utc": "2026-11-08T11:55:12.325193+00:00",
+  "runtime_seconds": 33.45,
   "schema_version": 1,
   "scope_rule": "No document is classified out of NIFTY 50 scope by filename, archive title, or prior assessment. Primary PDF content must be reviewed for exact index, page, section, and text.",
   "status": "COMPLETE",
