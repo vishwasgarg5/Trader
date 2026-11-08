@@ -123,36 +123,6 @@ def inspect_asset(source_page_id: str, url: str):
             "transport": getattr(exc, "metadata", {}),
             "error": f"{type(exc).__name__}: {exc}"[:800],
         })
-def inspect_asset(source_page_id: str, url: str):
-    """Fetch and validate one observed asset; safe to run concurrently."""
-    try:
-        body, content_type, final_url = fetch_asset(url)
-        digest = hashlib.sha256(body).hexdigest()
-        archive_path = ARCHIVE / f"{digest[:16]}_{pathlib.PurePosixPath(urllib.parse.urlsplit(final_url).path).name}"
-        if not archive_path.exists():
-            archive_path.write_bytes(body)
-        text = body.decode("utf-8", errors="replace")
-        return ({
-            "source_page_id": source_page_id,
-            "source_url": url,
-            "final_url": final_url,
-            "archive_path": archive_path.as_posix(),
-            "bytes": len(body),
-            "sha256": digest,
-            "content_type": content_type,
-            "candidate_routes_for_manual_review": candidate_routes(text),
-            "evidence_status": "OBSERVED_OFFICIAL_FRONTEND_ASSET_ARCHIVED",
-            "route_execution_status": "NOT_CALLED",
-        }, None)
-    except Exception as exc:
-        return (None, {
-            "source_page_id": source_page_id,
-            "source_url": url,
-            "status": "ASSET_UNAVAILABLE_OR_REJECTED",
-            "error": f"{type(exc).__name__}: {exc}"[:800],
-        })
-
-
 def main():
     ARCHIVE.mkdir(parents=True, exist_ok=True)
     report = json.loads(REPORT_IN.read_text(encoding="utf-8"))
