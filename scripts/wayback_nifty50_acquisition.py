@@ -6,6 +6,7 @@ membership ledger, model inputs, holdout, or trading permissions.
 """
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import io
