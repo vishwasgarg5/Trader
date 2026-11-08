@@ -71,3 +71,46 @@ def test_fetch_failure_exposes_auditable_metadata(monkeypatch):
         assert len(exc.metadata["attempts"]) == 2
     else:
         raise AssertionError("failed source must not return a success result")
+
+
+
+def test_http2_failure_falls_back_to_http11(monkeypatch):
+    requested_versions = []
+
+    class Response:
+        url = "https://www.nseindia.com/a.pdf"
+        status_code = 200
+        headers = {"Content-Type": "application/pdf", "Content-Length": "19"}
+
+        def iter_content(self, chunk_size):
+            yield b"%PDF-1.7\\nbody\\n%%EOF"
+
+    class Session:
+        def __init__(self, **kwargs): pass
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+        def get(self, *args, **kwargs):
+            version = kwargs.get("http_version")
+            requested_versions.append(version)
+            if version == MODULE.CurlHttpVersion.V2_0:
+                raise ConnectionError("simulated HTTP/2 connection failure")
+            return Response()
+
+    monkeypatch.setattr(MODULE.curl_requests, "Session", Session)
+    monkeypatch.setattr(MODULE, "egress_identity", lambda: {"ip": "203.0.113.1"})
+    body, metadata = MODULE.fetch_bytes(
+        "https://www.nseindia.com/a.pdf",
+        allowed_hosts={"www.nseindia.com"},
+        pdf=True,
+        attempts=1,
+    )
+
+    assert body.startswith(b"%PDF")
+    assert requested_versions == [
+        MODULE.CurlHttpVersion.V2_0,
+        MODULE.CurlHttpVersion.V1_1,
+    ]
+    assert [attempt["protocol"] for attempt in metadata["attempts"]] == [
+        "http2",
+        "http1.1",
+    ]
