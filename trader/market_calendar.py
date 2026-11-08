@@ -78,6 +78,11 @@ def load_calendar(path: str | Path = DEFAULT_SPECIAL_SESSIONS_PATH) -> dict:
     }
 
 
+def load_special_sessions(path: str | Path = DEFAULT_SPECIAL_SESSIONS_PATH) -> dict[str, dict]:
+    """Backward-compatible accessor for the source-backed special-session map."""
+    return load_calendar(path)["special_sessions"]
+
+
 def classify_nse_session_date(
     value: str | date | datetime,
     *,
