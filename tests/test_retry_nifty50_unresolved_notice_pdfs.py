@@ -91,3 +91,25 @@ def test_wayback_cdx_digest_matches_base32_sha1_body():
     assert MODULE.cdx_digest_matches(payload, expected.lower())
     assert not MODULE.cdx_digest_matches(payload + b"changed", expected)
     assert not MODULE.cdx_digest_matches(payload, "")
+
+
+def test_cdx_parser_accepts_empty_json_result_as_completed_zero_capture_lookup():
+    assert MODULE.parse_cdx_json(b"[]") == []
+    assert MODULE.parse_cdx_json("\\ufeff[]") == []
+
+
+def test_cdx_parser_preserves_header_and_capture_rows():
+    payload = b'[["timestamp","original","statuscode","mimetype","digest","length"],["20200101000000","https://example.test/a.pdf","200","application/pdf","ABC","123"]]'
+    rows = MODULE.parse_cdx_json(payload)
+    assert len(rows) == 2
+    assert rows[1][4] == "ABC"
+
+
+def test_cdx_parser_rejects_non_row_json_with_diagnostic_preview():
+    try:
+        MODULE.parse_cdx_json(b'{"message":"rate limited"}')
+    except ValueError as exc:
+        assert "array of rows" in str(exc)
+        assert "rate limited" in str(exc)
+    else:
+        raise AssertionError("non-row CDX JSON accepted")
