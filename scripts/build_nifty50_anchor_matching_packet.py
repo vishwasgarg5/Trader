@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STATE = ROOT / "data/reference/wayback_nifty50_acquisition_state.json"
 DEFAULT_TRANSITIONS = ROOT / "data/reference/nifty50_transition_register.csv"
 DEFAULT_OUTPUT = ROOT / "data/reports/nifty50_anchor_matching_packet.json"
+DEFAULT_REVIEW_CSV = ROOT / "data/reports/nifty50_anchor_human_review_checklist.csv"
 CANDIDATE_STATUS = "50_CONSTITUENT_SNAPSHOT_CANDIDATE_PENDING_REVIEW"
 
 
