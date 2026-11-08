@@ -243,6 +243,13 @@ def validate_constituent_snapshot(payload: bytes) -> dict:
     }
 
 
+def parse_cdx_json(payload: str) -> list[list[str]]:
+    rows = json.loads(payload)
+    if not isinstance(rows, list) or not rows or not all(isinstance(row, list) for row in rows):
+        raise ValueError("Wayback CDX response must be a JSON array of rows")
+    return rows
+
+
 def archive_wayback_constituent_snapshots(session, target: str, cdx_rows: list[list[str]]) -> list[dict]:
     if target not in SNAPSHOT_CSV_TARGETS:
         return []
@@ -312,7 +319,7 @@ def ingest_wayback() -> dict:
                 path = WAYBACK_ARCHIVE / f"{digest[:16]}.json"
                 if not path.exists():
                     path.write_bytes(payload)
-                rows = json.loads(response.text)
+                rows = parse_cdx_json(response.text)
                 records.append({"target_url": target, "http_status": response.status_code,
                                 "bytes_received": len(payload), "sha256": digest,
                                 "archive_path": path.as_posix(), "retrieved_at_utc": now_utc(),
