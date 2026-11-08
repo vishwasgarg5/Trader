@@ -26,7 +26,7 @@ def test_pdf_validation_requires_signature_and_eof():
     class Response:
         url = "https://www.nseindia.com/a.pdf"
         status_code = 200
-        headers = {"Content-Type": "application/pdf", "Content-Length": "22"}
+        headers = {"Content-Type": "application/pdf", "Content-Length": "19"}
 
         def iter_content(self, chunk_size):
             yield b"%PDF-1.7\\nbody\\n%%EOF"
