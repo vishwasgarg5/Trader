@@ -15,6 +15,7 @@
     "production_data_authorized": false,
     "required_timestamps": [
       "signal_date",
+      "signal_timestamp",
       "feature_available_at",
       "outcome_end_date"
     ],
