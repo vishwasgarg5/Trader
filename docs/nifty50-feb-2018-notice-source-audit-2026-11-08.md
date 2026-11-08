@@ -76,3 +76,15 @@ These are secondary corroboration only; the official PDF is the controlling noti
 5. Only then consider upgrading the relevant evidence status; never infer or promote other index sections as NIFTY 50 changes.
 
 No canonical membership interval, model, holdout, paper-trading, or live-trading state is modified by this note. The release remains on HOLD.
+
+
+## Follow-up notice / supersession screen
+
+The official NSE Indices archive also lists a 6 March 2018 notice, "Replacements in Indices". Its full text was reviewed:
+https://www.niftyindices.com/Press_Release/ind_prs06032018.pdf
+
+That notice explains that Videocon Industries had been included in various indices under the 21 February announcement, but a subsequent NSE circular moved VIDEOIND to the BZ series from 13 March. The 6 March notice then replaces VIDEOIND with ERIS, effective 13 March (close of 12 March), in exactly three listed indices: NIFTY 500, NIFTY Smallcap 250, and NIFTY MidSmallcap 400. It does **not** list NIFTY 50 among the affected indices. This is a useful scope check: the March 6 Videocon adjustment does not amend the six NIFTY 50 changes recorded above.
+
+The same archive listing also has a 22 March 2018 item titled "Change in the Fixed Income Indices w.e.f. April 02, 2018"; its title/scope is fixed income, not NIFTY 50 equity constituents. No correction to the six NIFTY 50 rows has been identified in these follow-up entries. This is a bounded archive screen, not proof that no later correction exists anywhere.
+
+Official archive listing: https://www.niftyindices.com/media
