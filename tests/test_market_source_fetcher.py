@@ -29,7 +29,7 @@ def test_pdf_validation_requires_signature_and_eof():
         headers = {"Content-Type": "application/pdf", "Content-Length": "19"}
 
         def iter_content(self, chunk_size):
-            yield b"%PDF-1.7\\nbody\\n%%EOF"
+            yield b"%PDF-1.7\nbody\n%%EOF"
 
     class Session:
         def __init__(self, **kwargs): pass
