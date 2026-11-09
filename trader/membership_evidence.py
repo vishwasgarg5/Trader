@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 from datetime import date
 from pathlib import Path
 
@@ -38,10 +39,17 @@ def _read_csv(path: Path, required: set[str]) -> tuple[list[dict[str, str]], lis
         return [], [f"{path.name}: cannot read ({type(exc).__name__})"]
 
 
+def _parse_iso_calendar_date(value: str) -> date:
+    """Parse only the unambiguous YYYY-MM-DD ISO calendar-date form."""
+    if not isinstance(value, str) or re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", value.strip()) is None:
+        raise ValueError("date must use YYYY-MM-DD")
+    return date.fromisoformat(value.strip())
+
+
 def _valid_review_date(value: str) -> bool:
     """Accept only explicit ISO calendar dates for human review sign-off."""
     try:
-        date.fromisoformat(value.strip())
+        _parse_iso_calendar_date(value)
         return True
     except (AttributeError, TypeError, ValueError):
         return False
@@ -94,8 +102,8 @@ def audit_membership_evidence(
         if action not in {"ADD", "REMOVE"}:
             errors.append(f"{label}: action must be ADD or REMOVE")
         try:
-            announcement = date.fromisoformat(row["announcement_date"])
-            effective = date.fromisoformat(row["effective_date"])
+            announcement = _parse_iso_calendar_date(row["announcement_date"])
+            effective = _parse_iso_calendar_date(row["effective_date"])
             if announcement > effective:
                 errors.append(f"{label}: announcement date is after effective date")
             if effective < date(2018, 4, 1) or effective > date(2024, 12, 31):
@@ -153,8 +161,8 @@ def audit_membership_evidence(
         expected_start = date(2018, 4, 1) if year == 2018 else date(year, 1, 1)
         expected_end = date(year, 12, 31)
         try:
-            actual_start = date.fromisoformat(row.get("scope_start", ""))
-            actual_end = date.fromisoformat(row.get("scope_end", ""))
+            actual_start = _parse_iso_calendar_date(row.get("scope_start", ""))
+            actual_end = _parse_iso_calendar_date(row.get("scope_end", ""))
             if actual_start != expected_start or actual_end != expected_end:
                 errors.append(
                     f"{year}: scope must be {expected_start.isoformat()} through {expected_end.isoformat()}"
@@ -235,8 +243,8 @@ def audit_special_membership_events(path: Path) -> dict:
         if not row.get("price_treatment", "").strip():
             errors.append(f"{event_id}: price_treatment is missing")
         try:
-            announced = date.fromisoformat(row.get("announcement_date", ""))
-            effective = date.fromisoformat(row.get("effective_date", ""))
+            announced = _parse_iso_calendar_date(row.get("announcement_date", ""))
+            effective = _parse_iso_calendar_date(row.get("effective_date", ""))
             if announced > effective:
                 errors.append(f"{event_id}: announcement_date is after effective_date")
         except ValueError:
