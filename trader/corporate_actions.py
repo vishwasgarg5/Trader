@@ -51,7 +51,7 @@ def audit_corporate_action_ledger(path: Path) -> dict:
         result["errors"].append(f"corporate-action ledger not found: {path}")
         return result
     try:
-        frame = pd.read_csv(path)
+        frame = pd.read_csv(path, dtype=str)
     except (OSError, pd.errors.ParserError, UnicodeError) as exc:
         result["errors"].append(f"unable to read corporate-action ledger: {type(exc).__name__}")
         result["status"] = "invalid"
