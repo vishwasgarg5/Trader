@@ -10,8 +10,11 @@ import math
 import pandas as pd
 
 
-PILOT_HOLDING_SESSIONS = 5
-PILOT_POSITIVE_EXCESS_THRESHOLD = 0.01
+from trader.research_target import load_target_contract
+
+_TARGET_CONTRACT = load_target_contract()
+PILOT_HOLDING_SESSIONS = _TARGET_CONTRACT.holding_period_sessions
+PILOT_POSITIVE_EXCESS_THRESHOLD = _TARGET_CONTRACT.positive_excess_threshold
 REQUIRED_COLUMNS = {
     "security_id",
     "signal_date",
