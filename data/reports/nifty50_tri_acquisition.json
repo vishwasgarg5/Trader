@@ -6,7 +6,7 @@
       "last_session": "2018-06-29",
       "raw_response_bytes": 17713,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2018-01-01_2018-06-30.json",
-      "raw_response_sha256": "ea1e4e95dd0c7220c3513a6fb3c48b08ba3fd376c33390be30ce615b29bc6cdf",
+      "raw_response_sha256": "4bb586bc51a71e5fad78c6cd806cdc0c6c6a0baa6b186dd8a0c6ec191a0930de",
       "record_count": 124,
       "requested_end": "2018-06-30",
       "requested_start": "2018-01-01"
@@ -16,7 +16,7 @@
       "last_session": "2018-12-31",
       "raw_response_bytes": 17432,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2018-07-01_2018-12-31.json",
-      "raw_response_sha256": "bdcbf53199ba1b3d249225d72637474adc4e34ffe3fee16b3c534b1d5d538d4c",
+      "raw_response_sha256": "0b6e6ba0032ff6fd254aedd89d2332f4199546539bc485b9f96a7b99a5d9edfe",
       "record_count": 122,
       "requested_end": "2018-12-31",
       "requested_start": "2018-07-01"
@@ -26,7 +26,7 @@
       "last_session": "2019-06-28",
       "raw_response_bytes": 17438,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2019-01-01_2019-06-30.json",
-      "raw_response_sha256": "6c2672365abcf84615cf535ca5bc3702c2dfc208e9486526ec05558189799b70",
+      "raw_response_sha256": "0b66005ce36c991518172e7ff49587675c1def59f26520e5c9cdb09c90b60f71",
       "record_count": 122,
       "requested_end": "2019-06-30",
       "requested_start": "2019-01-01"
@@ -36,7 +36,7 @@
       "last_session": "2019-12-31",
       "raw_response_bytes": 17577,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2019-07-01_2019-12-31.json",
-      "raw_response_sha256": "b54c764d3c2811dafa71ec8e6f437f45b2d01d2494bca9cb0a82a2a8ec49547e",
+      "raw_response_sha256": "0c22e4ad9e22dde7b02713f0248834e836c726bbe292462742f4dbd404dbf31e",
       "record_count": 123,
       "requested_end": "2019-12-31",
       "requested_start": "2019-07-01"
@@ -46,7 +46,7 @@
       "last_session": "2020-06-30",
       "raw_response_bytes": 17572,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2020-01-01_2020-06-30.json",
-      "raw_response_sha256": "2ce476b3b5e7253a4747938e52204455129ea3d040b407ab764812f9e8e949cd",
+      "raw_response_sha256": "201e3a5d55d5d0e665aaed4ad351c999b828bc78e11fb244faf7e3883899ba66",
       "record_count": 123,
       "requested_end": "2020-06-30",
       "requested_start": "2020-01-01"
@@ -56,7 +56,7 @@
       "last_session": "2020-12-31",
       "raw_response_bytes": 18431,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2020-07-01_2020-12-31.json",
-      "raw_response_sha256": "5bbf94cf55238c446f5798ddff6e7acff1c42460032c76a9d8b0313637c7a320",
+      "raw_response_sha256": "4f55cef79e598833439c4b8e973495b7adf523a1981db9e66286a778584c0a50",
       "record_count": 129,
       "requested_end": "2020-12-31",
       "requested_start": "2020-07-01"
@@ -66,7 +66,7 @@
       "last_session": "2021-06-30",
       "raw_response_bytes": 17435,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2021-01-01_2021-06-30.json",
-      "raw_response_sha256": "b39ee5bacbd70a5755724adf81c24c1b29947a035af7563f534d933d424d9b23",
+      "raw_response_sha256": "470db48f596eb7198dceb599065a867f76453600fdc336a2c2a5272052d1ac3f",
       "record_count": 122,
       "requested_end": "2021-06-30",
       "requested_start": "2021-01-01"
@@ -76,7 +76,7 @@
       "last_session": "2021-12-31",
       "raw_response_bytes": 18004,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2021-07-01_2021-12-31.json",
-      "raw_response_sha256": "511283c074676250c80fefaf8f43e4f16df607ade2c38777a3219585dbe74281",
+      "raw_response_sha256": "a3cbb9d8e6c45969a71c5acc6cbb89ccad707a77b21db99e06bfc58c9a7bf1ac",
       "record_count": 126,
       "requested_end": "2021-12-31",
       "requested_start": "2021-07-01"
@@ -86,7 +86,7 @@
       "last_session": "2022-06-30",
       "raw_response_bytes": 17577,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2022-01-01_2022-06-30.json",
-      "raw_response_sha256": "c1588179ff6314b21d077b27fa8f8900cc78175204a30343b06139dd5b8dec16",
+      "raw_response_sha256": "5564c64ed8356b463286b52f73706befd1d5777065aa1f83cdc8e568f4dd23ad",
       "record_count": 123,
       "requested_end": "2022-06-30",
       "requested_start": "2022-01-01"
@@ -96,7 +96,7 @@
       "last_session": "2022-12-30",
       "raw_response_bytes": 17861,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2022-07-01_2022-12-31.json",
-      "raw_response_sha256": "3c5b32dacd8c7f05ff77ef5949552a41086dd58d7fdff55ed422af1c11d8234e",
+      "raw_response_sha256": "d1360b8e68358dd9904dd6da530fc6f1e2d6ded5853abd788cc3e0aec1e79cb6",
       "record_count": 125,
       "requested_end": "2022-12-31",
       "requested_start": "2022-07-01"
@@ -106,7 +106,7 @@
       "last_session": "2023-06-30",
       "raw_response_bytes": 17435,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2023-01-01_2023-06-30.json",
-      "raw_response_sha256": "5b6fb980957a68fca2273500b3ff430a6d5cb546c1785a8c3c5caa9310b7dd35",
+      "raw_response_sha256": "19331f53267275024e19ccc4ce51374c4841f9abaff56aa47e9c7489e4dc5c29",
       "record_count": 122,
       "requested_end": "2023-06-30",
       "requested_start": "2023-01-01"
@@ -116,7 +116,7 @@
       "last_session": "2023-12-29",
       "raw_response_bytes": 17718,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2023-07-01_2023-12-31.json",
-      "raw_response_sha256": "ae6b5f92bb4517946996a184025e936b61285437d13cf24db622d312ddc30832",
+      "raw_response_sha256": "936abb28f6427bf13fd4fbf733b958b192188d4e52ed6a92c2a18f99af9bacbd",
       "record_count": 124,
       "requested_end": "2023-12-31",
       "requested_start": "2023-07-01"
@@ -126,7 +126,7 @@
       "last_session": "2024-06-28",
       "raw_response_bytes": 17576,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2024-01-01_2024-06-30.json",
-      "raw_response_sha256": "1e1c8110876709c473c9b35662d81f7cfbdeeb6c51af52f9e9d07be2ad118d30",
+      "raw_response_sha256": "c2e95d05790c5da950c851351e455ea358f894cc27f23fa1e0a3fab174b6a175",
       "record_count": 123,
       "requested_end": "2024-06-30",
       "requested_start": "2024-01-01"
@@ -136,7 +136,7 @@
       "last_session": "2024-12-31",
       "raw_response_bytes": 18009,
       "raw_response_path": "data/reference/source_documents/nifty50_tri/nifty50_tri_2024-07-01_2024-12-31.json",
-      "raw_response_sha256": "5028fc96bc226d2335dc4a70fe5b33cb95cb2933f8f03db17fdf9566aaa189e0",
+      "raw_response_sha256": "d0e07ff649bac2d65ed29fffb7b972e9570f62bab6af5033bfef2b9dfe787a8c",
       "record_count": 126,
       "requested_end": "2024-12-31",
       "requested_start": "2024-07-01"
@@ -156,8 +156,8 @@
   "record_count": 1734,
   "requested_end": "2024-12-31",
   "requested_start": "2018-01-01",
-  "retrieved_at_ist": "2026-11-09T08:56:09.845123+05:30",
-  "retrieved_at_utc": "2026-11-09T03:26:09.845123+00:00",
+  "retrieved_at_ist": "2026-11-09T10:02:54.005869+05:30",
+  "retrieved_at_utc": "2026-11-09T04:32:54.005869+00:00",
   "reviewer": null,
   "series": "Total Returns Index (gross TRI)",
   "source_authenticity_review": "PENDING",
