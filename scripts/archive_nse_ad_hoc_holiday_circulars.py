@@ -29,8 +29,16 @@ def is_official_nse_url(url: str) -> bool:
     return parsed.scheme == "https" and (parsed.hostname or "").lower() in OFFICIAL_NSE_HOSTS
 
 
+class DownloadError(RuntimeError):
+    """All candidate URLs failed; retain per-URL diagnostics in the manifest."""
+
+    def __init__(self, attempts: list[dict]):
+        self.attempts = attempts
+        super().__init__("all download candidates failed: " + json.dumps(attempts, sort_keys=True))
+
+
 def download(urls: list[str]) -> tuple[bytes, str]:
-    last_error = None
+    attempts = []
     for url in urls:
         request = urllib.request.Request(url, headers={
             "User-Agent": "Mozilla/5.0 (compatible; Nifty50ResearchEvidence/1.0)",
@@ -45,9 +53,9 @@ def download(urls: list[str]) -> tuple[bytes, str]:
                         raise ValueError(f"not a PDF (HTTP {response.status}, {len(body)} bytes)")
                     return body, url
             except Exception as exc:
-                last_error = exc
+                attempts.append({"url": url, "attempt": attempt + 1, "error": str(exc)})
                 time.sleep(2 ** attempt)
-    raise RuntimeError(str(last_error))
+    raise DownloadError(attempts)
 
 
 def build_manifest(records: list[dict], failures: list[dict],
@@ -104,6 +112,7 @@ def main() -> int:
                 "event_type": source["event_type"],
                 "source_url": source["source_url"],
                 "error": str(exc),
+                "download_attempts": exc.attempts if isinstance(exc, DownloadError) else [],
             })
             if source["circular_reference"] == "NSE/CMTR/57285":
                 press_release_url = "https://niftyindices.com/Press_Release/ind_prs27062023.pdf"
@@ -131,12 +140,17 @@ def main() -> int:
                         "related_circular_reference": "NSE/CMTR/57285",
                         "source_url": press_release_url,
                         "error": str(corroboration_error),
+                        "download_attempts": (corroboration_error.attempts if isinstance(corroboration_error, DownloadError) else []),
                     })
+    mirror_url = "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+    mirror_attempts = [attempt for failure in failures for attempt in failure.get("download_attempts", []) if attempt.get("url") == mirror_url]
     discovered_mirror_candidates = [{
         "related_circular_reference": "NSE/CMTR/57285",
         "document_type": "THIRD_PARTY_MIRROR_OF_NSE_ORIGINAL_CIRCULAR",
-        "source_url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf",
+        "source_url": mirror_url,
         "discovery_status": "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
+        "acquisition_status": "ATTEMPTED_AND_FAILED" if mirror_attempts else "NOT_ATTEMPTED",
+        "acquisition_errors": mirror_attempts,
         "document_metadata": {
             "date": "2023-06-27",
             "circular_reference": "NSE/CMTR/57285",
