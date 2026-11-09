@@ -11,7 +11,7 @@ import json
 import pathlib
 import time
 from datetime import datetime, timezone
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 from curl_cffi import CurlHttpVersion, CurlOpt, requests as curl_requests
 
@@ -32,6 +32,31 @@ def validate_official_url(url: str, allowed_hosts: set[str]) -> None:
         raise ValueError("URL must use HTTPS and an explicitly allowlisted official host")
     if parsed.username or parsed.password:
         raise ValueError("credentials in source URLs are not permitted")
+
+
+def _get_allowlisted(session, url: str, allowed_hosts: set[str], **kwargs):
+    """Follow redirects manually, validating each destination before requesting it."""
+    current_url = url
+    redirect_chain = [url]
+    redirect_statuses = {301, 302, 303, 307, 308}
+    for redirect_count in range(11):
+        validate_official_url(current_url, allowed_hosts)
+        response = session.get(current_url, allow_redirects=False, **kwargs)
+        if response.status_code not in redirect_statuses:
+            validate_official_url(str(response.url), allowed_hosts)
+            return response, redirect_chain
+        location = response.headers.get("Location")
+        if not location:
+            raise ValueError("redirect response is missing Location")
+        if redirect_count >= 10:
+            raise ValueError("source exceeded maximum of 10 redirects")
+        next_url = urljoin(current_url, location)
+        # Validate before the next network request; a disallowed intermediate hop
+        # must never be contacted even if a later hop would return to an allowed host.
+        validate_official_url(next_url, allowed_hosts)
+        redirect_chain.append(next_url)
+        current_url = next_url
+    raise ValueError("source exceeded maximum of 10 redirects")
 
 
 def egress_identity() -> dict:
@@ -105,16 +130,16 @@ def fetch_bytes(
             try:
                 mode = "ab" if existing else "wb"
                 with curl_requests.Session(impersonate="chrome") as session:
-                    response = session.get(
+                    response, redirect_chain = _get_allowlisted(
+                        session,
                         url,
+                        allowed_hosts,
                         headers=request_headers,
                         timeout=timeout,
                         stream=True,
-                        allow_redirects=True,
                         http_version=http_version,
                     )
                     final_url = str(response.url)
-                    validate_official_url(final_url, allowed_hosts)
                     status = response.status_code
                     # A range resume is accepted only for a proper 206 response.
                     if existing and status == 200:
@@ -171,6 +196,7 @@ def fetch_bytes(
                     record.update({
                         "http_status": status,
                         "final_url": final_url,
+                        "redirect_chain": redirect_chain,
                         "content_type": content_type,
                         "content_length": content_length,
                         "bytes_received": len(body),
@@ -182,6 +208,7 @@ def fetch_bytes(
                     metadata.update({
                         "status": "FETCHED_AND_VALIDATED",
                         "final_url": final_url,
+                        "redirect_chain": redirect_chain,
                         "http_status": status,
                         "content_type": content_type,
                         "bytes": len(body),
