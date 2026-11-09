@@ -45,7 +45,7 @@ class OfficialNSEHostClassificationTests(unittest.TestCase):
         self.assertEqual(report["independent_review_status"], "PENDING")
         self.assertEqual(report["calendar_completeness"], "NOT_CERTIFIED")
         self.assertEqual(report["research_status"], "RESEARCH_HOLD")
-        self.assertFalse(report["holdout_access_authorized")
+        self.assertFalse(report["holdout_access_authorized"])
 
 
 if __name__ == "__main__":
