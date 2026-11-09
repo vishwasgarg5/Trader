@@ -41,7 +41,7 @@ def _read_csv(path: Path, required: set[str]) -> tuple[list[dict[str, str]], lis
 
 def _parse_iso_calendar_date(value: str) -> date:
     """Parse only the unambiguous YYYY-MM-DD ISO calendar-date form."""
-    if not isinstance(value, str) or re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", value.strip()) is None:
+    if not isinstance(value, str) or re.fullmatch(r"\d{4}-\d{2}-\d{2}", value.strip()) is None:
         raise ValueError("date must use YYYY-MM-DD")
     return date.fromisoformat(value.strip())
 
