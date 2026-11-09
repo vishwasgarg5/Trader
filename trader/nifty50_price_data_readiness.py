@@ -41,9 +41,17 @@ def _read(path: Path, required: set[str]) -> tuple[list[dict[str, str]], list[st
         return [], [f"{path.name}: cannot read ({type(exc).__name__})"]
 
 
-def _audit_rows(path: Path, rows: list[dict[str, str]], *, tri: bool) -> list[str]:
+def _audit_rows(
+    path: Path,
+    rows: list[dict[str, str]],
+    *,
+    tri: bool,
+    evidence_root: Path | None = None,
+) -> list[str]:
     errors: list[str] = []
     seen: set[tuple[str, str]] = set()
+    verified_evidence: dict[Path, str | None] = {}
+    resolved_evidence_root = evidence_root.resolve() if evidence_root is not None else None
     for line, row in enumerate(rows, start=2):
         label = f"{path.name}:{line}"
         symbol = "NIFTY50_TRI" if tri else row.get("security_id", "").strip()
@@ -95,11 +103,40 @@ def _audit_rows(path: Path, rows: list[dict[str, str]], *, tri: bool) -> list[st
         url = urlparse(row.get("source_url", "").strip())
         if url.scheme != "https" or not url.netloc:
             errors.append(f"{label}: source_url must be HTTPS")
-        if not row.get("evidence_path", "").strip():
+        evidence_value = row.get("evidence_path", "").strip()
+        if not evidence_value:
             errors.append(f"{label}: missing archived evidence path")
         digest = row.get("evidence_sha256", "").strip()
-        if len(digest) != 64 or any(ch not in "0123456789abcdefABCDEF" for ch in digest):
+        digest_valid = len(digest) == 64 and all(
+            ch in "0123456789abcdefABCDEF" for ch in digest
+        )
+        if not digest_valid:
             errors.append(f"{label}: evidence_sha256 must be a 64-character digest")
+        if resolved_evidence_root is not None and evidence_value:
+            relative_evidence = Path(evidence_value)
+            if relative_evidence.is_absolute() or ".." in relative_evidence.parts:
+                errors.append(f"{label}: archived evidence path must stay inside the evidence root")
+                continue
+            evidence_file = (resolved_evidence_root / relative_evidence).resolve()
+            try:
+                evidence_file.relative_to(resolved_evidence_root)
+            except ValueError:
+                errors.append(f"{label}: resolved archived evidence path escapes the evidence root")
+                continue
+            if evidence_file not in verified_evidence:
+                if not evidence_file.is_file() or not digest_valid:
+                    verified_evidence[evidence_file] = None
+                else:
+                    import hashlib
+
+                    verified_evidence[evidence_file] = hashlib.sha256(
+                        evidence_file.read_bytes()
+                    ).hexdigest()
+            actual_digest = verified_evidence[evidence_file]
+            if actual_digest is None:
+                errors.append(f"{label}: archived evidence file is missing or cannot be checked")
+            elif actual_digest.lower() != digest.lower():
+                errors.append(f"{label}: archived evidence SHA-256 mismatch")
     if not rows:
         errors.append(f"{path.name}: no verified historical observations; header-only is not data")
     return errors
@@ -119,8 +156,9 @@ def audit_price_data_readiness(reference_dir: Path = REFERENCE) -> dict:
     ohlcv_rows, ohlcv_errors = _read(ohlcv_path, OHLCV_COLUMNS)
     tri_rows, tri_errors = _read(tri_path, TRI_COLUMNS)
     errors = list(ohlcv_errors) + list(tri_errors)
-    errors.extend(_audit_rows(ohlcv_path, ohlcv_rows, tri=False))
-    errors.extend(_audit_rows(tri_path, tri_rows, tri=True))
+    evidence_root = reference_dir.resolve().parent.parent
+    errors.extend(_audit_rows(ohlcv_path, ohlcv_rows, tri=False, evidence_root=evidence_root))
+    errors.extend(_audit_rows(tri_path, tri_rows, tri=True, evidence_root=evidence_root))
 
     # These are prerequisite evidence gates, not data-quality assertions.
     if not membership["ready_for_pit_research"]:
