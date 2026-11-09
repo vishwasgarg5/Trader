@@ -8,9 +8,25 @@ import json
 import pathlib
 import time
 import urllib.request
+from urllib.parse import urlparse
 
 REGISTER = pathlib.Path("data/reference/nifty50_tri_ad_hoc_closures.csv")
 MANIFEST = pathlib.Path("data/reports/nifty50_tri_ad_hoc_closure_archive.json")
+
+# Exact hostnames only: substring checks can misclassify lookalike domains.
+OFFICIAL_NSE_HOSTS = {
+    "nseindia.com",
+    "www.nseindia.com",
+    "archives.nseindia.com",
+    "nsearchives.nseindia.com",
+    "niftyindices.com",
+    "www.niftyindices.com",
+}
+
+
+def is_official_nse_url(url: str) -> bool:
+    parsed = urlparse(url)
+    return parsed.scheme == "https" and (parsed.hostname or "").lower() in OFFICIAL_NSE_HOSTS
 
 
 def download(urls: list[str]) -> tuple[bytes, str]:
@@ -55,7 +71,7 @@ def main() -> int:
                 "bytes": len(body),
                 "sha256": hashlib.sha256(body).hexdigest(),
                 "downloaded_from_url": successful_url,
-                "archive_status": ("ARCHIVED_OFFICIAL_HOST_PDF_SIGNATURE_VALID" if "nseindia.com" in successful_url else "ARCHIVED_THIRD_PARTY_MIRROR_PDF_SIGNATURE_VALID"),
+                "archive_status": ("ARCHIVED_OFFICIAL_HOST_PDF_SIGNATURE_VALID" if is_official_nse_url(successful_url) else "ARCHIVED_THIRD_PARTY_MIRROR_PDF_SIGNATURE_VALID"),
                 "independent_review_status": "PENDING",
             })
         except Exception as exc:
