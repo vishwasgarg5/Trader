@@ -205,11 +205,213 @@
   "last_session": "2024-12-31",
   "limitations": [
     "Weekend-dated observations are reported for review, not automatically rejected; special trading sessions may exist.",
+    "Quarter counts prove only that observations exist in each calendar quarter; they do not prove all expected exchange sessions are present.",
     "Calendar gaps are diagnostics and are not interpreted as missing sessions without an authoritative exchange calendar.",
     "Hash linkage proves local bytes match the recorded digest, not that the source is authentic or semantically correct.",
     "No independent reviewer identity or sign-off is inferred."
   ],
   "observation_count": 1734,
+  "quarterly_observation_coverage": [
+    {
+      "first_observation": "2018-01-01",
+      "last_observation": "2018-03-28",
+      "observation_count": 60,
+      "quarter": "2018-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2018-04-02",
+      "last_observation": "2018-06-29",
+      "observation_count": 64,
+      "quarter": "2018-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2018-07-02",
+      "last_observation": "2018-09-28",
+      "observation_count": 61,
+      "quarter": "2018-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2018-10-01",
+      "last_observation": "2018-12-31",
+      "observation_count": 61,
+      "quarter": "2018-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2019-01-01",
+      "last_observation": "2019-03-29",
+      "observation_count": 62,
+      "quarter": "2019-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2019-04-01",
+      "last_observation": "2019-06-28",
+      "observation_count": 60,
+      "quarter": "2019-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2019-07-01",
+      "last_observation": "2019-09-30",
+      "observation_count": 62,
+      "quarter": "2019-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2019-10-01",
+      "last_observation": "2019-12-31",
+      "observation_count": 61,
+      "quarter": "2019-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2020-01-01",
+      "last_observation": "2020-03-31",
+      "observation_count": 64,
+      "quarter": "2020-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2020-04-01",
+      "last_observation": "2020-06-30",
+      "observation_count": 59,
+      "quarter": "2020-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2020-07-01",
+      "last_observation": "2020-09-30",
+      "observation_count": 66,
+      "quarter": "2020-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2020-10-01",
+      "last_observation": "2020-12-31",
+      "observation_count": 63,
+      "quarter": "2020-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2021-01-01",
+      "last_observation": "2021-03-31",
+      "observation_count": 61,
+      "quarter": "2021-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2021-04-01",
+      "last_observation": "2021-06-30",
+      "observation_count": 61,
+      "quarter": "2021-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2021-07-01",
+      "last_observation": "2021-09-30",
+      "observation_count": 63,
+      "quarter": "2021-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2021-10-01",
+      "last_observation": "2021-12-31",
+      "observation_count": 63,
+      "quarter": "2021-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2022-01-03",
+      "last_observation": "2022-03-31",
+      "observation_count": 61,
+      "quarter": "2022-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2022-04-01",
+      "last_observation": "2022-06-30",
+      "observation_count": 62,
+      "quarter": "2022-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2022-07-01",
+      "last_observation": "2022-09-30",
+      "observation_count": 63,
+      "quarter": "2022-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2022-10-03",
+      "last_observation": "2022-12-30",
+      "observation_count": 62,
+      "quarter": "2022-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2023-01-02",
+      "last_observation": "2023-03-31",
+      "observation_count": 62,
+      "quarter": "2023-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2023-04-03",
+      "last_observation": "2023-06-30",
+      "observation_count": 60,
+      "quarter": "2023-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2023-07-03",
+      "last_observation": "2023-09-29",
+      "observation_count": 63,
+      "quarter": "2023-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2023-10-03",
+      "last_observation": "2023-12-29",
+      "observation_count": 61,
+      "quarter": "2023-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2024-01-01",
+      "last_observation": "2024-03-28",
+      "observation_count": 62,
+      "quarter": "2024-Q1",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2024-04-01",
+      "last_observation": "2024-06-28",
+      "observation_count": 61,
+      "quarter": "2024-Q2",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2024-07-01",
+      "last_observation": "2024-09-30",
+      "observation_count": 64,
+      "quarter": "2024-Q3",
+      "status": "OBSERVATIONS_PRESENT"
+    },
+    {
+      "first_observation": "2024-10-01",
+      "last_observation": "2024-12-31",
+      "observation_count": 62,
+      "quarter": "2024-Q4",
+      "status": "OBSERVATIONS_PRESENT"
+    }
+  ],
+  "quarterly_observation_status": "OBSERVATIONS_PRESENT_IN_ALL_28_QUARTERS",
+  "quarters_expected": 28,
+  "quarters_with_observations": 28,
   "raw_source_bytes_total": 247778,
   "raw_source_files_verified": 14,
   "raw_source_linked_observations": 1734,
