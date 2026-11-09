@@ -1,6 +1,20 @@
 {
   "archived_count": 2,
   "calendar_completeness": "NOT_CERTIFIED",
+  "corroborating_failures": [],
+  "corroborating_records": [
+    {
+      "archive_path": "data/reference/source_documents/nse_ad_hoc_holiday_circulars/2023-06-27_NSE_Indices_press_release.pdf",
+      "archive_status": "ARCHIVED_OFFICIAL_NSE_INDICES_PDF_SIGNATURE_VALID",
+      "bytes": 102953,
+      "document_type": "OFFICIAL_NSE_INDICES_PRESS_RELEASE_CORROBORATION_NOT_CIRCULAR",
+      "downloaded_from_url": "https://niftyindices.com/Press_Release/ind_prs27062023.pdf",
+      "independent_review_status": "PENDING",
+      "related_circular_reference": "NSE/CMTR/57285",
+      "sha256": "39b8c897ab70cd358ab4e4960be59c70184a5183ec6cb1b6ef5aa45ad94a8c0e",
+      "source_url": "https://niftyindices.com/Press_Release/ind_prs27062023.pdf"
+    }
+  ],
   "expected_count": 3,
   "experiment_id": "NIFTY50_PILOT_001",
   "failures": [
