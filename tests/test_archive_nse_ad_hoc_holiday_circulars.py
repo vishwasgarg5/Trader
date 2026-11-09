@@ -37,9 +37,19 @@ class OfficialNSEHostClassificationTests(unittest.TestCase):
             failures=[{"circular_reference": "NSE/CMTR/57285"}],
             corroborating_records=corroborating,
             corroborating_failures=[],
+            discovered_mirror_candidates=[{
+                "related_circular_reference": "NSE/CMTR/57285",
+                "discovery_status": "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
+                "sha256": None,
+            }],
             expected_count=2,
         )
         self.assertEqual(report["corroborating_records"], corroborating)
+        self.assertEqual(
+            report["discovered_mirror_candidates"][0]["discovery_status"],
+            "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
+        )
+        self.assertIsNone(report["discovered_mirror_candidates"][0]["sha256"])
         self.assertEqual(report["archived_count"], 1)
         self.assertEqual(report["expected_count"], 2)
         self.assertEqual(report["independent_review_status"], "PENDING")
