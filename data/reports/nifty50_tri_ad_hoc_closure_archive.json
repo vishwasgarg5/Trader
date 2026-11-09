@@ -17,6 +17,19 @@
   ],
   "discovered_mirror_candidates": [
     {
+      "acquisition_errors": [
+        {
+          "attempt": 1,
+          "error": "HTTP Error 403: Forbidden",
+          "url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+        },
+        {
+          "attempt": 2,
+          "error": "HTTP Error 403: Forbidden",
+          "url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+        }
+      ],
+      "acquisition_status": "ATTEMPTED_AND_FAILED",
       "discovery_status": "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
       "document_metadata": {
         "circular_reference": "NSE/CMTR/57285",
@@ -37,7 +50,39 @@
   "failures": [
     {
       "circular_reference": "NSE/CMTR/57285",
-      "error": "HTTP Error 403: Forbidden",
+      "download_attempts": [
+        {
+          "attempt": 1,
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf"
+        },
+        {
+          "attempt": 2,
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf"
+        },
+        {
+          "attempt": 1,
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://archives.nseindia.com/content/circulars/CMTR57285.pdf"
+        },
+        {
+          "attempt": 2,
+          "error": "HTTP Error 404: Not Found",
+          "url": "https://archives.nseindia.com/content/circulars/CMTR57285.pdf"
+        },
+        {
+          "attempt": 1,
+          "error": "HTTP Error 403: Forbidden",
+          "url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+        },
+        {
+          "attempt": 2,
+          "error": "HTTP Error 403: Forbidden",
+          "url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+        }
+      ],
+      "error": "all download candidates failed: [{\"attempt\": 1, \"error\": \"HTTP Error 404: Not Found\", \"url\": \"https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf\"}, {\"attempt\": 2, \"error\": \"HTTP Error 404: Not Found\", \"url\": \"https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf\"}, {\"attempt\": 1, \"error\": \"HTTP Error 404: Not Found\", \"url\": \"https://archives.nseindia.com/content/circulars/CMTR57285.pdf\"}, {\"attempt\": 2, \"error\": \"HTTP Error 404: Not Found\", \"url\": \"https://archives.nseindia.com/content/circulars/CMTR57285.pdf\"}, {\"attempt\": 1, \"error\": \"HTTP Error 403: Forbidden\", \"url\": \"https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf\"}, {\"attempt\": 2, \"error\": \"HTTP Error 403: Forbidden\", \"url\": \"https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf\"}]",
       "event_type": "HOLIDAY_DATE_REVISION",
       "session_date": "2023-06-29",
       "source_url": "https://nsearchives.nseindia.com/content/circulars/CMTR57285.pdf"
