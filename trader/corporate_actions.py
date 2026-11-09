@@ -93,15 +93,32 @@ def audit_corporate_action_ledger(path: Path) -> dict:
     if frame.duplicated(["symbol", "ex_date", "action_type"]).any():
         result["errors"].append("duplicate symbol/ex_date/action_type records")
 
+    evidence_root = path.parent.resolve()
     for row in frame.itertuples(index=False):
-        evidence = Path(str(row.evidence_path))
-        if not evidence.is_absolute():
-            evidence = path.parent / evidence
+        relative_evidence = Path(str(row.evidence_path).strip())
+        if relative_evidence.is_absolute() or ".." in relative_evidence.parts:
+            result["errors"].append(
+                f"unsafe evidence path for {row.symbol}: paths must stay inside {evidence_root}"
+            )
+            continue
+        evidence = (evidence_root / relative_evidence).resolve()
+        try:
+            evidence.relative_to(evidence_root)
+        except ValueError:
+            result["errors"].append(
+                f"unsafe evidence path for {row.symbol}: resolved path escapes ledger directory"
+            )
+            continue
         if not evidence.is_file():
             result["errors"].append(f"missing evidence file for {row.symbol}: {row.evidence_path}")
             continue
+        expected_digest = str(row.evidence_sha256).strip()
+        if len(expected_digest) != 64 or any(
+            character not in "0123456789abcdefABCDEF" for character in expected_digest
+        ):
+            continue
         digest = hashlib.sha256(evidence.read_bytes()).hexdigest()
-        if digest.lower() != str(row.evidence_sha256).lower():
+        if digest.lower() != expected_digest.lower():
             result["errors"].append(f"evidence checksum mismatch for {row.symbol}: {row.evidence_path}")
 
     result["rows"] = int(len(frame))
