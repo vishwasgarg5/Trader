@@ -53,6 +53,7 @@ def download(urls: list[str]) -> tuple[bytes, str]:
 def build_manifest(records: list[dict], failures: list[dict],
                    corroborating_records: list[dict],
                    corroborating_failures: list[dict],
+                   discovered_mirror_candidates: list[dict],
                    expected_count: int) -> dict:
     """Keep corroboration discoverable without treating it as the missing circular."""
     return {
@@ -62,6 +63,7 @@ def build_manifest(records: list[dict], failures: list[dict],
         "failures": failures,
         "corroborating_records": corroborating_records,
         "corroborating_failures": corroborating_failures,
+        "discovered_mirror_candidates": discovered_mirror_candidates,
         "archived_count": len(records),
         "expected_count": expected_count,
         "independent_review_status": "PENDING",
@@ -130,8 +132,24 @@ def main() -> int:
                         "source_url": press_release_url,
                         "error": str(corroboration_error),
                     })
+    discovered_mirror_candidates = [{
+        "related_circular_reference": "NSE/CMTR/57285",
+        "document_type": "THIRD_PARTY_MIRROR_OF_NSE_ORIGINAL_CIRCULAR",
+        "source_url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf",
+        "discovery_status": "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
+        "document_metadata": {
+            "date": "2023-06-27",
+            "circular_reference": "NSE/CMTR/57285",
+            "circular_reference_number": "76/2023",
+            "subject": "Change in Trading Holiday",
+        },
+        "sha256": None,
+        "independent_review_status": "PENDING",
+        "note": "Search-indexed PDF content identifies the original circular; raw bytes have not been acquired and hashed by this workflow.",
+    }]
     report = build_manifest(
-        records, failures, corroborating_records, corroborating_failures, len(sources)
+        records, failures, corroborating_records, corroborating_failures,
+        discovered_mirror_candidates, len(sources)
     )
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
