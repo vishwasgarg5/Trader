@@ -114,3 +114,64 @@ def test_http2_failure_falls_back_to_http11(monkeypatch):
         "http2",
         "http1.1",
     ]
+
+
+
+def test_redirect_chain_is_validated_before_each_network_request():
+    requested = []
+
+    class Response:
+        def __init__(self, url, status, headers=None):
+            self.url = url
+            self.status_code = status
+            self.headers = headers or {}
+
+    class Session:
+        def get(self, url, **kwargs):
+            requested.append((url, kwargs.get("allow_redirects")))
+            if url == "https://www.nseindia.com/start":
+                return Response(url, 302, {"Location": "https://evil.example/collect"})
+            raise AssertionError("disallowed redirect target must not be requested")
+
+    try:
+        MODULE._get_allowlisted(
+            Session(),
+            "https://www.nseindia.com/start",
+            {"www.nseindia.com"},
+        )
+    except ValueError as exc:
+        assert "allowlisted official host" in str(exc)
+    else:
+        raise AssertionError("disallowed intermediate redirect was accepted")
+
+    assert requested == [("https://www.nseindia.com/start", False)]
+
+
+def test_redirect_chain_records_only_allowlisted_hops():
+    requested = []
+
+    class Response:
+        def __init__(self, url, status, headers=None):
+            self.url = url
+            self.status_code = status
+            self.headers = headers or {}
+
+    class Session:
+        def get(self, url, **kwargs):
+            requested.append(url)
+            if url == "https://www.nseindia.com/start":
+                return Response(url, 302, {"Location": "/archive/final.csv"})
+            return Response(url, 200)
+
+    response, chain = MODULE._get_allowlisted(
+        Session(),
+        "https://www.nseindia.com/start",
+        {"www.nseindia.com"},
+    )
+
+    assert response.url == "https://www.nseindia.com/archive/final.csv"
+    assert chain == [
+        "https://www.nseindia.com/start",
+        "https://www.nseindia.com/archive/final.csv",
+    ]
+    assert requested == chain
