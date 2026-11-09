@@ -38,8 +38,19 @@ def _read_csv(path: Path, required: set[str]) -> tuple[list[dict[str, str]], lis
         return [], [f"{path.name}: cannot read ({type(exc).__name__})"]
 
 
+def _valid_review_date(value: str) -> bool:
+    """Accept only explicit ISO calendar dates for human review sign-off."""
+    try:
+        date.fromisoformat(value.strip())
+        return True
+    except (AttributeError, TypeError, ValueError):
+        return False
+
+
 def _valid_digest_file(root: Path, relative: str, digest: str, label: str) -> list[str]:
     errors: list[str] = []
+    if len(digest) != 64 or any(char not in "0123456789abcdefABCDEF" for char in digest):
+        return [f"{label}: SHA-256 digest must contain exactly 64 hexadecimal characters"]
     rel = Path(relative)
     if not relative or rel.is_absolute() or ".." in rel.parts:
         return [f"{label}: evidence path must be a non-empty relative path without '..'"]
@@ -102,6 +113,8 @@ def audit_membership_evidence(
         else:
             if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
                 errors.append(f"{label}: VERIFIED transition lacks reviewer sign-off")
+            elif not _valid_review_date(row.get("reviewed_at", "")):
+                errors.append(f"{label}: reviewed_at must be a valid ISO calendar date")
             if not row.get("source_url", "").startswith("https://"):
                 errors.append(f"{label}: VERIFIED transition lacks HTTPS source URL")
             errors.extend(_valid_digest_file(
@@ -170,6 +183,8 @@ def audit_membership_evidence(
             errors.append(f"{year}: coverage_status is not COMPLETE")
         if not row.get("independent_reviewer", "").strip() or not row.get("reviewed_at", "").strip():
             errors.append(f"{year}: independent reviewer sign-off is missing")
+        elif not _valid_review_date(row.get("reviewed_at", "")):
+            errors.append(f"{year}: reviewed_at must be a valid ISO calendar date")
 
     unexpected_years = sorted(set(coverage_by_year) - set(YEARS))
     if unexpected_years:
@@ -239,6 +254,8 @@ def audit_special_membership_events(path: Path) -> dict:
         else:
             if not row.get("reviewer", "").strip() or not row.get("reviewed_at", "").strip():
                 errors.append(f"{event_id}: VERIFIED special event lacks reviewer sign-off")
+            elif not _valid_review_date(row.get("reviewed_at", "")):
+                errors.append(f"{event_id}: reviewed_at must be a valid ISO calendar date")
             errors.extend(_valid_digest_file(
                 path.parent, row.get("source_document_path", ""),
                 row.get("source_sha256", ""), event_id,
