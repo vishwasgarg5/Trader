@@ -15,6 +15,23 @@
       "source_url": "https://niftyindices.com/Press_Release/ind_prs27062023.pdf"
     }
   ],
+  "discovered_mirror_candidates": [
+    {
+      "discovery_status": "DISCOVERED_CONTENT_INDEXED_NOT_ARCHIVED",
+      "document_metadata": {
+        "circular_reference": "NSE/CMTR/57285",
+        "circular_reference_number": "76/2023",
+        "date": "2023-06-27",
+        "subject": "Change in Trading Holiday"
+      },
+      "document_type": "THIRD_PARTY_MIRROR_OF_NSE_ORIGINAL_CIRCULAR",
+      "independent_review_status": "PENDING",
+      "note": "Search-indexed PDF content identifies the original circular; raw bytes have not been acquired and hashed by this workflow.",
+      "related_circular_reference": "NSE/CMTR/57285",
+      "sha256": null,
+      "source_url": "https://geplcapital.com/fundamental-research/649a873a2dbe6.1687848762.CMTR57285.pdf"
+    }
+  ],
   "expected_count": 3,
   "experiment_id": "NIFTY50_PILOT_001",
   "failures": [
