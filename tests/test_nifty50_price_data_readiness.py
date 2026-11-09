@@ -78,3 +78,44 @@ def test_ohlcv_accepts_valid_isin_shape_and_check_digit():
         tri=False,
     )
     assert not any("security_id" in error for error in errors)
+
+
+
+def test_price_rows_reject_evidence_path_outside_evidence_root(tmp_path):
+    outside = tmp_path / "outside.csv"
+    outside.write_text("source", encoding="utf-8")
+    row = _valid_ohlcv_row(
+        evidence_path="../outside.csv",
+        evidence_sha256=__import__("hashlib").sha256(outside.read_bytes()).hexdigest(),
+    )
+
+    errors = _audit_rows(
+        Path("nifty50_pilot_ohlcv.csv"),
+        [row],
+        tri=False,
+        evidence_root=tmp_path / "reference",
+    )
+
+    assert any("must stay inside the evidence root" in error for error in errors)
+
+
+def test_price_rows_verify_archived_evidence_checksum(tmp_path):
+    import hashlib
+
+    evidence_root = tmp_path / "repo"
+    evidence = evidence_root / "data" / "reference" / "evidence" / "source.csv"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("source bytes", encoding="utf-8")
+    row = _valid_ohlcv_row(
+        evidence_path="data/reference/evidence/source.csv",
+        evidence_sha256=hashlib.sha256(b"different bytes").hexdigest(),
+    )
+
+    errors = _audit_rows(
+        Path("nifty50_pilot_ohlcv.csv"),
+        [row],
+        tri=False,
+        evidence_root=evidence_root,
+    )
+
+    assert any("archived evidence SHA-256 mismatch" in error for error in errors)
