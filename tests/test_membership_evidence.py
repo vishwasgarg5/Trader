@@ -1,6 +1,10 @@
 from pathlib import Path
 
-from trader.membership_evidence import audit_membership_evidence
+from trader.membership_evidence import (
+    _valid_digest_file,
+    _valid_review_date,
+    audit_membership_evidence,
+)
 
 
 def _write_inputs(tmp_path: Path, *, verified: bool = False):
@@ -114,3 +118,20 @@ def test_annual_coverage_scope_must_match_the_defined_calendar_window(tmp_path):
     report = audit_membership_evidence(transition, coverage, evidence)
     assert report["ready"] is False
     assert any("scope must be 2018-04-01 through 2018-12-31" in error for error in report["errors"])
+
+
+
+def test_review_signoff_date_requires_iso_calendar_date():
+    assert _valid_review_date("2026-11-09") is True
+    assert _valid_review_date("2026-02-30") is False
+    assert _valid_review_date("reviewed-yesterday") is False
+    assert _valid_review_date("") is False
+
+
+def test_evidence_digest_must_be_64_hex_characters(tmp_path):
+    errors = _valid_digest_file(
+        tmp_path, "missing.pdf", "not-a-sha256", "E1"
+    )
+    assert errors == [
+        "E1: SHA-256 digest must contain exactly 64 hexadecimal characters"
+    ]
