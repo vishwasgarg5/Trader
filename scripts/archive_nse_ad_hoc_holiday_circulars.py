@@ -50,6 +50,27 @@ def download(urls: list[str]) -> tuple[bytes, str]:
     raise RuntimeError(str(last_error))
 
 
+def build_manifest(records: list[dict], failures: list[dict],
+                   corroborating_records: list[dict],
+                   corroborating_failures: list[dict],
+                   expected_count: int) -> dict:
+    """Keep corroboration discoverable without treating it as the missing circular."""
+    return {
+        "experiment_id": "NIFTY50_PILOT_001",
+        "purpose": "Archive additional NSE Capital Market closure and holiday-revision circulars identified in TRI diagnostics",
+        "records": records,
+        "failures": failures,
+        "corroborating_records": corroborating_records,
+        "corroborating_failures": corroborating_failures,
+        "archived_count": len(records),
+        "expected_count": expected_count,
+        "independent_review_status": "PENDING",
+        "calendar_completeness": "NOT_CERTIFIED",
+        "research_status": "RESEARCH_HOLD",
+        "holdout_access_authorized": False,
+    }
+
+
 def main() -> int:
     records, failures, corroborating_records, corroborating_failures = [], [], [], []
     with REGISTER.open(newline="", encoding="utf-8") as handle:
@@ -109,18 +130,9 @@ def main() -> int:
                         "source_url": press_release_url,
                         "error": str(corroboration_error),
                     })
-    report = {
-        "experiment_id": "NIFTY50_PILOT_001",
-        "purpose": "Archive additional NSE Capital Market closure and holiday-revision circulars identified in TRI diagnostics",
-        "records": records,
-        "failures": failures,
-        "archived_count": len(records),
-        "expected_count": len(sources),
-        "independent_review_status": "PENDING",
-        "calendar_completeness": "NOT_CERTIFIED",
-        "research_status": "RESEARCH_HOLD",
-        "holdout_access_authorized": False,
-    }
+    report = build_manifest(
+        records, failures, corroborating_records, corroborating_failures, len(sources)
+    )
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
