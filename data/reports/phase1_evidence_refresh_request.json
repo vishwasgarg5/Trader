@@ -1,0 +1,16 @@
+{
+  "task": "phase_1_evidence_recovery",
+  "target_branch": "main",
+  "requested_action": "Run the repository's automated NSE evidence refresh, archive discovery, conservative triage, archive catalog audit, source reconciliation, and fail-closed membership evidence audit.",
+  "trigger": "[evidence-refresh]",
+  "safety": {
+    "do_not_change_membership_rows": true,
+    "do_not_assign_human_reviewers": true,
+    "do_not_promote_sample_or_ai_reviewed_evidence": true,
+    "preserve_missing_source_exceptions": true,
+    "paper_trading_authorized": false,
+    "live_trading_enabled": false
+  },
+  "completion_rule": "Phase 1 may be marked complete only after source-document inventory and byte/hash integrity are reconciled, all required evidence gaps are resolved or explicitly adjudicated under protocol, and independent review requirements are met. Machine triage alone is not sign-off.",
+  "created_for": "User-requested direct-main execution"
+}
