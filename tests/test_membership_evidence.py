@@ -135,3 +135,10 @@ def test_evidence_digest_must_be_64_hex_characters(tmp_path):
     assert errors == [
         "E1: SHA-256 digest must contain exactly 64 hexadecimal characters"
     ]
+
+
+
+def test_review_signoff_date_rejects_noncanonical_iso_date_forms():
+    assert _valid_review_date("20261109") is False
+    assert _valid_review_date("2026-W46-1") is False
+    assert _valid_review_date("2026-11-09") is True
