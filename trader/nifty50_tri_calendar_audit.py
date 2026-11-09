@@ -61,6 +61,32 @@ def audit(csv_path: Path = CSV_PATH) -> dict:
     if len(dates) != len(set(dates)):
         raise ValueError("duplicate TRI session dates")
 
+    quarter_counts: Counter[str] = Counter()
+    quarter_first: dict[str, str] = {}
+    quarter_last: dict[str, str] = {}
+    for day in dates:
+        quarter = (day.month - 1) // 3 + 1
+        key = f"{day.year}-Q{quarter}"
+        quarter_counts[key] += 1
+        quarter_first.setdefault(key, day.isoformat())
+        quarter_last[key] = day.isoformat()
+
+    expected_quarters = [
+        f"{year}-Q{quarter}"
+        for year in range(2018, 2025)
+        for quarter in range(1, 5)
+    ]
+    quarterly_coverage = [
+        {
+            "quarter": key,
+            "observation_count": quarter_counts.get(key, 0),
+            "first_observation": quarter_first.get(key),
+            "last_observation": quarter_last.get(key),
+            "status": "OBSERVATIONS_PRESENT" if quarter_counts.get(key, 0) else "NO_OBSERVATIONS",
+        }
+        for key in expected_quarters
+    ]
+
     gaps = []
     for previous, current in zip(dates, dates[1:]):
         delta = (current - previous).days
@@ -79,6 +105,14 @@ def audit(csv_path: Path = CSV_PATH) -> dict:
         "first_session": dates[0].isoformat(),
         "last_session": dates[-1].isoformat(),
         "yearly_observation_counts": dict(sorted(year_counts.items())),
+        "quarterly_observation_coverage": quarterly_coverage,
+        "quarters_with_observations": sum(1 for row in quarterly_coverage if row["observation_count"] > 0),
+        "quarters_expected": len(expected_quarters),
+        "quarterly_observation_status": (
+            "OBSERVATIONS_PRESENT_IN_ALL_28_QUARTERS"
+            if all(row["observation_count"] > 0 for row in quarterly_coverage)
+            else "ONE_OR_MORE_QUARTERS_HAVE_NO_OBSERVATIONS"
+        ),
         "weekend_dated_observations": weekend_sessions,
         "gaps_over_three_calendar_days": gaps,
         "raw_source_files_verified": len(raw_sources),
@@ -92,6 +126,7 @@ def audit(csv_path: Path = CSV_PATH) -> dict:
         "research_status": "RESEARCH_HOLD",
         "limitations": [
             "Weekend-dated observations are reported for review, not automatically rejected; special trading sessions may exist.",
+            "Quarter counts prove only that observations exist in each calendar quarter; they do not prove all expected exchange sessions are present.",
             "Calendar gaps are diagnostics and are not interpreted as missing sessions without an authoritative exchange calendar.",
             "Hash linkage proves local bytes match the recorded digest, not that the source is authentic or semantically correct.",
             "No independent reviewer identity or sign-off is inferred.",
