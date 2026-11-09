@@ -93,3 +93,28 @@ def test_missing_adjustment_factor_is_explicitly_unresolved_not_assumed_neutral(
     assert result["valid"] is True
     assert result["unresolved_adjustment_factor_rows"] == 1
     assert result["corporate_action_adjustment_verified"] is False
+
+
+
+def test_corporate_action_ledger_rejects_evidence_path_outside_ledger_directory(tmp_path):
+    evidence = tmp_path / "outside.pdf"
+    evidence.write_bytes(b"outside evidence")
+    ledger_dir = tmp_path / "ledger"
+    ledger_dir.mkdir()
+    path = ledger_dir / "corporate_actions.csv"
+    pd.DataFrame([{
+        "symbol": "AAA.NS",
+        "ex_date": "2024-01-10",
+        "action_type": "split",
+        "adjustment_factor": 0.5,
+        "source": "NSE corporate action circular",
+        "source_url": "https://www.nseindia.com/",
+        "source_published_at": "2024-01-02T10:00:00+05:30",
+        "evidence_path": "../outside.pdf",
+        "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }]).to_csv(path, index=False)
+
+    result = audit_corporate_action_ledger(path)
+
+    assert result["valid"] is False
+    assert any("unsafe evidence path" in error for error in result["errors"])
