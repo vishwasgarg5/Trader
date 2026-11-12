@@ -5,7 +5,7 @@
     "archive_path": "data/reference/source_documents/nifty50_constituent_snapshots/nifty50_current_f5ba4027d935ae72.csv",
     "bytes": 3344,
     "content_type": "text/csv",
-    "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+    "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
     "row_count": 50,
     "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
     "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
@@ -70,7 +70,7 @@
           "content_length": "3344",
           "content_type": "text/csv",
           "final_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
-          "finished_at_utc": "2026-11-11T11:22:27.398242+00:00",
+          "finished_at_utc": "2026-11-12T11:41:29.612345+00:00",
           "http_status": 200,
           "ok": true,
           "partial_bytes_before": 0,
@@ -79,26 +79,26 @@
             "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
           ],
           "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
-          "started_at_utc": "2026-11-11T11:22:27.014759+00:00"
+          "started_at_utc": "2026-11-12T11:41:29.291948+00:00"
         }
       ],
       "bytes": 3344,
       "content_type": "text/csv",
       "egress_ip": {
-        "checked_at_utc": "2026-11-11T11:22:26.910195+00:00",
+        "checked_at_utc": "2026-11-12T11:41:29.186666+00:00",
         "http_status": 200,
-        "ip": "52.161.60.228",
+        "ip": "57.154.5.168",
         "service": "https://api.ipify.org?format=json"
       },
       "final_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
-      "finished_at_utc": "2026-11-11T11:22:27.398267+00:00",
+      "finished_at_utc": "2026-11-12T11:41:29.612361+00:00",
       "http_status": 200,
       "redirect_chain": [
         "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv"
       ],
       "requested_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty50list.csv",
       "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
-      "started_at_utc": "2026-11-11T11:22:26.910181+00:00",
+      "started_at_utc": "2026-11-12T11:41:29.186652+00:00",
       "status": "FETCHED_AND_VALIDATED"
     },
     "unique_symbol_count": 50,
@@ -132,7 +132,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
@@ -147,7 +147,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
@@ -162,7 +162,7 @@
       "http_last_modified": null,
       "links": [],
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
@@ -170,8 +170,8 @@
       "visible_link_count": 0
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_historical_data_20c270382c51ed46.html",
-      "bytes": 111036,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_historical_data_298b9a135d3b6d28.html",
+      "bytes": 111223,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -335,6 +335,10 @@
         {
           "href": "/indices/equity/broad-based-indices/nifty500-large-midsmall-equal-cap-weighted",
           "label": "Nifty500 LargeMidSmall Equal-Cap Weighted"
+        },
+        {
+          "href": "/indices/equity/broad-based-indices/nifty-1000",
+          "label": "Nifty 1000"
         },
         {
           "href": "/indices/equity/broad-based-indices/nifty-midcap-150",
@@ -911,6 +915,10 @@
         {
           "href": "/indices/equity/strategy-indices/nifty500--equal--weight",
           "label": "NIFTY500 EQUAL WEIGHT"
+        },
+        {
+          "href": "/indices/equity/strategy-indices/nifty1000-equal-weight",
+          "label": "Nifty1000 Equal Weight"
         },
         {
           "href": "/indices/equity/strategy-indices/nifty200-quality-30",
@@ -2006,16 +2014,16 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "20c270382c51ed46c34c4ec7e75abcd4092ac41ef8c02a02b5ce154681209516",
+      "sha256": "298b9a135d3b6d289da84d5f609440fba64d502f6b1ff33afcc14bad6db624c9",
       "source_id": "NIFTY_INDICES_HISTORICAL_DATA",
       "source_url": "https://www.niftyindices.com/reports/historical-data",
-      "visible_link_count": 457
+      "visible_link_count": 459
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_nifty50_profile_b6fd6e28e44489b1.html",
-      "bytes": 212117,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_nifty50_profile_111c5b58fd0ac60c.html",
+      "bytes": 212935,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -2179,6 +2187,10 @@
         {
           "href": "/indices/equity/broad-based-indices/nifty500-large-midsmall-equal-cap-weighted",
           "label": "Nifty500 LargeMidSmall Equal-Cap Weighted"
+        },
+        {
+          "href": "/indices/equity/broad-based-indices/nifty-1000",
+          "label": "Nifty 1000"
         },
         {
           "href": "/indices/equity/broad-based-indices/nifty-midcap-150",
@@ -2755,6 +2767,10 @@
         {
           "href": "/indices/equity/strategy-indices/nifty500--equal--weight",
           "label": "NIFTY500 EQUAL WEIGHT"
+        },
+        {
+          "href": "/indices/equity/strategy-indices/nifty1000-equal-weight",
+          "label": "Nifty1000 Equal Weight"
         },
         {
           "href": "/indices/equity/strategy-indices/nifty200-quality-30",
@@ -3942,16 +3958,16 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "b6fd6e28e44489b1c88d06b13b23aeac1965b3ea240b7a28665e2a83ef8d85e7",
+      "sha256": "111c5b58fd0ac60c6db2f94ca3b4d35533a20d835481aade3b7dcb7337b53cad",
       "source_id": "NIFTY_INDICES_NIFTY50_PROFILE",
       "source_url": "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50",
-      "visible_link_count": 480
+      "visible_link_count": 482
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_reconstitution_calendar_26deab2064535052.html",
-      "bytes": 151231,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nifty_indices_reconstitution_calendar_9f78b0b9e0cf54f2.html",
+      "bytes": 151855,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -4115,6 +4131,10 @@
         {
           "href": "/indices/equity/broad-based-indices/nifty500-large-midsmall-equal-cap-weighted",
           "label": "Nifty500 LargeMidSmall Equal-Cap Weighted"
+        },
+        {
+          "href": "/indices/equity/broad-based-indices/nifty-1000",
+          "label": "Nifty 1000"
         },
         {
           "href": "/indices/equity/broad-based-indices/nifty-midcap-150",
@@ -4691,6 +4711,10 @@
         {
           "href": "/indices/equity/strategy-indices/nifty500--equal--weight",
           "label": "NIFTY500 EQUAL WEIGHT"
+        },
+        {
+          "href": "/indices/equity/strategy-indices/nifty1000-equal-weight",
+          "label": "Nifty1000 Equal Weight"
         },
         {
           "href": "/indices/equity/strategy-indices/nifty200-quality-30",
@@ -5770,16 +5794,16 @@
         }
       ],
       "publisher": "NSE_INDICES",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "26deab2064535052b84f72bf7c69eec9d32cfeb17172ed53a0d497a35ac258ba",
+      "sha256": "9f78b0b9e0cf54f2d95a4c049e4a62e455f08e579264cadead71efa2c7d3dabc",
       "source_id": "NIFTY_INDICES_RECONSTITUTION_CALENDAR",
       "source_url": "https://www.niftyindices.com/resources/index-rebalancing-schedule",
-      "visible_link_count": 453
+      "visible_link_count": 455
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_2a2a4221380c153a.html",
-      "bytes": 403438,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_announcements_5198cda56142aeb3.html",
+      "bytes": 406388,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -6781,6 +6805,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -6793,40 +6829,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -7793,6 +7837,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -7805,40 +7861,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -8990,16 +9054,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "2a2a4221380c153ace2326ef7147b24a80d63879f191342ee0ca28d442d2f645",
+      "sha256": "5198cda56142aeb33cab96b9b6eb12ea82a04b59794965cb652c24b76278aeaf",
       "source_id": "NSE_ANNOUNCEMENTS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
-      "visible_link_count": 801
+      "visible_link_count": 811
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_696f5d9f5d13626f.html",
-      "bytes": 337472,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_buybacks_1dcd59c217aadd0f.html",
+      "bytes": 340422,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -10001,6 +10065,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -10013,40 +10089,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -11013,6 +11097,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -11025,40 +11121,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -11890,16 +11994,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "696f5d9f5d13626f4448ffa4df0948c254616e064d607b908cdf2ce9541befdd",
+      "sha256": "1dcd59c217aadd0f59332a352e278b34fd8d02fca6b3c421fc94a245802fd39e",
       "source_id": "NSE_BUYBACKS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-daily-buy-back",
-      "visible_link_count": 721
+      "visible_link_count": 731
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_b5ac1ad137909c0a.html",
-      "bytes": 366499,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_actions_9928d6dedad0c815.html",
+      "bytes": 369449,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -12901,6 +13005,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -12913,40 +13029,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -13913,6 +14037,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -13925,40 +14061,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -14878,16 +15022,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "b5ac1ad137909c0a5b2a4148a9765701f1cb31e761ff3eaa08d2579ee44a53e2",
+      "sha256": "9928d6dedad0c81541432e0f548f3c74c7c674c176b55906e31711d598360dc0",
       "source_id": "NSE_CORPORATE_ACTIONS",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-actions",
-      "visible_link_count": 743
+      "visible_link_count": 753
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_06832485fbfeec81.html",
-      "bytes": 377346,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_corporate_filings_dashboard_7101b96770d12da7.html",
+      "bytes": 380343,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -15889,6 +16033,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -15901,40 +16057,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -16901,6 +17065,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -16913,40 +17089,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -17054,87 +17238,87 @@
         },
         {
           "href": "/companies-listing/corporate-filings-announcements",
-          "label": "397 Corporate Announcements"
+          "label": "612 Corporate Announcements"
         },
         {
           "href": "/companies-listing/corporate-filings-actions",
-          "label": "21 Corporate Actions"
+          "label": "14 Corporate Actions"
         },
         {
           "href": "/companies-listing/corporate-filings-board-meetings?equitybmdatefilter=1",
-          "label": "107 Board Meetings"
+          "label": "421 Board Meetings"
         },
         {
           "href": "/companies-listing/corporate-filings-announcements",
           "label": ""
         },
         {
-          "href": "/get-quotes/equity?symbol=ICDSLTD",
-          "label": "ICDSLTD"
+          "href": "/get-quotes/equity?symbol=TDPOWERSYS",
+          "label": "TDPOWERSYS"
         },
         {
-          "href": "/get-quotes/equity?symbol=DELPHIFX",
-          "label": "DELPHIFX"
+          "href": "/get-quotes/equity?symbol=TALBROAUTO",
+          "label": "TALBROAUTO"
         },
         {
-          "href": "/get-quotes/equity?symbol=EIHAHOTELS",
-          "label": "EIHAHOTELS"
+          "href": "/get-quotes/equity?symbol=PAGEIND",
+          "label": "PAGEIND"
         },
         {
-          "href": "/get-quotes/equity?symbol=DELPHIFX",
-          "label": "DELPHIFX"
+          "href": "/get-quotes/equity?symbol=COROMANDEL",
+          "label": "COROMANDEL"
         },
         {
-          "href": "/get-quotes/equity?symbol=HONASA",
-          "label": "HONASA"
+          "href": "/get-quotes/equity?symbol=MEDPLUS",
+          "label": "MEDPLUS"
         },
         {
           "href": "/companies-listing/corporate-filings-actions",
           "label": ""
         },
         {
-          "href": "/get-quotes/equity?symbol=ADFFOODS",
-          "label": "ADFFOODS"
+          "href": "/get-quotes/equity?symbol=SAFARI",
+          "label": "SAFARI"
         },
         {
-          "href": "/get-quotes/equity?symbol=CONCOR",
-          "label": "CONCOR"
+          "href": "/get-quotes/equity?symbol=GPPL",
+          "label": "GPPL"
         },
         {
-          "href": "/get-quotes/equity?symbol=CHAMBLFERT",
-          "label": "CHAMBLFERT"
+          "href": "/get-quotes/equity?symbol=GODFRYPHLP",
+          "label": "GODFRYPHLP"
         },
         {
-          "href": "/get-quotes/equity?symbol=BALRAMCHIN",
-          "label": "BALRAMCHIN"
+          "href": "/get-quotes/equity?symbol=GAJA",
+          "label": "GAJA"
         },
         {
-          "href": "/get-quotes/equity?symbol=BALKRISIND",
-          "label": "BALKRISIND"
+          "href": "/get-quotes/equity?symbol=CITIUSINVT",
+          "label": "CITIUSINVT"
         },
         {
           "href": "/companies-listing/corporate-filings-board-meetings?equitybmdatefilter=1",
           "label": ""
         },
         {
-          "href": "/get-quotes/equity?symbol=AFSL",
-          "label": "AFSL"
+          "href": "/get-quotes/equity?symbol=ACE",
+          "label": "ACE"
         },
         {
-          "href": "/get-quotes/equity?symbol=AFSL",
-          "label": "AFSL"
+          "href": "/get-quotes/equity?symbol=ACE",
+          "label": "ACE"
         },
         {
-          "href": "/get-quotes/equity?symbol=AIRAN",
-          "label": "AIRAN"
+          "href": "/get-quotes/equity?symbol=ACEINTEG",
+          "label": "ACEINTEG"
         },
         {
-          "href": "/get-quotes/equity?symbol=AIRAN",
-          "label": "AIRAN"
+          "href": "/get-quotes/equity?symbol=ACEINTEG",
+          "label": "ACEINTEG"
         },
         {
-          "href": "/get-quotes/equity?symbol=AIRAN",
-          "label": "AIRAN"
+          "href": "/get-quotes/equity?symbol=ADVANIHOTR",
+          "label": "ADVANIHOTR"
         },
         {
           "href": "/companies-listing/corporate-filings-financial-results?equityfndatefilter=1",
@@ -17654,16 +17838,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "06832485fbfeec81bdcd7dd93c6ef8504e4cb9c594e76202aa2c9c784f40748d",
+      "sha256": "7101b96770d12da7cc728c138173e3dee350c7374002bd178d703a9de26b70ab",
       "source_id": "NSE_CORPORATE_FILINGS_DASHBOARD",
       "source_url": "https://www.nseindia.com/companies-listing/corporate-filings-application",
-      "visible_link_count": 690
+      "visible_link_count": 700
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_exchange_circulars_f73bb591f800128b.html",
-      "bytes": 329382,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_exchange_circulars_ac873e630f8a4452.html",
+      "bytes": 331468,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -18665,6 +18849,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -18677,40 +18873,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -19677,6 +19881,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -19689,40 +19905,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -19951,26 +20175,6 @@
         {
           "href": "/static/research/engagements-roundtables",
           "label": "Roundtables"
-        },
-        {
-          "href": "#",
-          "label": "Engagements"
-        },
-        {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
-          "label": "Conferences"
-        },
-        {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
         },
         {
           "href": "https://nsearchives.nseindia.com//content/RSS/Circulars.xml",
@@ -20434,16 +20638,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "f73bb591f800128bca612bbc88d0c0ad93927c263d8b3c32bdb3d61906750e71",
+      "sha256": "ac873e630f8a445232dfcbf96ef15b69e1c37835aef9429ca13bf139fe218dcb",
       "source_id": "NSE_EXCHANGE_CIRCULARS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-circulars",
-      "visible_link_count": 691
+      "visible_link_count": 696
     },
     {
-      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_1710868a0d899e76.html",
-      "bytes": 325795,
+      "archive_path": "data/reference/source_documents/weekly_market_pages/nse_holidays_2e80d6e61b976521.html",
+      "bytes": 327881,
       "evidence_status": "OFFICIAL_LANDING_PAGE_BYTES_ARCHIVED",
       "http_content_type": "text/html; charset=utf-8",
       "http_last_modified": null,
@@ -21445,6 +21649,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -21457,40 +21673,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -22457,6 +22681,18 @@
           "label": "RESEARCH"
         },
         {
+          "href": "/research/overview-about-epr",
+          "label": "About EPR"
+        },
+        {
+          "href": "/research/overview-contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/research/overview-photo-gallery",
+          "label": "Photo Gallery"
+        },
+        {
           "href": "/research/publications-reports-nse-market-pulse",
           "label": "Market Pulse"
         },
@@ -22469,40 +22705,48 @@
           "label": "Corporate Governance"
         },
         {
-          "href": "/research/publications-reports-nse-market-insights",
-          "label": "Factbook & ISMR"
+          "href": "/research/working-papers",
+          "label": "Working Papers"
         },
         {
-          "href": "/research/research-initiatives",
+          "href": "/research/publications-reports-archives",
+          "label": "Archives"
+        },
+        {
+          "href": "/research/initiatives-nse-ri",
           "label": "NSE RI"
         },
         {
-          "href": "/research/research-initiatives",
-          "label": "Ongoing"
+          "href": "/research/initiatives-workshops",
+          "label": "Workshops"
         },
         {
-          "href": "/research/working-papers",
-          "label": "Working Paper Series"
+          "href": "/research/initiatives-lecture-series",
+          "label": "Lecture Series"
+        },
+        {
+          "href": "/research/initiatives-data-for-research",
+          "label": "Data For Research"
+        },
+        {
+          "href": "/research/initiatives-data-for-analytics",
+          "label": "Data For Analytics"
         },
         {
           "href": "/research/past-initiatives",
           "label": "Past Initiatives"
         },
         {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
+          "href": "/research/engagements-conferences",
           "label": "Conferences"
         },
         {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
+          "href": "/research/engagements-visits",
+          "label": "Visits"
+        },
+        {
+          "href": "/research/engagements-roundtables",
+          "label": "Roundtables"
         },
         {
           "href": "https://www.nseindia.com/static/research/overview-about-epr",
@@ -22731,26 +22975,6 @@
         {
           "href": "/static/research/engagements-roundtables",
           "label": "Roundtables"
-        },
-        {
-          "href": "#",
-          "label": "Engagements"
-        },
-        {
-          "href": "/research/events-upcoming-programs",
-          "label": "Upcoming Programs"
-        },
-        {
-          "href": "/research/events-seminars-panel-dicussions",
-          "label": "Seminars & Panel Discussions"
-        },
-        {
-          "href": "/research/events-conferences",
-          "label": "Conferences"
-        },
-        {
-          "href": "/research/events-lecture-series",
-          "label": "Lecture Series"
         },
         {
           "href": "#holiday_trading",
@@ -23158,16 +23382,16 @@
         }
       ],
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "semantic_review_status": "NOT_REVIEWED",
-      "sha256": "1710868a0d899e7688bd40e64320364c3fe89ff20c3618e3d35d2befdf08eb3e",
+      "sha256": "2e80d6e61b9765219c335eb5ba4d7e60d00aa2e44a11254ef2406c32ea12d97b",
       "source_id": "NSE_HOLIDAYS",
       "source_url": "https://www.nseindia.com/resources/exchange-communication-holidays",
-      "visible_link_count": 677
+      "visible_link_count": 682
     }
   ],
   "research_status": "RESEARCH_HOLD",
-  "run_at_ist": "2026-11-11T16:52:24.562678+05:30",
+  "run_at_ist": "2026-11-12T17:11:26.846172+05:30",
   "schema_version": 1,
   "scope": {
     "exchange_wide_sources": [
@@ -23200,7 +23424,7 @@
     {
       "error": "ValueError: URL must use HTTPS and an explicitly allowlisted official host",
       "publisher": "NSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "source_id": "NSE_NIFTY50_PROFILE",
       "source_url": "https://betanseapi.nseindia.com/static/products-services/indices-nifty50-index",
       "status": "SOURCE_UNAVAILABLE_OR_UNPARSEABLE"
@@ -23208,7 +23432,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_ANNOUNCEMENTS",
       "source_url": "https://www.bseindia.com/corporates/ann.html",
@@ -23217,7 +23441,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_CORPORATE_ACTIONS",
       "source_url": "https://www.bseindia.com/corporates/corporate_act.html",
@@ -23226,7 +23450,7 @@
     {
       "error": "Zero visible links and byte-identical response shared by multiple source endpoints; not counted as usable discovery coverage.",
       "publisher": "BSE",
-      "retrieved_at_ist": "2026-11-11T16:52:24.562678+05:30",
+      "retrieved_at_ist": "2026-11-12T17:11:26.846172+05:30",
       "sha256": "722e4ec3f94b4c59d537cd643d09801dc6586c3529a58de9eb851f081be7420d",
       "source_id": "BSE_NOTICES_CIRCULARS",
       "source_url": "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars.aspx",
