@@ -3,9 +3,9 @@
   "candidate_count": 0,
   "changes_to_model_data": false,
   "egress_ip": {
-    "checked_at_utc": "2026-11-18T12:17:26.423179+00:00",
+    "checked_at_utc": "2026-11-20T13:58:19.140506+00:00",
     "http_status": 200,
-    "ip": "20.168.93.84",
+    "ip": "3.42.157.107",
     "service": "https://api.ipify.org?format=json"
   },
   "failed_count": 0,
@@ -16,14 +16,14 @@
   "promotion_eligible": false,
   "research_status": "RESEARCH_HOLD",
   "results": [],
-  "run_at_utc": "2026-11-18T12:20:39.450080+00:00",
+  "run_at_utc": "2026-11-20T13:59:49.051829+00:00",
   "schema_version": 1,
   "status": "COMPLETE",
   "transport_checks": [
     {
       "bytes_received": 131072,
       "content_type": "application/json",
-      "elapsed_seconds": 0.769,
+      "elapsed_seconds": 0.509,
       "http_status": 200,
       "method": "requests",
       "ok": true,
@@ -32,7 +32,7 @@
     {
       "bytes_received": 131427,
       "content_type": "application/json",
-      "elapsed_seconds": 0.408,
+      "elapsed_seconds": 0.297,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
@@ -41,7 +41,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.349,
+      "elapsed_seconds": 0.363,
       "http_status": 200,
       "method": "requests",
       "ok": true,
@@ -50,7 +50,7 @@
     {
       "bytes_received": 131072,
       "content_type": "application/pdf",
-      "elapsed_seconds": 0.361,
+      "elapsed_seconds": 0.307,
       "http_status": 200,
       "method": "curl_cffi",
       "ok": true,
